@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+    <url><loc>http://redeclipse.net/home</loc></url>
+    <url><loc>http://redeclipse.net/download</loc></url>
+    <url><loc>http://redeclipse.net/forum</loc></url>
+    <url><loc>http://redeclipse.net/chat</loc></url>
+    <url><loc>http://redeclipse.net/donate</loc></url>
+    <url><loc>http://redeclipse.net/readme</loc></url>
+    <url><loc>http://redeclipse.net/faq</loc></url>
+    <url><loc>http://redeclipse.net/install</loc></url>
+    <url><loc>http://redeclipse.net/license</loc></url>
+    <url><loc>http://redeclipse.net/trademark</loc></url>
+    <url><loc>http://redeclipse.net/guidelines</loc></url>
+    <url><loc>http://redeclipse.net/devel</loc></url>
+    <url><loc>http://redeclipse.net/svn</loc></url>
+</urlset>
