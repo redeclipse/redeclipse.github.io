@@ -6,12 +6,12 @@ layout: default
 ## v{{ site.game_version }} ({{ site.game_release }})
 ### Released {{ site.game_date }}
 
-Platform      | Official Downloads                  | Other Sources
+Platform      | Downloads                           | Other Sources
 --------------|-------------------------------------|-------------------------------------
-**Windows**   | **[NSIS Installer](/download/win)** | [Torrent](/torrent/win)
-**Linux/BSD** | **[Tarball](/download/nix)**        | [Torrent](/torrent/nix)
-**macOS**     | **[Tarball](/download/mac)**        | [Torrent](/torrent/mac)
-**Combined**  | **[Tarball](/download/combined)**   | [Torrent](/torrent/combined)
+**Windows**   | **[Installer](/download/win)**      | [Torrent](/torrent/win)
+**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/torrent/nix) [AppImage](/appimage/download)
+**macOS**     | **[TAR.BZ2](/download/mac)**        | [Torrent](/torrent/mac)
+**Combined**  | **[TAR.BZ2](/download/combined)**   | [Torrent](/torrent/combined)
 
 ### Release Notes
 
