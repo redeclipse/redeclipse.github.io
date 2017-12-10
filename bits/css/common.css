@@ -1,0 +1,188 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Orbitron-Light'), local('Orbitron-Regular'), url(/bits/orbitron-regular.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+    font-family: 'Orbitron';
+    font-style: normal;
+    font-weight: 900;
+    src: local('Orbitron-Black'), url(/bits/orbitron-black.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Oswald Light'), local('Oswald-Light'), url(/bits/oswald-light1.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Oswald Light'), local('Oswald-Light'), url(/bits/oswald-light2.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oswald Regular'), local('Oswald-Regular'), url(/bits/oswald-regular1.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Oswald Regular'), local('Oswald-Regular'), url(/bits/oswald-regular2.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Oswald Bold'), local('Oswald-Bold'), url(/bits/oswald-bold1.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'Oswald';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Oswald Bold'), local('Oswald-Bold'), url(/bits/oswald-bold2.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+@font-face {
+    font-family: 'Ruda';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ruda'), url(/bits/ruda1.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+    font-family: 'Ruda';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Ruda'), url(/bits/ruda2.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+body {
+    background: #340201 url(/bits/bg2.jpg) no-repeat center top;
+    color: rgb(220, 220, 220);
+    font-family: Ruda;
+    line-height: 1.7em;
+}
+a {
+    color: rgb(255, 190, 190);
+}
+a:hover {
+    color: rgb(255, 190, 190);
+}
+.navbar-inverse {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+}
+.navbar-inverse .navbar-nav > li > a {
+    color: #fcc;
+}
+.navbar-toggle {
+	margin-top: 23px;
+}
+.navbar-nav > li > a {
+    font-family: Oswald;
+    text-transform: uppercase;
+    transition: all 0.15s linear 0s;
+	-webkit-transition: all 0.15s linear 0s;
+	padding-bottom: 30px;
+    padding-top: 30px;
+}
+@media screen and (max-width: 1200px) {
+    .navbar-nav > li > a {
+        padding-bottom: 10px;
+        padding-top: 10px;
+	}
+}
+.navbar-nav > li > a:hover {
+   	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+	-moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.5);
+    -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+}
+.navbar-brand {
+  height: auto;
+  padding: 0;
+}
+.navbar-brand:hover {
+	 text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: center;
+}
+#gamejolt {
+	margin: 29px auto !important;
+}
+#cube2 {
+	margin: 1px auto !important;
+}
+#main { }
+#header {
+	padding-bottom: 20px;
+}
+.footer {
+	background-color: #600;
+	font-size: 14px;
+	font-family: Orbitron;
+}
+.social-icons {
+	font-size: 30px;
+	text-align: right;
+}
+@media screen and (max-width: 992px) {
+	.footer {
+		text-align: center;
+    }
+	.social-icons{
+		text-align: center;
+	}
+	.video {
+        padding: 9px 0px 0px 0;
+	}
+}
+@media screen and (min-width: 1280px) {
+	#container {
+		width: 1280px;
+		margin: auto;
+    }
+	.video {
+        padding: 9px 0px 30px 0;
+	}
+}
+@media screen and (min-width: 992px) and (max-width: 1280px) {
+	#container {
+		width: 100%;
+		margin: auto;
+    }
+	.video {
+		padding: 9px 30px 30px 0;
+	}
+}
+#copyright {
+	font-size: 11px;
+	text-align: center;
+	padding: 20px; background-color: #000;
+}
+#copyright p {
+	margin: 0;
+	padding: 0;
+}
+.carousel-control {
+	width: 6%;
+}

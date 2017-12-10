@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+.wholepage {
+    margin: 0px 32px 16px 32px;
+    text-align: left;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+h1 { font-size: 36px; }
+h2 { font-size: 32px; }
+h3 { font-size: 28px; }
+h4 { font-size: 24px; }
+h5 { font-size: 20px; }
+h6 { font-size: 16px; }
+blockquote {
+    font-size: 14px;
+	font-family: Ruda;
+}
