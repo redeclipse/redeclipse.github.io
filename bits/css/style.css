@@ -207,70 +207,6 @@ h4 {
     margin-right: 0px;
     text-align: center;
 }
-.wholepage {
-    margin: 0;
-    text-align: left;
-}
-.wholepage h1 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 40px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
-.wholepage h2 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 32px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
-.wholepage h3 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 24px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
-.wholepage h4 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
-.wholepage h5 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
-.wholepage h6 {
-	color: rgb(255, 255, 255);
-	margin: 0;
-	font-family: Orbitron;
-    font-size: 8px;
-    font-weight: 600;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-}
 #gamejolt {
 	margin: 29px auto !important;
 }
@@ -281,7 +217,7 @@ h4 {
 #header {
 	padding-bottom: 20px;
 }
-.texte{
+.texte {
     padding: 30px;
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* FF3.6+ */
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.4))), url(/bits/base1b.jpg);; /* Chrome, Safari4+ */
@@ -349,4 +285,69 @@ h4 {
 }
 .carousel-control {
 	width: 6%;
+}
+
+.wholepage {
+    margin: 0;
+    text-align: left;
+}
+.wholepage h1 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.wholepage h2 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.wholepage h3 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.wholepage h4 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.wholepage h5 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+}
+.wholepage h6 {
+	color: rgb(255, 255, 255);
+	margin: 16px 0px 8px 0px;
+	font-family: Orbitron;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
