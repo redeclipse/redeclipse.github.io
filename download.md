@@ -3,7 +3,8 @@ title: Downloads
 layout: default
 ---
 
-## v1.5.8 "Elysium Edition" released 17th January 2017
+## v1.5.8 "Elysium Edition"
+### Released 17th January 2017
 
 ### Available Downloads
 
