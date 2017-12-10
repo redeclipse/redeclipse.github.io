@@ -128,7 +128,7 @@ header ul a:active {
 }
 
 strong {
-    color: rgb(255, 128, 128);
+    color: rgb(255, 200, 200);
     font-weight: 700;
 }
 
@@ -140,7 +140,7 @@ header ul li + li + li {
 header ul a strong {
     font-size: 14px;
     display: block;
-    color: rgb(255, 128, 128);
+    color: rgb(255, 200, 200);
 }
 
 section {
@@ -155,7 +155,7 @@ small {
 
 hr {
     border: 0;
-    background: rgb(255, 128, 128);
+    background: rgb(255, 64, 64);
     height: 1px;
     margin: 0 0 20px;
 }
