@@ -96,11 +96,6 @@ end
 
 ![](https://assets-cdn.github.com/images/icons/emoji/octocat.png)
 
-### Large image
-
-![](https://guides.github.com/activities/hello-world/branching.png =512x)
-
-
 ### Definition lists can be used with HTML syntax.
 
 <dl>
@@ -121,3 +116,5 @@ Long, single-line code blocks should not wrap. They should horizontally scroll i
 ```
 The final element.
 ```
+
+THE END :smile:
