@@ -5,5 +5,4 @@ kramdown:
     hard_wrap: false
 future: true
 jailed: false
-theme: jekyll-theme-midnight
 gfm_quirks: paragraph_end
