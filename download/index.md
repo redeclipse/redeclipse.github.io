@@ -9,7 +9,7 @@ layout: default
 Platform      | Downloads                           | Other Sources
 --------------|-------------------------------------|-------------------------------------
 **Windows**   | **[Installer](/download/win)**      | [Torrent](/torrent/win)
-**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/torrent/nix) [AppImage](/appimage/download)
+**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/torrent/nix) - [AppImage](/appimage/download)
 **macOS**     | **[TAR.BZ2](/download/mac)**        | [Torrent](/torrent/mac)
 **Combined**  | **[TAR.BZ2](/download/combined)**   | [Torrent](/torrent/combined)
 
