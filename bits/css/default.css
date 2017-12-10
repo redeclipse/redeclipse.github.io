@@ -23,3 +23,145 @@ blockquote {
     font-size: 14px;
 	font-family: Ruda;
 }
+
+.wrapper {
+  width: 860px;
+  margin: 0 auto;
+}
+
+blockquote {
+  border-left: 1px solid rgb(255, 255, 255);
+  margin: 0;
+  padding: 0 0 0 20px;
+  font-style: italic;
+}
+
+code, pre {
+  font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+  color: rgb(255, 128, 128);
+  font-size: 12px;
+}
+
+pre {
+  padding: 8px 15px;
+  background: rgb(8, 8, 8);
+  border-radius: 5px;
+  border: 1px solid rgb(255, 128, 128);
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 5px 10px;
+  border-bottom: 1px solid rgb(255, 128, 128);
+}
+
+dt {
+  color: #444;
+  font-weight: 700;
+}
+
+th {
+  color: #444;
+}
+
+img {
+  max-width: 100%;
+}
+
+header {
+  width: 270px;
+  float: left;
+  position: fixed;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+header ul {
+  list-style: none;
+  height: 40px;
+  padding: 0;
+  background: rgb(8, 8, 8);
+  border-radius: 5px;
+  border: 1px solid rgb(255, 128, 128);
+  width: 270px;
+}
+
+header li {
+  width: 89px;
+  float: left;
+  border-right: 1px solid rgb(255, 128, 128);
+  height: 40px;
+}
+
+header li:first-child a {
+  border-radius: 5px 0 0 5px;
+}
+
+header li:last-child a {
+  border-radius: 0 5px 5px 0;
+}
+
+header ul a {
+  line-height: 1;
+  font-size: 11px;
+  color: rgb(128, 128, 128);
+  display: block;
+  text-align: center;
+  padding-top: 6px;
+  height: 34px;
+}
+
+header ul a:hover, header ul a:focus {
+  color: rgb(255, 128, 128);
+  font-weight: bold;
+}
+
+header ul a:active {
+  background-color: rgb(200, 200, 200);
+}
+
+strong {
+  color: rgb(255, 128, 128);
+  font-weight: 700;
+}
+
+header ul li + li + li {
+  border-right: none;
+  width: 89px;
+}
+
+header ul a strong {
+  font-size: 14px;
+  display: block;
+  color: rgb(255, 128, 128);
+}
+
+section {
+  width: 500px;
+  float: right;
+  padding-bottom: 50px;
+}
+
+small {
+  font-size: 11px;
+}
+
+hr {
+  border: 0;
+  background: rgb(255, 128, 128);
+  height: 1px;
+  margin: 0 0 20px;
+}
+
+footer {
+  width: 270px;
+  float: left;
+  position: fixed;
+  bottom: 50px;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
