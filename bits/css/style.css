@@ -351,3 +351,7 @@ h4 {
     text-transform: uppercase;
 	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
+.wholepage blockquote {
+    font-size: 15px;
+	font-family: Ruda;
+}
