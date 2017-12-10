@@ -2,7 +2,6 @@
 title: A free arena shooter featuring parkour
 layout: home
 ---
-
 {::nomarkdown}
 <div class="row" id="main">
     <div class="col-xs12 col-sm-12 col-md-6" style="text-align:center; padding:22px 0 30px 0;">
