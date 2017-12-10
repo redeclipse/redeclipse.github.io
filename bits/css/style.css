@@ -288,7 +288,7 @@ h4 {
 }
 
 .wholepage {
-    margin: 0;
+    margin: 0px 32px 16px 32px;
     text-align: left;
 }
 .wholepage h1 {
