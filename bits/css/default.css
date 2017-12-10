@@ -46,6 +46,7 @@ code, pre {
 }
 .highlight code {
     border: 0;
+    overflow-x: scroll;
 }
 pre {
     padding: 8px 15px;
