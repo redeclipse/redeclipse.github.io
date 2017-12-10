@@ -3,27 +3,18 @@ title: Downloads
 layout: default
 ---
 
-## {{ site.game_version }}
-### Released {{ site.game_released }}
+## v{{ site.game_version }} ({{ site.game_release }})
+### Released {{ site.game_date }}
 
-- **[Windows](https://redeclipse.net/download/win)** ([Torrent](https://redeclipse.net/torrent/win))
-- **[Linux/BSD](https://redeclipse.net/download/nix)** ([Torrent](https://redeclipse.net/torrent/nix))
-- **[MacOS](https://redeclipse.net/download/mac)** ([Torrent](https://redeclipse.net/torrent/mac))
-- **[Combined/All](https://redeclipse.net/download/combined)** ([Torrent](https://redeclipse.net/torrent/combined))
+Platform      | Downloads 
+--------------|-----------
+**Windows**   | [NSIS Installer](/download/win) ([Torrent](https://redeclipse.net/torrent/win))
+**Linux/BSD** | [Tarball](/download/nix) ([Torrent](https://redeclipse.net/torrent/nix))
+**macOS**     | [Tarball](/download/mac) ([Torrent](https://redeclipse.net/torrent/mac))
+**Combined**  | [Tarball](/download/combined) ([Torrent](https://redeclipse.net/torrent/combined))
 
 ### Release Notes
 
-- New maps, mapmodels, and vanity items have been added.
-- Grenade now transitions from green to red based on the fuse timer.
-- Added the ability to make bots perform specific actions (stand, dance, crouch).
-- IP addresses are now private and shown only to moderators.
-- Optimised game variable resets to reduce network flooding.
-- Added basic support for CMake.
-- Improved team balancing mechanics, including using statistics if available.
-- Improved behaviour of reset-to-floor for flags/bombs/etc.
-- Improved some visual aspects of the HUD and text rendering.
-- Improved edit mode prefabs, pasting, and undo/redo in multiplayer.
-- Fixed instances where multi-GPU setups were not switching to the high performance processor.
-- Fixed edit mode when editing entities in multiplayer.
-- Fixed wire particle entity rendering.
-- Fixed stereoscopic view types.
+{% include_relative /sources/release_{{ site.game_version }}.md %}
+
+You can view the entire release [on GitHub](https://github.com/red-eclipse/base/releases/tag/v{{ site.game_version }}).

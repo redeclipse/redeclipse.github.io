@@ -179,7 +179,7 @@ a:hover {
 	text-align: center;
 	padding: 8px;
     background-color: rgb(8, 8, 8);
-    line-height: 1.2em;
+    line-height: 1.3em;
 }
 #copyright p {
 	margin: 0;
@@ -187,7 +187,7 @@ a:hover {
 }
 #copyright a {
     font-weight: 800;
-    color: rgb(198, 64, 64);
+    color: rgb(255, 96, 96);
 }
 .carousel-control {
 	width: 6%;

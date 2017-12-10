@@ -10,7 +10,10 @@
         {% include nav.html %}
         <div id="container">
             <div class="wholepage" id="main">
-                {{ content | default: '<h1>Redirecting...</h1><a href="{{ page.redir_to }}">Click here if you are not redirected.<a><script>location="{{ page.redir_to }}"</script>' }}
+                <h1>Redirecting: {{ page.title }}</h1>
+                <p><a href="{{ page.redir_to }}">Click here if you are not redirected.<a></p>
+                <script>location="{{ page.redir_to }}"</script>
+                {{ content }}
             </div>
             {% include footer.html %}
         </div>
