@@ -33,13 +33,13 @@ layout: home
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Other Sources<span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="https://redeclipse.net/gamejolt">Gamejolt</a> <a href="https://redeclipse.net/itchio">Itch.io</a> <a href="https://redeclipse.net/download">GitHub</a>
+                    <li><a href="https://redeclipse.net/gamejolt" target="_blank>Gamejolt</a> <a href="https://redeclipse.net/itchio" target="_blank>Itch.io</a> <a href="https://redeclipse.net/download" target="_blank>GitHub</a>
                 </ul>
             </div>
             <div class="btn-group">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="margin-right:0;">Help &amp; Support<span class="caret"></span></button>
                 <ul class="dropdown-menu" role="menu">
-                    <li><a href="https://redeclipse.net/faq">FAQs</a> <a href="https://redeclipse.net/install">Installing the Game</a> <a href="https://redeclipse.net/guide">Gameplay Guide</a> <a href="https://redeclipse.net/devel">Development Version</a> <a href="https://redeclipse.net/discuss">Discussions</a> <a href="https://redeclipse.net/reddit">Reddit Page</a> <a href="https://redeclipse.net/chat">Live Chat</a></li>
+                    <li><a href="https://redeclipse.net/faq" target="_blank>FAQs</a> <a href="https://redeclipse.net/install" target="_blank>Installing the Game</a> <a href="https://redeclipse.net/guide" target="_blank>Gameplay Guide</a> <a href="https://redeclipse.net/devel" target="_blank>Development Version</a> <a href="https://redeclipse.net/discuss" target="_blank>Discussions</a> <a href="https://redeclipse.net/reddit" target="_blank>Reddit Page</a> <a href="https://redeclipse.net/chat" target="_blank>Live Chat</a></li>
                 </ul>
             </div>
         </div>
@@ -190,16 +190,16 @@ layout: home
 </div>
 <div class="row texte">
     <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>Red Eclipse is a fun-filled new take on the first person arena shooter, built as a total conversion of <a href="http://www.cubeengine.com/">Cube Engine 2</a>, which lends itself toward a balanced gameplay, with a general theme of agility in a variety of environments. For more information, please see our <a href="https://redeclipse.net/wiki">Wiki</a> or <a href="https://redeclipse.net/discuss">Discussions</a>.</p>
-        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://www.cubeengine.com/">Cube Engine 2</a> using <a href="http://libsdl.org/">SDL</a> and <a href="http://opengl.org/">OpenGL</a> which allows it to be ported to many platforms; you can <a href="https://redeclipse.net/download">download a package</a> for <i>Windows, GNU/Linux, BSD, and MacOS</i>, or grab a development copy from our <a href="https://redeclipse.net/devel">Github</a> repository and live on the bleeding edge.</p>
+        <p>Red Eclipse is a fun-filled new take on the first person arena shooter, built as a total conversion of <a href="http://www.cubeengine.com/" target="_blank>Cube Engine 2</a>, which lends itself toward a balanced gameplay, with a general theme of agility in a variety of environments. For more information, please see our <a href="https://redeclipse.net/wiki" target="_blank>Wiki</a> or <a href="https://redeclipse.net/discuss" target="_blank>Discussions</a>.</p>
+        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://www.cubeengine.com/" target="_blank>Cube Engine 2</a> using <a href="http://libsdl.org/" target="_blank>SDL</a> and <a href="http://opengl.org/" target="_blank>OpenGL</a> which allows it to be ported to many platforms; you can <a href="/download">download a package</a> for <i>Windows, GNU/Linux, BSD, and MacOS</i>, or grab a development copy from our <a href="https://redeclipse.net/devel" target="_blank>Github</a> repository and live on the bleeding edge.</p>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
         <p>In a true open source <i>by the people for the people</i> nature, we try to work closely with the gaming and open source communities to provide a better overall experience, aiming to create a game environment that is fun and easy to play, while still having elements to master.</p>
-        <p>If you think you might have something to contribute to the game or community, please feel free to drop by our <a href="https://redeclipse.net/chat">Chat</a> or <a href="https://redeclipse.net/discuss">Discussions</a> and talk to us directly. We try to maintain a standard of friendly behaviour in our community, so don't be afraid to speak up and have your say in building this game for us all!</p>
+        <p>If you think you might have something to contribute to the game or community, please feel free to drop by our <a href="https://redeclipse.net/chat" target="_blank>Chat</a> or <a href="https://redeclipse.net/discuss" target="_blank>Discussions</a> and talk to us directly. We try to maintain a standard of friendly behaviour in our community, so don't be afraid to speak up and have your say in building this game for us all!</p>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4 support">
         <h4>Support Us</h4>
-        <p id="donatemsg">Red Eclipse is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="https://redeclipse.net/contribute">help evolve the game</a>, <a href="https://redeclipse.net/donate">donate to our worthy cause</a>, or <a href="https://redeclipse.net/patreon">subscribe to our Patreon</a>.</p>
+        <p id="donatemsg">Red Eclipse is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="https://redeclipse.net/contribute" target="_blank>help evolve the game</a>, <a href="https://redeclipse.net/donate" target="_blank>donate to our worthy cause</a>, or <a href="https://redeclipse.net/patreon" target="_blank>subscribe to our Patreon</a>.</p>
     </div>
 </div>
 {:/}
