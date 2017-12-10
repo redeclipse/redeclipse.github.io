@@ -204,6 +204,11 @@ h4 {
     margin-right: 0px;
     text-align: center;
 }
+.wholepage {
+    margin-left: 0px;
+    margin-right: 0px;
+    text-align: left;
+}
 #gamejolt {
 	margin: 29px auto !important;
 }
