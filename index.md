@@ -2,7 +2,7 @@
 title: Red Eclipse: A free arena shooter featuring parkour
 layout: index
 ---
-
+{::nomarkdown}
 <div class="row" id="main">
     <div class="col-xs12 col-sm-12 col-md-6" style="text-align:center; padding:22px 0 30px 0;">
         <h1>a free <b>arena shooter</b></h1>
@@ -202,3 +202,4 @@ layout: index
         <p id="donatemsg">Red Eclipse is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="https://redeclipse.net/contribute">help evolve the game</a>, <a href="https://redeclipse.net/donate">donate to our worthy cause</a>, or <a href="https://redeclipse.net/patreon">subscribe to our Patreon</a>.</p>
     </div>
 </div>
+{:/}
