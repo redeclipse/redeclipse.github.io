@@ -6,8 +6,6 @@ layout: default
 ## v1.5.8 "Elysium Edition"
 ### Released 17th January 2017
 
-### Available Downloads
-
 - **[Windows](https://redeclipse.net/download/win)** ([Torrent](https://redeclipse.net/torrent/win))
 - **[Linux/BSD](https://redeclipse.net/download/nix)** ([Torrent](https://redeclipse.net/torrent/nix))
 - **[MacOS](https://redeclipse.net/download/mac)** ([Torrent](https://redeclipse.net/torrent/mac))
