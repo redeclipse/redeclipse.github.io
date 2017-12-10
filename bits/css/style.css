@@ -1,8 +1,5 @@
 @charset "utf-8";
 
-@import "/bits/css/normalize.scss";
-@import "/bits/css/rouge-base16-dark.scss";
-
 @font-face {
     font-family: 'Orbitron';
     font-style: normal;
