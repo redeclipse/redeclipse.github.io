@@ -140,7 +140,8 @@ h1 b {
 }
 h3 {
 	color: rgb(200, 190, 190);
-	font-family: Ruda; font-weight: 900; font-size: 14px; margin: 10px}
+	font-family: Ruda; font-weight: 900; font-size: 14px; margin: 10px
+}
 h4 {
 	margin-top: 0;
 	font-family: Orbitron;
@@ -207,13 +208,12 @@ h4 {
     text-align: center;
 }
 .wholepage {
-    margin-left: 0px;
-    margin-right: 0px;
+    margin: 0;
     text-align: left;
 }
 .wholepage h1 {
 	color: rgb(255, 255, 255);
-	margin-top: 0;
+	margin: 0;
 	font-family: Orbitron;
     font-size: 40px;
     font-weight: 600;
@@ -223,7 +223,7 @@ h4 {
 }
 .wholepage h2 {
 	color: rgb(255, 255, 255);
-	margin-top: 0;
+	margin: 0;
 	font-family: Orbitron;
     font-size: 32px;
     font-weight: 600;
@@ -233,7 +233,7 @@ h4 {
 }
 .wholepage h3 {
 	color: rgb(255, 255, 255);
-	margin-top: 0;
+	margin: 0;
 	font-family: Orbitron;
     font-size: 24px;
     font-weight: 600;
@@ -243,7 +243,7 @@ h4 {
 }
 .wholepage h4 {
 	color: rgb(255, 255, 255);
-	margin-top: 0;
+	margin: 0;
 	font-family: Orbitron;
     font-size: 16px;
     font-weight: 600;
@@ -251,7 +251,6 @@ h4 {
     text-transform: uppercase;
 	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
-
 #gamejolt {
 	margin: 29px auto !important;
 }
