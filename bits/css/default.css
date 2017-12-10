@@ -53,7 +53,7 @@ pre {
 }
 
 table {
-    width: 100%;
+    /* width: 100%; */
     border-collapse: collapse;
 }
 
@@ -80,7 +80,7 @@ header {
     width: 270px;
     float: left;
     position: fixed;
-  -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: subpixel-antialiased;
 }
 
 header ul {
@@ -128,7 +128,7 @@ header ul a:active {
 }
 
 strong {
-    color: rgb(255, 200, 200);
+    color: rgb(255, 224, 224);
     font-weight: 700;
 }
 
@@ -140,7 +140,7 @@ header ul li + li + li {
 header ul a strong {
     font-size: 14px;
     display: block;
-    color: rgb(255, 200, 200);
+    color: rgb(255, 224, 224);
 }
 
 section {
@@ -165,5 +165,5 @@ footer {
     float: left;
     position: fixed;
     bottom: 50px;
-  -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-font-smoothing: subpixel-antialiased;
 }

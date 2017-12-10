@@ -8,10 +8,10 @@ layout: default
 
 Platform      | Downloads 
 --------------|-----------
-**Windows**   | [NSIS Installer](/download/win) ([Torrent](https://redeclipse.net/torrent/win))
-**Linux/BSD** | [Tarball](/download/nix) ([Torrent](https://redeclipse.net/torrent/nix))
-**macOS**     | [Tarball](/download/mac) ([Torrent](https://redeclipse.net/torrent/mac))
-**Combined**  | [Tarball](/download/combined) ([Torrent](https://redeclipse.net/torrent/combined))
+**Windows**   | **[NSIS Installer](/download/win) ([Torrent](https://redeclipse.net/torrent/win))**
+**Linux/BSD** | **[Tarball](/download/nix) ([Torrent](https://redeclipse.net/torrent/nix))**
+**macOS**     | **[Tarball](/download/mac) ([Torrent](https://redeclipse.net/torrent/mac))**
+**Combined**  | **[Tarball](/download/combined) ([Torrent](https://redeclipse.net/torrent/combined))**
 
 ### Release Notes
 
