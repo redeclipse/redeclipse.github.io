@@ -13,7 +13,7 @@ layout: home
         <h3>An array of mutators and variables</h3>
         <h3>Create your own maps cooperatively online</h3>
         <div class="col-xs12 col-sm-12 col-md-12">
-            <a href="https://redeclipse.net/download" id="button" class="btn btn-primary">
+            <a href="/download" id="button" class="btn btn-primary">
                 <p class="download"><span class="glyphicon glyphicon-download" aria-hidden="true"></span> FREE DOWNLOAD</p>
                 <p class="version">v1.5.8 "Elysium Edition" released 17th January 2017</p>
             </a>

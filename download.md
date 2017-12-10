@@ -3,16 +3,16 @@ title: Downloads
 layout: default
 ---
 
-**Latest Release**: v1.5.8 "Elysium Edition" released 17th January 2017
+## v1.5.8 "Elysium Edition" released 17th January 2017
 
-## Available Downloads
+### Available Downloads
 
-- [Windows](https://redeclipse.net/download/win) ([Torrent](https://redeclipse.net/torrent/win))
-- [Linux/BSD](https://redeclipse.net/download/nix) ([Torrent](https://redeclipse.net/torrent/nix))
-- [MacOS](https://redeclipse.net/download/mac) ([Torrent](https://redeclipse.net/torrent/mac))
-- [Combined/All](https://redeclipse.net/download/combined) ([Torrent](https://redeclipse.net/torrent/combined))
+- **[Windows](https://redeclipse.net/download/win)** ([Torrent](https://redeclipse.net/torrent/win))
+- **[Linux/BSD](https://redeclipse.net/download/nix)** ([Torrent](https://redeclipse.net/torrent/nix))
+- **[MacOS](https://redeclipse.net/download/mac)** ([Torrent](https://redeclipse.net/torrent/mac))
+- **[Combined/All](https://redeclipse.net/download/combined)** ([Torrent](https://redeclipse.net/torrent/combined))
 
-## Release Notes
+### Release Notes
 
 - New maps, mapmodels, and vanity items have been added.
 - Grenade now transitions from green to red based on the fuse timer.
