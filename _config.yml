@@ -1,5 +1,7 @@
 # Site settings
 title: Red Eclipse
+game_version: "v1.5.8 (Elysium Edition)"
+game_released: "17th January 2017"
 
 # Where things are
 source: "."
