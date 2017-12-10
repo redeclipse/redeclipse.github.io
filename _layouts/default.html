@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <title>Red Eclipse: {{ site.title | default: site.github.repository_name }}</title>
+        <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
         <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
         <link rel="apple-touch-icon" sizes="57x57" href="/bits/apple-touch-icon-57x57.png">
         <link rel="apple-touch-icon" sizes="60x60" href="/bits/apple-touch-icon-60x60.png">
@@ -43,7 +43,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img src="/bits/redeclipse-small.png" alt="Red Eclipse"></a>
+                    <a class="navbar-brand" href="/"><img src="/bits/redeclipse-small.png" alt="{{ site.title | default: site.github.repository_name }}"></a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -81,8 +81,7 @@
                 </div>
             </div>
             <div id="copyright" style="text-align: center">
-                <p>Red Eclipse, Copyright &copy; 2009-2017 Quinton Reeves, Lee Salzman</p>
-                <p>Cube Engine 2, Copyright &copy; 2001-2017 Wouter van Oortmerssen, Lee Salzman, Mike Dysart, Robert Pointon, and Quinton Reeves</p>
+                <p>{{ site.title | default: site.github.repository_name }}, Copyright &copy; 2009-2017 Quinton Reeves, Lee Salzman</p>
                 <p><a href="http://remiclouet.com" target="_blank">Website by R&eacute;mi Clouet d'Orval</a></p>
             </div>
         </div>

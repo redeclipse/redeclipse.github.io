@@ -1,8 +1,52 @@
+# Site settings
+title: Red Eclipse
+
+# Where things are
+source: "."
+collections_dir: "pages"
+plugins_dir: "bits/plugins"
+layouts_dir: "bits/layouts"
+data_dir: "bits/data"
+includes_dir: "bits/includes"
+
+# Handling Reading
+safe: false
+include: []
+exclude: ["_config.yml", "CNAME", ".github"]
+keep_files: []
+encoding: "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+strict_front_matter: false
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0
+future: false
+unpublished: false
+
+# Plugins
+whitelist: []
+plugins: []
+
+# Conversion
 markdown: kramdown
-encoding: UTF-8
+highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
+
+# Outputting
+# permalink: date
+# paginate_path: /page:num
+# timezone: null
+
+# Markdown Processors
 kramdown:
+    auto_ids: true
+    entity_output: as_char
+    toc_levels: 1..6
+    smart_quotes: lsquo,rsquo,ldquo,rdquo
     input: GFM
     hard_wrap: false
-future: true
-jailed: false
-gfm_quirks: paragraph_end
+    footnote_nr: 1
+    show_warnings: false
