@@ -1,5 +1,5 @@
 ---
-title: Red Eclipse: A free arena shooter featuring parkour
+title: A free arena shooter featuring parkour
 layout: home
 ---
 
