@@ -115,8 +115,8 @@ a:hover {
     box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
 }
 .navbar-brand {
-  height: auto;
-  padding: 0;
+    height: auto;
+    padding: 0;
 }
 .navbar-brand:hover {
 	 text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
