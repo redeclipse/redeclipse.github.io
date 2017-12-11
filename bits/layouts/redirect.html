@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
+        <title>{{ site.title | default: site.github.repository_name }}: Redirecting to {{ page.title | default: page.path }}</title>
         <link rel="canonical" href="{{ content }}"/>
         <meta http-equiv="refresh" content="0;url={{ content }}" />
         {% include head.html %}

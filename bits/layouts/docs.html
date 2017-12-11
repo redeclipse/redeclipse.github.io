@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
+        <title>{{ site.title | default: site.github.repository_name }}: Docs - {{ page.title | default: page.path }}</title>
         {% include head.html %}
         <link rel="stylesheet" type="text/css" href="/bits/css/default.css" />
     </head>
@@ -9,6 +9,7 @@
         {% include nav.html %}
         <div id="container">
             <div class="wholepage" id="main">
+                <h1>{{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>
             {% include footer.html %}
