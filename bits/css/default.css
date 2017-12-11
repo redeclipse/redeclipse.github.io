@@ -14,27 +14,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 h1 {
     font-size: 36px;
-    color: rgb(255, 224, 224);
+    color: rgb(255, 232, 232);
 }
 h2 {
     font-size: 30px;
-    color: rgb(224, 198, 198);
+    color: rgb(255, 224, 224);
 }
 h3 {
     font-size: 24px;
-    color: rgb(198, 156, 156);
+    color: rgb(255, 208, 208);
 }
 h4 {
     font-size: 18px;
-    color: rgb(156, 128, 128);
+    color: rgb(255, 196, 196);
 }
 h5 {
     font-size: 16px;
-    color: rgb(128, 96, 96);
+    color: rgb(255, 178, 178);
 }
 h6 {
     font-size: 14px;
-    color: rgb(96, 64, 64);
+    color: rgb(255, 156, 156);
 }
 blockquote {
     font-size: 14px;
