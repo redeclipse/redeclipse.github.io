@@ -1,10 +1,10 @@
 @charset "utf-8";
 .wholepage {
-    margin: 0px 32px 16px 32px;
+    margin: 0px 16px 16px 16px;
     text-align: left;
 }
 h1, h2, h3, h4, h5, h6 {
-    margin: 16px 0px 8px 0px;
+    margin: 8px 0px 8px 0px;
     color: rgb(255, 255, 255);
     font-family: Orbitron;
     font-weight: 600;
@@ -44,10 +44,13 @@ blockquote {
     width: 860px;
     margin: 0 auto;
 }
+p {
+    margin: 8px 0px 8px 0px;
+}
 blockquote {
     border-left: 1px solid rgb(255, 255, 255);
     margin: 0;
-    padding: 0 0 0 20px;
+    padding: 0 0 0 16px;
     font-style: italic;
 }
 code, pre {
@@ -63,7 +66,7 @@ code, pre {
     overflow-x: scroll;
 }
 pre {
-    padding: 8px 15px;
+    padding: 8px 16px 8px 0px;
     overflow-x: auto;
 }
 table {
@@ -77,10 +80,9 @@ th, td {
 }
 dt, th {
     color: rgb(255, 255, 255);
-    font-family: Orbitron;
+    font-family: Ruda;
     font-weight: 600;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
     text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
 img {

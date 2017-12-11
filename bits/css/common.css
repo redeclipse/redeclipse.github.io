@@ -71,15 +71,15 @@
 }
 body {
     background: #340201 url(/bits/bg2.jpg) no-repeat center top;
-    color: rgb(220, 220, 220);
+    color: rgb(255, 255, 255);
     font-family: Ruda;
-    line-height: 1.7em;
+    line-height: 1.6em;
 }
 a {
     color: rgb(255, 190, 190);
 }
 a:hover {
-    color: rgb(255, 190, 190);
+    color: rgb(255, 128, 128);
 }
 .navbar-inverse {
     background-color: rgba(0, 0, 0, 0.3);
