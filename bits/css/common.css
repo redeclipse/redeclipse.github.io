@@ -106,7 +106,7 @@ a:hover {
     }
 }
 .navbar-nav > li > a:hover {
-    text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    text-shadow: -1px -1px 5px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
     -moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
     -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.5);
     -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
@@ -117,7 +117,7 @@ a:hover {
     padding: 0;
 }
 .navbar-brand:hover {
-    text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    text-shadow: -1px -1px 5px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
 .row {
     margin-left: 0px;
