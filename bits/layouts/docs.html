@@ -9,7 +9,7 @@
         {% include nav.html %}
         <div id="container">
             <div class="wholepage" id="main">
-                <h1>{{ page.title | default: page.path }}</h1>
+                <h1>Docs - {{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>
             {% include footer.html %}
