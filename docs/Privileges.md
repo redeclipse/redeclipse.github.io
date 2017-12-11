@@ -8,13 +8,13 @@ Players can [apply](https://redeclipse.net/apply) for an account that allows the
 
 Icon | Description | Icon | Description
 -----|-------------|------|------------
-| <img src="images/privs/bot.png" width="32px" height="32px" /> | Bot (AI Controlled) | | | 
-| <img src="images/privs/none.png" width="32px" height="32px" /> | Guest Player | <img src="images/privs/player.png" width="32px" height="32px" /> | Authenticated Player
-| <img src="images/privs/localsupporter.png" width="32px" height="32px" /> | Local Supporters | <img src="images/privs/supporter.png" width="32px" height="32px" /> | Global Supporters
-| <img src="images/privs/localmoderator.png" width="32px" height="32px" /> | Local Moderators | <img src="images/privs/moderator.png" width="32px" height="32px" /> | Global Moderators
-| <img src="images/privs/localoperator.png" width="32px" height="32px" /> | Local Operators | <img src="images/privs/operator.png" width="32px" height="32px" /> | Global Operators
-| <img src="images/privs/localadministrator.png" width="32px" height="32px" /> | Local Administrators | <img src="images/privs/administrator.png" width="32px" height="32px" /> | Global Administrators
-| <img src="images/privs/developer.png" width="32px" height="32px" /> | Project Developers | <img src="images/privs/founder.png" width="32px" height="32px" /> | Project Founders
+<img src="images/privs/bot.png" width="32px" height="32px" /> | Bot (AI Controlled) | |
+<img src="images/privs/none.png" width="32px" height="32px" /> | Guest Player | <img src="images/privs/player.png" width="32px" height="32px" /> | Authenticated Player
+<img src="images/privs/localsupporter.png" width="32px" height="32px" /> | Local Supporters | <img src="images/privs/supporter.png" width="32px" height="32px" /> | Global Supporters
+<img src="images/privs/localmoderator.png" width="32px" height="32px" /> | Local Moderators | <img src="images/privs/moderator.png" width="32px" height="32px" /> | Global Moderators
+<img src="images/privs/localoperator.png" width="32px" height="32px" /> | Local Operators | <img src="images/privs/operator.png" width="32px" height="32px" /> | Global Operators
+<img src="images/privs/localadministrator.png" width="32px" height="32px" /> | Local Administrators | <img src="images/privs/administrator.png" width="32px" height="32px" /> | Global Administrators
+<img src="images/privs/developer.png" width="32px" height="32px" /> | Project Developers | <img src="images/privs/founder.png" width="32px" height="32px" /> | Project Founders
 
 Of course, [bots](Bots) are not related to player accounts, but they have their own icons to readily distinguish them from human ("real") players. Some privilege levels can be either local or global. Local privileges are given to registered players on specific servers, as described in a following section. In contrast, global privileges are valid on all public servers.
 
