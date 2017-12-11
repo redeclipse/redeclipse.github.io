@@ -13,12 +13,30 @@ h1, h2, h3, h4, h5, h6 {
     text-transform: uppercase;
 	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
-h1 { font-size: 36px; }
-h2 { font-size: 32px; }
-h3 { font-size: 28px; }
-h4 { font-size: 24px; }
-h5 { font-size: 20px; }
-h6 { font-size: 16px; }
+h1 {
+    font-size: 36px;
+	color: rgb(255, 224, 224);
+}
+h2 {
+    font-size: 30px;
+	color: rgb(224, 198, 198);
+}
+h3 {
+    font-size: 24px;
+	color: rgb(198, 156, 156);
+}
+h4 {
+    font-size: 18px;
+	color: rgb(156, 128, 128);
+}
+h5 {
+    font-size: 16px;
+	color: rgb(128, 96, 96);
+}
+h6 {
+    font-size: 14px;
+	color: rgb(96, 64, 64);
+}
 blockquote {
     font-size: 14px;
 	font-family: Ruda;

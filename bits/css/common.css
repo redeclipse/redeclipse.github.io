@@ -192,3 +192,10 @@ a:hover {
 .carousel-control {
 	width: 6%;
 }
+.navbar {
+    margin-bottom: unset;
+}
+#container {
+    padding-top: 15px;
+    background-color: rgba(16, 16, 16, .7);
+}
