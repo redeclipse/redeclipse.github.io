@@ -10,7 +10,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    text-shadow: -1px -1px 5px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 h1 {
     font-size: 36px;
@@ -83,7 +83,7 @@ dt, th {
     font-family: Ruda;
     font-weight: 600;
     letter-spacing: 0.2em;
-    text-shadow: -1px -1px 5px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 img {
     max-width: 100%;
