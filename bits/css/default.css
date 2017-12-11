@@ -65,8 +65,8 @@ code, pre {
     border: 0;
     overflow-x: scroll;
 }
-pre {
-    padding: 8px 16px 8px 0px;
+pre, pre code {
+    padding: 8px 16px 8px 16px;
     overflow-x: auto;
 }
 table {
