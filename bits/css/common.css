@@ -1,5 +1,4 @@
 @charset "utf-8";
-
 @font-face {
     font-family: 'Orbitron';
     font-style: normal;
@@ -70,7 +69,6 @@
     src: local('Ruda'), url(/bits/ruda2.woff2) format('woff2');
     unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
-
 body {
     background: #340201 url(/bits/bg2.jpg) no-repeat center top;
     color: rgb(220, 220, 220);
@@ -91,25 +89,25 @@ a:hover {
     color: #fcc;
 }
 .navbar-toggle {
-	margin-top: 23px;
+    margin-top: 23px;
 }
 .navbar-nav > li > a {
     font-family: Oswald;
     text-transform: uppercase;
     transition: all 0.15s linear 0s;
-	-webkit-transition: all 0.15s linear 0s;
-	padding-bottom: 30px;
+    -webkit-transition: all 0.15s linear 0s;
+    padding-bottom: 30px;
     padding-top: 30px;
 }
 @media screen and (max-width: 1200px) {
     .navbar-nav > li > a {
         padding-bottom: 10px;
         padding-top: 10px;
-	}
+    }
 }
 .navbar-nav > li > a:hover {
-   	text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
-	-moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    -moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
     -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.5);
     -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
     box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
@@ -119,7 +117,7 @@ a:hover {
     padding: 0;
 }
 .navbar-brand:hover {
-	 text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
+    text-shadow: 0px 0px 6px rgb(255, 0, 0), 0px 0px 3px rgb(255, 128, 128);
 }
 .row {
     margin-left: 0px;
@@ -127,70 +125,70 @@ a:hover {
     text-align: center;
 }
 #gamejolt {
-	margin: 29px auto !important;
+    margin: 29px auto !important;
 }
 #cube2 {
-	margin: 1px auto !important;
+    margin: 1px auto !important;
 }
 #main { }
 #header {
-	padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 .footer {
-	background-color: #600;
-	font-size: 14px;
-	font-family: Orbitron;
+    background-color: #600;
+    font-size: 14px;
+    font-family: Orbitron;
 }
 .social-icons {
-	font-size: 30px;
-	text-align: right;
+    font-size: 30px;
+    text-align: right;
 }
 @media screen and (max-width: 992px) {
-	.footer {
-		text-align: center;
+    .footer {
+        text-align: center;
     }
-	.social-icons{
-		text-align: center;
-	}
-	.video {
+    .social-icons{
+        text-align: center;
+    }
+    .video {
         padding: 9px 0px 0px 0;
-	}
+    }
 }
 @media screen and (min-width: 1280px) {
-	#container {
-		width: 1280px;
-		margin: auto;
+    #container {
+        width: 1280px;
+        margin: auto;
     }
-	.video {
+    .video {
         padding: 9px 0px 30px 0;
-	}
+    }
 }
 @media screen and (min-width: 992px) and (max-width: 1280px) {
-	#container {
-		width: 100%;
-		margin: auto;
+    #container {
+        width: 100%;
+        margin: auto;
     }
-	.video {
-		padding: 9px 30px 30px 0;
-	}
+    .video {
+        padding: 9px 30px 30px 0;
+    }
 }
 #copyright {
-	font-size: 12px;
-	text-align: center;
-	padding: 8px;
+    font-size: 12px;
+    text-align: center;
+    padding: 8px;
     background-color: rgb(8, 8, 8);
     line-height: 1.3em;
 }
 #copyright p {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 #copyright a {
     font-weight: 800;
     color: rgb(255, 96, 96);
 }
 .carousel-control {
-	width: 6%;
+    width: 6%;
 }
 .navbar {
     margin-bottom: unset;

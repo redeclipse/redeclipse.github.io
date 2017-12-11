@@ -5,7 +5,7 @@
         <link rel="canonical" href="{{ content }}"/>
         <meta http-equiv="refresh" content="0;url={{ content }}" />
         {% include head.html %}
-        <link rel="stylesheet" type="text/css" href="/bits/css/default.css" />
+        <link rel="stylesheet" type="text/css" href="/bits/css/default.css?v={{ site.github.build_revision }}" />
     </head>
     <body>
         {% include nav.html %}

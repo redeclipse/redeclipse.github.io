@@ -3,7 +3,7 @@
     <head>
         <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
         {% include head.html %}
-        <link rel="stylesheet" type="text/css" href="/bits/css/default.css" />
+        <link rel="stylesheet" type="text/css" href="/bits/css/default.css?v={{ site.github.build_revision }}" />
     </head>
     <body>
         {% include nav.html %}
