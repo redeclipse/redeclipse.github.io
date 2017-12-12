@@ -66,8 +66,10 @@ code, pre {
     overflow-x: scroll;
 }
 pre code {
-    padding: 8px 16px 8px 16px;
+    padding: 0;
     overflow-x: scroll;
+    white-space: no-wrap;
+    display: inline;
 }
 table {
     /* width: 100%; */
