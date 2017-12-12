@@ -83,6 +83,9 @@ h4 {
 .btn {
     border-radius: 40px;
 }
+.btnlinks {
+    padding-top: 16px;
+}
 .texte {
     padding: 30px;
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* FF3.6+ */
