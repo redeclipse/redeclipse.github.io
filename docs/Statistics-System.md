@@ -8,13 +8,13 @@ layout: docs
 * [Privacy](#privacy)
 
 ***
-The statistics system, introduced after 1.5.3, records results of games and sends them to a central database on the master server. red command and press the Enter or Return key to execute it.
+The statistics system, introduced after 1.5.3, records results of games and sends them to a central database on the master server.
 
 # Enable statistic system
 Add or edit this lines inside your `servinit.cfg`
 ```
-sv_serverstats 1 //Your server must have thes flag in its auth for this to take effect.
-serverauthkey [handle] [key] //Authorization key to validate stats server.
+sv_serverstats 1 // Your server must have thes flag in its auth for this to take effect.
+serverauthkey [handle] [key] // Authorization key to validate stats server.
 ```
 # Sending Process
 - Before the server will send statistics, `sv_serverstats` must be 1 and the server must have the `s` (statistics) flag on its authentication handle. To get the `s` flag, the server must be issued a key, which may be obtained at request.

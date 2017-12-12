@@ -12,5 +12,10 @@ layout: docs
 - **[Tips and Tricks for using Parkour](Parkour-Guide)** - Everyone loves running on walls, but there's more to learn.
 - **[Privilege Levels](Privileges)** - What those icons next to player names are all about.
 
+## Server Administration
+- **[Server Setup](Server-Setup)** - How to configure and run a Red Eclipse server.
+- **[Administration Guide](Admin-Guide)** - How to manage and moderate a server.
+- **[Statistics System](Statistics-System)** - Information about the master server's global statistics system.
+
 ## Development
 - **[Version 2.0](Information-for-v2.0)** - Find out more about the upcoming v2.0 release, featuring [Tesseract](http://tesseract.gg/).
