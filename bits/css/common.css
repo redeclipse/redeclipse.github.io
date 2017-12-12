@@ -147,9 +147,6 @@ a:hover {
 .video {
     padding: 9px 16px 0px 0px;
 }
-#container {
-    margin: auto;
-}
 #copyright {
     font-size: 12px;
     text-align: center;
@@ -172,6 +169,8 @@ a:hover {
     margin-bottom: unset;
 }
 #container {
-    padding-top: 15px;
+    padding: 15px 0px 0px 0px;
     background-color: rgba(16, 16, 16, .7);
+    margin: auto;
+    float: none;
 }
