@@ -138,39 +138,14 @@ a:hover {
     background-color: #600;
     font-size: 14px;
     font-family: Orbitron;
+    text-align: center;
 }
 .social-icons {
     font-size: 30px;
     text-align: right;
 }
-@media screen and (max-width: 992px) {
-    .footer {
-        text-align: center;
-    }
-    .social-icons{
-        text-align: center;
-    }
-    .video {
-        padding: 9px 12px 0px 0;
-    }
-}
-@media screen and (min-width: 1280px) {
-    #container {
-        width: 1280px;
-        margin: auto;
-    }
-    .video {
-        padding: 9px 12px 30px 0;
-    }
-}
-@media screen and (min-width: 992px) and (max-width: 1280px) {
-    #container {
-        width: 100%;
-        margin: auto;
-    }
-    .video {
-        padding: 9px 30px 30px 0;
-    }
+.video {
+    padding: 9px 16px 0px 0px;
 }
 #copyright {
     font-size: 12px;
