@@ -147,6 +147,9 @@ a:hover {
 .video {
     padding: 9px 16px 0px 0px;
 }
+#container {
+    margin: auto;
+}
 #copyright {
     font-size: 12px;
     text-align: center;
