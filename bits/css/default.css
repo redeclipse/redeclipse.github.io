@@ -15,18 +15,30 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 36px;
     color: rgb(255, 232, 232);
+    border-bottom-style: solid;
+    border-bottom-width: 3px;
+    border-bottom-color: rgb(255, 232, 232);
 }
 h2 {
     font-size: 30px;
     color: rgb(255, 224, 224);
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: rgb(255, 224, 224);
 }
 h3 {
     font-size: 24px;
     color: rgb(255, 208, 208);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(255, 208, 208);
 }
 h4 {
     font-size: 20px;
     color: rgb(255, 196, 196);
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(255, 208, 208);
 }
 h5 {
     font-size: 18px;
@@ -36,10 +48,6 @@ h6 {
     font-size: 16px;
     color: rgb(255, 156, 156);
 }
-blockquote {
-    font-size: 14px;
-    font-family: Play, sans-serif;
-}
 .wrapper {
     width: 860px;
     margin: 0 auto;
@@ -48,28 +56,34 @@ p {
     margin: 8px 0px 8px 0px;
 }
 blockquote {
+    font-size: 14px;
+    font-family: Play, sans-serif;
     border-left: 1px solid rgb(255, 255, 255);
     margin: 0;
     padding: 0 0 0 16px;
     font-style: italic;
 }
-code, pre {
+code {
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-    background: rgb(8, 8, 8);
-    color: rgb(255, 128, 128);
+    background: rgba(8, 8, 8, 0.7);
+    color: rgb(255, 255, 255);
+    font-size: 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(255, 128, 128);
+}
+pre {
+    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
+    background: rgba(8, 8, 8, 0.7);
+    color: rgb(255, 255, 255);
     font-size: 12px;
     border-radius: 4px;
     border: 1px solid rgb(255, 64, 64);
 }
-.highlight code {
-    border: 0;
-    overflow-x: scroll;
-}
 pre code {
     padding: 0;
+    border: 0;
     overflow-x: scroll;
     white-space: nowrap;
-    display: inline;
 }
 table {
     /* width: 100%; */
