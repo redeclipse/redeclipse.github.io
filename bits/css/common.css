@@ -22,7 +22,7 @@ a:hover {
     margin-top: 23px;
 }
 .navbar-nav > li > a {
-    font-family: Oswald;
+    font-family: Play, sans-serif;
     text-transform: uppercase;
     transition: all 0.15s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
