@@ -168,3 +168,6 @@ a:hover {
     padding: 16px 0px 0px 0px;
     background-color: rgba(16, 16, 16, .7);
 }
+.navbar {
+    margin-bottom: unset;
+}

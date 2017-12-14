@@ -3,8 +3,8 @@ h1 {
     color: rgb(255, 255, 255);
     margin-top: 0;
     font-family: Orbitron;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 900;
     letter-spacing: 0.5em;
     text-transform: uppercase;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
@@ -19,21 +19,21 @@ h2 {
     text-transform: uppercase;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
-h3 b {
+h2 b {
     font-weight: 900;
     display: block;
     display: block;
     font-size: 30px;
     letter-spacing: 0;
 }
-h4 {
+h3 {
     color: rgb(200, 190, 190);
     font-family: Ruda;
     font-weight: 900;
     font-size: 14px;
     margin: 10px
 }
-h5 {
+h4 {
     margin-top: 0;
     font-family: Orbitron;
     font-size: 16px;
