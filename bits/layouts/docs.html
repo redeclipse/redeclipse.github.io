@@ -8,10 +8,10 @@
     <body>
         {% include nav.html %}
         <div id="pagecontent" class="container">
+            <div id="pagesidebar" class="sidebar">
+                <a href="https://github.com/red-eclipse/world/wiki/{{ page.origtitle }}/_edit" target="_blank">Edit this page</a>
+            </div>
             <div id="pagecontainer" class="main">
-                <div id="pagesidebar" class="sidebar">
-                    <a href="https://github.com/red-eclipse/world/wiki/{{ page.origtitle }}/_edit" target="_blank">Edit this page</a>
-                </div>
                 <h1>Docs - {{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>
