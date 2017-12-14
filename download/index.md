@@ -3,7 +3,7 @@ title: Downloads
 layout: default
 ---
 
-## v{{ site.game_version }} ({{ site.game_release }})
+# v{{ site.game_version }} ({{ site.game_release }})
 ### Released {{ site.game_date }}
 
 Platform      | Downloads                           | Other Sources
