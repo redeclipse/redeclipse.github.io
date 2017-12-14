@@ -22,8 +22,8 @@ layout: docs
 ***
 **WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/red-eclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
 
-# System Requirement
-Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system.
+# System Requirements
+Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system. A Red Eclipse can even be run on a Raspberry Pi if so desired, though it is advisable to have a little more compute power to avoid lagspikes on player join.
 
 # Quickstart
 ## Using the server shipped with Red Eclipse

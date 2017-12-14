@@ -28,6 +28,7 @@ You can change how a light behaves by modifying attribute 7 in a bitwise fashion
 - 2 = `L_NODYNSHADOW` - does not cast shadows for dynamic entities (like players, etc)
 - 4 = `L_VOLUMETRIC` - creates a volumetric effect inside the area of influence for the light
 - 8 = `L_NOSPEC` - disables specular highlights that a normal point source light creates, useful for ambient
+
 Having lights that work in realtime has finally allowed me to add both "palette" and "palindex" attributes to the LIGHT entity at attributes 8 and 9. This means maps can be completely responsive to to the available palettes which includes team colours in team games, even allowing for a neutral fallback if it is a free-for-all game. You can use these attributes in conjunction with "texpalette" to make textures the same colours. I would like to see more maps taking advantage of this feature as we can actually change the colours of the teams with variables. Anyway, I'll try to explain how this works.
 
 Palette "0" - rotating pulse colours:
