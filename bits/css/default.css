@@ -4,7 +4,7 @@
     text-align: left;
 }
 h1, h2, h3, h4, h5, h6 {
-    margin: 8px 0px 8px 0px;
+    margin: 12px 0px 8px 0px;
     color: rgb(255, 255, 255);
     font-family: Orbitron, sans-serif;
     font-weight: 600;
@@ -25,15 +25,15 @@ h3 {
     color: rgb(255, 208, 208);
 }
 h4 {
-    font-size: 18px;
+    font-size: 20px;
     color: rgb(255, 196, 196);
 }
 h5 {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 178, 178);
 }
 h6 {
-    font-size: 14px;
+    font-size: 16px;
     color: rgb(255, 156, 156);
 }
 blockquote {
