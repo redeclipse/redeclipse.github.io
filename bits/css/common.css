@@ -3,7 +3,8 @@ body {
     background: #340201 url(/bits/bg2.jpg) no-repeat center top;
     color: rgb(255, 255, 255);
     font-family: Play, sans-serif;
-    line-height: 1.6em;
+    line-height: 1.4em;
+    letter-spacing: 0.05em;
 }
 a {
     color: rgb(255, 190, 190);
