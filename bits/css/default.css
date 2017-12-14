@@ -68,7 +68,7 @@ code, pre {
 pre code {
     padding: 0;
     overflow-x: scroll;
-    white-space: no-wrap;
+    white-space: nowrap;
     display: inline;
 }
 table {
