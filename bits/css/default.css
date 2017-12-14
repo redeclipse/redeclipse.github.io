@@ -20,8 +20,8 @@ h1, h2, h3, h4, h5, h6 {
     margin: 12px 0px 8px 0px;
     color: rgb(255, 255, 255);
     font-family: Orbitron, sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-weight: 900;
+    letter-spacing: 0.1em;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 h1 {
@@ -30,20 +30,20 @@ h1 {
     border-bottom: 1px solid rgb(255, 232, 232);
 }
 h2 {
-    font-size: 32px;
+    font-size: 30px;
     color: rgb(255, 224, 224);
     border-bottom: 1px solid rgb(255, 224, 224);
 }
 h3 {
-    font-size: 28px;
+    font-size: 26px;
     color: rgb(255, 208, 208);
 }
 h4 {
-    font-size: 24px;
+    font-size: 22px;
     color: rgb(255, 196, 196);
 }
 h5 {
-    font-size: 20px;
+    font-size: 18px;
     color: rgb(255, 178, 178);
 }
 h6 {
