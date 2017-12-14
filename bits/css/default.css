@@ -3,49 +3,44 @@
     margin: 0px 32px 8px 32px;
     text-align: left;
 }
+#pagesidebar {
+    float: right;
+    text-align: left;
+    border-radius: 4px;
+    border: 1px solid rgb(255, 232, 232);
+}
 h1, h2, h3, h4, h5, h6 {
     margin: 12px 0px 8px 0px;
     color: rgb(255, 255, 255);
     font-family: Orbitron, sans-serif;
     font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
+    letter-spacing: 0.15em;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 h1 {
     font-size: 36px;
     color: rgb(255, 232, 232);
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: rgb(255, 232, 232);
+    border-bottom: 1px solid rgb(255, 232, 232);
 }
 h2 {
-    font-size: 30px;
+    font-size: 32px;
     color: rgb(255, 224, 224);
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: rgb(255, 224, 224);
+    border-bottom: 1px solid rgb(255, 224, 224);
 }
 h3 {
-    font-size: 24px;
+    font-size: 28px;
     color: rgb(255, 208, 208);
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(255, 208, 208);
 }
 h4 {
-    font-size: 20px;
+    font-size: 24px;
     color: rgb(255, 196, 196);
-    border-bottom-style: dashed;
-    border-bottom-width: 1px;
-    border-bottom-color: rgb(255, 208, 208);
 }
 h5 {
-    font-size: 18px;
+    font-size: 20px;
     color: rgb(255, 178, 178);
 }
 h6 {
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(255, 156, 156);
 }
 .wrapper {
@@ -69,7 +64,7 @@ code {
     color: rgb(255, 255, 255);
     font-size: 12px;
     border-radius: 4px;
-    border: 1px solid rgb(255, 128, 128);
+    border: 1px dashed rgb(128, 128, 128);
 }
 pre {
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
@@ -83,7 +78,6 @@ pre code {
     padding: 0;
     border: 0;
     overflow-x: scroll;
-    white-space: nowrap;
 }
 table {
     /* width: 100%; */
@@ -167,7 +161,7 @@ small {
 }
 hr {
     border: 0;
-    background: rgb(255, 64, 64);
+    background: rgb(255, 224, 224);
     height: 1px;
     margin: 0 0 20px;
 }
