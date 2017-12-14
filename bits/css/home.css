@@ -2,7 +2,7 @@
 h1 {
     color: rgb(255, 255, 255);
     margin-top: 0;
-    font-family: Orbitron;
+    font-family: Orbitron, sans-serif;
     font-size: 30px;
     font-weight: 900;
     letter-spacing: 0.5em;
@@ -12,7 +12,7 @@ h1 {
 h2 {
     color: rgb(255, 255, 255);
     margin-top: 0;
-    font-family: Orbitron;
+    font-family: Orbitron, sans-serif;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0.5em;
@@ -28,14 +28,14 @@ h2 b {
 }
 h3 {
     color: rgb(200, 190, 190);
-    font-family: Ruda;
+    font-family: Play, sans-serif;
     font-weight: 900;
     font-size: 14px;
     margin: 10px
 }
 h4 {
     margin-top: 0;
-    font-family: Orbitron;
+    font-family: Orbitron, sans-serif;
     font-size: 16px;
     font-weight: 900;
     text-transform: uppercase;
@@ -74,18 +74,18 @@ h4 {
     color: #333;
     font-size: 12px;
     margin-right: 5px;
-    font-family: Ruda;
+    font-family: Play, sans-serif;
 }
 .version {
     font-size: 10px;
     font-weight: 400;
-    font-family: Ruda;
+    font-family: Play, sans-serif;
     padding: 0;
     margin: 0;
 }
 .download {
     font-size: 21px;
-    font-family: Orbitron;
+    font-family: Orbitron, sans-serif;
     font-weight: 900;
     padding: 0;
     margin: 0;
