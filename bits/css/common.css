@@ -130,7 +130,6 @@ a:hover {
 #cube2 {
     margin: 1px auto !important;
 }
-#main { }
 #header {
     padding-bottom: 20px;
 }
@@ -165,10 +164,7 @@ a:hover {
 .carousel-control {
     width: 6%;
 }
-.navbar {
-    margin-bottom: unset;
-}
-#container {
-    padding: 15px 0px 0px 0px;
+#pagecontent {
+    padding: 16px 0px 0px 0px;
     background-color: rgba(16, 16, 16, .7);
 }
