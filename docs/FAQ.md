@@ -1,5 +1,6 @@
 ---
 title: FAQ
+origtitle: FAQ
 layout: docs
 ---
 ### What operating systems are supported?

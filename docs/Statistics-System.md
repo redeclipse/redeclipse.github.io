@@ -1,5 +1,6 @@
 ---
 title: Statistics System
+origtitle: Statistics-System
 layout: docs
 ---
 * [Enable statistic system](#enable-statistic-system)

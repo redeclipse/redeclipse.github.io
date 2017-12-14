@@ -1,5 +1,6 @@
 ---
 title: Server Setup
+origtitle: Server-Setup
 layout: docs
 ---
 * [System Requirement](#system-requirement)

@@ -1,5 +1,6 @@
 ---
 title: Install Guide
+origtitle: Install-Guide
 layout: docs
 ---
 * [Windows Instructions](#windows)

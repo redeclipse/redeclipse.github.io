@@ -1,5 +1,6 @@
 ---
 title: Admin Guide
+origtitle: Admin-Guide
 layout: docs
 ---
 * [Using Commands](#using-commands)

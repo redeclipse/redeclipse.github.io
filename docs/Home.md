@@ -1,5 +1,6 @@
 ---
 title: Home
+origtitle: Home
 layout: docs
 ---
 [Red Eclipse](https://redeclipse.net/) is an open-source arena shooter, built using the technology found in [Tesseract](http://tesseract.gg/) and [Cube Engine 2](http://cubeengine.com/). Offering an [innovative parkour system](Parkour-Guide), [distinct but all potent weapons](Weapons-Guide), and fast paced accessible gameplay.

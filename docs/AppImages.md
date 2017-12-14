@@ -1,5 +1,6 @@
 ---
 title: AppImages
+origtitle: AppImages
 layout: docs
 ---
 The Red Eclipse project provides [AppImage](https://appimage.org) builds that should work on any recent Linux distribution as an easy, dependency-free way to install and run the game.

@@ -1,5 +1,6 @@
 ---
 title: System Requirements
+origtitle: System-Requirements
 layout: docs
 ---
 # RE 2.0 (Tesseract)

@@ -1,5 +1,6 @@
 ---
 title: Official Maps
+origtitle: Official-Maps
 layout: docs
 ---
 * [Maps updated to 2.0](#maps-updated-to-20-tesseract)

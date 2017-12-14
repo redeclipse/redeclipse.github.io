@@ -1,5 +1,6 @@
 ---
 title: Contributing
+origtitle: Contributing
 layout: docs
 ---
 This guide is a basic introduction to the development model for Red Eclipse, including the procedure for submitting modifications and creating new ideas. It is suggested you read this in its entirety before starting any development related work, as it contains vital information regarding proper etiquette.
