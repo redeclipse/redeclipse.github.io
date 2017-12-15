@@ -3,6 +3,8 @@ title: Official Maps
 origtitle: Official-Maps
 layout: docs
 ---
+* TOC
+{:toc}
 * [Maps updated to 2.0](#maps-updated-to-20-tesseract)
 * [Main maps](#main-maps)
 * [Race maps](#race-maps)

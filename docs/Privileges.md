@@ -3,6 +3,8 @@ title: Privileges
 origtitle: Privileges
 layout: docs
 ---
+* TOC
+{:toc}
 Players can [apply](https://redeclipse.net/apply) for an account that allows them to authenticate as registered users. Registration is optional, so users are free to play anonymously. Some accounts have special privileges that serve for game moderation or server administration. These are indicated in-game as icons, which are shown to the left of all player names.
 
 ## Privilege Icons

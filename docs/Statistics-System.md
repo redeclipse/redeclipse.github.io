@@ -3,6 +3,8 @@ title: Statistics System
 origtitle: Statistics-System
 layout: docs
 ---
+* TOC
+{:toc}
 * [Enable statistic system](#enable-statistic-system)
 * [Sending Process](#sending-process)
 * [Web Interface](#web-interface)

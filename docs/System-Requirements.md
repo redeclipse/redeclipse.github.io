@@ -3,6 +3,8 @@ title: System Requirements
 origtitle: System-Requirements
 layout: docs
 ---
+* TOC
+{:toc}
 # RE 2.0 (Tesseract)
 
 The next release of Red Eclipse, 2.0, is based on the Tesseract engine, which is much more GPU heavy than the outgoing Cube 2 engine. To see if your current computer is up to the task of RE 2.0, check with the system requirements listed below.

@@ -3,6 +3,8 @@ title: Admin Guide
 origtitle: Admin-Guide
 layout: docs
 ---
+* TOC
+{:toc}
 * [Using Commands](#using-commands)
     * [Entering Commands](#entering-commands)
     * [Client Numbers](#client-numbers)

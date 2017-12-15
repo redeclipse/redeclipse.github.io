@@ -3,6 +3,8 @@ title: Install Guide
 origtitle: Install-Guide
 layout: docs
 ---
+* TOC
+{:toc}
 * [Windows Instructions](#windows)
 * [Linux Instructions](#linux)
 * [macOS Instructions](#macos)

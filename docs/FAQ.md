@@ -3,6 +3,8 @@ title: FAQ
 origtitle: FAQ
 layout: docs
 ---
+* TOC
+{:toc}
 ### What operating systems are supported?
 
 Red Eclipse can be played under Windows XP/Vista/7/8.1/10, macOS, GNU/Linux and BSD.

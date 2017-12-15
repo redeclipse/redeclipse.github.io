@@ -3,6 +3,8 @@ title: Server Setup
 origtitle: Server-Setup
 layout: docs
 ---
+* TOC
+{:toc}
 * [System Requirement](#system-requirement)
 * [Quickstart](#quickstart)
     * [Using the server shipped with Red Eclipse](#using-the-server-shipped-with-red-eclipse)
