@@ -5,7 +5,7 @@ layout: docs
 ---
 ### What operating systems are supported?
 
-Red Eclipse can be played under Windows XP/Vista/7/8.1/10, OS X, GNU/Linux and BSD.
+Red Eclipse can be played under Windows XP/Vista/7/8.1/10, macOS, GNU/Linux and BSD.
 
 ### How long has the game been in development?
 
@@ -61,7 +61,7 @@ See the .redeclipse user data in your home directory: `~/.redeclipse`
 
 #### Mac/OSX
 
-Check the app data in your home directory: `/Users/`<username>`/Library/Application Support/Red Eclipse`
+Check the app data in your home directory: `/Users/<username>/Library/Application Support/Red Eclipse`
 
 ### When I launch the game, there's a terminal. Is that normal?
 
@@ -131,7 +131,7 @@ In [capture](Capture-the-Flag) games, you can press **F** (per default) to pick 
 
 ### Why are there no ammo and health pickups?
 
-In Red Eclipse, players have an unlimited supply of weapon reloads, health regeneration and [impulse](Impulse-Guide) energy. Therefore, map control is less important, and everyone can focus on the real fun: Capturing that flag, grabbing that bomber ball ... or just fraging!
+In Red Eclipse, players have an unlimited supply of weapon reloads, health regeneration and [impulse](Impulse-Guide) energy. Therefore, map control is less important, and everyone can focus on the real fun: Capturing that flag, grabbing that bomber ball… or just fragging!
 
 ### A green beeping thing obscured my vision - what the heck?
 
