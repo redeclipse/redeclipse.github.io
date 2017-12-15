@@ -1,0 +1,10 @@
+- Fixed memory leaks.
+- Cleaned up some in-game messages.
+- Created AppImage builds.
+- Disabled sound when SDL 2.0.6 is detected as it is broken.
+- Fix the random weapon selection code.
+- Attempt to fix incorrect client state during desync.
+- Limited the length of server descriptions to 80 characters.
+- New maps, mapmodels, and vanity items have been added.
+- Improved team balancing mechanics, including using statistics if available.
+- Improved behaviour of reset-to-floor for flags/bombs/etc.
