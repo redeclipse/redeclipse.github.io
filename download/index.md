@@ -15,6 +15,6 @@ Platform      | Downloads                           | Other Sources
 
 ### Release Notes
 
-{% include release_{{ site.game_version }}.md %}
+{% include release.md %}
 
 You can view the entire release [on GitHub](https://github.com/red-eclipse/base/releases/tag/v{{ site.game_version }}).
