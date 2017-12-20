@@ -7,21 +7,21 @@ layout: docs
 {:toc}
 **WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/red-eclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
 
-# System Requirements
+## System Requirements
 Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system. A Red Eclipse can even be run on a Raspberry Pi if so desired, though it is advisable to have a little more compute power to avoid lagspikes on player join.
 
-# Quickstart
-## Using the server shipped with Red Eclipse
+## Quickstart
+### Using the server shipped with Red Eclipse
 
-### Windows
+#### Windows
 1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template from `doc\examples` to the root Red Eclipse directory (copy to the same directory as `server.bat`)
 1. Edit these files with a text editor as appropriate, see [Comfiguration Files](#configuration-files) for more.
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
-### GNU/Linux
+#### GNU/Linux
 For details on locating your Red Eclipse home directory, refer to [Game Settings]().
 
-#### Installed
+##### Installed
 This is normally the case if you installed Red Eclipse via your package manager, or using the "system-install" make target.
 1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template from `/usr/share/doc/redeclipse/examples/` to your homedir, using
 ```sh
@@ -33,7 +33,7 @@ cp /usr/share/doc/redeclipse/examples/servinit.cfg ~/.redeclipse/
 redeclipse-server
 ```
 
-#### From Unpacked Tarball
+##### From Unpacked Tarball
 This is the case if you are running Red Eclipse directly from the unpacked tarball distributed via redeclipse.net (and others).
 
 1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template located in `doc/examples` either to your homedir
@@ -50,7 +50,7 @@ cp doc/examples/servinit.cfg .
 ./server.sh
 ```
 
-### Mac OSX
+#### Mac OSX
 
 There is currently no server binary for the Mac, yet it is possible to host a non-dedicated server via running the client binary in server mode. To set this up, you will need to follow a few steps:
 
@@ -70,19 +70,19 @@ exec "macserver.cfg"
 
 If all goes well, your client will connect to the master server and register itself, and will then show up in the server list. Please note that the client must be running at all times you wish the server to be online.
 
-## Using [Docker](https://www.docker.com/)
+### Using [Docker](https://www.docker.com/)
 Currently there are two different Docker Images, its up to you which one you choose.
 For the installation and configuration steps follow the specific guides.
 1. https://github.com/TheAssassin/redeclipse-docker
 1. https://hub.docker.com/r/iceflower/redeclipse-server
 
-# Configuration Files
+## Configuration Files
 The configuration files are written in [cubescript](), lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
 
-## servinit.cfg
+### servinit.cfg
 [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
 
-### Admin Password
+#### Admin Password
 - The admin password can (and should!) be set using
 ```cubescript
 adminpass "yourpassword"
@@ -94,7 +94,7 @@ adminpass "yourpassword"
 **Only give your adminpass to people you trust and deem responsible to manage your server! They can do just about anything to your server after claiming admin!**
 
 
-### Connection Settings
+#### Connection Settings
 - If you wish to customize the ports used by the server you can do so by uncommenting the serverport line and changing the port number to that of your liking. For example:
 ```
 serverport 10000
@@ -105,7 +105,7 @@ serverip 127.0.0.1
 ```
 Remember these settings for later, in case you will need to do [port forwarding](#forwarding-ports). 
 
-## Server Visibility and Access
+### Server Visibility and Access
 You can control the visibility and/or accessibility of your server to the public.
 
 - For a private server that does not register with the master server (and therefore does not show up on the public server list), you can use:
@@ -118,7 +118,7 @@ serverpass "password_to_connect"
 ```
 Note however that this is **NOT** the same as adminpass, and will **NOT** allow those connected to claim admin.
 
-## Access Restrictions
+### Access Restrictions
 You can change the "openness" of your server; ie. allowing anyone to claim **helper** (one hierarchal level lower than [moderator](Privileges)), and/or preventing mastermode from being changed. Although usually unnecessary, these settings are convenient for example, public co-op editing servers. These restrictions may be modified with the serveropen variable, and the following is a list of options:
 
  Type | Description                                                                                                                    
@@ -128,12 +128,12 @@ You can change the "openness" of your server; ie. allowing anyone to claim **hel
  2    | *Open master* - Mastermode can be changed, but cannot set to 3 (private). This is useful for public co-op editing.             
  3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   
 
-## Server Customization
+### Server Customization
 - For information on how to limit modes and mutators please see [Game Filters]()
 - For examples of servinit.cfg configurations see [Server Examples]()
 - For information on weapon variables, see [Weapon Variables]()
 
-# Forwarding Ports
+## Forwarding Ports
 All servers need enabled port forwarding.
 
 **Important:** Whatever port you choose to forward, you must also forward that port plus one. For example, if you choose port 6551, you would also need to forward port 6552.
@@ -155,8 +155,8 @@ All servers need enabled port forwarding.
 
 For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](PortForward.com)
 
-# Advanced Setup
-## Multiple Servers
+## Advanced Setup
+### Multiple Servers
 *This do not apply to server running with [Docker](#using-docker).*
 
 To run multiple servers from the same install, one must change the `redeclipse_server.sh` file slightly. First, copy the `redeclipse_server.sh` file to a new directory. Here we will use 'second' Second, the `APP_PATH` variable needs to be set to the base install, so:
@@ -174,7 +174,7 @@ Done! Run your server with:
 ./redeclipse_server.sh
 ```
 
-## Using auth to grant permissions
+### Using auth to grant permissions
 Red Eclipse supports a global permissions and identification system called "[auth](Privileges)" that can be used to grant players permission to use commands on your server. In the `servinit.cfg`, simply place a line as so:
 ```
 addlocalop AUTHNAME FLAG

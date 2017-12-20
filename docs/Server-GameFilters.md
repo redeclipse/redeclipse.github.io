@@ -5,7 +5,7 @@ layout: docs
 ---
 * TOC
 {:toc}
-# Vote filtering
+## Vote filtering
 If you wish to limit voting on your server to only certain modes or mutators you will need to
 - Take all the the *bit shifted* values for the modes/mutators you want to allow
 - Add them up
@@ -35,7 +35,7 @@ sv_mutslockfilter 65536
 ```
 which will only keep the third mode variation mutator (ctf-protect) enabled.
 
-# Server Rotation Filtering
+## Server Rotation Filtering
 If you wish to filter the server rotation (without blocking rotation completely) use the `sv_rotatemodefilter`/`sv_rotatemutsfilter` variables
 
 For example
@@ -43,8 +43,8 @@ For example
 sv_rotatemodefilter 36
 ```
 
-# Filter Values
-## Modes
+## Filter Values
+### Modes
  Number | Bit shifted | Mutator          | idxvar              
 --------|-------------|------------------|---------------------
     0   | 1           | Demo             | `modebitdemo`       
@@ -56,7 +56,7 @@ sv_rotatemodefilter 36
     6   | 64          | Race             | `modebitrace`       
     7   | 127         | All              | `modebitall`        
 
-## Mutators
+### Mutators
  Number | Bit shifted | Mutator                                                                       | idxvar             
 --------|-------------|-------------------------------------------------------------------------------|--------------------
     0   | 1           | Multi                                                                         | `mutsbitmulti`     
@@ -79,7 +79,7 @@ sv_rotatemodefilter 36
    17   | 131072      | Third mode variation (ctf-protect)                                            | `mutsbitgsp3`      
    18   | 262143      | All                                                                           | `mutsbitall`       
 
-# How the Filter Values Work
+## How the Filter Values Work
 Filters are simply created using bitwise OR (numbers are bit shifted first):
 
 Example: 

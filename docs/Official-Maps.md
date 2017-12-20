@@ -5,10 +5,11 @@ layout: docs
 ---
 * TOC
 {:toc}
-# Maps updated to 2.0 (Tesseract)
+## Maps updated to 2.0 (Tesseract)
 
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
+    <tr>
         <td>
             <div><img src="images/maps/error.png" width="128px" height="128px" /></div>
             <div>Error</div>
@@ -16,7 +17,7 @@ layout: docs
     </tr>
 </table>
 
-# Main maps
+## Main maps
 
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
@@ -146,7 +147,7 @@ layout: docs
     </tr>
 </table>
 
-# Race maps
+## Race maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -195,7 +196,7 @@ layout: docs
     </tr>
 </table>
 
-# Gladiator maps
+## Gladiator maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -238,7 +239,7 @@ layout: docs
 
 **Note:** Bold maps are gladiator-only; other maps are adapted from other game modes.
 
-# Bonus maps
+## Bonus maps
 Bonus content is available at [https://github.com/red-eclipse/bonus](https://github.com/red-eclipse/bonus).
 
 [//]: # (HTML is easier to maintain as markdown when applying changes)
@@ -325,14 +326,14 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
     </tr>
 </table>
 
-# Former maps
-## Removed in 2.0
+## Former maps
+### Removed in 2.0
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
         <td>
             <div><img src="images/maps/affluence.png" width="128px" height="128px" /></div>
-            <div><b>Affluence<b></div>
+            <div><b>Affluence</b></div>
         </td>
         <td>
             <div><img src="images/maps/ares.png" width="128px" height="128px" /></div>
@@ -444,12 +445,14 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
             <div><img src="images/maps/vorticity.png" width="128px" height="128px" /></div>
             <div>Vorticity</div>
         </td>
+        <td></td>
+        <td></td>
     </tr>
 </table>
 
 **Note:** Bold maps are now available as bonus content.
 
-## Removed in 1.5.8
+### Removed in 1.5.8
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -472,7 +475,7 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
     </tr>
 </table>
 
-## Removed in 1.5.5
+### Removed in 1.5.5
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -486,32 +489,3 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
         </td>
     </tr>
 </table>
-
-# Map lists
-## sv_allowmaps
-
-## sv_mainmaps
-
-## sv_capturemaps
-
-## sv_defendmaps
-
-## sv_kingmaps
-
-## sv_bombermaps
-
-## sv_holdmaps
-
-## sv_racemaps
-
-## sv_multimaps
-
-## sv_duelmaps
-
-## sv_gladiatormaps
-
-## sv_smallmaps
-
-## sv_mediummaps
-
-## sv_largemaps

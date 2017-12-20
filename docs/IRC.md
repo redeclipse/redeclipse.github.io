@@ -5,7 +5,7 @@ layout: docs
 ---
 * TOC
 {:toc}
-# Red Eclipse IRC Channel
+## Red Eclipse IRC Channel
 The Red Eclipse IRC (**I**nternet **R**elay **C**hat) channel is located in **#redeclipse** on the Freenode Network (irc.freenode.net). If you don't have an IRC client installed, you may access the channel from your web browser at http://www.redeclipse.net/chat
 
 The channel is primarily a development and social environment for those who are working on or with others on the project. Please be mindful of how you approach the people in there, as for most of us this is our home and you are our guest. You may ask help and support questions, but the preferred mechanism for getting assistance is our forums, located at: http://www.redeclipse.net/forum
@@ -14,13 +14,11 @@ Please be patient when asking questions or seeking other support, not everyone o
 
 The native language of the majority of people in the channel is English. Please use English when talking in the channel for long periods of time. If you wish to have a conversation with someone in another language, please consider creating your own channel for this purpose.
 
-# Channel Rules
+## Community Rules
 
-- Behave: You are a guest in our home.
-- Patience: Don't expect everyone to give you what you want immediately.
-- Wait: If you ask a question, wait for an answer, don't pester everyone.
-- Thoughtful: Try to answer your own questions before asking us.
-- On Topic: Ask questions related to RE only, we won't help you create a game.
-- Speak English: One language unifies us, multiple languages creates chaos.
-- Etiquette: Do not private message someone without their consent.
-- Politically Correct: Do NOT engage in blatant racism, political or religious debates, or engage in slander over the sex and/or orientation of anyone else.
+* **Behave**: You are a guest in our community.
+* **Patience**: Don't expect everyone to give you what you want immediately.
+* **Thoughtful**: Try to answer your own questions before asking us.
+* **On Topic**: Ask questions related to Red Eclipse only, we won't help you create a game.
+* **Speak English**: One language unifies us, multiple languages creates chaos.
+* **No Slander**: Do NOT engage in blatant racism, political or religious debates, or engage in slander over the sex and/or orientation of anyone else.

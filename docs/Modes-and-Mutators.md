@@ -7,7 +7,7 @@ layout: docs
 {:toc}
 Red Eclipse has a variety of different game modes to choose from, with mutators to further tweak the experience. This page gives an overview of all the available modes and mutators. For further information and game strategy, see [Mutator Tips](Mutator-Tips) and the articles about each of the below game modes.
 
-# Modes
+## Modes
                                                      Icon                                                     | Name                                     | Description                                                                                                                                                                                                                                                                                                                   
 --------------------------------------------------------------------------------------------------------------|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  <img src="images/modes/demo.png" width="64px"/>       | [Demo](Demo)                             | View recorded matches.                                                                                                                                                                                                                                                                                                        
@@ -18,7 +18,7 @@ Red Eclipse has a variety of different game modes to choose from, with mutators 
  <img src="images/modes/bomber.png" width="64px"/>     | [Bomber Ball](Bomber-ball)               | Grab the ball and deliver to the enemy base to score, but watch your bomb timer - it will explode if you hold on to it too long. Pass it to your teammates (with the F key) to keep it going. If the other team holds it, kill the carrier or intercept it midair. Players defending their base get [buffed](Status-effects). 
  <img src="images/modes/race.png" width="64px"/>       | [Race](Race)                             | Compete in a race for the most number of laps, carefully managing your limited impulse and executing various [parkour moves](Parkour-Guide).                                                                                                                                                                                  
 
-# Mutators
+## Mutators
                                                      Icon                                                    | Name      | Description                                                                                                                                                                                                                                       
 -------------------------------------------------------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  <img src="images/modes/multi.png" width="64px"/>     | Multi     | Play with four teams instead of two (by default Kappa & Sigma, in addition to Alpha & Omega).                                                                                                                                                     
@@ -37,41 +37,41 @@ Red Eclipse has a variety of different game modes to choose from, with mutators 
  <img src="images/modes/hard.png" width="64px"/>      | Hard      | No regeneration and radar.                                                                                                                                                                                                                        
  <img src="images/modes/basic.png" width="64px"/>     | Basic     | No collectible items will spawn in the arena.                                                                                                                                                                                                     
 
-# Mode-Exclusive Mutators
-## Deathmatch
+## Mode-Exclusive Mutators
+### Deathmatch
                                                      Icon                                                    | Name       | Description                                                   
 -------------------------------------------------------------------------------------------------------------|------------|---------------------------------------------------------------
  <img src="images/modes/gladiator.png" width="64px"/> | Gladiator  | Fight in a confined area with increased pushback from damage. 
  <img src="images/modes/oldschool.png" width="64px"/> | Old School | Secure the most number of frags instead of points.            
 
-## Capture the Flag
+### Capture the Flag
                                                        Icon                                                       | Name    | Description                                                                                                                                  
 ------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------
   <img src="images/modes/capturequick.png" width="64px"/>  | Quick   | Touching your own team's loose flag will instantly teleport it back to your base, instead of having to escort it there on foot.              
   <img src="images/modes/capturedefend.png" width="64px"/> | Defend  | When your flag is taken, you cannot return it. You must protect it from where it's dropped until the timer resets.                           
  <img src="images/modes/captureprotect.png" width="64px"/> | Protect | You do not score for bringing a flag back to your base. Instead, simply pick up an opponent's flag and hold onto it for 15 seconds to score. 
 
-## Defend and Control
+### Defend and Control
                                                        Icon                                                       | Name    | Description                                                                                                                                                             
 ------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
    <img src="images/modes/defendquick.png" width="64px"/>  | Quick   | Touching your own team's loose flag will instantly teleport it back to your base, instead of having to escort it there on foot.                                         
    <img src="images/modes/defendking.png" width="64px"/>   | King    | Flags can be secured much more quickly. When capturing enemy points, they change directly to your color, instead of passing through a neutral "overthrown" state first. 
 
-## Bomber Ball
+### Bomber Ball
                                                       Icon                                                      | Name   | Description                                                                                                                                                                                                                                                                                        
 ----------------------------------------------------------------------------------------------------------------|--------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
  <img src="images/modes/bomberbasket.png" width="64px"/> | Basket | The ball must be thrown into the goal to score, using the F key at a minimal distance.                                                                                                                                                                                                             
   <img src="images/modes/bomberhold.png" width="64px"/>  | Hold   | There are no goals to drop the ball into. Instead, you get points for holding the ball as long as possible, but don't let the timer run out or you blow up and lose points! In this mode, the player holding the ball can kill opponents to reset the timer, allowing them to hold onto it longer. 
  <img src="images/modes/bomberattack.png" width="64px"/> | Attack | The ball spawns at a teams base and they attack for half the round, then it swaps over.                                                                                                                                                                                                            
 
-## Race
+### Race
                                                        Icon                                                      | Name      | Description                                                                                                                                                                                 
 -----------------------------------------------------------------------------------------------------------------|-----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
    <img src="images/modes/racetimed.png" width="64px"/>   | Timed     | Compete for the fastest time completing a lap. The number of laps does not matter.                                                                                                          
  <img src="images/modes/raceendurance.png" width="64px"/> | Endurance | Disables impulse restoration on checkpoints and when respawning. Also slows down impulse recovery, so plan your route carefully.                                                            
   <img src="images/modes/racegauntlet.png" width="64px"/> | Gauntlet  | One team (blue/Alpha) races to reach the goal and score points, while the other team (red/Omega) tries to shoot them before they can get there. Teams switch off halfway through the match. 
 
-# Mutatormatrix
+## Mutatormatrix
                         |        Multi       |               FFA              |        Coop        |      Instagib      |      Medieval      |       Kaboom       |                Duel                |              Survivor              |       Classic      |      Onslaught     |            Freestyle           |       Vampire      |       Resize       |        Hard        |        Basic       
 ------------------------|--------------------|--------------------------------|--------------------|--------------------|--------------------|--------------------|------------------------------------|------------------------------------|--------------------|--------------------|--------------------------------|--------------------|--------------------|--------------------|--------------------
         **Demo**        |         :x:        |               :x:              |         :x:        |         :x:        |         :x:        |         :x:        |                 :x:                |                 :x:                |         :x:        |         :x:        |               :x:              |         :x:        |         :x:        |         :x:        |         :x:        
