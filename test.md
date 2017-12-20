@@ -1,4 +1,5 @@
 ---
+title: Markdown Test Page
 layout: default
 ---
 
