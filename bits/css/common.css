@@ -20,7 +20,6 @@ a:hover, a:active {
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
     font-weight: 700;
-    font-size: 16px;
 }
 .navbar-toggle {
     margin-top: 23px;
@@ -67,7 +66,6 @@ a:hover, a:active {
 }
 .footer {
     background-color: #600;
-    font-size: 16px;
     font-family: Orbitron, sans-serif;
     text-align: center;
 }
@@ -79,7 +77,6 @@ a:hover, a:active {
     padding: 8px 16px 16px 8px;
 }
 #copyright {
-    font-size: 12px;
     text-align: center;
     padding: 8px;
     background-color: rgb(8, 8, 8);
