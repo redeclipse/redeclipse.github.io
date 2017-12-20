@@ -1,6 +1,6 @@
 # Site settings
 title: Red Eclipse
-game_version: "1.5.9"
+game_version: "1.5.8"
 game_release: "Elysium Edition"
 game_date: "14th December 2017"
 
@@ -13,10 +13,11 @@ data_dir: "bits/data"
 includes_dir: "bits/includes"
 
 # Handling Reading
-safe: false
-include: []
-exclude: ["_config.yml", "CNAME", ".github", "sources"]
-keep_files: []
+safe: true
+exclude:
+  - ".github"
+  - "_config.yml"
+  - "CNAME"
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 strict_front_matter: false
@@ -28,8 +29,11 @@ future: false
 unpublished: false
 
 # Plugins
-whitelist: []
-plugins: []
+plugins:
+  - jekyll-avatar
+  - jekyll-mentions
+  - jekyll-sitemap
+  - jemoji
 
 # Conversion
 markdown: kramdown
