@@ -45,16 +45,16 @@ sv_rotatemodefilter 36
 
 ## Filter Values
 ### Modes
- Number | Bit shifted | Mutator          | idxvar              
---------|-------------|------------------|---------------------
-    0   | 1           | Demo             | `modebitdemo`       
-    1   | 2           | Editing          | `modebitediting`    
-    2   | 4           | Deathmatch       | `modebitdeathmatch` 
-    3   | 8           | Capture the Flag | `modebitcapture`    
-    4   | 16          | Defend the Flag  | `modebitdefend`     
-    5   | 32          | Bomber-ball      | `modebitbomber`     
-    6   | 64          | Race             | `modebitrace`       
-    7   | 127         | All              | `modebitall`        
+| Number | Bit shifted | Mutator          | idxvar              |
+|:------:|-------------|------------------|---------------------|
+|    0   | 1           | Demo             | `modebitdemo`       |
+|    1   | 2           | Editing          | `modebitediting`    |
+|    2   | 4           | Deathmatch       | `modebitdeathmatch` |
+|    3   | 8           | Capture the Flag | `modebitcapture`    |
+|    4   | 16          | Defend the Flag  | `modebitdefend`     |
+|    5   | 32          | Bomber-ball      | `modebitbomber`     |
+|    6   | 64          | Race             | `modebitrace`       |
+|    7   | 127         | All              | `modebitall`        |
 
 ### Mutators
  Number | Bit shifted | Mutator                                                                       | idxvar             
