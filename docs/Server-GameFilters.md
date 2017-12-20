@@ -45,39 +45,39 @@ sv_rotatemodefilter 36
 
 # Filter Values
 ## Modes
-| Number | Bit shifted | Mutator          | idxvar              |
-|:------:|-------------|------------------|---------------------|
-|    0   | 1           | Demo             | `modebitdemo`       |
-|    1   | 2           | Editing          | `modebitediting`    |
-|    2   | 4           | Deathmatch       | `modebitdeathmatch` |
-|    3   | 8           | Capture the Flag | `modebitcapture`    |
-|    4   | 16          | Defend the Flag  | `modebitdefend`     |
-|    5   | 32          | Bomber-ball      | `modebitbomber`     |
-|    6   | 64          | Race             | `modebitrace`       |
-|    7   | 127         | All              | `modebitall`        |
+ Number | Bit shifted | Mutator          | idxvar              
+--------|-------------|------------------|---------------------
+    0   | 1           | Demo             | `modebitdemo`       
+    1   | 2           | Editing          | `modebitediting`    
+    2   | 4           | Deathmatch       | `modebitdeathmatch` 
+    3   | 8           | Capture the Flag | `modebitcapture`    
+    4   | 16          | Defend the Flag  | `modebitdefend`     
+    5   | 32          | Bomber-ball      | `modebitbomber`     
+    6   | 64          | Race             | `modebitrace`       
+    7   | 127         | All              | `modebitall`        
 
 ## Mutators
-| Number | Bit shifted | Mutator                                                                       | idxvar             |
-|:------:|-------------|-------------------------------------------------------------------------------|--------------------|
-|    0   | 1           | Multi                                                                         | `mutsbitmulti`     |
-|    1   | 2           | Free-for-all                                                                  | `mutsbitffa`       |
-|    2   | 4           | Co-op                                                                         | `mutsbitcoop`      |
-|    3   | 8           | Instagib                                                                      | `mutsbitinstagib`  |
-|    4   | 16          | Medieval                                                                      | `mutsbitmedieval`  |
-|    5   | 32          | Kaboom                                                                        | `mutsbitkaboom`    |
-|    6   | 64          | Duel                                                                          | `mutsbitduel`      |
-|    7   | 128         | Survivor                                                                      | `mutsbitsurvivor`  |
-|    8   | 256         | Classic                                                                       | `mutsbitclassic`   |
-|    9   | 512         | Onslaught                                                                     | `mutsbitonslaught` |
-|   10   | 1024        | Freestyle                                                                     | `mutsbitfreestyle` |
-|   11   | 2048        | Vampire                                                                       | `mutsbitvampire`   |
-|   12   | 4096        | Resize                                                                        | `mutsbitresize`    |
-|   13   | 8192        | Hard                                                                          | `mutsbithard`      |
-|   14   | 16384       | Basic                                                                         | `mutsbitbasic`     |
-|   15   | 32768       | First mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard)  | `mutsbitgsp1`      |
-|   16   | 65536       | Second mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard) | `mutsbitgsp2`      |
-|   17   | 131072      | Third mode variation (ctf-protect)                                            | `mutsbitgsp3`      |
-|   18   | 262143      | All                                                                           | `mutsbitall`       |
+ Number | Bit shifted | Mutator                                                                       | idxvar             
+--------|-------------|-------------------------------------------------------------------------------|--------------------
+    0   | 1           | Multi                                                                         | `mutsbitmulti`     
+    1   | 2           | Free-for-all                                                                  | `mutsbitffa`       
+    2   | 4           | Co-op                                                                         | `mutsbitcoop`      
+    3   | 8           | Instagib                                                                      | `mutsbitinstagib`  
+    4   | 16          | Medieval                                                                      | `mutsbitmedieval`  
+    5   | 32          | Kaboom                                                                        | `mutsbitkaboom`    
+    6   | 64          | Duel                                                                          | `mutsbitduel`      
+    7   | 128         | Survivor                                                                      | `mutsbitsurvivor`  
+    8   | 256         | Classic                                                                       | `mutsbitclassic`   
+    9   | 512         | Onslaught                                                                     | `mutsbitonslaught` 
+   10   | 1024        | Freestyle                                                                     | `mutsbitfreestyle` 
+   11   | 2048        | Vampire                                                                       | `mutsbitvampire`   
+   12   | 4096        | Resize                                                                        | `mutsbitresize`    
+   13   | 8192        | Hard                                                                          | `mutsbithard`      
+   14   | 16384       | Basic                                                                         | `mutsbitbasic`     
+   15   | 32768       | First mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard)  | `mutsbitgsp1`      
+   16   | 65536       | Second mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard) | `mutsbitgsp2`      
+   17   | 131072      | Third mode variation (ctf-protect)                                            | `mutsbitgsp3`      
+   18   | 262143      | All                                                                           | `mutsbitall`       
 
 # How the Filter Values Work
 Filters are simply created using bitwise OR (numbers are bit shifted first):

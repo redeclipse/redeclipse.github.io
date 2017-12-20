@@ -121,12 +121,12 @@ Note however that this is **NOT** the same as adminpass, and will **NOT** allow 
 ## Access Restrictions
 You can change the "openness" of your server; ie. allowing anyone to claim **helper** (one hierarchal level lower than [moderator](Privileges)), and/or preventing mastermode from being changed. Although usually unnecessary, these settings are convenient for example, public co-op editing servers. These restrictions may be modified with the serveropen variable, and the following is a list of options:
 
-| Type | Description                                                                                                                    |
-|------|--------------------------------------------------------------------------------------------------------------------------------|
-| 0    | *Very open* - Allow "open master" (anyone may claim helper with `setpriv 1`) and can set mastermode 2 (locked) or 3 (private). |
-| 1    | *Open master* - Mastermode cannot be modified at all.                                                                          |
-| 2    | *Open master* - Mastermode can be changed, but cannot set to 3 (private). This is useful for public co-op editing.             |
-| 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   |
+ Type | Description                                                                                                                    
+------|--------------------------------------------------------------------------------------------------------------------------------
+ 0    | *Very open* - Allow "open master" (anyone may claim helper with `setpriv 1`) and can set mastermode 2 (locked) or 3 (private). 
+ 1    | *Open master* - Mastermode cannot be modified at all.                                                                          
+ 2    | *Open master* - Mastermode can be changed, but cannot set to 3 (private). This is useful for public co-op editing.             
+ 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   
 
 ## Server Customization
 - For information on how to limit modes and mutators please see [Game Filters]()
@@ -148,10 +148,10 @@ All servers need enabled port forwarding.
 
 **Default Ports**
 
-| Type        | Port      |
-|-------------|-----------|
-| Connections | 28801 UDP |
-| Queries     | 28802UDP  |
+ Type        | Port      
+-------------|-----------
+ Connections | 28801 UDP 
+ Queries     | 28802UDP  
 
 For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](PortForward.com)
 
