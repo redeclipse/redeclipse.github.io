@@ -5,15 +5,6 @@ layout: docs
 ---
 * TOC
 {:toc}
-* [Using Commands](#using-commands)
-    * [Entering Commands](#entering-commands)
-    * [Client Numbers](#client-numbers)
-    * [Hints](#hints)
-* [Moderation Commands](#moderation-commands)
-* [Administration Commands](#administration-commands)
-* [Master Server](#master-server)
-
-***
 Red Eclipse moderators and administrators have several powerful commands at their disposal to manage players and gameplay. This guide lists common admin commands, print it for a handy cheat sheet. For a complete list of admin commands and variables, see Client and Admin Vars.
 Contents
 

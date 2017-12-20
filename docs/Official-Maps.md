@@ -5,18 +5,6 @@ layout: docs
 ---
 * TOC
 {:toc}
-* [Maps updated to 2.0](#maps-updated-to-20-tesseract)
-* [Main maps](#main-maps)
-* [Race maps](#race-maps)
-* [Gladiator maps](#gladiator-maps)
-* [Bonus maps](#bonus-maps)
-* [Former maps](#former-maps)
-    * [Removed in 2.0](#removed-in-20)
-    * [Removed in 1.5.8](#removed-in-158)
-    * [Removed in 1.5.5](#removed-in-155)
-* [Map lists](#map-lists)
-
-***
 # Maps updated to 2.0 (Tesseract)
 
 [//]: # (HTML is easier to maintain as markdown when applying changes)

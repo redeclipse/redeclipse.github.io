@@ -19,9 +19,9 @@ The tree is split up into the following:
 If you are on Windows and don't like the official GitHub application you can try MSysGit or TortoiseGit. If you are on Linux you should be able to obtain the git command line tools from your distribution/package manager.
 
 Here's a rundown of how to setup a new repository:
-
- git clone --recurse-submodules https://github.com/red-eclipse/base.git redeclipse
-
+```
+git clone --recurse-submodules https://github.com/red-eclipse/base.git redeclipse
+```
 ## Content/Idea/Proposal Guidelines
 
 * Create a piece of content, come up with an idea, or decide to propose a change you want included in Red Eclipse.

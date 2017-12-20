@@ -5,24 +5,6 @@ layout: docs
 ---
 * TOC
 {:toc}
-* [System Requirement](#system-requirement)
-* [Quickstart](#quickstart)
-    * [Using the server shipped with Red Eclipse](#using-the-server-shipped-with-red-eclipse)
-        * [Windows](#windows)
-        * [GNU/Linux](#gnulinux)
-        * [Mac OSX](#max-osx)
-    * [Using Docker](#using-docker)
-* [Configuration Files](#configuration-files)
-     * [serverinit.cfg](#serverinitcfg)
-     * [Server Visibility and Access](#server-visibility-and-access)
-     * [Access Restrictions](#access-restrictions)
-     * [Server Customization](#server-customization)
-* [Forwarding Ports](#forwarding-ports)
-* [Advanced Setup](#advanced-setup)
-    * [Multiple Servers](#multiple-servers)
-    * [Using auth to grant permissions](#using-auth-to-grant-permissions)
-    
-***
 **WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/red-eclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
 
 # System Requirements
