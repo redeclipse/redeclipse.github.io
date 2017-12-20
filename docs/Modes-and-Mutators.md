@@ -80,18 +80,19 @@ Red Eclipse has a variety of different game modes to choose from, with mutators 
 
 ## Mutatormatrix
 
-|                        | Multi |       FFA      | Coop |     Instagib   |    Medieval   |     Kaboom    |        Duel        |      Survivor     | Classic  | Onslaught |   Freestyle   |     Vampire     |     Resize    |      Hard      |     Basic     |
-|:----------------------:|:-----:|:--------------:|:----:|:--------------:|:-------------:|:-------------:|:------------------:|:-----------------:|:--------:|:---------:|:-------------:|:---------------:|:-------------:|:--------------:|:-------------:|
-|        **Demo**        |   ✖   |       ✖       |   ✖  |       ✖       |       ✖       |       ✖       |         ✖         |         ✖         |    ✖    |     ✖     |       ✖       |        ✖       |       ✖       |       ✖       |       ✖       |
-|       **Editing**      |   ✖   |       ✖       |   ✖  |       ✖       |       ✖       |       ✖       |         ✖         |         ✖         |    ✖    |     ✖     |       ✔       |        ✖       |       ✖       |       ✖       |       ✖       |
-|     **Deathmatch**     |   ✔   |       ✔       |   ✔  |       ✔       |       ✔       |       ✔       |         ✔         |         ✔         |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
-|  **Capture the Flag**  |   ✔   |       ✖       |   ✔  |       ✔       |       ✔       |       ✔       |         ✔         |         ✔         |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
-| **Defend and Control** |   ✔   |       ✖       |   ✔  |       ✔       |       ✔       |       ✔       |         ✖         |         ✖         |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
-|     **Bomber Ball**    |   ✔   | ✖<sup>1</sup> |   ✔  |       ✔       |       ✔       |       ✔       | ✔<sup>1,2,3</sup> | ✔<sup>1,2,3</sup> |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
-|        **Race**        |   ✔   | ✔<sup>5</sup> |   ✖  | ✖<sup>4</sup> | ✖<sup>4</sup> | ✖<sup>4</sup> |         ✖         |         ✖         |    ✖    |     ✔     | ✔<sup>3</sup> | ✖ <sup>4</sup> | ✖<sup>4</sup> | ✖<sup>4</sup> | ✖<sup>4</sup> |
+|                        | Multi |       FFA      | Coop |     Instagib   |    Medieval   |     Kaboom    |       Duel       |     Survivor    | Classic  | Onslaught |   Freestyle   |     Vampire     |     Resize    |      Hard      |     Basic     |
+|:----------------------:|:-----:|:--------------:|:----:|:--------------:|:-------------:|:-------------:|:----------------:|:---------------:|:--------:|:---------:|:-------------:|:---------------:|:-------------:|:--------------:|:-------------:|
+|        **Demo**        |   ✖   |       ✖       |   ✖  |       ✖       |       ✖       |       ✖       |        ✖        |        ✖        |    ✖    |     ✖     |       ✖       |        ✖       |       ✖       |       ✖       |       ✖       |
+|       **Editing**      |   ✖   |       ✖       |   ✖  |       ✖       |       ✖       |       ✖       |        ✖        |        ✖        |    ✖    |     ✖     |       ✔       |        ✖       |       ✖       |       ✖       |       ✖       |
+|     **Deathmatch**     |   ✔   |       ✔       |   ✔  |       ✔       |       ✔       |       ✔       |        ✔        |        ✔        |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
+|  **Capture the Flag**  |   ✔   |       ✖       |   ✔  |       ✔       |       ✔       |       ✔       |        ✔        |        ✔        |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
+| **Defend and Control** |   ✔   |       ✖       |   ✔  |       ✔       |       ✔       |       ✔       |        ✖        |        ✖        |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
+|     **Bomber Ball**    |   ✔   | ✖<sup>1</sup> |   ✔  |       ✔       |       ✔       |       ✔       | ✔<sup>2,3</sup> | ✔<sup>2,3</sup> |    ✔    |     ✔     |       ✔       |        ✔       |       ✔       |       ✔       |       ✔       |
+|        **Race**        |   ✔   | ✔<sup>6</sup> |   ✖  | ✖<sup>5</sup> | ✖<sup>5</sup> | ✖<sup>5</sup> |        ✖        |        ✖        |    ✖    |     ✔     | ✔<sup>4</sup> | ✖ <sup>5</sup> | ✖<sup>5</sup> | ✖<sup>5</sup> | ✖<sup>5</sup> |
                                                                      
 <sup>1 </sup>: available with mutator *hold*  
 <sup>2 </sup>: not available with mutator *hold*  
 <sup>3 </sup>: not available with mutator *attack*  
-<sup>4 </sup>: available with mutator *gauntlet*  
-<sup>5 </sup>: not available with mutator *gauntlet*  
+<sup>4 </sup>: not available with mutator *endurance*
+<sup>5 </sup>: available with mutator *gauntlet*  
+<sup>6 </sup>: not available with mutator *gauntlet*  
