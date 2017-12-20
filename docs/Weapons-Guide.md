@@ -1,6 +1,6 @@
 ---
 title: Weapons Guide
-origtitle: Weapons-Guide
+origfile: Weapons-Guide.md
 layout: docs
 ---
 * TOC

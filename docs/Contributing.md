@@ -1,6 +1,6 @@
 ---
 title: Contributing
-origtitle: Contributing
+origfile: Contributing.md
 layout: docs
 ---
 * TOC

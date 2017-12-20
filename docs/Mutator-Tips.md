@@ -1,6 +1,6 @@
 ---
 title: Mutator Tips
-origtitle: Mutator-Tips
+origfile: Mutator-Tips.md
 layout: docs
 ---
 * TOC

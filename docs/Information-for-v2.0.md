@@ -1,6 +1,6 @@
 ---
 title: Information for v2.0
-origtitle: Information-for-v2.0
+origfile: Information-for-v2.0.md
 layout: docs
 ---
 * TOC

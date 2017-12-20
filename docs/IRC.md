@@ -1,6 +1,6 @@
 ---
 title: IRC
-origtitle: IRC
+origfile: IRC.md
 layout: docs
 ---
 * TOC

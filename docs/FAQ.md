@@ -1,6 +1,6 @@
 ---
 title: FAQ
-origtitle: FAQ
+origfile: FAQ.md
 layout: docs
 ---
 * TOC

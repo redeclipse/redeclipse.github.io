@@ -1,6 +1,6 @@
 ---
 title: Scoring System
-origtitle: Scoring-System
+origfile: Scoring-System.md
 layout: docs
 ---
 * TOC

@@ -1,6 +1,6 @@
 ---
 title: Status effects
-origtitle: Status-effects
+origfile: Status-effects.md
 layout: docs
 ---
 * TOC

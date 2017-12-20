@@ -1,6 +1,6 @@
 ---
 title: Glossary
-origtitle: Glossary
+origfile: Glossary.md
 layout: docs
 ---
 * TOC

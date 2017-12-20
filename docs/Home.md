@@ -1,6 +1,6 @@
 ---
 title: Home
-origtitle: Home
+origfile: Home.md
 layout: docs
 ---
 * TOC

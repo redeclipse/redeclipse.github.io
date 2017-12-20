@@ -1,6 +1,6 @@
 ---
 title: Modes and Mutators
-origtitle: Modes-and-Mutators
+origfile: Modes-and-Mutators.md
 layout: docs
 ---
 * TOC

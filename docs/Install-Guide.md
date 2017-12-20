@@ -1,6 +1,6 @@
 ---
 title: Install Guide
-origtitle: Install-Guide
+origfile: Install-Guide.md
 layout: docs
 ---
 * TOC

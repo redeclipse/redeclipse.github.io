@@ -1,6 +1,6 @@
 ---
 title: AppImages
-origtitle: AppImages
+origfile: AppImages.md
 layout: docs
 ---
 * TOC

@@ -1,6 +1,6 @@
 ---
 title: System Requirements
-origtitle: System-Requirements
+origfile: System-Requirements.md
 layout: docs
 ---
 * TOC
