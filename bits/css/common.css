@@ -4,47 +4,51 @@ body {
     color: rgb(255, 255, 255);
     font-family: Play, sans-serif;
     line-height: 1.4em;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.001em;
+    font-size: 16px;
 }
-a {
-    color: rgb(255, 190, 190);
+a, a:link, a:visited {
+    color: rgb(255, 178, 178);
 }
-a:hover {
+a:hover, a:active {
     color: rgb(255, 128, 128);
 }
 .navbar-inverse {
     background-color: rgba(0, 0, 0, 0.3);
     border: none;
 }
-.navbar-inverse .navbar-nav > li > a {
-    color: #fcc;
+.navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
+    color: rgb(255, 178, 178);
+    font-weight: 700;
+    font-size: 16px;
 }
 .navbar-toggle {
     margin-top: 23px;
 }
-.navbar-nav > li > a {
+.navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
     font-family: Play, sans-serif;
     transition: all 0.15s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
     padding: 30px 10px 30px 10px;
 }
 @media screen and (max-width: 1200px) {
-    .navbar-nav > li > a {
+    .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
         padding: 10px 10px 10px 10px;
     }
 }
-.navbar-nav > li > a:hover {
+.navbar-nav > li > a:hover, .navbar-nav > li > a:active {
+    color: rgb(255, 255, 255);
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
-    -moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
-    -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.5);
-    -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
-    box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    -moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
+    -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.7);
+    -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
+    box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
 }
 .navbar-brand {
     height: auto;
     padding: 0;
 }
-.navbar-brand:hover {
+.navbar-brand:hover, .navbar-brand:active {
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 .row {
@@ -63,7 +67,7 @@ a:hover {
 }
 .footer {
     background-color: #600;
-    font-size: 14px;
+    font-size: 16px;
     font-family: Orbitron, sans-serif;
     text-align: center;
 }
@@ -85,7 +89,7 @@ a:hover {
     margin: 0;
     padding: 0;
 }
-#copyright a {
+#copyright a, #copyright a:link, #copyright a:visited {
     font-weight: 800;
     color: rgb(255, 96, 96);
 }

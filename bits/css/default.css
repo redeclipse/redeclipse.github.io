@@ -21,34 +21,34 @@ h1, h2, h3, h4, h5, h6 {
     color: rgb(255, 255, 255);
     font-family: Orbitron, sans-serif;
     font-weight: 900;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.01em;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 h1 {
-    font-size: 36px;
+    font-size: 32px;
     color: rgb(255, 232, 232);
     border-bottom: 1px solid rgb(255, 232, 232);
 }
 h2 {
-    font-size: 30px;
-    color: rgb(255, 224, 224);
-    border-bottom: 1px solid rgb(255, 224, 224);
+    font-size: 28px;
+    color: rgb(255, 204, 204);
+    border-bottom: 1px solid rgb(255, 204, 204);
 }
 h3 {
-    font-size: 26px;
-    color: rgb(255, 208, 208);
+    font-size: 24px;
+    color: rgb(255, 186, 186);
 }
 h4 {
     font-size: 22px;
-    color: rgb(255, 196, 196);
+    color: rgb(255, 172, 172);
 }
 h5 {
-    font-size: 18px;
-    color: rgb(255, 178, 178);
+    font-size: 20px;
+    color: rgb(255, 156, 156);
 }
 h6 {
     font-size: 18px;
-    color: rgb(255, 156, 156);
+    color: rgb(255, 134, 134);
 }
 .wrapper {
     width: 860px;
@@ -58,7 +58,7 @@ p {
     margin: 8px 0px 8px 0px;
 }
 blockquote {
-    font-size: 14px;
+    font-size: 16px;
     font-family: Play, sans-serif;
     border-left: 1px solid rgb(255, 255, 255);
     margin: 0;
@@ -155,7 +155,7 @@ header ul li + li + li {
     width: 89px;
 }
 header ul a strong {
-    font-size: 14px;
+    font-size: 16px;
     display: block;
 }
 section {
