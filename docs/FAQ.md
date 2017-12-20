@@ -17,37 +17,37 @@ Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourcefor
 
 Red Eclipse is available for download at no cost.
 
--   The [latest release](https://redeclipse.net/download) can be downloaded for all supported operating systems.
--   GNU/Linux packages can also be found on:
-    -   [Debian](Install-Guide#Debian/Ubuntu_repository)
-    -   [Ubuntu](Install-Guide#Debian/Ubuntu_repository)
-    -   [AUR](https://aur.archlinux.org/packages/redeclipse)
-    -   [Chakra](https://chakralinux.org/ccr/packages.php?O=0&K=redeclipse&do_Search=+Go+)
--   BSD ports are available for:
-    -   [FreeBSD](https://www.freshports.org/games/redeclipse/)
-    -   [OpenBSD](http://ports.su/games/redeclipse,-main)
--   Or download the developmental [Git version](https://redeclipse.net/devel), which is hosted by [GitHub](https://github.com/red-eclipse/base).
+- The [latest release](https://redeclipse.net/download) can be downloaded for all supported operating systems.
+- GNU/Linux packages can also be found on:
+    - [Debian](Install-Guide#Debian/Ubuntu_repository)
+    - [Ubuntu](Install-Guide#Debian/Ubuntu_repository)
+    -  AUR](https://aur.archlinux.org/packages/redeclipse)
+    - [Chakra](https://chakralinux.org/ccr/packages.php?O=0&K=redeclipse&do_Search=+Go+)
+- BSD ports are available for:
+    - [FreeBSD](https://www.freshports.org/games/redeclipse/)
+    - [OpenBSD](http://ports.su/games/redeclipse,-main)
+- Or download the developmental [Git version](https://redeclipse.net/devel), which is hosted by [GitHub](https://github.com/red-eclipse/base).
 
 ## What are my rights?
 
 Red Eclipse is a [Free](http://www.gnu.org/philosophy/free-sw.html) and [Open Source](http://www.opensource.org/) game.
 
--   Red Eclipse itself and the Cube Engine 2 are under the [zlib License](http://en.wikipedia.org/wiki/Zlib_License).
--   All content in the game is Free, and no more strict than the Creative Commons [CC-BY-SA](http://creativecommons.org/licenses/by-sa/3.0/) license.
--   For more details, see [license.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/license.txt) and [trademark.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/trademark.txt).
+- Red Eclipse itself and the Cube Engine 2 are under the [zlib License](http://en.wikipedia.org/wiki/Zlib_License).
+- All content in the game is Free, and no more strict than the Creative Commons [CC-BY-SA](http://creativecommons.org/licenses/by-sa/3.0/) license.
+- For more details, see [license.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/license.txt) and [trademark.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/trademark.txt).
 
 ## What are my rights regarding game servers?
 
--   Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
-    -   Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt).
--   Any player or server found to not be in compliance with these guidelines are susceptible to denial of access to the Red Eclipse Master Server either temporarily or indefinitely.
+- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
+    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt).
+- Any player or server found to not be in compliance with these guidelines are susceptible to denial of access to the Red Eclipse Master Server either temporarily or indefinitely.
 
 ## Where else can I get help or discuss the game?
 
 Apart from this wiki, and playing on the game servers, you can:
 
--   Participate in the game [discussions](https://redeclipse.net/discuss).
--   Connect to [irc.freenode.net](irc://irc.freenode.net) IRC network, and join \#redeclipse channel or use the [WebChat](https://redeclipse.net/chat)
+- Participate in the game [discussions](https://redeclipse.net/discuss).
+- Connect to [irc.freenode.net](irc://irc.freenode.net) IRC network, and join \#redeclipse channel or use the [WebChat](https://redeclipse.net/chat)
 
 ## Where do I find screenshots, logs and other user data?
 
