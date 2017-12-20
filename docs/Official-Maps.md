@@ -445,8 +445,6 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
             <div><img src="images/maps/vorticity.png" width="128px" height="128px" /></div>
             <div>Vorticity</div>
         </td>
-        <td></td>
-        <td></td>
     </tr>
 </table>
 
