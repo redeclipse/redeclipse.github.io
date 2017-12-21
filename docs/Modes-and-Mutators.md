@@ -3,7 +3,6 @@ title: Modes and Mutators
 layout: docs
 origfile: Modes-and-Mutators.md
 origtitle: Modes-and-Mutators
-permalink: /docs/Modes-and-Mutators
 ---
 * TOC
 {:toc}

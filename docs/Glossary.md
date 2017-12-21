@@ -3,7 +3,6 @@ title: Glossary
 layout: docs
 origfile: Glossary.md
 origtitle: Glossary
-permalink: /docs/Glossary
 ---
 * TOC
 {:toc}

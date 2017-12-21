@@ -3,7 +3,6 @@ title: Install Guide
 layout: docs
 origfile: Install-Guide.md
 origtitle: Install-Guide
-permalink: /docs/Install-Guide
 ---
 * TOC
 {:toc}

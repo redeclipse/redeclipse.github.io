@@ -3,7 +3,6 @@ title: Readme
 layout: docs
 origfile: Readme.md
 origtitle: Readme
-permalink: /docs/Readme
 ---
 * TOC
 {:toc}

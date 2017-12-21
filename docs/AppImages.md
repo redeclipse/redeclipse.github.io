@@ -3,7 +3,6 @@ title: AppImages
 layout: docs
 origfile: AppImages.md
 origtitle: AppImages
-permalink: /docs/AppImages
 ---
 * TOC
 {:toc}

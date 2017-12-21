@@ -3,7 +3,6 @@ title: Server Setup
 layout: docs
 origfile: Server-Setup.md
 origtitle: Server-Setup
-permalink: /docs/Server-Setup
 ---
 * TOC
 {:toc}

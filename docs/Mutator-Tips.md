@@ -3,7 +3,6 @@ title: Mutator Tips
 layout: docs
 origfile: Mutator-Tips.md
 origtitle: Mutator-Tips
-permalink: /docs/Mutator-Tips
 ---
 * TOC
 {:toc}

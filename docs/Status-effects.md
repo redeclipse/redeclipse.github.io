@@ -3,7 +3,6 @@ title: Status effects
 layout: docs
 origfile: Status-effects.md
 origtitle: Status-effects
-permalink: /docs/Status-effects
 ---
 * TOC
 {:toc}

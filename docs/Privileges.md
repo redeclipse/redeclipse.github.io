@@ -3,7 +3,6 @@ title: Privileges
 layout: docs
 origfile: Privileges.md
 origtitle: Privileges
-permalink: /docs/Privileges
 ---
 * TOC
 {:toc}
