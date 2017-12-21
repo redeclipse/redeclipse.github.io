@@ -9,10 +9,10 @@ permalink: /download/
 
 Platform      | Downloads                           | Other Sources
 --------------|-------------------------------------|-------------------------------------
-**Windows**   | **[Installer](/download/win)**      | [Torrent](/torrent/win) - [ZIP](/download/zip)
-**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/torrent/nix) - [AppImage](/download/appimage)
-**macOS**     | **[TAR.BZ2](/download/mac)**        | [Torrent](/torrent/mac)
-**Combined**  | **[TAR.BZ2](/download/combined)**   | [Torrent](/torrent/combined)
+**Windows**   | **[Installer](/download/win)**      | [Torrent](/download/torrent/win) - [ZIP](/download/zip)
+**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/download/torrent/nix) - [AppImage](/download/appimage)
+**macOS**     | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
+**Combined**  | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
 
 ### Release Notes
 
