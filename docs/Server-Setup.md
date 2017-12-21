@@ -179,6 +179,6 @@ Done! Run your server with:
 ### Using auth to grant permissions
 Red Eclipse supports a global permissions and identification system called "[auth](Privileges)" that can be used to grant players permission to use commands on your server. In the `servinit.cfg`, simply place a line as so:
 ```
-addlocalop AUTHNAME FLAG
+addlocalop <authname> <privileg>
 ```
-The `AUTHNAME` would be that player's handle, that they recieved to use in the `/authkey` command. As for the FLAG argument, that can be an `a`, `m`, or `o`. These stand for administrator, moderator, operator respectively. To take advantage of the different flags, you will have to set the `sv_{mode, maps, vars, vote, spec, kick, allow, ban, mute, limit, veto, flood}lock` variables.
+The `<authname>` would be that player's handle, that they recieved to use in the `/authkey` command. As for the `<privileg>` argument, that can be an `a`, `m`, or `o`. These stand for administrator, moderator, operator respectively. To take advantage of the different flags, you will have to set the `sv_{mode, maps, vars, vote, spec, kick, allow, ban, mute, limit, veto, flood}lock` variables.
