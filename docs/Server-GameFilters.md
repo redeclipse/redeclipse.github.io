@@ -1,9 +1,9 @@
 ---
 title: Server GameFilters
+layout: docs
 origfile: Server-GameFilters.md
 origtitle: Server-GameFilters
 permalink: /docs/Server-GameFilters
-layout: docs
 ---
 * TOC
 {:toc}

@@ -1,9 +1,9 @@
 ---
 title: FAQ
+layout: docs
 origfile: FAQ.md
 origtitle: FAQ
 permalink: /docs/FAQ
-layout: docs
 ---
 * TOC
 {:toc}

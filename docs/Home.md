@@ -1,9 +1,12 @@
 ---
 title: Home
+layout: docs
 origfile: Home.md
 origtitle: Home
 permalink: /docs/Home
-layout: docs
+redirect_from:
+  - /docs
+  - /docs/index
 ---
 * TOC
 {:toc}

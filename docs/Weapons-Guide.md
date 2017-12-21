@@ -1,9 +1,9 @@
 ---
 title: Weapons Guide
+layout: docs
 origfile: Weapons-Guide.md
 origtitle: Weapons-Guide
 permalink: /docs/Weapons-Guide
-layout: docs
 ---
 * TOC
 {:toc}

@@ -1,9 +1,9 @@
 ---
 title: Glossary
+layout: docs
 origfile: Glossary.md
 origtitle: Glossary
 permalink: /docs/Glossary
-layout: docs
 ---
 * TOC
 {:toc}

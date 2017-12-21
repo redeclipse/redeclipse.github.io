@@ -1,9 +1,9 @@
 ---
 title: IRC
+layout: docs
 origfile: IRC.md
 origtitle: IRC
 permalink: /docs/IRC
-layout: docs
 ---
 * TOC
 {:toc}

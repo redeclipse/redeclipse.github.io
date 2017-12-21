@@ -1,9 +1,9 @@
 ---
 title: System Requirements
+layout: docs
 origfile: System-Requirements.md
 origtitle: System-Requirements
 permalink: /docs/System-Requirements
-layout: docs
 ---
 * TOC
 {:toc}

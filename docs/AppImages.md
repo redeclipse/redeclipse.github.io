@@ -1,9 +1,9 @@
 ---
 title: AppImages
+layout: docs
 origfile: AppImages.md
 origtitle: AppImages
 permalink: /docs/AppImages
-layout: docs
 ---
 * TOC
 {:toc}

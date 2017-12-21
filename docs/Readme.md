@@ -1,9 +1,9 @@
 ---
-title: readme
-origfile: readme.md
-origtitle: readme
-permalink: /docs/readme
+title: Readme
 layout: docs
+origfile: Readme.md
+origtitle: Readme
+permalink: /docs/Readme
 ---
 * TOC
 {:toc}

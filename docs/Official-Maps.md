@@ -1,9 +1,9 @@
 ---
 title: Official Maps
+layout: docs
 origfile: Official-Maps.md
 origtitle: Official-Maps
 permalink: /docs/Official-Maps
-layout: docs
 ---
 * TOC
 {:toc}
