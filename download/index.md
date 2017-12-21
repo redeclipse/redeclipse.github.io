@@ -1,7 +1,7 @@
 ---
 title: Downloads
 layout: default
-permalink: /
+permalink: /download/
 ---
 
 # v{{ site.game_version }} ({{ site.game_release }})
