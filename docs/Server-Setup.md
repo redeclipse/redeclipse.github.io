@@ -75,8 +75,8 @@ If all goes well, your client will connect to the master server and register its
 ### Using [Docker](https://www.docker.com/)
 Currently there are two different Docker Images, its up to you which one you choose.
 For the installation and configuration steps follow the specific guides.
-1. https://github.com/TheAssassin/redeclipse-docker
-1. https://hub.docker.com/r/iceflower/redeclipse-server
+1. [https://github.com/TheAssassin/redeclipse-docker](https://github.com/TheAssassin/redeclipse-docker)
+1. [https://hub.docker.com/r/iceflower/redeclipse-server](https://hub.docker.com/r/iceflower/redeclipse-server)
 
 ## Configuration Files
 The configuration files are written in [cubescript](), lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
@@ -155,7 +155,7 @@ All servers need enabled port forwarding.
 | Connections | 28801 UDP |
 | Queries     | 28802 UDP |
 
-For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](PortForward.com)
+For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](https://portforward.com/)
 
 ## Advanced Setup
 ### Multiple Servers
