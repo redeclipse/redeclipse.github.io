@@ -3,6 +3,7 @@ title: Admin Guide
 layout: docs
 origfile: Admin-Guide.md
 origtitle: Admin-Guide
+permalink: /docs/Admin-Guide
 ---
 * TOC
 {:toc}

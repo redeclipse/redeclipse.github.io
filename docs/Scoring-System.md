@@ -3,6 +3,7 @@ title: Scoring System
 layout: docs
 origfile: Scoring-System.md
 origtitle: Scoring-System
+permalink: /docs/Scoring-System
 ---
 * TOC
 {:toc}

@@ -3,6 +3,7 @@ title: Statistics System
 layout: docs
 origfile: Statistics-System.md
 origtitle: Statistics-System
+permalink: /docs/Statistics-System
 ---
 * TOC
 {:toc}
