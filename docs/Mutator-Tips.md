@@ -5,7 +5,7 @@ layout: docs
 ---
 * TOC
 {:toc}
-For those mutators specific to certain game modes, see the corresponding [mode pages](Modes-and-Mutators.md).
+For those mutators specific to certain game modes, see the corresponding [mode pages](Modes-and-Mutators).
 
 ## Multi <img src="images/modes/multi.png" width="64px"/>
 

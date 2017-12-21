@@ -19,7 +19,7 @@ Hosting one or more Red Eclipse servers on your system will require a decent ban
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
 #### GNU/Linux
-For details on locating your Red Eclipse home directory, refer to [Game Settings](.md).
+For details on locating your Red Eclipse home directory, refer to [Game Settings]().
 
 ##### Installed
 This is normally the case if you installed Red Eclipse via your package manager, or using the "system-install" make target.
@@ -77,7 +77,7 @@ For the installation and configuration steps follow the specific guides.
 1. https://hub.docker.com/r/iceflower/redeclipse-server
 
 ## Configuration Files
-The configuration files are written in [cubescript](.md), lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
+The configuration files are written in [cubescript](), lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
 
 ### servinit.cfg
 [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
@@ -119,19 +119,19 @@ serverpass "password_to_connect"
 Note however that this is **NOT** the same as adminpass, and will **NOT** allow those connected to claim admin.
 
 ### Access Restrictions
-You can change the "openness" of your server; ie. allowing anyone to claim **helper** (one hierarchal level lower than [moderator](Privileges.md)), and/or preventing mastermode from being changed. Although usually unnecessary, these settings are convenient for example, public co-op editing servers. These restrictions may be modified with the serveropen variable, and the following is a list of options:
+You can change the "openness" of your server; ie. allowing anyone to claim **helper** (one hierarchal level lower than [moderator](Privileges)), and/or preventing mastermode from being changed. Although usually unnecessary, these settings are convenient for example, public co-op editing servers. These restrictions may be modified with the serveropen variable, and the following is a list of options:
 
 | Type | Description                                                                                                                    |
 |:----:|--------------------------------------------------------------------------------------------------------------------------------|
 | 0    | *Very open* - Allow "open master" (anyone may claim helper with `setpriv 1`) and can set mastermode 2 (locked) or 3 (private). |
 | 1    | *Open master* - Mastermode cannot be modified at all.                                                                          |
 | 2    | *Open master* - Mastermode can be changed, but cannot set to 3 (private). This is useful for public co-op editing.             |
-| 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges.md) may claim master.   |
+| 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   |
 
 ### Server Customization
-- For information on how to limit modes and mutators please see [Game Filters](.md)
-- For examples of servinit.cfg configurations see [Server Examples](.md)
-- For information on weapon variables, see [Weapon Variables](.md)
+- For information on how to limit modes and mutators please see [Game Filters]()
+- For examples of servinit.cfg configurations see [Server Examples]()
+- For information on weapon variables, see [Weapon Variables]()
 
 ## Forwarding Ports
 All servers need enabled port forwarding.
@@ -153,7 +153,7 @@ All servers need enabled port forwarding.
 | Connections | 28801 UDP |
 | Queries     | 28802 UDP |
 
-For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](PortForward.com.md)
+For more information on port forwarding, including instructions specific to your router, visit the very helpful site [PortForward.com](PortForward.com)
 
 ## Advanced Setup
 ### Multiple Servers
@@ -175,7 +175,7 @@ Done! Run your server with:
 ```
 
 ### Using auth to grant permissions
-Red Eclipse supports a global permissions and identification system called "[auth](Privileges.md)" that can be used to grant players permission to use commands on your server. In the `servinit.cfg`, simply place a line as so:
+Red Eclipse supports a global permissions and identification system called "[auth](Privileges)" that can be used to grant players permission to use commands on your server. In the `servinit.cfg`, simply place a line as so:
 ```
 addlocalop AUTHNAME FLAG
 ```
