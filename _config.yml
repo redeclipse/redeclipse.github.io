@@ -1,21 +1,25 @@
 # Site settings
 title: Red Eclipse
-game_version: "1.5.8"
-game_release: "Elysium Edition"
-game_date: "14th December 2017"
+game_version: "1.6.0"
+game_release: "Sunset Edition"
+game_date: "21st December 2017"
 
 # Where things are
 source: "."
 collections_dir: "pages"
-plugins_dir: "bits/plugins"
-layouts_dir: "bits/layouts"
-data_dir: "bits/data"
-includes_dir: "bits/includes"
+plugins_dir: "plugins"
+layouts_dir: "layouts"
+data_dir: "data"
+includes_dir: "includes"
 
 # Handling Reading
 safe: true
 exclude:
   - ".github"
+  - "plugins"
+  - "layouts"
+  - "data"
+  - "includes"
   - "_config.yml"
   - "CNAME"
 encoding: "utf-8"
@@ -57,3 +61,8 @@ kramdown:
     hard_wrap: false
     footnote_nr: 1
     show_warnings: false
+
+# Relative links
+relative_links:
+  enabled: true
+  collections: false
