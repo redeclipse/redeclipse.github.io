@@ -1,10 +1,6 @@
-We apologise to everyone who downloaded `v1.5.9` and had to deal with it's broken state. This release fixes those issues.
+We apologise to everyone who downloaded **v1.5.9** and had to deal with it's broken state. This release fixes those issues, and is dubbed "Sunset Edition", as this will be the final release with the old Cube Engine 2 rendering pipeline that we have used for the past *10 years*. In **v2.0** we will have an all new rendering system from **[Tesseract](http://tesseract.gg/)**, featuring dynamic lighting and other modern rendering techniques that are sure to impress everyone. Here's to another 10 years! :smile:
 
-This release is dubbed "Sunset Edition", as this will be the final release with the old Cube Engine 2 rendering pipeline that we have used for the past 10 years.
-
-In `v2.0` we will have an all new rendering system from [Tesseract](http://tesseract.gg/) featuring dynamic lighting and other modern rendering techniques.
-
-- Fixed broken release packages.
+- Fixed broken release packages. Oops.
 - Fixed memory leaks.
 - Cleaned up some in-game messages.
 - Created AppImage builds.
