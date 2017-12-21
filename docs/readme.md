@@ -1,6 +1,8 @@
 ---
 title: readme
 origfile: readme.md
+origtitle: readme
+permalink: /docs/readme
 layout: docs
 ---
 * TOC

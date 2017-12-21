@@ -1,6 +1,8 @@
 ---
 title: FAQ
 origfile: FAQ.md
+origtitle: FAQ
+permalink: /docs/FAQ
 layout: docs
 ---
 * TOC

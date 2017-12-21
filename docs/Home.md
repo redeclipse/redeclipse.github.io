@@ -1,6 +1,8 @@
 ---
 title: Home
 origfile: Home.md
+origtitle: Home
+permalink: /docs/Home
 layout: docs
 ---
 * TOC

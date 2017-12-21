@@ -1,6 +1,8 @@
 ---
 title: Server Setup
 origfile: Server-Setup.md
+origtitle: Server-Setup
+permalink: /docs/Server-Setup
 layout: docs
 ---
 * TOC

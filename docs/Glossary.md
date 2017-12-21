@@ -1,6 +1,8 @@
 ---
 title: Glossary
 origfile: Glossary.md
+origtitle: Glossary
+permalink: /docs/Glossary
 layout: docs
 ---
 * TOC

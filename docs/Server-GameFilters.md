@@ -1,6 +1,8 @@
 ---
 title: Server GameFilters
 origfile: Server-GameFilters.md
+origtitle: Server-GameFilters
+permalink: /docs/Server-GameFilters
 layout: docs
 ---
 * TOC

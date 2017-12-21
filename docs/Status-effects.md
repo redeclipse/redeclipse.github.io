@@ -1,6 +1,8 @@
 ---
 title: Status effects
 origfile: Status-effects.md
+origtitle: Status-effects
+permalink: /docs/Status-effects
 layout: docs
 ---
 * TOC

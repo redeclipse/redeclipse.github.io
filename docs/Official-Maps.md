@@ -1,6 +1,8 @@
 ---
 title: Official Maps
 origfile: Official-Maps.md
+origtitle: Official-Maps
+permalink: /docs/Official-Maps
 layout: docs
 ---
 * TOC

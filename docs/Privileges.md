@@ -1,6 +1,8 @@
 ---
 title: Privileges
 origfile: Privileges.md
+origtitle: Privileges
+permalink: /docs/Privileges
 layout: docs
 ---
 * TOC

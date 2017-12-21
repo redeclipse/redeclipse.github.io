@@ -1,6 +1,8 @@
 ---
 title: Admin Guide
 origfile: Admin-Guide.md
+origtitle: Admin-Guide
+permalink: /docs/Admin-Guide
 layout: docs
 ---
 * TOC

@@ -1,6 +1,8 @@
 ---
 title: Statistics System
 origfile: Statistics-System.md
+origtitle: Statistics-System
+permalink: /docs/Statistics-System
 layout: docs
 ---
 * TOC

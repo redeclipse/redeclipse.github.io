@@ -1,6 +1,8 @@
 ---
 title: Mutator Tips
 origfile: Mutator-Tips.md
+origtitle: Mutator-Tips
+permalink: /docs/Mutator-Tips
 layout: docs
 ---
 * TOC
