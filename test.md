@@ -1,6 +1,7 @@
 ---
 title: Markdown Test Page
 layout: default
+permalink: /test
 ---
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.

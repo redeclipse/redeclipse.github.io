@@ -36,6 +36,7 @@ unpublished: false
 plugins:
   - jekyll-avatar
   - jekyll-mentions
+  - jekyll-redirect-from
   - jekyll-sitemap
   - jemoji
 

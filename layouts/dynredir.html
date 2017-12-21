@@ -2,8 +2,8 @@
 <html lang="en" dir="ltr">
     <head>
         <title>{{ site.title | default: site.github.repository_name }}: Redirecting to {{ page.title | default: page.path }}</title>
-        <link rel="canonical" href="{{ page.redirect.to }}"/>
-        <meta http-equiv="refresh" content="0;url={{ page.redirect.to }}" />
+        <link rel="canonical" href="{{ content }}"/>
+        <meta http-equiv="refresh" content="0;url={{ content }}" />
         {% include head.html %}
         <link rel="stylesheet" type="text/css" href="/bits/css/default.css?v={{ site.github.build_revision }}" />
     </head>
@@ -13,8 +13,8 @@
             <div id="pagecontainer" class="main">
                 <h1>Redirecting to:</h1>
                 <h2>{{ page.title }}</h2>
-                <p><a href="{{ page.redirect.to }}">Click here if you are not redirected.<a></p>
-                <script>location="{{ page.redirect.to }}"</script>
+                <p><a href="{{ content }}">Click here if you are not redirected.<a></p>
+                <script>location="{{ content }}"</script>
             </div>
             {% include footer.html %}
         </div>
