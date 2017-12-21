@@ -10,7 +10,7 @@ The following list explains some commonly used terms and acronyms.
 | term   | Description |
 |--------|-------------|
 | afk    | away from keyboard. When spectators go AFK, they can and should alter their /name accordingly. Going AFK on a nearly full server can result in a kick. |
-| auth   | authentication, a key for registered players to identify. Often used as synonym for player accounts or [privileges](Privileges). |
+| auth   | authentication, a key for registered players to identify. Often used as synonym for player accounts or [privileges](Privileges.md). |
 | bb     | bomber-ball, a game mode. Or bye bye. |
 | bot    | usually refers to an A.I. controlled player. Not to confuse with aim-bot, a client side modification that is considered cheating according to the Multiplayer Guidelines. |
 | cc     | creative-commons license, typically used for licensing of contributions. |
@@ -25,14 +25,14 @@ The following list explains some commonly used terms and acronyms.
 | gg     | good game, a typical chat comment at the end of a match. |
 | gaud   | the official unit for gaudiness. 100° C is hot enough to vaporize your eyeballs; likewise 100 gaud is gaudy enough to do the same. For an example of a 100-gaud map, see Map Rooftop |
 | insta  | instagib, a game mutator for one-hit-kills, disabled by default. |
-| irc    | Internet Relay Chat. The official [IRC](IRC) channel for Red Eclipse is #redeclipse on the Freenode Network. Game servers can be configured to relay chat from or to IRC, and the game client has a basic IRC menu built-in. |
+| irc    | Internet Relay Chat. The official [IRC](IRC.md) channel for Red Eclipse is #redeclipse on the Freenode Network. Game servers can be configured to relay chat from or to IRC, and the game client has a basic IRC menu built-in. |
 | mat    | materials define special properties of map volumes, such as filling an area with water or clipping. |
-| mod    | moderator, a player with elevated [privileges](Privileges). Mod can also stand for client modifications. |
+| mod    | moderator, a player with elevated [privileges](Privileges.md). Mod can also stand for client modifications. |
 | mpz    | file format to store most content of a map, including all geometry, entity positions and lightmaps. |
 | muts   | game mutators, special game rules that can be added and combined for a more diverse game experience. |
 | nade   | grenade, a collectible explosive weapon. |
 | ogg    | container format for vorbis audio, used for music and sound files. |
-| op     | operator, a player with advanced [privileges](Privileges). Or just OverPowered. |
+| op     | operator, a player with advanced [privileges](Privileges.md). Or just OverPowered. |
 | pzap   | a typical taunt or chat comment, echoism of a rifle shot. |
 | runner | players with a preference for parkour and agile game-play, like race games or hit-and-run tactics in capture-the-flag or bomber-ball games. |
 | sg     | shotgun, a short ranged loadout weapon. |

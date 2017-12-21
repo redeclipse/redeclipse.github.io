@@ -5,7 +5,7 @@ layout: docs
 ---
 * TOC
 {:toc}
-In most games all players are equipped with a pistol and two of their favorite loadout weapons. Furthermore, explosive weapons can be collected in the arena, such as grenades, mines and rockets, unless these are disabled via the [basic mutator](Mutators).
+In most games all players are equipped with a pistol and two of their favorite loadout weapons. Furthermore, explosive weapons can be collected in the arena, such as grenades, mines and rockets, unless these are disabled via the [basic mutator](Mutators.md).
 
 ## Loadout weapons
 
@@ -15,11 +15,11 @@ These weapons can be chosen in the *profile* game menu, and it is even possible 
 
 #### Shotgun and Rifle
 
-This traditional choice of loadout weapons is very popular, especially in [deathmatch](Deathmatch), [capture-the-flag](Capture-the-Flag), [defend-and-control](Defend-and-Control), and [bomber-ball](Bomber-ball) games. A player with these tools of destruction prioritizes the ability to inflict heavy damage—any time, anywhere, and over any distance.
+This traditional choice of loadout weapons is very popular, especially in [deathmatch](Deathmatch.md), [capture-the-flag](Capture-the-Flag.md), [defend-and-control](Defend-and-Control.md), and [bomber-ball](Bomber-ball.md) games. A player with these tools of destruction prioritizes the ability to inflict heavy damage—any time, anywhere, and over any distance.
 
 #### Flamer and Zapper
 
-This pair of weapons optimizes a players ability to outrun and annoy his enemies and to support his team mates. It serves well for hit-and-run tactics, not only in [capture-the-flag](Capture-the-Flag) games. It is also very effective at getting enemies to waste time telling you in chat how "nooby" your weapon loadout is and attempt to convince you that other (read: shotgun/rifle) loadouts are what you "should" be using.
+This pair of weapons optimizes a players ability to outrun and annoy his enemies and to support his team mates. It serves well for hit-and-run tactics, not only in [capture-the-flag](Capture-the-Flag.md) games. It is also very effective at getting enemies to waste time telling you in chat how "nooby" your weapon loadout is and attempt to convince you that other (read: shotgun/rifle) loadouts are what you "should" be using.
 
 #### Plasma and Zapper
 
@@ -31,7 +31,7 @@ This combo can really be very effective since the vast majority of duelists are 
 
 Explosive weapons can be collected from certain spots of the arena. Unlike other weapons, they cannot be reloaded.
 
-Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and mines that reload over time.
+Exception: In [kaboom](Mutators.md#kaboom) games, players start with grenades and mines that reload over time.
 
 ## Spawn weapons
 
@@ -61,7 +61,7 @@ The player model is split into 3 parts which determine how much damage is applie
 
 ### Weapon variables
 
-When playing offline or as a server [operator](Privileges), almost all aspects of game rules can be tuned and modified using the [console](Console) to control thousands of [variables](Variables). This includes a large [array of variables](Variables-and-Commands) for each weapon that give you deep control of the weapon characteristics.
+When playing offline or as a server [operator](Privileges.md), almost all aspects of game rules can be tuned and modified using the [console](Console.md) to control thousands of [variables](Variables.md). This includes a large [array of variables](Variables-and-Commands.md) for each weapon that give you deep control of the weapon characteristics.
 
 ### Weapon IDs
 

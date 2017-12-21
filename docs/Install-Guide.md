@@ -18,7 +18,7 @@ If you get a permission denied error during install, right click the installer a
 - After download, give the AppImage executable permissions through your file manager or using the terminal command `chmod +x redeclipse-*.AppImage`
 - You can then run Red Eclipse by double-clicking the AppImage or executing it from a terminal.
 
-[More information and options](AppImages).
+[More information and options](AppImages.md).
 
 ### Standard Package
 - Install Red Eclipse's dependencies.
