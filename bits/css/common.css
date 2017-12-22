@@ -100,9 +100,17 @@ a:hover, a:active {
 .navbar {
     margin-bottom: unset;
 }
+@media screen and (max-width: 560px) {
+    #copyright {
+        font-size: 14px;
+    }
+}
 @media screen and (max-width: 432px) {
     body {
         font-size: 14px;
+    }
+    #copyright {
+        font-size: 12px;
     }
     #pagecontent {
         padding: 8px 0px 8px 0px;
