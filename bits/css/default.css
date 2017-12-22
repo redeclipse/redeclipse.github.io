@@ -13,6 +13,16 @@
     border: 1px solid rgb(255, 232, 232);
     background: rgb(8, 8, 8);
 }
+#markdown-toc {
+    width: 240px;
+    float: right;
+    clear: both;
+    padding: 4px 8px 4px 30px;
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    border: 1px solid rgb(255, 232, 232);
+    background: rgb(8, 8, 8);
+}
 #pagesidebar a {
     display: block;
 }
@@ -178,6 +188,11 @@ footer {
     position: fixed;
     bottom: 50px;
     -webkit-font-smoothing: subpixel-antialiased;
+}
+@media screen and (max-width: 800px) {
+    #markdown-toc {
+        width: 100%;
+    }
 }
 @media screen and (max-width: 432px) {
     #pagecontainer {

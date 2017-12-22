@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <title>{{ site.title | default: site.github.repository_name }}: Docs - {{ page.title | default: page.path }}</title>
+        <title>{{ site.title | default: site.github.repository_name }}: Documentation - {{ page.title | default: page.path }}</title>
         {% include head.html %}
         <link rel="stylesheet" type="text/css" href="/bits/css/default.css?v={{ site.github.build_revision }}" />
     </head>
@@ -12,11 +12,11 @@
                 <a href="https://github.com/red-eclipse/docs/edit/master/{{ page.origfile }}" target="_blank">Edit on GitHub</a>
             </div>
             <div id="pagecontainer" class="main">
-                <h1>Docs - {{ page.title | default: page.path }}</h1>
+                <h1>Documentation - {{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>
-            {% include footer.html %}
         </div>
+        {% include footer.html %}
         {% include last.html %}
     </body>
 </html>
