@@ -74,6 +74,7 @@ a:hover, a:active {
     width: 100%;
     text-align: center;
     padding: 8px;
+    margin-top: 16px;
     background-color: rgb(8, 8, 8);
     line-height: 1.2em;
 }
@@ -89,7 +90,7 @@ a:hover, a:active {
     width: 6%;
 }
 #pagecontent {
-    padding: 16px 0px 16px 0px;
+    padding: 8px 0px 0px 0px;
     background-color: rgba(16, 16, 16, .7);
 }
 .navbar {
@@ -111,8 +112,5 @@ a:hover, a:active {
     }
     #footer {
         font-size: 10px;
-    }
-    #pagecontent {
-        padding: 8px 0px 8px 0px;
     }
 }

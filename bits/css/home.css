@@ -117,9 +117,6 @@ h4 {
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
 }
-#pagecontent {
-    padding: 8px 0px 0px 0px;
-}
 @media screen and (max-width: 432px) {
     h3, h4 {
         font-size: 14px;
