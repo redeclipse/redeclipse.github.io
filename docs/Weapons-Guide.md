@@ -33,7 +33,7 @@ This combo can really be very effective since the vast majority of duelists are 
 
 Explosive weapons can be collected from certain spots of the arena. Unlike other weapons, they cannot be reloaded.
 
-Exception: In [kaboom](Mutators.md#kaboom) games, players start with grenades and mines that reload over time.
+Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and mines that reload over time.
 
 ## Spawn weapons
 

@@ -21,8 +21,8 @@ Red Eclipse is available for download at no cost.
 
 - The [latest release](https://redeclipse.net/download) can be downloaded for all supported operating systems.
 - GNU/Linux packages can also be found on:
-    - [Debian](Install-Guide.md#Debian/Ubuntu_repository)
-    - [Ubuntu](Install-Guide.md#Debian/Ubuntu_repository)
+    - [Debian](Install-Guide#debian/ubuntu_repository)
+    - [Ubuntu](Install-Guide#debian/ubuntu_repository)
     -  AUR](https://aur.archlinux.org/packages/redeclipse)
     - [Chakra](https://chakralinux.org/ccr/packages.php?O=0&K=redeclipse&do_Search=+Go+)
 - BSD ports are available for:
@@ -89,7 +89,7 @@ Technical problems can be discussed in the [discussion area](https://redeclipse.
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
-On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will report a much lower GL version. This has been resolved by removing [config.cfg](Game-Settings.md#config.cfg) and [init.cfg](Game-Settings.md#init.cfg) to reset game settings.
+On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will report a much lower GL version. This has been resolved by removing [config.cfg](Game-Settings#config.cfg) and [init.cfg](Game-Settings#init.cfg) to reset game settings.
 
 ## Can I contribute to the game?
 
@@ -111,7 +111,7 @@ This depends on the current [mode and mutators](GameModes_and_Mutators) of the g
 
 ## Why is my player score negative?
 
-Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on [flag carriers](Capture-the-Flag), [bombers](Bomber-ball) or [defenders](Defend-and-Control) even double this penalty. For details, see [Deathmatch Scoring](Deathmatch.md#Scoring).
+Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on [flag carriers](Capture-the-Flag), [bombers](Bomber-ball) or [defenders](Defend-and-Control) even double this penalty. For details, see [Deathmatch Scoring](Deathmatch#scoring).
 
 ## dm, pzap, gg - what did they just say?
 
