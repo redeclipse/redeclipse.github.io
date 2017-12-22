@@ -3,8 +3,8 @@ body {
     background: #340201 url(/bits/bg2.jpg) no-repeat center top;
     color: rgb(255, 255, 255);
     font-family: Play, sans-serif;
-    line-height: 1.4em;
-    letter-spacing: 0.001em;
+    line-height: 1.2em;
+    letter-spacing: 0.002em;
     font-size: 16px;
 }
 a, a:link, a:visited {
@@ -80,7 +80,7 @@ a:hover, a:active {
     text-align: center;
     padding: 8px;
     background-color: rgb(8, 8, 8);
-    line-height: 1.3em;
+    line-height: 1.2em;
 }
 #copyright p {
     margin: 0;
@@ -94,9 +94,17 @@ a:hover, a:active {
     width: 6%;
 }
 #pagecontent {
-    padding: 16px 0px 0px 0px;
+    padding: 16px 0px 16px 0px;
     background-color: rgba(16, 16, 16, .7);
 }
 .navbar {
     margin-bottom: unset;
+}
+@media screen and (max-width: 432px) {
+    body {
+        font-size: 14px;
+    }
+    #pagecontent {
+        padding: 8px 0px 8px 0px;
+    }
 }

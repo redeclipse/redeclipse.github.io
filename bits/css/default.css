@@ -21,7 +21,7 @@ h1, h2, h3, h4, h5, h6 {
     color: rgb(255, 255, 255);
     font-family: Orbitron, sans-serif;
     font-weight: 900;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.02em;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 h1 {
@@ -178,4 +178,15 @@ footer {
     position: fixed;
     bottom: 50px;
     -webkit-font-smoothing: subpixel-antialiased;
+}
+@media screen and (max-width: 432px) {
+    #pagecontainer {
+        margin: 0px 8px 8px 8px;
+    }
+    header ul a strong {
+        font-size: 14px;
+    }
+    blockquote {
+        font-size: 14px;
+    }
 }
