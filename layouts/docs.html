@@ -15,8 +15,8 @@
                 <h1>Documentation - {{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>
+            {% include footer.html %}
         </div>
-        {% include footer.html %}
         {% include last.html %}
     </body>
 </html>
