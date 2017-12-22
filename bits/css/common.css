@@ -20,6 +20,7 @@ a:hover, a:active {
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
     font-weight: 700;
+    text-align: right;
 }
 .navbar-toggle {
     margin-top: 23px;
