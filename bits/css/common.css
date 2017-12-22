@@ -64,29 +64,27 @@ a:hover, a:active {
 #header {
     padding-bottom: 20px;
 }
-.footer {
-    background-color: #600;
-    font-family: Orbitron, sans-serif;
-    text-align: center;
-}
-.social-icons {
+#navicon {
     font-size: 30px;
-    text-align: right;
 }
 .video {
     padding: 8px 16px 16px 8px;
 }
-#copyright {
+#footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
     text-align: center;
     padding: 8px;
     background-color: rgb(8, 8, 8);
     line-height: 1.2em;
 }
-#copyright p {
+#footer p {
     margin: 0;
     padding: 0;
 }
-#copyright a, #copyright a:link, #copyright a:visited {
+#footer a, #footer a:link, #footer a:visited {
     font-weight: 800;
     color: rgb(255, 96, 96);
 }
@@ -101,7 +99,7 @@ a:hover, a:active {
     margin-bottom: unset;
 }
 @media screen and (max-width: 560px) {
-    #copyright {
+    #footer {
         font-size: 14px;
     }
 }
@@ -109,7 +107,7 @@ a:hover, a:active {
     body {
         font-size: 14px;
     }
-    #copyright {
+    #footer {
         font-size: 12px;
     }
     #pagecontent {
