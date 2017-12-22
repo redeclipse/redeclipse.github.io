@@ -17,6 +17,9 @@ a:hover, a:active {
     background-color: rgba(0, 0, 0, 0.3);
     border: none;
 }
+.navbar-nav > li {
+    height: 84px;
+}
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
     font-weight: 700;
