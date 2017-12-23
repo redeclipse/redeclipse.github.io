@@ -39,17 +39,21 @@ a:hover, a:active {
     padding: 30px 10px 30px 10px;
 }
 .navbar-nav > li > a > div {
-    display: inline;
-    margin-left: 8px;
+    display: none;
 }
 @media screen and (max-width: 1200px) {
     .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
         padding: 10px 10px 10px 10px;
     }
-    .navbar-nav > li > a > div {
-        display: none;
+}
+@media screen and (min-width: 1199px) {
+    .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
+        padding: 0;
     }
-    
+    .navbar-nav > li > a > div {
+        display: inline;
+        margin-left: 8px;
+    }
 }
 .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
     color: rgb(255, 255, 255);
