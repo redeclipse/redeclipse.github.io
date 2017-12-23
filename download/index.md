@@ -7,12 +7,12 @@ permalink: /download/
 # v{{ site.game_version }} ({{ site.game_release }})
 ### Released {{ site.game_date }}
 
-Platform      | Downloads                           | Other Sources
---------------|-------------------------------------|-------------------------------------
-**Windows**   | **[Installer](/download/win)**      | [Torrent](/download/torrent/win) - [ZIP](/download/zip)
-**Linux/BSD** | **[TAR.BZ2](/download/nix)**        | [Torrent](/download/torrent/nix) - [AppImage](/download/appimage)
-**macOS**     | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
-**Combined**  | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
+Platform                                                             | Downloads                           | Other Sources
+---------------------------------------------------------------------|-------------------------------------|-------------------------------------
+<span class="fab fa-windows" aria-hidden="true"></span> **Windows**  | **[Installer](/download/win)**      | [Torrent](/download/torrent/win) - [ZIP](/download/zip)
+<span class="fab fa-linux" aria-hidden="true"></span> **Linux/BSD**  | **[TAR.BZ2](/download/nix)**        | [Torrent](/download/torrent/nix) - [AppImage](/download/appimage)
+<span class="fab fa-apple" aria-hidden="true"></span> **macOS**      | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
+<span class="fas fa-archive" aria-hidden="true"></span> **Combined** | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
 
 ### Release Notes
 
