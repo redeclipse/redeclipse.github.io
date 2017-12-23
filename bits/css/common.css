@@ -38,10 +38,18 @@ a:hover, a:active {
     -webkit-transition: all 0.15s linear 0s;
     padding: 30px 10px 30px 10px;
 }
+.navbar-nav > li > a > div {
+    display: inline;
+    margin-left: 8px;
+}
 @media screen and (max-width: 1200px) {
     .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
         padding: 10px 10px 10px 10px;
     }
+    .navbar-nav > li > a > div {
+        display: none;
+    }
+    
 }
 .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
     color: rgb(255, 255, 255);
@@ -72,7 +80,7 @@ a:hover, a:active {
 #header {
     padding-bottom: 20px;
 }
-#navicon {
+.navitem {
     font-size: 24px;
 }
 .video {
