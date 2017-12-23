@@ -24,6 +24,7 @@ a:hover, a:active {
     color: rgb(255, 178, 178);
     font-weight: 700;
     text-align: right;
+    height: auto;
 }
 .navbar-toggle {
     margin-top: 23px;
