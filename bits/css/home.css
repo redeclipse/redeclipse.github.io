@@ -99,7 +99,7 @@ h4 {
     padding-top: 8px;
 }
 .texte {
-    padding: 30px;
+    padding: 16px;
     font-size: 14px;
     background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* FF3.6+ */
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.4))), url(/bits/base1b.jpg);; /* Chrome, Safari4+ */
@@ -113,14 +113,17 @@ h4 {
     box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
 }
 .support {
-    padding: 12px 12px 12px 12px;
+    padding: 12px 12px 0px 12px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 4px;
 }
+.affiliate {
+    padding: 2px 2px 0px 2px;
+}
 .affiliate img {
     display: inline;
-    width: 164px;
+    width: 160px;
     vertical-align: middle;
     padding: 4px 8px 4px 8px;
 }
