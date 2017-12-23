@@ -113,10 +113,19 @@ h4 {
     box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
 }
 .support {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding: 12px 12px 12px 12px;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+.affiliate img {
+    display: inline;
+    width: 164px;
+    vertical-align: middle;
+    padding: 4px 8px 4px 8px;
+}
+.affiliate img#img-gamejolt {
+    padding-top: 16px;
 }
 @media screen and (max-width: 540px) {
     h3, h4 {
