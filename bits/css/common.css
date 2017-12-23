@@ -76,6 +76,9 @@ a:hover, a:active {
     vertical-align: middle;
     padding: 2px 8px 2px 8px;
 }
+.affiliate img#img-gamejolt {
+    padding: 16px 8px 2px 8px;
+}
 #header {
     padding-bottom: 20px;
 }
