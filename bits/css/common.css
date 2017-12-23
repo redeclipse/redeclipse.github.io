@@ -43,11 +43,11 @@ a:hover, a:active {
 }
 @media screen and (max-width: 1200px) {
     .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
-        padding: 0;
+        padding: 4px 0px 4px 0px;
     }
     .navbar-nav > li > a > div {
         display: inline;
-        margin-left: 8px;
+        margin-right: 8px;
     }
 }
 .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
