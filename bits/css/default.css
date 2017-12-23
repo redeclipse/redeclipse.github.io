@@ -36,7 +36,8 @@ ul#markdown-toc ul, ul#markdown-toc ul ul, ul#markdown-toc ul ul ul, ul#markdown
     padding-left: 16px;
 }
 #markdown-toc li {
-    padding-top: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 #pagesidebar a {
     display: block;
