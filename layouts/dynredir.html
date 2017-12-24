@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
     <head>
-        <title>{{ site.title | default: site.github.repository_name }}: Redirecting to {{ page.title | default: page.path }}</title>
+        <title>{{ site.title | default: site.github.repository_name }}: Redirecting</title>
         <link rel="canonical" href="{{ content }}"/>
         <meta http-equiv="refresh" content="0;url={{ content }}" />
         {% include head.html %}
@@ -11,8 +11,8 @@
         {% include nav.html %}
         <div id="pagecontent" class="container">
             <div id="pagecontainer" class="main">
-                <h1>Redirecting to:</h1>
-                <h2>{{ page.title }}</h2>
+                <h1>Redirecting</h1>
+                <p><b>{{ content }}</b></p>
                 <p><a href="{{ content }}">Click here if you are not redirected.<a></p>
                 <script>location="{{ content }}"</script>
             </div>
