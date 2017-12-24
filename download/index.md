@@ -2,6 +2,8 @@
 title: Downloads
 layout: default
 permalink: /download/
+redirect_from:
+  - /torrent
 ---
 
 # v{{ site.game_version }} ({{ site.game_release }})
