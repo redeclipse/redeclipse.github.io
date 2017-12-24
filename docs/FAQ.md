@@ -19,7 +19,7 @@ Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourcefor
 
 Red Eclipse is available for download at no cost.
 
-- The [latest release](https://redeclipse.net/download) can be downloaded for all supported operating systems.
+- The [latest release](/download) can be downloaded for all supported operating systems.
 - GNU/Linux packages can also be found on:
     - [Debian](Install-Guide#debian/ubuntu_repository)
     - [Ubuntu](Install-Guide#debian/ubuntu_repository)
@@ -28,7 +28,7 @@ Red Eclipse is available for download at no cost.
 - BSD ports are available for:
     - [FreeBSD](https://www.freshports.org/games/redeclipse/)
     - [OpenBSD](http://ports.su/games/redeclipse,-main)
-- Or download the developmental [Git version](https://redeclipse.net/devel), which is hosted by [GitHub](https://github.com/red-eclipse/base).
+- Or download the developmental [Git version](/devel), which is hosted by [GitHub](https://github.com/red-eclipse/base).
 
 ## What are my rights?
 
@@ -48,8 +48,8 @@ Red Eclipse is a [Free](http://www.gnu.org/philosophy/free-sw.html) and [Open So
 
 Apart from this wiki, and playing on the game servers, you can:
 
-- Participate in the game [discussions](https://redeclipse.net/discuss).
-- Connect to [irc.freenode.net](irc://irc.freenode.net) IRC network, and join \#redeclipse channel or use the [WebChat](https://redeclipse.net/chat)
+- Participate in the game [discussions](/discuss).
+- Connect to [irc.freenode.net](irc://irc.freenode.net) IRC network, and join \#redeclipse channel or use the [WebChat](/chat)
 
 ## Where do I find screenshots, logs and other user data?
 
@@ -85,7 +85,7 @@ These are the two branches of our base repository on GitHub, <http://github.com/
 
 ## I found a bug, where can I report it?
 
-Technical problems can be discussed in the [discussion area](https://redeclipse.net/discuss). Evident bugs can be reported on the [issue list](https://redeclipse.net/issues), but first, please have a look at our [guidelines](Contribution-Guidelines).
+Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [guidelines](Contribution-Guidelines).
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
@@ -97,7 +97,7 @@ Development of Red Eclipse is open and community driven. Contributions can be ma
 
 ## I found a cheater, what can I do?
 
-If you think someone cheats or violates the [Multiplayer Guidelines](Multiplayer-Guidelines) in some other way, you can open a issue in the [discussion area](https://redeclipse.net/discuss). Be sure to attach a [demo](Demo-Guide) record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
+If you think someone cheats or violates the [Multiplayer Guidelines](Multiplayer-Guidelines) in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a [demo](Demo-Guide) record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
 
 ## How can i change the chat colour?
 
@@ -119,7 +119,7 @@ For frequently used abbreviations and player slang, see [glossary](Glossary).
 
 ## What are those symbols near player names?
 
-These are the [privileges](Privileges) or ranks of registered players. You can request your own player account on <https://redeclipse.net/apply>
+These are the [privileges](Privileges) or ranks of registered players. You can request your own player account on </apply>
 
 ## Why is there a timer when I get killed?
 
