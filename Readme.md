@@ -1,6 +1,6 @@
 Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.0.
 
-This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Beta Website](http://beta.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/red-eclipse/docs).
+This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](http://www.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/red-eclipse/docs).
 
 When editing pages here, there are a few guidelines you should follow. It is also important to understand how the pre-processors work, like [Jekyll](https://jekyllrb.com/docs/home/) and [Kramdown](https://kramdown.gettalong.org/documentation.html). The configuration for everything is held in [_config.yml](https://github.com/red-eclipse/red-eclipse.github.io/blob/master/_config.yml).
 
