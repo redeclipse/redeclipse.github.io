@@ -10,7 +10,6 @@ data_dir: "data"
 includes_dir: "includes"
 
 # Handling Reading
-safe: true
 exclude:
   - ".github"
   - "plugins"
@@ -40,9 +39,7 @@ plugins:
 # Conversion
 markdown: kramdown
 highlighter: rouge
-lsi: false
 excerpt_separator: "\n\n"
-incremental: false
 
 # Outputting
 # permalink: date

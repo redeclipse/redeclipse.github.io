@@ -11,7 +11,7 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                {% for navitem in site.navigation %}
+                {% for navitem in site.data.navigation %}
                     <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}"><div class="navtext">{{ navitem.title }}</div><span class="{{ navitem.class }} fa-fw" aria-hidden="true"></span></a></li>
                 {% endfor %}
             </ul>

@@ -14,7 +14,7 @@ permalink: /
         <div class="col-xs12 col-sm-12 col-md-12 btndownload">
             <a href="/download" class="btn btn-primary">
                 <p class="download"><span class="fas fa-download" aria-hidden="true"></span> FREE DOWNLOAD</p>
-                <p class="version">v{{ site.game.version }} ({{ site.game.release }}) released {{ site.game.date }}</p>
+                <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}</p>
             </a>
         </div>
         <div class="col-xs12 col-sm-12 col-md-12 btnlinks">
@@ -34,23 +34,21 @@ permalink: /
     </div>
     <div class="col-xs12 col-sm-12 col-md-6 video">
         <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
         </div>
     </div>
 </div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
-        {% capture x %}{{ site.game.screenshots.pages | default: 20 }}{% endcapture %}
-        {% capture y %}{{ site.game.screenshots.items | default: 4 }}{% endcapture %}
+        {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
+        {% capture y %}{{ site.data.game.screenshots.items | default: 4 }}{% endcapture %}
         {% for i in (0..x) %}
-        <div class="item active row">
-            {% for j in (1..y) }
+        <div class="item{% if n <= 2 %} {% endif %}active row">
+            {% for j in (1..y) %}
             {% assign k = i | times: 4 | plus: j %}
             {% assign m = k | prepend: '0' %}
-            {% capture n %}{{ k | size }}{% endcapture %}
-            {% if n <= 2 %}
-                {% assign m = k | prepend: '00' %}
-            {% endif %}
+            {% assign n = m | size %}
+            {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
             <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"></a>
             {% endfor %}
         </div>
