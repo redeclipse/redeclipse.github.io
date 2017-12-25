@@ -7,11 +7,11 @@
     </head>
     <body>
         {% include nav.html %}
-        <div id="pagecontent" class="container">
-            <div id="pagesidebar" class="sidebar">
+        <div class="container pagecontent">
+            <div class="sidebar pagesidebar">
                 <a href="https://github.com/red-eclipse/docs/edit/master/{{ page.origfile }}" target="_blank">Edit on GitHub</a>
             </div>
-            <div id="pagecontainer" class="main">
+            <div class="main pagecontainer">
                 <h1>Documentation - {{ page.title | default: page.path }}</h1>
                 {{ content }}
             </div>

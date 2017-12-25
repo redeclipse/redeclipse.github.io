@@ -41,6 +41,10 @@ h4 {
     font-weight: 900;
     text-transform: uppercase;
 }
+.pagehome {
+    text-align: center;
+    padding: 16px 0 24px 0;
+}
 .btn-primary {
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(86%, rgba(0, 0, 0, 0.3)), color-stop(99%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.2))); /* Chrome, Safari4+ */
@@ -127,7 +131,7 @@ h4 {
     vertical-align: middle;
     padding: 4px 8px 4px 8px;
 }
-.affiliate img#img-gamejolt {
+.img-gamejolt {
     padding-top: 16px;
 }
 @media screen and (max-width: 540px) {
