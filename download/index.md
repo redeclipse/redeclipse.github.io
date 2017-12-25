@@ -6,8 +6,8 @@ redirect_from:
   - /torrent
 ---
 
-# v{{ site.game_version }} ({{ site.game_release }})
-### Released {{ site.game_date }}
+# v{{ site.game.version }} ({{ site.game.release }})
+### Released {{ site.game.date }}
 
 Platform                                                             | Downloads                           | Other Sources
 ---------------------------------------------------------------------|-------------------------------------|-------------------------------------
@@ -20,4 +20,4 @@ Platform                                                             | Downloads
 
 {% include release.md %}
 
-You can view the entire release [on GitHub](https://github.com/red-eclipse/base/releases/tag/v{{ site.game_version }}).
+You can view the entire release [on GitHub](https://github.com/red-eclipse/base/releases/tag/v{{ site.game.version }}).
