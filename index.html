@@ -41,11 +41,11 @@ permalink: /
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         {% for i in (1..84) %}
-            {% assign j = i | minus: 1 | modulo: 4 %}
+            {% assign j = (i | minus: 1 | modulo: 4) %}
             {% if i < 10 %}
-                {% assign k = i | prepend: '00' %}
+                {% assign k = (i | prepend: '00') %}
             {% else %}
-                {% assign k = i | prepend: '0' %}
+                {% assign k = (i | prepend: '0') %}
             {% endif %}
             {% if j = 0 %}
                 <div class="item active row">
