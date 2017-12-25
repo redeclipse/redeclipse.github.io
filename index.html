@@ -40,21 +40,132 @@ permalink: /
 </div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
-        {% for i in (1..84) %}
-            {% assign j = (i | minus: 1 | modulo: 4) %}
-            {% if i < 10 %}
-                {% assign k = (i | prepend: '00') %}
-            {% else %}
-                {% assign k = (i | prepend: '0') %}
-            {% endif %}
-            {% if j = 0 %}
-                <div class="item active row">
-            {% endif %}
-            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/{{ k }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/{{ k }}.jpg" alt="screenshot"></a>
-            {% if j = 3 %}
-                </div>
-            {% endif %}
-        {% endfor %}
+        <div class="item active row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/001.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/001.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/002.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/002.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/003.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/003.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/004.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/004.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/005.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/005.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/006.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/006.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/007.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/007.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/008.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/008.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/009.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/009.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/010.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/010.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/011.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/011.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/012.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/012.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/013.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/013.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/014.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/014.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/015.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/015.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/016.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/016.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/017.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/017.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/018.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/018.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/019.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/019.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/020.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/020.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/021.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/021.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/022.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/022.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/023.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/023.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/024.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/024.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/025.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/025.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/026.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/026.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/027.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/027.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/028.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/028.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/029.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/029.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/030.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/030.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/031.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/031.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/032.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/032.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/033.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/033.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/034.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/034.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/035.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/035.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/036.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/036.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/037.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/037.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/038.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/038.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/039.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/039.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/040.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/040.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/041.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/041.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/042.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/042.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/043.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/043.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/044.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/044.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/045.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/045.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/046.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/046.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/047.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/047.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/048.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/048.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/049.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/049.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/050.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/050.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/051.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/051.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/052.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/052.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/053.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/053.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/054.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/054.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/055.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/055.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/056.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/056.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/057.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/057.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/058.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/058.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/059.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/059.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/060.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/060.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/061.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/061.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/062.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/062.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/063.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/063.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/064.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/064.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/065.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/065.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/066.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/066.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/067.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/067.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/068.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/068.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/069.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/069.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/070.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/070.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/071.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/071.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/072.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/072.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/073.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/073.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/074.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/074.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/075.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/075.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/076.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/076.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/077.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/077.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/078.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/078.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/079.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/079.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/080.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/080.jpg" alt="screenshot"></a>
+        </div>
+        <div class="item row">
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/081.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/081.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/082.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/082.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/083.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/083.jpg" alt="screenshot"></a>
+            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/084.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/084.jpg" alt="screenshot"></a>
+        </div>
     </div>
     <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
