@@ -43,7 +43,7 @@ permalink: /
         {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
         {% capture y %}{{ site.data.game.screenshots.items | default: 4 }}{% endcapture %}
         {% for i in (0..x) %}
-        <div class="item{% if n <= 2 %} {% endif %}active row">
+        <div class="item{% if n <= 2 %} active{% endif %} row">
             {% for j in (1..y) %}
             {% assign k = i | times: 4 | plus: j %}
             {% assign m = k | prepend: '0' %}
