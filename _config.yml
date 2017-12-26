@@ -1,5 +1,6 @@
 # Site settings
 title: Red Eclipse
+description: A free arena shooter featuring parkour
 
 # Where things are
 source: "."
