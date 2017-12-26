@@ -22,6 +22,15 @@ a:hover, a:active {
 }
 .navbar-nav > li > a {
     height: 84px;
+    font-family: Play, sans-serif;
+    transition: all 0.15s linear 0s;
+    -webkit-transition: all 0.15s linear 0s;
+    padding: 30px 5px 30px 5px;
+}
+.navbar-nav > li > a > div {
+    display: none;
+    margin-right: 8px;
+    margin-left: 8px;
 }
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
@@ -37,22 +46,12 @@ a:hover, a:active {
     -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
     box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
 }
-.navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
-    font-family: Play, sans-serif;
-    transition: all 0.15s linear 0s;
-    -webkit-transition: all 0.15s linear 0s;
-    padding: 30px 10px 30px 10px;
-}
-.navbar-nav > li > a > div {
-    display: none;
-}
 @media screen and (max-width: 1200px) {
     .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
         padding: 4px 0px 4px 0px;
     }
     .navbar-nav > li > a > div {
         display: inline;
-        margin-right: 8px;
     }
 }
 .navbar-toggle {
