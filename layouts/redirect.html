@@ -4,8 +4,8 @@
         <title>{{ site.title | default: site.github.repository_name }}: Redirecting</title>
         <link rel="canonical" href="{{ page.redirect.to }}"/>
         <meta http-equiv="refresh" page.redirect.to="0;url={{ page.redirect.to }}" />
+        {% assign cssclass = 'default' %}
         {% include head.html %}
-        <link rel="stylesheet" type="text/css" href="/bits/css/default.css?v={{ site.github.build_revision }}" />
     </head>
     <body>
         {% include nav.html %}

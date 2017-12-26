@@ -33,38 +33,44 @@ a:hover, a:active {
     vertical-align: middle;
 }
 .navbar-nav > li > a > div {
-    display: inline;
-    font-size: 0px;
+    display: none;
+    font-size: 16px;
     margin: 0;
     padding: 0;
     transition: all 0.5s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
+    text-align: center;
+    width: 180px;
 }
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
     font-weight: 700;
-    text-align: right;
-    height: auto;
+    text-align: left;
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
     color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.1);
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
-    -moz-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
-    -webkit-box-shadow: inset 0px 0px 40px 0px rgba(255, 0, 0.7);
-    -o-box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
-    box-shadow: inset 0px 0px 40px 0px rgba(50, 0, 0, 0.7);
+    -moz-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
+    -webkit-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0.7);
+    -o-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
 }
 .navbar-inverse .navbar-nav > li > a:hover > div, .navbar-nav > li > a:active > div {
-    font-size: 16px;
+    display: inline-block;
     margin: 0px 8px 0px 8px;
 }
 @media screen and (max-width: 1200px) {
+    .navbar-inverse .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
+        height: auto;
+    }
     .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
-        padding: 4px 0px 4px 0px;
+        padding: 4px 8px 4px 8px;
     }
     .navbar-nav > li > a > div {
-        font-size: 16px;
+        display: inline-block;
         margin: 0px 8px 0px 8px;
+        width: auto;
     }
 }
 .navbar-toggle {

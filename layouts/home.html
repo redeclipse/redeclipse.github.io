@@ -2,8 +2,8 @@
 <html lang="en" dir="ltr">
     <head>
         <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
+        {% assign cssclass = 'home' %}
         {% include head.html %}
-        <link rel="stylesheet" type="text/css" href="/bits/css/home.css?v={{ site.github.build_revision }}" />
     </head>
     <body>
         {% include nav.html %}
