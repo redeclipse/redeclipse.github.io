@@ -20,8 +20,11 @@ a:hover, a:active {
     background-color: rgba(0, 0, 0, 0.3);
     border: none;
 }
-.navbar-nav > li > a {
+.navbar-nav > li {
     height: 84px;
+}
+.navbar-nav > li > a {
+    height: 100%;
     font-family: Play, sans-serif;
     font-size: 22px;
     transition: all 0.15s linear 0s;
@@ -29,18 +32,16 @@ a:hover, a:active {
     padding: 30px 5px 30px 5px;
     vertical-align: middle;
 }
-.navbar-nav > li > a > * {
-    vertical-align: middle;
-}
 .navbar-nav > li > a > div {
-    display: none;
-    font-size: 16px;
+    display: inline;
+    float: left;
+    font-size: 0px;
     margin: 0;
     padding: 0;
-    transition: all 0.5s linear 0s;
+    transition: all 0.15s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
-    text-align: center;
-    width: 180px;
+    text-align: right;
+    width: 0px;
 }
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
@@ -56,9 +57,14 @@ a:hover, a:active {
     -o-box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
     box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
 }
+.navbar-inverse .navbar-nav > li > a:hover > svg, .navbar-nav > li > a:active > svg {
+    -webkit-filter: drop-shadow( -1px -1px 5px #ff0000 );
+    filter: drop-shadow( -1px -1px 5px #ff0000 );
+}
 .navbar-inverse .navbar-nav > li > a:hover > div, .navbar-nav > li > a:active > div {
-    display: inline-block;
-    margin: 0px 8px 0px 8px;
+    font-size: 16px;
+    width: 200px;
+    padding: 2px 8px 0px 8px;
 }
 @media screen and (max-width: 1200px) {
     .navbar-inverse .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
@@ -68,8 +74,8 @@ a:hover, a:active {
         padding: 4px 8px 4px 8px;
     }
     .navbar-nav > li > a > div {
-        display: inline-block;
-        margin: 0px 8px 0px 8px;
+        font-size: 16px;
+        padding: 2px 8px 0px 8px;
         width: auto;
     }
 }
