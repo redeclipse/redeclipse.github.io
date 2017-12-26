@@ -50,31 +50,29 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.02em;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
+h1 > svg, h2 > svg, h3 > svg, h4 > svg, h5 > svg, h6 > svg, h1 > a > svg, h2 > a > svg, h3 > a > svg, h4 > a > svg, h5 > a > svg, h6 > a > svg {
+    -webkit-filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
+    filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
+}
 h1 {
-    font-size: 32px;
-    color: rgb(255, 232, 232);
+    font-size: 30px;
     border-bottom: 1px solid rgb(255, 232, 232);
 }
 h2 {
-    font-size: 28px;
-    color: rgb(255, 204, 204);
+    font-size: 26px;
     border-bottom: 1px solid rgb(255, 204, 204);
 }
 h3 {
     font-size: 24px;
-    color: rgb(255, 186, 186);
 }
 h4 {
-    font-size: 22px;
-    color: rgb(255, 172, 172);
+    font-size: 20px;
 }
 h5 {
-    font-size: 20px;
-    color: rgb(255, 156, 156);
+    font-size: 17px;
 }
 h6 {
-    font-size: 18px;
-    color: rgb(255, 134, 134);
+    font-size: 15px;
 }
 .wrapper {
     width: 860px;
@@ -92,30 +90,32 @@ blockquote {
     font-style: italic;
 }
 code {
+    padding: 1px;
+    margin: 0;
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
     background: rgba(8, 8, 8, 0.7);
     color: rgb(255, 255, 255);
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: 0px;
     border: 1px dashed rgb(128, 128, 128);
-    white-space: pre;
+    white-space: pre-wrap;
+    word-wrap: break-word;
 }
 pre {
     font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
     background: rgba(8, 8, 8, 0.7);
     color: rgb(255, 255, 255);
     font-size: 12px;
-    border-radius: 4px;
+    border-radius: 0px;
     border: 1px solid rgb(255, 64, 64);
+    max-width: 100%;
+}
+pre code {
+    border: 0;
+    white-space: pre;
     max-width: 100%;
     overflow-x: auto;
     word-break: keep-all;
-    white-space: pre;
-}
-pre code {
-    padding: 0;
-    border: 0;
-    white-space: pre;
 }
 table {
     /* width: 100%; */

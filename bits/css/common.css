@@ -34,14 +34,16 @@ a:hover, a:active {
 }
 .navbar-nav > li > a > div {
     display: inline;
-    float: left;
     font-size: 0px;
     margin: 0;
     padding: 0;
     transition: all 0.15s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
-    text-align: right;
+    text-align: center;
     width: 0px;
+}
+.navbar-nav > li > a > * {
+    float: left;
 }
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
@@ -58,8 +60,8 @@ a:hover, a:active {
     box-shadow: inset 0px 0px 40px 0px rgba(0, 0, 0, 0.7);
 }
 .navbar-inverse .navbar-nav > li > a:hover > svg, .navbar-nav > li > a:active > svg {
-    -webkit-filter: drop-shadow( -1px -1px 5px #ff0000 );
-    filter: drop-shadow( -1px -1px 5px #ff0000 );
+    -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
+    filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
 }
 .navbar-inverse .navbar-nav > li > a:hover > div, .navbar-nav > li > a:active > div {
     font-size: 16px;
@@ -67,16 +69,19 @@ a:hover, a:active {
     padding: 2px 8px 0px 8px;
 }
 @media screen and (max-width: 1200px) {
-    .navbar-inverse .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
+    .navbar-nav > li, .navbar-inverse .navbar-nav > li > a {
         height: auto;
     }
-    .navbar-nav > li > a, .navbar-nav > li > a:link, .navbar-nav > li > a:visited {
+    .navbar-nav > li > a {
         padding: 4px 8px 4px 8px;
     }
     .navbar-nav > li > a > div {
         font-size: 16px;
         padding: 2px 8px 0px 8px;
         width: auto;
+    }
+    .navbar-nav > li > a > * {
+        float: none;
     }
 }
 .navbar-toggle {
