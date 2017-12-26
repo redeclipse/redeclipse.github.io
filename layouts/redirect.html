@@ -12,11 +12,11 @@
         <div class="container pagecontent">
             <div class="main pagecontainer">
                 <h1>Redirecting</h1>
-                <h5><span class="fas fa-cog fa-spin"></span> <a href="{{ page.redirect.to }}">{{ page.redirect.to }}</a></h5>
+                <h6><span class="fas fa-cog fa-spin"></span> <a href="{{ page.redirect.to }}">{{ page.redirect.to }}</a></h6>
                 <p><b>Click the link if you are not redirected.<b></p>
-                <script>location="{{ page.redirect.to }}"</script>
             </div>
             {% include footer.html %}
         </div>
     </body>
+    <script>location="{{ page.redirect.to }}"</script>
 </html>
