@@ -37,12 +37,19 @@ plugins:
   - jekyll-mentions
   - jekyll-redirect-from
   - jekyll-sitemap
+  - jekyll-paginate
   - jemoji
 
 # Conversion
 markdown: kramdown
 highlighter: rouge
 excerpt_separator: "\n\n"
+paginate: 25
+
+#collections:
+#  discussion:
+#    output: true
+#    permalink: /:collection/:title/
 
 # Outputting
 # permalink: date

@@ -132,6 +132,10 @@ dt, th {
     font-weight: 700;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
+dt > svg, th > svg {
+    -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
+    filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
+}
 img {
     max-width: 100%;
 }
