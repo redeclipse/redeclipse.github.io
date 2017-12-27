@@ -37,8 +37,11 @@
                 }
             }
             var script = document.createElement('script');
-            // script.src = '{{ page.repository }}.json';
+            {% if site.local_json %}
+            script.src = '/{{ page.repository }}.json';
+            {% else %}
             script.src = 'https://api.github.com/repos/red-eclipse/{{ page.repository }}/issues?sort=updated&direction=desc&callback=issues';
+            {% endif %}
             document.getElementsByTagName('head')[0].appendChild(script);
         </script>
     </head>
