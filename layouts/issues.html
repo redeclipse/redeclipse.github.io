@@ -4,6 +4,49 @@
         <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
         {% assign cssclass = 'default' %}
         {% include head.html %}
+        <script type="text/javascript">
+            var sort_by = '{{ page.issues.sort.by }}';
+            var sort_dir = '{{ page.issues.sort.direction }}';
+            var sort_state = '{{ page.issues.sort.state }}';
+            function issue_date(data) {
+                var d = new Date(data);
+                return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+            }
+            function issue_create(item, iter) {
+                var row = document.createElement('tr');
+                row.style = 'background-color: rgba(0, 0, 0, ' + (iter%2 ? '0.125' : '0.625') + ');'
+                row.innerHTML += '<th style="text-align: center"><a href="' + item.number + '">#' + item.number + '</a></th>';
+                var labels = document.createElement('th');
+                labels.innerHTML += '<a href="' + item.html_url + '" style="font-size: 12px">' + item.title + '</a>';
+                for (var j = 0; j < item.labels.length; j++) {
+                    var label = item.labels[j];
+                    labels.innerHTML += ' <span style="margin: 1px; padding: 2px 4px 2px 4px; font-size: 10px; white-space: nowrap; border-radius: 4px; border: 1px solid #' + label.color + ';">' + label.name + '</span>';
+                }
+                row.appendChild(labels);
+                row.innerHTML += '<th style="text-align: center">' + item.comments + '</th>';
+                row.innerHTML += '<th style="text-align: center">' + item.user.login + '</th>';
+                row.innerHTML += '<th style="text-align: center">' + issue_date(item.created_at) + '</th>';
+                row.innerHTML += '<th style="text-align: center">' + issue_date(item.updated_at) + '</th>';
+                return row;
+            }
+            function issues(response) {
+                var meta = response.meta;
+                var data = response.data;
+                console.log(meta);
+                console.log(data);
+                for (var i = 0; i < data.length; i++) {
+                    var row = issue_create(data[i], i);
+                    document.getElementById('issues-body').appendChild(row);
+                }
+            }
+            var script = document.createElement('script');
+            {% if site.data.local.json %}
+            script.src = '/{{ page.issues.repository }}.json';
+            {% else %}
+            script.src = 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository }}/issues?state=' + sort_state + '&sort=' + sort_by + '&direction=' + sort_dir + '&callback=issues';
+            {% endif %}
+            document.getElementsByTagName('head')[0].appendChild(script);
+        </script>
     </head>
     <body>
         {% include nav.html %}
@@ -29,47 +72,4 @@
             {% include footer.html %}
         </div>
     </body>
-    <script type="text/javascript">
-        var sort_by = '{{ page.issues.sort.by }}';
-        var sort_dir = '{{ page.issues.sort.direction }}';
-        var sort_state = '{{ page.issues.sort.state }}';
-        function issue_date(data) {
-            var d = new Date(data);
-            return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
-        }
-        function issue_create(item, iter) {
-            var row = document.createElement('tr');
-            row.style = 'background-color: rgba(0, 0, 0, ' + (iter%2 ? '0.125' : '0.625') + ');'
-            row.innerHTML += '<th style="text-align: center"><a href="' + item.number + '">#' + item.number + '</a></th>';
-            var labels = document.createElement('th');
-            labels.innerHTML += '<a href="' + item.html_url + '" style="font-size: 12px">' + item.title + '</a>';
-            for (var j = 0; j < item.labels.length; j++) {
-                var label = item.labels[j];
-                labels.innerHTML += ' <span style="margin: 1px; padding: 2px 4px 2px 4px; font-size: 10px; white-space: nowrap; border-radius: 4px; border: 1px solid #' + label.color + ';">' + label.name + '</span>';
-            }
-            row.appendChild(labels);
-            row.innerHTML += '<th style="text-align: center">' + item.comments + '</th>';
-            row.innerHTML += '<th style="text-align: center">' + item.user.login + '</th>';
-            row.innerHTML += '<th style="text-align: center">' + issue_date(item.created_at) + '</th>';
-            row.innerHTML += '<th style="text-align: center">' + issue_date(item.updated_at) + '</th>';
-            return row;
-        }
-        function issues(response) {
-            var meta = response.meta;
-            var data = response.data;
-            console.log(meta);
-            console.log(data);
-            for (var i = 0; i < data.length; i++) {
-                var row = issue_create(data[i], i);
-                document.getElementById('issues-body').appendChild(row);
-            }
-        }
-        var script = document.createElement('script');
-        {% if site.data.local.json %}
-        script.src = '/{{ page.issues.repository }}.json';
-        {% else %}
-        script.src = 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository }}/issues?state=' + sort_state + '&sort=' + sort_by + '&direction=' + sort_dir + '&callback=issues';
-        {% endif %}
-        document.getElementsByTagName('head')[0].appendChild(script);
-    </script>
 </html>
