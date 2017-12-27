@@ -17,7 +17,7 @@
                 labels.innerHTML += '<a href="' + item.html_url + '">' + item.title + '</a>';
                 for (var j = 0; j < item.labels.length; j++) {
                     var label = item.labels[j];
-                    labels.innerHTML += ' <span style="margin: 1px; padding: 2px 4px 2px 4px; font-size: 10px; border-radius: 4px; border: 1px solid #' + label.color + ';">' + label.name + '</span>';
+                    labels.innerHTML += ' <span style="margin: 1px; padding: 2px 4px 2px 4px; font-size: 10px; white-space: nowrap; border-radius: 4px; border: 1px solid #' + label.color + ';">' + label.name + '</span>';
                 }
                 row.appendChild(labels);
                 row.innerHTML += '<th style="text-align: center">' + item.comments + '</th>';
@@ -37,8 +37,8 @@
                 }
             }
             var script = document.createElement('script');
-            // script.src = 'discuss.json';
-            script.src = 'https://api.github.com/repos/red-eclipse/world/issues?sort=updated&direction=desc&callback=issues';
+            // script.src = '{{ page.repository }}.json';
+            script.src = 'https://api.github.com/repos/red-eclipse/{{ page.repository }}/issues?sort=updated&direction=desc&callback=issues';
             document.getElementsByTagName('head')[0].appendChild(script);
         </script>
     </head>
