@@ -4,29 +4,37 @@
         <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
         {% assign cssclass = 'default' %}
         {% include head.html %}
+        <link rel="stylesheet" type="text/css" href="/bits/css/issues.css" />
         <script type="text/javascript">
             var sort_by = '{{ page.issues.sort.by }}';
             var sort_dir = '{{ page.issues.sort.direction }}';
             var sort_state = '{{ page.issues.sort.state }}';
+            Number.prototype.zeropad= function(len) {
+                var s = String(this), c = '0';
+                len = len || 2;
+                while(s.length < len) s = c + s;
+                return s;
+            }
             function issue_date(data) {
                 var d = new Date(data);
-                return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
+                return d.getFullYear() + '-' + d.getMonth().zeropad() + '-' + d.getDate().zeropad() + ' ' + d.getHours() + ':' + d.getMinutes().zeropad() + ':' + d.getSeconds().zeropad();
             }
             function issue_create(item, iter) {
                 var row = document.createElement('tr');
-                row.style = 'background-color: rgba(0, 0, 0, ' + (iter%2 ? '0.125' : '0.625') + ');'
-                row.innerHTML += '<th style="text-align: center"><a href="' + item.number + '">#' + item.number + '</a></th>';
-                var labels = document.createElement('th');
-                labels.innerHTML += '<a href="' + item.html_url + '" style="font-size: 12px">' + item.title + '</a>';
+                row.class = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
+                row.innerHTML += '<th id="issues-t-number" class="issues-center"><a href="' + item.number + '">#' + item.number + '</a></th>';
+                var title = document.createElement('th');
+                title.id = 'issues-t-title';
+                title.innerHTML += '<a id="issues-t-url" href="' + item.html_url + '">' + item.title + '</a>';
                 for (var j = 0; j < item.labels.length; j++) {
                     var label = item.labels[j];
-                    labels.innerHTML += ' <span style="margin: 1px; padding: 2px 4px 2px 4px; font-size: 10px; white-space: nowrap; border-radius: 4px; border: 1px solid #' + label.color + ';">' + label.name + '</span>';
+                    title.innerHTML += ' <span class="issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
                 }
-                row.appendChild(labels);
-                row.innerHTML += '<th style="text-align: center">' + item.comments + '</th>';
-                row.innerHTML += '<th style="text-align: center">' + item.user.login + '</th>';
-                row.innerHTML += '<th style="text-align: center">' + issue_date(item.created_at) + '</th>';
-                row.innerHTML += '<th style="text-align: center">' + issue_date(item.updated_at) + '</th>';
+                row.appendChild(title);
+                row.innerHTML += '<th id="issues-t-comments" class="issues-center">' + item.comments + '</th>';
+                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + item.user.login + '</th>';
+                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + issue_date(item.created_at) + '</th>';
+                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + issue_date(item.updated_at) + '</th>';
                 return row;
             }
             function issues(response) {
@@ -57,12 +65,12 @@
                 <table id="issues">
                     <thead id="issues-header">
                         <tr>
-                            <th style="text-align: center">ID</th>
-                            <th>Title</th>
-                            <th style="text-align: center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>
-                            <th style="text-align: center">Author</th>
-                            <th style="text-align: center">Created</th>
-                            <th style="text-align: center">Updated</th>
+                            <th id="issues-t-number" class="issues-center">ID</th>
+                            <th id="issues-t-title">Title</th>
+                            <th id="issues-t-comments" class="issues-center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>
+                            <th id="issues-t-author" class="issues-center">Author</th>
+                            <th id="issues-t-created" class="issues-center">Created</th>
+                            <th id="issues-t-updated" class="issues-center">Updated</th>
                         </tr>
                     </thead>
                     <tbody id="issues-body"></tbody>
