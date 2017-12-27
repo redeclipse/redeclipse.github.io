@@ -5,7 +5,6 @@ description: A free arena shooter featuring parkour
 # Where things are
 source: "."
 collections_dir: "pages"
-plugins_dir: "plugins"
 layouts_dir: "layouts"
 data_dir: "data"
 includes_dir: "includes"
