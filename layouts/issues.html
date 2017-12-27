@@ -37,7 +37,7 @@
                 }
             }
             var script = document.createElement('script');
-            {% if site.local_json %}
+            {% if site.data.local.json %}
             script.src = '/{{ page.repository }}.json';
             {% else %}
             script.src = 'https://api.github.com/repos/red-eclipse/{{ page.repository }}/issues?sort=updated&direction=desc&callback=issues';

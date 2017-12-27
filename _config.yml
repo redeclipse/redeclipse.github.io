@@ -8,7 +8,6 @@ collections_dir: "pages"
 layouts_dir: "layouts"
 data_dir: "data"
 includes_dir: "includes"
-#local_json: true
 
 # Handling Reading
 exclude:
