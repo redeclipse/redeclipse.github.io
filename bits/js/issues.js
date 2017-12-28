@@ -54,15 +54,20 @@ function issues_view(item, hbody, hrow) {
 }
 
 function issues_build() {
-    var head = document.getElementById('issues-header'),
+    var table = document.getElementById('issues-table'),
+        head = document.getElementById('issues-header'),
         hbody = document.getElementById('issues-body'),
         hrow = document.getElementById('issues-h-row');
+    if(table == null) {
+        table = document.getElementById('issues-view');
+    }
     if(hrow == null) {
         hrow = document.createElement('tr');
         hrow.id = 'issues-h-row';
         head.appendChild(hrow);
     }
     if(issues_page > 0) {
+        table.id = 'issues-view';
         hrow.innerHTML = '';
         hbody.innerHTML = '';
         for(var i = 0; i < issues_data.length; i++) {
@@ -73,6 +78,7 @@ function issues_build() {
         }
     }
     else {
+        table.id = 'issues-table';
         hrow.innerHTML = '<th id="issues-h-number" class="issues-center">ID</th>';
         hrow.innerHTML += '<th id="issues-h-title" class="issues-left">Title</th>';
         hrow.innerHTML += '<th id="issues-h-comments" class="issues-center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>';
