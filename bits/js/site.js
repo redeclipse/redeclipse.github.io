@@ -6,3 +6,35 @@
 ga('create', 'UA-45886576-1', 'www.redeclipse.net');
 ga('require', 'linkid', 'linkid.js');
 ga('send', 'pageview');
+
+$(document).ready(function() {
+    jQuery("time.timeago").timeago();
+    jQuery.timeago.settings = {
+        refreshMillis: 60000,
+        allowPast: true,
+        allowFuture: true,
+        localeTitle: false,
+        cutoff: 0,
+        autoDispose: true,
+        strings: {
+            prefixAgo: null,
+            prefixFromNow: null,
+            suffixAgo: "ago",
+            suffixFromNow: "from now",
+            inPast: "any moment",
+            seconds: "&lt;1 minute",
+            minute: "~1 minute",
+            minutes: "%d minutes",
+            hour: "~1 hour",
+            hours: "~%d hours",
+            day: "~1 day",
+            days: "~%d days",
+            month: "~1 month",
+            months: "~%d months",
+            year: "~1 year",
+            years: "~%d years",
+            wordSeparator: " ",
+            numbers: []
+        }
+    }
+});

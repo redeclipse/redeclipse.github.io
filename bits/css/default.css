@@ -39,9 +39,6 @@ ul#markdown-toc ul, ul#markdown-toc ul ul, ul#markdown-toc ul ul ul, ul#markdown
     padding-top: 2px;
     padding-bottom: 2px;
 }
-.pagesidebar a {
-    display: block;
-}
 h1, h2, h3, h4, h5, h6 {
     margin: 12px 0px 8px 0px;
     color: rgb(255, 255, 255);

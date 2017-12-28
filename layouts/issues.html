@@ -5,77 +5,49 @@
         {% assign cssclass = 'default' %}
         {% include head.html %}
         <link rel="stylesheet" type="text/css" href="/bits/css/issues.css" />
+        <script type="text/javascript" src="/bits/js/showdown.min.js"></script>
         <script type="text/javascript">
-            var sort_by = '{{ page.issues.sort.by }}';
-            var sort_dir = '{{ page.issues.sort.direction }}';
-            var sort_state = '{{ page.issues.sort.state }}';
-            Number.prototype.zeropad= function(len) {
-                var s = String(this), c = '0';
-                len = len || 2;
-                while(s.length < len) s = c + s;
-                return s;
-            }
-            function issue_date(data) {
-                var d = new Date(data);
-                return d.getFullYear() + '-' + d.getMonth().zeropad() + '-' + d.getDate().zeropad() + ' ' + d.getHours() + ':' + d.getMinutes().zeropad() + ':' + d.getSeconds().zeropad();
-            }
-            function issue_create(item, iter) {
-                var row = document.createElement('tr');
-                row.class = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
-                row.innerHTML += '<th id="issues-t-number" class="issues-center"><a href="' + item.number + '">#' + item.number + '</a></th>';
-                var title = document.createElement('th');
-                title.id = 'issues-t-title';
-                title.innerHTML += '<a id="issues-t-url" href="' + item.html_url + '">' + item.title + '</a>';
-                for (var j = 0; j < item.labels.length; j++) {
-                    var label = item.labels[j];
-                    title.innerHTML += ' <span class="issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
-                }
-                row.appendChild(title);
-                row.innerHTML += '<th id="issues-t-comments" class="issues-center">' + item.comments + '</th>';
-                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + item.user.login + '</th>';
-                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + issue_date(item.created_at) + '</th>';
-                row.innerHTML += '<th id="issues-t-number" class="issues-center">' + issue_date(item.updated_at) + '</th>';
-                return row;
-            }
-            function issues(response) {
-                var meta = response.meta;
-                var data = response.data;
-                console.log(meta);
-                console.log(data);
-                for (var i = 0; i < data.length; i++) {
-                    var row = issue_create(data[i], i);
-                    document.getElementById('issues-body').appendChild(row);
-                }
-            }
-            var script = document.createElement('script');
+            var sdconv = new showdown.Converter({
+                omitExtraWLInCodeBlocks: true,
+                noHeaderId: true,
+                strikethrough: true,
+                tables: true,
+                ghCodeBlocks: true,
+                tasklists: true,
+                simpleLineBreaks: true,
+                ghMentions: true,
+                openLinksInNewWindow: true,
+                emoji: true
+            });
+            sdconv.setFlavor('github');
+            var page_title = '{{ page.title | default: page.path }}';
+            var page_path = '{{ page.path }}';
+            var page_permalink = '{{ page.permalink }}';
+            var page_issues_repository = '{{ page.issues.repository | default: "base" }}';
+            var page_issues_sort_by = '{{ page.issues.sort.by | default: "updated" }}';
+            var page_issues_sort_direction = '{{ page.issues.sort.direction | default: "desc" }}';
+            var page_issues_sort_link = '{{ page.issues.sort.link | default: "updated-desc" }}';
+            var page_issues_sort_state = '{{ page.issues.sort.state | default: "open" }}';
             {% if site.data.local.json %}
-            script.src = '/{{ page.issues.repository }}.json';
+            var page_script = '/' + page_issues_repository + '.json';
             {% else %}
-            script.src = 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository }}/issues?state=' + sort_state + '&sort=' + sort_by + '&direction=' + sort_dir + '&callback=issues';
+            var page_script = 'https://api.github.com/repos/red-eclipse/' + page_issues_repository + '/issues?state=' + page_issues_sort_state + '&sort=' + page_issues_sort_by + '&direction=' + page_issues_sort_direction + '&callback=issues';
             {% endif %}
-            document.getElementsByTagName('head')[0].appendChild(script);
         </script>
+        <script type="text/javascript" src="/bits/js/issues.js"></script>
     </head>
     <body>
         {% include nav.html %}
         <div class="container pagecontent">
-            <div class="main pagecontainer">
+            <div class="sidebar pagesidebar">
+                <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}" target="_blank">Go to GitHub</a>
+                | <a href="#0">Go to Index</a>
+            </div>
+            <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
+                <p><b>NOTICE:</b> This area is still under construction, during this phase, please use GitHub for full functionality.</p>
                 {{ content }}
-                <table id="issues">
-                    <thead id="issues-header">
-                        <tr>
-                            <th id="issues-t-number" class="issues-center">ID</th>
-                            <th id="issues-t-title">Title</th>
-                            <th id="issues-t-comments" class="issues-center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>
-                            <th id="issues-t-author" class="issues-center">Author</th>
-                            <th id="issues-t-created" class="issues-center">Created</th>
-                            <th id="issues-t-updated" class="issues-center">Updated</th>
-                        </tr>
-                    </thead>
-                    <tbody id="issues-body"></tbody>
-                </table>
-                <p><b>This area is under construction. You can find the full list <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}">here</a>.</b></p>
+                <table id="issues-table"><thead id="issues-header"></thead><tbody id="issues-body"></tbody></table>
             </div>
             {% include footer.html %}
         </div>
