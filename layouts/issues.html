@@ -20,19 +20,21 @@
                 emoji: true
             });
             sdconv.setFlavor('github');
-            var page_title = '{{ page.title | default: page.path }}';
-            var page_path = '{{ page.path }}';
-            var page_permalink = '{{ page.permalink }}';
-            var page_issues_repository = '{{ page.issues.repository | default: "base" }}';
-            var page_issues_sort_by = '{{ page.issues.sort.by | default: "updated" }}';
-            var page_issues_sort_direction = '{{ page.issues.sort.direction | default: "desc" }}';
-            var page_issues_sort_link = '{{ page.issues.sort.link | default: "updated-desc" }}';
-            var page_issues_sort_state = '{{ page.issues.sort.state | default: "open" }}';
-            {% if site.data.local.json %}
-            var page_script = '/' + page_issues_repository + '.json';
-            {% else %}
-            var page_script = 'https://api.github.com/repos/red-eclipse/' + page_issues_repository + '/issues?state=' + page_issues_sort_state + '&sort=' + page_issues_sort_by + '&direction=' + page_issues_sort_direction + '&callback=issues';
-            {% endif %}
+            var pagedata = {
+                title: '{{ page.title | default: page.path }}',
+                path: '{{ page.path }}',
+                permalink: '{{ page.permalink }}',
+                issues: {
+                    repository: '{{ page.issues.repository | default: "base" }}',
+                    sort: {
+                        by: '{{ page.issues.sort.by | default: "updated" }}',
+                        direction: '{{ page.issues.sort.direction | default: "desc" }}',
+                        link: '{{ page.issues.sort.link | default: "updated-desc" }}',
+                        state: '{{ page.issues.sort.state | default: "open" }}'
+                    }
+                },
+                script: {% if site.data.local.json %}'/{{ page.issues.repository | default: "base" }}.json'{% else %}'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues'{% endif %}
+            }
         </script>
         <script type="text/javascript" src="/bits/js/issues.js"></script>
     </head>
@@ -41,7 +43,7 @@
         <div class="container pagecontent">
             <div class="sidebar pagesidebar">
                 <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}" target="_blank">Go to GitHub</a>
-                | <a href="#0">Go to Index</a>
+                | <a href="#">Go to Index</a>
             </div>
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>

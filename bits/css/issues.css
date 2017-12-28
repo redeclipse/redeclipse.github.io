@@ -12,14 +12,20 @@
 #issues-table time {
     white-space: nowrap;
 }
+#issues-t-row {
+    height: 40px;
+}
 #issues-t-info img {
     background-color: rgb(255, 255, 255);
 }
+#issues-t-title {
+    color: rgb(255, 255, 255);
+    font-family: Play, sans-serif;
+    font-weight: 700;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
 #issues-t-number {
     font-weight: 700;
-}
-#issues-t-row {
-    height: 40px;
 }
 .issues-bg1 {
     background-color: rgba(0, 0, 0, 0.125);

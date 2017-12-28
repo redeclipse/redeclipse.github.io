@@ -1,3 +1,6 @@
+---
+layout: null
+---
 // Helpers
 Number.prototype.zeropad= function(len) {
     var s = String(this), c = '0';
@@ -6,9 +9,22 @@ Number.prototype.zeropad= function(len) {
     return s;
 }
 
+Element.prototype.remove = function() {
+    this.parentElement.removeChild(this);
+}
+
+NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    for(var i = this.length - 1; i >= 0; i--) {
+        if(this[i] && this[i].parentElement) {
+            this[i].parentElement.removeChild(this[i]);
+        }
+    }
+}
+
 // Issues API
 var issues_page = 0;
 var issues_data = null;
+var issues_comments_data = null;
 
 function issues_get()
 {
@@ -31,7 +47,7 @@ function issues_create(item, iter) {
     var row = document.createElement('tr');
     row.id = 'issues-t-row';
     row.class = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
-    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="https://github.com/red-eclipse/' + page_issues_repository + '/issues/' + item.number + '" target="_blank">#' + item.number + '</a></td>';
+    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="' + item.html_url + '" target="_blank">#' + item.number + '</a></td>';
     var title = document.createElement('td');
     title.id = 'issues-t-title';
     title.class = 'issues-left';
@@ -49,8 +65,29 @@ function issues_create(item, iter) {
 }
 
 function issues_view(item, hbody, hrow) {
-    hrow.innerHTML = '<th id="issues-h-info" class="issues-left"><a href="https://github.com/red-eclipse/' + page_issues_repository + '/issues/' + item.number + '" target="_blank">#' + item.number + ': ' + item.title + '</a> by ' + item.user.login + ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></th>';
+    hrow.innerHTML = '<th id="issues-h-info" class="issues-left"><a href="' + item.html_url + '" target="_blank">#' + item.number + ': ' + item.title + '</a> by ' + item.user.login + ', <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></th>';
     hbody.innerHTML = '<tr id="issues-t-row"><td id="issues-t-info" class="issues-left">' + sdconv.makeHtml(item.body) + '</td></tr>';
+    issues_script_comments({% if site.data.local.json %}'/comments.json'{% else %}item.comments_url + '?callback=issues_comments'{% endif %});
+}
+
+function issues_view_comment(item, comment, hbody) {
+    var hrow = document.createElement('tr');
+    hrow.id = 'issues-h-comments-row';
+    hrow.innerHTML = '<th id="issues-h-comments-info" class="issues-left"><a href="' + item.html_url + '" target="_blank">#' + comment + '</a> by ' + item.user.login + ', <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></th>';
+    hbody.appendChild(hrow);
+    hrow = document.createElement('tr');
+    hrow.id = 'issues-t-comments-row';
+    hrow.innerHTML = '<td id="issues-t-comments-info" class="issues-left">' + sdconv.makeHtml(item.body) + '</td>';
+    hbody.appendChild(hrow);
+}
+
+function issues_build_comments() {
+    if(issues_page <= 0) return;
+    var hbody = document.getElementById('issues-body');
+    for(var i = 0; i < issues_comments_data.length; i++) {
+        issues_view_comment(issues_comments_data[i], i+1, hbody);
+    }
+    jQuery("time.timeago").timeago();
 }
 
 function issues_build() {
@@ -94,6 +131,18 @@ function issues_build() {
     jQuery("time.timeago").timeago();
 }
 
+function issues_script_comments(src)
+{
+    var issues_script = document.getElementById('issues-script-comment');
+    if(issues_script != null) {
+        issues_script.remove();
+    }
+    issues_script = document.createElement('script');
+    issues_script.id = 'issues-script-comment';
+    issues_script.src = src;
+    document.getElementsByTagName('head')[0].appendChild(issues_script);
+}
+
 function issues_script(src)
 {
     var issues_script = document.getElementById('issues-script');
@@ -105,16 +154,23 @@ function issues_script(src)
     issues_script.src = src;
 }
 
+function issues_comments(response) {
+    console.log('issue comments meta: ', response.meta);
+    console.log('issue comments data: ', response.data);
+    issues_comments_data = response.data;
+    issues_build_comments();
+}
+
 function issues(response) {
-    console.log(response.meta);
-    console.log(response.data);
+    console.log('issues meta: ', response.meta);
+    console.log('issues data: ', response.data);
     issues_data = response.data;
     issues_build();
 }
 
 $(document).ready(function ($) {
     issues_get();
-    issues_script(page_script);
+    issues_script(pagedata.script);
 });
 
 $(window).on('hashchange', function() {
