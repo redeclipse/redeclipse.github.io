@@ -31,7 +31,7 @@ function issues_create(item, iter) {
     var row = document.createElement('tr');
     row.id = 'issues-t-row';
     row.class = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
-    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="' + item.number + '">#' + item.number + '</a></td>';
+    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="https://github.com/red-eclipse/' + page_issues_repository + '/issues/' + item.number + '" target="_blank">#' + item.number + '</a></td>';
     var title = document.createElement('td');
     title.id = 'issues-t-title';
     title.class = 'issues-left';

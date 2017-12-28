@@ -5,8 +5,17 @@
     border-radius: 4px;
     border: 1px solid rgb(255, 64, 64);
 }
+#issues-table time {
+    white-space: nowrap;
+}
 #issues-t-info img {
     background-color: rgb(255, 255, 255);
+}
+#issues-t-number {
+    font-weight: 700;
+}
+#issues-t-row {
+    height: 40px;
 }
 .issues-bg1 {
     background-color: rgba(0, 0, 0, 0.125);
