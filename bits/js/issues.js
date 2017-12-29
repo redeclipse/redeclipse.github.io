@@ -21,7 +21,7 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
 Element.prototype.makechild = function(elemname, idname, classname) {
     var child = document.createElement(elemname);
     child.id = idname;
-    child.class = classname;
+    child.classList.add(classname);
     this.appendChild(child);
     return child;
 }
@@ -51,11 +51,11 @@ function issues_date(data) {
 function issues_create(item, iter) {
     var row = document.createElement('tr');
     row.id = 'issues-t-row';
-    row.class = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
+    row.classList.add('issues-' + (iter%2 ? 'bg1' : 'bg2'));
     row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="' + item.html_url + '" target="_blank">#' + item.number + '</a></td>';
     var title = document.createElement('td');
     title.id = 'issues-t-title';
-    title.class = 'issues-left';
+    title.classList.add('issues-left');
     title.innerHTML += '<a id="issues-t-url" href="#' + item.number + '">' + item.title + '</a>';
     for(var j = 0; j < item.labels.length; j++) {
         var label = item.labels[j];
