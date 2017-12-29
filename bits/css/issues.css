@@ -5,6 +5,7 @@
     max-width: 100%;
     border-radius: 4px;
     border: 1px solid rgb(255, 64, 64);
+    vertical-align: middle;
 }
 #issues-view {
     table-layout: fixed;
@@ -26,6 +27,18 @@
 }
 #issues-t-number {
     font-weight: 700;
+}
+#issues-h-comments-avatar {
+    float: right;
+    clear: both;
+}
+#issues-h-comments-avatar img {
+    width: 24px;
+    height: 24px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 128, 128);
+    -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
+    filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
 }
 .issues-bg1 {
     background-color: rgba(0, 0, 0, 0.125);

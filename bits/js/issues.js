@@ -21,6 +21,13 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     }
 }
 
+Element.prototype.makechild = function(elemname, idname, classname) {
+    var child = document.createElement(elemname);
+    child.id = idname;
+    child.class = classname;
+    this.appendChild(child);
+    return child;
+}
 // Issues API
 var issues_page = 0;
 var issues_data = null;
@@ -65,20 +72,25 @@ function issues_create(item, iter) {
 }
 
 function issues_view(item, hbody, hrow) {
-    hrow.innerHTML = '<th id="issues-h-info" class="issues-left"><a href="' + item.html_url + '" target="_blank">#' + item.number + ': ' + item.title + '</a> by ' + item.user.login + ', <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></th>';
-    hbody.innerHTML = '<tr id="issues-t-row"><td id="issues-t-info" class="issues-left">' + sdconv.makeHtml(item.body) + '</td></tr>';
+    var head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left');
+    head.innerHTML = ' <a href="' + item.html_url + '" target="_blank">#' + item.number + ': ' + item.title + '</a>';
+    head.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    head.innerHTML += '<span id="issues-h-comments-avatar"><a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a></span>';
+    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
+        info = irow.makechild('td', 'issues-t-comments-info', 'issues-left');
+    info.innerHTML = sdconv.makeHtml(item.body);
     issues_script_comments({% if site.data.local.json %}'/comments.json'{% else %}item.comments_url + '?callback=issues_comments'{% endif %});
 }
 
 function issues_view_comment(item, comment, hbody) {
-    var hrow = document.createElement('tr');
-    hrow.id = 'issues-h-comments-row';
-    hrow.innerHTML = '<th id="issues-h-comments-info" class="issues-left"><a href="' + item.html_url + '" target="_blank">#' + comment + '</a> by ' + item.user.login + ', <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></th>';
-    hbody.appendChild(hrow);
-    hrow = document.createElement('tr');
-    hrow.id = 'issues-t-comments-row';
-    hrow.innerHTML = '<td id="issues-t-comments-info" class="issues-left">' + sdconv.makeHtml(item.body) + '</td>';
-    hbody.appendChild(hrow);
+    var hrow = hbody.makechild('tr', 'issues-h-comments-row', ''),
+        head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left');
+    head.innerHTML = ' <a href="' + item.html_url + '" target="_blank">comment #' + comment + '</a>';
+    head.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    head.innerHTML += '<span id="issues-h-comments-avatar"><a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a></span>';
+    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
+        info = irow.makechild('td', 'issues-t-comments-info', 'issues-left');
+    info.innerHTML = sdconv.makeHtml(item.body);
 }
 
 function issues_build_comments() {
