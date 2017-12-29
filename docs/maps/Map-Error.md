@@ -14,6 +14,8 @@
 | **Day/Night**             | ✔/✔                 |
 | **Lights**                | 44                  |
 | **Entities**              | 125                 |
+| **Vertices**              | ~42 000             |
+| **Triangles**             | ~30 000             |
 | **Recommend Modes**       | Deathmatch, Duel    |
 
 ## Review
