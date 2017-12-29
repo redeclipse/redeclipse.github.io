@@ -13,8 +13,8 @@ permalink: /docs/Official-Maps
 <table>
     <tr>
         <td>
-            <div><img src="images/maps/error.png" width="128px" height="128px" /></div>
-            <div>Error</div>
+            <div><a href="maps/Map-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Map-Error">Error</a> </div>
         </td>
     </tr>
 </table>
