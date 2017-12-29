@@ -33,7 +33,13 @@
                         state: '{{ page.issues.sort.state | default: "open" }}'
                     }
                 },
-                script: {% if site.data.local.json %}'/{{ page.issues.repository | default: "base" }}.json'{% else %}'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues'{% endif %}
+                {% if site.data.local.json %}
+                script: '/{{ page.issues.repository | default: "base" }}.json',
+                comments: '/comments.json'
+                {% else %}
+                script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues',
+                comments: null
+                {% endif %}
             }
         </script>
         <script type="text/javascript" src="/bits/js/issues.js"></script>

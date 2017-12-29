@@ -1,6 +1,3 @@
----
-layout: null
----
 // Helpers
 Number.prototype.zeropad= function(len) {
     var s = String(this), c = '0';
@@ -28,6 +25,7 @@ Element.prototype.makechild = function(elemname, idname, classname) {
     this.appendChild(child);
     return child;
 }
+
 // Issues API
 var issues_page = 0;
 var issues_data = null;
@@ -79,7 +77,7 @@ function issues_view(item, hbody, hrow) {
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left');
     info.innerHTML = sdconv.makeHtml(item.body);
-    issues_script_comments({% if site.data.local.json %}'/comments.json'{% else %}item.comments_url + '?callback=issues_comments'{% endif %});
+    issues_script_comments(pagedata.comments != null ? pagedata.comments : item.comments_url + '?callback=issues_comments');
 }
 
 function issues_view_comment(item, comment, hbody) {
