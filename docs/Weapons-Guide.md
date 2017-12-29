@@ -43,19 +43,7 @@ Spawn weapons are available to all players in addition to the chosen loadout wea
 
 ### Status effects
 
-Some weapons induce status ailments that inflict some damage over time and last for about five seconds. Useful to delay enemy health recovery. Multiple effects can be stacked.
-
-#### Shock
-
-Slows down movement greatly. Deals 2 damage per second. Caused by the zapper and by mines.
-
-#### Burn
-
-Deals 3 damage per second. Can be negated with the secondary fire of the flamer or by entering water (as long as you are at least half submerged). Caused by grenades, rockets and the flamer.
-
-#### Bleed
-
-Deals 3 damage per second. Caused by the secondary fire of the shotgun and by the sword.
+Some weapons induce status ailments that inflict some damage over time and last for about five seconds. Useful to delay enemy health recovery. Multiple effects can be stacked. See the [main article](Status-effects) for more.
 
 ### Anatomy
 
