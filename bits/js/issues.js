@@ -31,6 +31,8 @@ var issues_page = 0;
 var issues_data = null;
 var issues_current = null;
 var issues_comments_data = null;
+var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
+var issues_reactmd = [ ":+1:", ":-1:", ":laugh:", ":raised_hands:", ":confused:", ":heart:" ];
 
 function issues_get()
 {
@@ -64,6 +66,7 @@ function issues_create(item, iter) {
     }
     row.appendChild(title);
     row.innerHTML += '<td id="issues-t-comments" class="issues-center">' + item.comments + '</td>';
+    row.innerHTML += '<td id="issues-t-reactions" class="issues-center">' + item.reactions.total_count + '</td>';
     row.innerHTML += '<td id="issues-t-author" class="issues-center">' + item.user.login + '</td>';
     row.innerHTML += '<td id="issues-t-created" class="issues-time issues-center"><time class="timeago" datetime="' + item.created_at + '">' + issues_date(item.created_at) + '</time></td>';
     row.innerHTML += '<td id="issues-t-updated" class="issues-time issues-center"><time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time></td>';
@@ -76,6 +79,14 @@ function issues_view(item, hbody, hrow) {
         avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
     span.innerHTML = ' <a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + ': ' + item.title + '</a>';
     span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    if(item.reactions.total_count > 0) {
+        for(var j = 0; j < issues_reactions.length; j++) {
+            var react = issues_reactions[j], num = item.reactions[react];
+            if(num > 0) {
+                span.innerHTML += ' ' + sdconv.makeHtml(issues_reactmd[j]) + ' ' + num;
+            }
+        }
+    }
     avat.innerHTML += '<a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a>';
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
@@ -91,6 +102,14 @@ function issues_view_comment(item, comment, hbody) {
         avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
     span.innerHTML = ' <a href="' + item.html_url + '" target="_blank">comment #' + comment + '</a>';
     span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    if(item.reactions.total_count > 0) {
+        for(var j = 0; j < issues_reactions.length; j++) {
+            var react = issues_reactions[j], num = item.reactions[react];
+            if(num > 0) {
+                span.innerHTML += ' ' + sdconv.makeHtml(issues_reactmd[j]) + ' ' + num;
+            }
+        }
+    }
     avat.innerHTML += '<a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a>';
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
@@ -142,6 +161,7 @@ function issues_build() {
         hrow.innerHTML = '<th id="issues-h-number" class="issues-center">ID</th>';
         hrow.innerHTML += '<th id="issues-h-title" class="issues-left">Title</th>';
         hrow.innerHTML += '<th id="issues-h-comments" class="issues-center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>';
+        hrow.innerHTML += '<th id="issues-h-reactions" class="issues-center"><span class="far fa-meh fa-fw" aria-hidden="true"></span></th>';
         hrow.innerHTML += '<th id="issues-h-author" class="issues-center">Author</th>';
         hrow.innerHTML += '<th id="issues-h-created" class="issues-center">Created</th>';
         hrow.innerHTML += '<th id="issues-h-updated" class="issues-center">Updated</th>';

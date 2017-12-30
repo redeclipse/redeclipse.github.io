@@ -40,6 +40,9 @@
     -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
     filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
 }
+#issues-h-comments-span p {
+    display: inline;
+}
 .issues-middle {
     vertical-align: middle;
 }
