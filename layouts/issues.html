@@ -50,10 +50,10 @@
             <div class="sidebar pagesidebar">
                 <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}" target="_blank">Go to GitHub</a>
                 | <a href="#">Go to Index</a>
+                | <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New Topic</a>
             </div>
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
-                <p><b>NOTICE:</b> This area is still under construction, during this phase, please use GitHub for full functionality.</p>
                 {{ content }}
                 <table id="issues-table"><thead id="issues-header"></thead><tbody id="issues-body"></tbody></table>
             </div>
