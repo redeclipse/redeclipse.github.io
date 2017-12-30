@@ -111,7 +111,7 @@ var issues_data = null;
 var issues_current = null;
 var issues_comments_data = null;
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
-var issues_reactmd = [ ":+1:", ":-1:", ":laugh:", ":raised_hands:", ":confused:", ":heart:" ];
+var issues_reactmd = [ ":+1:", ":-1:", ":laughing:", ":raised_hands:", ":confused:", ":heart:" ];
 
 function issues_setup()
 {
