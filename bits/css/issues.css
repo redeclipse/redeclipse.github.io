@@ -1,11 +1,12 @@
 @charset "utf-8";
-#issues-table, #issues-view {
+#issues-front, #issues-table, #issues-view {
     font-size: 16px;
     width: 100%;
     max-width: 100%;
     border-radius: 4px;
     border: 1px solid rgb(255, 64, 64);
     vertical-align: middle;
+    margin-bottom: 16px;
 }
 #issues-view {
     table-layout: fixed;
@@ -19,7 +20,7 @@
 #issues-t-info img {
     background-color: rgb(255, 255, 255);
 }
-#issues-t-title, #issues-t-reply-row {
+#issues-t-title, #issues-t-reply-row, #issues-h-load, #issues-t-load {
     color: rgb(255, 255, 255);
     font-family: Play, sans-serif;
     font-weight: 700;
@@ -43,13 +44,16 @@
 #issues-h-comments-span p {
     display: inline;
 }
+#issues-reload {
+    cursor: pointer;
+}
 .issues-middle {
     vertical-align: middle;
 }
 .issues-bg1 {
     background-color: rgba(0, 0, 0, 0.125);
 }
-.issues-bg2, #issues-h-comments-info, #issues-t-reply-row {
+.issues-bg2, #issues-h-comments-info, #issues-t-reply-row, #issues-l-row, #issues-h-load, #issues-t-load {
     background-color: rgba(0, 0, 0, 0.625);
 }
 .issues-center {

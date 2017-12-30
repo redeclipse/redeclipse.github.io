@@ -7,20 +7,8 @@
         <link rel="stylesheet" type="text/css" href="/bits/css/issues.css" />
         <script type="text/javascript" src="/bits/js/showdown.min.js"></script>
         <script type="text/javascript">
-            var sdconv = new showdown.Converter({
-                omitExtraWLInCodeBlocks: true,
-                noHeaderId: true,
-                strikethrough: true,
-                tables: true,
-                ghCodeBlocks: true,
-                tasklists: true,
-                simpleLineBreaks: true,
-                ghMentions: true,
-                openLinksInNewWindow: true,
-                emoji: true
-            });
-            sdconv.setFlavor('github');
             var pagedata = {
+                site: '{{ site.url }}',
                 title: '{{ page.title | default: page.path }}',
                 path: '{{ page.path }}',
                 permalink: '{{ page.permalink }}',
@@ -50,16 +38,32 @@
     <body>
         {% include nav.html %}
         <div class="container pagecontent">
-            <div class="sidebar pagesidebar">
-                <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}" target="_blank">Go to GitHub</a>
-                | <a href="#">Go to Index</a>
-                | <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New Topic</a>
-                | <a id="issues-login" href="#" onclick="user_oauth();">Login?</a>
-            </div>
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
                 {{ content }}
-                <table id="issues-table"><thead id="issues-header"></thead><tbody id="issues-body"></tbody></table>
+                <table id="issues-front">
+                    <thead id="issues-link">
+                        <tr id="issues-l-row">
+                            <th id="issues-l-data">
+                                <a id="issues-index" href="#">Index</a>
+                                | <a id="issues-reload" onclick="location.reload();">Refresh</a>
+                                | <a id="issues-create" href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New Topic</a>
+                            </th>
+                            <th id="issues-l-login" class="issues-right">
+                                <a id="issues-login" href="#" onclick="user_oauth();">Login with GitHub</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="issues-more"></tbody>
+                </table>
+                <table id="issues-table">
+                    <thead id="issues-header">
+                        <tr id="issues-h-load">
+                            <th id="issues-h-loading"><span class="fas fa-cog fa-spin"></span> Loading...</th>
+                        </tr>
+                    </thead>
+                    <tbody id="issues-body"></tbody>
+                </table>
             </div>
             {% include footer.html %}
         </div>

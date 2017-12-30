@@ -48,38 +48,62 @@ function getcookie(cname) {
     return "";
 }
 
+// Showdown
+var md_convert = new showdown.Converter({
+    omitExtraWLInCodeBlocks: true,
+    noHeaderId: true,
+    strikethrough: true,
+    tables: true,
+    ghCodeBlocks: true,
+    tasklists: true,
+    simpleLineBreaks: true,
+    ghMentions: true,
+    openLinksInNewWindow: true,
+    emoji: true
+});
+md_convert.setFlavor('github');
+
 // OAuth
 var user_data = null;
 var user_login = null;
+var user_cookie = '0';
+var user_nologin = false;
 OAuth.initialize('TnbOMXVV86ugQ7ol49rg5giIz8E');
 
-function user_oauth(setup) {
-    OAuth.popup('github', { cache: true })
-    .done(function(result) {
-        console.log('login: ', result);
+function user_oauth(setup, src) {
+    makecookie('login', '2', 1);
+    user_cookie = '2';
+    user_nologin = true;
+    OAuth.redirect('github', { cache: true }, pagedata.site + pagedata.permalink + "#");
+}
+
+function user_callback(err, result) {
+    user_nologin = true;
+    if(err) {
+        console.log('login error: ', result);
+    } else {
+        console.log('login result: ', result);
+        makecookie('login', '1', 7300);
+        user_cookie = '1';
         user_data = result;
-        result.get('/user')
+        user_data.get('/user')
         .done(function (response) {
-            console.log('user: ', response);
+            console.log('login user: ', response);
             user_login = response;
             var top = document.getElementById('issues-login');
-            top.innerHTML = user_login.name;
+            top.innerHTML = '@' + user_login.login;
             top.href = user_login.html_url;
+            top.title = 'Logged in as: ' + user_login.name;
             top.onclick = '';
             makecookie('login', '1', 7300);
-            if(setup) {
-                issues_get();
-                issues_script(pagedata.script, 'issues-script');
-            }
+            issues_script(pagedata.script, 'issues-script');
         })
         .fail(function (err) {
-            console.log('user error: ', err);
+            console.log('login error: ', err);
         });
-    })
-    .fail(function (err) {
-        console.log('login error: ', err);
-    });
+    }
 }
+OAuth.callback('github', { cache: true }, user_callback);
 
 // Issues API
 var issues_page = 0;
@@ -89,16 +113,24 @@ var issues_comments_data = null;
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
 var issues_reactmd = [ ":+1:", ":-1:", ":laugh:", ":raised_hands:", ":confused:", ":heart:" ];
 
-function issues_get()
+function issues_setup()
 {
-    var url = window.location.hash, idx = url.indexOf('#')
-    issues_page = idx != -1 ? parseInt(url.substring(idx + 1)) : 0;
-}
-
-function issues_set(idx)
-{
-    issues_page = idx;
-    issues_build();
+    user_cookie = getcookie('login');
+    var url = window.location.hash, idx = url.indexOf('#');
+    if(idx >= 0) {
+        var str = url.substring(idx + 1);
+        if(str == 'oauthio=cache:github' || str == '&oauthio=cache:github') {
+            user_nologin = true;
+            issues_page = 0;
+            window.location.hash = '';
+        }
+        else {
+            issues_page = parseInt(str);
+        }
+    }
+    else {
+        issues_page = 0;
+    }
 }
 
 function issues_date(data) {
@@ -138,7 +170,7 @@ function issues_view(item, hbody, hrow) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
             if(num > 0) {
-                span.innerHTML += ' ' + sdconv.makeHtml(issues_reactmd[j]) + ' ' + num;
+                span.innerHTML += ' ' + md_convert.makeHtml(issues_reactmd[j]) + ' ' + num;
             }
         }
     }
@@ -146,7 +178,10 @@ function issues_view(item, hbody, hrow) {
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
-    cont.innerHTML = sdconv.makeHtml(item.body);
+    cont.innerHTML = md_convert.makeHtml(item.body);
+    var vrow = hbody.makechild('tr', 'issues-t-load', ''),
+        load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
+    load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
     issues_script(pagedata.uselocal ? pagedata.comments : item.comments_url + '?callback=issues_comments', 'issues-script-comment');
 }
 
@@ -161,7 +196,7 @@ function issues_view_comment(item, comment, hbody) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
             if(num > 0) {
-                span.innerHTML += ' ' + sdconv.makeHtml(issues_reactmd[j]) + ' ' + num;
+                span.innerHTML += ' ' + md_convert.makeHtml(issues_reactmd[j]) + ' ' + num;
             }
         }
     }
@@ -169,10 +204,12 @@ function issues_view_comment(item, comment, hbody) {
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
-    cont.innerHTML = sdconv.makeHtml(item.body);
+    cont.innerHTML = md_convert.makeHtml(item.body);
 }
 
 function issues_build_comments() {
+    var loading = document.getElementById('issues-t-load');
+    if(loading != null) loading.remove();
     if(issues_page <= 0 || issues_current == null) return;
     var hbody = document.getElementById('issues-body');
     for(var i = 0; i < issues_comments_data.length; i++) {
@@ -187,6 +224,9 @@ function issues_build_comments() {
 }
 
 function issues_build() {
+    var loading = document.getElementById('issues-h-load');
+    if(loading != null) loading.remove();
+    if(issues_data == null) return;
     var table = document.getElementById('issues-table'),
         head = document.getElementById('issues-header'),
         hbody = document.getElementById('issues-body'),
@@ -242,12 +282,11 @@ function issues_script(src, idname)
     }
     else {
         var head = {};
-        if(user_login) {
+        if(user_login != null) {
             head = {
                 "Authorization": "token "  + user_data.access_token
             }
         }
-        console.log('head: ', src, ' | ', head);
         $.ajax({
             method: "GET",
             url: src,
@@ -285,16 +324,19 @@ function issues(response) {
 }
 
 $(document).ready(function ($) {
-    if(getcookie('login')) {
-        user_oauth(true);
-    }
-    else {
-        issues_get();
-        issues_script(pagedata.script, 'issues-script');
+    issues_setup();
+    if(user_nologin == false) {
+        console.log('cookie: ', user_cookie);
+        if(user_cookie == '1') {
+            user_oauth(true);
+        }
+        else {
+            issues_script(pagedata.script, 'issues-script');
+        }
     }
 });
 
 $(window).on('hashchange', function() {
-    issues_get();
+    issues_setup();
     issues_build();
 });
