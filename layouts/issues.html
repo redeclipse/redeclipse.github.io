@@ -26,7 +26,7 @@
                 comments: '/comments.json',
                 uselocal: true
                 {% else %}
-                script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues',
+                script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&per_page=100&callback=issues',
                 comments: null,
                 uselocal: false
                 {% endif %}

@@ -50,11 +50,11 @@
 .issues-middle {
     vertical-align: middle;
 }
-.issues-bg1 {
-    background-color: rgba(0, 0, 0, 0.125);
+.issues-bg1, #issues-h-row, #issues-t-comments-row {
+    background-color: rgba(0, 0, 0, 0.25);
 }
 .issues-bg2, #issues-h-comments-info, #issues-t-reply-row, #issues-l-row, #issues-h-load, #issues-t-load {
-    background-color: rgba(0, 0, 0, 0.625);
+    background-color: rgba(0, 0, 0, 0.75);
 }
 .issues-center {
     text-align: center;

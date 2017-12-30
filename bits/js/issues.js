@@ -182,7 +182,7 @@ function issues_view(item, hbody, hrow) {
     var vrow = hbody.makechild('tr', 'issues-t-load', ''),
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
     load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
-    issues_script(pagedata.uselocal ? pagedata.comments : item.comments_url + '?callback=issues_comments', 'issues-script-comment');
+    issues_script(pagedata.uselocal ? pagedata.comments : item.comments_url + '?per_page=100&callback=issues_comments', 'issues-script-comment');
 }
 
 function issues_view_comment(item, comment, hbody) {
