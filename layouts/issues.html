@@ -44,6 +44,7 @@
                 {% endif %}
             }
         </script>
+        <script type="text/javascript" src="/bits/js/oauth.min.js"></script>
         <script type="text/javascript" src="/bits/js/issues.js"></script>
     </head>
     <body>
@@ -53,6 +54,7 @@
                 <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues?q=is%3Aissue+is%3A{{ page.issues.sort.state }}+sort%3A{{ page.issues.sort.link }}" target="_blank">Go to GitHub</a>
                 | <a href="#">Go to Index</a>
                 | <a href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New Topic</a>
+                | <a id="issues-login" href="#" onclick="user_oauth();">Login?</a>
             </div>
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>

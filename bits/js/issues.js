@@ -26,6 +26,61 @@ Element.prototype.makechild = function(elemname, idname, classname) {
     return child;
 }
 
+function makecookie(name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    document.cookie = name + '=' + escape(value) + '; expires=' + exdate.toUTCString() + '; path=/';
+}
+
+function getcookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+// OAuth
+var user_data = null;
+var user_login = null;
+OAuth.initialize('TnbOMXVV86ugQ7ol49rg5giIz8E');
+
+function user_oauth(setup) {
+    OAuth.popup('github', { cache: true })
+    .done(function(result) {
+        console.log('login: ', result);
+        user_data = result;
+        result.get('/user')
+        .done(function (response) {
+            console.log('user: ', response);
+            user_login = response;
+            var top = document.getElementById('issues-login');
+            top.innerHTML = user_login.name;
+            top.href = user_login.html_url;
+            top.onclick = '';
+            makecookie('login', '1', 7300);
+            if(setup) {
+                issues_get();
+                issues_script(pagedata.script, 'issues-script');
+            }
+        })
+        .fail(function (err) {
+            console.log('user error: ', err);
+        });
+    })
+    .fail(function (err) {
+        console.log('login error: ', err);
+    });
+}
+
 // Issues API
 var issues_page = 0;
 var issues_data = null;
@@ -37,7 +92,7 @@ var issues_reactmd = [ ":+1:", ":-1:", ":laugh:", ":raised_hands:", ":confused:"
 function issues_get()
 {
     var url = window.location.hash, idx = url.indexOf('#')
-    issues_page = idx != -1 ? parseInt(url.substring(idx+1)) : 0;
+    issues_page = idx != -1 ? parseInt(url.substring(idx + 1)) : 0;
 }
 
 function issues_set(idx)
@@ -78,7 +133,7 @@ function issues_view(item, hbody, hrow) {
         span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
         avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
     span.innerHTML = ' <a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + ': ' + item.title + '</a>';
-    span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    span.innerHTML += ' created <time class="timeago" datetime="' + item.created_at + '">' + issues_date(item.created_at) + '</time>';
     if(item.reactions.total_count > 0) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
@@ -186,9 +241,17 @@ function issues_script(src, idname)
         document.getElementsByTagName('head')[0].appendChild(script);
     }
     else {
+        var head = {};
+        if(user_login) {
+            head = {
+                "Authorization": "token "  + user_data.access_token
+            }
+        }
+        console.log('head: ', src, ' | ', head);
         $.ajax({
             method: "GET",
             url: src,
+            headers: head,
             accepts: {
                 "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
             },
@@ -222,8 +285,13 @@ function issues(response) {
 }
 
 $(document).ready(function ($) {
-    issues_get();
-    issues_script(pagedata.script, 'issues-script');
+    if(getcookie('login')) {
+        user_oauth(true);
+    }
+    else {
+        issues_get();
+        issues_script(pagedata.script, 'issues-script');
+    }
 });
 
 $(window).on('hashchange', function() {
