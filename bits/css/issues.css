@@ -19,7 +19,7 @@
 #issues-t-info img {
     background-color: rgb(255, 255, 255);
 }
-#issues-t-title {
+#issues-t-title, #issues-t-reply-row {
     color: rgb(255, 255, 255);
     font-family: Play, sans-serif;
     font-weight: 700;
@@ -40,10 +40,13 @@
     -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
     filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
 }
+.issues-middle {
+    vertical-align: middle;
+}
 .issues-bg1 {
     background-color: rgba(0, 0, 0, 0.125);
 }
-.issues-bg2, #issues-h-comments-info {
+.issues-bg2, #issues-h-comments-info, #issues-t-reply-row {
     background-color: rgba(0, 0, 0, 0.625);
 }
 .issues-center {
