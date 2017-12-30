@@ -81,7 +81,7 @@ function issues_view(item, hbody, hrow) {
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
     cont.innerHTML = sdconv.makeHtml(item.body);
-    issues_script(pagedata.comments != null ? pagedata.comments : item.comments_url + '?callback=issues_comments', 'issues-script-comment');
+    issues_script(pagedata.uselocal ? pagedata.comments : item.comments_url + '?callback=issues_comments', 'issues-script-comment');
 }
 
 function issues_view_comment(item, comment, hbody) {
@@ -157,24 +157,34 @@ function issues_build() {
 
 function issues_script(src, idname)
 {
-    $.ajax({
-        method: "GET",
-        url: src,
-        accepts: {
-            "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
-        },
-        success: function(data) {
-            var script = document.getElementById(idname);
-            if(script != null) script.remove();
-            script = document.createElement('script');
-            script.id = 'issues-script';
-            script.innerHTML = data;
-            document.getElementsByTagName('head')[0].appendChild(script);
-        },
-        error: function() {
-            console.log('script failure: ', idname, src);
-        }
-    });
+    if(pagedata.uselocal) {
+        var script = document.getElementById(idname);
+        if(script != null) script.remove();
+        script = document.createElement('script');
+        script.id = idname;
+        script.src = src;
+        document.getElementsByTagName('head')[0].appendChild(script);
+    }
+    else {
+        $.ajax({
+            method: "GET",
+            url: src,
+            accepts: {
+                "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
+            },
+            success: function(data) {
+                var script = document.getElementById(idname);
+                if(script != null) script.remove();
+                script = document.createElement('script');
+                script.id = idname;
+                script.innerHTML = data;
+                document.getElementsByTagName('head')[0].appendChild(script);
+            },
+            error: function() {
+                console.log('script failure: ', idname, src);
+            }
+        });
+    }
 }
 
 function issues_comments(response) {

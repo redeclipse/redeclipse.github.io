@@ -35,10 +35,12 @@
                 },
                 {% if site.data.local.json %}
                 script: '/{{ page.issues.repository | default: "base" }}.json',
-                comments: '/comments.json'
+                comments: '/comments.json',
+                uselocal: true
                 {% else %}
                 script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues',
-                comments: null
+                comments: null,
+                uselocal: false
                 {% endif %}
             }
         </script>
