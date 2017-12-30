@@ -81,7 +81,7 @@ function issues_view(item, hbody, hrow) {
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
     cont.innerHTML = sdconv.makeHtml(item.body);
-    issues_script_comments(pagedata.comments != null ? pagedata.comments : item.comments_url + '?callback=issues_comments', item);
+    issues_script(pagedata.comments != null ? pagedata.comments : item.comments_url + '?callback=issues_comments', 'issues-script-comment');
 }
 
 function issues_view_comment(item, comment, hbody) {
@@ -155,27 +155,26 @@ function issues_build() {
     jQuery("time.timeago").timeago();
 }
 
-function issues_script_comments(src, item)
+function issues_script(src, idname)
 {
-    var issues_script = document.getElementById('issues-script-comment');
-    if(issues_script != null) {
-        issues_script.remove();
-    }
-    issues_script = document.createElement('script');
-    issues_script.id = 'issues-script-comment';
-    issues_script.src = src;
-    document.getElementsByTagName('head')[0].appendChild(issues_script);
-}
-
-function issues_script(src)
-{
-    var issues_script = document.getElementById('issues-script');
-    if(issues_script == null) {
-        issues_script = document.createElement('script');
-        issues_script.id = 'issues-script';
-        document.getElementsByTagName('head')[0].appendChild(issues_script);
-    }
-    issues_script.src = src;
+    $.ajax({
+        method: "GET",
+        url: src,
+        accepts: {
+            "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
+        },
+        success: function(data) {
+            var script = document.getElementById(idname);
+            if(script != null) script.remove();
+            script = document.createElement('script');
+            script.id = 'issues-script';
+            script.innerHTML = data;
+            document.getElementsByTagName('head')[0].appendChild(script);
+        },
+        error: function() {
+            console.log('script failure: ', idname, src);
+        }
+    });
 }
 
 function issues_comments(response) {
@@ -194,7 +193,7 @@ function issues(response) {
 
 $(document).ready(function ($) {
     issues_get();
-    issues_script(pagedata.script);
+    issues_script(pagedata.script, 'issues-script');
 });
 
 $(window).on('hashchange', function() {
