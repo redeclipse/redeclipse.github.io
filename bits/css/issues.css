@@ -67,8 +67,6 @@
     vertical-align: middle;
 }
 #issues-h-comments-xtra-labels span {
-    margin-top: -1px;
-    position: absolute;
     font-size: 14px;
     padding: 0px 4px 0px 4px;
 }
