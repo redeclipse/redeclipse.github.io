@@ -68,7 +68,9 @@
 }
 #issues-h-comments-xtra-labels span {
     font-size: 14px;
-    padding: 0px 4px 0px 4px;
+}
+#issues-h-comments-xtra-reactions {
+    padding-top: 3px;
 }
 #issues-h-comments-avatar img, #issues-login img {
     width: 24px;
