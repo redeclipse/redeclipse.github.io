@@ -15,6 +15,7 @@
                 issues: {
                     repository: '{{ page.issues.repository | default: "base" }}',
                     noun: '{{ page.issues.noun | default: "Issue" }}',
+                    perpage: '{{ page.issues.perpage | default: 50 }}',
                     sort: {
                         by: '{{ page.issues.sort.by | default: "updated" }}',
                         direction: '{{ page.issues.sort.direction | default: "desc" }}',
@@ -22,15 +23,7 @@
                         state: '{{ page.issues.sort.state | default: "open" }}'
                     }
                 },
-                {% if site.data.local.json %}
-                script: '/{{ page.issues.repository | default: "base" }}.json',
-                comments: '/comments.json',
-                uselocal: true
-                {% else %}
-                script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&per_page=100&callback=issues',
-                comments: null,
-                uselocal: false
-                {% endif %}
+                script: 'https://api.github.com/repos/red-eclipse/{{ page.issues.repository | default: "base" }}/issues?state={{ page.issues.sort.state }}&sort={{ page.issues.sort.by }}&direction={{ page.issues.sort.direction }}&callback=issues',
             }
         </script>
         <script type="text/javascript" src="/bits/js/oauth.min.js"></script>
@@ -45,7 +38,7 @@
                 <table id="issues-front">
                     <thead id="issues-link">
                         <tr id="issues-l-row">
-                            <th id="issues-l-data">
+                            <th id="issues-l-data" class="issues-left">
                                 <a id="issues-index" href="#">Index</a>
                                 | <a id="issues-reload" onclick="location.reload();">Refresh</a>
                                 | <a id="issues-create" href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
@@ -55,15 +48,23 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="issues-more"></tbody>
+                    <tbody id="issues-information"></tbody>
                 </table>
                 <table id="issues-table">
                     <thead id="issues-header">
                         <tr id="issues-h-load">
-                            <th id="issues-h-loading"><span class="fas fa-cog fa-spin"></span> Loading...</th>
+                            <th id="issues-h-loading" class="issues-left"><span class="fas fa-cog fa-spin"></span> Loading...</th>
                         </tr>
                     </thead>
                     <tbody id="issues-body"></tbody>
+                </table>
+                <table id="issues-more">
+                    <thead id="issues-morehead">
+                        <tr id="issues-h-more" style="display: none">
+                            <th id="issues-h-loading" class="issues-center"><a id="issues-getmore" onclick="issues_more();">Load More</a></th>
+                        </tr>
+                    </thead>
+                    <tbody id="issues-morebody"></tbody>
                 </table>
             </div>
             {% include footer.html %}

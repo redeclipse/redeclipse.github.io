@@ -1,5 +1,5 @@
 @charset "utf-8";
-#issues-front, #issues-table, #issues-view {
+#issues-front, #issues-table, #issues-view, #issues-more {
     font-size: 16px;
     width: 100%;
     max-width: 100%;
@@ -44,7 +44,7 @@
 #issues-h-comments-span p {
     display: inline;
 }
-#issues-reload {
+#issues-reload, #issues-getmore {
     cursor: pointer;
 }
 .issues-middle {
@@ -53,7 +53,7 @@
 .issues-bg1, #issues-h-row, #issues-t-comments-row {
     background-color: rgba(0, 0, 0, 0.25);
 }
-.issues-bg2, #issues-h-comments-info, #issues-t-reply-row, #issues-l-row, #issues-h-load, #issues-t-load {
+.issues-bg2, #issues-h-comments-info, #issues-t-reply-row, #issues-l-row, #issues-h-load, #issues-t-load, #issues-h-more {
     background-color: rgba(0, 0, 0, 0.75);
 }
 .issues-center {

@@ -22,7 +22,7 @@ $(document).ready(function() {
             suffixAgo: "ago",
             suffixFromNow: "from now",
             inPast: "any moment",
-            seconds: "&lt;1 minute",
+            seconds: "a moment",
             minute: "1 minute",
             minutes: "%d minutes",
             hour: "1 hour",

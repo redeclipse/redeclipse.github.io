@@ -26,6 +26,11 @@ Element.prototype.makechild = function(elemname, idname, classname) {
     return child;
 }
 
+Array.prototype.extend = function (data) {
+    data.forEach(function(v) {
+        this.push(v)
+    }, this);    
+}
 function makecookie(name, value, exdays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
@@ -91,12 +96,14 @@ function user_callback(err, result) {
             console.log('login user: ', response);
             user_login = response;
             var top = document.getElementById('issues-login');
-            top.innerHTML = '@' + user_login.login;
-            top.href = user_login.html_url;
-            top.title = 'Logged in as: ' + user_login.name;
-            top.onclick = '';
+            if(top) {
+                top.innerHTML = '@' + user_login.login;
+                top.href = user_login.html_url;
+                top.title = 'Logged in as: ' + user_login.name;
+                top.onclick = '';
+            }
             makecookie('login', '1', 7300);
-            issues_script(pagedata.script, 'issues-script');
+            issues_script(pagedata.script, 'issues-script', issues_data_page);
         })
         .fail(function (err) {
             console.log('login error: ', err);
@@ -106,10 +113,12 @@ function user_callback(err, result) {
 OAuth.callback('github', { cache: true }, user_callback);
 
 // Issues API
-var issues_page = 0;
-var issues_data = null;
+var issue_num = 0;
+var issues_data = [];
+var issues_data_page = 1;
 var issues_current = null;
-var issues_comments_data = null;
+var issues_comments = [];
+var issues_comments_page = 1;
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
 var issues_reactmd = [ ":+1:", ":-1:", ":laughing:", ":raised_hands:", ":confused:", ":heart:" ];
 
@@ -121,15 +130,20 @@ function issues_setup()
         var str = url.substring(idx + 1);
         if(str == 'oauthio=cache:github' || str == '&oauthio=cache:github') {
             user_nologin = true;
-            issues_page = 0;
+            issue_num = 0;
             window.location.hash = '';
         }
         else {
-            issues_page = parseInt(str);
+            var old = issue_num;
+            issue_num = parseInt(str);
+            if(issue_num != old) {
+                issues_comments = [];
+                issues_comments_page = 1;
+            }
         }
     }
     else {
-        issues_page = 0;
+        issue_num = 0;
     }
 }
 
@@ -182,7 +196,7 @@ function issues_view(item, hbody, hrow) {
     var vrow = hbody.makechild('tr', 'issues-t-load', ''),
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
     load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
-    issues_script(pagedata.uselocal ? pagedata.comments : item.comments_url + '?per_page=100&callback=issues_comments', 'issues-script-comment');
+    issues_script(item.comments_url + '?callback=issuecomments', 'issues-script-comment', issues_comments_page);
 }
 
 function issues_view_comment(item, comment, hbody) {
@@ -210,23 +224,39 @@ function issues_view_comment(item, comment, hbody) {
 function issues_build_comments() {
     var loading = document.getElementById('issues-t-load');
     if(loading != null) loading.remove();
-    if(issues_page <= 0 || issues_current == null) return;
+    if(issue_num <= 0 || issues_current == null || issues_comments == null || issues_comments.length <= 0) return;
     var hbody = document.getElementById('issues-body');
-    for(var i = 0; i < issues_comments_data.length; i++) {
-        issues_view_comment(issues_comments_data[i], i+1, hbody);
+    for(var i = 0; i < issues_comments.length; i++) {
+        issues_view_comment(issues_comments[i], i+1, hbody);
     }
-    var hrow = hbody.makechild('tr', 'issues-t-reply-row', ''),
-        head = hrow.makechild('td', 'issues-t-reply-info', 'issues-center'),
-        span = head.makechild('span', 'issues-t-reply-span', 'issues-middle');
-    span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" target="_blank">View on GitHub</a>'
-    span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" target="_blank">Reply on GitHub</a>';
+    if(issues_comments_page > 0) {
+        var more = document.getElementById('issues-h-more');
+        if(more) {
+            var count = issues_comments_page*pagedata.issues.perpage;
+            if(issues_comments.length >= count) {
+                more.style.display = 'table-row';
+            }
+            else {
+                more.style.display = 'none';
+            }
+        }
+    }
+    var view = document.getElementById('issues-morebody');
+    if(view) {
+        view.innerHTML = '';
+        var hrow = view.makechild('tr', 'issues-t-reply-row', ''),
+            head = hrow.makechild('td', 'issues-t-reply-info', 'issues-center'),
+            span = head.makechild('span', 'issues-t-reply-span', 'issues-middle');
+        span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" target="_blank">View on GitHub</a>'
+        span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" target="_blank">Reply on GitHub</a>';
+    }
     jQuery("time.timeago").timeago();
 }
 
 function issues_build() {
     var loading = document.getElementById('issues-h-load');
     if(loading != null) loading.remove();
-    if(issues_data == null) return;
+    if(issues_data == null || issues_data.length <= 0) return;
     var table = document.getElementById('issues-table'),
         head = document.getElementById('issues-header'),
         hbody = document.getElementById('issues-body'),
@@ -239,12 +269,12 @@ function issues_build() {
         hrow.id = 'issues-h-row';
         head.appendChild(hrow);
     }
-    if(issues_page > 0) {
+    if(issue_num > 0) {
         table.id = 'issues-view';
         hrow.innerHTML = '';
         hbody.innerHTML = '';
         for(var i = 0; i < issues_data.length; i++) {
-            if(issues_data[i].number == issues_page) {
+            if(issues_data[i].number == issue_num) {
                 issues_current = issues_data[i];
                 issues_view(issues_data[i], hbody, hrow);
                 break;
@@ -266,60 +296,87 @@ function issues_build() {
             var row = issues_create(issues_data[i], i);
             hbody.appendChild(row);
         }
+        if(issues_data_page > 0) {
+            var more = document.getElementById('issues-h-more');
+            if(more) {
+                var count = issues_data_page*pagedata.issues.perpage;
+                if(issues_data.length >= count) {
+                    more.style.display = 'table-row';
+                }
+                else {
+                    more.style.display = 'none';
+                }
+            }
+        }
+        var view = document.getElementById('issues-morebody');
+        if(view) view.innerHTML = '';
     }
     jQuery("time.timeago").timeago();
 }
 
-function issues_script(src, idname)
+function issues_script(src, idname, pagenum)
 {
-    if(pagedata.uselocal) {
-        var script = document.getElementById(idname);
-        if(script != null) script.remove();
-        script = document.createElement('script');
-        script.id = idname;
-        script.src = src;
-        document.getElementsByTagName('head')[0].appendChild(script);
+    var head = {}, uri = src + '&per_page=' + pagedata.issues.perpage + '&page=' + pagenum;
+    if(user_login != null) {
+        head = {
+            "Authorization": "token "  + user_data.access_token
+        }
     }
-    else {
-        var head = {};
-        if(user_login != null) {
-            head = {
-                "Authorization": "token "  + user_data.access_token
+    console.log('script get: ', idname, uri, head);
+    $.ajax({
+        method: "GET",
+        url: uri,
+        headers: head,
+        accepts: {
+            "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
+        },
+        success: function(data) {
+            var script = document.getElementById(idname);
+            if(script != null) script.remove();
+            script = document.createElement('script');
+            script.id = idname;
+            script.innerHTML = data;
+            document.getElementsByTagName('head')[0].appendChild(script);
+        },
+        error: function() {
+            console.log('script failure: ', idname, uri);
+        }
+    });
+}
+
+function issues_more() {
+    if(issue_num > 0) {
+        var count = issues_comments_page*pagedata.issues.perpage;
+        if(issues_comments.length >= count) {
+            for(var i = 0; i < issues_data.length; i++) {
+                if(issues_data[i].number == issue_num) {
+                    issues_comments_page++;
+                    issues_script(issues_data[i].comments_url + '?callback=issuecomments', 'issues-script-comment', issues_comments_page);
+                    break;
+                }
             }
         }
-        $.ajax({
-            method: "GET",
-            url: src,
-            headers: head,
-            accepts: {
-                "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
-            },
-            success: function(data) {
-                var script = document.getElementById(idname);
-                if(script != null) script.remove();
-                script = document.createElement('script');
-                script.id = idname;
-                script.innerHTML = data;
-                document.getElementsByTagName('head')[0].appendChild(script);
-            },
-            error: function() {
-                console.log('script failure: ', idname, src);
-            }
-        });
+    }
+    else {
+        var count = issues_data_page*pagedata.issues.perpage;
+        if(issues_data.length >= count) {
+            issues_data_page++;
+            issues_script(pagedata.script, 'issues-script', issues_data_page);
+        }
     }
 }
 
-function issues_comments(response) {
+function issuecomments(response) {
     console.log('issue comments meta: ', response.meta);
     console.log('issue comments data: ', response.data);
-    issues_comments_data = response.data;
+    issues_comments.extend(response.data);
     issues_build_comments();
 }
 
 function issues(response) {
     console.log('issues meta: ', response.meta);
     console.log('issues data: ', response.data);
-    issues_data = response.data;
+    issues_data.extend(response.data);
     issues_build();
 }
 
@@ -331,7 +388,7 @@ $(document).ready(function ($) {
             user_oauth(true);
         }
         else {
-            issues_script(pagedata.script, 'issues-script');
+            issues_script(pagedata.script, 'issues-script', issues_data_page);
         }
     }
 });
