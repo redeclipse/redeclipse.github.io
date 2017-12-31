@@ -197,15 +197,23 @@ function issues_view(item, hbody, hrow) {
         avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
     span.innerHTML = ' <a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + ': ' + item.title + '</a>';
     span.innerHTML += ' created <time class="timeago" datetime="' + item.created_at + '">' + issues_date(item.created_at) + '</time>';
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
+    var xrow = hbody.makechild('tr', 'issues-h-comments-xtra', ''),
+        xtra = xrow.makechild('th', 'issues-h-comments-xtra-row', 'issues-left'),
+        labels = xtra.makechild('span', 'issues-h-comments-xtra-labels', 'issues-left issues-middle'),
+        reactions = xtra.makechild('span', 'issues-h-comments-xtra-reactions', 'issues-right issues-middle');
+    for(var j = 0; j < item.labels.length; j++) {
+        var label = item.labels[j];
+        labels.innerHTML += ' <span id="issues-t-label" class="issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
+    }
     if(item.reactions.total_count > 0) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
             if(num > 0) {
-                span.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
+                reactions.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
             }
         }
     }
-    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
@@ -214,60 +222,6 @@ function issues_view(item, hbody, hrow) {
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
     load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
     issues_script(item.comments_url + '?callback=issuecomments', 'issues-script-comment', issues_comments_page);
-}
-
-function issues_view_comment(item, comment, hbody) {
-    var hrow = hbody.makechild('tr', 'issues-h-comments-row', ''),
-        head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left'),
-        span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
-        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
-    span.innerHTML = ' comment <a href="' + item.html_url + '" target="_blank">#' + comment + '</a>';
-    span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
-    if(item.reactions.total_count > 0) {
-        for(var j = 0; j < issues_reactions.length; j++) {
-            var react = issues_reactions[j], num = item.reactions[react];
-            if(num > 0) {
-                span.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
-            }
-        }
-    }
-    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
-    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
-        info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
-        cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
-    cont.innerHTML = markdown(item.body);
-}
-
-function issues_build_comments() {
-    var loading = getelem('issues-t-load');
-    if(loading != null) loading.remove();
-    if(issue_num <= 0 || issues_current == null || issues_comments == null || issues_comments.length <= 0) return;
-    var hbody = getelem('issues-body');
-    for(var i = 0; i < issues_comments.length; i++) {
-        issues_view_comment(issues_comments[i], i+1, hbody);
-    }
-    if(issues_comments_page > 0) {
-        var more = getelem('issues-h-more');
-        if(more) {
-            var count = issues_comments_page*pagedata.issues.perpage;
-            if(issues_comments.length >= count) {
-                more.style.display = 'table-row';
-            }
-            else {
-                more.style.display = 'none';
-            }
-        }
-    }
-    var view = getelem('issues-morebody');
-    if(view) {
-        view.innerHTML = '';
-        var hrow = view.makechild('tr', 'issues-t-reply-row', ''),
-            head = hrow.makechild('td', 'issues-t-reply-info', 'issues-center'),
-            span = head.makechild('span', 'issues-t-reply-span', 'issues-middle');
-        span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" target="_blank">View on GitHub</a>'
-        span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" target="_blank">Reply on GitHub</a>';
-    }
-    jQuery("time.timeago").timeago();
 }
 
 function issues_build() {
@@ -327,6 +281,60 @@ function issues_build() {
         }
         var view = getelem('issues-morebody');
         if(view) view.innerHTML = '';
+    }
+    jQuery("time.timeago").timeago();
+}
+
+function issues_view_comment(item, comment, hbody) {
+    var hrow = hbody.makechild('tr', 'issues-h-comments-row', ''),
+        head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left'),
+        span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
+        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
+    span.innerHTML = ' comment <a href="' + item.html_url + '" target="_blank">#' + comment + '</a>';
+    span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
+    if(item.reactions.total_count > 0) {
+        for(var j = 0; j < issues_reactions.length; j++) {
+            var react = issues_reactions[j], num = item.reactions[react];
+            if(num > 0) {
+                span.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
+            }
+        }
+    }
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
+    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
+        info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
+        cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
+    cont.innerHTML = markdown(item.body);
+}
+
+function issues_build_comments() {
+    var loading = getelem('issues-t-load');
+    if(loading != null) loading.remove();
+    if(issue_num <= 0 || issues_current == null || issues_comments == null || issues_comments.length <= 0) return;
+    var hbody = getelem('issues-body');
+    for(var i = 0; i < issues_comments.length; i++) {
+        issues_view_comment(issues_comments[i], i+1, hbody);
+    }
+    if(issues_comments_page > 0) {
+        var more = getelem('issues-h-more');
+        if(more) {
+            var count = issues_comments_page*pagedata.issues.perpage;
+            if(issues_comments.length >= count) {
+                more.style.display = 'table-row';
+            }
+            else {
+                more.style.display = 'none';
+            }
+        }
+    }
+    var view = getelem('issues-morebody');
+    if(view) {
+        view.innerHTML = '';
+        var hrow = view.makechild('tr', 'issues-t-reply-row', ''),
+            head = hrow.makechild('td', 'issues-t-reply-info', 'issues-center'),
+            span = head.makechild('span', 'issues-t-reply-span', 'issues-middle');
+        span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" target="_blank">View on GitHub</a>'
+        span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" target="_blank">Reply on GitHub</a>';
     }
     jQuery("time.timeago").timeago();
 }
