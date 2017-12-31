@@ -119,6 +119,7 @@ var issues_data_page = 1;
 var issues_current = null;
 var issues_comments = [];
 var issues_comments_page = 1;
+
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
 var issues_reactmd = [ ":+1:", ":-1:", ":laughing:", ":raised_hands:", ":confused:", ":heart:" ];
 
@@ -366,9 +367,21 @@ function issues_more() {
     }
 }
 
+function issues_remain(remain, rate) {
+    if(remain != null && rate != null) {
+        var more = document.getElementById('issues-rate');
+        if(more) {
+            more.innerHTML = '| Rate limit: ' + remain + '/' + rate;
+            more.title = user_login != null ? 'You have the full authenticated rate.' : 'Login with GitHub to increase your rate limit.';
+        }
+    }
+}
+
 function issuecomments(response) {
     console.log('issue comments meta: ', response.meta);
     console.log('issue comments data: ', response.data);
+    issues_remain(response.meta['X-RateLimit-Remaining'], response.meta['X-RateLimit-Limit']);
+
     issues_comments.extend(response.data);
     issues_build_comments();
 }
@@ -376,6 +389,7 @@ function issuecomments(response) {
 function issues(response) {
     console.log('issues meta: ', response.meta);
     console.log('issues data: ', response.data);
+    issues_remain(response.meta['X-RateLimit-Remaining'], response.meta['X-RateLimit-Limit']);
     issues_data.extend(response.data);
     issues_build();
 }
