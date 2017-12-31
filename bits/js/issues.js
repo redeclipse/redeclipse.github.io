@@ -61,12 +61,19 @@ var md_convert = new showdown.Converter({
     tables: true,
     ghCodeBlocks: true,
     tasklists: true,
+    smoothLivePreview: true,
     simpleLineBreaks: true,
     ghMentions: true,
     openLinksInNewWindow: true,
     emoji: true
 });
 md_convert.setFlavor('github');
+
+function markdown(data) {
+    var str = md_convert.makeHtml(data);
+    console.log(str);
+    return str.replace(/<br>|<br\/>|<br \/>/gi, '</p><p>');
+}
 
 // OAuth
 var user_data = null;
@@ -185,7 +192,7 @@ function issues_view(item, hbody, hrow) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
             if(num > 0) {
-                span.innerHTML += ' ' + md_convert.makeHtml(issues_reactmd[j]) + ' ' + num;
+                span.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
             }
         }
     }
@@ -193,7 +200,7 @@ function issues_view(item, hbody, hrow) {
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
-    cont.innerHTML = md_convert.makeHtml(item.body);
+    cont.innerHTML = markdown(item.body);
     var vrow = hbody.makechild('tr', 'issues-t-load', ''),
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
     load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
@@ -211,7 +218,7 @@ function issues_view_comment(item, comment, hbody) {
         for(var j = 0; j < issues_reactions.length; j++) {
             var react = issues_reactions[j], num = item.reactions[react];
             if(num > 0) {
-                span.innerHTML += ' ' + md_convert.makeHtml(issues_reactmd[j]) + ' ' + num;
+                span.innerHTML += ' ' + markdown(issues_reactmd[j]) + ' ' + num;
             }
         }
     }
@@ -219,7 +226,7 @@ function issues_view_comment(item, comment, hbody) {
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
-    cont.innerHTML = md_convert.makeHtml(item.body);
+    cont.innerHTML = markdown(item.body);
 }
 
 function issues_build_comments() {
