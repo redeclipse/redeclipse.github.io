@@ -42,14 +42,22 @@
                                 <a id="issues-index" href="#">Index</a>
                                 | <a id="issues-reload" onclick="location.reload();">Refresh</a>
                                 | <a id="issues-create" href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
-                                <span id="issues-rate"></span>
+                                | <span id="issues-rate"><span class="fas fa-cog fa-spin"></span> Loading...</span>
                             </th>
                             <th id="issues-l-login" class="issues-right">
                                 <a id="issues-login" href="#" onclick="user_oauth();">Login with GitHub</a>
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="issues-information"></tbody>
+                    <tbody id="issues-information">
+                        <tr id="issues-i-row">
+                            <td id="issues-i-data" class="issues-left">
+                                <b>NOTE:</b> This area is still under construction. If you have any issues, please notify Quin.
+                            </td>
+                            <td id="issues-i-right" class="issues-right"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot id="issues-extra"></tbody>
                 </table>
                 <table id="issues-table">
                     <thead id="issues-header">
@@ -58,6 +66,7 @@
                         </tr>
                     </thead>
                     <tbody id="issues-body"></tbody>
+                    <tfoot id="issues-post"></tbody>
                 </table>
                 <table id="issues-more">
                     <thead id="issues-morehead">
@@ -66,6 +75,7 @@
                         </tr>
                     </thead>
                     <tbody id="issues-morebody"></tbody>
+                    <tfoot id="issues-morextra"></tbody>
                 </table>
             </div>
             {% include footer.html %}

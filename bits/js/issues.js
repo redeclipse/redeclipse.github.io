@@ -378,7 +378,7 @@ function issues_remain(remain, rate) {
     if(remain != null && rate != null) {
         var more = document.getElementById('issues-rate');
         if(more) {
-            more.innerHTML = '| Rate limit: ' + remain + '/' + rate;
+            more.innerHTML = 'Rate limit: ' + remain + '/' + rate;
             more.title = user_login != null ? 'You have the full authenticated rate.' : 'Login with GitHub to increase your rate limit.';
         }
     }
