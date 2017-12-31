@@ -14,6 +14,7 @@
                 permalink: '{{ page.permalink }}',
                 issues: {
                     repository: '{{ page.issues.repository | default: "base" }}',
+                    noun: '{{ page.issues.noun | default: "Issue" }}',
                     sort: {
                         by: '{{ page.issues.sort.by | default: "updated" }}',
                         direction: '{{ page.issues.sort.direction | default: "desc" }}',
@@ -47,7 +48,7 @@
                             <th id="issues-l-data">
                                 <a id="issues-index" href="#">Index</a>
                                 | <a id="issues-reload" onclick="location.reload();">Refresh</a>
-                                | <a id="issues-create" href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New Topic</a>
+                                | <a id="issues-create" href="https://github.com/red-eclipse/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
                             </th>
                             <th id="issues-l-login" class="issues-right">
                                 <a id="issues-login" href="#" onclick="user_oauth();">Login with GitHub</a>
