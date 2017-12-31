@@ -1,6 +1,12 @@
 # Site settings
 title: Red Eclipse
 description: A free arena shooter featuring parkour
+repository: red-eclipse/red-eclipse.github.io
+organisation: red-eclipse
+github: [metadata]
+locs:
+  api: "https://api.github.com"
+  ref: "https://github.com"
 
 # Where things are
 source: "."

@@ -33,7 +33,10 @@
     float: right;
     clear: both;
 }
-#issues-h-comments-avatar img {
+#issues-h-comments-avatar, #issues-login {
+    vertical-align: middle;
+}
+#issues-h-comments-avatar img, #issues-login img {
     width: 24px;
     height: 24px;
     background-color: rgb(255, 255, 255);

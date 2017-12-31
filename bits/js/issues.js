@@ -31,26 +31,35 @@ Array.prototype.extend = function (data) {
         this.push(v)
     }, this);    
 }
+
 function makecookie(name, value, exdays) {
     var exdate = new Date();
     exdate.setDate(exdate.getDate() + exdays);
     document.cookie = name + '=' + escape(value) + '; expires=' + exdate.toUTCString() + '; path=/';
 }
 
-function getcookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
+function getcookie(name) {
+    var cname = name + '=';
+    var decoded = decodeURIComponent(document.cookie);
+    var ca = decoded.split(';');
     for(var i = 0; i <ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+        if (c.indexOf(cname) == 0) {
+            return c.substring(cname.length, c.length);
         }
     }
-    return "";
+    return '';
+}
+
+function getelem(name) {
+    return document.getElementById(name);
+}
+
+function mkelem(name) {
+    return document.createElement(name);
 }
 
 // Showdown
@@ -83,37 +92,36 @@ var user_nologin = false;
 OAuth.initialize('TnbOMXVV86ugQ7ol49rg5giIz8E');
 
 function user_oauth(setup, src) {
-    makecookie('login', '2', 1);
-    user_cookie = '2';
     user_nologin = true;
-    OAuth.redirect('github', { cache: true }, pagedata.site + pagedata.permalink + "#");
+    OAuth.redirect('github', { cache: true }, sitedata.url + pagedata.permalink + "#");
 }
 
 function user_callback(err, result) {
     user_nologin = true;
     if(err) {
         console.log('login error: ', result);
+        issues_script(issues_location, 'issues-script', issues_data_page);
     } else {
         console.log('login result: ', result);
-        makecookie('login', '1', 7300);
-        user_cookie = '1';
         user_data = result;
         user_data.get('/user')
         .done(function (response) {
             console.log('login user: ', response);
             user_login = response;
-            var top = document.getElementById('issues-login');
+            var top = getelem('issues-login');
             if(top) {
-                top.innerHTML = '@' + user_login.login;
+                top.innerHTML = user_login.login + ' <img src="' + user_login.avatar_url + '" />';
                 top.href = user_login.html_url;
                 top.title = 'Logged in as: ' + user_login.name;
                 top.onclick = '';
             }
             makecookie('login', '1', 7300);
-            issues_script(pagedata.script, 'issues-script', issues_data_page);
+            user_cookie = '1';
+            issues_script(issues_location, 'issues-script', issues_data_page);
         })
         .fail(function (err) {
             console.log('login error: ', err);
+            issues_script(issues_location, 'issues-script', issues_data_page);
         });
     }
 }
@@ -126,6 +134,7 @@ var issues_data_page = 1;
 var issues_current = null;
 var issues_comments = [];
 var issues_comments_page = 1;
+var issues_location = sitedata.locs.api + '/repos/' + sitedata.organisation + '/' + pagedata.issues.repository + '/issues?state=' + pagedata.issues.sort.state + '&sort=' + pagedata.issues.sort.by + '&direction=' + pagedata.issues.sort.direction + '&callback=issues';
 
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
 var issues_reactmd = [ ":+1:", ":-1:", ":laughing:", ":raised_hands:", ":confused:", ":heart:" ];
@@ -161,11 +170,11 @@ function issues_date(data) {
 }
 
 function issues_create(item, iter) {
-    var row = document.createElement('tr');
+    var row = mkelem('tr');
     row.id = 'issues-t-row';
     row.className = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
     row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + '</a></td>';
-    var title = document.createElement('td');
+    var title = mkelem('td');
     title.id = 'issues-t-title';
     title.className = 'issues-left';
     title.innerHTML += '<a id="issues-t-url" href="#' + item.number + '">' + item.title + '</a>';
@@ -196,7 +205,7 @@ function issues_view(item, hbody, hrow) {
             }
         }
     }
-    avat.innerHTML += '<a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a>';
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
@@ -212,7 +221,7 @@ function issues_view_comment(item, comment, hbody) {
         head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left'),
         span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
         avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
-    span.innerHTML = ' <a href="' + item.html_url + '" target="_blank">comment #' + comment + '</a>';
+    span.innerHTML = ' comment <a href="' + item.html_url + '" target="_blank">#' + comment + '</a>';
     span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
     if(item.reactions.total_count > 0) {
         for(var j = 0; j < issues_reactions.length; j++) {
@@ -222,7 +231,7 @@ function issues_view_comment(item, comment, hbody) {
             }
         }
     }
-    avat.innerHTML += '<a href="' + item.user.html_url + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" alt="' + item.user.login + '" /></a>';
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
     var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
@@ -230,15 +239,15 @@ function issues_view_comment(item, comment, hbody) {
 }
 
 function issues_build_comments() {
-    var loading = document.getElementById('issues-t-load');
+    var loading = getelem('issues-t-load');
     if(loading != null) loading.remove();
     if(issue_num <= 0 || issues_current == null || issues_comments == null || issues_comments.length <= 0) return;
-    var hbody = document.getElementById('issues-body');
+    var hbody = getelem('issues-body');
     for(var i = 0; i < issues_comments.length; i++) {
         issues_view_comment(issues_comments[i], i+1, hbody);
     }
     if(issues_comments_page > 0) {
-        var more = document.getElementById('issues-h-more');
+        var more = getelem('issues-h-more');
         if(more) {
             var count = issues_comments_page*pagedata.issues.perpage;
             if(issues_comments.length >= count) {
@@ -249,7 +258,7 @@ function issues_build_comments() {
             }
         }
     }
-    var view = document.getElementById('issues-morebody');
+    var view = getelem('issues-morebody');
     if(view) {
         view.innerHTML = '';
         var hrow = view.makechild('tr', 'issues-t-reply-row', ''),
@@ -262,18 +271,18 @@ function issues_build_comments() {
 }
 
 function issues_build() {
-    var loading = document.getElementById('issues-h-load');
+    var loading = getelem('issues-h-load');
     if(loading != null) loading.remove();
     if(issues_data == null || issues_data.length <= 0) return;
-    var table = document.getElementById('issues-table'),
-        head = document.getElementById('issues-header'),
-        hbody = document.getElementById('issues-body'),
-        hrow = document.getElementById('issues-h-row');
+    var table = getelem('issues-table'),
+        head = getelem('issues-header'),
+        hbody = getelem('issues-body'),
+        hrow = getelem('issues-h-row');
     if(table == null) {
-        table = document.getElementById('issues-view');
+        table = getelem('issues-view');
     }
     if(hrow == null) {
-        hrow = document.createElement('tr');
+        hrow = mkelem('tr');
         hrow.id = 'issues-h-row';
         head.appendChild(hrow);
     }
@@ -305,7 +314,7 @@ function issues_build() {
             hbody.appendChild(row);
         }
         if(issues_data_page > 0) {
-            var more = document.getElementById('issues-h-more');
+            var more = getelem('issues-h-more');
             if(more) {
                 var count = issues_data_page*pagedata.issues.perpage;
                 if(issues_data.length >= count) {
@@ -316,7 +325,7 @@ function issues_build() {
                 }
             }
         }
-        var view = document.getElementById('issues-morebody');
+        var view = getelem('issues-morebody');
         if(view) view.innerHTML = '';
     }
     jQuery("time.timeago").timeago();
@@ -339,9 +348,9 @@ function issues_script(src, idname, pagenum)
             "*": "application/vnd.github.squirrel-girl-preview+json; charset=utf-8"
         },
         success: function(data) {
-            var script = document.getElementById(idname);
+            var script = getelem(idname);
             if(script != null) script.remove();
-            script = document.createElement('script');
+            script = mkelem('script');
             script.id = idname;
             script.innerHTML = data;
             document.getElementsByTagName('head')[0].appendChild(script);
@@ -369,14 +378,14 @@ function issues_more() {
         var count = issues_data_page*pagedata.issues.perpage;
         if(issues_data.length >= count) {
             issues_data_page++;
-            issues_script(pagedata.script, 'issues-script', issues_data_page);
+            issues_script(issues_location, 'issues-script', issues_data_page);
         }
     }
 }
 
 function issues_remain(remain, rate) {
     if(remain != null && rate != null) {
-        var more = document.getElementById('issues-rate');
+        var more = getelem('issues-rate');
         if(more) {
             more.innerHTML = 'Rate limit: ' + remain + '/' + rate;
             more.title = user_login != null ? 'You have the full authenticated rate.' : 'Login with GitHub to increase your rate limit.';
@@ -409,7 +418,7 @@ $(document).ready(function ($) {
             user_oauth(true);
         }
         else {
-            issues_script(pagedata.script, 'issues-script', issues_data_page);
+            issues_script(issues_location, 'issues-script', issues_data_page);
         }
     }
 });

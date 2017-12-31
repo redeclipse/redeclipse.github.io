@@ -30,6 +30,35 @@
 <script type="text/javascript" src="/bits/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/bits/js/ekko-lightbox.min.js"></script>
 <script type="text/javascript" src="/bits/js/site.js"></script>
+<script type="text/javascript">
+    var sitedata = {
+        baseurl: {{ site.baseurl | jsonify }},
+        categories: {{ site.categories | jsonify }},
+        description: {{ site.description | jsonify }},
+        host: {{ site.host | jsonify }},
+        locs: {{ site.locs | jsonify }},
+        permalink: {{ site.permalink | jsonify }},
+        port: {{ site.port | jsonify }},
+        related_posts: {{ site.related_posts | jsonify }},
+        organisation: {{ site.organisation | jsonify }},
+        repository: {{ site.repository | jsonify }},
+        tags: {{ site.tags | jsonify }},
+        time: {{ site.time | jsonify }},
+        title: {{ site.title | jsonify }},
+        url: {{ site.url | jsonify }}
+    };
+    var pagedata = {
+        dir: {{ page.dir | jsonify }},
+        {% if page.layout == 'issues' %}issues: {{ page.issues | jsonify }},{% endif %}
+        layout: {{ page.layout | jsonify }},
+        name: {{ page.name | jsonify }},
+        path: {{ page.path | jsonify }},
+        permalink: {{ page.permalink | jsonify }},
+        redirect_from: {{ page.redirect_from | jsonify }},
+        title: {{ page.title | jsonify }},
+        url: {{ page.url | jsonify }}
+    };
+</script>
 <link rel="stylesheet" type="text/css" href="/bits/css/normalize.css" />
 <link rel="stylesheet" type="text/css" href="/bits/css/rouge-base16-dark.css" />
 <link rel="stylesheet" type="text/css" href="/bits/css/bootstrap.min.css" />
