@@ -22,16 +22,15 @@ h2 {
 h2 b {
     font-weight: 900;
     display: block;
-    display: block;
     font-size: 30px;
     letter-spacing: 0;
 }
 h3 {
-    color: rgb(200, 190, 190);
-    font-family: Play, sans-serif;
-    font-weight: 900;
+    color: rgb(255, 200, 200);
+    font-weight: 700;
     font-size: 16px;
     line-height: 0.9em;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
     margin: 10px
 }
 h4 {
@@ -78,13 +77,11 @@ h4 {
     border-color: #ccc;
     color: #333;
     margin-right: 5px;
-    font-family: Play, sans-serif;
 }
 .version {
     color: rgb(255, 224, 224);
     font-size: 10px;
     font-weight: 400;
-    font-family: Play, sans-serif;
     padding: 0;
     margin: 0;
 }

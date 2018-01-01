@@ -173,11 +173,11 @@ function issues_create(item, iter) {
     var row = mkelem('tr');
     row.id = 'issues-t-row';
     row.className = 'issues-' + (iter%2 ? 'bg1' : 'bg2');
-    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + '</a></td>';
+    row.innerHTML += '<td id="issues-t-number" class="issues-center"><a id="issues-t-numurl" href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + '</a></td>';
     var title = mkelem('td');
     title.id = 'issues-t-title';
     title.className = 'issues-left';
-    title.innerHTML += '<a id="issues-t-url" href="#' + item.number + '">' + item.title + '</a>';
+    title.innerHTML += '<a id="issues-t-url" class="issues-left" href="#' + item.number + '">' + item.title + '</a>';
     for(var j = 0; j < item.labels.length; j++) {
         var label = item.labels[j];
         title.innerHTML += ' <span id="issues-t-label" class="issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
@@ -193,18 +193,18 @@ function issues_create(item, iter) {
 
 function issues_view(item, hbody, hrow) {
     var head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left'),
-        span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
-        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
-    span.innerHTML = ' <a href="' + item.html_url + '#show_issue" target="_blank">#' + item.number + ': ' + item.title + '</a>';
+        span = head.makechild('span', 'issues-h-comments-span', 'issues-left'),
+        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right');
+    span.innerHTML = ' <a href="' + item.html_url + '#show_issue" class="issues-left" target="_blank">#' + item.number + ': ' + item.title + '</a>';
     span.innerHTML += ' created <time class="timeago" datetime="' + item.created_at + '">' + issues_date(item.created_at) + '</time>';
-    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" class="issues-left" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" class="issues-left" /></a>';
     var xrow = hbody.makechild('tr', 'issues-h-comments-xtra', ''),
         xtra = xrow.makechild('th', 'issues-h-comments-xtra-row', 'issues-left'),
-        labels = xtra.makechild('span', 'issues-h-comments-xtra-labels', 'issues-left issues-middle'),
-        reactions = xtra.makechild('span', 'issues-h-comments-xtra-reactions', 'issues-right issues-middle');
+        labels = xtra.makechild('span', 'issues-h-comments-xtra-labels', 'issues-left'),
+        reactions = xtra.makechild('span', 'issues-h-comments-xtra-reactions', 'issues-right');
     for(var j = 0; j < item.labels.length; j++) {
         var label = item.labels[j];
-        labels.innerHTML += ' <span id="issues-t-label" class="issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
+        labels.innerHTML += ' <span id="issues-t-label" class="issues-top issues-label" style="border-color: #' + label.color + ';">' + label.name + '</span>';
     }
     if(item.reactions.total_count > 0) {
         for(var j = 0; j < issues_reactions.length; j++) {
@@ -214,11 +214,11 @@ function issues_view(item, hbody, hrow) {
             }
         }
     }
-    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
+    var irow = hbody.makechild('tr', 'issues-t-comments-row', 'issues-left'),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
     cont.innerHTML = markdown(item.body);
-    var vrow = hbody.makechild('tr', 'issues-t-load', ''),
+    var vrow = hbody.makechild('tr', 'issues-t-load', 'issues-left'),
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
     load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
     issues_script(item.comments_url + '?callback=issuecomments', 'issues-script-comment', issues_comments_page);
@@ -238,6 +238,7 @@ function issues_build() {
     if(hrow == null) {
         hrow = mkelem('tr');
         hrow.id = 'issues-h-row';
+        hrow.class = 'issues-left';
         head.appendChild(hrow);
     }
     if(issue_num > 0) {
@@ -286,11 +287,11 @@ function issues_build() {
 }
 
 function issues_view_comment(item, comment, hbody) {
-    var hrow = hbody.makechild('tr', 'issues-h-comments-row', ''),
+    var hrow = hbody.makechild('tr', 'issues-h-comments-row', 'issues-left'),
         head = hrow.makechild('th', 'issues-h-comments-info', 'issues-left'),
-        span = head.makechild('span', 'issues-h-comments-span', 'issues-left issues-middle'),
-        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right issues-middle');
-    span.innerHTML = ' comment <a href="' + item.html_url + '" target="_blank">#' + comment + '</a>';
+        span = head.makechild('span', 'issues-h-comments-span', 'issues-left'),
+        avat = head.makechild('span', 'issues-h-comments-avatar', 'issues-right');
+    span.innerHTML = ' comment <a href="' + item.html_url + '" class="issues-left" target="_blank">#' + comment + '</a>';
     span.innerHTML += ' updated <time class="timeago" datetime="' + item.updated_at + '">' + issues_date(item.updated_at) + '</time>';
     if(item.reactions.total_count > 0) {
         for(var j = 0; j < issues_reactions.length; j++) {
@@ -300,8 +301,8 @@ function issues_view_comment(item, comment, hbody) {
             }
         }
     }
-    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" /></a>';
-    var irow = hbody.makechild('tr', 'issues-t-comments-row', ''),
+    avat.innerHTML += '<a href="' + item.user.html_url + '" title="' + item.user.login + '" class="issues-left" target="_blank">' + item.user.login + ' <img src="' + item.user.avatar_url + '" class="issues-left" /></a>';
+    var irow = hbody.makechild('tr', 'issues-t-comments-row', 'issues-left'),
         info = irow.makechild('td', 'issues-t-comments-info', 'issues-left'),
         cont = info.makechild('span', 'issues-t-comments-span', 'issues-left');
     cont.innerHTML = markdown(item.body);
@@ -330,11 +331,11 @@ function issues_build_comments() {
     var view = getelem('issues-morebody');
     if(view) {
         view.innerHTML = '';
-        var hrow = view.makechild('tr', 'issues-t-reply-row', ''),
+        var hrow = view.makechild('tr', 'issues-t-reply-row', 'issues-left'),
             head = hrow.makechild('td', 'issues-t-reply-info', 'issues-center'),
-            span = head.makechild('span', 'issues-t-reply-span', 'issues-middle');
-        span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" target="_blank">View on GitHub</a>'
-        span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" target="_blank">Reply on GitHub</a>';
+            span = head.makechild('span', 'issues-t-reply-span', 'issues-left');
+        span.innerHTML = '<a href="' + issues_current.html_url + '#show_issue" class="issues-left" target="_blank">View on GitHub</a>'
+        span.innerHTML += ' | <a href="' + issues_current.html_url + '#partial-timeline-marker" class="issues-left" target="_blank">Reply on GitHub</a>';
     }
     jQuery("time.timeago").timeago();
 }
@@ -396,7 +397,7 @@ function issues_remain(remain, rate) {
         var more = getelem('issues-rate');
         if(more) {
             more.innerHTML = 'Rate limit: ' + remain + '/' + rate;
-            more.title = user_login != null ? 'You have the full authenticated rate.' : 'Login with GitHub to increase your rate limit.';
+            more.title = user_login != null ? 'You have the full authenticated rate limit.' : 'Login with GitHub to increase your rate limit.';
         }
     }
 }

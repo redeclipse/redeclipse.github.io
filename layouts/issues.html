@@ -15,47 +15,47 @@
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
                 {{ content }}
-                <table id="issues-front">
-                    <thead id="issues-link">
-                        <tr id="issues-l-row">
+                <table id="issues-front" class="issues-left">
+                    <thead id="issues-link" class="issues-left">
+                        <tr id="issues-l-row" class="issues-left">
                             <th id="issues-l-data" class="issues-left">
-                                <a id="issues-index" href="#">Index</a>
-                                | <a id="issues-reload" onclick="location.reload();">Refresh</a>
-                                | <a id="issues-create" href="{{ site.locs.ref }}/{{ site.organisation }}/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
+                                <a id="issues-index" class="issues-left" href="#">Index</a>
+                                | <a id="issues-reload" class="issues-left" onclick="location.reload();">Refresh</a>
+                                | <a id="issues-create" class="issues-left" href="{{ site.locs.ref }}/{{ site.organisation }}/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
                                 | <span id="issues-rate"><span class="fas fa-cog fa-spin"></span> Loading...</span>
                             </th>
                             <th id="issues-l-login" class="issues-right">
-                                <a id="issues-login" href="#" onclick="user_oauth();">Login with GitHub</a>
+                                <a id="issues-login" class="issues-left" href="#" onclick="user_oauth();">Login with GitHub</a>
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="issues-information">
-                        <tr id="issues-i-row">
+                    <tbody id="issues-information" class="issues-left">
+                        <tr id="issues-i-row" class="issues-left">
                             <td id="issues-i-data" class="issues-left">
-                                <b>NOTE:</b> This area is still under construction. If you have any problems, please <a href="{{ site.locs.ref }}/{{ site.repository }}/issues/new">notify us</a>.
+                                <b>NOTE:</b> This area is still under construction. If you have any problems, please <a href="{{ site.locs.ref }}/{{ site.repository }}/issues/new" target="_blank">notify us</a>.
                             </td>
                             <td id="issues-i-right" class="issues-right"></td>
                         </tr>
                     </tbody>
-                    <tfoot id="issues-extra"></tbody>
+                    <tfoot id="issues-extra" class="issues-left"></tbody>
                 </table>
-                <table id="issues-table">
-                    <thead id="issues-header">
-                        <tr id="issues-h-load">
+                <table id="issues-table" class="issues-left">
+                    <thead id="issues-header" class="issues-left">
+                        <tr id="issues-h-load" class="issues-left">
                             <th id="issues-h-loading" class="issues-left"><span class="fas fa-cog fa-spin"></span> Loading...</th>
                         </tr>
                     </thead>
-                    <tbody id="issues-body"></tbody>
-                    <tfoot id="issues-post"></tbody>
+                    <tbody id="issues-body" class="issues-left"></tbody>
+                    <tfoot id="issues-post" class="issues-left"></tbody>
                 </table>
-                <table id="issues-more">
-                    <thead id="issues-morehead">
-                        <tr id="issues-h-more" style="display: none">
-                            <th id="issues-h-loading" class="issues-center"><a id="issues-getmore" onclick="issues_more();">Load More</a></th>
+                <table id="issues-more" class="issues-left">
+                    <thead id="issues-morehead" class="issues-left">
+                        <tr id="issues-h-more" class="issues-left" style="display: none">
+                            <th id="issues-h-loading" class="issues-center"><a id="issues-getmore" class="issues-middle" onclick="issues_more();">Load More</a></th>
                         </tr>
                     </thead>
-                    <tbody id="issues-morebody"></tbody>
-                    <tfoot id="issues-morextra"></tbody>
+                    <tbody id="issues-morebody" class="issues-left"></tbody>
+                    <tfoot id="issues-morextra" class="issues-left"></tbody>
                 </table>
             </div>
             {% include footer.html %}
