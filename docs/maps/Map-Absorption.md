@@ -10,7 +10,7 @@
 | **Release Date**                                          | ????-??-??                                                     |
 | **Difficulty**                                            | Easy to moderate                                               |
 | **Theme**                                                 | Futuristic                                                     |
-| **Enviromental Features**                                 |                                                                |
+| **Environmental Features**                                |                                                                |
 | **Day/Night**                                             | ✔/✖                                                           |
 | **Top Time**                                              | [00:42.273s](http://play.redeclipse.net:28700/maps/absorption) |
 | **Top Time (Endurance)**                                  | [??:??.???s](http://play.redeclipse.net:28700/maps/absorption) |

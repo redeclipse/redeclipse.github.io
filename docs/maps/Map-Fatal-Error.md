@@ -2,22 +2,22 @@
 
 ## Information
 
-|                           |                     |
-|---------------------------|---------------------|
-| **Name**                  | Fatal Error         |
-| **Author**                | blarg               |
-| **Filename**              | error               |
-| **Release Date**          | 2011-01-11          |
-| **Size**                  | Medium/Large (6-10) |
-| **Complexity**            | Advanced            |
-| **Theme**                 | Futuristic          |
-| **Enviromental Features** | Lava                |
-| **Day/Night**             | ✔/✔                 |
-| **Lights**                | 44                  |
-| **Entities**              | 125                 |
-| **Vertices**              | ~42 000             |
-| **Triangles**             | ~30 000             |
-| **Recommend Modes**       | Deathmatch, Duel    |
+|                            |                     |
+|----------------------------|---------------------|
+| **Name**                   | Fatal Error         |
+| **Author**                 | blarg               |
+| **Filename**               | error               |
+| **Release Date**           | 2011-01-11          |
+| **Size**                   | Medium/Large (6-10) |
+| **Complexity**             | Advanced            |
+| **Theme**                  | Futuristic          |
+| **Environmental Features** | Lava                |
+| **Day/Night**              | ✔/✔                 |
+| **Lights**                 | 44                  |
+| **Entities**               | 125                 |
+| **Vertices**               | ~42 000             |
+| **Triangles**              | ~30 000             |
+| **Recommend Modes**        | Deathmatch, Duel    |
 
 ## Review
 

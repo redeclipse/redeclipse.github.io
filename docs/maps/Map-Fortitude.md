@@ -2,23 +2,23 @@
 
 ## Information
 
-|                           |                          |
-|---------------------------|--------------------------|
-| **Name**                  | Fortitude                |
-| **Author**                | James 'Max Payne' Tonjes |
-| **Filename**              | fortitude                |
-| **Release Date**          | ????-??-??               |
-| **Removed in**            | 1.5.5                    |
-| **Size**                  | Small/Medium             |
-| **Complexity**            | Medium                   |
-| **Theme**                 | Futuristic               |
-| **Enviromental Features** |                          |
-| **Day/Night**             | ✔/✖                      |
-| **Lights**                | 75                       |
-| **Entities**              | 420                      |
-| **Vertices**              | ~106 000                 |
-| **Triangles**             | ~82 000                  |
-| **Recommend Modes**       | Deathmatch               |
+|                            |                          |
+|----------------------------|--------------------------|
+| **Name**                   | Fortitude                |
+| **Author**                 | James 'Max Payne' Tonjes |
+| **Filename**               | fortitude                |
+| **Release Date**           | ????-??-??               |
+| **Removed in**             | 1.5.5                    |
+| **Size**                   | Small/Medium             |
+| **Complexity**             | Medium                   |
+| **Theme**                  | Futuristic               |
+| **Environmental Features** |                          |
+| **Day/Night**              | ✔/✖                      |
+| **Lights**                 | 75                       |
+| **Entities**               | 420                      |
+| **Vertices**               | ~106 000                 |
+| **Triangles**              | ~82 000                  |
+| **Recommend Modes**        | Deathmatch               |
 
 ## Review
 
