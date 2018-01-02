@@ -476,8 +476,8 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
 <table>
     <tr>
         <td>
-            <div><img src="images/maps/linear.png" width="128px" height="128px" /></div>
-            <div>Linear</div>
+            <div><a href="maps/Map-Linear"><img src="images/maps/linear.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Map-Linear">Linear</a></div>
         </td>
         <td>
             <div><a href="maps/Map-Fortitude"><img src="images/maps/fortitude.png" width="128px" height="128px" /></a></div>

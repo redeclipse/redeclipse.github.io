@@ -12,7 +12,7 @@
 | **Size**                   | Small/Medium             |
 | **Complexity**             | Medium                   |
 | **Theme**                  | Futuristic               |
-| **Environmental Features** |                          |
+| **Environmental Features** | N/A                      |
 | **Day/Night**              | ✔/✖                      |
 | **Lights**                 | 75                       |
 | **Entities**               | 420                      |
