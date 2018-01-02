@@ -55,9 +55,6 @@
     float: right;
     clear: both;
 }
-#issues-h-comments-avatar, #issues-login, #issues-h-comments-xtra-labels, #issues-h-comments-xtra-reactions, #issues-h-comments-xtra-row {
-    vertical-align: middle;
-}
 #issues-h-comments-xtra-labels span {
     font-size: 14px;
 }
@@ -74,9 +71,6 @@
 }
 #issues-reload, #issues-getmore {
     cursor: pointer;
-}
-#issues-h-comments-span {
-    vertical-align: middle;
 }
 #issues-t-numurl, #issues-t-url {
     color: rgb(255, 255, 255);
