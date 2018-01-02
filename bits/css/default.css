@@ -125,7 +125,7 @@ th, td {
 }
 dt, th {
     color: rgb(255, 255, 255);
-    font-weight: 700;
+    font-weight: 600;
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
 }
 dt > svg, th > svg {
@@ -172,13 +172,13 @@ header ul a {
 }
 header ul a:hover, header ul a:focus {
     color: rgb(255, 128, 128);
-    font-weight: 700;
+    font-weight: 600;
 }
 header ul a:active {
     background-color: rgb(200, 200, 200);
 }
 strong {
-    font-weight: 700;
+    font-weight: 600;
 }
 header ul li + li + li {
     border-right: none;
