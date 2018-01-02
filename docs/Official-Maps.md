@@ -453,16 +453,16 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
 <table>
     <tr>
         <td>
-            <div><img src="images/maps/colony.png" width="128px" height="128px" /></div>
-            <div>Colony</div>
+            <div><a href="maps/Map-Canals"><img src="images/maps/canals.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Map-Canals">Canals</a></div>
         </td>
         <td>
-            <div><img src="images/maps/canals.png" width="128px" height="128px" /></div>
-            <div>Canals</div>
+            <div><a href="maps/Map-Colony"><img src="images/maps/colony.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Map-Colony">Colony</a></div>
         </td>
         <td>
-            <div><img src="images/maps/rooftop.png" width="128px" height="128px" /></div>
-            <div>Rooftop</div>
+            <div><a href="maps/Map-Rooftop"><img src="images/maps/rooftop.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Map-Rooftop">Rooftop</a></div>
         </td>
         <td>
             <div><img src="images/maps/train.png" width="128px" height="128px" /></div>

@@ -35,6 +35,6 @@ This map is no longer included with the game. (Removed in 1.5.5)
 | <img src="../images/weapons/plasma.png" width="32px"/> **Plasma**   |   4   |
 | <img src="../images/weapons/zapper.png" width="32px"/> **Zapper**   |   4   |
 | <img src="../images/weapons/rifle.png" width="32px"/> **Rifle**     |   4   |
-| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** |   12  |
-| <img src="../images/weapons/mine.png" width="32px"/> **Mine**       |   14  |
+| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** |  12   |
+| <img src="../images/weapons/mine.png" width="32px"/> **Mine**       |  14   |
 | <img src="../images/weapons/rocket.png" width="32px"/> **Rocket**   |   1   |
