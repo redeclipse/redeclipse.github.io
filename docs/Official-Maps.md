@@ -13,8 +13,8 @@ permalink: /docs/Official-Maps
 <table>
     <tr>
         <td>
-            <div><a href="maps/Map-Fatal-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Fatal-Error">Error</a></div>
+            <div><a href="maps/Fatal-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Fatal-Error">Error</a></div>
         </td>
     </tr>
 </table>
@@ -91,8 +91,8 @@ permalink: /docs/Official-Maps
     </tr>
     <tr>
         <td>
-            <div><a href="maps/Map-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Error">Error</a> </div>
+            <div><a href="maps/Fatal-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Fatal-Error">Error</a> </div>
         </td>
         <td>
             <div><img src="images/maps/ghost.png" width="128px" height="128px" /></div>
@@ -150,8 +150,8 @@ permalink: /docs/Official-Maps
 <table>
     <tr>
         <td>
-            <div><a href="maps/Map-Absorption"><img src="images/maps/absorption.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Absorption">Absorption</a></div>
+            <div><a href="maps/Absorption"><img src="images/maps/absorption.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Absorption">Absorption</a></div>
         </td>
         <td>
             <div><img src="images/maps/cyanide.png" width="128px" height="128px" /></div>
@@ -453,16 +453,16 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
 <table>
     <tr>
         <td>
-            <div><a href="maps/Map-Canals"><img src="images/maps/canals.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Canals">Canals</a></div>
+            <div><a href="maps/Canals"><img src="images/maps/canals.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Canals">Canals</a></div>
         </td>
         <td>
-            <div><a href="maps/Map-Colony"><img src="images/maps/colony.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Colony">Colony</a></div>
+            <div><a href="maps/Colony"><img src="images/maps/colony.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Colony">Colony</a></div>
         </td>
         <td>
-            <div><a href="maps/Map-Rooftop"><img src="images/maps/rooftop.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Rooftop">Rooftop</a></div>
+            <div><a href="maps/Rooftop"><img src="images/maps/rooftop.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Rooftop">Rooftop</a></div>
         </td>
         <td>
             <div><img src="images/maps/train.png" width="128px" height="128px" /></div>
@@ -476,12 +476,12 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
 <table>
     <tr>
         <td>
-            <div><a href="maps/Map-Linear"><img src="images/maps/linear.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Linear">Linear</a></div>
+            <div><a href="maps/Linear"><img src="images/maps/linear.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Linear">Linear</a></div>
         </td>
         <td>
-            <div><a href="maps/Map-Fortitude"><img src="images/maps/fortitude.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/Map-Fortitude">Fortitude</a></div>
+            <div><a href="maps/Fortitude"><img src="images/maps/fortitude.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Fortitude">Fortitude</a></div>
         </td>
     </tr>
 </table>
