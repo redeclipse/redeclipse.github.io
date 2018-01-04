@@ -485,3 +485,18 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
         </td>
     </tr>
 </table>
+
+### Removed in 1.5.3
+[//]: # (HTML is easier to maintain as markdown when applying changes)
+<table>
+    <tr>
+        <td>
+            <div><a href="maps/Condensation"><img src="images/maps/condensation.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Condensation">Condensation</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Convolution"><img src="images/maps/convolution.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Convolution">Convolution</a></div>
+        </td>
+    </tr>
+</table>
