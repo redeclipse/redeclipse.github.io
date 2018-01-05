@@ -1,3 +1,12 @@
+---
+title: Canals
+layout: docs
+origfile: maps/Canals.md
+origtitle: Canals
+permalink: /docs/maps/Canals
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/canals.png" width="256px" />
 
 ## Information

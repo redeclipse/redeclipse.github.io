@@ -1,3 +1,12 @@
+---
+title: Colony
+layout: docs
+origfile: maps/Colony.md
+origtitle: Colony
+permalink: /docs/maps/Colony
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/colony.png" width="256px" />
 
 ## Information

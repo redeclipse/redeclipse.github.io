@@ -1,3 +1,12 @@
+---
+title: Convolution
+layout: docs
+origfile: maps/Convolution.md
+origtitle: Convolution
+permalink: /docs/maps/Convolution
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/convolution.png" width="256px" />
 
 ## Information

@@ -1,3 +1,12 @@
+---
+title: Fatal Error
+layout: docs
+origfile: maps/Fatal-Error.md
+origtitle: Fatal-Error
+permalink: /docs/maps/Fatal-Error
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/error.png" width="256px" />
 
 ## Information

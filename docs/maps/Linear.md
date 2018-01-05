@@ -1,3 +1,12 @@
+---
+title: Linear
+layout: docs
+origfile: maps/Linear.md
+origtitle: Linear
+permalink: /docs/maps/Linear
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/linear.png" width="256px" />
 
 ## Information

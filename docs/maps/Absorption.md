@@ -1,3 +1,12 @@
+---
+title: Absorption
+layout: docs
+origfile: maps/Absorption.md
+origtitle: Absorption
+permalink: /docs/maps/Absorption
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/absorption.png" width="256px" />
 
 ## Information

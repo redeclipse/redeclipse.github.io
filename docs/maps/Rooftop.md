@@ -1,3 +1,12 @@
+---
+title: Rooftop
+layout: docs
+origfile: maps/Rooftop.md
+origtitle: Rooftop
+permalink: /docs/maps/Rooftop
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/rooftop.png" width="256px" />
 
 ## Information

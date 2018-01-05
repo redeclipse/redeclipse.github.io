@@ -1,3 +1,12 @@
+---
+title: Condensation
+layout: docs
+origfile: maps/Condensation.md
+origtitle: Condensation
+permalink: /docs/maps/Condensation
+---
+* TOC
+{:toc}
 <img style='border:5px solid #ffe0e0e0' src="../images/maps/condensation.png" width="256px" />
 
 ## Information
