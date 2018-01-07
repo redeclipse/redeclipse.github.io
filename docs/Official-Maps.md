@@ -500,3 +500,14 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
         </td>
     </tr>
 </table>
+
+### Removed in 1.5.3
+[//]: # (HTML is easier to maintain as markdown when applying changes)
+<table>
+    <tr>
+        <td>
+            <div><a href="maps/Warp"><img src="images/maps/warp.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Warp">Warp</a></div>
+        </td>
+    </tr>
+</table>
