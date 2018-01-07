@@ -501,7 +501,7 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
     </tr>
 </table>
 
-### Removed in 1.5.3
+### Removed in 1.5.0
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
