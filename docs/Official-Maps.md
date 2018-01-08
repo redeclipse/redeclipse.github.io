@@ -471,7 +471,7 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
     </tr>
 </table>
 
-### Removed in 1.5.5
+### Removed in 1.5.6
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -486,7 +486,7 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
     </tr>
 </table>
 
-### Removed in 1.5.3
+### Removed in 1.5.4
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -506,8 +506,30 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
 <table>
     <tr>
         <td>
+            <div><a href="maps/Amplification"><img src="images/maps/amplification.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Amplification">Amplification</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Forge"><img src="images/maps/forge.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Forge">Forge</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Foundation"><img src="images/maps/foundation.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Foundation">Foundation</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Fourplex"><img src="images/maps/fourplex.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Fourplex">Fourplex</a></div>
+        </td>
+        <td>
             <div><a href="maps/Hawk"><img src="images/maps/hawk.png" width="128px" height="128px" /></a></div>
             <div><a href="maps/Hawk">Hawk</a></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div><a href="maps/Starlibido"><img src="images/maps/starlibido.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Starlibido">Starlibido</a></div>
         </td>
         <td>
             <div><a href="maps/Warp"><img src="images/maps/warp.png" width="128px" height="128px" /></a></div>
