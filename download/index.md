@@ -16,6 +16,8 @@ Platform                                                             | Downloads
 <span class="fab fa-apple" aria-hidden="true"></span> **macOS**      | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
 <span class="fas fa-archive" aria-hidden="true"></span> **Combined** | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
 
+**[Installation Help](/docs/Install-Guide)**
+
 ### Release Notes
 
 {% include release.md %}
