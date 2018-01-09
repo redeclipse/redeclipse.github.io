@@ -16,7 +16,7 @@ If you get a permission denied error during install, right click the installer a
 
 ## GNU/Linux or BSD
 ### AppImage
-- [Download the stable AppImage](/appimage/stable/redeclipse-stable-x86_64.AppImage)
+- [Download the stable AppImage](/download/appimage)
 - After download, give the AppImage executable permissions through your file manager or using the terminal command `chmod +x redeclipse-*.AppImage`
 - You can then run Red Eclipse by double-clicking the AppImage or executing it from a terminal.
 
