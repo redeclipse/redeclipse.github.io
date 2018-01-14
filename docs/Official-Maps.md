@@ -537,3 +537,51 @@ Bonus content is available at [https://github.com/red-eclipse/bonus](https://git
         </td>
     </tr>
 </table>
+
+### Removed in 1.4.0
+[//]: # (HTML is easier to maintain as markdown when applying changes)
+<table>
+    <tr>
+        <td>
+            <div><a href="maps/Blink"><img src="images/maps/blink.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Blink">Blink</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Dawn"><img src="images/maps/dawn.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Dawn">Dawn</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Facility"><img src="images/maps/facility.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Facility">Facility</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Industrial"><img src="images/maps/industrial.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Industrial">Industrial</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Isolation"><img src="images/maps/isolation.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Isolation">Isolation</a></div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div><a href="maps/Lab"><img src="images/maps/lab.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Lab">Lab</a></div>
+        </td>
+        <td>
+            <div><a href="maps/Tranquility"><img src="images/maps/tranquility.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Tranquility">Tranquility</a></div>
+        </td>
+    </tr>
+</table>
+
+### Removed in 1.3.0
+[//]: # (HTML is easier to maintain as markdown when applying changes)
+<table>
+    <tr>
+        <td>
+            <div><a href="maps/Alpha-Campaign"><img src="images/maps/alphacampaign.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Alpha-Campaign">Alpha Campaign</a></div>
+        </td>
+    </tr>
+</table>
