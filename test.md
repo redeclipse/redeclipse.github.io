@@ -1,7 +1,7 @@
 ---
 title: Markdown Test Page
 layout: default
-permalink: /test
+permalink: /test/
 ---
 
 Text can be **bold**, _italic_, or ~~strikethrough~~.
