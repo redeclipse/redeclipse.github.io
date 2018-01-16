@@ -4,6 +4,9 @@ layout: docs
 origfile: Official-Maps.md
 origtitle: Official-Maps
 permalink: /docs/Official-Maps
+redirect_from:
+  - /docs/Official_Maps
+  - /docs/Official_Maps/
 ---
 * TOC
 {:toc}

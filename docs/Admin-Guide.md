@@ -4,6 +4,9 @@ layout: docs
 origfile: Admin-Guide.md
 origtitle: Admin-Guide
 permalink: /docs/Admin-Guide
+redirect_from:
+  - /docs/Admin_Guide
+  - /docs/Admin_Guide/
 ---
 * TOC
 {:toc}

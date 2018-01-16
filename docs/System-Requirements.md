@@ -4,6 +4,9 @@ layout: docs
 origfile: System-Requirements.md
 origtitle: System-Requirements
 permalink: /docs/System-Requirements
+redirect_from:
+  - /docs/System_Requirements
+  - /docs/System_Requirements/
 ---
 * TOC
 {:toc}

@@ -5,6 +5,7 @@ origfile: Home.md
 origtitle: Home
 permalink: /docs/Home
 redirect_from:
+  - /docs
   - /docs/
 ---
 * TOC

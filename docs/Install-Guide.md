@@ -4,6 +4,9 @@ layout: docs
 origfile: Install-Guide.md
 origtitle: Install-Guide
 permalink: /docs/Install-Guide
+redirect_from:
+  - /docs/Install_Guide
+  - /docs/Install_Guide/
 ---
 * TOC
 {:toc}

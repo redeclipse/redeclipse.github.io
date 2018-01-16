@@ -5,8 +5,10 @@ origfile: Information-for-v2.0.md
 origtitle: Information-for-v2.0
 permalink: /docs/Information-for-v2-0
 redirect_from:
+  - /docs/Information-for-v2.0
   - /docs/Information-for-v2.0/
-  - /docs/Information-for-v2.0.html
+  - /docs/Information_for_v2_0
+  - /docs/Information_for_v2_0/
 ---
 * TOC
 {:toc}

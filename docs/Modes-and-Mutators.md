@@ -4,6 +4,9 @@ layout: docs
 origfile: Modes-and-Mutators.md
 origtitle: Modes-and-Mutators
 permalink: /docs/Modes-and-Mutators
+redirect_from:
+  - /docs/Modes_and_Mutators
+  - /docs/Modes_and_Mutators/
 ---
 * TOC
 {:toc}
