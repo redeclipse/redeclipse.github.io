@@ -14,7 +14,6 @@
         <div class="container pagecontent">
             <div id="issues-container" class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
-                {{ content }}
                 <table id="issues-front" class="issues-left">
                     <thead id="issues-link" class="issues-left">
                         <tr id="issues-l-row" class="issues-left">
@@ -35,6 +34,10 @@
                                 <b>NOTE:</b> This area is still under construction. If you have any problems, please <a href="{{ site.locs.ref }}/{{ site.repository }}/issues/new" target="_blank">notify us</a>.
                             </td>
                             <td id="issues-i-right" class="issues-right"></td>
+                        </tr>
+                        <tr id="issues-i-content" class="issues-left">
+                            <td id="issues-i-contentdata" class="issues-left issues-nomargins">{{ content | markdownify }}</td>
+                            <td id="issues-i-contentright" class="issues-right"></td>
                         </tr>
                     </tbody>
                     <tfoot id="issues-extra" class="issues-left"></tbody>

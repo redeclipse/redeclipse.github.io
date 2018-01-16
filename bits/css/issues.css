@@ -23,7 +23,7 @@
     border: 1px solid rgb(255, 255, 255);
     vertical-align: top;
 }
-.issues-time {
+.issues-time, #issues-body {
     font-size: 14px;
 }
 #issues-front, #issues-table, #issues-view, #issues-more {
@@ -55,8 +55,8 @@
     float: right;
     clear: both;
 }
-#issues-h-comments-xtra-labels span {
-    font-size: 14px;
+#issues-h-comments-xtra-labels span, #issues-t-label {
+    font-size: 12px;
 }
 #issues-h-comments-avatar img, #issues-login img {
     width: 24px;
@@ -74,4 +74,7 @@
 }
 #issues-t-numurl, #issues-t-url {
     color: rgb(255, 255, 255);
+}
+.issues-nomargins p {
+    margin: 0px;
 }
