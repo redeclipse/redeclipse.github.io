@@ -1,9 +1,9 @@
 ---
-title: Status effects
+title: Status Effects
 layout: docs
-origfile: Status-effects.md
-origtitle: Status-effects
-permalink: /docs/Status-effects
+origfile: Status-Effects.md
+origtitle: Status-Effects
+permalink: /docs/Status-Effects
 ---
 * TOC
 {:toc}

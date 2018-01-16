@@ -1,9 +1,9 @@
 ---
-title: error
+title: Error
 layout: docs
-origfile: maps/error.md
-origtitle: error
-permalink: /docs/maps/error
+origfile: maps/Error.md
+origtitle: Error
+permalink: /docs/maps/Error
 ---
 * TOC
 {:toc}
