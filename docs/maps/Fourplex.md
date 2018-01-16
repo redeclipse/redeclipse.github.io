@@ -3,7 +3,7 @@ title: Fourplex
 layout: docs
 origfile: maps/Fourplex.md
 origtitle: Fourplex
-permalink: /docs/maps/Fourplex
+permalink: /docs/maps/Fourplex/
 ---
 * TOC
 {:toc}

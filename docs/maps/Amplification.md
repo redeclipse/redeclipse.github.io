@@ -3,7 +3,7 @@ title: Amplification
 layout: docs
 origfile: maps/Amplification.md
 origtitle: Amplification
-permalink: /docs/maps/Amplification
+permalink: /docs/maps/Amplification/
 ---
 * TOC
 {:toc}

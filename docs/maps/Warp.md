@@ -3,7 +3,7 @@ title: Warp
 layout: docs
 origfile: maps/Warp.md
 origtitle: Warp
-permalink: /docs/maps/Warp
+permalink: /docs/maps/Warp/
 ---
 * TOC
 {:toc}

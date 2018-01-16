@@ -3,7 +3,7 @@ title: Error
 layout: docs
 origfile: maps/Error.md
 origtitle: Error
-permalink: /docs/maps/Error
+permalink: /docs/maps/Error/
 ---
 * TOC
 {:toc}

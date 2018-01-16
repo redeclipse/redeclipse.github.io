@@ -3,7 +3,7 @@ title: Forge
 layout: docs
 origfile: maps/Forge.md
 origtitle: Forge
-permalink: /docs/maps/Forge
+permalink: /docs/maps/Forge/
 ---
 * TOC
 {:toc}

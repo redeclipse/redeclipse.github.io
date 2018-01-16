@@ -3,7 +3,7 @@ title: Lab
 layout: docs
 origfile: maps/Lab.md
 origtitle: Lab
-permalink: /docs/maps/Lab
+permalink: /docs/maps/Lab/
 ---
 * TOC
 {:toc}

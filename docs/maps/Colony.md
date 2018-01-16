@@ -3,7 +3,7 @@ title: Colony
 layout: docs
 origfile: maps/Colony.md
 origtitle: Colony
-permalink: /docs/maps/Colony
+permalink: /docs/maps/Colony/
 ---
 * TOC
 {:toc}

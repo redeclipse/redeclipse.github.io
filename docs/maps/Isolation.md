@@ -3,7 +3,7 @@ title: Isolation
 layout: docs
 origfile: maps/Isolation.md
 origtitle: Isolation
-permalink: /docs/maps/Isolation
+permalink: /docs/maps/Isolation/
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: Debug
 layout: docs
 origfile: Debug.md
 origtitle: Debug
-permalink: /docs/Debug
+permalink: /docs/Debug/
 ---
 * TOC
 {:toc}

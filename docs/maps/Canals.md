@@ -3,7 +3,7 @@ title: Canals
 layout: docs
 origfile: maps/Canals.md
 origtitle: Canals
-permalink: /docs/maps/Canals
+permalink: /docs/maps/Canals/
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: Dawn
 layout: docs
 origfile: maps/Dawn.md
 origtitle: Dawn
-permalink: /docs/maps/Dawn
+permalink: /docs/maps/Dawn/
 ---
 * TOC
 {:toc}

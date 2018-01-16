@@ -3,7 +3,7 @@ title: Fortitude
 layout: docs
 origfile: maps/Fortitude.md
 origtitle: Fortitude
-permalink: /docs/maps/Fortitude
+permalink: /docs/maps/Fortitude/
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: Convolution
 layout: docs
 origfile: maps/Convolution.md
 origtitle: Convolution
-permalink: /docs/maps/Convolution
+permalink: /docs/maps/Convolution/
 ---
 * TOC
 {:toc}
