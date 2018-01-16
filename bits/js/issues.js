@@ -311,20 +311,22 @@ function issues_view_comment(item, comment, hbody) {
 function issues_build_comments() {
     var loading = getelem('issues-t-load');
     if(loading != null) loading.remove();
-    if(issue_num <= 0 || issues_current == null || issues_comments == null || issues_comments.length <= 0) return;
-    var hbody = getelem('issues-body');
-    for(var i = 0; i < issues_comments.length; i++) {
-        issues_view_comment(issues_comments[i], i+1, hbody);
-    }
-    if(issues_comments_page > 0) {
-        var more = getelem('issues-h-more');
-        if(more) {
-            var count = issues_comments_page*pagedata.issues.perpage;
-            if(issues_comments.length >= count) {
-                more.style.display = 'table-row';
-            }
-            else {
-                more.style.display = 'none';
+    if(issue_num <= 0 || issues_current == null) return;
+    if(issues_comments != null && issues_comments.length > 0) {
+        var hbody = getelem('issues-body');
+        for(var i = 0; i < issues_comments.length; i++) {
+            issues_view_comment(issues_comments[i], i+1, hbody);
+        }
+        if(issues_comments_page > 0) {
+            var more = getelem('issues-h-more');
+            if(more) {
+                var count = issues_comments_page*pagedata.issues.perpage;
+                if(issues_comments.length >= count) {
+                    more.style.display = 'table-row';
+                }
+                else {
+                    more.style.display = 'none';
+                }
             }
         }
     }
