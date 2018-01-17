@@ -17,6 +17,7 @@ includes_dir: "includes"
 
 # Handling Reading
 exclude:
+  - "_site"
   - ".github"
   - "plugins"
   - "layouts"

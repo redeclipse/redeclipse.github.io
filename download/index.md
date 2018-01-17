@@ -1,7 +1,7 @@
 ---
 title: Downloads
 layout: default
-permalink: /download/
+permalink: /download
 redirect_from:
   - /torrent
 ---
