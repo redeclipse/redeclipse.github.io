@@ -3,7 +3,7 @@ title: Rooftop
 layout: docs
 origfile: maps/Rooftop.md
 origtitle: Rooftop
-permalink: /docs/maps/Rooftop/
+permalink: /docs/maps/Rooftop
 ---
 * TOC
 {:toc}

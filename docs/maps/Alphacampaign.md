@@ -3,7 +3,7 @@ title: Alphacampaign
 layout: docs
 origfile: maps/Alphacampaign.md
 origtitle: Alphacampaign
-permalink: /docs/maps/Alphacampaign/
+permalink: /docs/maps/Alphacampaign
 ---
 * TOC
 {:toc}

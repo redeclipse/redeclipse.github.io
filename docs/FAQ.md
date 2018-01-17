@@ -3,7 +3,7 @@ title: FAQ
 layout: docs
 origfile: FAQ.md
 origtitle: FAQ
-permalink: /docs/FAQ/
+permalink: /docs/FAQ
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: IRC
 layout: docs
 origfile: IRC.md
 origtitle: IRC
-permalink: /docs/IRC/
+permalink: /docs/IRC
 ---
 * TOC
 {:toc}

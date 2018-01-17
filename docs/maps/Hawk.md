@@ -3,7 +3,7 @@ title: Hawk
 layout: docs
 origfile: maps/Hawk.md
 origtitle: Hawk
-permalink: /docs/maps/Hawk/
+permalink: /docs/maps/Hawk
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: Foundation
 layout: docs
 origfile: maps/Foundation.md
 origtitle: Foundation
-permalink: /docs/maps/Foundation/
+permalink: /docs/maps/Foundation
 ---
 * TOC
 {:toc}

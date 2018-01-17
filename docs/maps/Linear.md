@@ -3,7 +3,7 @@ title: Linear
 layout: docs
 origfile: maps/Linear.md
 origtitle: Linear
-permalink: /docs/maps/Linear/
+permalink: /docs/maps/Linear
 ---
 * TOC
 {:toc}

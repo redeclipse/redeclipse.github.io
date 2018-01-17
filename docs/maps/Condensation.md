@@ -3,7 +3,7 @@ title: Condensation
 layout: docs
 origfile: maps/Condensation.md
 origtitle: Condensation
-permalink: /docs/maps/Condensation/
+permalink: /docs/maps/Condensation
 ---
 * TOC
 {:toc}

@@ -3,7 +3,7 @@ title: Industrial
 layout: docs
 origfile: maps/Industrial.md
 origtitle: Industrial
-permalink: /docs/maps/Industrial/
+permalink: /docs/maps/Industrial
 ---
 * TOC
 {:toc}

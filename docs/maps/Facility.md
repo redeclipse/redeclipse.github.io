@@ -3,7 +3,7 @@ title: Facility
 layout: docs
 origfile: maps/Facility.md
 origtitle: Facility
-permalink: /docs/maps/Facility/
+permalink: /docs/maps/Facility
 ---
 * TOC
 {:toc}

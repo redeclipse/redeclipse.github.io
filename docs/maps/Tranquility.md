@@ -3,7 +3,7 @@ title: Tranquility
 layout: docs
 origfile: maps/Tranquility.md
 origtitle: Tranquility
-permalink: /docs/maps/Tranquility/
+permalink: /docs/maps/Tranquility
 ---
 * TOC
 {:toc}

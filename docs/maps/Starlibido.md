@@ -3,7 +3,7 @@ title: Starlibido
 layout: docs
 origfile: maps/Starlibido.md
 origtitle: Starlibido
-permalink: /docs/maps/Starlibido/
+permalink: /docs/maps/Starlibido
 ---
 * TOC
 {:toc}

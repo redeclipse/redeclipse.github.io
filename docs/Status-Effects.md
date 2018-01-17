@@ -3,9 +3,9 @@ title: Status Effects
 layout: docs
 origfile: Status-Effects.md
 origtitle: Status-Effects
-permalink: /docs/Status-Effects/
+permalink: /docs/Status-Effects
 redirect_from:
-  - /docs/Status_Effects/
+  - /docs/Status_Effects
 ---
 * TOC
 {:toc}

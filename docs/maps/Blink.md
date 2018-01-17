@@ -3,7 +3,7 @@ title: Blink
 layout: docs
 origfile: maps/Blink.md
 origtitle: Blink
-permalink: /docs/maps/Blink/
+permalink: /docs/maps/Blink
 ---
 * TOC
 {:toc}

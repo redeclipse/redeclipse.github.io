@@ -3,7 +3,7 @@ title: Absorption
 layout: docs
 origfile: maps/Absorption.md
 origtitle: Absorption
-permalink: /docs/maps/Absorption/
+permalink: /docs/maps/Absorption
 ---
 * TOC
 {:toc}
