@@ -15,8 +15,8 @@ redirect_from:
 <table>
     <tr>
         <td>
-            <div><a href="maps/error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps/error">Fatal Error</a></div>
+            <div><a href="maps/Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Error">Fatal Error</a></div>
         </td>
     </tr>
 </table>
