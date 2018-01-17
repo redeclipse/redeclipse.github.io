@@ -1,9 +1,11 @@
 ---
-title: Error
+title: Fatal Error
 layout: docs
-origfile: maps/Error.md
-origtitle: Error
-permalink: /docs/maps/Error
+origfile: maps/Fatal-Error.md
+origtitle: Fatal-Error
+permalink: /docs/maps/Fatal-Error
+redirect_from:
+  - /docs/maps/Fatal_Error
 ---
 * TOC
 {:toc}

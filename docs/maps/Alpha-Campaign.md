@@ -1,9 +1,11 @@
 ---
-title: Alphacampaign
+title: Alpha Campaign
 layout: docs
-origfile: maps/Alphacampaign.md
-origtitle: Alphacampaign
-permalink: /docs/maps/Alphacampaign
+origfile: maps/Alpha-Campaign.md
+origtitle: Alpha-Campaign
+permalink: /docs/maps/Alpha-Campaign
+redirect_from:
+  - /docs/maps/Alpha_Campaign
 ---
 * TOC
 {:toc}
