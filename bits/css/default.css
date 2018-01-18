@@ -86,20 +86,19 @@ blockquote {
     font-style: italic;
 }
 code {
-    padding: 0px 1px 0px 1px;
+    padding: 0px 2px 0px 2px;
     margin: 0;
-    background: rgba(8, 8, 8, 0.7);
+    background: rgba(48, 48, 48, 0.5);
     color: rgb(255, 255, 255);
-    font-size: 100%;
-    border-radius: 0px;
-    border: 1px dashed rgb(128, 128, 128);
+    font-size: 85%;
+    border: 0;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 pre {
     background: rgba(8, 8, 8, 0.7);
     color: rgb(255, 255, 255);
-    font-size: 100%;
+    font-size: 85%;
     border-radius: 0px;
     border: 1px solid rgb(255, 64, 64);
     max-width: 100%;
@@ -112,8 +111,10 @@ pre code {
     overflow-x: auto;
     word-break: keep-all;
 }
+div.highlighter-rouge, pre {
+    margin-top: 4px;
+}
 table {
-    /* width: 100%; */
     border-collapse: collapse;
 }
 th, td {
