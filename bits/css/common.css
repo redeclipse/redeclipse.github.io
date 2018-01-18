@@ -2,7 +2,7 @@
 body {
     background: #340201 url(/bits/bg2.jpg) no-repeat center top;
     color: rgb(255, 255, 255);
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 400;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     line-height: 1.2em;
@@ -147,7 +147,7 @@ a:hover, a:active {
 }
 @media screen and (max-width: 432px) {
     body {
-        font-size: 14px;
+        font-size: 12px;
     }
     .footer {
         font-size: 10px;
