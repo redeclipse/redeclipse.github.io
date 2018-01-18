@@ -22,6 +22,13 @@ a, a:link, a:visited {
 a:hover, a:active {
     color: rgb(255, 128, 128);
 }
+#navbar {
+    width: 900px;
+    float: right;
+    margin-top: 16px;
+    vertical-align: middle;
+    text-align: right;
+}
 .navbar-right {
     margin-right: -12px;
 }
@@ -30,33 +37,29 @@ a:hover, a:active {
     border: none;
 }
 .navbar-nav > li {
-    height: 84px;
+    padding: 0;
+    margin: 0;
+    text-align: right;
 }
 .navbar-nav > li > a {
+    padding: 2px 4px 2px 4px;
     height: 100%;
-    font-size: 22px;
+    font-size: 16px;
     transition: all 0.15s linear 0s;
     -webkit-transition: all 0.15s linear 0s;
-    padding: 30px 5px 30px 5px;
-    vertical-align: middle;
+    text-align: right;
 }
-.navbar-nav > li > a > div {
+.navbar-nav > li > a > div, .navbar-nav > li > a > svg {
     display: inline;
-    font-size: 0px;
+    padding: 2px 4px 0px 4px;
     margin: 0;
-    padding: 0;
-    transition: all 0.15s linear 0s;
-    -webkit-transition: all 0.15s linear 0s;
-    text-align: center;
-    width: 0px;
-}
-.navbar-nav > li > a > * {
-    float: left;
+    vertical-align: middle;
+    text-align: right;
 }
 .navbar-inverse .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a:link, .navbar-inverse .navbar-nav > li > a:visited {
     color: rgb(255, 178, 178);
     font-weight: 600;
-    text-align: left;
+    text-align: right;
 }
 .navbar-inverse .navbar-nav > li > a:hover, .navbar-nav > li > a:active {
     color: rgb(255, 255, 255);
@@ -71,25 +74,15 @@ a:hover, a:active {
     -webkit-filter: drop-shadow( -1px -1px 5px rgb(255, 0, 0));
     filter: drop-shadow(-1px -1px 5px rgb(255, 0, 0));
 }
-.navbar-inverse .navbar-nav > li > a:hover > div, .navbar-nav > li > a:active > div {
-    font-size: 16px;
-    width: 200px;
-    padding: 2px 8px 0px 8px;
-}
 @media screen and (max-width: 1200px) {
-    .navbar-nav > li, .navbar-inverse .navbar-nav > li > a {
-        height: auto;
+    #navbar {
+        font-size: 24px;
+        width: 100%;
+        margin: 0;
     }
     .navbar-nav > li > a {
-        padding: 4px 8px 4px 8px;
-    }
-    .navbar-nav > li > a > div {
-        font-size: 16px;
-        padding: 2px 8px 0px 8px;
-        width: auto;
-    }
-    .navbar-nav > li > a > * {
-        float: none;
+        padding: 4px 4px 8px 4px;
+        font-size: 20px;
     }
 }
 .navbar-toggle {

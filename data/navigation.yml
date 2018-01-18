@@ -2,53 +2,50 @@
   title: "Downloads"
   class: "fas fa-download"
 - url: /docs
-  title: "Beta Documentation"
+  title: "Beta Docs"
   class: "fas fa-flask"
 - url: /wiki
   title: "Documentation"
   class: "fas fa-book"
-- url: /apply
-  title: "Account Application"
-  class: "fas fa-user-plus"
 - url: /discuss
-  title: "Discussion Area"
+  title: "Discussions"
   class: "fas fa-quote-left"
 - url: /chat
-  title: "Live Chat"
+  title: "Chat"
   class: "fas fa-comments"
 - url: /discord
-  title: "Discord Server"
+  title: "Discord"
   class: "fab fa-discord"
 - url: /messenger
-  title: "Facebook Messenger"
+  title: "Messenger"
   class: "fab fa-facebook-messenger"
 - url: /issues
-  title: "Issue Tracker"
+  title: "Issues"
   class: "fas fa-tasks"
 - url: /contribute
-  title: "Contribution Guidelines"
+  title: "Contribute"
   class: "fas fa-handshake"
 - url: /stats
-  title: "Game Statistics"
+  title: "Statistics"
   class: "fas fa-chart-bar"
 - url: /servers
-  title: "Server List"
+  title: "Servers"
   class: "fas fa-server"
 - url: /reddit
-  title: "Official SubReddit"
+  title: "Reddit"
   class: "fab fa-reddit"
 - url: /facebook
-  title: "Facebook Page"
+  title: "Facebook"
   class: "fab fa-facebook"
 - url: /youtube
-  title: "YouTube Page"
+  title: "YouTube"
   class: "fab fa-youtube"
 - url: /github
-  title: "GitHub Project"
+  title: "GitHub"
   class: "fab fa-github"
 - url: /patreon
-  title: "Subscribe via Patreon"
+  title: "Patreon"
   class: "fab fa-patreon"
 - url: /donate
-  title: "Donate via PayPal"
+  title: "PayPal"
   class: "fab fa-paypal"
