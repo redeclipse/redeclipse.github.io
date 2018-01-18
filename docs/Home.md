@@ -5,7 +5,8 @@ origfile: Home.md
 origtitle: Home
 permalink: /docs/Home
 redirect_from:
-  - /docs
+  - /docs/
+  - /docs/Main_Page
 ---
 * TOC
 {:toc}
