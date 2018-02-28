@@ -1,3 +1,11 @@
+var issue_num = 0;
+var issues_data = [];
+var issues_data_page = 1;
+var issues_current = null;
+var issues_comments = [];
+var issues_comments_page = 1;
+var issues_location = sitedata.locs.api + '/repos/' + sitedata.organisation + '/' + pagedata.issues.repository + '/issues?state=' + pagedata.issues.sort.state + '&sort=' + pagedata.issues.sort.by + '&direction=' + pagedata.issues.sort.direction + '&callback=issues';
+
 // Helpers
 Number.prototype.zeropad= function(len) {
     var s = String(this), c = '0';
@@ -80,7 +88,6 @@ md_convert.setFlavor('github');
 
 function markdown(data) {
     var str = md_convert.makeHtml(data);
-    console.log(str);
     return str.replace(/<br>|<br\/>|<br \/>/gi, '</p><p>');
 }
 
@@ -89,18 +96,25 @@ var user_data = null;
 var user_login = null;
 var user_cookie = '0';
 var user_nologin = false;
-OAuth.initialize('TnbOMXVV86ugQ7ol49rg5giIz8E');
+OAuth.initialize('p7dOPzuUbL6qWAyxu73egl5DJYA');
+OAuth.setOAuthdURL('https://hq.redeclipse.net:6284');
 
 function user_oauth(setup, src) {
     user_nologin = true;
     OAuth.redirect('github', { cache: true }, sitedata.url + pagedata.permalink + "#");
 }
 
+function user_failed(err) {
+    console.log('login error: ', err);
+    makecookie('login', '0', 0);
+    user_cookie = '0';
+    issues_script(issues_location, 'issues-script', issues_data_page);
+}
+
 function user_callback(err, result) {
     user_nologin = true;
     if(err) {
-        console.log('login error: ', result);
-        issues_script(issues_location, 'issues-script', issues_data_page);
+        user_failed(err);
     } else {
         console.log('login result: ', result);
         user_data = result;
@@ -120,22 +134,13 @@ function user_callback(err, result) {
             issues_script(issues_location, 'issues-script', issues_data_page);
         })
         .fail(function (err) {
-            console.log('login error: ', err);
-            issues_script(issues_location, 'issues-script', issues_data_page);
+            user_failed(err);
         });
     }
 }
 OAuth.callback('github', { cache: true }, user_callback);
 
 // Issues API
-var issue_num = 0;
-var issues_data = [];
-var issues_data_page = 1;
-var issues_current = null;
-var issues_comments = [];
-var issues_comments_page = 1;
-var issues_location = sitedata.locs.api + '/repos/' + sitedata.organisation + '/' + pagedata.issues.repository + '/issues?state=' + pagedata.issues.sort.state + '&sort=' + pagedata.issues.sort.by + '&direction=' + pagedata.issues.sort.direction + '&callback=issues';
-
 var issues_reactions = [ "+1", "-1", "laugh", "hooray", "confused", "heart" ];
 var issues_reactmd = [ ":+1:", ":-1:", ":laughing:", ":raised_hands:", ":confused:", ":heart:" ];
 
