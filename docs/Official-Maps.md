@@ -15,8 +15,20 @@ redirect_from:
 <table>
     <tr>
         <td>
+            <div><img src="images/maps/castle.png" width="128px" height="128px" /></div>
+            <div>Castle</div>
+        </td>
+        <td>
+            <div><img src="images/maps/dutility.png" width="128px" height="128px" /></div>
+            <div>Dutility</div>
+        </td>
+        <td>
             <div><a href="maps/Fatal-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
             <div><a href="maps/Fatal-Error">Error</a></div>
+        </td>
+        <td>
+            <div><img src="images/maps/polaris.png" width="128px" height="128px" /></div>
+            <div>Polaris</div>
         </td>
     </tr>
 </table>
