@@ -153,3 +153,8 @@ a:hover, a:active {
         font-size: 10px;
     }
 }
+button, input, button, select, textarea {
+    color: rgb(255, 255, 255);
+    background-color: rgb(32, 0, 0);
+    border-color: rgb(192, 0, 0);
+}
