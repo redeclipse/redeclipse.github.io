@@ -51,7 +51,7 @@ a:hover, a:active {
 }
 .navbar-nav > li > a > div, .navbar-nav > li > a > svg {
     display: inline;
-    padding: 2px 4px 0px 4px;
+    padding: 2px 0px 0px 2px;
     margin: 0;
     vertical-align: middle;
     text-align: right;
