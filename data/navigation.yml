@@ -2,9 +2,6 @@
   title: "Downloads"
   class: "fas fa-download"
 - url: /docs
-  title: "Beta Docs"
-  class: "fas fa-flask"
-- url: /wiki
   title: "Documentation"
   class: "fas fa-book"
 - url: /discuss
@@ -19,6 +16,12 @@
 - url: /messenger
   title: "Messenger"
   class: "fab fa-facebook-messenger"
+- url: mailto:contact@redeclipse.net
+  title: "Email"
+  class: "fa fa-at"
+- url: /lists
+  title: "Mailing Lists"
+  class: "fas fa-envelope"
 - url: /issues
   title: "Issues"
   class: "fas fa-tasks"
@@ -37,9 +40,9 @@
 - url: /facebook
   title: "Facebook"
   class: "fab fa-facebook"
-- url: /youtube
-  title: "YouTube"
-  class: "fab fa-youtube"
+- url: /gamejolt
+  title: "GameJolt"
+  class: "fas fa-bolt"
 - url: /github
   title: "GitHub"
   class: "fab fa-github"
