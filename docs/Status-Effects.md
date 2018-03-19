@@ -5,7 +5,7 @@ origfile: Status-Effects.md
 origtitle: Status-Effects
 permalink: /docs/Status-Effects
 redirect_from:
-  - /docs/Status_Effects
+  - /docs/Status_Effects/
 ---
 * TOC
 {:toc}

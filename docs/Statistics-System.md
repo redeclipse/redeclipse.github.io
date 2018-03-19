@@ -5,7 +5,7 @@ origfile: Statistics-System.md
 origtitle: Statistics-System
 permalink: /docs/Statistics-System
 redirect_from:
-  - /docs/Statistics_System
+  - /docs/Statistics_System/
 ---
 * TOC
 {:toc}

@@ -5,7 +5,7 @@ origfile: Mutator-Tips.md
 origtitle: Mutator-Tips
 permalink: /docs/Mutator-Tips
 redirect_from:
-  - /docs/Mutator_Tips
+  - /docs/Mutator_Tips/
 ---
 * TOC
 {:toc}

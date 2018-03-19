@@ -5,7 +5,7 @@ origfile: Weapons-Guide.md
 origtitle: Weapons-Guide
 permalink: /docs/Weapons-Guide
 redirect_from:
-  - /docs/Weapons_Guide
+  - /docs/Weapons_Guide/
 ---
 * TOC
 {:toc}

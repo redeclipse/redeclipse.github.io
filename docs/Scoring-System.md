@@ -5,7 +5,7 @@ origfile: Scoring-System.md
 origtitle: Scoring-System
 permalink: /docs/Scoring-System
 redirect_from:
-  - /docs/Scoring_System
+  - /docs/Scoring_System/
 ---
 * TOC
 {:toc}
