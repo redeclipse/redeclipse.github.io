@@ -3,6 +3,8 @@ title: Red Eclipse
 description: A free arena shooter featuring parkour
 repository: red-eclipse/red-eclipse.github.io
 organisation: red-eclipse
+website: https://redeclipse.net/
+email: contact@redeclipse.net
 github: [metadata]
 locs:
   api: "https://api.github.com"

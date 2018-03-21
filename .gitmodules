@@ -1,3 +1,3 @@
 [submodule "bits"]
 	path = bits
-	url = https://github.com/red-eclipse/www-bits.git
+	url = git@github.com:red-eclipse/www-bits.git
