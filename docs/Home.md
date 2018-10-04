@@ -26,7 +26,7 @@ redirect_from:
 - **[Statistics System](Statistics-System)** - Information about the master server's global statistics system.
 
 ## Development
-- **~~[Version 2.0](Information-for-v2-0)~~** - Find out more about the upcoming **v2.0**, featuring [Tesseract](http://tesseract.gg/).
+- **[Version 2.0](Information-for-v2)** - Find out more about the upcoming **v2.0**, featuring [Tesseract](http://tesseract.gg/).
 - **[Contributing](Contributing)** - Instructions on contributing to the Red Eclipse project.
 - **[Debugging](Debug)** - How to gather information for debugging.
 

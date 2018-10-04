@@ -1,12 +1,11 @@
 ---
-title: Information for v2.0
+title: Information for v2
 layout: docs
-origfile: Information-for-v2.0.md
-origtitle: Information-for-v2.0
-permalink: /docs/Information-for-v2-0
+origfile: Information-for-v2.md
+origtitle: Information-for-v2
+permalink: /docs/Information-for-v2
 redirect_from:
-  - /docs/Information-for-v2.0/
-  - /docs/Information_for_v2_0/
+  - /docs/Information_for_v2/
 ---
 * TOC
 {:toc}
