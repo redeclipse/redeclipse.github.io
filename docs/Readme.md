@@ -65,4 +65,3 @@ All paths need to be relative to each other. The docs repository is converted to
 
 ### Table of Contents
 Kramdown supports the automatic generation of these, and the pages are automatically generated to include them. You do **not** need to create your own at the top of your pages.
-

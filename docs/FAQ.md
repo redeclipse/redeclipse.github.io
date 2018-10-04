@@ -13,7 +13,7 @@ Red Eclipse can be played under Windows XP/Vista/7/8.1/10, macOS, GNU/Linux and 
 
 ## How long has the game been in development?
 
-Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourceforge.net/projects/bloodfrontier/) project. Blood Frontier development started in 2007, and Red Eclipse was formed Spring of 2011. Red Eclipse 1.0 Ides Edition debuted on [March 15](http://en.wikipedia.org/wiki/Ides_of_march), 2011. [See history](History).
+Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourceforge.net/projects/bloodfrontier/) project. Blood Frontier development started in 2007, and Red Eclipse was formed Spring of 2011. Red Eclipse 1.0 Ides Edition debuted on [March 15](http://en.wikipedia.org/wiki/Ides_of_march), 2011. ~~[See history](History)~~.
 
 ## Where can I get the game?
 
@@ -77,7 +77,7 @@ If the terminal window closes without launching the game, then there's a problem
 
 ## What does 'devel' mean?
 
-This is the development version of the game, which can be [obtained](Development-Version) from our Github repository to check out upcoming features and life on the bleeding edge.
+This is the development version of the game, which can be ~~[obtained](Development-Version)~~ from our Github repository to check out upcoming features and life on the bleeding edge.
 
 ## What does master and stable mean?
 
@@ -85,7 +85,7 @@ These are the two branches of our base repository on GitHub, <http://github.com/
 
 ## I found a bug, where can I report it?
 
-Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [guidelines](Contribution-Guidelines).
+Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our ~~[guidelines](Contribution-Guidelines)~~.
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
@@ -93,11 +93,11 @@ On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will repor
 
 ## Can I contribute to the game?
 
-Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game [editor](Editing-Guide), art assets like models, config [scripts](Cubescript-Guide) like game menus, or modifications of the [source code](https://github.com/red-eclipse/base/tree/master/src). For further information, please read our [guidelines](Contribution-Guidelines).
+Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/red-eclipse/base/tree/master/src). For further information, please read our ~~[guidelines](Contribution-Guidelines)~~.
 
 ## I found a cheater, what can I do?
 
-If you think someone cheats or violates the [Multiplayer Guidelines](Multiplayer-Guidelines) in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a [demo](Demo-Guide) record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
+If you think someone cheats or violates the ~~[Multiplayer Guidelines](Multiplayer-Guidelines)~~ in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a ~~[demo](Demo-Guide)~~ record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
 
 ## How can i change the chat colour?
 
@@ -107,11 +107,11 @@ Only use bright colours with good contrast. A value of -1 will take your profile
 
 ## What is the game objective?
 
-This depends on the current [mode and mutators](GameModes_and_Mutators) of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a [guide](Gameplay-Guide) for beginners.
+This depends on the current ~~[mode and mutators](GameModes_and_Mutators)~~ of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a ~~[guide](Gameplay-Guide)~~ for beginners.
 
 ## Why is my player score negative?
 
-Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on [flag carriers](Capture-the-Flag), [bombers](Bomber-ball) or [defenders](Defend-and-Control) even double this penalty. For details, see [Deathmatch Scoring](Deathmatch#scoring).
+Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on ~~[flag carriers](Capture-the-Flag)~~, ~~[bombers](Bomber-ball)~~ or ~~[defenders](Defend-and-Control)~~ even double this penalty. For details, see [Deathmatch Scoring](Deathmatch#scoring).
 
 ## dm, pzap, gg - what did they just say?
 
@@ -131,11 +131,11 @@ It is easy to hit someone with a shotgun, but the weapon is really only effectiv
 
 ## How did they take away their own flag?
 
-In [capture](Capture-the-Flag) games, you can press **F** (per default) to pick up the flag in your own base, so the enemy cannot reach it that easily. The same button can also be used to drop a flag you carry, be it yours or the enemy's.
+In ~~[capture](Capture-the-Flag)~~ games, you can press **F** (per default) to pick up the flag in your own base, so the enemy cannot reach it that easily. The same button can also be used to drop a flag you carry, be it yours or the enemy's.
 
 ## Why are there no ammo and health pickups?
 
-In Red Eclipse, players have an unlimited supply of weapon reloads, health regeneration and [impulse](Impulse-Guide) energy. Therefore, map control is less important, and everyone can focus on the real fun: Capturing that flag, grabbing that bomber ball… or just fragging!
+In Red Eclipse, players have an unlimited supply of weapon reloads, health regeneration and ~~[impulse](Impulse-Guide)~~ energy. Therefore, map control is less important, and everyone can focus on the real fun: Capturing that flag, grabbing that bomber ball… or just fragging!
 
 ## A green beeping thing obscured my vision - what the heck?
 

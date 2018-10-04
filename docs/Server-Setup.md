@@ -23,7 +23,7 @@ Hosting one or more Red Eclipse servers on your system will require a decent ban
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
 #### GNU/Linux
-For details on locating your Red Eclipse home directory, refer to [Game Settings]().
+For details on locating your Red Eclipse home directory, refer to ~~[Game Settings]()~~.
 
 ##### Installed
 This is normally the case if you installed Red Eclipse via your package manager, or using the "system-install" make target.
@@ -81,7 +81,7 @@ For the installation and configuration steps follow the specific guides.
 1. [https://hub.docker.com/r/iceflower/redeclipse-server](https://hub.docker.com/r/iceflower/redeclipse-server)
 
 ## Configuration Files
-The configuration files are written in [cubescript](), lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
+The configuration files are written in ~~[cubescript]()~~, lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
 
 ### servinit.cfg
 [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
@@ -133,9 +133,9 @@ You can change the "openness" of your server; ie. allowing anyone to claim **hel
 | 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   |
 
 ### Server Customization
-- For information on how to limit modes and mutators please see [Game Filters]()
-- For examples of servinit.cfg configurations see [Server Examples]()
-- For information on weapon variables, see [Weapon Variables]()
+- For information on how to limit modes and mutators please see ~~[Game Filters]()~~
+- For examples of servinit.cfg configurations see ~~[Server Examples]()~~
+- For information on weapon variables, see ~~[Weapon Variables]()~~
 
 ## Forwarding Ports
 All servers need enabled port forwarding.
