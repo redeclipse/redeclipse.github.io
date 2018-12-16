@@ -9,11 +9,11 @@ permalink: /docs/Entities
 {:toc}
 ## Creating Entities
 
-An entity can be created through one of two ways: using the menu or console commands To create an entity you have to be in edit mode.
+An entity can be created through usage of either the menu or console commands. To create an entity, you first have to be in edit mode.
 
 -   Using the menu:
 
-Open the main menu with 'ESC'. Click on the "Editing" item. Go to the third tab of the submenu, labeled "ents". You can see some entity commands and a list of all the entities on this tab. By clicking on an item in the entity list, you can create it. Once an item is clicked, a command appears, where you can change properties of the entity. Confirm the creation with 'RETURN' or cancel it with 'ESC'.
+Open the main menu with 'ESC'. Click on the "Editing" item. Go to the third tab of the submenu, labeled "ents". You can see some entity commands and a list of all the entities on this tab. By clicking on an item in the entity list, you can create it. Once an item is clicked, a command appears where you can change properties of the entity. Confirm the creation with 'RETURN' or cancel it with 'ESC'.
 
 -   Using console commands.
 
@@ -23,7 +23,7 @@ Use the /newent command to create a new light entity. Don't forget to enter the 
 
 `/newent light 300 180 180 180`
 
-...This will create a Light Entity with a *radius* of 300 and *Red Green and Blue Values* of 180. This will give a medium sized white/grey light.
+...This will create a Light Entity with a *radius* of 300 and *Red Green and Blue Values* of 180. This will give a medium-sized white/grey light.
 
 ## Entity Properties
 
@@ -32,11 +32,11 @@ Entity properties are numbers that change the behaviour of an entity. Properties
 To modify properties after creation, select the entity you wish to change by clicking on it. After that, either
 
 -   press the Period key (.) to change properties (/entset) directly to the value you want them...
--   hold the corresponding Number Key to the parameter you wish to change while scrolling with the scroll Wheel.
+-   hold the corresponding Number Key to the parameter you wish to change while scrolling with the scroll wheel.
 
-To move an entity, left-click the face corresponding to the axis you wish to move it on and drag it to the new position.
+To move an entity, left-click the face corresponding to the axis you wish to move it along and drag it to the new position.
 
-You can change if entities snap to the grid while moving them with:
+You can change if entities snap to the grid while moving them using:
 
 `/entselsnap (0|1)`
 
