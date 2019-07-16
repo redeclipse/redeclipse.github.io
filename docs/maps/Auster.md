@@ -32,7 +32,9 @@ permalink: /docs/maps/Auster
 
 ## Review
 This is the map formerly known by its assigned layout name, ffs33.
+
 Small duel-centric map with three levels and no teleporters or jumpers. Sunset lighting provided for alt mode and broad daylight in normal mode.
+
 This is the first complete map done with phillipk's normal maps over flat diffuse textures; the skeletons of phillipk's textures are visible but muted in this map.
 
 ## Notes & Strategies
