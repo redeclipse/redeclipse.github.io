@@ -15,6 +15,10 @@ redirect_from:
 <table>
     <tr>
         <td>
+            <div><a href="maps/Auster"><img src="images/maps/auster.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Auster">Auster</a></div>
+        </td>
+        <td>
             <div><img src="images/maps/castle.png" width="128px" height="128px" /></div>
             <div>Castle</div>
         </td>
