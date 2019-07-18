@@ -19,8 +19,8 @@ redirect_from:
             <div><a href="maps/Auster">Auster</a></div>
         </td>
         <td>
-            <div><img src="images/maps/castle.png" width="128px" height="128px" /></div>
-            <div>Castle</div>
+            <div><a href="maps/Castle"><img src="images/maps/castle.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps/Castle">Castle</a></div>
         </td>
         <td>
             <div><img src="images/maps/dutility.png" width="128px" height="128px" /></div>
