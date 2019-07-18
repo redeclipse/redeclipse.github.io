@@ -7,7 +7,7 @@ permalink: /docs/maps/Castle
 ---
 * TOC
 {:toc}
-<img style='border:5px solid #ffe0e0e0' src="../images/maps/auster.png" width="256px" />
+<img style='border:5px solid #ffe0e0e0' src="../images/maps/castle.png" width="256px" />
 
 ## Information
 
