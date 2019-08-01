@@ -67,30 +67,14 @@ redirect_from:
 ### 2.0 Gladiator Maps
 
 <table>
-    <tr>
-        <td>
-            <div><img src="images/maps/cyanide.png" width="128px" height="128px" /></div>
-            <div>Cyanide</div>
-        </td>
-        <td>
-            <div><img src="images/maps/testchamber.png" width="128px" height="128px" /></div>
-            <div>Testchamber</div>
-        </td>
-        <td>
-            <div><img src="images/maps/purge.png" width="128px" height="128px" /></div>
-            <div>Purge</div>
-        </td>
-    </tr>
-</table>
-
-## 1.6 maps
-
-<table>
         <td>
             <div><img src="images/maps/disco.png" width="128px" height="128px" /></div>
             <div><b>Disco</b></div>
         </td>
 </table>
+
+## 1.6 maps
+
 ### Main Maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
