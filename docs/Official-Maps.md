@@ -9,11 +9,16 @@ redirect_from:
 ---
 * TOC
 {:toc}
-## Maps updated to 2.0 (Tesseract)
+## Maps in 2.0 (Tesseract)
 
+### 2.0 FFA Maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
+        <td>
+            <div><img src="images/maps/abuse.png" width="128px" height="128px" /></div>
+            <div>Abuse</div>
+        </td>
         <td>
             <div><a href="maps/Auster"><img src="images/maps/auster.png" width="128px" height="128px" /></a></div>
             <div><a href="maps/Auster">Auster</a></div>
@@ -23,22 +28,70 @@ redirect_from:
             <div><a href="maps/Castle">Castle</a></div>
         </td>
         <td>
-            <div><img src="images/maps/dutility.png" width="128px" height="128px" /></div>
-            <div>Dutility</div>
-        </td>
-        <td>
             <div><a href="maps/Fatal-Error"><img src="images/maps/error.png" width="128px" height="128px" /></a></div>
             <div><a href="maps/Fatal-Error">Error</a></div>
-        </td>
-        <td>
-            <div><img src="images/maps/polaris.png" width="128px" height="128px" /></div>
-            <div>Polaris</div>
         </td>
     </tr>
 </table>
 
-## Main maps
+### 2.0 Team Maps
 
+<table>
+    <tr>
+        <td>
+            <div><img src="images/maps/darkness.png" width="128px" height="128px" /></div>
+            <div>Darkness</div>
+        </td>
+    </tr>
+</table>
+
+### 2.0 Race Maps
+
+<table>
+    <tr>
+        <td>
+            <div><img src="images/maps/cyanide.png" width="128px" height="128px" /></div>
+            <div>Cyanide</div>
+        </td>
+        <td>
+            <div><img src="images/maps/testchamber.png" width="128px" height="128px" /></div>
+            <div>Testchamber</div>
+        </td>
+        <td>
+            <div><img src="images/maps/purge.png" width="128px" height="128px" /></div>
+            <div>Purge</div>
+        </td>
+    </tr>
+</table>
+
+### 2.0 Gladiator Maps
+
+<table>
+    <tr>
+        <td>
+            <div><img src="images/maps/cyanide.png" width="128px" height="128px" /></div>
+            <div>Cyanide</div>
+        </td>
+        <td>
+            <div><img src="images/maps/testchamber.png" width="128px" height="128px" /></div>
+            <div>Testchamber</div>
+        </td>
+        <td>
+            <div><img src="images/maps/purge.png" width="128px" height="128px" /></div>
+            <div>Purge</div>
+        </td>
+    </tr>
+</table>
+
+## 1.6 maps
+
+<table>
+        <td>
+            <div><img src="images/maps/disco.png" width="128px" height="128px" /></div>
+            <div><b>Disco</b></div>
+        </td>
+</table>
+### Main Maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -163,7 +216,7 @@ redirect_from:
     </tr>
 </table>
 
-## Race maps
+### Race maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
@@ -212,7 +265,7 @@ redirect_from:
     </tr>
 </table>
 
-## Gladiator maps
+### Gladiator maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
