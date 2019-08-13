@@ -6,7 +6,7 @@
         {% include head.html %}
         <link rel="stylesheet" type="text/css" href="/bits/css/issues.css" />
         <script type="text/javascript" src="/bits/js/showdown.min.js"></script>
-        <script type="text/javascript" src="/bits/js/oauth.min.js"></script>
+        <!-- <script type="text/javascript" src="/bits/js/oauth.min.js"></script> -->
         <script type="text/javascript" src="/bits/js/issues.js"></script>
     </head>
     <body>
@@ -23,15 +23,17 @@
                                 | <a id="issues-create" class="issues-left" href="{{ site.locs.ref }}/{{ site.organisation }}/{{ page.issues.repository }}/issues/new" target="_blank">Create New {{ page.issues.noun }}</a>
                                 | <span id="issues-rate"><span class="fas fa-cog fa-spin"></span> Loading...</span>
                             </th>
+                            <!-- currently unavailable --
                             <th id="issues-l-login" class="issues-right">
                                 <a id="issues-login" class="issues-left" href="#" onclick="user_oauth();">Login with GitHub</a>
                             </th>
+                            -->
                         </tr>
                     </thead>
                     <tbody id="issues-information" class="issues-left">
                         <tr id="issues-i-row" class="issues-left">
                             <td id="issues-i-data" class="issues-left">
-                                <b>NOTE:</b> This area is in <b>beta</b>. If you have any problems, please feel free to <a href="mailto:{{ site.email }}" target="_blank">contact us</a>.
+                                The full version of this tracker is available at: <a href="{{ site.locs.ref }}/{{ site.organisation }}/{{ page.issues.repository }}/issues">{{ site.locs.ref }}/{{ site.organisation }}/{{ page.issues.repository }}/issues</a>.
                             </td>
                             <td id="issues-i-right" class="issues-right"></td>
                         </tr>
