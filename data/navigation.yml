@@ -16,12 +16,6 @@
 - url: /messenger
   title: "Messenger"
   class: "fab fa-facebook-messenger"
-- url: mailto:contact@redeclipse.net
-  title: "Email"
-  class: "fa fa-at"
-- url: /lists
-  title: "Mailing Lists"
-  class: "fas fa-envelope"
 - url: /issues
   title: "Issues"
   class: "fas fa-tasks"
