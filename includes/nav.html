@@ -15,6 +15,11 @@
                     <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}"><span class="{{ navitem.class }} fa-fw" aria-hidden="true"></span><div class="navtext">{{ navitem.title }}</div></a></li>
                 {% endfor %}
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                {% for navitem in site.data.extlinks %}
+                    <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}"><span class="{{ navitem.class }} fa-fw" aria-hidden="true"></span><div class="navtext">{{ navitem.title }}</div></a></li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </nav>
