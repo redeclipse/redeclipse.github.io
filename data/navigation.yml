@@ -4,11 +4,20 @@
 - url: /docs
   title: "Documentation"
   class: "fas fa-book"
+- url: /issues
+  title: "Issue Tracker"
+  class: "fas fa-tasks"
+- url: /contribute
+  title: "Contribution Guide"
+  class: "fas fa-handshake"
+- url: /servers
+  title: "Server List"
+  class: "fas fa-server"
 - url: /discuss
-  title: "Discussions"
+  title: "Discussion Forum"
   class: "fas fa-quote-left"
 - url: /chat
-  title: "Chat"
+  title: "Live Chat"
   class: "fas fa-comments"
 - url: /discord
   title: "Discord"
@@ -16,18 +25,6 @@
 - url: /messenger
   title: "Messenger"
   class: "fab fa-facebook-messenger"
-- url: /issues
-  title: "Issues"
-  class: "fas fa-tasks"
-- url: /contribute
-  title: "Contribute"
-  class: "fas fa-handshake"
-- url: /stats
-  title: "Statistics"
-  class: "fas fa-chart-bar"
-- url: /servers
-  title: "Servers"
-  class: "fas fa-server"
 - url: /reddit
   title: "Reddit"
   class: "fab fa-reddit"
