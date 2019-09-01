@@ -97,7 +97,7 @@ Development of Red Eclipse is open and community driven. Contributions can be ma
 
 ## I found a cheater, what can I do?
 
-If you think someone cheats or violates the ~~[Multiplayer Guidelines](Multiplayer-Guidelines)~~ in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a ~~[demo](Demo-Guide)~~ record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
+If you think someone cheats or violates the [Multiplayer Guidelines](Multiplayer-Guidelines) in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a ~~[demo](Demo-Guide)~~ record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
 
 ## How can i change the chat colour?
 
