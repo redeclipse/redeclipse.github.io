@@ -28,7 +28,7 @@ Red Eclipse is available for download at no cost.
 - BSD ports are available for:
     - [FreeBSD](https://www.freshports.org/games/redeclipse/)
     - [OpenBSD](http://ports.su/games/redeclipse,-main)
-- Or download the developmental [Git version](/devel), which is hosted by [GitHub](https://github.com/red-eclipse/base).
+- Or download the developmental [Git version](/devel), which is hosted by [GitHub](https://github.com/redeclipse/base).
 
 ## What are my rights?
 
@@ -36,12 +36,12 @@ Red Eclipse is a [Free](http://www.gnu.org/philosophy/free-sw.html) and [Open So
 
 - Red Eclipse itself and the Cube Engine 2 are under the [zlib License](http://en.wikipedia.org/wiki/Zlib_License).
 - All content in the game is Free, and no more strict than the Creative Commons [CC-BY-SA](http://creativecommons.org/licenses/by-sa/3.0/) license.
-- For more details, see [license.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/license.txt) and [trademark.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/trademark.txt).
+- For more details, see [license.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/license.txt) and [trademark.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/trademark.txt).
 
 ## What are my rights regarding game servers?
 
-- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
-    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of [guidelines.txt](https://raw.githubusercontent.com/red-eclipse/base/master/doc/guidelines.txt).
+- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in [guidelines.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
+    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of [guidelines.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt).
 - Any player or server found to not be in compliance with these guidelines are susceptible to denial of access to the Red Eclipse Master Server either temporarily or indefinitely.
 
 ## Where else can I get help or discuss the game?
@@ -81,7 +81,7 @@ This is the development version of the game, which can be ~~[obtained](Developme
 
 ## What does master and stable mean?
 
-These are the two branches of our base repository on GitHub, <http://github.com/red-eclipse/base/>. The stable branch is for the current release version of the game. This also includes important bug fixes that are fetched via automatic updates. The master branch is for the current development version.
+These are the two branches of our base repository on GitHub, <http://github.com/redeclipse/base/>. The stable branch is for the current release version of the game. This also includes important bug fixes that are fetched via automatic updates. The master branch is for the current development version.
 
 ## I found a bug, where can I report it?
 
@@ -93,7 +93,7 @@ On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will repor
 
 ## Can I contribute to the game?
 
-Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/red-eclipse/base/tree/master/src). For further information, please read our ~~[guidelines](Contribution-Guidelines)~~.
+Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/redeclipse/base/tree/master/src). For further information, please read our ~~[guidelines](Contribution-Guidelines)~~.
 
 ## I found a cheater, what can I do?
 

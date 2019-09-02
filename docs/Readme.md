@@ -9,7 +9,7 @@ permalink: /docs/Readme
 {:toc}
 Welcome to the Red Eclipse Documentation repository.
 
-The pages contained here are automatically built and updated on the [Website repository](https://github.com/red-eclipse/red-eclipse.github.io).
+The pages contained here are automatically built and updated on the [Website repository](https://github.com/redeclipse/redeclipse.github.io).
 
 When editing pages here, there are a few guidelines you should follow.
 

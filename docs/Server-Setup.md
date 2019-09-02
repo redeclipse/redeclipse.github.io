@@ -9,7 +9,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-**WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/red-eclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
+**WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/redeclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
 
 ## System Requirements
 Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system. A Red Eclipse can even be run on a Raspberry Pi if so desired, though it is advisable to have a little more compute power to avoid lagspikes on player join.
@@ -18,7 +18,7 @@ Hosting one or more Red Eclipse servers on your system will require a decent ban
 ### Using the server shipped with Red Eclipse
 
 #### Windows
-1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template from `doc\examples` to the root Red Eclipse directory (copy to the same directory as `server.bat`)
+1. Copy the [servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) example template from `doc\examples` to the root Red Eclipse directory (copy to the same directory as `server.bat`)
 1. Edit these files with a text editor as appropriate, see [Comfiguration Files](#configuration-files) for more.
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
@@ -27,7 +27,7 @@ For details on locating your Red Eclipse home directory, refer to ~~[Game Settin
 
 ##### Installed
 This is normally the case if you installed Red Eclipse via your package manager, or using the "system-install" make target.
-1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template from `/usr/share/doc/redeclipse/examples/` to your homedir, using
+1. Copy the [servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) example template from `/usr/share/doc/redeclipse/examples/` to your homedir, using
 ```sh
 cp /usr/share/doc/redeclipse/examples/servinit.cfg ~/.redeclipse/
 ```
@@ -40,7 +40,7 @@ redeclipse-server
 ##### From Unpacked Tarball
 This is the case if you are running Red Eclipse directly from the unpacked tarball distributed via redeclipse.net (and others).
 
-1. Copy the [servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) example template located in `doc/examples` either to your homedir
+1. Copy the [servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) example template located in `doc/examples` either to your homedir
 ```sh
 cp doc/examples/servinit.cfg ~/.redeclipse/
 ```
@@ -84,7 +84,7 @@ For the installation and configuration steps follow the specific guides.
 The configuration files are written in ~~[cubescript]()~~, lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
 
 ### servinit.cfg
-[servinit.cfg](https://raw.githubusercontent.com/red-eclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
+[servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
 
 #### Admin Password
 - The admin password can (and should!) be set using

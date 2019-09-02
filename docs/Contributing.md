@@ -15,14 +15,14 @@ Red Eclipse development is done with GIT. From there, you are able to create Iss
 
 The tree is split up into the following:
 
-* base: https://github.com/red-eclipse/base - The base environment, including everything needed to build the game.
-* site: https://github.com/red-eclipse/site - The entirety of the website, minus runtime config and data.
+* base: https://github.com/redeclipse/base - The base environment, including everything needed to build the game.
+* site: https://github.com/redeclipse/site - The entirety of the website, minus runtime config and data.
 
 If you are on Windows and don't like the official GitHub application you can try MSysGit or TortoiseGit. If you are on Linux you should be able to obtain the git command line tools from your distribution/package manager.
 
 Here's a rundown of how to setup a new repository:
 ```
-git clone --recurse-submodules https://github.com/red-eclipse/base.git redeclipse
+git clone --recurse-submodules https://github.com/redeclipse/base.git redeclipse
 ```
 ## Content/Idea/Proposal Guidelines
 

@@ -23,7 +23,7 @@ Many commands use client numbers, abbreviated as `cn`, to refer to specific play
 - Player nicknames can be used instead of client numbers, however the name must be entered exactly the same as it is displayed.
 
 ## Moderation Commands
-When using this commands have the [Multiplayer Guidelines](https://github.com/red-eclipse/base/blob/master/doc/guidelines.txt) in mind.
+When using this commands have the [Multiplayer Guidelines](https://github.com/redeclipse/base/blob/master/doc/guidelines.txt) in mind.
 
 | Command                        | Description                                                                                                                                   |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,4 +48,4 @@ With `mastermode <mode>`, you can limit the access to a server.
 | 3        | **Private**, players with less than moderator privileges cannot connect to the server |
 
 ## Master Server
-Trusted moderators are given access to the [master repository](http://github.com/red-eclipse/master) which contains the environment for the master server, this includes the global ban (and other) lists. If you don't want to do a git checkout of the repository, you can edit the files using the GitHub visual editor and commit directly to the repository from there. The server runs the update sequence every ten minutes (X:00, X:10, X:20 .. X:50), at which point the master server will reload the configuration and pass the updated information to all connected servers. 
+Trusted moderators are given access to the [master repository](http://github.com/redeclipse/master) which contains the environment for the master server, this includes the global ban (and other) lists. If you don't want to do a git checkout of the repository, you can edit the files using the GitHub visual editor and commit directly to the repository from there. The server runs the update sequence every ten minutes (X:00, X:10, X:20 .. X:50), at which point the master server will reload the configuration and pass the updated information to all connected servers. 
