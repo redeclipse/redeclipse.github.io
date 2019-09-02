@@ -1,21 +1,21 @@
 Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.0.
 
-This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](https://www.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/red-eclipse/docs).
+This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](https://www.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/redeclipse/docs).
 
-When editing pages here, there are a few guidelines you should follow. It is also important to understand how the pre-processors work, like [Jekyll](https://jekyllrb.com/docs/home/) and [Kramdown](https://kramdown.gettalong.org/documentation.html). The configuration for everything is held in [_config.yml](https://github.com/red-eclipse/red-eclipse.github.io/blob/master/_config.yml).
+When editing pages here, there are a few guidelines you should follow. It is also important to understand how the pre-processors work, like [Jekyll](https://jekyllrb.com/docs/home/) and [Kramdown](https://kramdown.gettalong.org/documentation.html). The configuration for everything is held in [_config.yml](https://github.com/redeclipse/redeclipse.github.io/blob/master/_config.yml).
 
 ## Front Matter
 It is important to include the appropriate YAML [Front Matter](https://jekyllrb.com/docs/frontmatter/) and set at least the following values:
 
 - **title:** The title of the page, which also acts as the first header.
-- **layout:** Which [layout](https://github.com/red-eclipse/red-eclipse.github.io/tree/master/layouts) to use.
+- **layout:** Which [layout](https://github.com/redeclipse/redeclipse.github.io/tree/master/layouts) to use.
 - **permalink:** Where the page sits when then site is built (please omit file extensions like '.html' and '.md').
 
 ### Layouts
-Layouts are generally HTML templates that are used by inserting content and generating a static HTML page. You can see which layouts are available in the [layouts directory](https://github.com/red-eclipse/red-eclipse.github.io/tree/master/layouts).
+Layouts are generally HTML templates that are used by inserting content and generating a static HTML page. You can see which layouts are available in the [layouts directory](https://github.com/redeclipse/redeclipse.github.io/tree/master/layouts).
 
 - **default:** Used for rendering normal pages within the site, and, as the name implies, is the default if omitted from the front matter.
-- **docs:** Used by the files generated from the [Documentation Repository](https://github.com/red-eclipse/docs).
+- **docs:** Used by the files generated from the [Documentation Repository](https://github.com/redeclipse/docs).
 - **dynredir:** As the normal "redirect_to" does not allow the insertion of [variables](https://jekyllrb.com/docs/variables/), you can create an HTML file with this layout and define the URL in the content area.
 - **home:** A special template used for the home page to arrange all the fancy stuff.
 - **redirect:** Used by [jekyll-redirect-from](https://github.com/jekyll/jekyll-redirect-from), see their [usage](https://github.com/jekyll/jekyll-redirect-from#usage) for more information.

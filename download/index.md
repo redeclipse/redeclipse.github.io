@@ -22,4 +22,4 @@ Platform                                                             | Downloads
 
 {% include release.md %}
 
-You can view the entire release [on GitHub](https://github.com/red-eclipse/base/releases/tag/v{{ site.data.game.version }}).
+You can view the entire release [on GitHub](https://github.com/redeclipse/base/releases/tag/v{{ site.data.game.version }}).
