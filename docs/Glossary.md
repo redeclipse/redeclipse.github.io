@@ -27,7 +27,6 @@ The following list explains some commonly used terms and acronyms.
 | gg     | good game, a typical chat comment at the end of a match. |
 | gaud   | the official unit for gaudiness. 100° C is hot enough to vaporize your eyeballs; likewise 100 gaud is gaudy enough to do the same. For an example of a 100-gaud map, see Map Rooftop |
 | insta  | instagib, a game mutator for one-hit-kills, disabled by default. |
-| irc    | Internet Relay Chat. The official [IRC](IRC) channel for Red Eclipse is #redeclipse on the Freenode Network. Game servers can be configured to relay chat from or to IRC, and the game client has a basic IRC menu built-in. |
 | mat    | materials define special properties of map volumes, such as filling an area with water or clipping. |
 | mod    | moderator, a player with elevated [privileges](Privileges). Mod can also stand for client modifications. |
 | mpz    | file format to store most content of a map, including all geometry, entity positions and lightmaps. |

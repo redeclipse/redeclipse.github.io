@@ -39,7 +39,7 @@ You must download and install Code::Blocks for easiest building on Windows.
 - Once crashed, you will see the debugger near the bottom of the screen with a Command input. Write `bt full` in that command input and press enter.
 
 <a href="images/debug/Win64dbg04.png" target="_blank"><img src="images/debug/Win64dbg04.png" width="512px"/></a>
-- This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on [IRC](IRC).
+- This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on ~~[IRC](IRC)~~.
 
 ## Linux
 
@@ -63,4 +63,4 @@ Once Red Eclipse has crashed, GDB will catch this and present a prompt. At this 
 ```
 bt full
 ```
-This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on [IRC](IRC). 
+This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on ~~[IRC](IRC)~~. 

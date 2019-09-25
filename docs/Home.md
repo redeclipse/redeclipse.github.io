@@ -35,7 +35,6 @@ redirect_from:
 - **[Downloads](/download)** - Download the game and play it!
 - **[Account Application](/apply)** - Apply for an account to identify yourself.
 - **[Discussion Area](/discuss)** - Talk with your fellow players and developers.
-- **[Live Chat](/chat)** - Join our IRC channel in `#redeclipse` on `chat.freenode.net`.
 - **[Discord Server](/discord)** - Join our Discord Server, chats in `#re-lay` are sent to our IRC.
 - **[Facebook Messenger](/messenger)** - Ask a quick question and we'll get back to you.
 - **[Issue Tracker](/issues)** - The place for bug reports and approved feature requests.

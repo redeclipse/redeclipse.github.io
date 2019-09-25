@@ -40,16 +40,16 @@ Red Eclipse is a [Free](http://www.gnu.org/philosophy/free-sw.html) and [Open So
 
 ## What are my rights regarding game servers?
 
-- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in [guidelines.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
-    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of [guidelines.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt).
+- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in the [Multiplayer Guidelines](Multiplayer-Guidelines)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
+    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of the [Multiplayer Guidelines](Multiplayer-Guidelines).
 - Any player or server found to not be in compliance with these guidelines are susceptible to denial of access to the Red Eclipse Master Server either temporarily or indefinitely.
 
 ## Where else can I get help or discuss the game?
 
 Apart from this wiki, and playing on the game servers, you can:
 
-- Participate in the game [discussions](/discuss).
-- Connect to [irc.freenode.net](irc://irc.freenode.net) IRC network, and join \#redeclipse channel or use the [WebChat](/chat)
+- Participate in [discussions](/discuss).
+- Chat on our [Discord](/discord).
 
 ## Where do I find screenshots, logs and other user data?
 
@@ -85,7 +85,7 @@ These are the two branches of our base repository on GitHub, <http://github.com/
 
 ## I found a bug, where can I report it?
 
-Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our ~~[guidelines](Contribution-Guidelines)~~.
+Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our ~~[contribution guidelines](Contribution-Guidelines)~~.
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
@@ -93,7 +93,7 @@ On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will repor
 
 ## Can I contribute to the game?
 
-Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/redeclipse/base/tree/master/src). For further information, please read our ~~[guidelines](Contribution-Guidelines)~~.
+Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/redeclipse/base/tree/master/src). For further information, please read our ~~[contribution guidelines](Contribution-Guidelines)~~.
 
 ## I found a cheater, what can I do?
 
