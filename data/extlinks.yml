@@ -1,8 +1,5 @@
-- url: /chat
-  title: "Live Chat"
-  class: "fas fa-comments"
 - url: /discord
-  title: "Discord"
+  title: "Discord Chat"
   class: "fab fa-discord"
 - url: /messenger
   title: "Messenger"
