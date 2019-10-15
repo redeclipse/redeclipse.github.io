@@ -6,6 +6,7 @@ origtitle: Server-GameFilters
 permalink: /docs/Server-GameFilters
 redirect_from:
   - /docs/Server_GameFilters/
+  - /wiki/Server_GameFilters/
 ---
 * TOC
 {:toc}

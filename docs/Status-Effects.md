@@ -6,6 +6,7 @@ origtitle: Status-Effects
 permalink: /docs/Status-Effects
 redirect_from:
   - /docs/Status_Effects/
+  - /wiki/Status_Effects/
 ---
 * TOC
 {:toc}

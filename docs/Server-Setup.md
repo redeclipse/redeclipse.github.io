@@ -6,6 +6,7 @@ origtitle: Server-Setup
 permalink: /docs/Server-Setup
 redirect_from:
   - /docs/Server_Setup/
+  - /wiki/Server_Setup/
 ---
 * TOC
 {:toc}

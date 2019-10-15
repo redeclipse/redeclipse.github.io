@@ -6,6 +6,7 @@ origtitle: Scoring-System
 permalink: /docs/Scoring-System
 redirect_from:
   - /docs/Scoring_System/
+  - /wiki/Scoring_System/
 ---
 * TOC
 {:toc}

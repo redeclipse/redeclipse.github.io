@@ -6,6 +6,7 @@ origtitle: Statistics-System
 permalink: /docs/Statistics-System
 redirect_from:
   - /docs/Statistics_System/
+  - /wiki/Statistics_System/
 ---
 * TOC
 {:toc}

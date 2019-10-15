@@ -6,6 +6,7 @@ origtitle: Admin-Guide
 permalink: /docs/Admin-Guide
 redirect_from:
   - /docs/Admin_Guide/
+  - /wiki/Admin_Guide/
 ---
 * TOC
 {:toc}
