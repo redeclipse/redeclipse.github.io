@@ -1,11 +1,11 @@
 ---
-title: Blink
+title: maps/Blink
 layout: docs
 origfile: maps/Blink.md
-origtitle: Blink
+origtitle: maps/Blink
 permalink: /docs/maps/Blink
 redirect_from:
-  - /wiki/Blink/
+  - /wiki/maps/Blink/
 ---
 * TOC
 {:toc}

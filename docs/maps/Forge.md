@@ -1,11 +1,11 @@
 ---
-title: Forge
+title: maps/Forge
 layout: docs
 origfile: maps/Forge.md
-origtitle: Forge
+origtitle: maps/Forge
 permalink: /docs/maps/Forge
 redirect_from:
-  - /wiki/Forge/
+  - /wiki/maps/Forge/
 ---
 * TOC
 {:toc}

@@ -1,11 +1,11 @@
 ---
-title: Hawk
+title: maps/Hawk
 layout: docs
 origfile: maps/Hawk.md
-origtitle: Hawk
+origtitle: maps/Hawk
 permalink: /docs/maps/Hawk
 redirect_from:
-  - /wiki/Hawk/
+  - /wiki/maps/Hawk/
 ---
 * TOC
 {:toc}

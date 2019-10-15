@@ -1,11 +1,11 @@
 ---
-title: Absorption
+title: maps/Absorption
 layout: docs
 origfile: maps/Absorption.md
-origtitle: Absorption
+origtitle: maps/Absorption
 permalink: /docs/maps/Absorption
 redirect_from:
-  - /wiki/Absorption/
+  - /wiki/maps/Absorption/
 ---
 * TOC
 {:toc}

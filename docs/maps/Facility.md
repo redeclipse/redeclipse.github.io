@@ -1,11 +1,11 @@
 ---
-title: Facility
+title: maps/Facility
 layout: docs
 origfile: maps/Facility.md
-origtitle: Facility
+origtitle: maps/Facility
 permalink: /docs/maps/Facility
 redirect_from:
-  - /wiki/Facility/
+  - /wiki/maps/Facility/
 ---
 * TOC
 {:toc}

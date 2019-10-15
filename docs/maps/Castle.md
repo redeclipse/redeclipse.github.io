@@ -1,11 +1,11 @@
 ---
-title: Castle
+title: maps/Castle
 layout: docs
 origfile: maps/Castle.md
-origtitle: Castle
+origtitle: maps/Castle
 permalink: /docs/maps/Castle
 redirect_from:
-  - /wiki/Castle/
+  - /wiki/maps/Castle/
 ---
 * TOC
 {:toc}

@@ -1,11 +1,11 @@
 ---
-title: Dawn
+title: maps/Dawn
 layout: docs
 origfile: maps/Dawn.md
-origtitle: Dawn
+origtitle: maps/Dawn
 permalink: /docs/maps/Dawn
 redirect_from:
-  - /wiki/Dawn/
+  - /wiki/maps/Dawn/
 ---
 * TOC
 {:toc}

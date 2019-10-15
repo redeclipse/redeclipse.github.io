@@ -1,11 +1,11 @@
 ---
-title: Convolution
+title: maps/Convolution
 layout: docs
 origfile: maps/Convolution.md
-origtitle: Convolution
+origtitle: maps/Convolution
 permalink: /docs/maps/Convolution
 redirect_from:
-  - /wiki/Convolution/
+  - /wiki/maps/Convolution/
 ---
 * TOC
 {:toc}

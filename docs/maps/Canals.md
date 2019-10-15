@@ -1,11 +1,11 @@
 ---
-title: Canals
+title: maps/Canals
 layout: docs
 origfile: maps/Canals.md
-origtitle: Canals
+origtitle: maps/Canals
 permalink: /docs/maps/Canals
 redirect_from:
-  - /wiki/Canals/
+  - /wiki/maps/Canals/
 ---
 * TOC
 {:toc}

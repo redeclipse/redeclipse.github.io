@@ -1,11 +1,11 @@
 ---
-title: Colony
+title: maps/Colony
 layout: docs
 origfile: maps/Colony.md
-origtitle: Colony
+origtitle: maps/Colony
 permalink: /docs/maps/Colony
 redirect_from:
-  - /wiki/Colony/
+  - /wiki/maps/Colony/
 ---
 * TOC
 {:toc}

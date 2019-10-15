@@ -1,11 +1,11 @@
 ---
-title: Condensation
+title: maps/Condensation
 layout: docs
 origfile: maps/Condensation.md
-origtitle: Condensation
+origtitle: maps/Condensation
 permalink: /docs/maps/Condensation
 redirect_from:
-  - /wiki/Condensation/
+  - /wiki/maps/Condensation/
 ---
 * TOC
 {:toc}

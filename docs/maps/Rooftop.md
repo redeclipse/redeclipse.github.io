@@ -1,11 +1,11 @@
 ---
-title: Rooftop
+title: maps/Rooftop
 layout: docs
 origfile: maps/Rooftop.md
-origtitle: Rooftop
+origtitle: maps/Rooftop
 permalink: /docs/maps/Rooftop
 redirect_from:
-  - /wiki/Rooftop/
+  - /wiki/maps/Rooftop/
 ---
 * TOC
 {:toc}

@@ -1,11 +1,11 @@
 ---
-title: Industrial
+title: maps/Industrial
 layout: docs
 origfile: maps/Industrial.md
-origtitle: Industrial
+origtitle: maps/Industrial
 permalink: /docs/maps/Industrial
 redirect_from:
-  - /wiki/Industrial/
+  - /wiki/maps/Industrial/
 ---
 * TOC
 {:toc}

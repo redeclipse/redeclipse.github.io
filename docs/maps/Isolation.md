@@ -1,11 +1,11 @@
 ---
-title: Isolation
+title: maps/Isolation
 layout: docs
 origfile: maps/Isolation.md
-origtitle: Isolation
+origtitle: maps/Isolation
 permalink: /docs/maps/Isolation
 redirect_from:
-  - /wiki/Isolation/
+  - /wiki/maps/Isolation/
 ---
 * TOC
 {:toc}

@@ -1,11 +1,11 @@
 ---
-title: Auster
+title: maps/Auster
 layout: docs
 origfile: maps/Auster.md
-origtitle: Auster
+origtitle: maps/Auster
 permalink: /docs/maps/Auster
 redirect_from:
-  - /wiki/Auster/
+  - /wiki/maps/Auster/
 ---
 * TOC
 {:toc}

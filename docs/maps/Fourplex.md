@@ -1,11 +1,11 @@
 ---
-title: Fourplex
+title: maps/Fourplex
 layout: docs
 origfile: maps/Fourplex.md
-origtitle: Fourplex
+origtitle: maps/Fourplex
 permalink: /docs/maps/Fourplex
 redirect_from:
-  - /wiki/Fourplex/
+  - /wiki/maps/Fourplex/
 ---
 * TOC
 {:toc}

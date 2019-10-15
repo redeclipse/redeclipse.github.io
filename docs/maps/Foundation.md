@@ -1,11 +1,11 @@
 ---
-title: Foundation
+title: maps/Foundation
 layout: docs
 origfile: maps/Foundation.md
-origtitle: Foundation
+origtitle: maps/Foundation
 permalink: /docs/maps/Foundation
 redirect_from:
-  - /wiki/Foundation/
+  - /wiki/maps/Foundation/
 ---
 * TOC
 {:toc}

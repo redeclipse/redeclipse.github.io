@@ -1,11 +1,11 @@
 ---
-title: Lab
+title: maps/Lab
 layout: docs
 origfile: maps/Lab.md
-origtitle: Lab
+origtitle: maps/Lab
 permalink: /docs/maps/Lab
 redirect_from:
-  - /wiki/Lab/
+  - /wiki/maps/Lab/
 ---
 * TOC
 {:toc}

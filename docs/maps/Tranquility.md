@@ -1,11 +1,11 @@
 ---
-title: Tranquility
+title: maps/Tranquility
 layout: docs
 origfile: maps/Tranquility.md
-origtitle: Tranquility
+origtitle: maps/Tranquility
 permalink: /docs/maps/Tranquility
 redirect_from:
-  - /wiki/Tranquility/
+  - /wiki/maps/Tranquility/
 ---
 * TOC
 {:toc}

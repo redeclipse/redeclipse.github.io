@@ -1,12 +1,12 @@
 ---
-title: Alpha Campaign
+title: maps/Alpha Campaign
 layout: docs
 origfile: maps/Alpha-Campaign.md
-origtitle: Alpha-Campaign
+origtitle: maps/Alpha-Campaign
 permalink: /docs/maps/Alpha-Campaign
 redirect_from:
   - /docs/maps/Alpha_Campaign/
-  - /wiki/Alpha_Campaign/
+  - /wiki/maps/Alpha_Campaign/
 ---
 * TOC
 {:toc}

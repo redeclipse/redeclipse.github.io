@@ -1,11 +1,11 @@
 ---
-title: Amplification
+title: maps/Amplification
 layout: docs
 origfile: maps/Amplification.md
-origtitle: Amplification
+origtitle: maps/Amplification
 permalink: /docs/maps/Amplification
 redirect_from:
-  - /wiki/Amplification/
+  - /wiki/maps/Amplification/
 ---
 * TOC
 {:toc}

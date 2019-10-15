@@ -1,11 +1,11 @@
 ---
-title: Linear
+title: maps/Linear
 layout: docs
 origfile: maps/Linear.md
-origtitle: Linear
+origtitle: maps/Linear
 permalink: /docs/maps/Linear
 redirect_from:
-  - /wiki/Linear/
+  - /wiki/maps/Linear/
 ---
 * TOC
 {:toc}

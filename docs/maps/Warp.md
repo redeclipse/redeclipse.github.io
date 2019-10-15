@@ -1,11 +1,11 @@
 ---
-title: Warp
+title: maps/Warp
 layout: docs
 origfile: maps/Warp.md
-origtitle: Warp
+origtitle: maps/Warp
 permalink: /docs/maps/Warp
 redirect_from:
-  - /wiki/Warp/
+  - /wiki/maps/Warp/
 ---
 * TOC
 {:toc}
