@@ -1,5 +1,5 @@
 ---
-title: 
+title: Status Effects
 layout: docs
 origfile: Status-Effects.md
 origtitle: Status-Effects

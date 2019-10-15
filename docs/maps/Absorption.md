@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Absorption
 layout: docs
 origfile: maps/Absorption.md
 origtitle: Absorption

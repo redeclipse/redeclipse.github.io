@@ -1,5 +1,5 @@
 ---
-title: 
+title: Server Setup
 layout: docs
 origfile: Server-Setup.md
 origtitle: Server-Setup

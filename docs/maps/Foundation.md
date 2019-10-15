@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Foundation
 layout: docs
 origfile: maps/Foundation.md
 origtitle: Foundation

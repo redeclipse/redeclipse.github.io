@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Industrial
 layout: docs
 origfile: maps/Industrial.md
 origtitle: Industrial

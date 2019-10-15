@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Tranquility
 layout: docs
 origfile: maps/Tranquility.md
 origtitle: Tranquility

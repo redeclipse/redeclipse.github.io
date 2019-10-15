@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Lab
 layout: docs
 origfile: maps/Lab.md
 origtitle: Lab

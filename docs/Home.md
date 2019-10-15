@@ -1,5 +1,5 @@
 ---
-title: 
+title: Home
 layout: docs
 origfile: Home.md
 origtitle: Home

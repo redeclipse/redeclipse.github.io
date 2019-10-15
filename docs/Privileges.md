@@ -1,5 +1,5 @@
 ---
-title: 
+title: Privileges
 layout: docs
 origfile: Privileges.md
 origtitle: Privileges

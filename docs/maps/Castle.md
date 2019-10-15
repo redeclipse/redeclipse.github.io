@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Castle
 layout: docs
 origfile: maps/Castle.md
 origtitle: Castle

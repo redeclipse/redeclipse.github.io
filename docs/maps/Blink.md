@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Blink
 layout: docs
 origfile: maps/Blink.md
 origtitle: Blink

@@ -1,5 +1,5 @@
 ---
-title: 
+title: Mutator Tips
 layout: docs
 origfile: Mutator-Tips.md
 origtitle: Mutator-Tips

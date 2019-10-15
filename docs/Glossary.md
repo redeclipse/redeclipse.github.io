@@ -1,5 +1,5 @@
 ---
-title: 
+title: Glossary
 layout: docs
 origfile: Glossary.md
 origtitle: Glossary

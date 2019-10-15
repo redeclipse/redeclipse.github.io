@@ -1,5 +1,5 @@
 ---
-title: 
+title: Maps: Auster
 layout: docs
 origfile: maps/Auster.md
 origtitle: Auster
