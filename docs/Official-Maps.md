@@ -1,5 +1,5 @@
 ---
-title: Official Maps
+title: 
 layout: docs
 origfile: Official-Maps.md
 origtitle: Official-Maps

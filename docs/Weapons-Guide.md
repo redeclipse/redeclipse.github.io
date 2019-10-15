@@ -1,5 +1,5 @@
 ---
-title: Weapons Guide
+title: 
 layout: docs
 origfile: Weapons-Guide.md
 origtitle: Weapons-Guide

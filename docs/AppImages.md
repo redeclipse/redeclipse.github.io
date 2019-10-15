@@ -1,5 +1,5 @@
 ---
-title: AppImages
+title: 
 layout: docs
 origfile: AppImages.md
 origtitle: AppImages

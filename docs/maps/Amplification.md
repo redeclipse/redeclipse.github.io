@@ -1,8 +1,8 @@
 ---
-title: maps/Amplification
+title: 
 layout: docs
 origfile: maps/Amplification.md
-origtitle: maps/Amplification
+origtitle: Amplification
 permalink: /docs/maps/Amplification
 redirect_from:
   - /wiki/maps/Amplification/

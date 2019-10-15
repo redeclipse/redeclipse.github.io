@@ -1,8 +1,8 @@
 ---
-title: maps/Facility
+title: 
 layout: docs
 origfile: maps/Facility.md
-origtitle: maps/Facility
+origtitle: Facility
 permalink: /docs/maps/Facility
 redirect_from:
   - /wiki/maps/Facility/

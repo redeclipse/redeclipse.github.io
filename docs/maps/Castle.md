@@ -1,8 +1,8 @@
 ---
-title: maps/Castle
+title: 
 layout: docs
 origfile: maps/Castle.md
-origtitle: maps/Castle
+origtitle: Castle
 permalink: /docs/maps/Castle
 redirect_from:
   - /wiki/maps/Castle/

@@ -1,8 +1,8 @@
 ---
-title: maps/Starlibido
+title: 
 layout: docs
 origfile: maps/Starlibido.md
-origtitle: maps/Starlibido
+origtitle: Starlibido
 permalink: /docs/maps/Starlibido
 redirect_from:
   - /wiki/maps/Starlibido/

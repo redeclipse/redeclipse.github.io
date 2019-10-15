@@ -1,8 +1,8 @@
 ---
-title: maps/Linear
+title: 
 layout: docs
 origfile: maps/Linear.md
-origtitle: maps/Linear
+origtitle: Linear
 permalink: /docs/maps/Linear
 redirect_from:
   - /wiki/maps/Linear/

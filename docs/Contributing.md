@@ -1,5 +1,5 @@
 ---
-title: Contributing
+title: 
 layout: docs
 origfile: Contributing.md
 origtitle: Contributing

@@ -1,8 +1,8 @@
 ---
-title: maps/Forge
+title: 
 layout: docs
 origfile: maps/Forge.md
-origtitle: maps/Forge
+origtitle: Forge
 permalink: /docs/maps/Forge
 redirect_from:
   - /wiki/maps/Forge/

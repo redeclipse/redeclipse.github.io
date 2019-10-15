@@ -1,8 +1,8 @@
 ---
-title: maps/Canals
+title: 
 layout: docs
 origfile: maps/Canals.md
-origtitle: maps/Canals
+origtitle: Canals
 permalink: /docs/maps/Canals
 redirect_from:
   - /wiki/maps/Canals/

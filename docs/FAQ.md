@@ -1,5 +1,5 @@
 ---
-title: FAQ
+title: 
 layout: docs
 origfile: FAQ.md
 origtitle: FAQ

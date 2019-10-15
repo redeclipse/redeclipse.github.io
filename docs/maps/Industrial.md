@@ -1,8 +1,8 @@
 ---
-title: maps/Industrial
+title: 
 layout: docs
 origfile: maps/Industrial.md
-origtitle: maps/Industrial
+origtitle: Industrial
 permalink: /docs/maps/Industrial
 redirect_from:
   - /wiki/maps/Industrial/

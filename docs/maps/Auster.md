@@ -1,8 +1,8 @@
 ---
-title: maps/Auster
+title: 
 layout: docs
 origfile: maps/Auster.md
-origtitle: maps/Auster
+origtitle: Auster
 permalink: /docs/maps/Auster
 redirect_from:
   - /wiki/maps/Auster/

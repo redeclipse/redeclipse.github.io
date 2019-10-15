@@ -1,5 +1,5 @@
 ---
-title: Admin Guide
+title: 
 layout: docs
 origfile: Admin-Guide.md
 origtitle: Admin-Guide

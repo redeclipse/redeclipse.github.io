@@ -1,8 +1,8 @@
 ---
-title: maps/Blink
+title: 
 layout: docs
 origfile: maps/Blink.md
-origtitle: maps/Blink
+origtitle: Blink
 permalink: /docs/maps/Blink
 redirect_from:
   - /wiki/maps/Blink/

@@ -1,8 +1,8 @@
 ---
-title: maps/Fatal Error
+title: 
 layout: docs
 origfile: maps/Fatal-Error.md
-origtitle: maps/Fatal-Error
+origtitle: Fatal-Error
 permalink: /docs/maps/Fatal-Error
 redirect_from:
   - /docs/maps/Fatal_Error/

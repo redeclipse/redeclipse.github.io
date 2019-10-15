@@ -1,8 +1,8 @@
 ---
-title: maps/Rooftop
+title: 
 layout: docs
 origfile: maps/Rooftop.md
-origtitle: maps/Rooftop
+origtitle: Rooftop
 permalink: /docs/maps/Rooftop
 redirect_from:
   - /wiki/maps/Rooftop/

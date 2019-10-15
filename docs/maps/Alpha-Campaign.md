@@ -1,8 +1,8 @@
 ---
-title: maps/Alpha Campaign
+title: 
 layout: docs
 origfile: maps/Alpha-Campaign.md
-origtitle: maps/Alpha-Campaign
+origtitle: Alpha-Campaign
 permalink: /docs/maps/Alpha-Campaign
 redirect_from:
   - /docs/maps/Alpha_Campaign/

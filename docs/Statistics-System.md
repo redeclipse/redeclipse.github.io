@@ -1,5 +1,5 @@
 ---
-title: Statistics System
+title: 
 layout: docs
 origfile: Statistics-System.md
 origtitle: Statistics-System

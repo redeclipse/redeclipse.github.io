@@ -1,8 +1,8 @@
 ---
-title: maps/Condensation
+title: 
 layout: docs
 origfile: maps/Condensation.md
-origtitle: maps/Condensation
+origtitle: Condensation
 permalink: /docs/maps/Condensation
 redirect_from:
   - /wiki/maps/Condensation/

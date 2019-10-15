@@ -1,5 +1,5 @@
 ---
-title: Debug
+title: 
 layout: docs
 origfile: Debug.md
 origtitle: Debug

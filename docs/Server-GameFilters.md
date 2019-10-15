@@ -1,5 +1,5 @@
 ---
-title: Server GameFilters
+title: 
 layout: docs
 origfile: Server-GameFilters.md
 origtitle: Server-GameFilters

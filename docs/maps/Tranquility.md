@@ -1,8 +1,8 @@
 ---
-title: maps/Tranquility
+title: 
 layout: docs
 origfile: maps/Tranquility.md
-origtitle: maps/Tranquility
+origtitle: Tranquility
 permalink: /docs/maps/Tranquility
 redirect_from:
   - /wiki/maps/Tranquility/

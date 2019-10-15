@@ -1,5 +1,5 @@
 ---
-title: Information for v2
+title: 
 layout: docs
 origfile: Information-for-v2.md
 origtitle: Information-for-v2

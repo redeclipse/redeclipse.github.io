@@ -1,8 +1,8 @@
 ---
-title: maps/Warp
+title: 
 layout: docs
 origfile: maps/Warp.md
-origtitle: maps/Warp
+origtitle: Warp
 permalink: /docs/maps/Warp
 redirect_from:
   - /wiki/maps/Warp/

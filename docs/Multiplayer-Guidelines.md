@@ -1,5 +1,5 @@
 ---
-title: Multiplayer Guidelines
+title: 
 layout: docs
 origfile: Multiplayer-Guidelines.md
 origtitle: Multiplayer-Guidelines

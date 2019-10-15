@@ -1,5 +1,5 @@
 ---
-title: Modes and Mutators
+title: 
 layout: docs
 origfile: Modes-and-Mutators.md
 origtitle: Modes-and-Mutators

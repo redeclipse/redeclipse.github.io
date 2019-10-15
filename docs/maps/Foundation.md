@@ -1,8 +1,8 @@
 ---
-title: maps/Foundation
+title: 
 layout: docs
 origfile: maps/Foundation.md
-origtitle: maps/Foundation
+origtitle: Foundation
 permalink: /docs/maps/Foundation
 redirect_from:
   - /wiki/maps/Foundation/

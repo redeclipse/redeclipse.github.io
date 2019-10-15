@@ -1,8 +1,8 @@
 ---
-title: maps/Lab
+title: 
 layout: docs
 origfile: maps/Lab.md
-origtitle: maps/Lab
+origtitle: Lab
 permalink: /docs/maps/Lab
 redirect_from:
   - /wiki/maps/Lab/

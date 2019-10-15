@@ -1,8 +1,8 @@
 ---
-title: maps/Isolation
+title: 
 layout: docs
 origfile: maps/Isolation.md
-origtitle: maps/Isolation
+origtitle: Isolation
 permalink: /docs/maps/Isolation
 redirect_from:
   - /wiki/maps/Isolation/

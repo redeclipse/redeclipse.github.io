@@ -1,5 +1,5 @@
 ---
-title: Materials
+title: 
 layout: docs
 origfile: Materials.md
 origtitle: Materials

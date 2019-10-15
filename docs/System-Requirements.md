@@ -1,5 +1,5 @@
 ---
-title: System Requirements
+title: 
 layout: docs
 origfile: System-Requirements.md
 origtitle: System-Requirements

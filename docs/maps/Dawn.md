@@ -1,8 +1,8 @@
 ---
-title: maps/Dawn
+title: 
 layout: docs
 origfile: maps/Dawn.md
-origtitle: maps/Dawn
+origtitle: Dawn
 permalink: /docs/maps/Dawn
 redirect_from:
   - /wiki/maps/Dawn/

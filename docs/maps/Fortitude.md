@@ -1,8 +1,8 @@
 ---
-title: maps/Fortitude
+title: 
 layout: docs
 origfile: maps/Fortitude.md
-origtitle: maps/Fortitude
+origtitle: Fortitude
 permalink: /docs/maps/Fortitude
 redirect_from:
   - /wiki/maps/Fortitude/

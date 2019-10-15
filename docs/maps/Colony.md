@@ -1,8 +1,8 @@
 ---
-title: maps/Colony
+title: 
 layout: docs
 origfile: maps/Colony.md
-origtitle: maps/Colony
+origtitle: Colony
 permalink: /docs/maps/Colony
 redirect_from:
   - /wiki/maps/Colony/

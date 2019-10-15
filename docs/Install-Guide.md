@@ -1,5 +1,5 @@
 ---
-title: Install Guide
+title: 
 layout: docs
 origfile: Install-Guide.md
 origtitle: Install-Guide

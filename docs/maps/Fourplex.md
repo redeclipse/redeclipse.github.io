@@ -1,8 +1,8 @@
 ---
-title: maps/Fourplex
+title: 
 layout: docs
 origfile: maps/Fourplex.md
-origtitle: maps/Fourplex
+origtitle: Fourplex
 permalink: /docs/maps/Fourplex
 redirect_from:
   - /wiki/maps/Fourplex/

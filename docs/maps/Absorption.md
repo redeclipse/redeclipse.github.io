@@ -1,8 +1,8 @@
 ---
-title: maps/Absorption
+title: 
 layout: docs
 origfile: maps/Absorption.md
-origtitle: maps/Absorption
+origtitle: Absorption
 permalink: /docs/maps/Absorption
 redirect_from:
   - /wiki/maps/Absorption/
