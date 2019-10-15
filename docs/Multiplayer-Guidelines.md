@@ -5,8 +5,8 @@ origfile: Multiplayer-Guidelines.md
 origtitle: Multiplayer-Guidelines
 permalink: /docs/Multiplayer-Guidelines
 redirect_from:
-  - /docs/Multiplayer_Guidelines/
-  - /wiki/Multiplayer_Guidelines/
+  - /docs/Multiplayer_Guidelines
+  - /wiki/Multiplayer_Guidelines
 ---
 * TOC
 {:toc}
