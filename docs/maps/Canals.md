@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Canals.md
 origtitle: Canals
 permalink: /docs/maps/Canals
+redirect_from:
+  - /wiki/Canals/
 ---
 * TOC
 {:toc}

@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Castle.md
 origtitle: Castle
 permalink: /docs/maps/Castle
+redirect_from:
+  - /wiki/Castle/
 ---
 * TOC
 {:toc}

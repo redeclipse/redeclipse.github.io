@@ -4,6 +4,8 @@ layout: docs
 origfile: Debug.md
 origtitle: Debug
 permalink: /docs/Debug
+redirect_from:
+  - /wiki/Debug/
 ---
 * TOC
 {:toc}

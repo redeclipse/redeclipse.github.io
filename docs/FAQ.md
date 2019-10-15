@@ -4,6 +4,8 @@ layout: docs
 origfile: FAQ.md
 origtitle: FAQ
 permalink: /docs/FAQ
+redirect_from:
+  - /wiki/FAQ/
 ---
 * TOC
 {:toc}

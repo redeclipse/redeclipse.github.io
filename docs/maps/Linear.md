@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Linear.md
 origtitle: Linear
 permalink: /docs/maps/Linear
+redirect_from:
+  - /wiki/Linear/
 ---
 * TOC
 {:toc}

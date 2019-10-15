@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Fourplex.md
 origtitle: Fourplex
 permalink: /docs/maps/Fourplex
+redirect_from:
+  - /wiki/Fourplex/
 ---
 * TOC
 {:toc}

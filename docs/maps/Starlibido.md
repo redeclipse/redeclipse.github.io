@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Starlibido.md
 origtitle: Starlibido
 permalink: /docs/maps/Starlibido
+redirect_from:
+  - /wiki/Starlibido/
 ---
 * TOC
 {:toc}

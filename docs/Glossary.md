@@ -4,6 +4,8 @@ layout: docs
 origfile: Glossary.md
 origtitle: Glossary
 permalink: /docs/Glossary
+redirect_from:
+  - /wiki/Glossary/
 ---
 * TOC
 {:toc}

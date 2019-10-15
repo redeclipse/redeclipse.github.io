@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Fortitude.md
 origtitle: Fortitude
 permalink: /docs/maps/Fortitude
+redirect_from:
+  - /wiki/Fortitude/
 ---
 * TOC
 {:toc}

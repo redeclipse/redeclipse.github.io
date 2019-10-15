@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Lab.md
 origtitle: Lab
 permalink: /docs/maps/Lab
+redirect_from:
+  - /wiki/Lab/
 ---
 * TOC
 {:toc}

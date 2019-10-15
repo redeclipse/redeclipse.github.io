@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Isolation.md
 origtitle: Isolation
 permalink: /docs/maps/Isolation
+redirect_from:
+  - /wiki/Isolation/
 ---
 * TOC
 {:toc}

@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Condensation.md
 origtitle: Condensation
 permalink: /docs/maps/Condensation
+redirect_from:
+  - /wiki/Condensation/
 ---
 * TOC
 {:toc}

@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Facility.md
 origtitle: Facility
 permalink: /docs/maps/Facility
+redirect_from:
+  - /wiki/Facility/
 ---
 * TOC
 {:toc}

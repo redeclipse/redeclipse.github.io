@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Tranquility.md
 origtitle: Tranquility
 permalink: /docs/maps/Tranquility
+redirect_from:
+  - /wiki/Tranquility/
 ---
 * TOC
 {:toc}

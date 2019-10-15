@@ -4,6 +4,8 @@ layout: docs
 origfile: Materials.md
 origtitle: Materials
 permalink: /docs/Materials
+redirect_from:
+  - /wiki/Materials/
 ---
 * TOC
 {:toc}

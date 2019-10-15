@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Auster.md
 origtitle: Auster
 permalink: /docs/maps/Auster
+redirect_from:
+  - /wiki/Auster/
 ---
 * TOC
 {:toc}

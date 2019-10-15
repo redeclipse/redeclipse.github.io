@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Convolution.md
 origtitle: Convolution
 permalink: /docs/maps/Convolution
+redirect_from:
+  - /wiki/Convolution/
 ---
 * TOC
 {:toc}

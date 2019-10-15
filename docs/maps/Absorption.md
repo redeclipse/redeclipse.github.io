@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Absorption.md
 origtitle: Absorption
 permalink: /docs/maps/Absorption
+redirect_from:
+  - /wiki/Absorption/
 ---
 * TOC
 {:toc}

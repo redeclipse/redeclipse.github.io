@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Warp.md
 origtitle: Warp
 permalink: /docs/maps/Warp
+redirect_from:
+  - /wiki/Warp/
 ---
 * TOC
 {:toc}

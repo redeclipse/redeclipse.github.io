@@ -4,6 +4,8 @@ layout: docs
 origfile: Readme.md
 origtitle: Readme
 permalink: /docs/Readme
+redirect_from:
+  - /wiki/Readme/
 ---
 * TOC
 {:toc}

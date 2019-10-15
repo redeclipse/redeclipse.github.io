@@ -4,6 +4,8 @@ layout: docs
 origfile: Entities.md
 origtitle: Entities
 permalink: /docs/Entities
+redirect_from:
+  - /wiki/Entities/
 ---
 * TOC
 {:toc}

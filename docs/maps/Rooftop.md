@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Rooftop.md
 origtitle: Rooftop
 permalink: /docs/maps/Rooftop
+redirect_from:
+  - /wiki/Rooftop/
 ---
 * TOC
 {:toc}

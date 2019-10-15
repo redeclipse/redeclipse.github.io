@@ -4,6 +4,8 @@ layout: docs
 origfile: AppImages.md
 origtitle: AppImages
 permalink: /docs/AppImages
+redirect_from:
+  - /wiki/AppImages/
 ---
 * TOC
 {:toc}

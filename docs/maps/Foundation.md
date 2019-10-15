@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Foundation.md
 origtitle: Foundation
 permalink: /docs/maps/Foundation
+redirect_from:
+  - /wiki/Foundation/
 ---
 * TOC
 {:toc}

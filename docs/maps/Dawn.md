@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Dawn.md
 origtitle: Dawn
 permalink: /docs/maps/Dawn
+redirect_from:
+  - /wiki/Dawn/
 ---
 * TOC
 {:toc}

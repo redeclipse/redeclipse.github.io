@@ -4,6 +4,8 @@ layout: docs
 origfile: Privileges.md
 origtitle: Privileges
 permalink: /docs/Privileges
+redirect_from:
+  - /wiki/Privileges/
 ---
 * TOC
 {:toc}

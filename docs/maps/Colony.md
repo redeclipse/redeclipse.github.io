@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Colony.md
 origtitle: Colony
 permalink: /docs/maps/Colony
+redirect_from:
+  - /wiki/Colony/
 ---
 * TOC
 {:toc}

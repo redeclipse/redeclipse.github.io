@@ -4,6 +4,8 @@ layout: docs
 origfile: maps/Blink.md
 origtitle: Blink
 permalink: /docs/maps/Blink
+redirect_from:
+  - /wiki/Blink/
 ---
 * TOC
 {:toc}

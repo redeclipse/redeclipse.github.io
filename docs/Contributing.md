@@ -4,6 +4,8 @@ layout: docs
 origfile: Contributing.md
 origtitle: Contributing
 permalink: /docs/Contributing
+redirect_from:
+  - /wiki/Contributing/
 ---
 * TOC
 {:toc}

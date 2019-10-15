@@ -8,6 +8,7 @@ redirect_from:
   - /docs/
   - /docs/Main_Page/
   - /wiki/Main_Page/
+  - /wiki/Home/
 ---
 * TOC
 {:toc}
