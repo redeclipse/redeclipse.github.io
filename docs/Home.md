@@ -6,8 +6,8 @@ origtitle: Home
 permalink: /docs/Home
 redirect_from:
   - /docs/
-  - /docs/Main_Page
-  - /wiki/Main_Page
+  - /docs/Main_Page/
+  - /wiki/Main_Page/
 ---
 * TOC
 {:toc}

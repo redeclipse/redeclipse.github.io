@@ -5,8 +5,8 @@ origfile: System-Requirements.md
 origtitle: System-Requirements
 permalink: /docs/System-Requirements
 redirect_from:
-  - /docs/System_Requirements
-  - /wiki/System_Requirements
+  - /docs/System_Requirements/
+  - /wiki/System_Requirements/
 ---
 * TOC
 {:toc}

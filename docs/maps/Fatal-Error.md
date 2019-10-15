@@ -5,8 +5,8 @@ origfile: maps/Fatal-Error.md
 origtitle: Fatal-Error
 permalink: /docs/maps/Fatal-Error
 redirect_from:
-  - /docs/maps/Fatal_Error
-  - /wiki/Fatal_Error
+  - /docs/maps/Fatal_Error/
+  - /wiki/Fatal_Error/
 ---
 * TOC
 {:toc}

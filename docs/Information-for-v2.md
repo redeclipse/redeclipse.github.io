@@ -5,8 +5,8 @@ origfile: Information-for-v2.md
 origtitle: Information-for-v2
 permalink: /docs/Information-for-v2
 redirect_from:
-  - /docs/Information_for_v2
-  - /wiki/Information_for_v2
+  - /docs/Information_for_v2/
+  - /wiki/Information_for_v2/
 ---
 * TOC
 {:toc}
