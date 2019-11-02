@@ -17,7 +17,7 @@ redirect_from:
 |----------------------------|-----------------------------------------------|
 | **Name**                   | Trespass                                      |
 | **Author**                 | Greaserpirate, JDWhyte, Rabidbutton, Molexted |
-| **Filename**               | rift                                          |
+| **Filename**               | trespass                                      |
 | **Release Date**           | 2013-04-13 (2019-11-02)                       |
 | **Introduced in**          | 2.0.0                                         |
 | **Size**                   | Small (2-4)                                   |
