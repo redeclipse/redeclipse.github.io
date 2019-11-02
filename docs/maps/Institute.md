@@ -19,7 +19,7 @@ redirect_from:
 | **Author**                 | Derek "Jojo" Stegall and Alex "molexted" Foster      |
 | **Filename**               | institute                                            |
 | **Release Date**           | 2012-09-01 (2019-11-02)                              |
-| **Introduced in**          | 1.6.0                                                |
+| **Introduced in**          | 1.3.0                                                |
 | **Size**                   | Medium (4-10)                                        |
 | **Complexity**             | Simple                                               |
 | **Theme**                  | Modern                                               |

@@ -33,7 +33,7 @@ redirect_from:
 | **Recommend Modes**        | CTF, TDM                                             |
 
 ## Overview
-The only map included in 1.6 to make it to 2.0.0, Octavus is a large, open symmetrical team map suitable for large matches.
+One of the only two main maps included in 1.6 to make it to 2.0.0, Octavus is a large, open symmetrical team map suitable for large matches.
 
 
 ## Notes & Strategies
