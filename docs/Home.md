@@ -21,7 +21,7 @@ redirect_from:
 - **[Learn about the Weapons](Weapons-Guide)** - Each weapon is unique, learn the pros and cons.
 - **~~[Tips and Tricks for using Parkour](Parkour-Guide)~~** - Everyone loves running on walls, but there's more to learn.
 - **[Privilege Levels](Privileges)** - What those icons next to player names are all about.
-- **~~[Official Maps](Offical-Maps)~~** - Descriptions and recommendations for the included levels
+- **[Official Maps](Official-Maps)** - Descriptions and recommendations for the included levels
 
 ## Server Administration
 - **[Server Setup](Server-Setup)** - How to configure and run a Red Eclipse server.
