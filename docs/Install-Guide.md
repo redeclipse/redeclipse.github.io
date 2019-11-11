@@ -32,6 +32,16 @@ If you get a permission denied error during install, right click the installer a
 - [Download the tarball](/download/linux), move it to your home directory, and extract it with your file manager, an archive utility, or the terminal command `tar -jxvf redeclipse_X.Y.Z_nix.tar.bz2`.
 - Enter the extracted folder (redeclipse-X.Y.Z) and run `redeclipse.sh` to launch Red Eclipse.
 
+### From Source
+- Install additional dependencies to compile with:
+    - Debian/Ubuntu: `sudo apt-get install libsdl2-mixer-dev libsdl2-image-dev libsdl2-dev`
+From the command line:
+- Clone the repositry and its submodules with `git clone --recurse-submodules https://github.com/redeclipse/base`
+- Enter the working directory with `cd base`
+- Compile with `make -C src install -jN`, with `-jN` being set to the number of cores your CPU has (e.g. `-j4` for a quad core system)
+- Enter the source directory with `cd src`
+- Run the game with `./redeclipse_linux`
+
 ## macOS
 - [Download the macOS tarball](/download/macos).
 - When it is done, click the resulting TAR.BZ2 file in your downloads folder on the dock.
