@@ -104,7 +104,7 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
 
 3. The development team is not on a mission from God.
     * The game can only expect to succeed or fail on the merits of the actual game and not on other metrics.
-    * This includes being open source. Most people don't give two shits if a program is open source.
+    * This includes being open source. Most people couldn't care less if a program is open source.
     * The development team is not especially privileged. Developers are ordinary people and are largely only capable of ordinary feats.
     * Help will *not* show up when it is needed most.
 
