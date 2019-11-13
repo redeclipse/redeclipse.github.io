@@ -11,16 +11,16 @@ redirect_from:
 * TOC
 {:toc}
 
-The core principles for how RE2 gameplay is designed. This does not cover the specific gameplay choices of the game, but instead is focused on the parameters the game has been attempted to be balanced upon. Red Eclipse 2's gameplay is not a unique solution to these parameters, but explaining 
+The core principles for how RE2 gameplay is designed. This does not cover the specific gameplay choices of the game, but instead is focused on the parameters the game has been attempted to be balanced upon. Red Eclipse 2's gameplay is not a unique solution to these parameters, but explaining what kinds of thoughts led to these decisions.
 
-0. This is a free game. All the engine code, the UI design and implementation, the maps, the assets, and the gameplay is made by volunteers.
+* This is a free game. All the engine code, the UI design and implementation, the maps, the assets, and the gameplay is made by volunteers.
     - Wanton complaining about how you dislike the game is akin to walking into a soup kitchen and yelling at the volunteer cook.
-        * "I think the broth is a little salty" is not a problem, but "WTF the last cook was doing a way better job and you've ruined it" is an unacceptable way to confront the people who work on the game.
+    - "I think the broth is a little salty" is not a problem, but "WTF the last cook was doing a way better job and you've ruined it" is an unacceptable way to confront the people who work on the game.
 
 ### Gameplay Principles
 
 
-1. Objects exist only if they have a gameplay reason to exist. 
+1. Objects exist only if they have a gameplay reason to exist.
     - Redundant mechanics and arbitrarily applied assets are clutter and distracting.
     - This means weapons are all unique in how they affect how the game is played, not just their appearence.
     - Adding content to the game is not always a good thing. Collections of random stuff are easy to find and is not impressive by itself.
@@ -53,7 +53,7 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
         * Data about how new players play and interact with the game is the most useful way to increase retention.
 
 
-5. No weapon is good at everything. 
+5. No weapon is good at everything.
     * Appropriate use of a counter weapon should determine the winner between the play of otherwise equal players.
     * Nobody's meta is protected, and no combination of weapons should overall be better than other combinations.
     * While maps clearly cannot be all balanced relative to each other, all maps should be viable for all weapons (though perhaps only efficiently in certain situations)
@@ -84,38 +84,38 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
 10. Realism should admitted whenever possible.
     * People have good intuitions about how physics work and these intuitions should be entertained whenever it does not have to defer to the gameplay in order to meet the constraints of the other criteria.
     * Reality is a comfortable blanket, not a straitjacket. Video games are played to not have to deal with the inconvenient minutiae of real life.
-    
+
 ### Pragmatic Constraints
 
 
-11. Weapons and gameplay are designed for the game as it exists, not as it might be.
+1. Weapons and gameplay are designed for the game as it exists, not as it might be.
     * The game is not owed maps and future assets can't be counted on to exist until they actually exist.
     * Until such time has passed that the development team has coffers large enough to buy assets (which is not particularly likely), no work can be guaranteed in advance.
         * For this reason, being able to consistently execute tasks as promised and on time is very much more useful than scattershot completion of tasks whenever time or motivation is available.
     * Personal issues happen and the development should not be catastrophically destroyed by such an event.
 
 
-12. It is not realistic to claim that a small open source project can beat commercially funded games at what they do.
+2. It is not realistic to claim that a small open source project can beat commercially funded games at what they do.
     * Mimicing the gameplay of other games means that they are in direct competetion with the game, and the game then has to be better than those other games.
     * Games which have commercial funding should be looked at as the *absolute ceiling* of how well the game could do in that specific subgenre of AFPS.
         * This means that replicating failed games is the *peak* of how an open-source game in the same vein could do.
         * More sucessful commercial games are a good case study to understand why certain mechanics or combinations of mechanics succeed or fail.
 
 
-13. The development team is not on a mission from God. 
+3. The development team is not on a mission from God.
     * The game can only expect to succeed or fail on the merits of the actual game and not on other metrics.
     * This includes being open source. Most people don't give two shits if a program is open source.
     * The development team is not especially privileged. Developers are ordinary people and are largely only capable of ordinary feats.
     * Help will *not* show up when it is needed most.
 
 
-14. Overpromising and underdelivering is worse than underpromising and overdelivering.
+4. Overpromising and underdelivering is worse than underpromising and overdelivering.
     * Providing large numbers of possible gameplay combinations without having the vast majority of them work satisfactorily is overpromising.
     * Large numbers of gameplay modes or maps makes it difficult for a team of a limited size to deliver consistent quality.
     * Due to the nature of open source it is often difficult to guarantee in advance that features will be ready for a release.
     * Missing a launch date is a very easy way to overpromise and underdeliver, and unfortunately very common in game releases.
 
 
-15. Losing a potential player to installation difficulties of UI navigation difficulties is always the game's fault.
+5. Losing a potential player to installation difficulties of UI navigation difficulties is always the game's fault.
     * The game cannot assume any computer skills on the behalf of the player.
     * The game cannot assume the user has read the documentation.
