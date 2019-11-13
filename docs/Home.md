@@ -21,7 +21,7 @@ redirect_from:
 - **[Learn about the Weapons](Weapons-Guide)** - Each weapon is unique, learn the pros and cons.
 - **~~[Tips and Tricks for using Parkour](Parkour-Guide)~~** - Everyone loves running on walls, but there's more to learn.
 - **[Privilege Levels](Privileges)** - What those icons next to player names are all about.
-- **[Official Maps](Official-Maps)** - Descriptions and recommendations for the included levels
+- **[Official Maps](Official-Maps)** - Descriptions and recommendations for the included levels.
 
 ## Server Administration
 - **[Server Setup](Server-Setup)** - How to configure and run a Red Eclipse server.
@@ -31,6 +31,7 @@ redirect_from:
 ## Development
 - **[Version 2.0](Information-for-v2)** - Find out more about the upcoming **v2.0**, featuring [Tesseract](http://tesseract.gg/).
 - **[Contributing](Contributing)** - Instructions on contributing to the Red Eclipse project.
+- **[Core Principles](Core-Principles)** - Some of the ideas that shape how Red Eclipse 2 as a game is designed.
 - **[Debugging](Debug)** - How to gather information for debugging.
 
 ## Important Links
