@@ -81,7 +81,7 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
     * A player should be able to select a random gameplay combination and enjoy the experience.
     * Providing suboptimal game types as if they are equal to well-executed game types is worse than not having them at all.
 
-10. Realism should admitted whenever possible.
+10. Realism should be admitted whenever possible.
     * People have good intuitions about how physics work and these intuitions should be entertained whenever it does not have to defer to the gameplay in order to meet the constraints of the other criteria.
     * Reality is a comfortable blanket, not a straitjacket. Video games are played to not have to deal with the inconvenient minutiae of real life.
 
