@@ -26,10 +26,10 @@ redirect_from:
 | **Environmental Features** | N/A                                  |
 | **Day/Night**              | ✔/✔                                  |
 | **Lights**                 | 131                                  |
-| **Entities**               | 680                                  |
+| **Entities**               | 693                                  |
 | **Vertices**               | 87k                                  |
 | **Triangles**              | 120k                                 |
-| **Vslots**                 | 272                                  |
+| **Vslots**                 | 271                                  |
 | **Recommend Modes**        | CTF, TDM                             |
 
 ## Overview
