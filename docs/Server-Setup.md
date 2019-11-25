@@ -20,7 +20,7 @@ Hosting one or more Red Eclipse servers on your system will require a decent ban
 
 #### Windows
 1. Copy the [servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) example template from `doc\examples` to the root Red Eclipse directory (copy to the same directory as `server.bat`)
-1. Edit these files with a text editor as appropriate, see [Comfiguration Files](#configuration-files) for more.
+1. Edit these files with a text editor as appropriate, see [Configuration Files](#configuration-files) for more.
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
 #### GNU/Linux
