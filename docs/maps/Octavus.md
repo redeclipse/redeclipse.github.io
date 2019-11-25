@@ -19,17 +19,17 @@ redirect_from:
 | **Author**                 | Ricky "unixfreak" Thomson and Alex "molexted" Foster |
 | **Filename**               | octavus                                              |
 | **Release Date**           | 2013-03-03 (2019-11-02)                              |
-| **Introduced in**          | 1.6.0                                                |
+| **Introduced in**          | 1.5.0                                                |
 | **Size**                   | Large (8-16)                                         |
 | **Complexity**             | Simple                                               |
 | **Theme**                  | Military Base                                        |
 | **Environmental Features** | Desert                                               |
 | **Day/Night**              | ✔/✔                                                  |
-| **Lights**                 | 256                                                  |
-| **Entities**               | 491                                                  |
+| **Lights**                 | 256 (34/106/251)                                     |
+| **Entities**               | 497                                                  |
 | **Vertices**               | 85k                                                  |
 | **Triangles**              | 110k                                                 |
-| **Vslots**                 | 130                                                  |
+| **Vslots**                 | 137                                                  |
 | **Recommend Modes**        | CTF, TDM                                             |
 
 ## Overview

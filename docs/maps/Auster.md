@@ -25,8 +25,8 @@ redirect_from:
 | **Theme**                  | Desert (on exterior)                 |
 | **Environmental Features** | None                                 |
 | **Day/Night**              | ✔/✔                                  |
-| **Lights**                 | 58                                   |
-| **Entities**               | 133                                  |
+| **Lights**                 | 137 (41/80/110)                      |
+| **Entities**               | 334                                  |
 | **Vertices**               | 46k                                  |
 | **Triangles**              | 65k                                  |
 | **Vslots**                 | 395                                  |

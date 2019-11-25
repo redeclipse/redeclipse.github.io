@@ -25,7 +25,7 @@ redirect_from:
 | **Theme**                  | Modern                                               |
 | **Environmental Features** | None                                                 |
 | **Day/Night**              | ✔/✔                                                  |
-| **Lights**                 | 98                                                   |
+| **Lights**                 | 99 (36/82/82)                                        |
 | **Entities**               | 200                                                  |
 | **Vertices**               | 34k                                                  |
 | **Triangles**              | 41k                                                  |

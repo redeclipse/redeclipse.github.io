@@ -25,7 +25,7 @@ redirect_from:
 | **Theme**                  | Futuristic                                           |
 | **Environmental Features** | None                                                 |
 | **Day/Night**              | ✔/✔                                                  |
-| **Lights**                 | 85                                                   |
+| **Lights**                 | 85 (0/53/73)                                         |
 | **Entities**               | 222                                                  |
 | **Vertices**               | 70k                                                  |
 | **Triangles**              | 92k                                                  |

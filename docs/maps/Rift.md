@@ -25,7 +25,7 @@ redirect_from:
 | **Theme**                  | Forest                               |
 | **Environmental Features** | N/A                                  |
 | **Day/Night**              | ✔/✔                                  |
-| **Lights**                 | 131                                  |
+| **Lights**                 | 131 (63/107/120)                     |
 | **Entities**               | 693                                  |
 | **Vertices**               | 87k                                  |
 | **Triangles**              | 120k                                 |

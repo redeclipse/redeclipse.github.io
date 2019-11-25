@@ -25,7 +25,7 @@ redirect_from:
 | **Theme**                  | Postmodern                                    |
 | **Environmental Features** | N/A                                           |
 | **Day/Night**              | ✔/✔                                           |
-| **Lights**                 | 67                                            |
+| **Lights**                 | 67 (25/54/58)                                 |
 | **Entities**               | 170                                           |
 | **Vertices**               | 22k                                           |
 | **Triangles**              | 30k                                           |
