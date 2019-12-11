@@ -10,27 +10,45 @@ redirect_from:
 ---
 * TOC
 {:toc}
-In most games all players are equipped with a pistol and two of their favorite loadout weapons. Furthermore, explosive weapons can be collected in the arena, such as grenades, mines and rockets, unless these are disabled via the ~~[basic mutator](Mutators)~~.
+In most games all players are equipped with a pistol and two of their favorite loadout weapons. Furthermore, explosive weapons can be collected in the arena, such as grenades and mines, to bolster their offensive abilities.
+
+## Spawn weapon
+
+### Pistol
+The pistol's primary fire deals a moderate amount of damage at a fairly fast rate of fire over a respectable distance. Because it has no bullet drop nor spread, it is a useful tool for picking off weak enemies when loadout weapons are low on ammunition or to stall regeneration speed.
 
 ## Loadout weapons
 
-These weapons can be chosen in the *profile* game menu, and it is even possible to change the weapon selection mid-match by pressing the *comma* key (per default). Note that one or both of the loadout weapon slots can be randomized. All of loadout weapons come with an unlimited supply of ammo, but must be reloaded when the clip is empty. Each weapon has two unique fire modes.
+These weapons can be chosen in the *profile* game menu, and it is possible to change the weapon selection mid-match by pressing the *comma* key (per default). Note that one or both of the loadout weapon slots can be randomized.
 
-### Weapon combos
+### Sword
 
-#### Shotgun and Rifle
+The *energy sword* deals a decent amount of damage with its primary attack and is capable of one shot kills for those capable of timing and aiming its bleed-inducing secondary attack. The generous hitbox afforded to the primary of the sword makes it a much more tenable melee option than other options.
 
-This traditional choice of loadout weapons is very popular, especially in ~~[deathmatch](Deathmatch)~~, ~~[capture-the-flag](Capture-the-Flag)~~, ~~[defend-and-control](Defend-and-Control)~~, and ~~[bomber-ball](Bomber-ball)~~ games. A player with these tools of destruction prioritizes the ability to inflict heavy damage—any time, anywhere, and over any distance.
+### Shotgun
 
-#### Flamer and Zapper
+The *super shotgun* shoots 25 pellets in a fairly wide spread to a fairly short effective range. For longer range damage, the secondary fire is capable of lobbing bleed-inducing shrapnel much farther. While the primary is as deadly as anything at close range, the shotgun has to reload in pairs of bullets at a time, making its user vulnerable to attack if time is not afforded to allow the user to reload.
 
-This pair of weapons optimizes a players ability to outrun and annoy his enemies and to support his team mates. It serves well for hit-and-run tactics, not only in ~~[capture-the-flag](Capture-the-Flag)~~ games. It is also very effective at getting enemies to waste time telling you in chat how "nooby" your weapon loadout is and attempt to convince you that other (read: shotgun/rifle) loadouts are what you "should" be using.
+### Submachine Gun
 
-#### Plasma and Zapper
+While hard to control, the *submachine gun* deals very heavy damage at short to medium range. At medium and longer ranges, the SMG can still do damage in bursts, but it is very difficult to maintain accuracy at long ranges at full auto. The SMG has an airbust secondary fire that hurls shrapnel in a moderate radius at a medium distance. While a very useful medium range weapon, the submachine gun is prone to emptying its ammunition quickly if the user is careless, and this can be exploited by attentive opponents.
 
-This pair of weapons optimizes the chances of being kicked by people who don't find getting shredded by "noob" weapons funny. The best way to exploit this is by teamkilling with plasma2 and accidentally using zapper2 on teammates.
+### Flamer
 
-This combo can really be very effective since the vast majority of duelists are used to facing the rifle/sword or rifle/shotgun combo.
+Another ammunition-limited weapon, the *flamethrower* can deal immense damage very quickly via its stream of fire which lances out in front of it. The flamethrower is not a weapon for the careless though; the operator can quickly find themselves in the midst of their own weapon's flames if they are not prudent about avoiding them. The flamer also has a secondary attack, capable of launching the player and their opponents into the air; this is especially useful as a sword deterrent.
+
+
+### Plasma
+
+The *plasma inductor* has a medium range primary fire with a large hit radius but a slow projectile speed. While it requires good shot-leading skills, its large hit radius means it is capable of consistent, if unexceptional, damage rates. The secondary fire requires charging, but releases a large mass of plasma which clogs corridors and is useful to get a pursuing enemy off one's tail.
+
+### Zapper
+
+A fairly standard automatic medium-to-long range weapon, the zapper can deal its damage over any range and at a reasonable pace, but is easily overwhelmed at short range by more specialized weapons. The weapon can be zoomed for better accuracy at long range with its secondary fire.
+
+### Rifle
+
+The longest ranged, highest damaging weapon in the game, the fully charged rifle secondary can kill an opponent in a single headshot at any range, thanks to its scope. However, it is heavy, has limited ammunition, and a rather weak primary fire that cannot hold its own at short range very well.
 
 ## Explosives
 
@@ -38,9 +56,14 @@ Explosive weapons can be collected from certain spots of the arena. Unlike other
 
 Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and mines that reload over time.
 
-## Spawn weapons
+### Grenade
 
-Spawn weapons are available to all players in addition to the chosen loadout weapons. This includes a pistol and the option to use parkour moves as melee attacks.
+Grenades can be used as either fragmentation (grenade primary) or sticky (grenade secondary) weapons. The primary fragmentation mode deals deadly damage over a large radius after 2.5 seconds (though the grenade can be held in hand by holding down LMB to adjust its detonation time); the secondary sticky mode deals less damage over a smaller radius, but sticks to whatever it touches, including players.
+
+### Mine
+
+The mine, like the grenade, can be used in two modes: explosive (mine primary) or beam (mine secondary). Neither can be killed during its 45 second lifetime, and as a result mines are useful tactical devices capable of changing the flow of the game. As such, mines are rare weapons, only spawning every minute on the few areas on maps upon which they appear. The primary explosive mode detonates and inflicts a slowing shock effect upon those unfortunate enough to end up in their midst, while the secondary instantly kills those who traverse its trigger beam.
+
 
 ## Weapon Mechanics
 
