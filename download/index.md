@@ -9,7 +9,7 @@ redirect_from:
 # v{{ site.data.game.version }} ({{ site.data.game.release }})
 ### Released {{ site.data.game.date }}
 
-The best way to download and play Red Eclipse is to download it through <span class="fab fa-steam" aria-hidden="true"></span> **Steam**. It is free of charge, and you will get the latest updates automatically as well as have Steam features available in-game.
+The best way to play Red Eclipse is by downloading it through <span class="fab fa-steam" aria-hidden="true"></span> **Steam**. It is free of charge, and you will get the latest updates automatically, as well as have Steam features available in-game.
 
 **[Click here to go to the Steam store page and download Red Eclipse for Free](/steam).**
 
