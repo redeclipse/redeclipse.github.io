@@ -1,4 +1,4 @@
-Red Eclipse 2 brings massive changes to all facets of the game, and the numerous improvements and changes are too numerous to list individually. The broad brush changes to the game are instead ennumerated below:
+Red Eclipse 2 brings massive changes to all facets of the game, and the numerous improvements and changes are too numerous to list individually. The broad brush changes to the game are instead enumerated below:
 
 ### Tesseract Engine
 
