@@ -10,6 +10,9 @@
 - url: /facebook
   title: "Facebook"
   class: "fab fa-facebook"
+- url: /steam
+  title: "Steam"
+  class: "fas fa-steam"
 - url: /gamejolt
   title: "GameJolt"
   class: "fas fa-bolt"
