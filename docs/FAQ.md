@@ -113,7 +113,7 @@ This depends on the current [mode and mutators](Modes-and-Mutators) of the game,
 
 ## Why is my player score negative?
 
-Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on ~~[flag carriers](Capture-the-Flag)~~, [bombers](Bomber-ball) or ~~[defenders](Defend-and-Control)~~ even double this penalty. For details, see [Deathmatch Scoring](Deathmatch#scoring).
+Be careful not to shoot your team mates, especially when using explosive weapons. Each team kill subtracts six points. Team kills on [flag carriers](Capture-the-Flag), [bombers](Bomber-ball) or ~~[defenders](Defend-and-Control)~~ even double this penalty. For details, see [Deathmatch Scoring](Deathmatch#scoring).
 
 ## dm, pzap, gg - what did they just say?
 
@@ -133,7 +133,7 @@ It is easy to hit someone with a shotgun, but the weapon is really only effectiv
 
 ## How did they take away their own flag?
 
-In ~~[capture](Capture-the-Flag)~~ games, you can press **F** (per default) to pick up the flag in your own base, so the enemy cannot reach it that easily. The same button can also be used to drop a flag you carry, be it yours or the enemy's.
+In [capture](Capture-the-Flag) games, you can press **F** (per default) to pick up the flag in your own base, so the enemy cannot reach it that easily. The same button can also be used to drop a flag you carry, be it yours or the enemy's.
 
 ## Why are there no ammo and health pickups?
 

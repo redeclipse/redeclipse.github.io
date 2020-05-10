@@ -18,7 +18,7 @@ redirect_from:
 
 ### Tips & strategy
 
--   Just as in ~~[Capture-the-Flag](Capture-the-Flag)~~, being close to your team base provides a powerful buff that enhances attack, defense, health regeneration and max health.
+-   Just as in [Capture-the-Flag](Capture-the-Flag), being close to your team base provides a powerful buff that enhances attack, defense, health regeneration and max health.
 -   One of the most important keys in Bomber-Ball is **F**. With it you can throw the ball before it explodes, throw it inside an enemy goal or pass it to teammates.
 -   Holding **F** will lock target on the nearest teammate in the center of your sight, and releasing will pass the ball directly to them instead of a normal throw (regardless of how far away they are from you).
 -   Pointing directly up in the air and throwing the ball can often allow you to catch it easily again, while defending the point where it will fall. This is especially useful in Free-for-All Hold Bomber-Ball.
