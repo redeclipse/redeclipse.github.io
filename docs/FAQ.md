@@ -79,7 +79,7 @@ If the terminal window closes without launching the game, then there's a problem
 
 ## What does 'devel' mean?
 
-This is the development version of the game, which can be ~~[obtained](Development-Version)~~ from our Github repository to check out upcoming features and life on the bleeding edge.
+This is the development version of the game, which can be [obtained](Contributing#preliminaries) from our Github repository to check out upcoming features and life on the bleeding edge.
 
 ## What does master and stable mean?
 
@@ -87,7 +87,7 @@ These are the two branches of our base repository on GitHub, <http://github.com/
 
 ## I found a bug, where can I report it?
 
-Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our ~~[contribution guidelines](Contribution-Guidelines)~~.
+Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [contribution guidelines](Contributing).
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
@@ -95,7 +95,7 @@ On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will repor
 
 ## Can I contribute to the game?
 
-Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/redeclipse/base/tree/master/src). For further information, please read our ~~[contribution guidelines](Contribution-Guidelines)~~.
+Development of Red Eclipse is open and community driven. Contributions can be maps created with the in-game ~~[editor](Editing-Guide)~~, art assets like models, config ~~[scripts](Cubescript-Guide)~~ like game menus, or modifications of the [source code](https://github.com/redeclipse/base/tree/master/src). For further information, please read our [contribution guidelines](Contributing).
 
 ## I found a cheater, what can I do?
 
@@ -109,7 +109,7 @@ Only use bright colours with good contrast. A value of -1 will take your profile
 
 ## What is the game objective?
 
-This depends on the current ~~[mode and mutators](GameModes_and_Mutators)~~ of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a ~~[guide](Gameplay-Guide)~~ for beginners.
+This depends on the current [mode and mutators](Modes-and-Mutators) of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a ~~[guide](Gameplay-Guide)~~ for beginners.
 
 ## Why is my player score negative?
 
