@@ -10,7 +10,6 @@ redirect_from:
 ---
 * TOC
 {:toc}
-## Weapons Guide
 
 In most games all players are equipped with a pistol and two of their favorite loadout weapons. Furthermore, explosive weapons can be collected in the arena, such as grenades and mines, to bolster their offensive abilities.
 

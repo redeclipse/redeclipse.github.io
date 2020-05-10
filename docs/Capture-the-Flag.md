@@ -10,7 +10,6 @@ redirect_from:
 ---
 * TOC
 {:toc}
-## Capture-the-Flag
 
 | Icon | Mode description |
 |-|-|
