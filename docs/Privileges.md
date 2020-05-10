@@ -19,7 +19,6 @@ Players can [apply](/apply) for an account that allows them to authenticate as r
 | <img src="images/privs/none.png" width="32px" height="32px" />               | Guest Player         | <img src="images/privs/player.png" width="32px" height="32px" />        | Authenticated Player  |
 | <img src="images/privs/localsupporter.png" width="32px" height="32px" />     | Local Supporters     | <img src="images/privs/supporter.png" width="32px" height="32px" />     | Global Supporters     |
 | <img src="images/privs/localmoderator.png" width="32px" height="32px" />     | Local Moderators     | <img src="images/privs/moderator.png" width="32px" height="32px" />     | Global Moderators     |
-| <img src="images/privs/localoperator.png" width="32px" height="32px" />      | Local Operators      | <img src="images/privs/operator.png" width="32px" height="32px" />      | Global Operators      |
 | <img src="images/privs/localadministrator.png" width="32px" height="32px" /> | Local Administrators | <img src="images/privs/administrator.png" width="32px" height="32px" /> | Global Administrators |
 | <img src="images/privs/developer.png" width="32px" height="32px" />          | Project Developers   | <img src="images/privs/founder.png" width="32px" height="32px" />       | Project Founders      |
 
@@ -33,7 +32,7 @@ If you host a game server, you are free to specify local privileges for selected
 ```
 addlocalop <handle> <level>
 ```
-Where level "s" is supporter, "m" is moderator, "o" is operator, and "a" is administrator.
+Where level "s" is supporter, "m" is moderator, and "a" is administrator.
 
 If you do not have an account, it is still possible to claim local administrator rights using a password specified in [servinit.cfg](Server-Setup#configuration-files):
 ```
