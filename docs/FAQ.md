@@ -121,7 +121,7 @@ For frequently used abbreviations and player slang, see [glossary](Glossary).
 
 ## What are those symbols near player names?
 
-These are the [privileges](Privileges) or ranks of registered players. You can request your own player account on </apply>
+These are the [privileges](Privileges) or ranks of registered players. You can request your own player account [here](/apply).
 
 ## Why is there a timer when I get killed?
 
