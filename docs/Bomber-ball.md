@@ -10,7 +10,6 @@ redirect_from:
 ---
 * TOC
 {:toc}
-## Bomber Ball
 
 | Icon | Mode description                                                                                                                                                                                                                                                                               |
 |-|-|
