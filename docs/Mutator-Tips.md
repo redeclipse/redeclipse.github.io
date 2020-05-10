@@ -12,14 +12,6 @@ redirect_from:
 {:toc}
 For those mutators specific to certain game modes, see the corresponding [mode pages](Modes-and-Mutators).
 
-## Multi
-<img src="images/modes/multi.png" width="64px"/>
-
-- Multi matches are best suited to large groups of players on symmetrical maps.
-- Not all maps support the Multi mutator, though some maps are created with Multi specifically in mind
-- Similar to the Free-for-All mutator, there are many different opponents to target in Multi. Try to concentrate on either the weakest team or the greatest threat.
-- As with all team modes, remember the presence of your teammates and try at all costs to avoid team kills (the point loss can be detrimental in Multi).
-
 ## FFA
 <img src="images/modes/ffa.png" width="64px"/>
 
