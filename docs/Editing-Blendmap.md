@@ -20,8 +20,6 @@ A blendmap allows you to combine textures by overlapping them with a paint-able 
 
 The first thing to do is create a layered texture. Within the editor, find the texture slot of a texture (can be viewed at the top left of the texture browser, starting with #) and apply this number to another texture using the `vlayer` command.
 
-For example, after selecting a texture within the grid selection, applying texture slot #123 as the layered texture can be done with:
-
 `/vlayer 123`
 
 ![Blendmap](images/editing/blendmap02.jpg "The texture browser") 
@@ -44,7 +42,10 @@ texlayer 249
 
 ### Painting
 
- Now that we have a layered texture, we are ready to start painting. Enable the blendbrush by pressing **[P]**. You can press **[P]** several times for different methods of applying the brush, such as erasing the blendmap or merging the blendmap. Scrolling the mouse wheel will enable you to change the brush shape and density, such as a square, circle or gradient.
+ Now that we have a layered texture, we are ready to start painting. Enable the blendbrush by pressing **[P]**. You can press **[P]** several times for different methods of applying the brush, such as erasing the blendmap or merging the blendmap. 
+
+- Scrolling the mouse wheel will enable you to change the brush shape and density, such as a square, circle or gradient.
+- Right clicking will allow you to rotate the blendbrush.
 
 **Brush modes:**
 
