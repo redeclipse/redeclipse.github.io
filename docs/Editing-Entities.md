@@ -22,7 +22,8 @@ An actor entity, can allow you to select specific weapons / personality of the a
 
 `/newent affinity`
 
-Affinities are entities that set the positional location of flags, capture points, bomberball spawns,  etc. 
+Affinities are entities that set the positional location of flags, capture points, bomberball spawns, etc.
+These are usually placed with *modebit* and *mutsbit* set to the corresponding bitwise value for specific game modes / mutators.
 
 ## Camera
 
@@ -53,6 +54,20 @@ Creates an environment map reflecting the geometry around the entity.  The optio
 `/newent light`
 
 The `light` entity is used to add point lights. They can be configured with the following attributes;
+
+| #  | Name     | Description         |
+|----|----------|---------------------|
+| 1  | radius   | The maximum radius of light emmited by the entity
+| 2  | red      | The red channel (0-255)
+| 3  | green    | The green channel (0-255)
+| 4  | blue     | The blue channel (0-255)
+| 5  | flare    | Lens flare
+| 6  | fscale   | The scale of the lens flare
+| 7  | flags    | Additional bitwise flags for *no-shadow, static, no-specular, volumetric* effects.
+| 8  | palette  | The type of colour palette to use
+| 9  | palindex | The index of the chosen colour palette
+| 10 | variant  | Determines if the entity appears in both ~~[map variants](Editing-Variants)~~ or only one
+| 11 | fxlevel  | Determines if the entity will be rendered based on the users ~~[map effects](Editing-Fxlevels)~~ setting
 
 ## Lightfx
 
@@ -120,7 +135,7 @@ A trigger is used to create events. For example; A proximity trigger will allow 
 
 `/newent weapon`
 
-The `weapon` entity is used to place weapon spawns within a map. 
+The `weapon` entity is used to place [weapon](Weapons-Guide) spawns within a map. 
 
 ## Wind
 
