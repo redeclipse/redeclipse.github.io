@@ -26,9 +26,14 @@ Affinities are entities that set the positional location of flags, capture point
 
 ## Checkpoint
 
+
+`/newent checkpoint`
+
 The `checkpoint` entity is used to track progress in the ~~[Race](Race)~~ game mode. When a player dies during Race, they will respawn at the last checkpoint.
 
 ## Decal
+
+`/newent decal`
 
 The `decal` entity is used to project a texture onto cube geometry. This allows you to add extra detail, such as stains, logos, graffiti or even animations such as raindrops.
 
@@ -82,7 +87,11 @@ Rails are a new feature in the development branch. Entities can be ~~[linked](Ed
 
 ## Route
 
+`/newent route`
+
 The `route` entities are used to add possible paths that the player can follow to complete a lap in ~~[Race](Race)~~ mode. 
+
+These are easier to place by using `/droproute 1` similar as to how [waypoints](Editing-Waypoints) are placed.
 
 ## Sound
 
