@@ -30,7 +30,7 @@ redirect_from:
 
 ## Map Editing
 - **[Editing Basics](Editing-Basics)** - Learn how to start making your own maps in Red Eclipse. 
-- **~~[Editing Reference](Editing-Reference)~~** - A detailed explanation of the available editor features.
+- **[Editing Reference](Editing-Reference)** - A detailed explanation of the available editor features.
 
 ## Development
 - **[Version 2.0](Information-for-v2)** - Find out more about the upcoming **v2.0**, featuring [Tesseract](http://tesseract.gg/).
