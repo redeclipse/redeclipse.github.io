@@ -67,7 +67,7 @@ The `light` entity is used to add point lights. They can be configured with the 
 | 8  | palette  | The type of colour palette to use
 | 9  | palindex | The index of the chosen colour palette
 | 10 | variant  | Determines if the entity appears in both ~~[map variants](Editing-Variants)~~ or only one
-| 11 | fxlevel  | Determines if the entity will be rendered based on the users ~~[map effects](Editing-Fxlevels)~~ setting
+| 11 | fxlevel  | Determines if the entity will be rendered based on the users [map effects](Editing-Fxlevels) setting
 
 ## Lightfx
 

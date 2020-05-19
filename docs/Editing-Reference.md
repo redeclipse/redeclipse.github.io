@@ -12,4 +12,5 @@ redirect_from:
 {:toc}
 - [Blendmap](Editing-Blendmap)
 - [Entities](Editing-Entities)
+- [Fxlevels](Editing-Fxlevels)
 - [Waypoints](Editing-Waypoints)
