@@ -22,7 +22,7 @@ Platform                                                             | Downloads
 **[Installation Help](/docs/Install-Guide)**
 
 ### System Requirements
-Red Eclipse 2 requires a fairly modern graphics card to run, but is otherwise fairly tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [last release of Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
+Red Eclipse 2 requires a fairly modern graphics card to run, but is otherwise quite tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [last release of Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
 
 #### MINIMUM
 * Processor: Intel Pentium Dual-Core E2180 / AMD Athlon 64 X2 4200+
