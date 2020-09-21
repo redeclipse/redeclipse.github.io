@@ -7,12 +7,6 @@
 - url: /issues
   title: "Issue Tracker"
   class: "fas fa-tasks"
-- url: /contribute
-  title: "Contribution Guide"
-  class: "fas fa-handshake"
 - url: /servers
   title: "Server List"
   class: "fas fa-server"
-- url: /discuss
-  title: "Discussion Forum"
-  class: "fas fa-quote-left"
