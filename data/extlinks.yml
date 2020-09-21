@@ -1,27 +1,21 @@
+- url: /github
+  title: "GitHub"
+  class: "fab fa-github"
 - url: /discord
   title: "Discord Chat"
   class: "fab fa-discord"
-- url: /messenger
-  title: "Messenger"
-  class: "fab fa-facebook-messenger"
-- url: /reddit
-  title: "Reddit"
-  class: "fab fa-reddit"
-- url: /facebook
-  title: "Facebook"
-  class: "fab fa-facebook"
 - url: /steam
   title: "Steam"
   class: "fab fa-steam"
 - url: /gamejolt
   title: "GameJolt"
   class: "fas fa-bolt"
-- url: /github
-  title: "GitHub"
-  class: "fab fa-github"
-- url: /patreon
-  title: "Patreon"
-  class: "fab fa-patreon"
+- url: /reddit
+  title: "Reddit"
+  class: "fab fa-reddit"
+- url: /facebook
+  title: "Facebook"
+  class: "fab fa-facebook"
 - url: /donate
-  title: "PayPal"
+  title: "Donate"
   class: "fab fa-paypal"
