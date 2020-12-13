@@ -4,6 +4,9 @@
 - url: /docs
   title: "Documentation"
   class: "fas fa-book"
+- url: /discuss
+  title: "Discussions"
+  class: "fas fa-comment"
 - url: /issues
   title: "Issue Tracker"
   class: "fas fa-tasks"
