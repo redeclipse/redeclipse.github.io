@@ -2,7 +2,7 @@
   title: "GitHub"
   class: "fab fa-github"
 - url: /discord
-  title: "Discord Chat"
+  title: "Discord"
   class: "fab fa-discord"
 - url: /steam
   title: "Steam"
