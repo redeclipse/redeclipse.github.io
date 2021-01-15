@@ -42,7 +42,11 @@ Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and m
 | Icon | Weapon | Description |
 |-|-|-|
 | <img src="images/weapons/grenade.png" width="128px"/> | **Grenade** | Grenades can be used as either fragmentation (grenade primary) or sticky (grenade secondary) weapons. The primary fragmentation mode deals deadly damage over a large radius after 2.5 seconds (though the grenade can be held in hand by holding down LMB to adjust its detonation time); the secondary sticky mode deals less damage over a smaller radius, but sticks to whatever it touches, including players. |
-| <img src="images/weapons/mine.png" width="128px"/> | **Mine** | The mine, like the grenade, can be used in two modes: explosive (mine primary) or beam (mine secondary). Neither can be killed during its 45 second lifetime, and as a result mines are useful tactical devices capable of changing the flow of the game. As such, mines are rare weapons, only spawning every minute on the few areas on maps upon which they appear. The primary explosive mode detonates and inflicts a slowing shock effect upon those unfortunate enough to end up in their midst, while the secondary instantly kills those who traverse its trigger beam.
+| <img src="images/weapons/mine.png" width="128px"/> | **Mine** | The mine, like the grenade, can be used in two modes: explosive (mine primary) or beam (mine secondary). Neither can be destroyed during its 45 second lifetime, and as a result mines are useful tactical devices capable of changing the flow of the game. As such, mines are rare weapons, only spawning every minute on the few areas on maps upon which they appear. The primary explosive mode detonates and inflicts a slowing shock effect upon those unfortunate enough to end up in their midst, while the secondary instantly kills those who traverse its trigger beam, even if he or she is far away from the mine.
+| <img src="images/weapons/rocket.png" width="128px"/> | **Rocket Launcher** | No official map have this weapon(or you can't use it)in version 2.0.0 but it still can be found in map editor and some unofficial maps. This is the most powerful weapon in the game, as a direct hit can instantly kill mutiple players. It has two firing modes: The primary mode like a normal rocket launcher, which fires a straight rocket to the target, the secondly mode fires a guided rocket, it will fly to the target which your crossair aim at.
+
+### Weapon Mechanics
+
 
 
 ### Weapon Mechanics
