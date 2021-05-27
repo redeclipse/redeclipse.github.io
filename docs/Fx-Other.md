@@ -18,10 +18,21 @@ This section briefly describes other effect types' properties.
 
 ## Light properties
 
-| Property name | Type   | Min     | Default | Max     | Modifiers    | Description                                  |
-|---------------|--------|---------|---------|---------|--------------|----------------------------------------------|
-| radius        | Float  | FLT_MIN | 32      | FLT_MAX | Random, Lerp | Light radius                                 |
-| colour        | Colour | 0       | 0       | 255     | Random, Lerp | Light colour (unless `colorized` is enabled) |
+| Property name | Type    | Min     | Default | Max     | Modifiers    | Description                                  |
+|---------------|---------|---------|---------|---------|--------------|----------------------------------------------|
+| radius        | Float   | FLT_MIN | 32      | FLT_MAX | Random, Lerp | Light radius                                 |
+| colour        | Colour  | 0       | 0       | 255     | Random, Lerp | Light colour (unless `colorized` is enabled) |
+| flags         | Integer | 0       | 0       | INT_MAX |              | Light flags (see *Light flags*)              |
+
+## Light flags
+
+| Flag          | Value | Description                         |
+|---------------|-------|-------------------------------------|
+| L_NOSHADOW    | 1     | Disable shadow                      |
+| L_NODYNSHADOW | 2     | Disable shadow for dynamic entities |
+| L_VOLUMETRIC  | 4     | Volumetric light                    |
+| L_NOSPEC      | 8     | Disable specular reflections        |
+| L_SMALPHA     | 16    | Coloured transparency shadows       |
 
 # Sound
 
