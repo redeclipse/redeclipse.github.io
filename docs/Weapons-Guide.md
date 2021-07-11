@@ -45,11 +45,19 @@ Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and m
 | <img src="images/weapons/mine.png" width="128px"/> | **Mine** | The mine, like the grenade, can be used in two modes: explosive (mine primary) or beam (mine secondary). Neither can be destroyed during its 45 second lifetime, and as a result mines are useful tactical devices capable of changing the flow of the game. As such, mines are rare weapons, only spawning every minute on the few areas on maps upon which they appear. The primary explosive mode detonates and inflicts a slowing shock effect upon those unfortunate enough to end up in their midst, while the secondary instantly kills those who traverse its trigger beam, even if he or she is far away from the mine.
 | <img src="images/weapons/rocket.png" width="128px"/> | **Rocket Launcher** | No official map have this weapon(or you can't use it)in version 2.0.0 but it still can be found in map editor and some unofficial maps. This is the most powerful weapon in the game, as a direct hit can instantly kill mutiple players. It has two firing modes: The primary mode like a normal rocket launcher, which fires a straight rocket to the target, the secondly mode fires a guided rocket, it will fly to the target which your crossair aim at.
 
-### Weapon Mechanics
+### Weapon weight
+Each weapon has a different weight. In general, the heavier the weapon, the more powerful it is, but you will move slower than other players who use lighter weapons. Here are some info you want to know:
+Claw, Pistol and Sword: 0 unit
+Shotgun: 5 units
+Submachine Gun: 3 units
+Plasma: 8 units
+Flamer: 6 units
+Zapper: 10 units
+Rifle: 12 units
+Grenade: 3 units
+Mine: 3 units
+Rocket Launcher: 15 units
 
-
-
-### Weapon Mechanics
 
 #### Status effects
 
