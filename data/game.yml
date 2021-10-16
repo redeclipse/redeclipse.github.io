@@ -2,7 +2,7 @@ version: "2.0.0"
 release: "Jupiter Edition"
 date: "19th December 2019"
 youtube: p7w4LXJ_JJ8
-copyright: "2009-2020 Quinton Reeves, Lee Salzman"
+copyright: "2009-`r format(Sys.time(), '%Y')` Quinton Reeves, Lee Salzman"
 screenshots:
   pages: 20
   items: 4
