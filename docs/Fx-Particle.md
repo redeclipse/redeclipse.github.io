@@ -90,26 +90,37 @@ Following pre-defined particles are available for use:
 
 Those properties are only available when the effect type is particle.
 
-| Property name  | Type         | Min                 | Default              | Max                 | Modifiers    | Description                                             |
-|----------------|--------------|---------------------|----------------------|---------------------|--------------|---------------------------------------------------------|
-| parttype       | Integer      | 0                   | $FX_PART_TYPE_SINGLE | $FX_PARTTYPE_TEXT   |              | Particle type (see *"Particle types"*)                  |
-| part           | Integer      | $PART_FIREBALL_LERP | $PART_FIREBALL_LERP  | $PART_FIREBALL_LERP |              | Particle (see *"Available particles"*)                  |
-| num            | Integer      | 1                   | 1                    | 100                 | Random, Lerp | Number of splash particles generated                    |
-| shape          | Integer      | 0                   | 0                    | 58                  |              | Particle shape (for shape type)                         |
-| colour         | Colour       | 0                   | 0                    | 255                 | Random, Lerp | Particle colour (unless `colorized` is enabled)         |
-| fade           | Integer      | 1                   | 1                    | INT_MAX             | Random, Lerp | Particle fade (lifetime) (ms)                           |
-| collide        | Integer      | 0                   | 0                    | !FIXME!             |              | Stain to leave upon collision                           |
-| regdelay       | Integer      | 0                   | 0                    | INT_MAX             | Random, Lerp | Random delay (higher the value the lower emit chance)   |
-| shapesize      | Float        | 0                   | 4                    | FLT_MAX             | Random, Lerp | Splash/shape/flare size                                 |
-| partsize       | Float        | FLT_MIN             | 4                    | FLT_MAX             | Random, Lerp | Particle size                                           |
-| maxpartsize    | Float        | FLT_MIN             | 16                   | FLT_MAX             | Random, Lerp | Final particle size (explosion)                         |
-| vel            | Float        | 0                   | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                             |
-| gravity        | Float        | -FLT_MAX            | 0                    | FLT_MAX             | Random, Lerp | Particle gravity                                        |
-| vel            | Float        | 0                   | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                             |
-| text           | String       | [n/a]               |                      | [n/a]               |              | Text                                                    |
-| parttrack      | Integer      | 0                   | 1                    | 1                   |              | Follow entity position (when not using offsets)         |
+| Property name  | Type         | Min                     | Default              | Max                 | Modifiers    | Description                                                |
+|----------------|--------------|-------------------------|----------------------|---------------------|--------------|------------------------------------------------------------|
+| parttype       | Integer      | 0                       | $FX_PART_TYPE_SINGLE | $FX_PARTTYPE_TEXT   |              | Particle type (see *"Particle types"*)                     |
+| part           | Integer      | $PART_FIREBALL_LERP     | $PART_FIREBALL_LERP  | $PART_FIREBALL_LERP |              | Particle (see *"Available particles"*)                     |
+| num            | Integer      | 1                       | 1                    | 100                 | Random, Lerp | Number of splash particles generated                       |
+| shape          | Integer      | 0                       | 0                    | 58                  |              | Particle shape (for shape type)                            |
+| colour         | Colour       | 0                       | 0                    | 255                 | Random, Lerp | Particle colour (unless `colorized` is enabled)            |
+| fade           | Integer      | 1                       | 1                    | INT_MAX             | Random, Lerp | Particle fade (lifetime) (ms)                              |
+| collide        | Integer      | $FX_PARTCOLLIDE_NOSTAIN | $FX_PARTCOLLIDE_NONE | $STAIN_STAIN        |              | Geometry collision and stain. (see *"Particle collision"*) |
+| regdelay       | Integer      | 0                       | 0                    | INT_MAX             | Random, Lerp | Random delay (higher the value the lower emit chance)      |
+| shapesize      | Float        | 0                       | 4                    | FLT_MAX             | Random, Lerp | Splash/shape/flare size                                    |
+| partsize       | Float        | FLT_MIN                 | 4                    | FLT_MAX             | Random, Lerp | Particle size                                              |
+| maxpartsize    | Float        | FLT_MIN                 | 16                   | FLT_MAX             | Random, Lerp | Final particle size (explosion)                            |
+| vel            | Float        | 0                       | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                                |
+| gravity        | Float        | -FLT_MAX                | 0                    | FLT_MAX             | Random, Lerp | Particle gravity                                           |
+| vel            | Float        | 0                       | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                                |
+| text           | String       | [n/a]                   |                      | [n/a]               |              | Text                                                       |
+| parttrack      | Integer      | 0                       | 1                    | 1                   |              | Follow entity position (when not using offsets)            |
 
 **NOTE ON `parttrack`: This property makes particles follow a bound entity's position (when an entity calls an FX emitter, it's considered bound to it). There are two main motivations to use this mechanism:**
 
  * Making long-fade particles (single/explosion/flare/text) follow the entity's position.
  * Dealing with model tag positions, being always one frame behind (such as when creating muzzle effects for weapons).
+
+# Particle collision
+
+With the use of the `collide` property one can define how a particle should behave upon collision with map geometry.
+By default it passes right through (value: `$FX_PARTCOLLIDE_NONE`).
+By setting `collide` to a stain index value (for instance `$STAIN_SMOKE`) (see *"Available stains"* in *Fx-Other.md*)
+the particle will collide with geometry and leave the set stain.
+Alternatively, one can set the value to `$FX_PARTCOLLIDE_NOSTAIN` in order to simply
+enable geometry collision without making the particle leave any stains.
+
+When collision is enabled and a particle hits geometry, the particle simply vanishes.
