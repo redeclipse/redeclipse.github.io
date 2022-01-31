@@ -17,7 +17,7 @@ You must download and install MSYS2 for easiest building on Windows.
 
 ### Setting up MSYS2
 
-- Install MSYS2 from https://www.msys2.org/ and follow the instructions on that page
+- Install MSYS2 from [https://www.msys2.org/](https://www.msys2.org/) and follow the instructions on that page
 - Then launch **MSYS2 MinGW x64** from the start menu
 
 ### Compiling Red Eclipse
