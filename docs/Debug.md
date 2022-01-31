@@ -13,35 +13,47 @@ To submit a bug report that concerns a crash to the Red Eclipse Team, it is help
 
 ## Windows (64 bit)
 
-You must download and install Code::Blocks for easiest building on Windows.
+You must download and install MSYS2 for easiest building on Windows.
 
-### Setting up Code::Blocks
+### Setting up MSYS2
 
-- Install TDM-GCC-64
-- You may need to set the Code::Blocks compiler to TDM-GCC-64, open Code::Blocks and go to `Settings -> Compiler -> Global Compiler Settings -> Toolchain Executables`. Paths may need changed depending on where you installed it.
-
-<a href="images/debug/Win64dbg06.png" target="_blank"><img src="images/debug/Win64dbg06.png" width="512px"/></a>
+- Install MSYS2 from https://www.msys2.org/ and follow the instructions on that page
+- Then launch **MSYS2 MinGW x64** from the start menu
 
 ### Compiling Red Eclipse
 
-- Open redeclipse.cbp in Code::Blocks as a project.
-- Select the debug build (redeclipse-amd64-dbg)
+In the MSYS2 prompt, change directory to the location that of Red Eclipse:
+```
+cd /c/Users/qreev/Documents/redeclipse
+```
+*(note: that MSYS2 is using "/" as the root directory, so that `C:\Users\qreev\Documents\redeclipse` would be written as `/c/Users/qreev/Documents/redeclipse`*
 
-<a href="images/debug/Win64dbg01.png" target="_blank"><img src="images/debug/Win64dbg01.png" width="512px"/></a>
-- Press the Build button.
+First you must compile with debug symbols:
+```
+make -Csrc clean && CXXFLAGS=-ggdb3 make -Csrc install
+```
 
-<a href="images/debug/Win64dbg02.png" target="_blank"><img src="images/debug/Win64dbg02.png" width="512px"/></a>
+<a href="images/debug/win_dbg1.png" target="_blank"><img src="images/debug/win_dbg1.png" width="512px"/></a>
 
-### Running Red Eclipse and Retrieving the Backtrace
+Then run with GDB:
+```
+gdb src/redeclipse_windows.exe
+```
 
-- Press the Debug/Continue button.
+<a href="images/debug/win_dbg2.png" target="_blank"><img src="images/debug/win_dbg2.png" width="512px"/></a>
 
-<a href="images/debug/Win64dbg03.png" target="_blank"><img src="images/debug/Win64dbg03.png" width="512px"/></a>
-- Red Eclipse will now start, attempt to crash it.
-- Once crashed, you will see the debugger near the bottom of the screen with a Command input. Write `bt full` in that command input and press enter.
 
-<a href="images/debug/Win64dbg04.png" target="_blank"><img src="images/debug/Win64dbg04.png" width="512px"/></a>
-- This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on ~~[IRC](IRC)~~.
+Inside GDB, to start Red Eclipse, type:
+```
+run
+```
+
+Now attempt to reproduce the problem in game. Once Red Eclipse has crashed, GDB will catch this and present a prompt. At this prompt run:
+```
+bt full
+```
+This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/RPDmG5Z).
+
 
 ## Linux
 
@@ -57,12 +69,12 @@ Then run with GDB:
 ```
 gdb src/redeclipse_linux
 ```
-Inside GDB, to start Red Eclipse:
+Inside GDB, to start Red Eclipse, type:
 ```
 run
 ```
-Once Red Eclipse has crashed, GDB will catch this and present a prompt. At this prompt run:
+Now attempt to reproduce the problem in game. Once Red Eclipse has crashed, GDB will catch this and present a prompt. At this prompt run:
 ```
 bt full
 ```
-This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse forum or a paste service to be linked on ~~[IRC](IRC)~~. 
+This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/RPDmG5Z).
