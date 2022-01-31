@@ -22,11 +22,11 @@ You must download and install MSYS2 for easiest building on Windows.
 
 ### Compiling Red Eclipse
 
-In the MSYS2 prompt, change directory to the location that of Red Eclipse:
+In the MSYS2 prompt, change directory to the location of Red Eclipse:
 ```
 cd /c/Users/qreev/Documents/redeclipse
 ```
-*(note: that MSYS2 is using "/" as the root directory, so that `C:\Users\qreev\Documents\redeclipse` would be written as `/c/Users/qreev/Documents/redeclipse`*
+*(note: that MSYS2 is using "/" as the root directory, so that `C:\Users\qreev\Documents\redeclipse` would be written as `/c/Users/qreev/Documents/redeclipse`)*
 
 First you must compile with debug symbols:
 ```
