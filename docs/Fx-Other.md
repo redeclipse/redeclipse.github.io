@@ -38,15 +38,17 @@ This section briefly describes other effect types' properties.
 
 ## Sound properties
 
-| Property name | Type    | Min   | Default | Max     | Modifiers    | Description                                        |
-|---------------|---------|-------|---------|---------|--------------|----------------------------------------------------|
-| sound         | String  | [n/a] |         | [n/a]   |              | Unique ID of the sound to be played                |
-| volume        | Integer | 0     | 255     | 255     | Random, Lerp | Sound volume                                       |
-| flags         | Integer | 0     | 0       | INT_MAX |              | Playback flags (see *Sound flags*)                 |
-| minrad        | Integer | -1    | -1      | INT_MAX | Random, Lerp | Minimum radius, below which there's no attenuation |
-| maxrad        | Integer | -1    | -1      | INT_MAX | Random, Lerp | Maximum radius, above which sound is not audible   |
+| Property name | Type    | Min   | Default | Max     | Modifiers    | Description                                                                   |
+|---------------|---------|-------|---------|---------|--------------|-------------------------------------------------------------------------------|
+| sound         | String  | [n/a] |         | [n/a]   |              | Unique ID of the sound to be played                                           |
+| gain          | Float   | 0     | 1       | 100     | Random, Lerp | Sound gain                                                                    |
+| pitch         | Float   | 0     | 1       | 100     | Random, Lerp | Sound pitch                                                                   |
+| rolloff       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Attentuation rate                                                             |
+| refdist       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Distance at which volume should attenuate to half, before roll-off influence. |
+| maxdist       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Distance, above which there's no more attenuation.                            |
+| flags         | Integer | 0     | 0       | INT_MAX |              | Playback flags (see *Sound flags*)                                            |
 
-**NOTE: Sound radius properties can take `-1` as value, in which case they will assume the default values from the definition of the sound slot.**
+**NOTE: `rolloff`, `refdist`, `maxdist` properties can take `-1` as value, in which case they will assume the default values from the definition of the sound slot.**
 
 ## Sound flags
 
