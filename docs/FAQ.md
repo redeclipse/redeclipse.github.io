@@ -109,7 +109,7 @@ Only use bright colours with good contrast. A value of -1 will take your profile
 
 ## What is the game objective?
 
-This depends on the current [mode and mutators](Modes-and-Mutators) of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a ~~[guide](Gameplay-Guide)~~ for beginners.
+This depends on the current [mode and mutators](Modes-and-Mutators) of the game, which you can look up any time in the help menu (default key: **F1**). Click the large icons in the help menu to learn more about the rules of the current game. These help menus provide detailed information and tips, of which most can also be read on the wiki. There is also a [guide](Gameplay-Guide) for beginners.
 
 ## Why is my player score negative?
 
