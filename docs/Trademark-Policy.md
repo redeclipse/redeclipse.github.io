@@ -10,9 +10,9 @@ redirect_from:
 ---
 * TOC
 {:toc}
-== THE RED ECLIPSE MARK POLICY ==
+# THE RED ECLIPSE MARK POLICY
 
-== General Guidelines ==
+## General Guidelines
 
 The purpose of the Red Eclipse mark policy is to encourage the widespread use of
 Red Eclipse marks by the community while controlling the use of the marks in
@@ -29,8 +29,7 @@ Marks cover the following items: The name "Red Eclipse", the Red Eclipse emblem
 Do not assume that this policy will answer every question about the use of Red
 Eclipse marks, if in doubt, contact the Red Eclipse project.
 
-
-== Declaration ==
+## Declaration
 
 The Red Eclipse project delcares that:
 
@@ -58,7 +57,7 @@ The Red Eclipse project delcares that:
    to eligible organisations on request. Please email: contact@redeclipse.net
 
 
-== Permitted Use ==
+## Permitted Use
 
 You may use the marks without prior written permission (subject to the following
 terms):
@@ -103,7 +102,7 @@ terms):
    or identity with the Red Eclipse project.
 
 
-== Non Permitted Use ==
+## Non Permitted Use
 
 You may not use the marks in the following ways:
 
@@ -130,7 +129,7 @@ Thus uses of the marks in a domain name or company name without explicit written
 permission from the Red Eclipse project are prohibited.
 
 
-== Other Legal Notes ==
+## Other Legal Notes
 
 The Red Eclipse project reserves the sole right to:
 
@@ -144,7 +143,7 @@ The Red Eclipse project reserves the sole right to:
 3. Grant exceptions to this policy, of any kind and for any reason whatsoever,
    other clauses notwithstanding.
 
-== Other Use ==
+## Other Use
 
 If you have questions regarding the policy, or if any of the examples are
 unclear, feel free to contact the Red Eclipse project using the details provided
@@ -163,7 +162,7 @@ that don't follow this policy, don't panic. Let us know, and we'll work it out,
 as described above.
 
 
-== Attribution ==
+## Attribution
 
 This text is Copyright (C) 2011-2019, the Red Eclipse Team
 and is available under a Creative Commons Attribution-ShareAlike 4.0
