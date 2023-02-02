@@ -17,7 +17,7 @@ redirect_from:
 |                            |                                           |
 |----------------------------|-------------------------------------------|
 | **Name**                   | Warp                                      |
-| **Author**                 | Derek "JoJo" Stegall and Favorito         |
+| **Author**                 | Derek "JoJo" Stegall and "Lucienne"       |
 | **Filename**               | warp                                      |
 | **Release Date**           | 2010-06-03                                |
 | **Removed in**             | 1.5.0                                     |
@@ -25,7 +25,7 @@ redirect_from:
 | **Complexity**             | Basic                                     |
 | **Theme**                  | Space                                     |
 | **Environmental Features** | Teleporter                                |
-| **Day/Night**              | ✔/✖                                       |
+| **Day/Night**              | ✔/✖                                      |
 | **Lights**                 | 93                                        |
 | **Entities**               | 194                                       |
 | **Vertices**               | ~31 000                                   |
