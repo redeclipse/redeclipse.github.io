@@ -1,28 +1,27 @@
 ---
-title: Modes and Mutators
+title: Gameplay: Modes and Mutators
 layout: docs
-origfile: Modes-and-Mutators.md
+origfile: gameplay/Modes-and-Mutators.md
 origtitle: Modes-and-Mutators
-permalink: /docs/Modes-and-Mutators
+permalink: /docs/gameplay/Modes-and-Mutators
 redirect_from:
-  - /docs/Modes_and_Mutators/
-  - /wiki/Modes_and_Mutators/
+  - /docs/gameplay/Modes_and_Mutators/
+  - /wiki/gameplay/Modes_and_Mutators/
 ---
 * TOC
 {:toc}
-Red Eclipse has a variety of different game modes to choose from, with mutators to further tweak the experience. This page gives an overview of all the available modes and mutators. For further information and game strategy, see [Mutator Tips](Mutator-Tips) and the articles about each of the below game modes.
+Red Eclipse has a variety of different game modes to choose from, with mutators to further tweak the experience. This page gives an overview of all the available modes and mutators. For further information and game strategy, see ~~[Mutator Tips](Mutator-Tips)~~ and the articles about each of the below game modes.
 
 ## Modes
 
 |                         Icon                          | Name                                     | Description                                                                                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------------:|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="images/modes/demo.png" width="64px"/>       | ~~[Demo](Demo)~~                             | View recorded matches.                                                                                                                                                                                                                                                                                                        |
-| <img src="images/modes/editing.png" width="64px"/>    | ~~[Editing](Editing)~~                       | Make your own custom maps. See our ~~[Mapping Tips](Mapping-Tips)~~.                                                                                                                                                                                                                                                              |
-| <img src="images/modes/deathmatch.png" width="64px"/> | ~~[Deathmatch](Deathmatch)~~                 | Kill other players to score points using the [scoring system](Scoring-System). The player or team with the most points at the end wins!                                                                                                                                                                                       |
-| <img src="images/modes/capture.png" width="64px"/>    | [Capture the Flag](Capture-the-Flag)     | Steal the other team's flag and return it to your base, without letting them take yours, to score points. Players that defend or escort their, flag benefit from a powerful ~~[buff](Status-effects)~~, but not the flag carrier, who will move 10% slower.                                                                       |
-| <img src="images/modes/defend.png" width="64px"/>     | ~~[Defend and Control](Defend-and-Control)~~ | Stand near control points to secure them. Each control point you hold brings in a steady stream of points. While defending a secured control, point players receive a powerful ~~[buff](Status-effects)~~. Before enemy control points can be secured, they are overthrown to a neutral state.                                    |
-| <img src="images/modes/bomber.png" width="64px"/>     | ~~[Bomber Ball](Bomber-Ball)~~               | Grab the ball and deliver to the enemy base to score, but watch your bomb timer - it will explode if you hold on to it too long. Pass it to your teammates (with the F key) to keep it going. If the other team holds it, kill the carrier or intercept it midair. Players defending their base get ~~[buffed](Status-effects)~~. |
-| <img src="images/modes/race.png" width="64px"/>       | ~~[Race](Race)~~                             | Compete in a race for the most number of laps, carefully managing your limited impulse and executing various [parkour moves](Parkour-Guide).                                                                                                                                                                                  |
+| <img src="images/modes/demo.png" width="64px"/>| [Demo](Demo)| View recorded matches.                                                                                                                                                                  | <img src="images/modes/editing.png" width="64px"/>| ~~[Editing](Editing-Basics)~~| Make your own custom maps. See ~~[Mapping Tips](Editing-Basics)~~.|
+| <img src="images/modes/deathmatch.png" width="64px"/>| [Deathmatch](Deathmatch)| Kill other players to score points using the [scoring system](Scoring-System). The player or team with the most points at the end wins!|
+| <img src="images/modes/capture.png" width="64px"/>    | [Capture the Flag](Capture-the-Flag)| Steal the other team's flag and return it to your base, without letting them take yours, to score points. Players that defend or escort their, flag benefit from a powerful [buff](Status-Effects), but not the flag carrier, who will move 10% slower.|
+| <img src="images/modes/defend.png" width="64px"/>| ~~[Defend and Control](Defend-and-Control)~~| Stand near control points to secure them. Each control point you hold brings in a steady stream of points. While defending a secured control, point players receive a powerful [buff](Status-Effects). Before enemy control points can be secured, they are overthrown to a neutral state.|
+| <img src="images/modes/bomber.png" width="64px"/>| [Bomber Ball](Bomber-Ball)| Grab the ball and deliver to the enemy base to score, but watch your bomb timer - it will explode if you hold on to it too long. Pass it to your teammates (with the F key) to keep it going. If the other team holds it, kill the carrier or intercept it midair. Players defending their base get [buffed](Status-Effects). |
+| <img src="images/modes/race.png" width="64px"/>| [Race](Race)| Compete in a race for the most number of laps, carefully managing your limited impulse and executing various [parkour moves](Parkour-Guide).|
 
 ## Mutators
 
@@ -63,8 +62,8 @@ Red Eclipse has a variety of different game modes to choose from, with mutators 
 
 |                          Icon                          | Name    | Description                                                                                                                                                             |
 |:------------------------------------------------------:|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <img src="images/modes/defendquick.png" width="64px"/> | Quick   | Touching your own team's loose flag will instantly teleport it back to your base, instead of having to escort it there on foot.                                         |
-| <img src="images/modes/defendking.png" width="64px"/>  | King    | Flags can be secured much more quickly. When capturing enemy points, they change directly to your color, instead of passing through a neutral "overthrown" state first. |
+| <img src="images/modes/defendquick.png" width="64px"/> | Quick  When capturing enemy points, they change directly to your color, instead of passing through a neutral "overthrown" state first. | .                                         |
+| <img src="images/modes/defendking.png" width="64px"/>  | King    | One base, gain points by holding the base. |
 
 ### Bomber Ball
 

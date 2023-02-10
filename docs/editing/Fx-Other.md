@@ -1,12 +1,12 @@
 ---
-title: Fx Other
+title: Editing: Fx Other
 layout: docs
-origfile: Fx-Other.md
+origfile: editing/Fx-Other.md
 origtitle: Fx-Other
-permalink: /docs/Fx-Other
+permalink: /docs/editing/Fx-Other
 redirect_from:
-  - /docs/Fx_Other/
-  - /wiki/Fx_Other/
+  - /docs/editing/Fx_Other/
+  - /wiki/editing/Fx_Other/
 ---
 * TOC
 {:toc}

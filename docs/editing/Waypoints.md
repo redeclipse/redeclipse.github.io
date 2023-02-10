@@ -1,12 +1,11 @@
 ---
-title: Editing Waypoints
+title: Editing: Waypoints
 layout: docs
-origfile: Editing-Waypoints.md
-origtitle: Editing-Waypoints
-permalink: /docs/Editing-Waypoints
+origfile: editing/Waypoints.md
+origtitle: Waypoints
+permalink: /docs/editing/Waypoints
 redirect_from:
-  - /docs/Editing_Waypoints/
-  - /wiki/Editing_Waypoints/
+  - /wiki/editing/Waypoints/
 ---
 * TOC
 {:toc}

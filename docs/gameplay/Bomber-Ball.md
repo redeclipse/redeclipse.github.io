@@ -1,12 +1,12 @@
 ---
-title: Bomber ball
+title: Gameplay: Bomber Ball
 layout: docs
-origfile: Bomber-ball.md
-origtitle: Bomber-ball
-permalink: /docs/Bomber-ball
+origfile: gameplay/Bomber-Ball.md
+origtitle: Bomber-Ball
+permalink: /docs/gameplay/Bomber-Ball
 redirect_from:
-  - /docs/Bomber_ball/
-  - /wiki/Bomber_ball/
+  - /docs/gameplay/Bomber_Ball/
+  - /wiki/gameplay/Bomber_Ball/
 ---
 * TOC
 {:toc}
@@ -29,4 +29,4 @@ redirect_from:
 |-|-|-|
 | <img src="images/modes/bomberhold.png" title="bomberhold.png" alt="bomberhold.png" width="64" /> | **Hold** | Instead of bringing the ball to a goal, you earn points in this mutator by holding the ball as long as possible. Killing an enemy will reset the explode timer. The ball will still explode when the timer runs out however, resulting in drastic point loss, so throw it away or pass it to a teammate before this happens! |
 | <img src="images/modes/bomberbasket.png" title="bomberbasket.png" alt="bomberbasket.png" width="64" /> | **Basket** | Instead of bringing the ball to the goal on foot, you absolutely must throw it in to score. You also must be far enough away from the goal before attempting a shot! |
-| <img src="images/modes/bomberattack.png" title="bomberattack.png" alt="bomberattack.png" width="64" /> | **Attack** | One team spawns with the ball at their goal while all others try to prevent the team from scoring at another goal. Afer a set time, the roles are switched. |
+| <img src="images/modes/bomberattack.png" title="bomberattack.png" alt="bomberattack.png" width="64" /> | **Attack** | One team spawns with the ball at their goal while all others try to prevent the team from scoring at another goal. After a set time, the roles are switched. |

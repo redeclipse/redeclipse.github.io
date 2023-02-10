@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-For those mutators specific to certain game modes, see the corresponding [mode pages](Modes-and-Mutators).
+For those mutators specific to certain game modes, see the corresponding ~~[mode pages](Modes-and-Mutators)~~.
 
 ## FFA
 <img src="images/modes/ffa.png" width="64px"/>
@@ -129,7 +129,7 @@ For those mutators specific to certain game modes, see the corresponding [mode p
 
 - As the name implies, the purpose of this mutator is to provide an added layer of difficulty to a match through handicaps.
 - As with Survivor or Duel, there is no health regeneration in Hard matches. Tread carefully and make your shots count.
-- No matter what radar style you have chosen, it is completely disabled during a Hard match. The element of suprise rests in the hands of every player.
+- No matter what radar style you have chosen, it is completely disabled during a Hard match. The element of surprise rests in the hands of every player.
 - Remember, not only have you lost track of players and teammates, you also won't see explosives (including the rocket) spawn on your radar. Check their spawn points frequently.
 - For a truly brutal Red Eclipse, try a Free-for-All Freestyle Onslaught Hard Deathmatch on a large map.
 

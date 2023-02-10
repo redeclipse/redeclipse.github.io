@@ -1,12 +1,12 @@
 ---
-title: Scoring System
+title: Gameplay: Scoring System
 layout: docs
-origfile: Scoring-System.md
+origfile: gameplay/Scoring-System.md
 origtitle: Scoring-System
-permalink: /docs/Scoring-System
+permalink: /docs/gameplay/Scoring-System
 redirect_from:
-  - /docs/Scoring_System/
-  - /wiki/Scoring_System/
+  - /docs/gameplay/Scoring_System/
+  - /wiki/gameplay/Scoring_System/
 ---
 * TOC
 {:toc}

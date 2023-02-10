@@ -1,12 +1,12 @@
 ---
-title: Parkour Guide
+title: Gameplay: Parkour Guide
 layout: docs
-origfile: Parkour-Guide.md
+origfile: gameplay/Parkour-Guide.md
 origtitle: Parkour-Guide
-permalink: /docs/Parkour-Guide
+permalink: /docs/gameplay/Parkour-Guide
 redirect_from:
-  - /docs/Parkour_Guide/
-  - /wiki/Parkour_Guide/
+  - /docs/gameplay/Parkour_Guide/
+  - /wiki/gameplay/Parkour_Guide/
 ---
 * TOC
 {:toc}
@@ -15,7 +15,7 @@ redirect_from:
 
 ### The impulse system
 
-Parkour is limited to 6 successive moves in a row by default. Touching the ground will reset the impulse move count. You can strategically use this to hop / slide / vault / wall run around a map and gain momentum to speed past your opponents.
+Parkour is limited to 6 successive moves in a row by default. Touching the ground will start charging the impulse move count. You can strategically use this to hop / slide / vault / wall run / dash around a map and gain momentum to speed past your opponents.
 
 You can show your current move count on the HUD by checking 
 -   ***Settings > User Interface > Show Moves Remaining***

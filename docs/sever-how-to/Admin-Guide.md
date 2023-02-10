@@ -1,12 +1,12 @@
 ---
-title: Admin Guide
+title: Sever how to: Admin Guide
 layout: docs
-origfile: Admin-Guide.md
+origfile: sever-how-to/Admin-Guide.md
 origtitle: Admin-Guide
-permalink: /docs/Admin-Guide
+permalink: /docs/sever-how-to/Admin-Guide
 redirect_from:
-  - /docs/Admin_Guide/
-  - /wiki/Admin_Guide/
+  - /docs/sever_how_to/Admin_Guide/
+  - /wiki/sever_how_to/Admin_Guide/
 ---
 * TOC
 {:toc}

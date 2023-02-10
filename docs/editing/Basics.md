@@ -1,12 +1,11 @@
 ---
-title: Editing Basics
+title: Editing: Basics
 layout: docs
-origfile: Editing-Basics.md
-origtitle: Editing-Basics
-permalink: /docs/Editing-Basics
+origfile: editing/Basics.md
+origtitle: Basics
+permalink: /docs/editing/Basics
 redirect_from:
-  - /docs/Editing_Basics/
-  - /wiki/Editing_Basics/
+  - /wiki/editing/Basics/
 ---
 * TOC
 {:toc}
@@ -144,3 +143,13 @@ A menu for finding available mapmodels can be shown by pressing `F6`. Scroll dow
 #### The REEE
 
 The *Red Eclipse Editing Encyclopedia*, found within the editing menu (press `E`). This menu displays an alphabetically ordered list of available commands related to editing, along with a description of usage, and the parameters each command expects.
+
+### More on map editing
+
+[Blendmaps](Blendmap) - Overlapping, and blend textures together.
+[Waypoints](Waypoints) - Letting bots navigate around the map.
+[Entities](Entities) - Managing particles, lighting, game specific objects, and more.
+[General FX](Fx) - General effects when map making.
+[Particle FX](Fx-Particle) - Using particle effects on map
+[Other FX](Fx-Other) - More effects to using on maps.
+[Level FX](Fxlevels) - How to increasing performance for users on lower settings.

@@ -1,12 +1,12 @@
 ---
-title: Server Setup
+title: Sever how to: Server Setup
 layout: docs
-origfile: Server-Setup.md
+origfile: sever-how-to/Server-Setup.md
 origtitle: Server-Setup
-permalink: /docs/Server-Setup
+permalink: /docs/sever-how-to/Server-Setup
 redirect_from:
-  - /docs/Server_Setup/
-  - /wiki/Server_Setup/
+  - /docs/sever_how_to/Server_Setup/
+  - /wiki/sever_how_to/Server_Setup/
 ---
 * TOC
 {:toc}
@@ -82,7 +82,7 @@ For the installation and configuration steps follow the specific guides.
 1. [https://hub.docker.com/r/iceflower/redeclipse-server](https://hub.docker.com/r/iceflower/redeclipse-server)
 
 ## Configuration Files
-The configuration files are written in ~~[cubescript]()~~, lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change it's value.
+The configuration files are written in cubescript, lines starting with `//` are ignored. If you want to configure a setting simply remove the `//` in front of it and change its value.
 
 ### servinit.cfg
 [servinit.cfg](https://raw.githubusercontent.com/redeclipse/base/stable/doc/examples/servinit.cfg) contains the configuration settings for a Red Eclipse server. As of Red Eclipse v1.4 Elara, the settings defined in `servinit.cfg` are set as the server's "default" settings, and using resetvars will simply restore the default settings, rather than re-executing `servexec.cfg`, which is now defunct and no longer used in Red Eclipse.
@@ -134,9 +134,9 @@ You can change the "openness" of your server; ie. allowing anyone to claim **hel
 | 3    | **Default setting** - Only those who know the adminpass may claim admin, and only [Auth users](Privileges) may claim master.   |
 
 ### Server Customization
-- For information on how to limit modes and mutators please see ~~[Game Filters]()~~
+- For information on how to limit modes and mutators please see [Game Filters](Server-GameFilters)
 - For examples of servinit.cfg configurations see ~~[Server Examples]()~~
-- For information on weapon variables, see ~~[Weapon Variables]()~~
+- For information on weapon variables, see ~~[Variables](Variables-Home)~~
 
 ## Forwarding Ports
 All servers need enabled port forwarding.
@@ -184,4 +184,4 @@ Red Eclipse supports a global permissions and identification system called "[aut
 ```
 addlocalop <authname> <privileg>
 ```
-The `<authname>` would be that player's handle, that they recieved to use in the `/authkey` command. As for the `<privileg>` argument, that can be an `a`, `m`, or `o`. These stand for administrator, moderator, operator respectively. To take advantage of the different flags, you will have to set the `sv_{mode, maps, vars, vote, spec, kick, allow, ban, mute, limit, veto, flood}lock` variables.
+The `<authname>` would be that player's handle, that they received to use in the `/authkey` command. As for the `<privileg>` argument, that can be an `a`, `m`, or `o`. These stand for administrator, moderator, operator respectively. To take advantage of the different flags, you will have to set the `sv_{mode, maps, vars, vote, spec, kick, allow, ban, mute, limit, veto, flood}lock` variables.

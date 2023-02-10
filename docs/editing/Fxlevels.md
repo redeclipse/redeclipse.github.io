@@ -1,12 +1,11 @@
 ---
-title: Editing Fxlevels
+title: Editing: Fxlevels
 layout: docs
-origfile: Editing-Fxlevels.md
-origtitle: Editing-Fxlevels
-permalink: /docs/Editing-Fxlevels
+origfile: editing/Fxlevels.md
+origtitle: Fxlevels
+permalink: /docs/editing/Fxlevels
 redirect_from:
-  - /docs/Editing_Fxlevels/
-  - /wiki/Editing_Fxlevels/
+  - /wiki/editing/Fxlevels/
 ---
 * TOC
 {:toc}

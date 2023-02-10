@@ -1,12 +1,12 @@
 ---
-title: Multiplayer Guidelines
+title: Gameplay: Multiplayer Guidelines
 layout: docs
-origfile: Multiplayer-Guidelines.md
+origfile: gameplay/Multiplayer-Guidelines.md
 origtitle: Multiplayer-Guidelines
-permalink: /docs/Multiplayer-Guidelines
+permalink: /docs/gameplay/Multiplayer-Guidelines
 redirect_from:
-  - /docs/Multiplayer_Guidelines/
-  - /wiki/Multiplayer_Guidelines/
+  - /docs/gameplay/Multiplayer_Guidelines/
+  - /wiki/gameplay/Multiplayer_Guidelines/
 ---
 * TOC
 {:toc}
@@ -152,7 +152,7 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
   - A moderator may not use mute, quarantine, kick, and/or ban as a way to
     silence a player who is simply being offensive or otherwise acting in a way
     that the moderator finds undesirable without violating this document.
-  - Personal opinions are not an enforcable reason for disciplinary action and
+  - Personal opinions are not an enforceable reason for disciplinary action and
     moderators should not assume they are always right.
 
 * Moderators should try to maintain a unified front when it comes to decision
@@ -160,7 +160,7 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
   moderator it is advised that they discuss the situation before taking any
   further action.
   - If there are multiple moderators online, they may opt work together to come
-    to a concensus by a majority vote regarding whether to take further action.
+    to a consensus by a majority vote regarding whether to take further action.
     Any moderators who do not vote or remain silent are said to abstain.
   - Further action includes undoing any disciplinary actions that have been
     carried out already. Moderator in-fighting is unprofessional behaviour.
@@ -169,7 +169,7 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
   - Mediation methods may include an open topic in the "General Discussion"
     section of the official Red Eclipse discussions located at
     https://redeclipse.net/discuss for the community to weigh in on and generate
-    a better concensus on the topic.
+    a better consensus on the topic.
 
 * If a moderator believes that any player behaviour not covered by this
   document should result in disciplinary action, they should create a topic in

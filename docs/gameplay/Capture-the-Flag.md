@@ -1,12 +1,12 @@
 ---
-title: Capture the Flag
+title: Gameplay: Capture the Flag
 layout: docs
-origfile: Capture-the-Flag.md
+origfile: gameplay/Capture-the-Flag.md
 origtitle: Capture-the-Flag
-permalink: /docs/Capture-the-Flag
+permalink: /docs/gameplay/Capture-the-Flag
 redirect_from:
-  - /docs/Capture_the_Flag/
-  - /wiki/Capture_the_Flag/
+  - /docs/gameplay/Capture_the_Flag/
+  - /wiki/gameplay/Capture_the_Flag/
 ---
 * TOC
 {:toc}
@@ -21,6 +21,7 @@ redirect_from:
 -   A buff is also applied when carrying either your own flag, or the enemy flag.
 -   You can retrieve your own flag from the spawn area by pressing **F**, making capture for enemies more difficult.
 -   Press **F** to throw away any flags in your possession, or to pass the flag to teammates.
+-   You cannot capture the opposing team's flag when your teams flag is not at any base.
 
 ### Mode-specific mutators
 

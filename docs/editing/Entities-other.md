@@ -1,11 +1,12 @@
 ---
-title: Entities
+title: Editing: Entities other
 layout: docs
-origfile: Entities.md
-origtitle: Entities
-permalink: /docs/Entities
+origfile: editing/Entities-other.md
+origtitle: Entities-other
+permalink: /docs/editing/Entities-other
 redirect_from:
-  - /wiki/Entities/
+  - /docs/editing/Entities_other/
+  - /wiki/editing/Entities_other/
 ---
 * TOC
 {:toc}

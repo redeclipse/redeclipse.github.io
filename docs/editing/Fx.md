@@ -1,11 +1,11 @@
 ---
-title: Fx
+title: Editing: Fx
 layout: docs
-origfile: Fx.md
+origfile: editing/Fx.md
 origtitle: Fx
-permalink: /docs/Fx
+permalink: /docs/editing/Fx
 redirect_from:
-  - /wiki/Fx/
+  - /wiki/editing/Fx/
 ---
 * TOC
 {:toc}

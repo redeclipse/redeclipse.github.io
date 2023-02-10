@@ -1,12 +1,11 @@
 ---
-title: Editing Entities
+title: Editing: Entities
 layout: docs
-origfile: Editing-Entities.md
-origtitle: Editing-Entities
-permalink: /docs/Editing-Entities
+origfile: editing/Entities.md
+origtitle: Entities
+permalink: /docs/editing/Entities
 redirect_from:
-  - /docs/Editing_Entities/
-  - /wiki/Editing_Entities/
+  - /wiki/editing/Entities/
 ---
 * TOC
 {:toc}
@@ -67,7 +66,7 @@ The `light` entity is used to add point lights. They can be configured with the 
 | 8  | palette  | The type of colour palette to use
 | 9  | palindex | The index of the chosen colour palette
 | 10 | variant  | Determines if the entity appears in both ~~[map variants](Editing-Variants)~~ or only one
-| 11 | fxlevel  | Determines if the entity will be rendered based on the users [map effects](Editing-Fxlevels) setting
+| 11 | fxlevel  | Determines if the entity will be rendered based on the users ~~[map effects](Editing-Fxlevels)~~ setting
 
 ## Lightfx
 
@@ -111,7 +110,7 @@ Rails are a new feature in the development branch. Entities can be ~~[linked](Ed
 
 The `route` entities are used to add possible paths that the player can follow to complete a lap in ~~[Race](Race)~~ mode. 
 
-These are easier to place by using `/droproute 1` similar as to how [waypoints](Editing-Waypoints) are placed.
+These are easier to place by using `/droproute 1` similar as to how ~~[waypoints](Editing-Waypoints)~~ are placed.
 
 ## Sound
 
@@ -135,7 +134,7 @@ A trigger is used to create events. For example; A proximity trigger will allow 
 
 `/newent weapon`
 
-The `weapon` entity is used to place [weapon](Weapons-Guide) spawns within a map. 
+The `weapon` entity is used to place ~~[weapon](Weapons-Guide)~~ spawns within a map. 
 
 ## Wind
 

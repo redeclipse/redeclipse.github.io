@@ -1,11 +1,12 @@
 ---
-title: Privileges
+title: Sever how to: Privileges
 layout: docs
-origfile: Privileges.md
+origfile: sever-how-to/Privileges.md
 origtitle: Privileges
-permalink: /docs/Privileges
+permalink: /docs/sever-how-to/Privileges
 redirect_from:
-  - /wiki/Privileges/
+  - /docs/sever_how_to/Privileges/
+  - /wiki/sever_how_to/Privileges/
 ---
 * TOC
 {:toc}
@@ -22,7 +23,7 @@ Players can [apply](/apply) for an account that allows them to authenticate as r
 | <img src="images/privs/localadministrator.png" width="32px" height="32px" /> | Local Administrators | <img src="images/privs/administrator.png" width="32px" height="32px" /> | Global Administrators |
 | <img src="images/privs/developer.png" width="32px" height="32px" />          | Project Developers   | <img src="images/privs/founder.png" width="32px" height="32px" />       | Project Founders      |
 
-Of course, ~~[bots](Bots)~~ are not related to player accounts, but they have their own icons to readily distinguish them from human ("real") players. Some privilege levels can be either local or global. Local privileges are given to registered players on specific servers, as described in a following section. In contrast, global privileges are valid on all public servers.
+Of course, bots are not related to player accounts, but they have their own icons to readily distinguish them from human ("real") players. Some privilege levels can be either local or global. Local privileges are given to registered players on specific servers, as described in a following section. In contrast, global privileges are valid on all public servers.
 
 ## Levels and lock variables
 The levels [above](#privilege-icons) sorted from low to high refer to the usage of certain server variables that define the minimum privileges required to perform a specific action. This allows server owners to give more liberal rights to lower player levels. The same levels can also be used to restrict map editing, joining a game or even connecting to the server. To learn more about these variables, search for *lock* in the *variables* menu, which is accessible from the game's main menu.

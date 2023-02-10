@@ -1,12 +1,12 @@
 ---
-title: Fx Particle
+title: Editing: Fx Particle
 layout: docs
-origfile: Fx-Particle.md
+origfile: editing/Fx-Particle.md
 origtitle: Fx-Particle
-permalink: /docs/Fx-Particle
+permalink: /docs/editing/Fx-Particle
 redirect_from:
-  - /docs/Fx_Particle/
-  - /wiki/Fx_Particle/
+  - /docs/editing/Fx_Particle/
+  - /wiki/editing/Fx_Particle/
 ---
 * TOC
 {:toc}
