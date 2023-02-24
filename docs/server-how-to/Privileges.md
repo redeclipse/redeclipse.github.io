@@ -1,12 +1,12 @@
 ---
-title: Sever how to: Privileges
+title: Server how to: Privileges
 layout: docs
-origfile: sever-how-to/Privileges.md
+origfile: server-how-to/Privileges.md
 origtitle: Privileges
-permalink: /docs/sever-how-to/Privileges
+permalink: /docs/server-how-to/Privileges
 redirect_from:
-  - /docs/sever_how_to/Privileges/
-  - /wiki/sever_how_to/Privileges/
+  - /docs/server_how_to/Privileges/
+  - /wiki/server_how_to/Privileges/
 ---
 * TOC
 {:toc}

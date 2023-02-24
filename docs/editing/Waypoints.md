@@ -12,7 +12,7 @@ redirect_from:
 
 Waypoints are used to allow bots to navigate through a map. They are hidden by default, but can be viewed by setting `/showwaypoints 1`. 
 
-Creating waypoints for a map is as simple as `/dropwaypoints 1` and then traversing around the map. The waypoints are represented by purple nodes which are linked together, your character will drop these as you move around.
+Creating waypoints for a map is as simple as using the console command `/dropwaypoints 1` and then traversing the map. The waypoints are represented by purple nodes which are linked together, your character will drop these as you move around.
 
 The `aiclip` material can be used to prevent creation of waypoint nodes in specific areas of the map (such as when the player jumps into a lava pit).
 

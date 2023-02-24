@@ -43,7 +43,7 @@ This section briefly describes other effect types' properties.
 | sound         | String  | [n/a] |         | [n/a]   |              | Unique ID of the sound to be played                                           |
 | gain          | Float   | 0     | 1       | 100     | Random, Lerp | Sound gain                                                                    |
 | pitch         | Float   | 0     | 1       | 100     | Random, Lerp | Sound pitch                                                                   |
-| rolloff       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Attentuation rate                                                             |
+| rolloff       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Attenuation rate                                                              |
 | refdist       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Distance at which volume should attenuate to half, before roll-off influence. |
 | maxdist       | Float   | -1    | -1      | FLT_MAX | Random, Lerp | Distance, above which there's no more attenuation.                            |
 | flags         | Integer | 0     | 0       | INT_MAX |              | Playback flags (see *Sound flags*)                                            |

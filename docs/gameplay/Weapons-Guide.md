@@ -47,17 +47,16 @@ Exception: In [kaboom](Mutators#kaboom) games, players start with grenades and m
 
 ### Weapon weight
 Each weapon has a different weight. In general, the heavier the weapon, the more powerful it is, but you will move slower than other players who use lighter weapons. Here are some info you want to know:
-Claw, Pistol and Sword: 0 unit
-Shotgun: 5 units
-Submachine Gun: 3 units
-Plasma: 8 units
-Flamer: 6 units
-Zapper: 10 units
-Rifle: 12 units
-Grenade: 3 units
-Mine: 3 units
-Rocket Launcher: 15 units
-
+- Claw, Pistol and Sword: 0 units
+- Shotgun: 5 units
+- Submachine Gun: 3 units
+- Plasma: 8 units
+- Flamer: 6 units
+- Zapper: 10 units
+- Rifle: 12 units
+- Grenade: 3 units
+- Mine: 3 units
+- Rocket Launcher: 15 units
 
 #### Status effects
 

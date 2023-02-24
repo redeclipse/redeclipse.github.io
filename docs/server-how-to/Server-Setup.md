@@ -1,12 +1,12 @@
 ---
-title: Sever how to: Server Setup
+title: Server how to: Server Setup
 layout: docs
-origfile: sever-how-to/Server-Setup.md
+origfile: server-how-to/Server-Setup.md
 origtitle: Server-Setup
-permalink: /docs/sever-how-to/Server-Setup
+permalink: /docs/server-how-to/Server-Setup
 redirect_from:
-  - /docs/sever_how_to/Server_Setup/
-  - /wiki/sever_how_to/Server_Setup/
+  - /docs/server_how_to/Server_Setup/
+  - /wiki/server_how_to/Server_Setup/
 ---
 * TOC
 {:toc}

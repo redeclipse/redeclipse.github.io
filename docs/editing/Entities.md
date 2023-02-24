@@ -102,7 +102,7 @@ A pusher entity gives you a push in the direction specified. These can be used f
 
 `/newent rail`
 
-Rails are a new feature in the development branch. Entities can be ~~[linked](Editing-Linking)~~ to a rail, allowing it to move around the map. These are used to add spectv cameras to a map, or to make mapmodels/lights move around as true dynamic objects.
+Rails are a new feature in the development branch. Entities can be ~~[linked](Editing-Linking)~~ to a rail, enabling them to move around the map. These are used to add spectv cameras to a map, or to make mapmodels/lights move around as true dynamic objects.
 
 ## Route
 

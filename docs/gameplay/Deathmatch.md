@@ -16,9 +16,9 @@ redirect_from:
 
 ### Tips & strategy
 
--   Avoid killing yourself or teammates as negatively impact your score this will directly corelate to your score.
--   Be especially carful with explosives as they have a large blast radius and can harm or kill you or your teammates.
--   Utilize parkour to quickly escape the enemy when you are low health to avoid giving the other team points.
+-   Avoid killing yourself or teammates as negatively impact your score this will directly correlate to your score.
+-   Be especially careful with explosives as they have a large blast radius and can harm or kill you or your teammates.
+-   Use parkour to quickly escape the enemy when you are low health to avoid giving the other team points.
 
 ### Mode-specific mutators
 

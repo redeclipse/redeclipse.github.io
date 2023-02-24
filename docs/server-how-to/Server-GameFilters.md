@@ -1,12 +1,12 @@
 ---
-title: Sever how to: Server GameFilters
+title: Server how to: Server GameFilters
 layout: docs
-origfile: sever-how-to/Server-GameFilters.md
+origfile: server-how-to/Server-GameFilters.md
 origtitle: Server-GameFilters
-permalink: /docs/sever-how-to/Server-GameFilters
+permalink: /docs/server-how-to/Server-GameFilters
 redirect_from:
-  - /docs/sever_how_to/Server_GameFilters/
-  - /wiki/sever_how_to/Server_GameFilters/
+  - /docs/server_how_to/Server_GameFilters/
+  - /wiki/server_how_to/Server_GameFilters/
 ---
 * TOC
 {:toc}
