@@ -15,7 +15,7 @@ Red Eclipse can be played under Windows XP/Vista/7/8.1/10, macOS, GNU/Linux and 
 
 ## How long has the game been in development?
 
-Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourceforge.net/projects/bloodfrontier/) project. Blood Frontier development started in 2007, and Red Eclipse was formed Spring of 2011. Red Eclipse 1.0 Ides Edition debuted on [March 15](http://en.wikipedia.org/wiki/Ides_of_march), 2011. ~~[See history](History)~~.
+Red Eclipse was branched from the now-defunct [Blood Frontier](https://sourceforge.net/projects/bloodfrontier/) project. Blood Frontier development started in 2007, and Red Eclipse was formed Spring of 2011. Red Eclipse 1.0 Ides Edition debuted on [March 15](http://en.wikipedia.org/wiki/Ides_of_march), 2011.
 
 ## Where can I get the game?
 
@@ -36,21 +36,21 @@ Red Eclipse is available for download at no cost.
 
 Red Eclipse is a [Free](http://www.gnu.org/philosophy/free-sw.html) and [Open Source](http://www.opensource.org/) game.
 
-- Red Eclipse itself and the Cube Engine 2 are under the [zlib License](http://en.wikipedia.org/wiki/Zlib_License).
+- Red Eclipse itself and the Cube Engine 2 are under the [Zlib License](http://en.wikipedia.org/wiki/Zlib_License).
 - All content in the game is Free, and no more strict than the Creative Commons [CC-BY-SA](http://creativecommons.org/licenses/by-sa/3.0/) license.
-- For more details, see [license.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/license.txt) and [trademark.txt](https://raw.githubusercontent.com/redeclipse/base/master/doc/trademark.txt).
+- For more details, see the [License](https://raw.githubusercontent.com/redeclipse/base/master/doc/license.txt) and [Trademark Policy](https://raw.githubusercontent.com/redeclipse/base/master/doc/trademark.txt).
 
 ## What are my rights regarding game servers?
 
-- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in the ~~[Multiplayer Guidelines](Multiplayer-Guidelines)~~*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
-    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of the ~~[Multiplayer Guidelines](Multiplayer-Guidelines)~~.
+- Anyone may run up to three (3) servers, and can be listed on the Red Eclipse Master Server, *however, only if they are in compliance with the guidelines, rules and policies outlined in the [Multiplayer Guidelines](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt)*. You can request a "trusted" (more servers) and/or "statistics" (contributes to stats) server from the Red Eclipse team.
+    - Players must also abide by a set of guidelines as well, and are advised to view the **latter half** of the [Multiplayer Guidelines](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt).
 - Any player or server found to not be in compliance with these guidelines are susceptible to denial of access to the Red Eclipse Master Server either temporarily or indefinitely.
 
 ## Where else can I get help or discuss the game?
 
 Apart from this wiki, and playing on the game servers, you can:
 
-- Participate in [discussions](/discuss).
+- Participate in [Discussions](/discuss).
 - Chat on our [Discord](/discord).
 
 ## Where do I find screenshots, logs and other user data?
@@ -87,7 +87,7 @@ These are the two branches of our base repository on GitHub, <http://github.com/
 
 ## I found a bug, where can I report it?
 
-Technical problems can be discussed in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [contribution guidelines](Contributing).
+Technical problems can be reported in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [contribution guidelines](Contributing).
 
 ## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
 
@@ -99,7 +99,7 @@ Development of Red Eclipse is open and community driven. Contributions can be ma
 
 ## I found a cheater, what can I do?
 
-If you think someone cheats or violates the ~~[Multiplayer Guidelines](Multiplayer-Guidelines)~~ in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a ~~[demo](Demo-Guide)~~ record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
+If you think someone cheats or violates the [Multiplayer Guidelines](https://raw.githubusercontent.com/redeclipse/base/master/doc/guidelines.txt) in some other way, you can open a issue in the [discussion area](/discuss). Be sure to attach a ~~[demo](Demo-Guide)~~ record of the game, so the problem can be investigated. Convictable cheaters will be sanctioned accordingly.
 
 ## How can i change the chat colour?
 
