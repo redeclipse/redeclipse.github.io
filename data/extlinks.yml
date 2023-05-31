@@ -7,15 +7,15 @@
 - url: /steam
   title: "Steam"
   class: "fab fa-steam"
-- url: /gamejolt
-  title: "GameJolt"
-  class: "fas fa-bolt"
 - url: /reddit
   title: "Reddit"
   class: "fab fa-reddit"
 - url: /facebook
   title: "Facebook"
   class: "fab fa-facebook"
+- url: /opencollective
+  title: "Open Collective"
+  class: "fas fa-dollar-sign"
 - url: /donate
   title: "Donate"
   class: "fab fa-paypal"

@@ -47,9 +47,9 @@ redirect_from:
 - **[Game Statistics](/stats)** - The place to see statistics collected by our master server.
 - **[Server List](/servers)** - See a nice list of server and who's playing on them.
 - **[Official SubReddit](/reddit)** - The place to share with your fellow Reddit'ors.
-- **[GameJolt Page](/gamejolt)** - Leave us a review or use the GameJolt client to manage your game.
+- **[Steam Page](/steam)** - Leave us a review or use the Steam client to manage your game.
 - **[Facebook Page](/facebook)** - Get social with our Facebook page and share your review of the game.
 - **[YouTube Page](/youtube)** - The place to see Red Eclipse related videos and live streams.
 - **[GitHub Project](/github)** - We do all our development on GitHub, so this is the place to start when developing.
-- **[Subscribe via Patreon](/patreon)** - Pledge to our Patreon in order to help cover project costs.
+- **[Contribute via Open Collective](/opencollective)** - Pledge to our Open Collective in order to help cover project costs.
 - **[Donate via PayPal](/paypal)** - Make a one-time or recurring donation to help cover project costs.
