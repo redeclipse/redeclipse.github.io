@@ -18,7 +18,7 @@ Redeclipse supports several model formats;
 
 Models that require a bone for positioning, or contain animations will need to be exported as IQM. We reccomend using Blender for 3D modelling, due to the IQM exporter. 
 
-An IQM exporter can be obtained here: https://github.com/lsalzman/iqm
+An IQM exporter can be obtained here: [https://github.com/lsalzman/iqm](https://github.com/lsalzman/iqm)
 Pick the lastest version of the plugin if using blender 3.0+.
 
 ### Configuration
