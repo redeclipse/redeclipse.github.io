@@ -11,13 +11,13 @@ redirect_from:
 * TOC
 {:toc}
 
-*Red Eclipse 2* features a parkour system, that allows you to navigate maps in many different ways.
+*Red Eclipse* features a parkour system, that allows you to navigate maps in many different ways.
 
 ### The impulse system
 
 Parkour is limited to 6 successive moves in a row by default. Touching the ground will start charging the impulse move count. You can strategically use this to hop / slide / vault / wall run / dash around a map and gain momentum to speed past your opponents.
 
-You can show your current move count on the HUD by checking 
+You can show your current move count on the HUD by checking
 -   ***Settings > User Interface > Show Moves Remaining***
 
 or alternatively by opening the in-game console and typing `/showmovecount 1`

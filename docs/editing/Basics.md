@@ -10,13 +10,13 @@ redirect_from:
 * TOC
 {:toc}
 
-Red Eclipse 2 makes use of the Tesseract engine, which utilizes an octree node for its level geometry. This allows for a shallow learning curve where anyone can quickly start making their own maps / levels to share with others. The editor itself is also contained within the game as its own game mode, meaning that you can create an entire map without the need of additional tools/software like most other 3D games. You can also join an online server to edit maps with others in realtime multiplayer map editing. 
+Red Eclipse makes use of the Tesseract engine, which utilizes an octree node for its level geometry. This allows for a shallow learning curve where anyone can quickly start making their own maps / levels to share with others. The editor itself is also contained within the game as its own game mode, meaning that you can create an entire map without the need of additional tools/software like most other 3D games. You can also join an online server to edit maps with others in realtime multiplayer map editing.
 
 ----
 
 ### Getting Started
 
-To make your first map, you will want to enter the *editing* game mode. This can be done by selecting *editing* from the map selection menu, or alternatively you can type `/edit <mapname>` at the in-game console. 
+To make your first map, you will want to enter the *editing* game mode. This can be done by selecting *editing* from the map selection menu, or alternatively you can type `/edit <mapname>` at the in-game console.
 
 Once you have loaded the *editing* game mode. You can start a new map, by typing `/newmap`. This gives you an empty world to start from.
 
@@ -28,9 +28,9 @@ If you wish to save any changes you've made to your map, simply type `/savemap <
 
 ### The Basics of Cube Manipulation
 
-The level geometry in Red Eclipse 2 is made up of cubes for the most part. They can be easily added or removed from the world with the scroll wheel, whilst using the edit camera. 
+The level geometry in Red Eclipse is made up of cubes for the most part. They can be easily added or removed from the world with the scroll wheel, whilst using the edit camera.
 
-On a new map, you only need to select an area on the floor, and start using your scroll wheel to see how this functions. You can click & drag to select an area and extrude multiple cube faces simultaneously. 
+On a new map, you only need to select an area on the floor, and start using your scroll wheel to see how this functions. You can click & drag to select an area and extrude multiple cube faces simultaneously.
 
 Right clicking different sides of the selection grid allows you to change which cube face you will be extruding cubes from.
 
@@ -83,7 +83,7 @@ All available materials can be viewed by pressing `NUMPAD 0`.
 
 ### Lighting
 
-Red Eclipse 2 supports realtime dynamic lighting. Meaning you can add a light entity to the map and instantly see your changes by moving the light entity around.
+Red Eclipse supports realtime dynamic lighting. Meaning you can add a light entity to the map and instantly see your changes by moving the light entity around.
 
 To add a new light entity, you can press `E`,`F` to access the entity menu, and select *light*. Or alternatively, you can also type `/newent light` into the console. The entity will appear where your current grid selection is located.
 
@@ -96,11 +96,11 @@ Most importantly, you will want to set the colour and the radius of the light en
 | 3 + SCROLL     | Green     |
 | 4 + SCROLL     | Blue      |
 
-You can also add some global lighting, by setting the `sunlight` variable. 
+You can also add some global lighting, by setting the `sunlight` variable.
 
 This can be adjusted from the *Environment Settings*, accessed by pressing `F3`.
 
-Alternatively, you can type `/sunlight 140 150 160` into the console, to instantly add light to the world. This command takes the values R G B (0-255). 
+Alternatively, you can type `/sunlight 140 150 160` into the console, to instantly add light to the world. This command takes the values R G B (0-255).
 
 ----
 
@@ -124,7 +124,7 @@ Similar to the light entity, you can hold `1 + SCROLL` to cycle through the mapm
 
 ### Helper UI's
 
-Red Eclipse 2 features several helper menus for adjusting various map settings whilst inside the editing mode. Ensure you have pressed `F2` to enter the edit camera to access the following;
+Red Eclipse features several helper menus for adjusting various map settings whilst inside the editing mode. Ensure you have pressed `F2` to enter the edit camera to access the following;
 
 #### Texture Browser
 
@@ -134,7 +134,7 @@ Pressing `F1` will open the texture browser, you can use this to apply a texture
 
 These can be accessed by pressing `F3`. Here you can change several things relating to the world lighting, fog, skybox, and ambient lighting.
 
-The above are also accessible from the editing menu, which can be accessed by pressing `E`. 
+The above are also accessible from the editing menu, which can be accessed by pressing `E`.
 
 #### Mapmodel Finder
 

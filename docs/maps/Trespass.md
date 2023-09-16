@@ -35,7 +35,7 @@ redirect_from:
 ## Overview
 Trespass is a clean, postmodern map with single pickups tuned for duel. It has areas that benefit every type of weapon, as well as grenades and mines to utilize.
 
-It was originally released in 2013, but was not compatible with the gameplay style. It has been redone for its inclusion in Red Eclipse 2.
+It was originally released in 2013, but was not compatible with the gameplay style. It has been redone for its inclusion in Red Eclipse.
 
 
 ## Notes & Strategies
