@@ -111,16 +111,6 @@ Effects can be scheduled in various ways. To change how timing functions on an e
 * `emitmove` - as opposed to rest being `integer` type, this one is `float`, when set above `0`, only allows emission when emitter moves at a given speed. Default: `0`.
 * `emitparam` - only allows emission when internal emitter parameter (see *"Internal parameters"*) of a given index (`integer`) becomes larger than 0. Default: `-1`.
 
-## Iteration
-
-Effect emissions can also be repeated by iterating an effect. It allows you to create repeated patterns using a single effect instance.
-
-* `iter` - how many times an effect should be emitted. Default: `1`.
-* `iteroffset` - position vector offset between each emission. Default: `0, 0, 0`.
-
-You can also modulate various properties by interpolating the values by the iteration. (*see "Property modifiers"*)
-
-
 ### Example 1: single-shot emission for 1 second
 
     registerfx FX_EXAMPLE1 $FX_TYPE_PARTICLE [
@@ -159,6 +149,24 @@ Various properties can also have modifiers applied such as interpolation or rand
 
 **NOTE: In the supplied example a minimum interval of `2` is used, to ensure the emission is treated as periodic. Remember, value of `1` implies standard emission!**
 Emission will occur randomly from 2 to 1000 milliseconds (the random value is added to the base value).
+
+## Iteration
+
+Effect emissions can also be repeated by iterating an effect. It allows you to create repeated patterns using a single effect instance.
+
+* `iter` - how many times an effect should be emitted. Default: `1`.
+* `iteroffset` - position vector offset between each emission. Default: `0, 0, 0`.
+
+You can also modulate various properties by interpolating the values by the iteration. (*see "Property modifiers"*)
+
+### Example: single particle repeated 5 times, increasing in size from 0.5 to 1.0, forming a cone
+
+    registerfx FX_EXAMPLE_ITER $FX_TYPE_PARTICLE [
+        fxpropi iter 5
+        fxpropfv iteroffset 0 0 10
+        fxpropf partsize 0.5
+        fxpropf partsize 1.0 $FX_MOD_LERP_ITER
+    ]
 
 ## Positioning
 
@@ -249,7 +257,6 @@ Interpolation (lerp) modifier has the following properties (all are `integer` ty
 | Emission           | 1     | $FX_MOD_LERP_EMIT   | Interpolation begins with the scheduled emission of the effect.                  |
 | Internal parameter | 2     | $FX_MOD_LERP_PARAM  | Interpolation by using parameter set by `lerpparam` as the factor.               |
 | Iteration          | 3     | $FX_MOD_LERP_ITER   | Interpolation by using the iteration progress as the factor. (*see "Iteration"*) |
-
 
 ### Interpolation shapes
 
