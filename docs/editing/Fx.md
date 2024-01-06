@@ -163,9 +163,11 @@ You can also modulate various properties by interpolating the values by the iter
 
     registerfx FX_EXAMPLE_ITER $FX_TYPE_PARTICLE [
         fxpropi iter 5
-        fxpropfv iteroffset 0 0 10
+        fxpropfv iteroffset 0 10 0
         fxpropf partsize 0.5
-        fxpropf partsize 1.0 $FX_MOD_LERP_ITER
+        fxpropf partsize 10.0 $FX_MOD_LERP [
+            fxpropi lerpmode $FX_MOD_LERP_ITER
+        ]
     ]
 
 ## Positioning
