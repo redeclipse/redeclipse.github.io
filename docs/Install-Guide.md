@@ -27,7 +27,7 @@ If you get a permission denied error during install, right click the installer a
 
 ### Standard Package
 - Install Red Eclipse's dependencies.
-    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0 libopenal-dev libsndfile-dev`
+    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0 libopenal1 libsndfile1`
     - Fedora: `dnf install curl SDL2 SDL2_mixer SDL2_image`
 - [Download the tarball](/download/linux), move it to your home directory, and extract it with your file manager, an archive utility, or the terminal command `tar -jxvf redeclipse_X.Y.Z_nix.tar.bz2`.
 - Enter the extracted folder (redeclipse-X.Y.Z) and run `redeclipse.sh` to launch Red Eclipse.
