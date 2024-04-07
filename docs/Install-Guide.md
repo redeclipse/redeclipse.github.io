@@ -34,7 +34,7 @@ If you get a permission denied error during install, right click the installer a
 
 ### From Source
 - Install additional dependencies to compile with:
-    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-mixer-dev libsdl2-image-dev libsdl2-dev libfreetype-dev libopenal-dev libsndfile-dev`
+    - Debian/Ubuntu: `sudo apt-get install make g++ curl libsdl2-mixer-dev libsdl2-image-dev libsdl2-dev libfreetype-dev libopenal-dev libsndfile-dev`
 
 From the command line:
 - Clone the repository and its submodules with `git clone --recurse-submodules https://github.com/redeclipse/base`
