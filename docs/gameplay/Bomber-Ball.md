@@ -13,7 +13,7 @@ redirect_from:
 
 | Icon | Mode description                                                                                                                                                                                                                                                                               |
 |-|-|
-| <img src="images/modes/bomber.png" width="128px"/> | Secure the bomber-ball and deliver it to the enemy base to destroy it, but watch the timer! If the timer runs out, the ball will explode and you with it. Press **F** to throw it before this happens, or hold **F** and lock target on a teammate to pass the ball, resetting the timer. |
+| <img src="../images/modes/bomber.png" width="128px"/> | Secure the bomber-ball and deliver it to the enemy base to destroy it, but watch the timer! If the timer runs out, the ball will explode and you with it. Press **F** to throw it before this happens, or hold **F** and lock target on a teammate to pass the ball, resetting the timer. |
 
 ### Tips & strategy
 
@@ -27,6 +27,6 @@ redirect_from:
 
 | Icon | Mutator | Description |
 |-|-|-|
-| <img src="images/modes/bomberhold.png" title="bomberhold.png" alt="bomberhold.png" width="64" /> | **Hold** | Instead of bringing the ball to a goal, you earn points in this mutator by holding the ball as long as possible. Killing an enemy will reset the explode timer. The ball will still explode when the timer runs out however, resulting in drastic point loss, so throw it away or pass it to a teammate before this happens! |
-| <img src="images/modes/bomberbasket.png" title="bomberbasket.png" alt="bomberbasket.png" width="64" /> | **Basket** | Instead of bringing the ball to the goal on foot, you absolutely must throw it in to score. You also must be far enough away from the goal before attempting a shot! |
-| <img src="images/modes/bomberattack.png" title="bomberattack.png" alt="bomberattack.png" width="64" /> | **Attack** | One team spawns with the ball at their goal while all others try to prevent the team from scoring at another goal. After a set time, the roles are switched. |
+| <img src="../images/modes/bomberhold.png" title="bomberhold.png" alt="bomberhold.png" width="64" /> | **Hold** | Instead of bringing the ball to a goal, you earn points in this mutator by holding the ball as long as possible. Killing an enemy will reset the explode timer. The ball will still explode when the timer runs out however, resulting in drastic point loss, so throw it away or pass it to a teammate before this happens! |
+| <img src="../images/modes/bomberbasket.png" title="bomberbasket.png" alt="bomberbasket.png" width="64" /> | **Basket** | Instead of bringing the ball to the goal on foot, you absolutely must throw it in to score. You also must be far enough away from the goal before attempting a shot! |
+| <img src="../images/modes/bomberassault.png" title="bomberassault.png" alt="bomberassault.png" width="64" /> | **Assault** | One team spawns with the ball at their goal while all others try to prevent the team from scoring at another goal. After a set time, the roles are switched. |

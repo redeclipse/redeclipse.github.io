@@ -13,7 +13,7 @@ redirect_from:
 
 | Icon | Mode description |
 |-|-|
-| <img src="images/modes/defend.png" width="128px"/> | Capture bases across the map to score points, highest scoring team wins. |
+| <img src="../images/modes/defend.png" width="128px"/> | Capture bases across the map to score points, highest scoring team wins. |
 
 ### Tips & strategy
 
@@ -24,5 +24,5 @@ redirect_from:
 
 | Icon | Mutator | Description |
 |-|-|-|
-| <img src="images/modes/defendquick.png" width="64px"/> | **Quick** |  When capturing enemy points, they change directly to your color, instead of passing through a neutral "overthrown" state first. |
-| <img src="images/modes/defendking.png" width="64px"/>  | **King** | One base, gain points by holding the base. |
+| <img src="../images/modes/defendquick.png" width="64px"/> | **Quick** |  When capturing enemy points, they change directly to your color, instead of passing through a neutral "overthrown" state first. |
+| <img src="../images/modes/defendking.png" width="64px"/>  | **King** | One base, gain points by holding the base. |

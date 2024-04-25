@@ -13,7 +13,7 @@ redirect_from:
 
 | Icon | Mode description |
 |-|-|
-| <img src="images/modes/capture.png" width="128px"/> | Capture the opponent's flag and bring it back to your base, whilst defending your own |
+| <img src="../images/modes/capture.png" width="128px"/> | Capture the opponent's flag and bring it back to your base, whilst defending your own |
 
 ### Tips & strategy
 
@@ -27,6 +27,6 @@ redirect_from:
 
 | Icon | Mutator | Description |
 |-|-|-|
-| <img src="images/modes/capturequick.png" title="capturequick.png" alt="capturequick.png" width="64" /> | **Quick** | Dropped flags instantly return to base |
-| <img src="images/modes/capturedefend.png" title="capturedefend.png" alt="capturedefend.png" width="64" /> | **Defend** | Dropped flags must be defended until they reset |
-| <img src="images/modes/captureprotect.png" title="captureprotect.png" alt="captureprotect.png" width="64" /> | **Protect** | Protect the flag and hold the enemy flag to score |
+| <img src="../images/modes/capturequick.png" title="capturequick.png" alt="capturequick.png" width="64" /> | **Quick** | Dropped flags instantly return to base |
+| <img src="../images/modes/capturedefend.png" title="capturedefend.png" alt="capturedefend.png" width="64" /> | **Defend** | Dropped flags must be defended until they reset |
+| <img src="../images/modes/captureprotect.png" title="captureprotect.png" alt="captureprotect.png" width="64" /> | **Protect** | Protect the flag and hold the enemy flag to score |
