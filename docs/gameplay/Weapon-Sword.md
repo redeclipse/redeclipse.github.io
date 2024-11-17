@@ -14,7 +14,7 @@ redirect_from:
 
 [Click here to return to the main page.](Weapons-Guide)
 
-<img src="../images/weapons/sword.png" width="256px"/>
+<img src="../images/weapons/weaponsguide/sword.png" height="300px"/>
 
 | Utility | Power | Difficulty |
 |---------------|---------------|----------------|
@@ -22,21 +22,21 @@ redirect_from:
 
 ### Description
 
-*NOTE: The Sword is easier to use in third person due to weird hitbox jankiness. This will be fixed by the developers.*
+*NOTE: The Sword is easier to use in third person due to weird hitbox jankiness. This is being fixed by the developers.*
 
-A strong weapon, if not slightly strange to have in a cybernetic future. It's one of the lightest in the game, so it doesn't slow you down too much when held, giving it a nice parkour utility. But otherwise, it's as simple as it gets: you run up to people and cut them the fuck up. Since it doesn't require ammo, you can repeat this process until the heat death of the universe, or until you die. While easy to learn how to use, mastering it is a whole another thing, and it doesn't help that every other weapon in the game is a gun - therefore it has the "medium" difficulty rating, as you have to learn HOW to run up to people without getting killed.
+A strong weapon, if not a seemingly odd choice in a cybernetic future full of powerful ranged weaponry. It's one of the lightest in the game, so it doesn't slow you down at all when held, giving it a nice parkour utility. But otherwise, it's as simple as it gets: you run up to people and cut them the fuck up. Since it doesn't require ammo, you can repeat this process until the heat death of the universe, or until you die. While easy to learn how to use, mastering it is a whole another thing, and it doesn't help that every other weapon in the game is a gun - therefore it has the "medium" difficulty rating, as you have to learn HOW to run up to people without getting killed.
 
 ### Primary
 
-Primary fire is an easily spammable horizontal slice that's not too hard to score a headshot with. If you let a toddler play Red Eclipse with the sword, they'd certainly score at least one kill by accident. Very good for hit-and-run tactics, since it requires absolutely zero commitment to any sort of timing. You'll eventually hit something.
+Primary fire is an easily spammable horizontal slice that's not too hard to score a headshot with. If you let a toddler play Red Eclipse with the sword, they'd certainly get at least one frag by accident. Very good for hit-and-run tactics, since it requires absolutely zero commitment to any sort of timing. You'll eventually hit something.
 
 ### Secondary
 
-Alt fire can be charged, and it's an overhead swing with the sword. Ridiculously powerful, can insta-kill with a headshot, but notoriously slow and has a narrow swinging arc. Hard to use, but when you time it right, it's very much worth it.
+Alt fire can be charged, and it's an overhead swing with the sword that doubles as an impaling attack, meaning it works for as long as the blade is set down in front of you. Ridiculously powerful and deals crazy damage with a headshot, but notoriously slow and has a narrow swinging arc, which makes it hard to use. But when you time it right, it's very much worth it.
 
 ### Tips
 
-Both fire modes also cause bleeding upon hit. Keep that in mind, especially when grazing your enemies, and don't forget to use your kick (Q) frequently with the Sword. Also, don't charge at people like a moron... at least not all the time. It's a tactic that works way more than you'd expect, but for the Sword, weapon match-ups are especially important due to its extremely limited range. Be a little more creative and wary. Jump down from walls, parkour up to them and then run away,  remember that it grants you a ton of mobility that no other weapon has. It is also a weapon that, just like the Pistol, does not have a finite supply of ammunition, so you have the added bonus of not expending your resources.
+Both fire modes cause bleeding upon hit. Keep that in mind, especially when grazing your enemies, and don't forget to use your kick (Q) frequently with the Sword - it's free damage that can decide the fate of your enemies more than you'd think. Also, don't charge at people like a moron... at least not all the time. It's a tactic that works way more than you'd expect, but for the Sword, weapon match-ups are especially important due to its extremely limited range. Be a little more creative and wary. Jump down from walls, parkour up to them and then run away, remember that it grants you a ton of mobility that no other weapon has. It is also a weapon that, just like the Pistol, does not have a finite supply of ammunition, so you have the added bonus of not expending your resources while this blade is put into good use.
 
 ### Counterplay
 

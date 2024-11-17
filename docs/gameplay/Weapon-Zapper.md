@@ -14,7 +14,7 @@ redirect_from:
 
 [Click here to return to the main page.](Weapons-Guide)
 
-<img src="../images/weapons/zapper.png" width="256px"/>
+<img src="../images/weapons/weaponsguide/zapper.png" height="300px"/>
 
 | Utility | Power | Difficulty |
 |------------------|------------|------------|
@@ -22,11 +22,11 @@ redirect_from:
 
 ### Description
 
-The Zapper, an almost truly generalist weapon that excels in long-range fights, but whose power is respectable at medium and short ranges as well, and yet its damage output is still below average. It plays similarly to how the SMG does, but has a much heavier weight, so chasing people is not necessarily what you're going to be doing a lot of with this. Absolutely perfect for picking off weakened targets, this thing induces about the same fear as seeing a Flamethrower user charging at you. Interestingly, the Zapper can hold a fuckton of ammo clips, so while running out of it with this weapon is possible, it's not something that will happen a lot, and you can be as wasteful with ammunition as you want.
+The Zapper, an almost truly generalist weapon that excels in long-range fights, but whose power is respectable at medium and short ranges as well, and yet its damage output is still below average. At first glance, it functions similarly to how the SMG does, but has a much heavier weight, so chasing people is not necessarily what you're going to be doing a lot of with this. Absolutely perfect for picking off weakened targets, this thing induces about the same fear as seeing a Flamethrower user charging at you. Interestingly, the Zapper can hold a fuckton of ammo clips, so while running out of it with this weapon is possible, it's not something that will happen a lot, and you can be as wasteful with ammunition as you want.
 
 ### Primary
 
-Primary fire is the only hitscan attack in the game, discounting your alt-fire (technically, it's a projectile with hitscan properties, but we won't talk about that). This already makes the primary ridiculously strong, as grazing an opponent with a few shots is trivial, and this weapon is perfectly accurate. It fires about as fast as the SMG, but deals much less damage. The thing is that the Zapper's headshot damage is subpar, but its torso and limb damage falls off only slightly from that, which makes using it at longer ranges pleasant. You do not have to score headshots to deal decent damage. It performs well at medium and short ranges, too, but naturally you cannot expect it to be better than weapons completely dedicated to their effective ranges. Aside from these nuances, there is not much to say - it really is just a hitscan projectile.
+Primary fire is the only hitscan attack in the game, discounting your alt-fire (technically, it's a projectile with hitscan properties, but this is not the place to talk about that). This already makes the primary ridiculously strong, as grazing an opponent with a few shots is a trivial endeavor, and this weapon is perfectly accurate. It fires about as fast as the SMG, but deals much less damage. The thing is that the Zapper's headshot damage is subpar, but its torso and limb damage falls off only slightly from that, which makes using it at longer ranges pleasant. You do not have to score headshots to deal decent damage. It performs well at medium and short ranges, too, but naturally you cannot expect it to be better than weapons completely dedicated to their effective ranges. Aside from these nuances, there is not much to say - it really is just a hitscan projectile.
 
 ### Secondary
 

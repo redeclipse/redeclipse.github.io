@@ -14,7 +14,7 @@ redirect_from:
 
 [Click here to return to the main page.](Weapons-Guide)
 
-<img src="../images/weapons/shotgun.png" width="256px"/>
+<img src="../images/weapons/weaponsguide/shotgun.png" height="300px"/>
 
 | Utility | Power | Difficulty |
 |---------------|---------------|----------------|
@@ -22,11 +22,11 @@ redirect_from:
 
 ### Description
 
-A neat, short-ranged weapon and a favorite of many experienced players thanks to its simplicity of use and sheer firepower. Its two biggest drawbacks - range and ammo consumption - are conveniently outweighed by the fact that it can kill players instantly with a point-blank bodyshot, something that very few weapons in this game can achieve. Excels especially against single opponents thanks to its rapid firing and wide area coverage. Requires decent aim to use correctly and weighs a bit more than you'd expect a shotgun to, but you can still parkour swiftly with this.
+A neat, short-ranged weapon and a favorite of many experienced players thanks to its simplicity of use and sheer firepower. Its two biggest drawbacks - range and ammo consumption - are conveniently outweighed by the fact that it can kill players instantly with a point-blank bodyshot, something that very few weapons in this game can achieve. Excels especially against single opponents thanks to its rapid firing and wide area coverage, but with a good enough player, this can turn into a crowd control weapon. Requires decent aim to use correctly and weighs a bit more than you'd expect a shotgun to, but you can still parkour swiftly with this.
 
 ### Primary
 
-Primary is a spray of buckshot. Doesn't work well beyond a rather short range, but deals decent enough chip damage that it may be worth spamming it without switching to a longer-ranged weapon sometimes. Fires absurdly fast. Minces people with a single shot and has enough damage potential to clear crowds when fully loaded. Take note that it also ricochets, so you may surprise somebody with a blast to the face... including yourself.
+Primary is a spray of buckshot. Doesn't work well beyond a rather short range, but deals decent enough chip damage that it may be worth spamming it without switching to a longer-ranged weapon sometimes. Fires absurdly fast. Minces people with a single shot and has enough damage potential to kill a whole lot of people with a fully loaded chamber. Take note that it also ricochets, so you may surprise somebody with a blast to the face... including yourself.
 
 ### Secondary
 
