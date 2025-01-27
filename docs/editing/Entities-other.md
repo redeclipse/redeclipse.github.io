@@ -46,182 +46,88 @@ You can change if entities snap to the grid while moving them using:
 ## Types of Entities
 
 <table cellspacing="10" style="width:100%">
-<tr>
-<td width="174">
-actor
-
-</td>
-<td width="219">
-spawnpoint for an enemy type in Campaign or Onslaught mode
-
-</td>
-</tr>
-<tr>
-<td width="174">
-affinity
-
-</td>
-<td width="219">
-special mode objects such as Flags and Bombs
-
-</td>
-</tr>
-<tr>
-<td width="174">
-camera
-
-</td>
-<td width="219">
-camera for spectv viewing mode
-
-</td>
-</tr>
-<tr>
-<td width="174">
-checkpoint
-
-</td>
-<td width="219">
-respawn point for campaign and timetrial modes
-
-</td>
-</tr>
-<tr>
-<td width="174">
-envmap
-
-</td>
-<td width="219">
-an entity that maps a reflection inside its radius to reflective surfaces
-
-</td>
-<tr>
-<td width="174">
-light
-
-</td>
-<td width="219">
-a spherical light max: 255 255 255
-
-</td>
-</tr>
-<tr>
-<td width="174">
-lightfx
-
-</td>
-<td width="219">
-animates a light when linked to a light entity (see Linking Objects)
-
-</td>
-</tr>
-<tr>
-<td width="174">
-mapmodel
-
-</td>
-<td width="219">
-a numbered mapmodel
-
-</td>
-</tr>
+    <tr>
+        <td width="174">actor</td>
+        <td width="219">spawnpoint for an enemy type in Campaign or Onslaught mode</td>
+    </tr>
+    <tr>
+        <td width="174">affinity</td>
+        <td width="219">special mode objects such as Flags and Bombs</td>
+    </tr>
+    <tr>
+        <td width="174">camera</td>
+        <td width="219">camera for spectv viewing mode</td>
+    </tr>
+    <tr>
+        <td width="174">checkpoint</td>
+        <td width="219">respawn point for campaign and timetrial modes</td>
+    </tr>
+    <tr>
+        <td width="174">envmap</td>
+        <td width="219">an entity that maps a reflection inside its radius to reflective surfaces</td>
+    <tr>
+        <td width="174">light</td>
+        <td width="219">a spherical light max: 255 255 255</td>
+    </tr>
+    <tr>
+        <td width="174">lightfx</td>
+        <td width="219">animates a light when linked to a light entity (see Linking Objects)</td>
+    </tr>
+    <tr>
+        <td width="174">mapmodel</td>
+        <td width="219">
+            <p>a numbered mapmodel</p>
+            <p>Mapmodel Palette:</p>
+            <ul>
+                <li><code>palette</code> is the colour type (0 = misc colours, 1 = team colours)</li>
+                <li><code>palindex</code> is the subset of each palette -></li>
+                <li><code>palette 0</code> = (0 = off, 1/2/3 = random pulse colours [fire/etc], 4/5/6 = linearly interpolated pulse colours)</li>
+                <li><code>palette 1</code> = (0/1/2/3/4/5 = team colours neutral/alpha/omega/kappa/sigma/enemy (only in team games), 6/7/8/9/10/11 = forced team colour)</li>
+                <li><code>colour</code> is a specific colour you want to apply to the model (24 bit colour value, eg. `0xRRGGBB` in hex)</li>
+        </td>
+    </tr>
+    <tr>
+        <td width="174">particles</td>
+        <td width="219">particles like smoke and fire</td>
+    <tr>
+        <td width="174">playerstart</td>
+        <td width="219">spawn point for players</td>
+    </tr>
+    <tr>
+        <td width="174">pusher</td>
+        <td width="219">
+            <p>pushes a player in the direction indicated by its arrow</p>
+            <p>Pusher Type:</p>
+            <ul>
+                <li><code>0</code> (conditional) will only apply a force if the velocity on each axis to which it is applying it to is below the amount threshold.</li>
+                <li><code>1</code> (additional) will add the force to the current velocity.</li>
+                <li><code>2</code> (redirectional) will take the current velocity and redirect it into the pusher direction and apply the force.</li>
+                <li><code>3</code> (absolute) will simply replace the current velocity with the pusher direction and force."</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td width="174">sound</td>
+        <td width="219">a sound that plays when a player is within its radius</td>
+    </tr>
+    <tr>
+        <td width="174">sunlight</td>
+        <td width="219">creates a directional light</td>
+    </tr>
+    <tr>
+        <td width="174">teleport</td>
+        <td width="219">portal. Link more than one of these to travel between them (see Linking)</td>
+    </tr>
+    <tr>
+        <td width="174">trigger</td>
+        <td width="219">triggers an other entities such as sounds and doors when a player is within its radius (see Linking)</td>
+    </tr>
+    <tr>
+        <td width="174">weapon</td>
+        <td width="219">creates a spawn point for a weapon.</td>
+    </tr>
 </table>
-`Mapmodel Palette:`
-`palette is the colour type (0 = misc colours, 1 = team colours)`
-`palindex is the subset of each palette ->`
-`palette 0 = (0 = off, 1/2/3 = random pulse colours [fire/etc], 4/5/6 = linearly interpolated pulse colours)`
-`palette 1 = (0/1/2/3/4/5 = team colours neutral/alpha/omega/kappa/sigma/enemy (only in team games), 6/7/8/9/10/11 = forced team colour)`
-`colour is a specific colour you want to apply to the model (24 bit colour value, eg. 0xRRGGBB in hex)`
 
-<table>
-<tr>
-<td width="174">
-particles
-
-</td>
-<td width="219">
-particles like smoke and fire
-
-</td>
-<tr>
-<td width="174">
-playerstart
-
-</td>
-<td width="219">
-spawn point for players
-
-</td>
-</tr>
-<tr>
-<td width="174">
-pusher
-
-</td>
-<td width="219">
-pushes a player in the direction indicated by its arrow
-
-</td>
-</tr>
-</table>
-`Pusher Type:`
-`0 (conditional) will only apply a force if the velocity on each axis to which it is applying it to is below the amount threshold.`
-`1 (additional) will add the force to the current velocity.`
-`2 (redirectional) will take the current velocity and redirect it into the pusher direction and apply the force.`
-`3 (absolute) will simply replace the current velocity with the pusher direction and force."`
-
-<table>
-<tr>
-<td width="174">
-sound
-
-</td>
-<td width="219">
-a sound that plays when a player is within its radius
-
-</td>
-</tr>
-<tr>
-<td width="174">
-sunlight
-
-</td>
-<td width="219">
-creates a directional light
-
-</td>
-</tr>
-<tr>
-<td width="174">
-teleport
-
-</td>
-<td width="219">
-portal. Link more than one of these to travel between them (see Linking)
-
-</td>
-</tr>
-<tr>
-<td width="174">
-trigger
-
-</td>
-<td width="219">
-triggers an other entities such as sounds and doors when a player is within its radius (see Linking)
-
-</td>
-</tr>
-<tr>
-<td width="174">
-weapon
-
-</td>
-<td width="219">
-creates a spawn point for a weapon.
-
-</td>
-</tr>
-</table>
 ## Linking Entities
 
 Some entities may be linked together.
