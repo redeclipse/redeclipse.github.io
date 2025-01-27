@@ -50,7 +50,7 @@ Killing 2, 3 or even 4 players in a time window of 5.0 seconds is awarded with a
 ### Killing-sprees
 <img src="../images/rewards/carnage.png" width="128px"/> <img src="../images/rewards/slaughter.png" width="128px"/> <img src="../images/rewards/massacre.png" width="128px"/> <img src="../images/rewards/bloodbath.png" width="128px"/>
 
-If you manage to get 5 frags in a row (regardless of how long they take) without dying or committing any team kills in between, this will give a message saying that it was 'in total carnage', and you receive a 1-point bonus. Further spree awards for higher multiples of 5 frags in a row are slaugher, massacre and bloodbath. Every killing spree bonus can only be earned once per player per match. For example, once you get a carnage bonus, you won't get any more bonuses for further 5-streaks in this match.
+If you manage to get 5 frags in a row (regardless of how long they take) without dying or committing any team kills in between, this will give a message saying that it was 'in total carnage', and you receive a 1-point bonus. Further spree awards for higher multiples of 5 frags in a row are slaughter, massacre and bloodbath. Every killing spree bonus can only be earned once per player per match. For example, once you get a carnage bonus, you won't get any more bonuses for further 5-streaks in this match.
 
 ### Spree breaker
 <img src="../images/rewards/breaker.png" width="128px"/>

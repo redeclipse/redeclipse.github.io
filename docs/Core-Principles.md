@@ -21,7 +21,7 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
 
 1. Objects exist only if they have a gameplay reason to exist.
     - Redundant mechanics and arbitrarily applied assets are clutter and distracting.
-    - This means weapons are all unique in how they affect how the game is played, not just their appearence.
+    - This means weapons are all unique in how they affect how the game is played, not just their appearance.
     - Adding content to the game is not always a good thing. Collections of random stuff are easy to find and is not impressive by itself.
     - Ineffective weapons and mechanics are at best no more useful than their absence would be, and at worst misleading and distracting.
 
@@ -74,10 +74,10 @@ The core principles for how RE2 gameplay is designed. This does not cover the sp
     - Personal issues happen and in a volunteer situation you should expect that to have an impact from time to time and plan accordingly.
 
 2. It is not realistic to claim that a small open source project can beat commercially funded games at what they do.
-    - Mimicing the gameplay of other games means that they are in direct competetion with the game, and the game then has to be better than those other games.
+    - Mimicing the gameplay of other games means that they are in direct competition with the game, and the game then has to be better than those other games.
     - Games which have commercial funding should be looked at as the *absolute ceiling* of how well the game could do in that specific subgenre of AFPS.
         - This means that replicating failed games is the *peak* of how an open-source game in the same vein could do.
-        - More sucessful commercial games are a good case study to understand why certain mechanics or combinations of mechanics succeed or fail.
+        - More successful commercial games are a good case study to understand why certain mechanics or combinations of mechanics succeed or fail.
 
 3. The development team is not on a mission from God.
     - The game can only expect to succeed or fail on the merits of the actual game and not on other metrics.

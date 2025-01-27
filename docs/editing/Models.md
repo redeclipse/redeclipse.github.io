@@ -70,7 +70,7 @@ You can now export your model to iqm, make sure the mesh and the armature is sel
 Models can be loaded into the game in various ways.
 
 ### Mapmodels
-Mapmodels can be loaded into a map during an editing session by running `mmodel path/to/model`. You can then find it at the last index on the mapmodel entity. When saving the map, `mmodel path/to/model` will be automatically ammended to the maps own cfg file. You can also manually edit the map config to register mapmodels for use in a map.
+Mapmodels can be loaded into a map during an editing session by running `mmodel path/to/model`. You can then find it at the last index on the mapmodel entity. When saving the map, `mmodel path/to/model` will be automatically amended to the maps own cfg file. You can also manually edit the map config to register mapmodels for use in a map.
 
 ### Player Vanities
 Vanities are defined in `vanities/package.cfg`, and need to be exported as IQM as per requiring a bone for positioning.

@@ -56,7 +56,7 @@ The `light` entity is used to add point lights. They can be configured with the 
 
 | #  | Name     | Description         |
 |----|----------|---------------------|
-| 1  | radius   | The maximum radius of light emmited by the entity
+| 1  | radius   | The maximum radius of light emitted by the entity
 | 2  | red      | The red channel (0-255)
 | 3  | green    | The green channel (0-255)
 | 4  | blue     | The blue channel (0-255)

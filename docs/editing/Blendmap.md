@@ -90,4 +90,4 @@ You can dump a greyscale image of the blendmap information to your [user data](F
 -   You can only paint accurately on horizontal surfaces with a blendbrush. In can be very tricky to paint on a vertical surface (such as a vertical wall).
 -   Stacked floors cannot have their own blendmap layer. For example, picture a block of apartments where each floor has a layered texture, the blendmap applied on any of the floors will also appear on every other floor where a layered texture is present.
 -   The blendmap can be combined with [grass](grass "wikilink") rendering to create some awesome texture effects.
--   Blendmaps created with custom brushes can be viewed by other players even if they don't have the blendbrushes present in their User Content direcotry. The blendmap painting information is packed into the map file itself.
+-   Blendmaps created with custom brushes can be viewed by other players even if they don't have the blendbrushes present in their User Content directory. The blendmap painting information is packed into the map file itself.
