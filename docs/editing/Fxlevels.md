@@ -1,5 +1,5 @@
 ---
-title: Editing: Fxlevels
+title: Editing - Fxlevels
 layout: docs
 origfile: editing/Fxlevels.md
 origtitle: Fxlevels

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Plasma
+title: Gameplay - Weapon Plasma
 layout: docs
 origfile: gameplay/Weapon-Plasma.md
 origtitle: Weapon-Plasma

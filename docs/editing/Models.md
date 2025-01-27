@@ -1,5 +1,5 @@
 ---
-title: Editing: Models
+title: Editing - Models
 layout: docs
 origfile: editing/Models.md
 origtitle: Models

@@ -1,5 +1,5 @@
 ---
-title: Editing: Fx Particle
+title: Editing - Fx Particle
 layout: docs
 origfile: editing/Fx-Particle.md
 origtitle: Fx-Particle

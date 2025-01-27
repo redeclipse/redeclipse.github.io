@@ -1,5 +1,5 @@
 ---
-title: Maps old: Fortitude
+title: Maps old - Fortitude
 layout: docs
 origfile: maps-old/Fortitude.md
 origtitle: Fortitude

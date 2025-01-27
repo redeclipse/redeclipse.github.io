@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Pistol
+title: Gameplay - Weapon Pistol
 layout: docs
 origfile: gameplay/Weapon-Pistol.md
 origtitle: Weapon-Pistol

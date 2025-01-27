@@ -1,5 +1,5 @@
 ---
-title: Maps old: Starlibido
+title: Maps old - Starlibido
 layout: docs
 origfile: maps-old/Starlibido.md
 origtitle: Starlibido

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Smg
+title: Gameplay - Weapon Smg
 layout: docs
 origfile: gameplay/Weapon-Smg.md
 origtitle: Weapon-Smg

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Modes and Mutators
+title: Gameplay - Modes and Mutators
 layout: docs
 origfile: gameplay/Modes-and-Mutators.md
 origtitle: Modes-and-Mutators

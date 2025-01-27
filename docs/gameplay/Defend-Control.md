@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Defend Control
+title: Gameplay - Defend Control
 layout: docs
 origfile: gameplay/Defend-Control.md
 origtitle: Defend-Control

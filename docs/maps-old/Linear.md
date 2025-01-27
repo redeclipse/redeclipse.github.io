@@ -1,5 +1,5 @@
 ---
-title: Maps old: Linear
+title: Maps old - Linear
 layout: docs
 origfile: maps-old/Linear.md
 origtitle: Linear

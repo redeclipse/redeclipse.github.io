@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Race
+title: Gameplay - Race
 layout: docs
 origfile: gameplay/Race.md
 origtitle: Race

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Status Effects
+title: Gameplay - Status Effects
 layout: docs
 origfile: gameplay/Status-Effects.md
 origtitle: Status-Effects

@@ -1,5 +1,5 @@
 ---
-title: Editing: Basics
+title: Editing - Basics
 layout: docs
 origfile: editing/Basics.md
 origtitle: Basics

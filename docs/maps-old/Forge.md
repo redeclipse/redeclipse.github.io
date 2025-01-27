@@ -1,5 +1,5 @@
 ---
-title: Maps old: Forge
+title: Maps old - Forge
 layout: docs
 origfile: maps-old/Forge.md
 origtitle: Forge

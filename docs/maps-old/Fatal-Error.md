@@ -1,5 +1,5 @@
 ---
-title: Maps old: Fatal Error
+title: Maps old - Fatal Error
 layout: docs
 origfile: maps-old/Fatal-Error.md
 origtitle: Fatal-Error

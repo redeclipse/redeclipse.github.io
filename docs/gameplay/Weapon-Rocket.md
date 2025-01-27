@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Rocket
+title: Gameplay - Weapon Rocket
 layout: docs
 origfile: gameplay/Weapon-Rocket.md
 origtitle: Weapon-Rocket

@@ -1,5 +1,5 @@
 ---
-title: Maps: Ennui
+title: Maps - Ennui
 layout: docs
 origfile: maps/Ennui.md
 origtitle: Ennui

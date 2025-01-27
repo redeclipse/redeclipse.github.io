@@ -1,5 +1,5 @@
 ---
-title: Maps old: Condensation
+title: Maps old - Condensation
 layout: docs
 origfile: maps-old/Condensation.md
 origtitle: Condensation

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Demo
+title: Gameplay - Demo
 layout: docs
 origfile: gameplay/Demo.md
 origtitle: Demo

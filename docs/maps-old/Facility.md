@@ -1,5 +1,5 @@
 ---
-title: Maps old: Facility
+title: Maps old - Facility
 layout: docs
 origfile: maps-old/Facility.md
 origtitle: Facility

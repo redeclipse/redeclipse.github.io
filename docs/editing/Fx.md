@@ -1,5 +1,5 @@
 ---
-title: Editing: Fx
+title: Editing - Fx
 layout: docs
 origfile: editing/Fx.md
 origtitle: Fx

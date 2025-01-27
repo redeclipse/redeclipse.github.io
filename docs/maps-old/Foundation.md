@@ -1,5 +1,5 @@
 ---
-title: Maps old: Foundation
+title: Maps old - Foundation
 layout: docs
 origfile: maps-old/Foundation.md
 origtitle: Foundation

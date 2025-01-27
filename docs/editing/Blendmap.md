@@ -1,5 +1,5 @@
 ---
-title: Editing: Blendmap
+title: Editing - Blendmap
 layout: docs
 origfile: editing/Blendmap.md
 origtitle: Blendmap

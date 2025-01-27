@@ -1,5 +1,5 @@
 ---
-title: Maps old: Convolution
+title: Maps old - Convolution
 layout: docs
 origfile: maps-old/Convolution.md
 origtitle: Convolution

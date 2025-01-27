@@ -1,5 +1,5 @@
 ---
-title: Editing: Waypoints
+title: Editing - Waypoints
 layout: docs
 origfile: editing/Waypoints.md
 origtitle: Waypoints

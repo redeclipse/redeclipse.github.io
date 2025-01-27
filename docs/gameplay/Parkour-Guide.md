@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Parkour Guide
+title: Gameplay - Parkour Guide
 layout: docs
 origfile: gameplay/Parkour-Guide.md
 origtitle: Parkour-Guide

@@ -1,5 +1,5 @@
 ---
-title: Maps: Octavus
+title: Maps - Octavus
 layout: docs
 origfile: maps/Octavus.md
 origtitle: Octavus

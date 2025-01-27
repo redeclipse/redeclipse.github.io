@@ -1,5 +1,5 @@
 ---
-title: Maps: Rift
+title: Maps - Rift
 layout: docs
 origfile: maps/Rift.md
 origtitle: Rift

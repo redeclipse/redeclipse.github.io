@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Bomber Ball
+title: Gameplay - Bomber Ball
 layout: docs
 origfile: gameplay/Bomber-Ball.md
 origtitle: Bomber-Ball

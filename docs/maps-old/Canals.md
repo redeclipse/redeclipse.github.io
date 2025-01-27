@@ -1,5 +1,5 @@
 ---
-title: Maps old: Canals
+title: Maps old - Canals
 layout: docs
 origfile: maps-old/Canals.md
 origtitle: Canals

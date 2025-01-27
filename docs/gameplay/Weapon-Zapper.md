@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Zapper
+title: Gameplay - Weapon Zapper
 layout: docs
 origfile: gameplay/Weapon-Zapper.md
 origtitle: Weapon-Zapper

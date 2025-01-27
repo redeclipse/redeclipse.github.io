@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Flamer
+title: Gameplay - Weapon Flamer
 layout: docs
 origfile: gameplay/Weapon-Flamer.md
 origtitle: Weapon-Flamer

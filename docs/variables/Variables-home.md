@@ -1,5 +1,5 @@
 ---
-title: Variables: Variables home
+title: Variables - Variables home
 layout: docs
 origfile: variables/Variables-home.md
 origtitle: Variables-home

@@ -1,5 +1,5 @@
 ---
-title: Server how to: Privileges
+title: Server how to - Privileges
 layout: docs
 origfile: server-how-to/Privileges.md
 origtitle: Privileges

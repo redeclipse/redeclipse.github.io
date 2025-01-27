@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapons Guide
+title: Gameplay - Weapons Guide
 layout: docs
 origfile: gameplay/Weapons-Guide.md
 origtitle: Weapons-Guide

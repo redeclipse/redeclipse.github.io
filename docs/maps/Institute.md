@@ -1,5 +1,5 @@
 ---
-title: Maps: Institute
+title: Maps - Institute
 layout: docs
 origfile: maps/Institute.md
 origtitle: Institute

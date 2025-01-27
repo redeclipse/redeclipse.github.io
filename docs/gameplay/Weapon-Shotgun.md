@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Shotgun
+title: Gameplay - Weapon Shotgun
 layout: docs
 origfile: gameplay/Weapon-Shotgun.md
 origtitle: Weapon-Shotgun

@@ -1,5 +1,5 @@
 ---
-title: Maps old: Warp
+title: Maps old - Warp
 layout: docs
 origfile: maps-old/Warp.md
 origtitle: Warp

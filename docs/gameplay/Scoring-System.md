@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Scoring System
+title: Gameplay - Scoring System
 layout: docs
 origfile: gameplay/Scoring-System.md
 origtitle: Scoring-System

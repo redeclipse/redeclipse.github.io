@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Gameplay Guide
+title: Gameplay - Gameplay Guide
 layout: docs
 origfile: gameplay/Gameplay-Guide.md
 origtitle: Gameplay-Guide

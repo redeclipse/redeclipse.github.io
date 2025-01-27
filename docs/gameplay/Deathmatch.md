@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Deathmatch
+title: Gameplay - Deathmatch
 layout: docs
 origfile: gameplay/Deathmatch.md
 origtitle: Deathmatch

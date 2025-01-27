@@ -1,5 +1,5 @@
 ---
-title: Editing: Entities other
+title: Editing - Entities other
 layout: docs
 origfile: editing/Entities-other.md
 origtitle: Entities-other

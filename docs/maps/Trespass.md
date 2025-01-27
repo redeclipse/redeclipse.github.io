@@ -1,5 +1,5 @@
 ---
-title: Maps: Trespass
+title: Maps - Trespass
 layout: docs
 origfile: maps/Trespass.md
 origtitle: Trespass

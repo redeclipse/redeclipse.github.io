@@ -1,5 +1,5 @@
 ---
-title: Maps old: Alpha Campaign
+title: Maps old - Alpha Campaign
 layout: docs
 origfile: maps-old/Alpha-Campaign.md
 origtitle: Alpha-Campaign

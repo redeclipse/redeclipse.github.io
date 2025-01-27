@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Grenade
+title: Gameplay - Weapon Grenade
 layout: docs
 origfile: gameplay/Weapon-Grenade.md
 origtitle: Weapon-Grenade

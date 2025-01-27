@@ -1,5 +1,5 @@
 ---
-title: Server how to: Admin Guide
+title: Server how to - Admin Guide
 layout: docs
 origfile: server-how-to/Admin-Guide.md
 origtitle: Admin-Guide

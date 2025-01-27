@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Sword
+title: Gameplay - Weapon Sword
 layout: docs
 origfile: gameplay/Weapon-Sword.md
 origtitle: Weapon-Sword

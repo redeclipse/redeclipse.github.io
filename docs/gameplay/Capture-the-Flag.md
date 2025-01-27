@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Capture the Flag
+title: Gameplay - Capture the Flag
 layout: docs
 origfile: gameplay/Capture-the-Flag.md
 origtitle: Capture-the-Flag

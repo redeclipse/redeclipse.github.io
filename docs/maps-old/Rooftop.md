@@ -1,5 +1,5 @@
 ---
-title: Maps old: Rooftop
+title: Maps old - Rooftop
 layout: docs
 origfile: maps-old/Rooftop.md
 origtitle: Rooftop

@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Mine
+title: Gameplay - Weapon Mine
 layout: docs
 origfile: gameplay/Weapon-Mine.md
 origtitle: Weapon-Mine

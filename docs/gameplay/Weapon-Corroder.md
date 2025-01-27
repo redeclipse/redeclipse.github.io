@@ -1,5 +1,5 @@
 ---
-title: Gameplay: Weapon Corroder
+title: Gameplay - Weapon Corroder
 layout: docs
 origfile: gameplay/Weapon-Corroder.md
 origtitle: Weapon-Corroder
