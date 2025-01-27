@@ -11,8 +11,6 @@ redirect_from:
 * TOC
 {:toc}
 
-##Former Maps
-
 ## 1.6 maps
 
 ### Main Maps
