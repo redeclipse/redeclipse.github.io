@@ -108,7 +108,7 @@ Should you desire/need to, you may also specify which address your server binds 
 ```
 serverip 127.0.0.1
 ```
-Remember these settings for later, in case you will need to do [port forwarding](#forwarding-ports). 
+Remember these settings for later, in case you will need to do [port forwarding](#forwarding-ports).
 
 ### Server Visibility and Access
 You can control the visibility and/or accessibility of your server to the public.

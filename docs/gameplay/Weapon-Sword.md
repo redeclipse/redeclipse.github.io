@@ -40,7 +40,7 @@ Both fire modes cause bleeding upon hit. Keep that in mind, especially when graz
 
 ### Counterplay
 
-A Sword user that cannot get within your range has their damage output castrated, but there are many ways they can get close to you that are the real problem. If the player is smart, they will take cover behind objects while you're firing at them, so force them out into open spaces - something that's rather easy to do if they are chasing you down relentlessly, but gives them a big disadvantage. Try to read their movements and time your impulses to dodge their attacks instead of plainly running away. Remember, they have the superior agility, but anyone can impulse, and a single move that throws them off can cost them their life. 
+A Sword user that cannot get within your range has their damage output castrated, but there are many ways they can get close to you that are the real problem. If the player is smart, they will take cover behind objects while you're firing at them, so force them out into open spaces - something that's rather easy to do if they are chasing you down relentlessly, but gives them a big disadvantage. Try to read their movements and time your impulses to dodge their attacks instead of plainly running away. Remember, they have the superior agility, but anyone can impulse, and a single move that throws them off can cost them their life.
 
 ### Strengths & Weaknesses
 

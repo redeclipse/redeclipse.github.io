@@ -46,7 +46,7 @@ The `decal` entity is used to project a texture onto cube geometry. This allows 
 
 `/newent envmap`
 
-Creates an environment map reflecting the geometry around the entity.  The optional radius overrides the maximum distance within which glass or geometry using the  "bumpenv*" shaders will reflect from this environment map. If none is specified, the default is taken from the variable `envmapradius` (which defaults to 128 units), which may also be set in map cfgs. Environment maps are generated on a map load, or can be regenerated whilst editing using the `recalc` command. 
+Creates an environment map reflecting the geometry around the entity.  The optional radius overrides the maximum distance within which glass or geometry using the  "bumpenv*" shaders will reflect from this environment map. If none is specified, the default is taken from the variable `envmapradius` (which defaults to 128 units), which may also be set in map cfgs. Environment maps are generated on a map load, or can be regenerated whilst editing using the `recalc` command.
 
 ## Light
 
@@ -108,7 +108,7 @@ Rails are a new feature in the development branch. Entities can be ~~[linked](Ed
 
 `/newent route`
 
-The `route` entities are used to add possible paths that the player can follow to complete a lap in ~~[Race](Race)~~ mode. 
+The `route` entities are used to add possible paths that the player can follow to complete a lap in ~~[Race](Race)~~ mode.
 
 These are easier to place by using `/droproute 1` similar as to how ~~[waypoints](Editing-Waypoints)~~ are placed.
 
@@ -134,7 +134,7 @@ A trigger is used to create events. For example; A proximity trigger will allow 
 
 `/newent weapon`
 
-The `weapon` entity is used to place ~~[weapon](Weapons-Guide)~~ spawns within a map. 
+The `weapon` entity is used to place ~~[weapon](Weapons-Guide)~~ spawns within a map.
 
 ## Wind
 

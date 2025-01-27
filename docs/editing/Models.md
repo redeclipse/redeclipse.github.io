@@ -16,7 +16,7 @@ Redeclipse supports several model formats;
 * OBJ (object wavefront)
 * IQM (inter-quake model format)
 
-Models that require a bone for positioning, or contain animations will need to be exported as IQM. We reccomend using Blender for 3D modelling, due to the IQM exporter. 
+Models that require a bone for positioning, or contain animations will need to be exported as IQM. We reccomend using Blender for 3D modelling, due to the IQM exporter.
 
 An IQM exporter can be obtained here: [https://github.com/lsalzman/iqm](https://github.com/lsalzman/iqm)
 Pick the lastest version of the plugin if using blender 3.0+.
@@ -43,7 +43,7 @@ mdlscale 250
 
 ### Examples
 #### obj
-This example uses a mesh exported for use as an obj model. 
+This example uses a mesh exported for use as an obj model.
 
 Within blender:
 * Add a new mesh to the scene
@@ -57,7 +57,7 @@ A correctly configured example of a model can be found here; Download this [map]
 #### iqm
 This example uses a mesh exported for use as an iqm model.
 
-An IQM model requires at least one bone present. 
+An IQM model requires at least one bone present.
 
 Within blender:
 * Add a new mesh to the scene

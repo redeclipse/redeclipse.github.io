@@ -22,7 +22,7 @@ The first thing to do is create a layered texture. Within the editor, find the t
 
 `/vlayer 123`
 
-![Blendmap](images/editing/blendmap02.jpg "The texture browser") 
+![Blendmap](images/editing/blendmap02.jpg "The texture browser")
 
 If done correctly, the texture preview should show the layered texture at the upper right corner of the thumbnail.
 
@@ -42,7 +42,7 @@ texlayer 249
 
 ### Painting
 
- Now that we have a layered texture, we are ready to start painting. Enable the blendbrush by pressing **[P]**. You can press **[P]** several times for different methods of applying the brush, such as erasing the blendmap or merging the blendmap. 
+ Now that we have a layered texture, we are ready to start painting. Enable the blendbrush by pressing **[P]**. You can press **[P]** several times for different methods of applying the brush, such as erasing the blendmap or merging the blendmap.
 
 - Scrolling the mouse wheel will enable you to change the brush shape and density, such as a square, circle or gradient.
 - Right clicking will allow you to rotate the blendbrush.
@@ -50,7 +50,7 @@ texlayer 249
 **Brush modes:**
 
 -   **1:** Blends both textures, but will overwrite existing blendmapping around the brush area (a square).
--   **2:** Blends textures, adding to the existing blendmap in place. 
+-   **2:** Blends textures, adding to the existing blendmap in place.
 -   **3:** Erases the blendmap around the brush area (full erase).
 -   **4:** Similar to \#1, except inverted: defaults to vlayer texture and paints base texture over it.
 -   **5:** Similar to \#2, except removes the vlayer according to the brush, functioning as an eraser.
