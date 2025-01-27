@@ -98,7 +98,6 @@ adminpass "yourpassword"
 ```
 **Only give your adminpass to people you trust and deem responsible to manage your server! They can do just about anything to your server after claiming admin!**
 
-
 #### Connection Settings
 - If you wish to customize the ports used by the server you can do so by uncommenting the serverport line and changing the port number to that of your liking. For example:
 ```

@@ -48,8 +48,6 @@ By default friendly fire is enabled. Make sure not to injure your own teammates 
 
 Some maps will have a layout that is not perfectly symmetrical where one team may have a slight advantage. To counteract this for balance, the server may automatically swap the teams spawn points when the time limit reaches halftime.
 
-
-
 ### Game Modes
 
 |Icon                                                   |Mode                  |Description|
@@ -93,7 +91,6 @@ Selecting the game mode, **Deathmatch**, along with the following mutators:
 This will create a game mode where players are not on teams, they only spawn with the sword, one hit kills instantly and there is no radar present.
 
 The above example will be abbreviated as **FF-In-Me-Ha-Deathmatch** for the active game mode being played.
-
 
 #### Game mode specific mutators
 Additional mutators which can only be enabled in specific game modes.

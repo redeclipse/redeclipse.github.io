@@ -35,7 +35,6 @@ redirect_from:
 ## Overview
 One of the only two main maps included in 1.6 to make it to 2.0.0, Octavus is a large, open symmetrical team map suitable for large matches.
 
-
 ## Notes & Strategies
 
 - Despite its size, this is a fairly simple layout. The bases are located at either end of the large outdoor courtyard in the center of the map.

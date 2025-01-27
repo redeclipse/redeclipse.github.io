@@ -56,7 +56,6 @@ The Red Eclipse project delcares that:
 4. Personal information and contact details for Mr Quinton Reeves is available
    to eligible organisations on request. Please email: contact@redeclipse.net
 
-
 ## Permitted Use
 
 You may use the marks without prior written permission (subject to the following
@@ -101,7 +100,6 @@ terms):
    general presentation of the product does not imply any official association
    or identity with the Red Eclipse project.
 
-
 ## Non Permitted Use
 
 You may not use the marks in the following ways:
@@ -127,7 +125,6 @@ You may not use the marks in the following ways:
 
 Thus uses of the marks in a domain name or company name without explicit written
 permission from the Red Eclipse project are prohibited.
-
 
 ## Other Legal Notes
 
@@ -160,7 +157,6 @@ for example) should clear everything up in short order.
 If you currently have a product that is using the Red Eclipse marks in a way
 that don't follow this policy, don't panic. Let us know, and we'll work it out,
 as described above.
-
 
 ## Attribution
 

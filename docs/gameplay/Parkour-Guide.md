@@ -35,5 +35,4 @@ or alternatively by opening the in-game console and typing `/showmovecount 1`
 | **Dash** (\*)           | Dashing can be used to quickly move out of the way, or to help gain speed whilst moving about the map. Pressing **[F]** will perform a dash, but you can also double tap the **[W]**,**[A]**,**[S]**,**[D]** keys to dash in a specific direction |
 | **Impulse Pound** (\*) | After jumping, pressing **[SHIFT]** + **[SPACE]** will make you boost vertically downwards. This can be used to quickly change direction of free-fall movement. This ability can also be used to deal melee damage to a player from above. |
 
-
 *(\*): Currently only available in the development branch.*

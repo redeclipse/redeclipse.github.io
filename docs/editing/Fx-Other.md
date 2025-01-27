@@ -87,7 +87,6 @@ Wind is a purely visual effect affecting some particles and models such as veget
 
 Following pre-defined stains are available for use:
 
-
 | Stain                    | Value |
 |--------------------------|-------|
 | $STAIN_SMOKE             | 0     |

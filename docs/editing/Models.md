@@ -53,7 +53,6 @@ save your mesh.obj file to the same folder as your obj.cfg
 
 A correctly configured example of a model can be found here; Download this [map](https://github.com/redeclipse/docs/raw/master/editing/monkey-map.rar) and [model](https://github.com/redeclipse/docs/raw/master/editing/monkey-model.rar). Extract the two folders to the root directory of your [local data folder](https://www.redeclipse.net/docs/FAQ#where-do-i-find-screenshots-logs-and-other-user-data). Load the example map in game with by running `map monkey` at the console. You should see Blender's default monkey mesh present within the map.
 
-
 #### iqm
 This example uses a mesh exported for use as an iqm model.
 

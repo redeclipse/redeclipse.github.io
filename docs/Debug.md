@@ -42,7 +42,6 @@ gdb src/redeclipse_windows.exe
 
 <a href="images/debug/win_dbg2.png" target="_blank"><img src="images/debug/win_dbg2.png" width="512px"/></a>
 
-
 Inside GDB, to start Red Eclipse, type:
 ```
 run
@@ -53,7 +52,6 @@ Now attempt to reproduce the problem in game. Once Red Eclipse has crashed, GDB 
 bt full
 ```
 This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/RPDmG5Z).
-
 
 ## Linux
 

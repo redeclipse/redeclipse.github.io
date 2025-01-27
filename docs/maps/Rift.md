@@ -37,7 +37,6 @@ This is the map formerly known by its assigned layout name, ctf13.
 
 Tripartiate map with alpha and omega bases at the far corners. The long chasms leave players exposed to rifle fire, while the tight corridors are suitable for ambushes.
 
-
 ## Notes & Strategies
 
 - The two mines are both local to the team bases. They may be useful corridor stuffers to cut off one mode of entry into the flag area.

@@ -37,7 +37,6 @@ This is the map formerly known by its assigned layout name, ffs35.
 
 Simple, but relatively large, layout capable of duel, survivor, or medium FFAs. Bridges cross the exposed center of the map, making long range combat viable.
 
-
 ## Notes & Strategies
 
 - There is just one mine on this level, but it is quite useful in light of the map's teleporter.

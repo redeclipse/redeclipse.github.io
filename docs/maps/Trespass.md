@@ -37,7 +37,6 @@ Trespass is a clean, postmodern map with single pickups tuned for duel. It has a
 
 It was originally released in 2013, but was not compatible with the gameplay style. It has been redone for its inclusion in Red Eclipse.
 
-
 ## Notes & Strategies
 
 - The north side of the map is more cluttered than the open south side. Those who opt not to carry a long range weapon should consider attempting to draw conflict on the north side

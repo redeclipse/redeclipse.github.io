@@ -55,7 +55,6 @@ texlayer 249
 -   **4:** Similar to \#1, except inverted: defaults to vlayer texture and paints base texture over it.
 -   **5:** Similar to \#2, except removes the vlayer according to the brush, functioning as an eraser.
 
-
 | **Using the brush** | |
 |-|-|
 Now that we have a layered texture, we can draw with our brush onto the blendmap. Simply click on the texture with the brush painting mode activated. Choosing "*blend mode: merge*" will allow you to paint the layered texture on top of the base texture. | [![Blendmap](images/editing/blendmap03.jpg "Painting with a blend brush")](images/editing/blendmap03.jpg) |
