@@ -1,0 +1,73 @@
+/* ==============================
+   Redflare Server Table Styling
+   ============================== */
+
+.server-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+}
+
+.server-table thead {
+  background-color: #20232a;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.server-table th,
+.server-table td {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0.6em 1em;
+  text-align: left;
+}
+
+.server-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.server-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  transition: background-color 0.2s ease;
+}
+
+.server-table td:first-child {
+  font-weight: 600;
+}
+
+.server-table td:nth-child(7) {
+  font-style: italic;
+  color: #66ccff;
+}
+
+.server-table td:nth-child(8) {
+  color: #cccccc;
+}
+
+.server-table td {
+  white-space: normal;
+  word-break: break-word;
+}
+
+@media (max-width: 768px) {
+  .server-table {
+    font-size: 0.85rem;
+    overflow-x: auto;
+    display: block;
+  }
+}
+
+/* Light theme */
+@media (prefers-color-scheme: light) {
+  .server-table thead {
+    background-color: #e9ecef;
+    color: #111;
+  }
+  .server-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+  }
+  .server-table tbody tr:hover {
+    background-color: #e0e0e0;
+  }
+}
