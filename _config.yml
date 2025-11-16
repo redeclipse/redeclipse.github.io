@@ -1,6 +1,3 @@
-url: "https://dc-redeclipse.github.io"
-baseurl: "/redeclipse.github.io"
-
 # Site settings
 title: Red Eclipse
 description: A free arena shooter featuring parkour
@@ -12,6 +9,10 @@ github: [metadata]
 locs:
   api: "https://api.github.com"
   ref: "https://github.com"
+
+# ONLY FOR TEST ENVIROMENT!
+url: "https://dc-redeclipse.github.io"
+baseurl: "/redeclipse.github.io"
 
 # Where things are
 source: "."
