@@ -5,41 +5,396 @@ permalink:
 redirect_from:
   - /home
 ---
-<div class="row main">
-    <div class="col-xs12 col-sm-12 col-md-6 pagehome">
-        <h2>A free <b>arena shooter</b></h1>
-        <h3>Fun for everyone, young and old, noob or expert</h3>
-        <h3>Available for Windows and Linux</h3>
-        <h3>Parkour, impulse boosts, dashing, and other tricks</h3>
-        <h3>A huge amount of mutators and game altering variables</h3>
-        <h3>Create maps with other players in realtime co-op edit</h3>
-        <h3>Over ten years of active development, and still going!</h3>
-        <div class="col-xs12 col-sm-12 col-md-12 btndownload">
-            <a href="/download" class="btn btn-primary">
-                <p class="download"><span class="fas fa-download" aria-hidden="true"></span> FREE DOWNLOAD</p>
-                <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}</p>
+<style>
+  #custom-cursor {
+    display: none;
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path stroke="white" stroke-width="2" d="M16 0v32M0 16h32"/></svg>');
+    background-size: contain;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+  }
+  #custom-cursor.hover-effect {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><defs><filter id="glow" x="-100%25" y="-100%25" width="300%25" height="300%25"><feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="red"/></filter></defs><g filter="url(%23glow)" stroke="orange" stroke-width="2" fill="none" stroke-linecap="round"><path d="M16 0v32M0 16h32"/><path d="M6 6 l4 4 M26 6 l-4 4 M6 26 l4 -4 M26 26 l-4 -4"/></g></svg>');
+    animation: pulse-cursor 1.5s infinite ease-in-out;
+  }
+  @keyframes pulse-cursor {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+  .lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
+    background: #000 !important;
+  }
+  .ekko-lightbox .modal-content {
+    background-color: #000 !important;
+    box-shadow: none !important;
+  }
+  .ekko-lightbox .modal-header {
+    border-bottom-color: red !important;
+  }
+  .ekko-lightbox .close, .lightbox .close, .modal-header .close, .ekko-lightbox .modal-header .close {
+    color: #fff !important;
+    opacity: 1 !important;
+    text-shadow: none !important;
+  }
+  .ekko-lightbox .close:hover, .lightbox .close:hover, .modal-header .close:hover, .ekko-lightbox .modal-header .close:hover {
+    color: red !important;
+    text-shadow: 0 0 5px red, 0 0 10px red !important;
+  }
+  .navbar-static-top {
+    margin-bottom: 0 !important;
+  }
+  .pagecontent {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .main-headline {
+    text-align: center;
+    font-size: 2.8em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+  .center-section {
+    text-align: center;
+  }
+  .hero-section-background {
+    background-image: url('/bits/bgtop.jpg');
+    background-size: auto 110%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 0px;
+    padding-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    transition: background-position 0.1s ease-out;
+    cursor: none;
+  }
+  .hero-section-background a {
+    cursor: none;
+  }
+  .center-section img[alt="{{ site.title }}"] {
+    max-width: 46%;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+  .center-section p.version a[href="/download"] {
+    color: #fff !important;
+    text-shadow: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  .center-section p.version a[href="/download"]:hover {
+    animation: pulse-red-text 2s infinite ease-in-out;
+  }
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 14px rgba(255, 0, 0, 0.5), 0 0 34px rgba(255, 0, 0, 0.3), 0 0 50px rgba(255, 0, 0, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.8), 0 0 48px rgba(255, 0, 0, 0.6), 0 0 70px rgba(255, 0, 0, 0.4);
+    }
+  }
+  @keyframes pulse-glow-small {
+    0%, 100% {
+      box-shadow: 0 0 18px rgba(255, 0, 0, 0.4), 0 0 28px rgba(255, 0, 0, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 28px rgba(255, 0, 0, 0.7), 0 0 38px rgba(255, 0, 0, 0.5);
+    }
+  }
+  @keyframes pulse-btn-color {
+    0%, 100% {
+      text-shadow: 0 0 4px #fff, 0 0 10px red, 0 0 20px red;
+    }
+    50% {
+      text-shadow: 0 0 8px #fff, 0 0 14px red, 0 0 28px red;
+    }
+  }
+  @keyframes pulse-dot {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 4px red, 0 0 8px red;
+      opacity: 0.7;
+    }
+    50% {
+      transform: scale(1.2);
+      box-shadow: 0 0 8px red, 0 0 16px red;
+      opacity: 1;
+    }
+  }
+  @keyframes pulse-red-text {
+    0%, 100% {
+      color: #fff;
+      text-shadow: 0 0 11px red, 0 0 21px red;
+    }
+    50% {
+      color: red;
+      text-shadow: 0 0 21px red, 0 0 42px red;
+    }
+  }
+  a.btn-primary[href="/steam"] {
+    border-color: red;
+    border-radius: 9999px;
+    font-size: clamp(1.56rem, 2.86vw, 2.58rem);
+    padding: 0.8em 1.6em;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    animation: pulse-glow-small 2s infinite ease-in-out;
+  }
+  a.btn-primary[href="/steam"]:hover, a.btn-primary[href="/steam"]:active {
+    background-color: red;
+    border-color: red;
+    animation: pulse-glow 2s infinite ease-in-out;
+  }
+  a.btn-primary[href="/steam"] p {
+    margin: 0;
+  }
+  a.btn-primary[href="/steam"] p.download, a.btn-primary[href="/steam"] p.version {
+    background: transparent;
+    border-radius: 0.5em;
+    color: #fff;
+    display: block;
+    padding: 0.05em 0.4em;
+    margin-bottom: 0.18em;
+    transition: none;
+  }
+  a.btn-primary[href="/steam"]:hover p.download, a.btn-primary[href="/steam"]:active p.download,
+  a.btn-primary[href="/steam"]:hover p.version, a.btn-primary[href="/steam"]:active p.version {
+    animation: pulse-btn-color 2s infinite ease-in-out;
+  }
+  a.btn-primary[href="/steam"] p.download {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 0.0em;
+  }
+  a.btn-primary[href="/steam"] p.version {
+    font-size: 0.58em;
+  }
+    a.btn-primary[href="/discord"] {
+      background-color: #7289DA;
+      border-color: #7289DA;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  a.btn-primary[href="/discord"] p.version {
+    font-size: 0.9em;
+  }
+  .feature-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 9999px;
+    padding: 30px 20px;
+    margin: 20px auto;
+    max-width: 520px;
+    box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .feature-box h2 {
+    color: #fff;
+    margin-top: 0.0em;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+    letter-spacing: -0.001em;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+  }
+  .feature-box h3 {
+      color: #fff;
+      margin-top: 0.0em;
+      margin-bottom: 0.8em;
+      text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
+      font-size: clamp(1rem, 2vw, 1.6rem);
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+  }
+  .feature-box h3:last-of-type {
+      margin-bottom: 0;
+  }
+  .feature-box h3::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 5px red, 0 0 10px red;
+    flex-shrink: 0;
+    animation: pulse-dot 2s infinite ease-in-out;
+  }
+  .feature-box h3::after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    box-shadow: 0 0 5px red, 0 0 10px red;
+    flex-shrink: 0;
+    animation: pulse-dot 2s infinite ease-in-out;
+  }
+  .feature-box h3:nth-of-type(1),
+  .feature-box h3:nth-of-type(6) {
+    padding-left: 5.5rem;
+    padding-right: 5.5rem;
+  }
+  .feature-box h3:nth-of-type(2),
+  .feature-box h3:nth-of-type(5) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .feature-box h3:nth-of-type(3),
+  .feature-box h3:nth-of-type(4) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .feature-box h3:nth-of-type(1)::before,
+  .feature-box h3:nth-of-type(1)::after { animation-delay: 0s; }
+  .feature-box h3:nth-of-type(2)::before,
+  .feature-box h3:nth-of-type(2)::after { animation-delay: 0.2s; }
+  .feature-box h3:nth-of-type(3)::before,
+  .feature-box h3:nth-of-type(3)::after { animation-delay: 0.4s; }
+  .feature-box h3:nth-of-type(4)::before,
+  .feature-box h3:nth-of-type(4)::after { animation-delay: 0.6s; }
+  .feature-box h3:nth-of-type(5)::before,
+  .feature-box h3:nth-of-type(5)::after { animation-delay: 0.8s; }
+  .feature-box h3:nth-of-type(6)::before,
+  .feature-box h3:nth-of-type(6)::after { animation-delay: 1.0s; }
+  .content-box {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: 0 0 10.4px rgba(255, 0, 0, 0.39);
+    box-sizing: border-box;
+    min-height: 170px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .content-box h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #fff;
+  }
+  .support.content-box .donatemsg {
+    font-size: clamp(1.6rem, 1vw, 1.60rem);
+  }
+  .donate-text {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  }
+  .donate-icon {
+    font-size: clamp(4.9rem, 2vw, 5.1rem);
+  }
+  .donate.content-box a:hover {
+    color: red !important;
+    text-shadow: 0 0 5px red, 0 0 10px red !important;
+  }
+  .row.texte .col-xs-12 > div[style="text-align: center; margin-top: 20px;"] a:hover {
+    color: red !important;
+    text-shadow: 0 0 5px red !important;
+  }
+  .row.texte {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 0 !important;
+  }
+  .row.texte > [class*="col-"] {
+    margin-top: 0 !important;
+    margin-bottom: 20px;
+  }
+  .row.texte > [class*="col-"]:first-child p:first-child {
+      margin-top: 0 !important;
+  }
+  #carousel-example-generic {
+    margin-bottom: -2px !important;
+  }
+  .center-section h2.headline {
+    text-shadow: none !important;
+    margin-top: 60px;
+  }
+  .center-section h1.main-headline {
+    text-shadow: none !important;
+  }
+  .carousel-control:hover {
+    color: red !important;
+    text-shadow: 0 0 5px red, 0 0 10px red !important;
+  }
+</style>
+<div id="custom-cursor"></div>
+<div class="center-section">
+    <div class="hero-section-background">
+        <img src="/bits/redeclipse-large.png" class="img-responsive" alt="{{ site.title }}">
+        <div class="center" style="padding:5px;">
+            <a href="/steam" class="btn btn-primary"><p class="download">
+                    <span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD
+                </p><p class="version">
+                    v{{ site.data.game.version }} ({{ site.data.game.release }})
+                </p></a>
+        </div>
+        <p class="version" style="margin:0; font-size:12px;">
+            <a href="/download">Install {{ site.title }} without Steam</a>
+        </p>
+        <h2 class="headline"><b>A free</b></h2>
+            <h1 class="main-headline"><b>arena shooter</b></h1>
+        <div class="feature-box">
+            <h3>Accessible to everyone</h3>
+            <h3>Available for Windows, Linux and BSD</h3>
+            <h3>A movement system with a very high skill ceiling</h3>
+            <h3>A huge amount of mutators and game altering variables</h3>
+            <h3>Create maps with other players, in real-time coop</h3>
+            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development</h3>
+        </div>
+        <div class="center" style="padding:5px;">
+            <a href="/discord" class="btn btn-primary">
+                <p class="download">
+                    <span class="fab fa-discord" aria-hidden="true"></span> JOIN THE COMMUNITY
+                </p>
+                <p class="version">
+                    Chat with other players on Discord
+                </p>
             </a>
         </div>
     </div>
-    <div class="col-xs12 col-sm-12 col-md-6 video">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
-        </div>
+</div>
+<!--/* FOR A NEW TRAILER */
+<div class="center-section">
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?modestbranding=1&rel=0" frameborder="0" allowfullscreen></iframe>
     </div>
 </div>
+-->
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
         {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
-        {% capture y %}{{ site.data.game.screenshots.items | default: 4 }}{% endcapture %}
+        {% assign items_per_slide = 1 %}
         {% for i in (0..x) %}
-        <div class="item{% if i == 0 %} active{% endif %} row">
-            {% for j in (1..y) %}
-            {% assign k = i | times: 4 | plus: j %}
-            {% assign m = k | prepend: '0' %}
-            {% assign n = m | size %}
-            {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
-            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"></a>
-            {% endfor %}
+        <div class="item{% if i == 0 %} active{% endif %}">
+            <div class="row" style="margin:0; padding:0;">
+                {% for j in (1..items_per_slide) %}
+                {% assign k = i | times: items_per_slide | plus: j %}
+                {% assign m = k | prepend: '0' %}
+                {% assign n = m | size %}
+                {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
+                <div class="col-xs-12" style="padding:0; margin:0;">
+                    <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
+                        <img src="/bits/thumbs/{{ m }}.jpg" alt="screenshot" style="width:100%; height:auto; display:block;">
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -54,19 +409,109 @@ redirect_from:
 </div>
 <div class="row texte">
     <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>{{ site.title }} is a fun-filled new take on the first person arena shooter, featuring parkour, impulse boosts, and more. The development is geared toward balanced gameplay, with a general theme of agility in a variety of environments. For more information, please see our <a href="/docs">Documentation</a>, <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a>.</p>
-        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://cubeengine.com/">Cube Engine 2</a> using <a href="http://libsdl.org/">SDL</a> and <a href="http://opengl.org/">OpenGL</a> which allows it to be ported to many platforms; you can <a href="/download">download a package</a> for <i>Windows, GNU/Linux, BSD, and MacOS</i>, or <a href="/devel">grab a development</a> copy from our <a href="/github">GitHub</a> repository and live on the bleeding edge.</p>
+        <p>{{ site.title }} is a movement focused arena shooter, inspired by old-school classics like Quake and Unreal Tournament, but with it's own unique flavor. We develop the game with a focus on balanced and varied weapons, with the in-depth movement/parkour system adding a big touch of skill expression for those who master it.</p>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>In a true open source <i>"by the people, for the people"</i> nature, we try to work closely with our community and invite everyone to have their say to provide a better overall experience, aiming to create a game environment that is fun and easy to play, while still having elements to master.</p>
-        <p>If you think you might have something to contribute to the game or community, please feel free to drop by our <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a> and talk to us directly. We try to maintain a standard of friendly behaviour in our community, so don't be afraid to speak up and have your say in building this game for us all!</p>
+        <p>If you have any suggestions to give us, or maybe even want to help us develop the game, don't hesitate to drop by our <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a> to talk to us! We work closely and try to maintain a standard of friendly behavior in our <a href="/discord">community</a>. So don't be afraid to join us and tell us your thoughts!</p>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 support">
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <p>It's a completely free and Open Source game, based on <a href="http://cubeengine.com/">Cube 2</a>; specifically, <a href="http://cubeengine.com/">Sauerbraten</a> and <a href="http://tesseract.gg/">Tesseract</a>, using <a href="http://libsdl.org/">SDL 2</a> and <a href="http://opengl.org/">OpenGL</a>, which allows it to be ported to many platforms. It's not just available on <a href="/steam">Steam</a>; For those who wish to make the most of the fact {{ site.title }} is Open Source, you can <a href="/download">download a package</a> for Windows, GNU/Linux and BSD.</p>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 support content-box">
         <h4>Support Us</h4>
-        <p class="donatemsg">{{ site.title }} is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="/contribute">help evolve the game</a>, <a href="/donate">donate to our worthy cause</a>, or <a href="/opencollective">subscribe to our Open Collective</a>.</p>
+        <p class="donatemsg">{{ site.title }} is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="/contribute">help evolve the game</a>.</p>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 affiliate">
+    <div class="col-xs-12 col-sm-4 col-md-4 donate content-box">
+        <h4>Donate</h4>
+        <div style="text-align: center;">
+            <a href="/opencollective" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease; display: inline-block; vertical-align: top;">
+                <span class="fas fa-dollar-sign donate-icon" aria-hidden="true"></span><br>
+                <h2 class="donate-text" style="margin-top: 0.33em; color: inherit; text-shadow: inherit; font-weight: normal; line-height: 2.9em;">Open Collective</h2>
+            </a>
+            <a href="/donate" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease; display: inline-block; vertical-align: top;">
+                <span class="fab fa-paypal donate-icon" aria-hidden="true"></span><br>
+                <h2 class="donate-text" style="margin-top: 0.33em; color: inherit; text-shadow: inherit; font-weight: normal; line-height: 2.9em;">PayPal</h2>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 affiliate content-box">
+        <h4>Affiliate</h4>
         <a href="http://cubeengine.com/"><img src="/bits/cube2.png" class="img-responsive img-cube2" alt="Cube Engine 2" style="margin:auto"></a>
         <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract" style="margin:auto"></a>
     </div>
+    <div class="col-xs-12">
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/discord" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
+                <span class="fa-brands fa-discord" aria-hidden="true" style="font-size: 3.4em;"></span>
+            </a>
+            <a href="/tiktok" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
+                <span class="fa-brands fa-tiktok" aria-hidden="true" style="font-size: 3.4em;"></span>
+            </a>
+            <a href="/youtube" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
+                <span class="fa-brands  fa-youtube" aria-hidden="true" style="font-size: 3.4em;"></span>
+            </a>
+            <a href="/x" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
+                <span class="fa-brands fa-x-twitter" aria-hidden="true" style="font-size: 3.4em;"></span>
+            </a>
+            <a href="/reddit" style="margin: 0 10px; color: #fff; text-shadow: 0 0 5px #fff; text-decoration: none; transition: all 0.3s ease;">
+                <span class="fa-brands  fa-reddit" aria-hidden="true" style="font-size: 3.4em;"></span>
+            </a>
+        </div>
+    </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var leftControl = document.querySelector('#carousel-example-generic .left.carousel-control');
+        var rightControl = document.querySelector('#carousel-example-generic .right.carousel-control');
+        if (leftControl) {
+            leftControl.addEventListener('mouseup', function() {
+                leftControl.blur();
+            });
+        }
+        if (rightControl) {
+            rightControl.addEventListener('mouseup', function() {
+                rightControl.blur();
+            });
+        }
+        const heroSection = document.querySelector('.hero-section-background');
+        if (heroSection) {
+            const parallaxAmount = 30;
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const normalizedX = (x - centerX) / centerX;
+                const normalizedY = (y - centerY) / centerY;
+                const offsetX = normalizedX * parallaxAmount;
+                const offsetY = normalizedY * parallaxAmount;
+                heroSection.style.backgroundPosition = `calc(50% + ${-offsetX}px) calc(50% + ${-offsetY}px)`;
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                heroSection.style.backgroundPosition = 'center center';
+            });
+        }
+        const cursor = document.getElementById('custom-cursor');
+        if (cursor && heroSection) {
+            window.addEventListener('mousemove', e => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            heroSection.addEventListener('mouseenter', () => {
+                cursor.style.display = 'block';
+            });
+            heroSection.addEventListener('mouseleave', () => {
+                cursor.style.display = 'none';
+            });
+            document.querySelectorAll('.hero-section-background a').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    cursor.classList.add('hover-effect');
+                });
+                link.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('hover-effect');
+                });
+            });
+        }
+    });
+</script>

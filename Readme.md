@@ -1,6 +1,6 @@
-Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.0.
+Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.1.
 
-This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](https://www.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/redeclipse/docs).
+This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](https://redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/redeclipse/docs).
 
 When editing pages here, there are a few guidelines you should follow. It is also important to understand how the pre-processors work, like [Jekyll](https://jekyllrb.com/docs/home/) and [Kramdown](https://kramdown.gettalong.org/documentation.html). The configuration for everything is held in [_config.yml](https://github.com/redeclipse/redeclipse.github.io/blob/master/_config.yml).
 
@@ -76,3 +76,86 @@ All paths need to be relative to each other. The docs repository is converted to
 ### Table of Contents
 Kramdown supports the automatic generation of these, and the pages are automatically generated to include them. You do **not** need to create your own at the top of your pages.
 
+
+# Server browser
+
+The system operates in a multi-stage process to minimize the load on the Master server while ensuring maximum data accuracy.
+
+
+### 1. Python Poller (Backend)
+The **Python Poller** acts as the heart of the system:
+* **Master Discovery:** It retrieves the list of all active server IPs from the Red Eclipse Master Server.
+* **UDP Queries:** The data is retrieved via **UDP** to get live stats and data.
+* **JSON Output:** Collected data is saved into structured **JSON files**. This decouples data collection from the display, ensuring the website stays fast.
+
+### 2. Server browser (Frontend)
+The **Frontend** serves as the user interface for the community:
+* The Server browser on the homepage parses the generated JSON files.
+* Data is rendered into a user-friendly, responsive layout.
+* Players can see exactly where the action is without needing to open the game client.
+
+### 3. Notifications
+Beyond just displaying data, the system includes a **Threshold-based Notification Mode**:
+* **Threshold Check:** The poller monitors player counts against a set limit (e.g., "Notify when 4+ players are online").
+* **Trigger:** Once the player count hits the threshold, the system triggers a notification (Browser notification or Discord Webhook).
+
+---
+
+## System Benefits
+
+* **Efficiency:** UDP pings and JSON caching keep web performance high, regardless of game server response times.
+* **Automation:** Players don't have to manually refresh; the system "calls" the community when a player joins.
+* **Mobile Ready:** The frontend is optimized so that server lists and stats remain perfectly readable on smartphones.
+
+---
+
+
+# Running the Homepage (Jekyll)
+
+The website is built using **Jekyll**, a Ruby-based static site generator. Ensure **Ruby** and **RubyGems** are installed on your system.
+
+## Installing
+
+Clone the git repository and navigate to the top-level directory. Install the dependencies using Bundler:
+
+    bundle install
+
+*Note: If you don't have Bundler, install it first with `gem install bundler`.*
+
+## Running
+
+To launch the local development server, run:
+
+    bundle exec jekyll serve --watch
+
+By default, the web UI will be available at `http://localhost:4000`. Jekyll will automatically watch for file changes and regenerate the site.
+
+---
+
+# Running the Server Browser (Python poller)
+
+The data poller is a **Python** application. Ensure **Python 3.8+** is installed.
+
+## Installing
+
+Clone the repository containing the poller and install the necessary Python packages:
+
+    pip install -r requirements.txt
+
+## Running
+
+The poller communicates with the master server via UDP and generates the JSON data used by the frontend. Run it with:
+
+    python3 getservers.py
+
+### Advanced Usage
+
+To enable the legacy notification mode (watching for player thresholds) and debug output:
+
+    python3 getservers.py [-h] [-d]
+    
+    options:
+    -h, --help   show this help message and exit
+    -d, --debug
+
+By default, the script writes its JSON output to the directory used by the homepage. Edit the configuration variables at the top of `getservers.py` or provide command-line arguments to change paths and notification thresholds.

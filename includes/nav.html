@@ -7,16 +7,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/"><img src="/bits/redeclipse-small.png" alt="{{ site.title | default: site.github.repository_name }}"></a>
+            <a class="navbar-brand" href="/"><img src="/bits/redeclipse-small.png" alt="{{ site.title | default: site.github.repository_name }}" style="height: 60px;"></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 {% for navitem in site.data.navigation %}
-                    <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}"><span class="{{ navitem.class }} fa-fw" aria-hidden="true"></span><div class="navtext">{{ navitem.title }}</div></a></li>
-                {% endfor %}
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% for navitem in site.data.extlinks %}
                     <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}"><span class="{{ navitem.class }} fa-fw" aria-hidden="true"></span><div class="navtext">{{ navitem.title }}</div></a></li>
                 {% endfor %}
             </ul>

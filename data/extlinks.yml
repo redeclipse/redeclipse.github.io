@@ -1,12 +1,3 @@
-- url: /github
-  title: "GitHub"
-  class: "fab fa-github"
-- url: /discord
-  title: "Discord"
-  class: "fab fa-discord"
-- url: /steam
-  title: "Steam"
-  class: "fab fa-steam"
 - url: /reddit
   title: "Reddit"
   class: "fab fa-reddit"

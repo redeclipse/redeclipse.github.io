@@ -1,15 +1,24 @@
+- url: /steam
+  title: "Steam"
+  class: "fab fa-steam"
+- url: /discord
+  title: "Discord"
+  class: "fab fa-discord"
+- url: /servers
+  title: "Server browser"
+  class: "fas fa-server"
 - url: /download
   title: "Downloads"
   class: "fas fa-download"
 - url: /docs
   title: "Documentation"
   class: "fas fa-book"
+- url: /github
+  title: "GitHub"
+  class: "fab fa-github"
 - url: /discuss
   title: "Discussions"
   class: "fas fa-comment"
 - url: /issues
   title: "Issue Tracker"
   class: "fas fa-tasks"
-- url: /servers
-  title: "Server List"
-  class: "fas fa-server"

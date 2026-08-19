@@ -4,6 +4,58 @@
         <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
         {% assign cssclass = 'default' %}
         {% include head.html %}
+        <style>
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 50px;
+                height: 24px;
+                vertical-align: middle;
+                margin-right: 10px;
+            }
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                transition: .4s;
+                border-radius: 24px;
+            }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 3px;
+                bottom: 3px;
+                background-color: white;
+                transition: .4s;
+                border-radius: 50%;
+            }
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+            input:checked + .slider:before {
+                transform: translateX(26px);
+            }
+            .notification-control {
+                font-family: sans-serif;
+                margin: 20px 0;
+                padding: 10px;
+                background: #f4f4f4;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+            }
+        </style>
     </head>
     <body>
         {% include nav.html %}
@@ -13,5 +65,398 @@
             </div>
             {% include footer.html %}
         </div>
+        <script>
+                (function() {
+                    const TOGGLE_ID = 'notif-toggle';
+                    const STATUS_ID = 'notif-status-text';
+                    const NOTIFY_URL = '/notify.json';
+                    const POLLING_INTERVAL = 5000;
+                    const STORAGE_KEY_SESSIONS = 'player_sessions';
+                    const STORAGE_KEY_ENABLED = 'notif_enabled';
+                    let pollingIntervalId = null;
+                    const MINOR_WORDS = new Set(["a","an","the","and","but","or","for","nor","so","yet","as","at","by","in","of","off","on","per","to","up","with"]);
+                    function formatModeTitleCase(modeStr) {
+                        try {
+                            const words = String(modeStr)
+                                .replace(/-/g, ' ')
+                                .trim()
+                                .toLowerCase()
+                                .split(/\s+/);
+                            const finalWords = [];
+                            for (let i = 0; i < words.length; i++) {
+                                const w = words[i].trim();
+                                if (!w) continue;
+                                const capitalize = (i === 0) || !MINOR_WORDS.has(w);
+                                finalWords.push(capitalize ? (w.charAt(0).toUpperCase() + w.slice(1)) : w);
+                            }
+                            return finalWords.length ? finalWords.join(' ') : 'Unknown';
+                        } catch (e) {
+                            return 'Unknown';
+                        }
+                    }
+                    function capitalizeFirst(s) {
+                        return (typeof s === 'string' && s)
+                            ? (s.charAt(0).toUpperCase() + s.slice(1))
+                            : '';
+                    }
+                    function capitalizeHyphenated(s) {
+                        if (typeof s !== 'string' || !s) return '';
+                        return s.split('-')
+                            .map(part => part ? (part.charAt(0).toUpperCase() + part.slice(1)) : '')
+                            .join('-');
+                    }
+                    function loadKnownSessions() {
+                        try {
+                            const stored = localStorage.getItem(STORAGE_KEY_SESSIONS);
+                            if (stored) {
+                                return new Map(JSON.parse(stored));
+                            }
+                        } catch (e) {
+                            console.error("[NotificationService] Error loading sessions:", e);
+                        }
+                        return new Map();
+                    }
+                    function saveKnownSessions(map) {
+                        try {
+                            const arrayData = Array.from(map.entries());
+                            localStorage.setItem(STORAGE_KEY_SESSIONS, JSON.stringify(arrayData));
+                        } catch (e) {
+                            console.error("[NotificationService] Error saving sessions:", e);
+                        }
+                    }
+                    let lastKnownSessions = loadKnownSessions();
+                    async function checkNewPlayers() {
+                        try {
+                            const response = await fetch(`${NOTIFY_URL}?t=${Date.now()}`);
+                            if (!response.ok) return;
+                            const data = await response.json();
+                            const activePlayers = data.map(p => ({
+                                name: p.name || p.player_name,
+                                server: p.server_name || p.server || p.hostname || 'Unknown Server',
+                                jointime: p.jointime || p.joined || p.time || 0,
+                                map: p.map_name || p.map || p.mapname || 'Unknown',
+                                mode: p.mode_name || p.mode || p.modename || 'Unknown',
+                                mutator: p.mutator_name || p.mutator || p.mutatorname || 'Unknown',
+                            }));
+                            let shouldNotify = true;
+                            const optLess = document.getElementById("opt-less-notifications");
+                            const optThreshold = document.getElementById("opt-less-notifications-threshold");
+                            if (optLess && (optLess.value == '1' || optLess.checked === true)) {
+                                const threshold = parseInt(optThreshold ? optThreshold.value : 0, 10) || 0;
+                                if (activePlayers.length < threshold) {
+                                    shouldNotify = false;
+                                }
+                            }
+                            const currentSessions = new Map();
+                            activePlayers.forEach(p => {
+                                const key = `${p.name}|${p.server}`;
+                                currentSessions.set(key, p.jointime);
+                            });
+                            if (lastKnownSessions.size === 0 && currentSessions.size > 0) {
+                                lastKnownSessions = currentSessions;
+                                saveKnownSessions(lastKnownSessions);
+                                return;
+                            }
+                            for (let player of activePlayers) {
+                                const key = `${player.name}|${player.server}`;
+                                const lastTime = lastKnownSessions.get(key);
+                                if (lastTime === undefined || player.jointime > lastTime) {
+                                    if (shouldNotify) {
+                                        sendNotification(player.name, player.server, player.map, player.mode);
+                                    }
+                                }
+                            }
+                            lastKnownSessions = currentSessions;
+                            saveKnownSessions(lastKnownSessions);
+                        } catch (e) {
+                            console.error("[NotificationService] Polling error:", e);
+                        }
+                    }
+                    function sendNotification(name, serverName, map, mode) {
+                        const notifTitle = `${name} joined ${serverName}`;
+                        const rawMode = mode || "Unknown Mode";
+                        const rawMap = map || "Unknown Map";
+                        const displayMode = formatModeTitleCase(rawMode);
+                        const displayMap = capitalizeFirst(rawMap);
+                        const notifBody = `${displayMode} on ${displayMap}`;
+                        if (Notification.permission === "granted") {
+                            try {
+                                const notification = new Notification(notifTitle, {
+                                    body: notifBody,
+                                    icon: '/bits/emblembrowser.png',
+                                    badge: '/bits/emblembrowser.png',
+                                    image: '/bits/emblembrowser.png',
+                                    vibrate: [200, 100, 200],
+                                    tag: `join-${name}-${serverName}`,
+                                    renotify: true,
+                                    silent: false,
+                                    data: { url: "https://redeclipse.net/servers/" }
+                                });
+                                notification.onclick = function(event) {
+                                    event.preventDefault();
+                                    const link = event.target.data ? event.target.data.url : "https://redeclipse.net/servers/";
+                                    if (link) {
+                                        window.open(link, '_blank');
+                                    }
+                                    notification.close();
+                                };
+                            } catch(e) {
+                                console.error("[NotificationService] Creation failed:", e);
+                            }
+                        }
+                    }
+                    function startPolling() {
+                        if (pollingIntervalId) return;
+                        lastKnownSessions = loadKnownSessions();
+                        checkNewPlayers();
+                        pollingIntervalId = setInterval(checkNewPlayers, POLLING_INTERVAL);
+                    }
+                    function stopPolling() {
+                        if (pollingIntervalId) clearInterval(pollingIntervalId);
+                        pollingIntervalId = null;
+                    }
+                    function updateUI(isEnabled) {
+                        const toggle = document.getElementById(TOGGLE_ID);
+                        const text = document.getElementById(STATUS_ID);
+                        if (toggle) toggle.checked = isEnabled;
+                        if (text) text.innerText = isEnabled ? "Notifications active" : "Enable player notifications";
+                    }
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const toggle = document.getElementById(TOGGLE_ID);
+                        const savedState = localStorage.getItem(STORAGE_KEY_ENABLED) === 'true';
+                        if (savedState && Notification.permission === "granted") {
+                            startPolling();
+                            updateUI(true);
+                        } else {
+                            updateUI(false);
+                            if(savedState) localStorage.setItem(STORAGE_KEY_ENABLED, 'false');
+                        }
+                        if (toggle) {
+                            toggle.addEventListener('change', (e) => {
+                                if (e.target.checked) {
+                                    Notification.requestPermission().then(perm => {
+                                        if (perm === "granted") {
+                                            localStorage.setItem(STORAGE_KEY_ENABLED, 'true');
+                                            startPolling();
+                                            updateUI(true);
+                                            new Notification("Notifications enabled", { body: "You will see when players join." });
+                                        } else {
+                                            e.target.checked = false;
+                                            alert("Please enable notifications in your browser settings.");
+                                        }
+                                    });
+                                } else {
+                                    localStorage.setItem(STORAGE_KEY_ENABLED, 'false');
+                                    stopPolling();
+                                    updateUI(false);
+                                }
+                            });
+                        }
+                    });
+                })();
+                </script>
+        <script>
+        (function(){
+          function parseSecondsFromText(text) {
+            if (!text) return null;
+            var t = text.trim();
+            if (!t || /no time limit/i.test(t)) return null;
+            var m = t.match(/^(?:(\d+)\s*h\s*)?(\d+)\s*m\s*(\d+)\s*s$/i);
+            if (m) {
+              var h = parseInt(m[1] || '0', 10);
+              var mm = parseInt(m[2] || '0', 10);
+              var s = parseInt(m[3] || '0', 10);
+              return (h*3600) + (mm*60) + s;
+            }
+            m = t.match(/^(\d+)\s*m\s*(\d+)\s*s$/i);
+            if (m) {
+              return parseInt(m[1],10)*60 + parseInt(m[2],10);
+            }
+            m = t.match(/^(\d+)\s*s$/i);
+            if (m) {
+              return parseInt(m[1],10);
+            }
+            return null;
+          }
+          function formatHMS(total) {
+            total = Math.max(0, total|0);
+            var h = Math.floor(total / 3600);
+            var m = Math.floor((total % 3600) / 60);
+            var s = total % 60;
+            var parts = [];
+            if (h > 0) parts.push(h + 'h');
+            parts.push(m + 'm');
+            parts.push(s + 's');
+            return { text: (parts.join(' ')), h: h, m: m, s: s };
+          }
+          function updateTitle(el, hms) {
+            var currentTitle = el.getAttribute('title') || '';
+            if (/Waiting for players/i.test(currentTitle) || /No time limit/i.test(currentTitle)) return;
+            el.setAttribute('title', 'Ends in');
+          }
+          function initCountdownFor(el) {
+            if (!el || el.classList.contains('waiting') || el.dataset.countdownInitialized === '1') return;
+            var timeText = '';
+            var clone = el.cloneNode(true);
+            var imgs = clone.querySelectorAll('img');
+            imgs.forEach(function(img){ img.remove(); });
+            timeText = (clone.textContent || '').trim();
+            var seconds = parseSecondsFromText(timeText);
+            if (seconds === null) return;
+            el.dataset.countdownInitialized = '1';
+            el.dataset.countdownSeconds = String(seconds);
+            var icon = el.querySelector('img');
+            function render(sec) {
+              if (sec <= 0) {
+                 el.setAttribute('title', 'Waiting for map suggestions');
+                 if (icon) {
+                    icon.src = '/servers/icons/vote.png';
+                    if (el.firstElementChild !== icon) {
+                       el.innerHTML = '';
+                       el.appendChild(icon);
+                    } else {
+                       while (icon.nextSibling) el.removeChild(icon.nextSibling);
+                    }
+                    el.appendChild(document.createTextNode('Voting'));
+                 } else {
+                    el.textContent = 'Voting';
+                 }
+                 return;
+              }
+              var hms = formatHMS(sec);
+              if (icon) {
+                if (el.firstElementChild !== icon) {
+                  el.innerHTML = '';
+                  el.appendChild(icon);
+                } else {
+                  while (icon.nextSibling) el.removeChild(icon.nextSibling);
+                }
+                el.appendChild(document.createTextNode(hms.text));
+              } else {
+                el.textContent = hms.text;
+              }
+              updateTitle(el, hms);
+            }
+            render(seconds);
+            var timer = setInterval(function(){
+              seconds -= 1;
+              if (seconds <= 0) {
+                seconds = 0;
+                render(seconds);
+                clearInterval(timer);
+                return;
+              }
+              render(seconds);
+            }, 1000);
+            el.dataset.countdownTimerId = String(timer);
+          }
+          function apply() {
+            var nodes = document.querySelectorAll('.time-left-container:not(.waiting)');
+            nodes.forEach(initCountdownFor);
+          }
+          window.__applyTimeLeftCountdown = apply;
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', apply);
+          } else {
+            apply();
+          }
+        })();
+        </script>
+        <script>
+        (function() {
+            const DATA_URL = '/data/servers.json';
+            const PAGE_URL = location.pathname;
+            const CHECK_INTERVAL_MS = 2500;
+            const SERVER_BUILD_DELAY_MS = 3000;
+            let lastSignature = null;
+            let timerId = null;
+            let isUpdating = false;
+            function simpleHash(str) {
+                let hash = 5381;
+                for (let i = 0; i < str.length; i++) {
+                    hash = ((hash << 5) + hash) ^ str.charCodeAt(i);
+                }
+                return (hash >>> 0).toString(16);
+            }
+            async function checkForUpdates() {
+                try {
+                    const res = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
+                    if (!res.ok) return null;
+                    const text = await res.text();
+                    return simpleHash(text);
+                } catch (e) {
+                    return null;
+                }
+            }
+            async function fetchPageHTML() {
+                const res = await fetch(PAGE_URL + '?t=' + Date.now(), { cache: 'no-store' });
+                if (!res.ok) throw new Error('Failed to fetch page HTML');
+                return await res.text();
+            }
+            function softSwapFromHTML(html) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newTbody = doc.querySelector('#server-list tbody');
+                const curTbody = document.querySelector('#server-list tbody');
+                if (newTbody && curTbody) {
+                    if (curTbody.innerHTML !== newTbody.innerHTML) {
+                         curTbody.innerHTML = newTbody.innerHTML;
+                    }
+                }
+                const newStats = doc.querySelector('.server-stats-info');
+                const curStats = document.querySelector('.server-stats-info');
+                if (newStats && curStats) {
+                    curStats.innerHTML = newStats.innerHTML;
+                }
+                const newLast = doc.querySelector('#last-checked-time');
+                const curLast = document.querySelector('#last-checked-time');
+                if (newLast && curLast) {
+                    curLast.textContent = newLast.textContent;
+                }
+                if (typeof window.__applyTimeLeftCountdown === 'function') window.__applyTimeLeftCountdown();
+                if (typeof window.__applyMapTitleTooltips === 'function') window.__applyMapTitleTooltips();
+            }
+            async function performUpdate() {
+                try {
+                    const html = await fetchPageHTML();
+                    requestAnimationFrame(() => {
+                        softSwapFromHTML(html);
+                    });
+                } catch (e) {
+                    console.error("Update failed", e);
+                } finally {
+                    isUpdating = false;
+                }
+            }
+            async function loop() {
+                const signature = await checkForUpdates();
+                if (signature !== null) {
+                    if (lastSignature === null) {
+                        lastSignature = signature;
+                    }
+                    else if (signature !== lastSignature) {
+                        if (!isUpdating) {
+                            isUpdating = true;
+                            lastSignature = signature;
+                            setTimeout(performUpdate, SERVER_BUILD_DELAY_MS);
+                        }
+                    }
+                }
+                timerId = setTimeout(loop, CHECK_INTERVAL_MS);
+            }
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'visible') {
+                    if (timerId) clearTimeout(timerId);
+                    isUpdating = false;
+                    console.log("Tab woke up. Restarting loop.");
+                    loop();
+                } else {
+                    if (timerId) clearTimeout(timerId);
+                    timerId = null;
+                }
+            });
+            loop();
+        })();
+        </script>
     </body>
 </html>
