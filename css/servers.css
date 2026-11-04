@@ -161,33 +161,19 @@
     color: rgb(255, 210, 210);
     background: none;
 }
-.servers-connect {
-    width: 1%;
-    text-align: right;
-    white-space: nowrap;
+#servers .servers-copy {
+    padding: 0;
+    color: rgb(255, 210, 210);
+    background: none;
+    border: 0;
+    font-family: monospace;
+    text-align: left;
+    cursor: copy !important;
 }
-.servers-sronly {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-}
-.servers-copy {
-    min-width: 7.5em;
-    padding: 0 6px;
-    vertical-align: middle;
-    font-size: 75% !important;
-    line-height: 1.6;
-    color: rgb(255, 220, 220);
-    background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgb(255, 64, 64);
-    border-radius: 4px;
-}
-.servers-copy:hover, .servers-copy:focus {
+#servers .servers-copy:hover, #servers .servers-copy:focus {
     color: rgb(255, 255, 255);
-    box-shadow: 0 0 6px rgb(255, 0, 0);
+    text-decoration: underline dotted;
+    outline: none;
 }
 .servers-empty {
     padding: 12px 10px;
