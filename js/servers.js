@@ -296,10 +296,10 @@
         var time = "–";
         if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
-            el("td", { class: "servers-desc" }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
+            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", {}, st ? st.map : "–"),
-            el("td", { class: "servers-wide" }, st ? modename(st) : "–"),
+            el("td", { class: "servers-wide servers-mode", title: st ? modename(st) : null }, st ? modename(st) : "–"),
             el("td", { class: "servers-opt" }, st ? (MASTERMODES[st.mastermode] || "?") : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, version(s.version)),

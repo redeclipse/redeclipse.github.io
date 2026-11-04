@@ -129,15 +129,26 @@
     background-color: rgba(120, 0, 0, 0.5);
     outline: none;
 }
+/* Every row is one line high: long text is cut short, with the whole of it in the cell's title */
 .servers-row > td {
     vertical-align: middle;
+    white-space: nowrap;
+}
+.servers-desc, .servers-mode {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.servers-mode {
+    max-width: 16em;
 }
 .servers-row small, .servers-team small {
     color: rgb(200, 160, 160);
 }
 .servers-desc {
-    color: rgb(255, 255, 255);
+    width: 100%;
+    max-width: 0; /* takes what the other columns leave */
     min-width: 12em;
+    color: rgb(255, 255, 255);
 }
 .servers-num {
     white-space: nowrap;
