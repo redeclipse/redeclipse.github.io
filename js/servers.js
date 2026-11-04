@@ -83,6 +83,8 @@
         return m + ":" + (s < 10 ? "0" : "") + s;
     }
     function remaining(ends) { return ends < 0 ? "No limit" : clock(ends - now()); }
+    // Only a match in play (Playing or Overtime) has a meaningful time left.
+    function playing(st) { return st.state === 5 || st.state === 6; }
     function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
 
     // Player colours are chosen in game against a dark background; lift very dark ones so they stay legible.
@@ -126,7 +128,7 @@
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
         { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modename(s.status.modeid, s.status.mutators) : ""; } },
         { id: "mastermode", title: "Access", cls: "servers-opt", value: function(s) { return s.status ? s.status.mastermode : -1; } },
-        { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
+        { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
         { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } },
         { id: "connect", title: "Connect", cls: "servers-opt servers-connect", nosort: true }
@@ -243,14 +245,7 @@
             ]);
         }
         var time = "–";
-        if(st)
-        {
-            var playing = st.state === 5 || st.state === 6;
-            time = el("span", {}, [
-                !playing ? el("small", { text: (STATES[st.state] || "") + " " }) : null,
-                el("span", { "data-ends": st.ends, text: remaining(st.ends) })
-            ]);
-        }
+        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: STATES[st.state] || "?" });
         append(tr, [
             el("td", { class: "servers-desc" }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
@@ -652,7 +647,7 @@
             fact("Map", st.map);
             fact("Mode", modename(st.modeid, st.mutators));
             fact("State", STATES[st.state] || "?");
-            fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
+            if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
             fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));
             fact("Access", MASTERMODES[st.mastermode] || "?");
         }
