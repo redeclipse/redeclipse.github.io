@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <title>{{ site.title | default: site.github.repository_name }}: {{ page.title | default: page.path }}</title>
+        {% assign cssclass = 'default' %}
+        {% include head.html %}
+        <link rel="stylesheet" type="text/css" href="/bits/css/servers.css?v={{ site.github.build_revision }}" />
+        <script type="text/javascript" src="/bits/js/servers.js?v={{ site.github.build_revision }}" defer></script>
+    </head>
+    <body>
+        {% include nav.html %}
+        <div class="container pagecontent">
+            <div class="main pagecontainer">
+                <h1>{{ page.title | default: page.path }}</h1>
+                {{ content }}
+                <div id="servers" data-master="{{ page.master }}">
+                    <noscript><p>The server browser needs JavaScript.</p></noscript>
+                </div>
+                <p class="servers-footnote">Build your own with the <a href="{{ page.apiguide }}">Red Eclipse Web API</a>.</p>
+            </div>
+            {% include footer.html %}
+        </div>
+    </body>
+</html>
