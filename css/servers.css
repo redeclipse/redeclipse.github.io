@@ -150,9 +150,25 @@
     color: rgb(255, 210, 210);
     background: none;
 }
+.servers-connect {
+    width: 1%;
+    text-align: right;
+    white-space: nowrap;
+}
+.servers-sronly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
 .servers-copy {
-    padding: 1px 8px;
-    font-size: 85% !important;
+    min-width: 7.5em;
+    padding: 0 6px;
+    vertical-align: middle;
+    font-size: 75% !important;
+    line-height: 1.6;
     color: rgb(255, 220, 220);
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid rgb(255, 64, 64);

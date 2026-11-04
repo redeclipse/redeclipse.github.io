@@ -128,7 +128,8 @@
         { id: "mastermode", title: "Access", cls: "servers-opt", value: function(s) { return s.status ? s.status.mastermode : -1; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
-        { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } }
+        { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } },
+        { id: "connect", title: "Connect", cls: "servers-opt servers-connect", nosort: true }
     ];
 
     function sorted()
@@ -213,6 +214,7 @@
         var tr = el("tr");
         COLUMNS.forEach(function(c)
         {
+            if(c.nosort) { tr.appendChild(el("th", { class: c.cls }, el("span", { class: "servers-sronly", text: c.title }))); return; }
             var active = prefs.sort === c.id;
             var b = el("button", { type: "button", class: "servers-sort" + (active ? " active" : ""), text: c.title + (active ? (prefs.dir < 0 ? " ▾" : " ▴") : "") });
             b.addEventListener("click", function()
@@ -257,7 +259,8 @@
             el("td", { class: "servers-opt" }, st ? (MASTERMODES[st.mastermode] || "?") : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, version(s.version)),
-            el("td", { class: "servers-opt servers-addr" }, [el("code", { text: address(s) }), " ", connectbutton(s)])
+            el("td", { class: "servers-opt servers-addr" }, el("code", { text: address(s) })),
+            el("td", { class: "servers-opt servers-connect" }, connectbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
         tr.addEventListener("click", function(e) { if(!e.target.closest("button, a")) toggle(); });
