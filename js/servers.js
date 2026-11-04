@@ -4,17 +4,57 @@
 {
     "use strict";
 
-    var MODES = ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend and Control", "Bomber Ball", "Speedrun"];
-    var MUTATORS = ["Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena", "Dark"];
-    var GSPMUTATORS = { // bits 14, 15 and 16 mean something different in each mode
-        2: ["Gladiator", "Old School"],
-        3: ["Quick", "Defend", "Protect"],
-        4: ["Quick", "King"],
-        5: ["Hold", "Basket", "Assault"],
-        6: ["Lapped", "Endurance", "Gauntlet"]
-    };
-    var MASTERMODES = ["Open", "Veto", "Locked", "Private", "Password"];
+    // How a server's mode, mutators and state numbers read depends on its game protocol (status.gameversion),
+    // taken from src/game/gamemode.h in redeclipse/base, and Redflare for the versions before that history.
+    // Each entry applies from its protocol on and inherits whatever it leaves out; "gsp" is merged by mode id.
+    // The game specific mutators always take the bits straight after the named ones.
+    var OLDSTATES = ["Waiting", "Voting", "Intermission", "Playing", "Overtime"];
     var STATES = ["Waiting", "Getting Map", "Sending Map", "Readying", "Syncing Info", "Playing", "Overtime", "Intermission", "Voting"];
+    var LAYOUTS = (function()
+    {
+        var changes = [
+            { from: 0, // 1.2
+                modes: ["Demo", "Editing", "Campaign", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial"],
+                mutators: ["Multi", "Team", "Instagib", "Medieval", "Ballistic", "Duel", "Survivor", "Arena", "Onslaught", "Hover", "Jetpack", "Vampire", "Expert", "Resize"],
+                gsp: {}, states: OLDSTATES, play: [3, 4] },
+            { from: 217, // 1.3
+                modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial"],
+                mutators: ["Multi", "Team", "Coop", "Instagib", "Medieval", "Ballistic", "Duel", "Survivor", "Arena", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"] },
+            { from: 220, // 1.4
+                modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial", "Gauntlet"],
+                mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"] },
+            { from: 226, // 1.5
+                modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend and Control", "Bomber Ball", "Race"],
+                mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Freestyle", "Vampire", "Resize", "Hard", "Basic"],
+                gsp: { 3: ["Quick", "Defend", "Protect"], 4: ["Quick", "King"], 5: ["Hold", "Basket", "Attack"], 6: ["Timed", "Endurance", "Gauntlet"] } },
+            { from: 227, states: STATES, play: [5, 6] },
+            { from: 228, gsp: { 2: ["Gladiator", "Old School"] } }, // 1.6 is 230
+            { from: 236, gsp: { 5: ["Hold", "Basket", "Assault"] } },
+            { from: 242, mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Freestyle", "Vampire", "Resize", "Hard", "Arena"] },
+            { from: 244, mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena"] },
+            { from: 245, // 2.0
+                mutators: ["Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena"],
+                gsp: { 6: ["Lapped", "Endurance", "Gauntlet"] } },
+            { from: 270, mutators: ["Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena", "Dark"] },
+            { from: 278, modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend and Control", "Bomber Ball", "Speedrun"] }
+        ];
+        var out = [], cur = {};
+        changes.forEach(function(c)
+        {
+            var next = {};
+            for(var k in cur) next[k] = cur[k];
+            for(k in c) if(k !== "gsp") next[k] = c[k];
+            if(c.gsp)
+            {
+                next.gsp = {};
+                for(k in cur.gsp) next.gsp[k] = cur.gsp[k];
+                for(k in c.gsp) next.gsp[k] = c.gsp[k];
+            }
+            out.push(cur = next);
+        });
+        return out;
+    })();
+    var MASTERMODES = ["Open", "Veto", "Locked", "Private", "Password"];
     var TEAMCOLOURS = { alpha: "#7aa2ff", omega: "#ff6a6a", neutral: "#e8e8e8", enemy: "#ffd27a", environment: "#b0b0b0" };
     var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
@@ -57,20 +97,25 @@
     function skey(s) { return key(s.host, s.port); }
     function address(s) { return (s.host.indexOf(":") >= 0 ? "[" + s.host + "]" : s.host) + ":" + s.port; }
 
-    function modename(modeid, mutators)
+    // The layout for a status, or the newest when it doesn't say which protocol it speaks.
+    function layout(st)
     {
-        var name = MODES[modeid] || ("Mode " + modeid), muts = [];
-        for(var i = 0; i < 17; i++) if(mutators & (1 << i))
+        var v = st && st.gameversion;
+        if(typeof v !== "number") return LAYOUTS[LAYOUTS.length - 1];
+        for(var i = LAYOUTS.length - 1; i > 0; i--) if(v >= LAYOUTS[i].from) return LAYOUTS[i];
+        return LAYOUTS[0];
+    }
+    function modename(st)
+    {
+        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), muts = [], gsp = l.gsp[st.modeid] || [];
+        for(var i = 0; i < 31; i++) if(st.mutators & (1 << i))
         {
-            if(i < MUTATORS.length) muts.push(MUTATORS[i]);
-            else
-            {
-                var g = (GSPMUTATORS[modeid] || [])[i - 14];
-                if(g) muts.push(g);
-            }
+            var m = i < l.mutators.length ? l.mutators[i] : gsp[i - l.mutators.length];
+            if(m) muts.push(m);
         }
         return muts.length ? name + ": " + muts.join(", ") : name;
     }
+    function statename(st) { return typeof st.state === "number" ? layout(st).states[st.state] || "?" : ""; }
     function version(v)
     {
         if(typeof v !== "number") return "?";
@@ -83,8 +128,12 @@
         return m + ":" + (s < 10 ? "0" : "") + s;
     }
     function remaining(ends) { return ends < 0 ? "No limit" : clock(ends - now()); }
-    // Only a match in play (Playing or Overtime) has a meaningful time left.
-    function playing(st) { return st.state === 5 || st.state === 6; }
+    // Only a match in play (Playing or Overtime) has a meaningful time left; with no state to go on, trust the clock.
+    function playing(st)
+    {
+        if(typeof st.state !== "number") return typeof st.ends === "number";
+        return layout(st).play.indexOf(st.state) >= 0;
+    }
     function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
 
     // Player colours are chosen in game against a dark background; lift very dark ones so they stay legible.
@@ -126,7 +175,7 @@
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
         { id: "players", title: "Players", value: function(s) { var h = humans(s); return h ? h.length * 1000 + (s.status.spectators || 0) * 10 + (s.status.bots || 0) : -1; } },
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
-        { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modename(s.status.modeid, s.status.mutators) : ""; } },
+        { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modename(s.status) : ""; } },
         { id: "mastermode", title: "Access", cls: "servers-opt", value: function(s) { return s.status ? s.status.mastermode : -1; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
@@ -156,7 +205,7 @@
         if(prefs.filter)
         {
             var f = prefs.filter.toLowerCase(), st = s.status || {};
-            var hay = [plain(s.description), s.host, String(s.port), st.map || "", s.status ? modename(st.modeid, st.mutators) : "", s.handle || ""];
+            var hay = [plain(s.description), s.host, String(s.port), st.map || "", s.status ? modename(st) : "", s.handle || ""];
             (humans(s) || []).forEach(function(p) { hay.push(p.name); });
             if(hay.join("\n").toLowerCase().indexOf(f) < 0) return false;
         }
@@ -245,12 +294,12 @@
             ]);
         }
         var time = "–";
-        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: STATES[st.state] || "?" });
+        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
             el("td", { class: "servers-desc" }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", {}, st ? st.map : "–"),
-            el("td", { class: "servers-wide" }, st ? modename(st.modeid, st.mutators) : "–"),
+            el("td", { class: "servers-wide" }, st ? modename(st) : "–"),
             el("td", { class: "servers-opt" }, st ? (MASTERMODES[st.mastermode] || "?") : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, version(s.version)),
@@ -562,7 +611,8 @@
                 this.line([this.name(m.victim), " died" + (m.weapon ? " by their own " + m.weapon : "")], "frag");
                 break;
             case "map":
-                this.line(["New match: " + m.map + ", " + modename(m.modeid, m.mutators)], "map");
+                var cur = servers.get(this.key), gv = cur && cur.status ? cur.status.gameversion : undefined;
+                this.line(["New match: " + m.map + ", " + modename({ modeid: m.modeid, mutators: m.mutators, gameversion: gv })], "map");
                 this.later(function() { self.refresh(); }, 2500); // past the relay's 2 second cache
                 break;
             case "score":
@@ -645,8 +695,8 @@
         if(st)
         {
             fact("Map", st.map);
-            fact("Mode", modename(st.modeid, st.mutators));
-            fact("State", STATES[st.state] || "?");
+            fact("Mode", modename(st));
+            if(statename(st)) fact("State", statename(st));
             if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
             fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));
             fact("Access", MASTERMODES[st.mastermode] || "?");
