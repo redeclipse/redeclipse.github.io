@@ -1,0 +1,297 @@
+@charset "utf-8";
+/* Server browser and match monitor, /servers */
+#servers {
+    margin: 12px 0 16px 0;
+    color: rgb(240, 224, 224);
+}
+#servers [hidden] {
+    display: none !important;
+}
+#servers button {
+    font: inherit;
+    cursor: pointer;
+}
+.servers-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
+    margin-bottom: 10px;
+}
+.servers-filter {
+    flex: 1 1 260px;
+    min-width: 0;
+    padding: 5px 10px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 64, 64);
+    border-radius: 4px;
+}
+.servers-filter:focus {
+    outline: none;
+    box-shadow: 0 0 6px rgb(255, 0, 0);
+}
+.servers-toggle {
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.servers-summary {
+    color: rgb(255, 200, 200);
+    white-space: nowrap;
+}
+.servers-indicator {
+    margin-left: auto;
+    white-space: nowrap;
+    font-size: 85%;
+}
+.servers-indicator::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+    border-radius: 50%;
+    background-color: rgb(160, 160, 160);
+    vertical-align: middle;
+}
+.servers-indicator.live::before {
+    background-color: rgb(80, 220, 110);
+    box-shadow: 0 0 6px rgb(80, 220, 110);
+}
+.servers-indicator.polling::before {
+    background-color: rgb(240, 200, 70);
+}
+.servers-indicator.offline::before {
+    background-color: rgb(255, 60, 60);
+}
+.servers-banner, .servers-notice {
+    margin-bottom: 10px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(255, 64, 64);
+    background-color: rgba(120, 0, 0, 0.6);
+    color: rgb(255, 255, 255);
+}
+.servers-notice {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.servers-dismiss, .servers-close {
+    float: right;
+    padding: 0 6px;
+    color: rgb(255, 200, 200);
+    background: none;
+    border: 0;
+    font-size: 120% !important;
+    line-height: 1;
+}
+.servers-scroll {
+    overflow-x: auto;
+    border-radius: 4px;
+    border: 1px solid rgb(255, 64, 64);
+}
+.servers-table {
+    width: 100%;
+}
+.servers-table.stale .servers-row {
+    opacity: 0.6;
+}
+.servers-table > thead > tr {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+.servers-table > thead > tr > th {
+    padding: 0;
+    white-space: nowrap;
+}
+.servers-sort {
+    display: block;
+    width: 100%;
+    padding: 6px 10px;
+    text-align: left;
+    color: rgb(255, 255, 255);
+    background: none;
+    border: 0;
+    font-weight: bold;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
+.servers-sort.active {
+    color: rgb(255, 200, 200);
+}
+.servers-row {
+    background-color: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+.servers-row:nth-child(even) {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+.servers-row:hover, .servers-row:focus, .servers-row.open {
+    background-color: rgba(120, 0, 0, 0.5);
+    outline: none;
+}
+.servers-row > td {
+    vertical-align: middle;
+}
+.servers-row small, .servers-team small {
+    color: rgb(200, 160, 160);
+}
+.servers-desc {
+    color: rgb(255, 255, 255);
+    min-width: 12em;
+}
+.servers-num {
+    white-space: nowrap;
+}
+.servers-addr {
+    white-space: nowrap;
+}
+#servers code {
+    padding: 0;
+    color: rgb(255, 210, 210);
+    background: none;
+}
+.servers-copy {
+    padding: 1px 8px;
+    font-size: 85% !important;
+    color: rgb(255, 220, 220);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 64, 64);
+    border-radius: 4px;
+}
+.servers-copy:hover, .servers-copy:focus {
+    color: rgb(255, 255, 255);
+    box-shadow: 0 0 6px rgb(255, 0, 0);
+}
+.servers-empty {
+    padding: 12px 10px;
+    text-align: center;
+    color: rgb(220, 180, 180);
+}
+.servers-panel > td {
+    padding: 12px 16px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.servers-match h2 {
+    margin-top: 0;
+    font-size: 22px;
+}
+.servers-match dl {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    margin: 0 0 8px 0;
+}
+.servers-match dt {
+    font-size: 80%;
+    font-weight: normal;
+    color: rgb(220, 160, 160);
+}
+.servers-match dd {
+    margin: 0;
+    color: rgb(255, 255, 255);
+}
+.servers-message {
+    margin: 8px 0;
+    color: rgb(255, 200, 120);
+}
+.servers-panelbody {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 24px;
+}
+.servers-scoreboard {
+    flex: 3 1 360px;
+    min-width: 0;
+}
+.servers-feedbox {
+    flex: 2 1 260px;
+    min-width: 0;
+}
+.servers-panelbody h3 {
+    margin-top: 4px;
+    font-size: 18px;
+}
+.servers-team {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.servers-team th, .servers-team td {
+    padding: 3px 8px;
+    border-bottom: 1px solid rgba(255, 64, 64, 0.4);
+}
+.servers-team .servers-num {
+    width: 4.5em;
+    text-align: right;
+}
+.servers-teamscore {
+    color: rgb(255, 255, 255);
+}
+.servers-specs {
+    margin: 0 0 8px 0;
+}
+.servers-player {
+    font-weight: bold;
+    text-shadow: 0 0 3px rgb(0, 0, 0), 0 0 1px rgb(0, 0, 0);
+}
+.servers-feedstate {
+    margin: 0 0 6px 0;
+    font-size: 85%;
+    color: rgb(255, 200, 120);
+}
+.servers-feedstate:empty {
+    display: none;
+}
+.servers-feed {
+    max-height: 360px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 90%;
+}
+.servers-feed li {
+    padding: 2px 0;
+    border-bottom: 1px solid rgba(255, 64, 64, 0.2);
+}
+.servers-feed time {
+    color: rgb(180, 140, 140);
+    font-size: 85%;
+    font-family: monospace;
+}
+.servers-feed li.map {
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+.servers-feed li.broadcast {
+    color: rgb(220, 210, 255);
+}
+.servers-feed li.join, .servers-feed li.leave, .servers-feed li.team {
+    color: rgb(200, 180, 180);
+}
+.servers-feed:empty::before {
+    content: "Waiting for something to happen\2026";
+    color: rgb(180, 140, 140);
+}
+.servers-footnote {
+    font-size: 90%;
+}
+@media (max-width: 767px) {
+    .servers-opt {
+        display: none;
+    }
+    .servers-panel > td {
+        padding: 10px 8px;
+    }
+    .servers-row > td, .servers-sort {
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+    .servers-desc {
+        min-width: 8em;
+    }
+}
+@media (max-width: 560px) {
+    .servers-wide {
+        display: none;
+    }
+}
