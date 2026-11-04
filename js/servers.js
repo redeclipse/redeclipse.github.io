@@ -206,7 +206,7 @@
         {
             var f = prefs.filter.toLowerCase(), st = s.status || {};
             var hay = [plain(s.description), s.host, String(s.port), st.map || "", s.status ? modename(st) : "", s.handle || ""];
-            (humans(s) || []).forEach(function(p) { hay.push(p.name); });
+            (humans(s) || []).forEach(function(p) { hay.push(plain(p.name)); });
             if(hay.join("\n").toLowerCase().indexOf(f) < 0) return false;
         }
         return true;
@@ -287,7 +287,7 @@
         var players = "–";
         if(h)
         {
-            players = el("span", { title: h.length ? h.map(function(p) { return p.name; }).join("\n") : "Nobody playing" }, [
+            players = el("span", { title: h.length ? h.map(function(p) { return plain(p.name); }).join("\n") : "Nobody playing" }, [
                 h.length + "/" + st.maxplayers,
                 st.spectators ? el("small", { text: " +" + st.spectators + " spec" }) : null,
                 st.bots ? el("small", { text: " +" + st.bots + " bot" + (st.bots === 1 ? "" : "s") }) : null
@@ -485,7 +485,9 @@
         else
         {
             this.body.hidden = true;
-            this.say("This server isn't linked to the master server, so there's no live match to show.");
+            this.say(s && s.status && s.status.polled
+                ? "This server isn't linked to the master server, which asks it how it's doing every 30 seconds instead, so there's no live match to show."
+                : "This server isn't linked to the master server, so there's no live match to show.");
         }
         this.update();
     }
@@ -706,6 +708,9 @@
         if(s.handle) fact("Registered by", s.handle);
         clear(this.header);
         append(this.header, [el("h2", { text: plain(s.description) || s.host }), el("dl", {}, facts)]);
+        // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard.
+        if(st && st.polled && !this.base && st.players && st.players.length)
+            append(this.header, el("p", { class: "servers-specs" }, ["On the server: ", st.players.map(function(p) { return plain(p.name); }).join(", ")]));
         if(this.players.size) this.drawboard(); // spectator flags and colours may have changed
     };
 
