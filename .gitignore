@@ -12,3 +12,10 @@ data/local.yml
 *.bak
 *.kate-swp
 
+
+# Agent files
+CLAUDE.md
+AGENTS.md
+GLOSSARY.md
+.agents/
+.claude/
