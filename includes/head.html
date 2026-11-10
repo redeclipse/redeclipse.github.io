@@ -1,10 +1,18 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="description" content="{{ page.description | default: site.description }}" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="msapplication-TileColor" content="#440000" />
 <meta name="msapplication-TileImage" content="/bits/icons/mstile-144x144.png" />
 <meta name="msapplication-navbutton-color" content="#440000" />
 <meta name="msapplication-config" content="/bits/browserconfig.xml" />
 <meta name="theme-color" content="#440000" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ page.title | default: site.title }}" />
+<meta property="og:description" content="{{ page.description | default: site.description }}" />
+<meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+<meta property="og:site_name" content="{{ site.title }}" />
+<meta property="og:image" content="{{ site.url }}/bits/redeclipse-full-preview.png" />
+<link rel="mask-icon" href="/bits/icons/safari-pinned-tab.svg" color="#440000" />
 <link rel="canonical" href="{{ site.url }}{{ page.url }}" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="manifest" href="/bits/manifest.json" />
