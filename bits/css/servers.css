@@ -184,6 +184,23 @@
     padding: 12px 16px;
     background-color: rgba(0, 0, 0, 0.7);
 }
+.servers-match {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+.servers-matchinfo {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+.servers-mapimg {
+    flex: 0 0 auto;
+    width: 128px;
+    height: 128px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 64, 64, 0.6);
+    object-fit: cover;
+}
 .servers-match h2 {
     margin-top: 0;
     font-size: 22px;
@@ -301,6 +318,10 @@
     }
     .servers-desc {
         min-width: 8em;
+    }
+    .servers-mapimg {
+        width: 80px;
+        height: 80px;
     }
 }
 @media (max-width: 560px) {

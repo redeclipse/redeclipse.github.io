@@ -56,6 +56,7 @@
     })();
     var MASTERMODES = ["Open", "Veto", "Locked", "Private", "Password"];
     var TEAMCOLOURS = { alpha: "#7aa2ff", omega: "#ff6a6a", neutral: "#e8e8e8", enemy: "#ffd27a", environment: "#b0b0b0" };
+    var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
     var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
 
@@ -460,7 +461,13 @@
         this.ws = null;
         this.timers = [];
 
-        this.header = el("div", { class: "servers-match" });
+        this.map = null;
+        this.mapimg = el("img", { class: "servers-mapimg", width: 128, height: 128, alt: "", hidden: true, onerror: function()
+        {
+            if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN; // a new or custom map with no preview
+        } });
+        this.info = el("div", { class: "servers-matchinfo" });
+        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info]);
         this.message = el("p", { class: "servers-message", hidden: true });
         this.board = el("div", { class: "servers-board" });
         this.feedstate = el("p", { class: "servers-feedstate" });
@@ -704,11 +711,21 @@
         fact("Version", version(s.version) + (s.branch ? " (" + s.branch + ")" : ""));
         fact("Address", addressbutton(s));
         if(s.handle) fact("Registered by", s.handle);
-        clear(this.header);
-        append(this.header, [el("h2", { text: plain(s.description) || s.host }), el("dl", {}, facts)]);
+        if((st && st.map || null) !== this.map)
+        {
+            this.map = st && st.map || null;
+            this.mapimg.hidden = !this.map;
+            if(this.map)
+            {
+                this.mapimg.src = MAPPATH + encodeURIComponent(this.map.replace(/^.*\//, "")) + ".jpg";
+                this.mapimg.alt = this.mapimg.title = "Preview of " + this.map;
+            }
+        }
+        clear(this.info);
+        append(this.info, [el("h2", { text: plain(s.description) || s.host }), el("dl", {}, facts)]);
         // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard.
         if(st && st.polled && !this.base && st.players && st.players.length)
-            append(this.header, el("p", { class: "servers-specs" }, ["On the server: ", st.players.map(function(p) { return plain(p.name); }).join(", ")]));
+            append(this.info, el("p", { class: "servers-specs" }, ["On the server: ", st.players.map(function(p) { return plain(p.name); }).join(", ")]));
         if(this.players.size) this.drawboard(); // spectator flags and colours may have changed
     };
 
