@@ -33,27 +33,36 @@ redirect_from:
         </div>
     </div>
 </div>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner" role="listbox">
-        {% assign shotpages = site.data.game.screenshots.pages | default: 20 | plus: 1 %}
-        {% assign shotcount = site.data.game.screenshots.items | default: 4 | times: shotpages %}
-        {% for k in (1..shotcount) %}
-        {% assign m = k | prepend: '00' | slice: -3, 3 %}
-        <div class="item{% if k == 1 %} active{% endif %}">
-            <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
-                <img class="carousel-shot" src="/bits/slides/{{ m }}.jpg" srcset="/bits/thumbs/{{ m }}.jpg 480w, /bits/slides/{{ m }}.jpg 1280w" sizes="(min-width: 1200px) 1140px, 100vw" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
+<div class="row home-media">
+    <div class="col-xs-12 col-md-6">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube-nocookie.com/embed/{{ site.data.game.youtube }}" title="{{ site.title }} trailer" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                {% assign shotpages = site.data.game.screenshots.pages | default: 20 | plus: 1 %}
+                {% assign shotcount = site.data.game.screenshots.items | default: 4 | times: shotpages %}
+                {% for k in (1..shotcount) %}
+                {% assign m = k | prepend: '00' | slice: -3, 3 %}
+                <div class="item{% if k == 1 %} active{% endif %}">
+                    <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-parent=".carousel-inner" data-title="screenshot">
+                        <img class="carousel-shot" src="/bits/slides/{{ m }}.jpg" srcset="/bits/thumbs/{{ m }}.jpg 480w, /bits/slides/{{ m }}.jpg 1280w" sizes="(min-width: 992px) 50vw, 100vw" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
             </a>
         </div>
-        {% endfor %}
     </div>
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
 <div class="row texte">
     <div class="col-xs-12 col-sm-4 col-md-4">

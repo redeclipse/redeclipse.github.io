@@ -138,12 +138,24 @@ h4 {
     text-align: center;
 }
 .hero-background {
-    background-image: url('/bits/bgtop.jpg');
-    background-size: auto 110%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    padding: 0 10px 30px 10px;
-    transition: background-position 0.1s ease-out;
+    position: relative;
+    padding: 0 10px 20px 10px;
+}
+/* The whole image across the top, dimmed so the text in front of it stands out, fading out at the bottom */
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    aspect-ratio: 2666 / 1500;
+    background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('/bits/bgtop.jpg') center / cover no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    pointer-events: none;
+}
+.hero-background > * {
+    position: relative;
 }
 .hero-logo {
     max-width: 46%;
@@ -168,13 +180,13 @@ h4 {
 }
 .hero h2.headline {
     text-shadow: none !important;
-    margin-top: 60px;
+    margin-top: 16px;
 }
 .hero h1.main-headline {
     text-align: center;
-    font-size: 2.8em;
+    font-size: min(2.8em, 8.5vw);
     font-weight: bold;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.25em;
     text-shadow: none !important;
 }
 @keyframes pulse-glow {
@@ -201,18 +213,6 @@ h4 {
         text-shadow: 0 0 8px #fff, 0 0 14px red, 0 0 28px red;
     }
 }
-@keyframes pulse-dot {
-    0%, 100% {
-        transform: scale(1);
-        box-shadow: 0 0 4px red, 0 0 8px red;
-        opacity: 0.7;
-    }
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 8px red, 0 0 16px red;
-        opacity: 1;
-    }
-}
 @keyframes pulse-red-text {
     0%, 100% {
         color: #fff;
@@ -226,8 +226,8 @@ h4 {
 .btn-hero-steam {
     border-color: red;
     border-radius: 9999px;
-    font-size: clamp(1.56rem, 2.86vw, 2.58rem);
-    padding: 0.8em 1.6em;
+    font-size: clamp(1.3rem, 2vw, 1.9rem);
+    padding: 0.6em 1.4em;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     animation: pulse-glow-small 2s infinite ease-in-out;
 }
@@ -257,7 +257,7 @@ h4 {
     margin-bottom: 0;
 }
 .btn-hero-steam p.version {
-    font-size: 0.58em;
+    font-size: max(0.58em, 11px);
 }
 .btn-hero-discord {
     background-color: #7289da;
@@ -270,8 +270,8 @@ h4 {
 .feature-box {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 9999px;
-    padding: 30px 20px;
-    margin: 20px auto;
+    padding: 16px 20px;
+    margin: 12px auto;
     max-width: 520px;
     box-shadow: 0 0 3px red, 0 0 7px red, 0 0 14px red;
     display: flex;
@@ -281,48 +281,20 @@ h4 {
 .feature-box h3 {
     color: #fff;
     margin-top: 0;
-    margin-bottom: 0.8em;
+    margin-bottom: 0.45em;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
     font-size: clamp(1rem, 2vw, 1.6rem);
     width: 100%;
     text-align: center;
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 .feature-box h3:last-of-type {
     margin-bottom: 0;
 }
-.feature-box h3::before, .feature-box h3::after {
-    content: '';
-    width: 5px;
-    height: 5px;
-    background-color: red;
-    border-radius: 50%;
-    box-shadow: 0 0 5px red, 0 0 10px red;
-    flex-shrink: 0;
-    animation: pulse-dot 2s infinite ease-in-out;
+.home-media {
+    margin-bottom: 20px;
 }
-.feature-box h3:nth-of-type(1), .feature-box h3:nth-of-type(6) {
-    padding-left: 5.5rem;
-    padding-right: 5.5rem;
-}
-.feature-box h3:nth-of-type(2), .feature-box h3:nth-of-type(5) {
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
-.feature-box h3:nth-of-type(3), .feature-box h3:nth-of-type(4) {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-.feature-box h3:nth-of-type(2)::before, .feature-box h3:nth-of-type(2)::after { animation-delay: 0.2s; }
-.feature-box h3:nth-of-type(3)::before, .feature-box h3:nth-of-type(3)::after { animation-delay: 0.4s; }
-.feature-box h3:nth-of-type(4)::before, .feature-box h3:nth-of-type(4)::after { animation-delay: 0.6s; }
-.feature-box h3:nth-of-type(5)::before, .feature-box h3:nth-of-type(5)::after { animation-delay: 0.8s; }
-.feature-box h3:nth-of-type(6)::before, .feature-box h3:nth-of-type(6)::after { animation-delay: 1.0s; }
-#carousel-example-generic {
-    margin-bottom: -2px !important;
+.home-media > div {
+    margin-bottom: 10px;
 }
 .carousel-shot {
     width: 100%;
@@ -332,6 +304,45 @@ h4 {
 .carousel-control:hover {
     color: red !important;
     text-shadow: 0 0 5px red, 0 0 10px red !important;
+}
+/* A fixed 16:9 box that fits the window, so the lightbox keeps its size while the next screenshot loads and whatever that screenshot's size;
+   the script sets the dialog's max-width to each image's width, which would resize it between 1280px and 3840px screenshots */
+.ekko-lightbox .modal-dialog {
+    width: auto;
+    max-width: none !important;
+}
+.ekko-lightbox .ekko-lightbox-container {
+    aspect-ratio: 16 / 9;
+    max-height: calc(100vh - 140px);
+    margin: 0 auto;
+}
+.ekko-lightbox .ekko-lightbox-container > div:not(.ekko-lightbox-nav-overlay) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.ekko-lightbox .ekko-lightbox-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+/* Each arrow is a link over half the image; centre its arrow vertically, in place of the padding the script works out before the image has its height */
+.ekko-lightbox-nav-overlay a {
+    display: flex;
+    align-items: center;
+    top: 0;
+    padding: 0 16px !important;
+}
+.ekko-lightbox-nav-overlay a:last-child {
+    float: right;
+    justify-content: flex-end;
+}
+.ekko-lightbox-nav-overlay a:focus {
+    outline: none;
+}
+.ekko-lightbox-nav-overlay a:focus-visible {
+    opacity: 1;
 }
 .lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
     background: #000 !important;
