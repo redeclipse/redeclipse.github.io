@@ -33,7 +33,7 @@ a:hover, a:active {
     text-shadow: -1px -1px 4px rgb(255, 240, 240);
 }
 #navbar {
-    width: 900px;
+    width: 960px;
     float: right;
     margin-top: 16px;
     vertical-align: middle;
@@ -108,6 +108,9 @@ a:hover, a:active {
 .navbar-brand {
     height: auto;
     padding: 0;
+}
+.navbar-brand img {
+    height: 60px;
 }
 .navbar-brand:hover, .navbar-brand:active {
     text-shadow: -1px -1px 5px rgb(255, 0, 0);
