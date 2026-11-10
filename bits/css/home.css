@@ -1,0 +1,143 @@
+@charset "utf-8";
+h1 {
+    color: rgb(255, 255, 255);
+    margin-top: 0;
+    font-family: Orbitron, sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
+h2 {
+    color: rgb(255, 255, 255);
+    margin-top: 0;
+    font-family: Orbitron, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
+h2 b {
+    font-weight: 900;
+    display: block;
+    font-size: 30px;
+    letter-spacing: 0;
+}
+h3 {
+    color: rgb(255, 200, 200);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 0.9em;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+    margin: 10px
+}
+h4 {
+    margin-top: 0;
+    font-family: Orbitron, sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+.pagehome {
+    text-align: center;
+    padding: 16px 0 24px 0;
+}
+.btn-primary {
+    background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(86%, rgba(0, 0, 0, 0.3)), color-stop(99%, rgba(0, 0, 0, 0.2)), color-stop(100%, rgba(0, 0, 0, 0.2))); /* Chrome, Safari4+ */
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* Chrome10+, Safari5.1+ */
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* IE10+ */
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 86%, rgba(0, 0, 0, 0.2) 99%, rgba(0, 0, 0, 0.2) 100%); /* W3C */
+    -moz-box-shadow: inset 0px 1px 0px 0px rgba(255, 0, 0, 1), inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    -webkit-box-shadow: inset 0px 1px 0px 0px rgba(255, 0, 0, 1), inset 0px 0px 40px 0px rgba(255, 0, 0.5);
+    -o-box-shadow: inset 0px 1px 0px 0px rgba(255, 0, 0, 1), inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    box-shadow: inset 0px 1px 0px 0px rgba(255, 0, 0, 1), inset 0px 0px 40px 0px rgba(50, 0, 0, 0.5);
+    background-color: rgb(180, 0, 0);
+    border-color: #600;
+    color: #fff;
+    padding: 16px 20px;
+    margin: 8px 0 8px;
+    transition: all 0.15s linear 0s;
+    -webkit-transition: all 0.15s linear 0s;
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
+.btn-primary:hover, .btn-primary:active {
+    background-color: rgb(0, 180, 180);
+    box-shadow: inset 0px 1px 0px 0px rgba(0, 255, 255, 1), inset 0px 0px 40px 0px rgba(0, 255, 255, 1), 0px 0px 20px 0px rgba(0, 255, 255, 1);
+    -moz-box-box-shadow: inset 0px 1px 0px 0px rgba(0, 255, 255, 1), inset 0px 0px 40px 0px rgba(0, 255, 255, 1), 0px 0px 20px 0px rgba(0, 255, 255, 1);
+    -o-box-shadow: inset 0px 1px 0px 0px rgba(0, 255, 255, 1), inset 0px 0px 40px 0px rgba(0, 255, 255, 1), 0px 0px 20px 0px rgba(0, 255, 255, 1);
+    -webkit-box-shadow: inset 0px 1px 0px 0px rgba(0, 255, 255, 1), inset 0px 0px 40px 0px rgba(0, 255, 255, 1), 0px 0px 20px 0px rgba(0, 255, 255, 1);
+    text-shadow: 0px 0px 5px rgb(128, 255, 255);
+}
+.btn-default {
+    background-color: #fff;
+    border-color: #ccc;
+    color: #333;
+    margin-right: 5px;
+}
+.version {
+    color: rgb(255, 224, 224);
+    font-size: 10px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+}
+.download {
+    color: rgb(255, 255, 255);
+    font-size: 21px;
+    font-family: Orbitron, sans-serif;
+    font-weight: 900;
+    padding: 0;
+    margin: 0;
+}
+.btn {
+    border-radius: 40px;
+}
+.btnlinks {
+    padding-top: 8px;
+}
+.texte {
+    padding: 16px;
+    font-size: 14px;
+    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* FF3.6+ */
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0)), color-stop(100%, rgba(0, 0, 0, 0.4))), url(/bits/base1b.jpg);; /* Chrome, Safari4+ */
+    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* Chrome10+, Safari5.1+ */
+    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* Opera 11.10+ */
+    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg);; /* IE10+ */
+    background-image:  linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 100%), url(/bits/base1b.jpg); /* W3C */
+    -moz-box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
+    -webkit-box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
+    -o-box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
+    box-shadow: inset 0px 2px 0px 0px rgba(255, 255, 255, 0.1), inset 0px 0px 70px 0px rgba(0, 0, 0, 1);
+}
+.support {
+    padding: 12px 12px 0px 12px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 4px;
+}
+.affiliate {
+    padding: 2px 2px 0px 2px;
+}
+.affiliate img {
+    display: inline;
+    width: 160px;
+    vertical-align: middle;
+    padding: 4px 8px 4px 8px;
+}
+.img-gamejolt {
+    padding-top: 16px;
+}
+@media screen and (max-width: 540px) {
+    h3, h4 {
+        font-size: 14px;
+    }
+}
+@media screen and (max-width: 432px) {
+    h3, h4 {
+        font-size: 12px;
+    }
+}
