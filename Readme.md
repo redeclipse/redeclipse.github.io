@@ -1,4 +1,4 @@
-Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.0.
+Welcome to the Red Eclipse Website repository. This is a work in progress to update the website in preparation for v2.1.
 
 This repository is automatically deployed by [GitHub Pages](https://pages.github.com/) to our [Website](https://www.redeclipse.net/) and includes pages built from the [Documentation Repository](https://github.com/redeclipse/docs).
 
