@@ -1,0 +1,46 @@
+name: Build map thumbnails
+
+on:
+  repository_dispatch:
+    types: [maps-updated]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: thumbnails
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Fetch the map previews from redeclipse/maps
+        run: |
+          git clone --quiet --filter=blob:none --no-checkout --depth 1 https://github.com/redeclipse/maps.git "$RUNNER_TEMP/maps"
+          git -C "$RUNNER_TEMP/maps" sparse-checkout set --no-cone '/*.png'
+          git -C "$RUNNER_TEMP/maps" checkout --quiet
+          echo "MAPS_SHA=$(git -C "$RUNNER_TEMP/maps" rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+
+      - name: Build the thumbnails
+        run: |
+          pip install --quiet pillow==13.0.0
+          python .github/scripts/thumbnails.py "$RUNNER_TEMP/maps" bits/images/maps
+
+      - name: Commit any changes
+        run: |
+          git add --all bits/images/maps
+          if git diff --cached --quiet; then
+            echo "Thumbnails already match redeclipse/maps@$MAPS_SHA"
+            exit 0
+          fi
+          git -c user.name="Red Eclipse" -c user.email="noreply@redeclipse.net" commit --quiet -m "Build thumbnails from redeclipse/maps@$MAPS_SHA"
+          git pull --quiet --rebase
+          git push --quiet
