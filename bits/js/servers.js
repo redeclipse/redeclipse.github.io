@@ -177,13 +177,14 @@
         if(typeof v !== "number") return "?";
         return Math.floor(v / 100) + "." + (Math.floor(v / 10) % 10) + "." + (v % 10);
     }
-    // Game servers on the Current Release are Current, older ones Outdated, and newer ones run a Development Build.
-    function versiontag(v)
+    // A game server's version, coloured by how it compares with the Current Release: Current, Outdated, or a Development Build.
+    function versionview(v)
     {
-        if(typeof v !== "number" || !release) return null;
-        if(v === release) return el("span", { class: "servers-tag current", title: "The current release, v" + version(release), text: "Current" });
-        if(v < release) return el("span", { class: "servers-tag outdated", title: "Older than the current release, v" + version(release), text: "Outdated" });
-        return el("span", { class: "servers-tag development", title: "A development build, newer than the current release, v" + version(release), text: "Development" });
+        if(typeof v !== "number" || !release) return version(v);
+        var kind = v === release ? ["current", "Current", "The current release"]
+            : v < release ? ["outdated", "Outdated", "Older than the current release, v" + version(release)]
+            : ["development", "Development", "A development build, newer than the current release, v" + version(release)];
+        return el("span", { class: "servers-version " + kind[0], title: kind[2] }, [version(v), el("span", { class: "sr-only", text: " (" + kind[1] + ")" })]);
     }
     function clock(secs)
     {
@@ -367,7 +368,7 @@
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-opt" }, st ? access(st) : "–"),
             el("td", { class: "servers-num" }, time),
-            el("td", { class: "servers-opt", title: s.branch || null }, [version(s.version), versiontag(s.version)]),
+            el("td", { class: "servers-opt", title: s.branch || null }, versionview(s.version)),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
@@ -769,19 +770,19 @@
         var s = servers.get(this.key);
         if(!s) return;
         var st = s.status, facts = [];
-        var fact = function(label, value) { facts.push(el("div", {}, [el("dt", { text: label }), el("dd", {}, value)])); };
+        // Only what the row doesn't show; facts from columns that small screens hide are shown only there.
+        var fact = function(label, value, cls) { facts.push(el("div", { class: cls }, [el("dt", { text: label }), el("dd", {}, value)])); };
         if(st)
         {
-            fact("Map", st.map);
-            fact("Mode", modeparts(st).map(function(p) { return partview(p, true); }));
-            if(statename(st)) fact("State", statename(st));
-            if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
-            fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));
-            fact("Access", access(st));
+            var parts = modeparts(st);
+            fact("Mode", partview(parts[0], true), "servers-widefact");
+            if(parts.length > 1) fact("Mutators", parts.slice(1).map(function(p) { return partview(p, true); }));
+            if(playing(st) && statename(st)) fact("State", statename(st)); // the Time column shows it otherwise
+            fact("Access", access(st), "servers-optfact");
         }
-        fact("Version", [version(s.version) + (s.branch ? " (" + s.branch + ")" : ""), versiontag(s.version)]);
-        fact("Address", addressbutton(s));
-        if(s.handle) fact("Registered by", s.handle);
+        fact("Version", versionview(s.version), "servers-optfact");
+        if(s.branch) fact("Branch", s.branch);
+        fact("Address", addressbutton(s), "servers-optfact");
         if((st && st.map || null) !== this.map)
         {
             this.map = st && st.map || null;
@@ -793,7 +794,7 @@
             }
         }
         clear(this.info);
-        append(this.info, [el("h2", { text: plain(s.description) || s.host }), el("dl", {}, facts)]);
+        append(this.info, el("dl", {}, facts));
         // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard.
         if(st && st.polled && !this.base && st.players && st.players.length)
             append(this.info, el("p", { class: "servers-specs" }, ["On the server: ", st.players.map(function(p) { return plain(p.name); }).join(", ")]));

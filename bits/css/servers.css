@@ -208,9 +208,8 @@
     border: 1px solid rgba(255, 64, 64, 0.6);
     object-fit: cover;
 }
-.servers-match h2 {
-    margin-top: 0;
-    font-size: 22px;
+.servers-optfact, .servers-widefact {
+    display: none;
 }
 .servers-match dl {
     display: flex;
@@ -316,6 +315,9 @@
     .servers-opt {
         display: none;
     }
+    .servers-optfact {
+        display: block;
+    }
     .servers-panel > td {
         padding: 10px 8px;
     }
@@ -338,6 +340,9 @@
 @media (max-width: 560px) {
     .servers-wide {
         display: none;
+    }
+    .servers-widefact {
+        display: block;
     }
 }
 /* Icons sit inside the line, so rows stay one line high; a percentage max-width would let the table squeeze them out */
@@ -367,26 +372,23 @@
     -webkit-mask: center / contain no-repeat;
     mask: center / contain no-repeat;
 }
-.servers-tag {
-    margin-left: 0.5em;
-    padding: 0 0.4em;
+.servers-version {
+    padding: 0 0.35em;
     border-radius: 3px;
     border: 1px solid;
-    font-size: 75%;
-    vertical-align: 0.1em;
     cursor: help;
 }
-.servers-tag.current {
+.servers-version.current {
     color: rgb(170, 240, 180);
     border-color: rgba(80, 220, 110, 0.7);
     background-color: rgba(10, 80, 30, 0.5);
 }
-.servers-tag.outdated {
+.servers-version.outdated {
     color: rgb(255, 200, 120);
     border-color: rgba(255, 170, 60, 0.7);
     background-color: rgba(120, 60, 0, 0.5);
 }
-.servers-tag.development {
+.servers-version.development {
     color: rgb(180, 210, 255);
     border-color: rgba(110, 160, 255, 0.7);
     background-color: rgba(20, 50, 120, 0.5);
