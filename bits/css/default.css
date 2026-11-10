@@ -229,3 +229,25 @@ footer {
         font-size: 14px;
     }
 }
+.download-steam {
+    margin: 2em 0;
+}
+.btn-steam, .btn-steam:link, .btn-steam:visited {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #fff;
+    background-color: #910000;
+    text-decoration: none;
+    border-radius: 40px;
+    border-bottom: 5px solid #1b2838;
+}
+.btn-steam:hover, .btn-steam:focus {
+    color: #fff;
+    background-color: #b00000;
+    text-decoration: none;
+}
+.btn-steam .svg-inline--fa {
+    margin-right: 10px;
+}
