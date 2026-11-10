@@ -531,7 +531,6 @@
             if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN; // a new or custom map with no preview
         } });
         this.info = el("div", { class: "servers-matchinfo" });
-        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info]);
         this.message = el("p", { class: "servers-message", hidden: true });
         this.board = el("div", { class: "servers-board" });
         this.feedstate = el("p", { class: "servers-feedstate" });
@@ -541,7 +540,9 @@
             el("div", { class: "servers-feedbox" }, [el("h3", { text: "Match feed" }), this.feedstate, this.feedlist])
         ]);
         var closebtn = el("button", { type: "button", class: "servers-close", "aria-label": "Close", text: "×", onclick: function() { closepanel(); } });
-        this.cell = el("td", { colspan: COLUMNS.length }, [closebtn, this.header, this.message, this.body]);
+        // The map preview has a column of its own, with the match beside it.
+        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info, this.message, this.body]);
+        this.cell = el("td", { colspan: COLUMNS.length }, [closebtn, this.header]);
         this.row = el("tr", { class: "servers-panel" }, this.cell);
 
         var s = servers.get(k);
