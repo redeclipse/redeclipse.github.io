@@ -13,7 +13,7 @@
             <div class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
                 {{ content }}
-                <div id="servers" data-master="{{ page.master }}">
+                <div id="servers" data-master="{{ page.master }}" data-release="{{ site.data.game.version }}">
                     <noscript><p>The server browser needs JavaScript.</p></noscript>
                 </div>
                 <p class="servers-footnote">Build your own with the <a href="{{ page.apiguide }}">Red Eclipse Web API</a>.</p>

@@ -356,3 +356,22 @@
     -webkit-mask: center / contain no-repeat;
     mask: center / contain no-repeat;
 }
+.servers-tag {
+    margin-left: 0.5em;
+    padding: 0 0.4em;
+    border-radius: 3px;
+    border: 1px solid;
+    font-size: 75%;
+    vertical-align: 0.1em;
+    cursor: help;
+}
+.servers-tag.outdated {
+    color: rgb(255, 200, 120);
+    border-color: rgba(255, 170, 60, 0.7);
+    background-color: rgba(120, 60, 0, 0.5);
+}
+.servers-tag.development {
+    color: rgb(180, 210, 255);
+    border-color: rgba(110, 160, 255, 0.7);
+    background-color: rgba(20, 50, 120, 0.5);
+}

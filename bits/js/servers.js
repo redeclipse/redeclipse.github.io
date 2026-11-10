@@ -75,6 +75,12 @@
     var root = document.getElementById("servers");
     if(!root) return;
     var master = (root.getAttribute("data-master") || "https://play.redeclipse.net:28888").replace(/\/+$/, "");
+    // The Current Release from data/game.yml, numbered as server versions are (209 is 2.0.9), or 0 if unreadable.
+    var release = (function(v)
+    {
+        var m = /^(\d)\.(\d)\.(\d)$/.exec(v || "");
+        return m ? m[1] * 100 + m[2] * 10 + m[3] * 1 : 0;
+    })(root.getAttribute("data-release"));
 
     // ---- helpers
 
@@ -172,6 +178,13 @@
     {
         if(typeof v !== "number") return "?";
         return Math.floor(v / 100) + "." + (Math.floor(v / 10) % 10) + "." + (v % 10);
+    }
+    // Game servers older than the Current Release are Outdated, and newer ones run a Development Build.
+    function versiontag(v)
+    {
+        if(typeof v !== "number" || !release || v === release) return null;
+        if(v < release) return el("span", { class: "servers-tag outdated", title: "Older than the current release, v" + version(release), text: "Outdated" });
+        return el("span", { class: "servers-tag development", title: "A development build, newer than the current release, v" + version(release), text: "Development" });
     }
     function clock(secs)
     {
@@ -353,7 +366,7 @@
             el("td", { class: "servers-wide servers-mode", title: st ? modename(st) : null }, st ? modeview(st, false) : "–"),
             el("td", { class: "servers-opt" }, st ? access(st) : "–"),
             el("td", { class: "servers-num" }, time),
-            el("td", { class: "servers-opt", title: s.branch || null }, version(s.version)),
+            el("td", { class: "servers-opt", title: s.branch || null }, [version(s.version), versiontag(s.version)]),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
@@ -764,7 +777,7 @@
             fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));
             fact("Access", access(st));
         }
-        fact("Version", version(s.version) + (s.branch ? " (" + s.branch + ")" : ""));
+        fact("Version", [version(s.version) + (s.branch ? " (" + s.branch + ")" : ""), versiontag(s.version)]);
         fact("Address", addressbutton(s));
         if(s.handle) fact("Registered by", s.handle);
         if((st && st.map || null) !== this.map)
