@@ -41,7 +41,7 @@ redirect_from:
         {% assign m = k | prepend: '00' | slice: -3, 3 %}
         <div class="item{% if k == 1 %} active{% endif %}">
             <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
-                <img class="carousel-shot" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
+                <img class="carousel-shot" src="/bits/slides/{{ m }}.jpg" srcset="/bits/thumbs/{{ m }}.jpg 480w, /bits/slides/{{ m }}.jpg 1280w" sizes="(min-width: 1200px) 1140px, 100vw" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
             </a>
         </div>
         {% endfor %}
