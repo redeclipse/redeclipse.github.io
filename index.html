@@ -5,41 +5,44 @@ permalink:
 redirect_from:
   - /home
 ---
-<div class="row main">
-    <div class="col-xs12 col-sm-12 col-md-6 pagehome">
-        <h2>A free <b>arena shooter</b></h1>
-        <h3>Fun for everyone, young and old, noob or expert</h3>
-        <h3>Available for Windows and Linux</h3>
-        <h3>Parkour, impulse boosts, dashing, and other tricks</h3>
-        <h3>A huge amount of mutators and game altering variables</h3>
-        <h3>Create maps with other players in realtime co-op edit</h3>
-        <h3>Over ten years of active development, and still going!</h3>
-        <div class="col-xs12 col-sm-12 col-md-12 btndownload">
-            <a href="/download" class="btn btn-primary">
-                <p class="download"><span class="fas fa-download" aria-hidden="true"></span> FREE DOWNLOAD</p>
-                <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }}) released {{ site.data.game.date }}</p>
+<div class="hero">
+    <div class="hero-background">
+        <img src="/bits/redeclipse-large.png" class="img-responsive hero-logo" alt="{{ site.title }}">
+        <div class="hero-button">
+            <a href="/steam" class="btn btn-primary btn-hero-steam">
+                <p class="download"><span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD</p>
+                <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }})</p>
             </a>
         </div>
-    </div>
-    <div class="col-xs12 col-sm-12 col-md-6 video">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/{{ site.data.game.youtube }}?showinfo=0" frameborder="0" allowfullscreen></iframe>
+        <p class="version hero-nosteam"><a href="/download">Install {{ site.title }} without Steam</a></p>
+        <h2 class="headline"><b>A free</b></h2>
+        <h1 class="main-headline"><b>arena shooter</b></h1>
+        <div class="feature-box">
+            <h3>Accessible to everyone</h3>
+            <h3>Available for Windows, Linux, BSD and macOS</h3>
+            <h3>A movement system with a very high skill ceiling</h3>
+            <h3>A huge amount of mutators and game altering variables</h3>
+            <h3>Create maps with other players, in real-time coop</h3>
+            <h3>Over {{ site.time | date: "%Y" | minus: 2009 }} years of active development</h3>
+        </div>
+        <div class="hero-button">
+            <a href="/discord" class="btn btn-primary btn-hero-discord">
+                <p class="download"><span class="fab fa-discord" aria-hidden="true"></span> JOIN THE COMMUNITY</p>
+                <p class="version">Chat with other players on Discord</p>
+            </a>
         </div>
     </div>
 </div>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner" role="listbox">
-        {% capture x %}{{ site.data.game.screenshots.pages | default: 20 }}{% endcapture %}
-        {% capture y %}{{ site.data.game.screenshots.items | default: 4 }}{% endcapture %}
-        {% for i in (0..x) %}
-        <div class="item{% if i == 0 %} active{% endif %} row">
-            {% for j in (1..y) %}
-            {% assign k = i | times: 4 | plus: j %}
-            {% assign m = k | prepend: '0' %}
-            {% assign n = m | size %}
-            {% if n <= 2 %}{% assign m = k | prepend: '00' %}{% endif %}
-            <a class="col-xs-6 col-sm-3 col-md-3" style="padding:0" href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot"><img class="img-responsive" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"></a>
-            {% endfor %}
+        {% assign shotpages = site.data.game.screenshots.pages | default: 20 | plus: 1 %}
+        {% assign shotcount = site.data.game.screenshots.items | default: 4 | times: shotpages %}
+        {% for k in (1..shotcount) %}
+        {% assign m = k | prepend: '00' | slice: -3, 3 %}
+        <div class="item{% if k == 1 %} active{% endif %}">
+            <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-title="screenshot">
+                <img class="carousel-shot" src="/bits/thumbs/{{ m }}.jpg" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
+            </a>
         </div>
         {% endfor %}
     </div>
@@ -54,19 +57,39 @@ redirect_from:
 </div>
 <div class="row texte">
     <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>{{ site.title }} is a fun-filled new take on the first person arena shooter, featuring parkour, impulse boosts, and more. The development is geared toward balanced gameplay, with a general theme of agility in a variety of environments. For more information, please see our <a href="/docs">Documentation</a>, <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a>.</p>
-        <p>The project is a <i>Free and Open Source</i> game, built on <a href="http://cubeengine.com/">Cube Engine 2</a> using <a href="http://libsdl.org/">SDL</a> and <a href="http://opengl.org/">OpenGL</a> which allows it to be ported to many platforms; you can <a href="/download">download a package</a> for <i>Windows, GNU/Linux, BSD, and MacOS</i>, or <a href="/devel">grab a development</a> copy from our <a href="/github">GitHub</a> repository and live on the bleeding edge.</p>
+        <p>{{ site.title }} is a movement focused arena shooter, inspired by old-school classics like Quake and Unreal Tournament, but with its own unique flavor. We develop the game with a focus on balanced and varied weapons, with the in-depth movement/parkour system adding a big touch of skill expression for those who master it.</p>
     </div>
     <div class="col-xs-12 col-sm-4 col-md-4">
-        <p>In a true open source <i>"by the people, for the people"</i> nature, we try to work closely with our community and invite everyone to have their say to provide a better overall experience, aiming to create a game environment that is fun and easy to play, while still having elements to master.</p>
-        <p>If you think you might have something to contribute to the game or community, please feel free to drop by our <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a> and talk to us directly. We try to maintain a standard of friendly behaviour in our community, so don't be afraid to speak up and have your say in building this game for us all!</p>
+        <p>If you have any suggestions to give us, or maybe even want to help us develop the game, don't hesitate to drop by our <a href="/discord">Discord</a> or <a href="/discuss">Discussions</a> to talk to us! We work closely and try to maintain a standard of friendly behavior in our <a href="/discord">community</a>. So don't be afraid to join us and tell us your thoughts!</p>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 support">
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        <p>It's a completely free and Open Source game, based on <a href="http://cubeengine.com/">Cube 2</a>; specifically, <a href="http://cubeengine.com/">Sauerbraten</a> and <a href="http://tesseract.gg/">Tesseract</a>, using <a href="http://libsdl.org/">SDL 2</a> and <a href="http://opengl.org/">OpenGL</a>, which allows it to be ported to many platforms. It's not just available on <a href="/steam">Steam</a>; for those who wish to make the most of the fact {{ site.title }} is Open Source, you can <a href="/download">download a package</a> for Windows, GNU/Linux, BSD and macOS.</p>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 support content-box">
         <h4>Support Us</h4>
-        <p class="donatemsg">{{ site.title }} is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="/contribute">help evolve the game</a>, <a href="/donate">donate to our worthy cause</a>, or <a href="/opencollective">subscribe to our Open Collective</a>.</p>
+        <p class="donatemsg">{{ site.title }} is developed by volunteers, and you get it free of charge; your contributions keep this project alive. You're encouraged to get involved with the community and <a href="/contribute">help evolve the game</a>.</p>
     </div>
-    <div class="col-xs-12 col-sm-4 col-md-4 affiliate">
-        <a href="http://cubeengine.com/"><img src="/bits/cube2.png" class="img-responsive img-cube2" alt="Cube Engine 2" style="margin:auto"></a>
-        <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract" style="margin:auto"></a>
+    <div class="col-xs-12 col-sm-4 col-md-4 donate content-box">
+        <h4>Donate</h4>
+        <div class="donate-links">
+            <a href="/opencollective" class="donate-link">
+                <span class="fas fa-dollar-sign donate-icon" aria-hidden="true"></span>
+                <span class="donate-text">Open Collective</span>
+            </a>
+            <a href="/donate" class="donate-link">
+                <span class="fab fa-paypal donate-icon" aria-hidden="true"></span>
+                <span class="donate-text">PayPal</span>
+            </a>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-4 col-md-4 affiliate content-box">
+        <h4>Affiliate</h4>
+        <a href="http://cubeengine.com/"><img src="/bits/cube2.png" class="img-responsive img-cube2" alt="Cube Engine 2"></a>
+        <a href="http://tesseract.gg/"><img src="/bits/tesseract.png" class="img-responsive img-tesseract" alt="Tesseract"></a>
+    </div>
+    <div class="col-xs-12 social-links">
+        {% for social in site.data.extlinks %}
+        <a href="{{ social.url }}" title="{{ social.title }}"><span class="{{ social.class }}" aria-hidden="true"></span><span class="sr-only">{{ social.title }}</span></a>
+        {% endfor %}
     </div>
 </div>

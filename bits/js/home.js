@@ -39,3 +39,22 @@ $(document).ready(function ($) {
         });
     });
 });
+$(document).ready(function()
+{
+    $('#carousel-example-generic .carousel-control').on('mouseup', function()
+    {
+        this.blur();
+    });
+    var PARALLAX = 30, hero = document.querySelector('.hero-background');
+    if(!hero) return;
+    hero.addEventListener('mousemove', function(e)
+    {
+        var rect = hero.getBoundingClientRect(), cx = rect.width / 2, cy = rect.height / 2;
+        var ox = (e.clientX - rect.left - cx) / cx * PARALLAX, oy = (e.clientY - rect.top - cy) / cy * PARALLAX;
+        hero.style.backgroundPosition = 'calc(50% + ' + -ox + 'px) calc(50% + ' + -oy + 'px)';
+    });
+    hero.addEventListener('mouseleave', function()
+    {
+        hero.style.backgroundPosition = 'center center';
+    });
+});

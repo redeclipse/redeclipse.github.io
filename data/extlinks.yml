@@ -1,21 +1,15 @@
-- url: /github
-  title: "GitHub"
-  class: "fab fa-github"
 - url: /discord
   title: "Discord"
   class: "fab fa-discord"
-- url: /steam
-  title: "Steam"
-  class: "fab fa-steam"
+- url: /youtube
+  title: "YouTube"
+  class: "fab fa-youtube"
+- url: /x
+  title: "X"
+  class: "fab fa-x-twitter"
+- url: /tiktok
+  title: "TikTok"
+  class: "fab fa-tiktok"
 - url: /reddit
   title: "Reddit"
   class: "fab fa-reddit"
-- url: /facebook
-  title: "Facebook"
-  class: "fab fa-facebook"
-- url: /opencollective
-  title: "Open Collective"
-  class: "fas fa-dollar-sign"
-- url: /donate
-  title: "Donate"
-  class: "fab fa-paypal"
