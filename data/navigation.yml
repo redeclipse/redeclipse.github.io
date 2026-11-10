@@ -9,7 +9,7 @@
   class: "fas fa-comment"
 - url: /issues
   title: "Issue Tracker"
-  class: "fas fa-tasks"
+  class: "fas fa-list-check"
 - url: /servers
   title: "Server Browser"
   class: "fas fa-server"

@@ -230,7 +230,7 @@ function issues_view(item, hbody, hrow) {
     cont.innerHTML = markdown(item.body);
     var vrow = hbody.makechild('tr', 'issues-t-load', 'issues-left'),
         load = vrow.makechild('td', 'issues-t-loading', 'issues-left');
-    load.innerHTML = '<span class="fas fa-cog fa-spin"></span> Loading...';
+    load.innerHTML = '<span class="fas fa-gear fa-spin"></span> Loading...';
     issues_script(item.comments_url + '?callback=issuecomments', 'issues-script-comment', issues_comments_page);
 }
 
@@ -268,7 +268,7 @@ function issues_build() {
         hrow.innerHTML = '<th id="issues-h-number" class="issues-center">ID</th>';
         hrow.innerHTML += '<th id="issues-h-title" class="issues-left">Title</th>';
         hrow.innerHTML += '<th id="issues-h-comments" class="issues-center"><span class="far fa-comment fa-fw" aria-hidden="true"></span></th>';
-        hrow.innerHTML += '<th id="issues-h-reactions" class="issues-center hide-small"><span class="far fa-meh fa-fw" aria-hidden="true"></span></th>';
+        hrow.innerHTML += '<th id="issues-h-reactions" class="issues-center hide-small"><span class="far fa-face-meh fa-fw" aria-hidden="true"></span></th>';
         hrow.innerHTML += '<th id="issues-h-author" class="issues-center">Author</th>';
         hrow.innerHTML += '<th id="issues-h-created" class="issues-center hide-small">Created</th>';
         hrow.innerHTML += '<th id="issues-h-updated" class="issues-center">Updated</th>';
