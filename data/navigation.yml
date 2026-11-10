@@ -11,5 +11,5 @@
   title: "Issue Tracker"
   class: "fas fa-tasks"
 - url: /servers
-  title: "Server List"
+  title: "Server Browser"
   class: "fas fa-server"
