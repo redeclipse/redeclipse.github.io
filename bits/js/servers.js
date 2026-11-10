@@ -56,6 +56,15 @@
     })();
     var MASTERMODES = ["Open", "Veto", "Locked", "Private", "Password"];
     var TEAMCOLOURS = { alpha: "#7aa2ff", omega: "#ff6a6a", neutral: "#e8e8e8", enemy: "#ffd27a", environment: "#b0b0b0" };
+    // Icons drawn by dc, in bits/images/servers by the game's names; whatever has none is shown as text.
+    var ICONPATH = "/bits/images/servers/";
+    var MODEICONS = { "Demo": "demo", "Editing": "editing", "Deathmatch": "deathmatch", "Capture the Flag": "capture", "Defend the Flag": "defend",
+        "Defend and Control": "defend", "Bomber Ball": "bomber", "Time Trial": "speedrun", "Race": "speedrun", "Speedrun": "speedrun" };
+    // Mode specific mutators are named for their mode, as "Quick" means something different in each.
+    var MUTATORICONS = ["arena", "classic", "coop", "dark", "duel", "ffa", "hard", "instagib", "kaboom", "medieval", "onslaught", "resize", "survivor", "vampire",
+        "deathmatch-gladiator", "deathmatch-oldschool", "capture-quick", "capture-defend", "capture-protect", "defend-quick", "defend-king",
+        "bomber-hold", "bomber-basket", "bomber-assault", "speedrun-lapped", "speedrun-endurance", "speedrun-gauntlet"];
+    var TEAMICONS = ["alpha", "omega", "neutral", "spectator"];
     var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
     var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
@@ -106,15 +115,45 @@
         for(var i = LAYOUTS.length - 1; i > 0; i--) if(v >= LAYOUTS[i].from) return LAYOUTS[i];
         return LAYOUTS[0];
     }
-    function modename(st)
+    function slug(name) { name = name.toLowerCase().replace(/[^a-z]/g, ""); return name === "freeforall" ? "ffa" : name; }
+    // The mode, then its mutators, each with its icon where there is one.
+    function modeparts(st)
     {
-        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), muts = [], gsp = l.gsp[st.modeid] || [];
+        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), gsp = l.gsp[st.modeid] || [], mode = MODEICONS[name];
+        var parts = [{ name: name, icon: mode ? "mode/" + mode : null }];
         for(var i = 0; i < 31; i++) if(st.mutators & (1 << i))
         {
-            var m = i < l.mutators.length ? l.mutators[i] : gsp[i - l.mutators.length];
-            if(m) muts.push(m);
+            var specific = i >= l.mutators.length, m = specific ? gsp[i - l.mutators.length] : l.mutators[i];
+            if(!m) continue;
+            var file = (specific ? mode + "-" : "") + slug(m);
+            parts.push({ name: m, icon: MUTATORICONS.indexOf(file) >= 0 ? "mutator/" + file : null });
         }
-        return muts.length ? name + ": " + muts.join(", ") : name;
+        return parts;
+    }
+    function modename(st)
+    {
+        var parts = modeparts(st), muts = parts.slice(1).map(function(p) { return p.name; });
+        return muts.length ? parts[0].name + ": " + muts.join(", ") : parts[0].name;
+    }
+    // An icon with its name on hover; the name is its alt text too, unless the name is written beside it.
+    function icon(path, name, named)
+    {
+        return el("img", { class: "servers-icon", src: ICONPATH + path + ".png", alt: named ? "" : name, title: name });
+    }
+    // The mode and mutators as icons: all named in the panel, while a row names only the mode to stay one line high.
+    function modeview(st, full)
+    {
+        return modeparts(st).map(function(p, i)
+        {
+            var named = full || !i;
+            if(!p.icon) return el("span", { class: "servers-modepart" }, named ? p.name : el("small", { text: p.name }));
+            return el("span", { class: "servers-modepart" }, [icon(p.icon, p.name, named), named ? p.name : null]);
+        });
+    }
+    function access(st)
+    {
+        var name = MASTERMODES[st.mastermode] || "?";
+        return name === "Locked" ? [icon("mastermode/locked", name, true), name] : name;
     }
     function statename(st) { return typeof st.state === "number" ? layout(st).states[st.state] || "?" : ""; }
     function version(v)
@@ -299,8 +338,8 @@
             el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", {}, st ? st.map : "–"),
-            el("td", { class: "servers-wide servers-mode", title: st ? modename(st) : null }, st ? modename(st) : "–"),
-            el("td", { class: "servers-opt" }, st ? (MASTERMODES[st.mastermode] || "?") : "–"),
+            el("td", { class: "servers-wide servers-mode", title: st ? modename(st) : null }, st ? modeview(st, false) : "–"),
+            el("td", { class: "servers-opt" }, st ? access(st) : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, version(s.version)),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
@@ -676,7 +715,7 @@
             });
             self.board.appendChild(el("table", { class: "servers-team" }, [
                 el("thead", {}, el("tr", {}, [
-                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [title, t in scores ? el("span", { class: "servers-teamscore", text: " " + scores[t] }) : null]),
+                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? icon("team/" + t, title, true) : null, title, t in scores ? el("span", { class: "servers-teamscore", text: " " + scores[t] }) : null]),
                     el("th", { class: "servers-num", text: "Points" }),
                     el("th", { class: "servers-num", text: "Frags" }),
                     el("th", { class: "servers-num", text: "Deaths" })
@@ -686,7 +725,7 @@
         });
         if(specs.length)
         {
-            var sp = el("p", { class: "servers-specs" }, el("strong", { text: "Spectating: " }));
+            var sp = el("p", { class: "servers-specs" }, el("strong", {}, [icon("team/spectator", "Spectating", true), "Spectating: "]));
             specs.forEach(function(p, i) { if(i) sp.appendChild(document.createTextNode(", ")); sp.appendChild(self.name(p)); });
             this.board.appendChild(sp);
         }
@@ -702,11 +741,11 @@
         if(st)
         {
             fact("Map", st.map);
-            fact("Mode", modename(st));
+            fact("Mode", modeview(st, true));
             if(statename(st)) fact("State", statename(st));
             if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
             fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));
-            fact("Access", MASTERMODES[st.mastermode] || "?");
+            fact("Access", access(st));
         }
         fact("Version", version(s.version) + (s.branch ? " (" + s.branch + ")" : ""));
         fact("Address", addressbutton(s));

@@ -139,7 +139,7 @@
     text-overflow: ellipsis;
 }
 .servers-mode {
-    max-width: 16em;
+    max-width: 19em;
 }
 .servers-row small, .servers-team small {
     color: rgb(200, 160, 160);
@@ -328,4 +328,21 @@
     .servers-wide {
         display: none;
     }
+}
+/* Icons sit inside the line, so rows stay one line high; a percentage max-width would let the table squeeze them out */
+.servers-icon {
+    max-width: none;
+    width: 1.3em;
+    height: 1.3em;
+    margin: -0.2em 0.3em -0.1em 0;
+    vertical-align: -0.2em;
+}
+.servers-modepart + .servers-modepart {
+    margin-left: 0.4em;
+}
+.servers-row .servers-modepart + .servers-modepart + .servers-modepart {
+    margin-left: 0.1em;
+}
+.servers-row .servers-modepart + .servers-modepart .servers-icon {
+    margin-right: 0;
 }
