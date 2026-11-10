@@ -1,15 +1,15 @@
 - url: /discord
   title: "Discord"
-  class: "fab fa-discord"
+  icon: discord
 - url: /youtube
   title: "YouTube"
-  class: "fab fa-youtube"
+  icon: youtube
 - url: /x
   title: "X"
-  class: "fab fa-x-twitter"
+  icon: x-twitter
 - url: /tiktok
   title: "TikTok"
-  class: "fab fa-tiktok"
+  icon: tiktok
 - url: /reddit
   title: "Reddit"
-  class: "fab fa-reddit"
+  icon: reddit

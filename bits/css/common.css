@@ -150,9 +150,6 @@ a:hover, a:active, a:focus {
 .footer a:hover, .footer a:active {
     color: rgb(255, 240, 240);
 }
-.carousel-control {
-    width: 6%;
-}
 .pagecontent {
     padding: 8px 0px 0px 0px;
     background-color: rgba(16, 16, 16, .92);

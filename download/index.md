@@ -9,24 +9,24 @@ redirect_from:
 # v{{ site.data.game.version }} ({{ site.data.game.release }})
 ### Released {{ site.data.game.date }}
 
-<p class="download-steam"><a href="/steam" class="btn-steam"><span class="fab fa-steam" aria-hidden="true"></span> Install with Steam</a></p>
+<p class="download-steam"><a href="/steam" class="btn-steam">{% include icon.html name="steam" %} Install with Steam</a></p>
 
-The best way to play Red Eclipse is by downloading it through <span class="fab fa-steam" aria-hidden="true"></span> **[Steam](/steam)**. It is free of charge, and you will get the latest updates automatically, as well as have Steam features available in-game.
+The best way to play Red Eclipse is by downloading it through {% include icon.html name="steam" %} **[Steam](/steam)**. It is free of charge, and you will get the latest updates automatically, as well as have Steam features available in-game.
 
 ### Install without Steam (not recommended)
-If you'd rather not use <span class="fab fa-steam" aria-hidden="true"></span> **[Steam](/steam)**, you can still download a static installable package, but please note that only the Linux AppImage provides automatic updates, any other version will require you to update your installation manually each release. The Red Eclipse team does not provide support for outdated versions of the software.
+If you'd rather not use {% include icon.html name="steam" %} **[Steam](/steam)**, you can still download a static installable package, but please note that only the Linux AppImage provides automatic updates, any other version will require you to update your installation manually each release. The Red Eclipse team does not provide support for outdated versions of the software.
 
 Platform                                                             | Downloads                           | Other Sources
 ---------------------------------------------------------------------|-------------------------------------|-------------------------------------
-<span class="fab fa-windows" aria-hidden="true"></span> **Windows**  | **[Installer](/download/win)**      | [Torrent](/download/torrent/win) - [ZIP](/download/zip)
-<span class="fab fa-linux" aria-hidden="true"></span> **Linux/BSD**  | **[TAR.BZ2](/download/nix)**        | [Torrent](/download/torrent/nix)
-<span class="fab fa-apple" aria-hidden="true"></span> **macOS**      | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
-<span class="fas fa-box-archive" aria-hidden="true"></span> **Combined** | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
+{% include icon.html name="windows" %} **Windows**  | **[Installer](/download/win)**      | [Torrent](/download/torrent/win) - [ZIP](/download/zip)
+{% include icon.html name="linux" %} **Linux/BSD**  | **[TAR.BZ2](/download/nix)**        | [Torrent](/download/torrent/nix)
+{% include icon.html name="apple" %} **macOS**      | **[TAR.BZ2](/download/mac)**        | [Torrent](/download/torrent/mac)
+{% include icon.html name="box-archive" %} **Combined** | **[TAR.BZ2](/download/combined)**   | [Torrent](/download/torrent/combined)
 
 **[Installation Help](/docs/Install-Guide)**
 
 ### System Requirements
-Red Eclipse requires a fairly modern graphics card to run, but is otherwise quite tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [old, unsupported Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) (also available on <span class="fab fa-steam" aria-hidden="true"></span> **[Steam](/steam)**), which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
+Red Eclipse requires a fairly modern graphics card to run, but is otherwise quite tolerant of hardware specifications. If you find you can't run the game due to insufficient hardware, you might want to try the [old, unsupported Red Eclipse v1.6](https://github.com/redeclipse/base/releases/tag/v1.6.0) (also available on {% include icon.html name="steam" %} **[Steam](/steam)**), which runs on Cube Engine 2 alone without the modern renderer from Tesseract.
 
 #### MINIMUM
 * Processor: Intel Pentium Dual-Core E2180 / AMD Athlon 64 X2 4200+

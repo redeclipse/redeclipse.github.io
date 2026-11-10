@@ -10,7 +10,7 @@ redirect_from:
         <img src="/bits/redeclipse-large.png" class="img-responsive hero-logo" alt="{{ site.title }}">
         <div class="hero-button">
             <a href="/steam" class="btn btn-primary btn-hero-steam">
-                <p class="download"><span class="fab fa-steam" aria-hidden="true"></span> FREE DOWNLOAD</p>
+                <p class="download">{% include icon.html name="steam" %} FREE DOWNLOAD</p>
                 <p class="version">v{{ site.data.game.version }} ({{ site.data.game.release }})</p>
             </a>
         </div>
@@ -27,7 +27,7 @@ redirect_from:
         </div>
         <div class="hero-button">
             <a href="/discord" class="btn btn-primary btn-hero-discord">
-                <p class="download"><span class="fab fa-discord" aria-hidden="true"></span> JOIN THE COMMUNITY</p>
+                <p class="download">{% include icon.html name="discord" %} JOIN THE COMMUNITY</p>
                 <p class="version">Chat with other players on Discord</p>
             </a>
         </div>
@@ -40,27 +40,17 @@ redirect_from:
         </div>
     </div>
     <div class="col-xs-12 col-md-6">
-        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner" role="listbox">
+        <div class="shots">
+            <div class="shots-track" tabindex="0" role="region" aria-label="Screenshots">
                 {% assign shotpages = site.data.game.screenshots.pages | default: 20 | plus: 1 %}
                 {% assign shotcount = site.data.game.screenshots.items | default: 4 | times: shotpages %}
                 {% for k in (1..shotcount) %}
                 {% assign m = k | prepend: '00' | slice: -3, 3 %}
-                <div class="item{% if k == 1 %} active{% endif %}">
-                    <a href="/bits/images/{{ m }}.jpg" data-toggle="lightbox" data-gallery="multiimages" data-parent=".carousel-inner" data-title="screenshot">
-                        <img class="carousel-shot" src="/bits/slides/{{ m }}.jpg" srcset="/bits/thumbs/{{ m }}.jpg 480w, /bits/slides/{{ m }}.jpg 1280w" sizes="(min-width: 992px) 50vw, 100vw" alt="screenshot"{% if k > 1 %} loading="lazy"{% endif %}>
-                    </a>
-                </div>
+                <a class="shots-item" href="/bits/images/{{ m }}.jpg"><img src="/bits/slides/{{ m }}.jpg" srcset="/bits/thumbs/{{ m }}.jpg 480w, /bits/slides/{{ m }}.jpg 1280w" sizes="(min-width: 992px) 50vw, 100vw" alt="Screenshot {{ k }} of {{ shotcount }}"{% if k > 1 %} loading="lazy"{% endif %}></a>
                 {% endfor %}
             </div>
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <button type="button" class="shots-prev" aria-label="Previous screenshot">{% include icon.html name="chevron-left" %}</button>
+            <button type="button" class="shots-next" aria-label="Next screenshot">{% include icon.html name="chevron-right" %}</button>
         </div>
     </div>
 </div>
@@ -82,11 +72,11 @@ redirect_from:
         <h4>Donate</h4>
         <div class="donate-links">
             <a href="/opencollective" class="donate-link">
-                <span class="fas fa-dollar-sign donate-icon" aria-hidden="true"></span>
+                {% include icon.html name="dollar-sign" class="donate-icon" %}
                 <span class="donate-text">Open Collective</span>
             </a>
             <a href="/donate" class="donate-link">
-                <span class="fab fa-paypal donate-icon" aria-hidden="true"></span>
+                {% include icon.html name="paypal" class="donate-icon" %}
                 <span class="donate-text">PayPal</span>
             </a>
         </div>
@@ -98,7 +88,19 @@ redirect_from:
     </div>
     <div class="col-xs-12 social-links">
         {% for social in site.data.extlinks %}
-        <a href="{{ social.url }}" title="{{ social.title }}"><span class="{{ social.class }}" aria-hidden="true"></span><span class="sr-only">{{ social.title }}</span></a>
+        <a href="{{ social.url }}" title="{{ social.title }}">{% include icon.html name=social.icon %}<span class="sr-only">{{ social.title }}</span></a>
         {% endfor %}
     </div>
 </div>
+<dialog class="lightbox" aria-label="Screenshot">
+    <div class="lightbox-head">
+        <h4>Screenshot <span class="lightbox-count"></span></h4>
+        <button type="button" class="lightbox-close" aria-label="Close">{% include icon.html name="xmark" %}</button>
+    </div>
+    <div class="lightbox-body">
+        <p class="lightbox-loading" hidden>Loading…</p>
+        <img alt="">
+        <button type="button" class="lightbox-prev" aria-label="Previous screenshot">{% include icon.html name="chevron-left" %}</button>
+        <button type="button" class="lightbox-next" aria-label="Next screenshot">{% include icon.html name="chevron-right" %}</button>
+    </div>
+</dialog>

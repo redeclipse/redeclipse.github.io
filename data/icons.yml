@@ -1,0 +1,25 @@
+# Width of each icon in bits/images/icons.svg (all are 512 high), for includes/icon.html
+apple: 384
+book: 448
+box-archive: 512
+chevron-left: 320
+chevron-right: 320
+comment: 512
+copyright: 512
+discord: 576
+dollar-sign: 320
+download: 448
+gear: 512
+github: 512
+linux: 448
+list-check: 512
+paypal: 384
+reddit: 512
+server: 448
+steam: 512
+tiktok: 448
+trademark: 640
+windows: 448
+x-twitter: 448
+xmark: 384
+youtube: 576

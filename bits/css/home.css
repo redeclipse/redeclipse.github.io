@@ -226,7 +226,7 @@ h4 {
 .btn-hero-steam {
     border-color: red;
     border-radius: 9999px;
-    font-size: clamp(1.3rem, 2vw, 1.9rem);
+    font-size: clamp(13px, 2vw, 19px);
     padding: 0.6em 1.4em;
     transition: background-color 0.3s ease, border-color 0.3s ease;
     animation: pulse-glow-small 2s infinite ease-in-out;
@@ -283,7 +283,7 @@ h4 {
     margin-top: 0;
     margin-bottom: 0.45em;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-    font-size: clamp(1rem, 2vw, 1.6rem);
+    font-size: clamp(10px, 2vw, 16px);
     width: 100%;
     text-align: center;
 }
@@ -296,71 +296,130 @@ h4 {
 .home-media > div {
     margin-bottom: 10px;
 }
-.carousel-shot {
-    width: 100%;
-    height: auto;
-    display: block;
+/* Screenshots: a row of slides that snaps one at a time, so phones can swipe it */
+.shots {
+    position: relative;
 }
-.carousel-control:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red, 0 0 10px red !important;
+.shots-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
 }
-/* A fixed 16:9 box that fits the window, so the lightbox keeps its size while the next screenshot loads and whatever that screenshot's size;
-   the script sets the dialog's max-width to each image's width, which would resize it between 1280px and 3840px screenshots */
-.ekko-lightbox .modal-dialog {
-    width: auto;
-    max-width: none !important;
+.shots-track::-webkit-scrollbar {
+    display: none;
 }
-.ekko-lightbox .ekko-lightbox-container {
+.shots-item {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
     aspect-ratio: 16 / 9;
-    max-height: calc(100vh - 140px);
-    margin: 0 auto;
 }
-.ekko-lightbox .ekko-lightbox-container > div:not(.ekko-lightbox-nav-overlay) {
+.shots-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Arrows over the sides of the screenshots, and of the lightbox's */
+.shots-prev, .shots-next, .lightbox-prev, .lightbox-next {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 6%;
+    min-width: 40px;
+    padding: 0;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    background: none;
+    border: 0;
+    opacity: 0.5;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+}
+.shots-prev, .lightbox-prev {
+    left: 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.shots-next, .lightbox-next {
+    right: 0;
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+.shots-prev, .shots-next {
+    color: rgb(255, 128, 128);
+}
+@media (min-width: 768px) {
+    .shots-prev, .shots-next, .lightbox-prev, .lightbox-next {
+        font-size: 30px;
+    }
+}
+.shots-prev:hover, .shots-next:hover, .lightbox-prev:hover, .lightbox-next:hover, .shots-prev:focus-visible, .shots-next:focus-visible, .lightbox-prev:focus-visible, .lightbox-next:focus-visible {
+    color: red;
+    opacity: 0.9;
+    outline: none;
+    filter: drop-shadow(0 0 5px red);
+}
+/* The lightbox: a fixed 16:9 box that fits the window, so it keeps its size from screenshot to screenshot */
+.lightbox {
+    width: min(100vw - 32px, (100vh - 140px) * 16 / 9 + 30px);
+    max-width: none;
+    max-height: none;
+    padding: 0;
+    color: rgb(255, 255, 255);
+    background: rgb(0, 0, 0);
+    border: 0;
+}
+.lightbox::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+}
+.lightbox-head {
     display: flex;
     align-items: center;
-    justify-content: center;
-    height: 100%;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid red;
 }
-.ekko-lightbox .ekko-lightbox-container img {
+.lightbox-head h4 {
+    margin: 0;
+}
+.lightbox-close {
+    padding: 0 4px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    background: none;
+    border: 0;
+}
+.lightbox-close:hover, .lightbox-close:focus-visible {
+    color: red;
+    outline: none;
+    filter: drop-shadow(0 0 5px red);
+}
+.lightbox-body {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    margin: 15px;
+}
+.lightbox-body img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
-/* Each arrow is a link over half the image; centre its arrow vertically, in place of the padding the script works out before the image has its height */
-.ekko-lightbox-nav-overlay a {
-    display: flex;
-    align-items: center;
-    top: 0;
-    padding: 0 16px !important;
+.lightbox-loading {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    margin: 0;
+    text-align: center;
+    transform: translateY(-50%);
 }
-.ekko-lightbox-nav-overlay a:last-child {
-    float: right;
-    justify-content: flex-end;
+.lightbox-prev, .lightbox-next {
+    opacity: 0;
+    transition: opacity 0.3s;
 }
-.ekko-lightbox-nav-overlay a:focus {
-    outline: none;
-}
-.ekko-lightbox-nav-overlay a:focus-visible {
-    opacity: 1;
-}
-.lightboxOverlay, .ekko-lightbox .modal-content, .ekko-lightbox .modal-dialog {
-    background: #000 !important;
-}
-.ekko-lightbox .modal-content {
-    box-shadow: none !important;
-}
-.ekko-lightbox .modal-header {
-    border-bottom-color: red !important;
-}
-.ekko-lightbox .close, .modal-header .close {
-    color: #fff !important;
-    opacity: 1 !important;
-    text-shadow: none !important;
-}
-.ekko-lightbox .close:hover, .modal-header .close:hover {
-    color: red !important;
-    text-shadow: 0 0 5px red, 0 0 10px red !important;
+.lightbox-body:hover .lightbox-prev, .lightbox-body:hover .lightbox-next {
+    opacity: 0.5;
 }
 .row.texte {
     display: flex;
@@ -392,7 +451,7 @@ h4 {
     color: #fff;
 }
 .support.content-box .donatemsg {
-    font-size: 1.6rem;
+    font-size: 16px;
 }
 .donate-links {
     text-align: center;
@@ -409,13 +468,13 @@ h4 {
     vertical-align: top;
 }
 .donate-icon {
-    font-size: 5rem;
+    font-size: 50px;
 }
 .donate-text {
     display: block;
     margin-top: 0.33em;
     font-family: Orbitron, sans-serif;
-    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    font-size: clamp(9px, 2.5vw, 11px);
     letter-spacing: 0.5em;
     text-transform: uppercase;
     line-height: 2.9em;

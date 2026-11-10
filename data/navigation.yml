@@ -1,24 +1,24 @@
 - url: /steam
   title: "Steam"
-  class: "fab fa-steam"
+  icon: steam
 - url: /discord
   title: "Discord"
-  class: "fab fa-discord"
+  icon: discord
 - url: /servers
   title: "Server Browser"
-  class: "fas fa-server"
+  icon: server
 - url: /download
   title: "Downloads"
-  class: "fas fa-download"
+  icon: download
 - url: /docs
   title: "Documentation"
-  class: "fas fa-book"
+  icon: book
 - url: /github
   title: "GitHub"
-  class: "fab fa-github"
+  icon: github
 - url: /discuss
   title: "Discussions"
-  class: "fas fa-comment"
+  icon: comment
 - url: /issues
   title: "Issue Tracker"
-  class: "fas fa-list-check"
+  icon: list-check

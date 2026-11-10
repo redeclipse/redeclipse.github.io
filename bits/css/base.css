@@ -1,0 +1,414 @@
+@charset "utf-8";
+/* What the site used of Bootstrap 3, with its values, so pages look as they did; see .agents/adr/0002-drop-bootstrap-and-jquery.md */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+    display: block;
+}
+[hidden], template {
+    display: none;
+}
+b, strong {
+    font-weight: bold;
+}
+sub, sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+}
+sup {
+    top: -0.5em;
+}
+sub {
+    bottom: -0.25em;
+}
+img {
+    border: 0;
+    vertical-align: middle;
+}
+svg:not(:root) {
+    overflow: hidden;
+}
+hr {
+    height: 0;
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid rgb(238, 238, 238);
+}
+button, input, select, textarea {
+    margin: 0;
+    font: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+button {
+    overflow: visible;
+    text-transform: none;
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: inherit;
+}
+h1, h2, h3 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+h4, h5, h6 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 30px;
+}
+h3 {
+    font-size: 24px;
+}
+h4 {
+    font-size: 18px;
+}
+h5 {
+    font-size: 14px;
+}
+h6 {
+    font-size: 12px;
+}
+p {
+    margin: 0 0 10px;
+}
+small {
+    font-size: 85%;
+}
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+ul ul, ul ol, ol ul, ol ol {
+    margin-bottom: 0;
+}
+dl {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin-left: 0;
+}
+code, kbd, pre, samp {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+code {
+    border-radius: 4px;
+}
+kbd {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(51, 51, 51);
+    border-radius: 3px;
+}
+pre {
+    display: block;
+    padding: 9.5px;
+    margin: 0 0 10px;
+    line-height: 1.42857143;
+    word-break: break-all;
+    word-wrap: break-word;
+    overflow: auto;
+}
+pre code {
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+    white-space: pre-wrap;
+    background-color: transparent;
+    border-radius: 0;
+}
+table {
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+td, th {
+    padding: 0;
+}
+th {
+    text-align: left;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+/* Grid: only the columns the site uses */
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.container::before, .container::after, .row::before, .row::after {
+    display: table;
+    content: " ";
+}
+.container::after, .row::after {
+    clear: both;
+}
+.col-xs-12, .col-sm-4, .col-md-4, .col-md-6 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.col-xs-12 {
+    float: left;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+    .col-sm-4 {
+        float: left;
+        width: 33.33333333%;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+    .col-md-4 {
+        float: left;
+        width: 33.33333333%;
+    }
+    .col-md-6 {
+        float: left;
+        width: 50%;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.btn:hover, .btn:focus {
+    text-decoration: none;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    color: rgb(255, 255, 255);
+}
+.embed-responsive {
+    position: relative;
+    display: block;
+    height: 0;
+    padding: 0 0 56.25% 0;
+    overflow: hidden;
+}
+.embed-responsive-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+/* Navbar: the menu folds behind a button below 768px */
+.navbar {
+    position: relative;
+    z-index: 1000;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 0 solid rgb(8, 8, 8);
+    border-bottom-width: 1px;
+}
+.navbar::before, .navbar::after, .navbar-header::before, .navbar-header::after, .navbar-collapse::before, .navbar-collapse::after, .nav::before, .nav::after {
+    display: table;
+    content: " ";
+}
+.navbar::after, .navbar-header::after, .navbar-collapse::after, .nav::after {
+    clear: both;
+}
+.navbar-brand {
+    float: left;
+    height: 50px;
+    padding: 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin: 8px 15px 8px 0;
+    background-color: transparent;
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 4px;
+}
+.navbar-toggle:hover, .navbar-toggle:focus {
+    background-color: rgb(51, 51, 51);
+    outline: 0;
+}
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1px;
+}
+.navbar-toggle .icon-bar + .icon-bar {
+    margin-top: 4px;
+}
+.navbar-collapse {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-top: 1px solid rgb(16, 16, 16);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.navbar-collapse:not(.open) {
+    display: none;
+}
+.container > .navbar-header, .container > .navbar-collapse {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.nav {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.nav > li {
+    position: relative;
+    display: block;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+.nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+}
+.navbar-nav {
+    margin: 7.5px -15px;
+}
+.navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 20px;
+}
+@media (min-width: 768px) {
+    .navbar-header {
+        float: left;
+    }
+    .navbar-toggle {
+        display: none;
+    }
+    .navbar-collapse, .navbar-collapse:not(.open) {
+        display: block;
+        width: auto;
+        border-top: 0;
+        box-shadow: none;
+    }
+    .container > .navbar-header, .container > .navbar-collapse {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .navbar > .container .navbar-brand {
+        margin-left: -15px;
+    }
+    .navbar-nav {
+        float: left;
+        margin: 0;
+    }
+    .navbar-nav > li {
+        float: left;
+    }
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .navbar-right {
+        float: right;
+        margin-right: -15px;
+    }
+}
+/* Icons from bits/images/icons.svg, sized like Font Awesome's */
+.icon {
+    display: inline-block;
+    box-sizing: content-box;
+    width: 1.25em;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -0.125em;
+    fill: currentColor;
+}
+/* Font Awesome's "shrink-6 up-4", for the trademark sign */
+.icon-tm {
+    transform: translateY(-0.25em) scale(0.625);
+}
+.icon-spin {
+    animation: icon-spin 2s infinite linear;
+}
+@keyframes icon-spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    .icon-spin {
+        animation: none;
+    }
+}
