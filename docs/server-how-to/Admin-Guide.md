@@ -24,7 +24,7 @@ Many commands use client numbers, abbreviated as `cn`, to refer to specific play
 - Player nicknames can be used instead of client numbers, however the name must be entered exactly the same as it is displayed.
 
 ## Moderation Commands
-When using this commands have the [Multiplayer Guidelines](https://github.com/redeclipse/base/blob/master/doc/guidelines.txt) in mind.
+When using this commands have the [Multiplayer Guidelines](../gameplay/Multiplayer-Guidelines) in mind.
 
 | Command                        | Description                                                                                                                                   |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|

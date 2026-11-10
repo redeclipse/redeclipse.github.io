@@ -79,7 +79,7 @@ The player model is split into 3 parts, which determine how much damage is appli
 
 ### Weapon variables
 
-When playing offline or as a server ~~[operator](Privileges)~~, almost all aspects of game rules can be tuned and modified using the ~~[console](Console)~~ to control thousands of ~~[variables](Variables)~~. This includes a large ~~[array of variables](Variables-and-Commands)~~ for each weapon that give you deep control of their characteristics.
+When playing offline or as a server [operator](../server-how-to/Privileges), almost all aspects of game rules can be tuned and modified using the console to control thousands of [variables](../variables/Variables-home). This includes a large array of variables for each weapon that give you deep control of their characteristics.
 
 #### Weapon IDs
 
@@ -90,7 +90,7 @@ Weapon numbers or IDs are used for certain variables, for instance when defining
 Variables related to flak or fragmentation give a plethora of options for creating weapon mods. However, the use of these variables can be rather confusing.
 
 - In essence, when the projectile of a weapon is destroyed (impact or expired lifetime), new flak projectiles can be created (fragmentation).
-- The corresponding *fragweap* variable defines which type of projectiles are created according to a [weapon ID](#weapon-ids) (none for -1).
+- The corresponding *fragweap* variable defines which type of projectiles are created according to a weapon ID (none for -1).
 - Further *frag* variables define the number and dynamics of these projectiles.
 - A large array of *flak* variables has defaults inherited from their base weapon variables.
 - These *flak* variables define many properties of flak projectiles. The variable names refer to the type of flak created (the ID used for *fragweap*), not the type of parent projectile.

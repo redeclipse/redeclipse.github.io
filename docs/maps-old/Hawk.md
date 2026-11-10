@@ -33,7 +33,7 @@ redirect_from:
 | **Entities**                                              | 409                                                      |
 | **Vertices**                                              | ~28 000                                                  |
 | **Triangles**                                             | ~21 000                                                  |
-| **Turrets ([onslaught](../Modes-and-Mutators#Mutators))** | 0                                                        |
+| **Turrets ([onslaught](../gameplay/Modes-and-Mutators#mutators))** | 0                                                        |
 | **Recommend Modes**                                       | Race                                                     |
 
 ## Review

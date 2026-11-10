@@ -34,7 +34,7 @@ Red Eclipse Team. Any person seeking to modify their game or server for use on
 the master server should first seek permission from the Red Eclipse Team, each
 modification must be approved and will be done on a case-by-case basis. It is
 advised you create a topic in the "General Discussion" section of the official
-Red Eclipse discussions located at https://redeclipse.net/discuss
+Red Eclipse discussions located at https://www.redeclipse.net/discuss
 
 ### Guidelines for Servers
 
@@ -57,7 +57,7 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
 
 * If the source code of the server is modified substantially you must contact
   the Red Eclipse Team to check that the changes are permitted by creating a
-  a topic in the official Red Eclipse discussion area at https://redeclipse.net/discuss
+  a topic in the official Red Eclipse discussion area at https://www.redeclipse.net/discuss
 
 * The server must honour the master server system, allowing global bans and
   granting the correct access by the Red Eclipse Team, or moderators assigned by
@@ -122,7 +122,7 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
 * If a player or moderator believes that the behaviour of any moderator is not
   supported by this document, it is advised that they lodge an official
   complaint in the "General Discussion" section of the official Red Eclipse
-  discussions located at https://redeclipse.net/discuss
+  discussions located at https://www.redeclipse.net/discuss
   - Arguing or being otherwise antagonistic about official moderator decisions
     via in-game communication is not allowed.
   - Attempting to mislead or otherwise deceive in a complaint is grounds for
@@ -168,13 +168,13 @@ Red Eclipse discussions located at https://redeclipse.net/discuss
     senior member of the Red Eclipse Team to mediate the dispute.
   - Mediation methods may include an open topic in the "General Discussion"
     section of the official Red Eclipse discussions located at
-    https://redeclipse.net/discuss for the community to weigh in on and generate
+    https://www.redeclipse.net/discuss for the community to weigh in on and generate
     a better consensus on the topic.
 
 * If a moderator believes that any player behaviour not covered by this
   document should result in disciplinary action, they should create a topic in
   the "General Discussion" section of the official Red Eclipse discussions
-  located at https://redeclipse.net/discuss
+  located at https://www.redeclipse.net/discuss
   - Moderators should remember that it is important to maintain a professional
     attitude when dealing with other players and arguing or being otherwise
     antagonistic outside of executing disciplinary actions is not advised.

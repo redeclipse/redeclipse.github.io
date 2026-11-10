@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-**WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](https://github.com/redeclipse/base/blob/master/doc/guidelines.txt), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
+**WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](../gameplay/Multiplayer-Guidelines), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
 
 ## System Requirements
 Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system. A Red Eclipse can even be run on a Raspberry Pi if so desired, though it is advisable to have a little more compute power to avoid lagspikes on player join.
@@ -24,7 +24,7 @@ Hosting one or more Red Eclipse servers on your system will require a decent ban
 1. Start the server by executing `server.bat`, an icon should appear in the taskbar. Click on it to view the console.
 
 #### GNU/Linux
-For details on locating your Red Eclipse home directory, refer to ~~[Game Settings]()~~.
+For details on locating your Red Eclipse home directory, refer to Game Settings.
 
 ##### Installed
 This is normally the case if you installed Red Eclipse via your package manager, or using the "system-install" make target.
@@ -134,8 +134,8 @@ You can change the "openness" of your server; ie. allowing anyone to claim **hel
 
 ### Server Customization
 - For information on how to limit modes and mutators please see [Game Filters](Server-GameFilters)
-- For examples of servinit.cfg configurations see ~~[Server Examples]()~~
-- For information on weapon variables, see ~~[Variables](Variables-Home)~~
+- For examples of servinit.cfg configurations see Server Examples
+- For information on weapon variables, see [Variables](../variables/Variables-home)
 
 ## Forwarding Ports
 All servers need enabled port forwarding.

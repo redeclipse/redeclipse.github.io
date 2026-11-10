@@ -49,8 +49,8 @@ Below shows a comparison of how fxlevel / mapeffects can be used to remove shado
 
 * `mapeffects 3`
 
-![mapeffects 3](images/editing/mapeffects0.jpg)
+![mapeffects 3](../images/editing/mapeffects0.jpg)
 
 * `mapeffects 1`
 
-![mapeffects 1](images/editing/mapeffects1.jpg)
+![mapeffects 1](../images/editing/mapeffects1.jpg)

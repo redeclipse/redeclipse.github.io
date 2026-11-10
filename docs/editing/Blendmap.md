@@ -14,7 +14,7 @@ redirect_from:
 
 | **What is a blendmap?** | |
 |-|-|
-A blendmap allows you to combine textures by overlapping them with a paint-able brush. This lets you create seamless environments where grass meets mud, or where gravel meets rock. Using this technique in a map can add a more natural feel to an environment. It can be used to add more variation to existing textures. The blendmap is stored within the map file itself. The following will explain how to add a blendmap to your map. | [![Blendmap](images/editing/blendmap01.jpg "Examples of blendmap usage")](images/editing/blendmap01.jpg) |
+A blendmap allows you to combine textures by overlapping them with a paint-able brush. This lets you create seamless environments where grass meets mud, or where gravel meets rock. Using this technique in a map can add a more natural feel to an environment. It can be used to add more variation to existing textures. The blendmap is stored within the map file itself. The following will explain how to add a blendmap to your map. | [![Blendmap](../images/editing/blendmap01.jpg "Examples of blendmap usage")](../images/editing/blendmap01.jpg) |
 
 ### Texture Layers
 
@@ -22,7 +22,7 @@ The first thing to do is create a layered texture. Within the editor, find the t
 
 `/vlayer 123`
 
-![Blendmap](images/editing/blendmap02.jpg "The texture browser")
+![Blendmap](../images/editing/blendmap02.jpg "The texture browser")
 
 If done correctly, the texture preview should show the layered texture at the upper right corner of the thumbnail.
 
@@ -57,7 +57,7 @@ texlayer 249
 
 | **Using the brush** | |
 |-|-|
-Now that we have a layered texture, we can draw with our brush onto the blendmap. Simply click on the texture with the brush painting mode activated. Choosing "*blend mode: merge*" will allow you to paint the layered texture on top of the base texture. | [![Blendmap](images/editing/blendmap03.jpg "Painting with a blend brush")](images/editing/blendmap03.jpg) |
+Now that we have a layered texture, we can draw with our brush onto the blendmap. Simply click on the texture with the brush painting mode activated. Choosing "*blend mode: merge*" will allow you to paint the layered texture on top of the base texture. | [![Blendmap](../images/editing/blendmap03.jpg "Painting with a blend brush")](../images/editing/blendmap03.jpg) |
 
 To exit the blendmap painting mode, press **P** until you see "*blend mode: off*" in the console.
 
@@ -77,11 +77,11 @@ A blendbrush can easily be created with any greyscale image. The darker parts ar
 
 | **Where do i place them?** | |
 |-|-|
-| The default brushes are stored in *data/blendbrush*. To add custom brushes, you will want to add them to *blendbrush/* in your [user data](FAQ#where-do-i-find-screenshots-logs-and-other-user-data) directory. | [![Blendmap](images/editing/blendmap04.jpg "A custom blendbrush used to paint stripes")](images/editing/blendmap04.jpg) |
+| The default brushes are stored in *data/blendbrush*. To add custom brushes, you will want to add them to *blendbrush/* in your [user data](../FAQ#where-do-i-find-screenshots-logs-and-other-user-data) directory. | [![Blendmap](../images/editing/blendmap04.jpg "A custom blendbrush used to paint stripes")](../images/editing/blendmap04.jpg) |
 
 ### Dumping the blendmap
 
-You can dump a greyscale image of the blendmap information to your [user data](FAQ#where-do-i-find-screenshots-logs-and-other-user-data). This can be used to quickly visualise which areas of your map have yet to be painted. The painted areas of the blendmap are represented by black pixels.
+You can dump a greyscale image of the blendmap information to your [user data](../FAQ#where-do-i-find-screenshots-logs-and-other-user-data). This can be used to quickly visualise which areas of your map have yet to be painted. The painted areas of the blendmap are represented by black pixels.
 
 `/dumpblendtexs`
 
@@ -89,5 +89,5 @@ You can dump a greyscale image of the blendmap information to your [user data](F
 
 -   You can only paint accurately on horizontal surfaces with a blendbrush. In can be very tricky to paint on a vertical surface (such as a vertical wall).
 -   Stacked floors cannot have their own blendmap layer. For example, picture a block of apartments where each floor has a layered texture, the blendmap applied on any of the floors will also appear on every other floor where a layered texture is present.
--   The blendmap can be combined with [grass](grass "wikilink") rendering to create some awesome texture effects.
+-   The blendmap can be combined with grass rendering to create some awesome texture effects.
 -   Blendmaps created with custom brushes can be viewed by other players even if they don't have the blendbrushes present in their User Content directory. The blendmap painting information is packed into the map file itself.

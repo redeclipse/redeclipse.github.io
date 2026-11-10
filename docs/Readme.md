@@ -15,6 +15,13 @@ The pages contained here are automatically built and updated on the [Website rep
 
 When editing pages here, there are a few guidelines you should follow.
 
+## Source Pages, not Built Pages
+The pages here are Source Pages: plain Markdown that reads correctly on GitHub. The build adds front matter, a table of contents and website-relative links when it publishes them to the website. Never copy a page from the website (or from the `docs` directory of the website repository) back into this repository, as that page has already been built and the build would add a second header to it.
+
+- Do not add front matter (a block starting with `---`) to a page; the build will refuse it.
+- Link to other pages by file name, including `.md`, relative to the page, such as `[Privileges](server-how-to/Privileges)`.
+- Link to the website with its full address, such as `https://www.redeclipse.net/download`.
+
 ## The Style
 I didn't set a style guide to begin with because I was unsure of what to expect and unaware of any cross-compatibility issues. As I mentioned, the documentation will be automatically deployed to the Beta Website, and this involves going through a few steps using 
 GitHub Pages. Basically there are two "pre-processors", [Jekyll](https://jekyllrb.com/docs/home/), and [Kramdown](https://kramdown.gettalong.org/syntax.html). It is necessary to understand the unique syntax of each when crafting your markdown pages.

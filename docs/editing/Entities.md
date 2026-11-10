@@ -28,13 +28,13 @@ These are usually placed with *modebit* and *mutsbit* set to the corresponding b
 
 `/newent camera`
 
-These entities are used when spectating with spectv. These can be ~~[linked](Editing-Linking)~~ to [rails](#rails) to allow them to move around.
+These entities are used when spectating with spectv. These can be linked to [rails](#rail) to allow them to move around.
 
 ## Checkpoint
 
 `/newent checkpoint`
 
-The `checkpoint` entity is used to track progress in the ~~[Race](Race)~~ game mode. When a player dies during Race, they will respawn at the last checkpoint.
+The `checkpoint` entity is used to track progress in the [Race](../gameplay/Race) game mode. When a player dies during Race, they will respawn at the last checkpoint.
 
 ## Decal
 
@@ -65,14 +65,14 @@ The `light` entity is used to add point lights. They can be configured with the 
 | 7  | flags    | Additional bitwise flags for *no-shadow, static, no-specular, volumetric* effects.
 | 8  | palette  | The type of colour palette to use
 | 9  | palindex | The index of the chosen colour palette
-| 10 | variant  | Determines if the entity appears in both ~~[map variants](Editing-Variants)~~ or only one
-| 11 | fxlevel  | Determines if the entity will be rendered based on the users ~~[map effects](Editing-Fxlevels)~~ setting
+| 10 | variant  | Determines if the entity appears in both map variants or only one
+| 11 | fxlevel  | Determines if the entity will be rendered based on the users [map effects](Fxlevels) setting
 
 ## Lightfx
 
 `/newent lightfx`
 
-An entity that can linked to `light` entities, to apply additional effects such as a spotlight. When linked to a light entity, the light entity takes on the additional properties of the `lightfx`. See ~~[links](Editing-Linking)~~ for more information on how to link these together.
+An entity that can linked to `light` entities, to apply additional effects such as a spotlight. When linked to a light entity, the light entity takes on the additional properties of the `lightfx`. See links for more information on how to link these together.
 
 ## Mapmodel
 
@@ -102,39 +102,39 @@ A pusher entity gives you a push in the direction specified. These can be used f
 
 `/newent rail`
 
-Rails are a new feature in the development branch. Entities can be ~~[linked](Editing-Linking)~~ to a rail, enabling them to move around the map. These are used to add spectv cameras to a map, or to make mapmodels/lights move around as true dynamic objects.
+Rails are a new feature in the development branch. Entities can be linked to a rail, enabling them to move around the map. These are used to add spectv cameras to a map, or to make mapmodels/lights move around as true dynamic objects.
 
 ## Route
 
 `/newent route`
 
-The `route` entities are used to add possible paths that the player can follow to complete a lap in ~~[Race](Race)~~ mode.
+The `route` entities are used to add possible paths that the player can follow to complete a lap in [Race](../gameplay/Race) mode.
 
-These are easier to place by using `/droproute 1` similar as to how ~~[waypoints](Editing-Waypoints)~~ are placed.
+These are easier to place by using `/droproute 1` similar as to how [waypoints](Waypoints) are placed.
 
 ## Sound
 
 `/newent sound`
 
-Will play a map-specific sound so long as the player is within the radius. By default (size 0), the sound is a point source. Its volume is maximal at the entity's location, and tapers off to 0 at the radius. Radius is always defined as distance from the entity's location. Sound entities can also be ~~[linked](Editing-Linking)~~ to other entities, such as mapmodels (allowing you to play a sound when a door is opened).
+Will play a map-specific sound so long as the player is within the radius. By default (size 0), the sound is a point source. Its volume is maximal at the entity's location, and tapers off to 0 at the radius. Radius is always defined as distance from the entity's location. Sound entities can also be linked to other entities, such as mapmodels (allowing you to play a sound when a door is opened).
 
 ## Teleport
 
 `/newent teleport`
 
-A teleport entity does exactly what you'd expect. ~~[Linking](Editing-Linking)~~ two of these together will act as arrival/destination for a teleport mechanism.
+A teleport entity does exactly what you'd expect. Linking two of these together will act as arrival/destination for a teleport mechanism.
 
 ## Trigger
 
 `/newent trigger`
 
-A trigger is used to create events. For example; A proximity trigger will allow you to open a door automatically when a player enters the radius of the trigger entity. Triggers are mostly useful when ~~[linked](Editing-Linking)~~ to other entities.
+A trigger is used to create events. For example; A proximity trigger will allow you to open a door automatically when a player enters the radius of the trigger entity. Triggers are mostly useful when linked to other entities.
 
 ## Weapon
 
 `/newent weapon`
 
-The `weapon` entity is used to place ~~[weapon](Weapons-Guide)~~ spawns within a map.
+The `weapon` entity is used to place [weapon](../gameplay/Weapons-Guide) spawns within a map.
 
 ## Wind
 
