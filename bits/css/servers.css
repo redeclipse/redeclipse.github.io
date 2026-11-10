@@ -362,6 +362,16 @@
 .servers-mutators .servers-icon {
     margin-right: 0;
 }
+.servers-teamicon {
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+    margin: -0.2em 0.3em -0.1em 0;
+    vertical-align: -0.2em;
+    background-color: currentColor;
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
 .servers-priv {
     display: inline-block;
     width: 1em;

@@ -158,13 +158,19 @@
     function mutatornames(st) { return modeparts(st).slice(1).map(function(p) { return p.name; }).join(", "); }
     // As in the game, a Privilege icon takes the player's colour, so the icons are masks over it. Bots have one of their own,
     // and a Privilege the page doesn't know shows as none, as the game clamps it.
-    function privicon(privilege, local, bot)
+    function privicon(privilege, local, bot, colour)
     {
         if(PRIVILEGES.indexOf(privilege) < 0) privilege = "none";
         local = local && LOCALPRIVILEGES.indexOf(privilege) >= 0;
         var name = bot ? "Bot" : privilege === "none" ? "No privilege" : privilege.charAt(0).toUpperCase() + privilege.slice(1) + (local ? ", given by this server" : "");
         var url = "url(" + ICONPATH + "privilege/" + (bot ? "bot" : (local ? "local" : "") + privilege) + ".svg)";
-        return el("span", { class: "servers-priv", role: "img", "aria-label": name, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
+        return el("span", { class: "servers-priv", role: "img", "aria-label": name, title: name, style: "color:" + colour + ";-webkit-mask-image:" + url + ";mask-image:" + url });
+    }
+    // Team icons are masks too, so they take the colour of the team's name beside them.
+    function teamicon(team, name)
+    {
+        var url = "url(" + ICONPATH + "team/" + team + ".png)";
+        return el("span", { class: "servers-teamicon", "aria-hidden": "true", title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
     function access(st)
     {
@@ -641,13 +647,14 @@
         while(this.feedlist.childNodes.length > FEEDLINES) this.feedlist.removeChild(this.feedlist.lastChild);
     };
 
-    // A name carries its Privilege, or the bot icon, preferring the list's, which says whether it's local.
+    // A name is in its team's colour, after its Privilege (or the bot icon) in the player's own colour,
+    // preferring the list's Privilege, which says whether it's local.
     Panel.prototype.name = function(c)
     {
         if(!c) return el("span", { text: "someone" });
-        var who = c.bot ? null : this.listplayer(c.cn) || c;
-        return el("span", { class: "servers-player", style: "color:" + this.colour(c.cn, c.team) }, [
-            c.bot ? privicon(null, false, true) : typeof who.privilege === "string" ? privicon(who.privilege, who.local) : null,
+        var who = c.bot ? null : this.listplayer(c.cn) || c, colour = this.colour(c.cn, c.team);
+        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[c.team] || TEAMCOLOURS.neutral) }, [
+            c.bot ? privicon(null, false, true, colour) : typeof who.privilege === "string" ? privicon(who.privilege, who.local, false, colour) : null,
             c.name
         ]);
     };
@@ -748,7 +755,7 @@
             });
             self.board.appendChild(el("table", { class: "servers-team" }, [
                 el("thead", {}, el("tr", {}, [
-                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? icon("team/" + t, title, true) : null, title, t in scores ? el("span", { class: "servers-teamscore", text: " " + scores[t] }) : null]),
+                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", text: " " + scores[t] }) : null]),
                     el("th", { class: "servers-num", text: "Points" }),
                     el("th", { class: "servers-num", text: "Frags" }),
                     el("th", { class: "servers-num", text: "Deaths" })
@@ -758,7 +765,7 @@
         });
         if(specs.length)
         {
-            var sp = el("p", { class: "servers-specs" }, el("strong", {}, [icon("team/spectator", "Spectating", true), "Spectating: "]));
+            var sp = el("p", { class: "servers-specs" }, el("strong", {}, [teamicon("spectator", "Spectating"), "Spectating: "]));
             specs.forEach(function(p, i) { if(i) sp.appendChild(document.createTextNode(", ")); sp.appendChild(self.name(p)); });
             this.board.appendChild(sp);
         }
