@@ -172,10 +172,13 @@
         var url = "url(" + ICONPATH + "team/" + team + ".png)";
         return el("span", { class: "servers-teamicon", "aria-hidden": "true", title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
+    // A Master Mode's icon, before the server's name, as a mask coloured as the game's server browser colours them.
     function access(st)
     {
-        var name = MASTERMODES[st.mastermode] || "?";
-        return name === "Locked" ? [icon("mastermode/locked", name, true), name] : name;
+        var name = MASTERMODES[st.mastermode];
+        if(!name) return null;
+        var slug = name.toLowerCase(), url = "url(" + ICONPATH + "mastermode/" + slug + ".svg)";
+        return el("span", { class: "servers-accessicon " + slug, role: "img", "aria-label": name, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
     function statename(st) { return typeof st.state === "number" ? layout(st).states[st.state] || "?" : ""; }
     function version(v)
@@ -238,17 +241,15 @@
 
     var servers = new Map(), loaded = false, stale = false, transport = "connecting";
 
-    function humans(s) { return s.status && s.status.players ? s.status.players.filter(function(p) { return !p.spectator; }) : null; }
     // Everyone connected, spectators included; -1 when the server reports no status.
     function playercount(s) { return s.status && s.status.players ? s.status.players.length : -1; }
 
     var COLUMNS = [
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
-        { id: "players", title: "Players", value: function(s) { var h = humans(s); return h ? h.length * 1000 + (s.status.spectators || 0) * 10 + (s.status.bots || 0) : -1; } },
+        { id: "players", title: "Players", value: playercount },
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
         { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modeparts(s.status)[0].name : ""; } },
         { id: "mutators", title: "Mutators", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
-        { id: "mastermode", title: "Access", cls: "servers-opt", value: function(s) { return s.status ? s.status.mastermode : -1; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
         { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } }
@@ -277,7 +278,7 @@
         {
             var f = prefs.filter.toLowerCase(), st = s.status || {};
             var hay = [plain(s.description), s.host, String(s.port), st.map || "", s.status ? modename(st) : "", s.handle || ""];
-            (humans(s) || []).forEach(function(p) { hay.push(plain(p.name)); });
+            (st.players || []).forEach(function(p) { hay.push(plain(p.name)); });
             if(hay.join("\n").toLowerCase().indexOf(f) < 0) return false;
         }
         return true;
@@ -353,26 +354,20 @@
 
     function row(s)
     {
-        var st = s.status, k = skey(s), h = humans(s);
+        var st = s.status, k = skey(s), everyone = st && st.players;
         var tr = el("tr", { class: "servers-row" + (open && open.key === k ? " open" : ""), tabindex: "0", "aria-expanded": open && open.key === k ? "true" : "false" });
         var players = "–";
-        if(h)
-        {
-            players = el("span", { title: h.length ? h.map(function(p) { return plain(p.name); }).join("\n") : "Nobody playing" }, [
-                h.length + "/" + st.maxplayers,
-                st.spectators ? el("small", { text: " +" + st.spectators + " spec" }) : null,
-                st.bots ? el("small", { text: " +" + st.bots + " bot" + (st.bots === 1 ? "" : "s") }) : null
-            ]);
-        }
+        // Everyone connected, spectators included and bots left out, with their names on hover.
+        if(everyone)
+            players = el("span", { title: everyone.length ? everyone.map(function(p) { return plain(p.name); }).join("\n") : "Nobody on" }, everyone.length + "/" + st.maxplayers);
         var time = "–";
         if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
-            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
+            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", {}, st ? st.map : "–"),
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
-            el("td", { class: "servers-opt" }, st ? access(st) : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, versionview(s.version)),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
@@ -392,7 +387,7 @@
         var list = sorted(), shown = 0, people = 0;
         list.forEach(function(s)
         {
-            people += Math.max(0, (humans(s) || []).length);
+            people += Math.max(0, playercount(s));
             if(!visible(s)) return;
             shown++;
             tbody.appendChild(row(s));
@@ -785,7 +780,6 @@
             fact("Mode", partview(parts[0], true), "servers-widefact");
             if(parts.length > 1) fact("Mutators", parts.slice(1).map(function(p) { return partview(p, true); }));
             if(playing(st) && statename(st)) fact("State", statename(st)); // the Time column shows it otherwise
-            fact("Access", access(st), "servers-optfact");
         }
         fact("Version", versionview(s.version), "servers-optfact");
         if(s.branch) fact("Branch", s.branch);

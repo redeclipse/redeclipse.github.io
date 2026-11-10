@@ -1,0 +1,7 @@
+<svg version="1.1" viewBox="0 0 512 512" width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <!-- in the style of the game's server icons, textures/servers in redeclipse/textures -->
+  <circle cx="256" cy="256" r="208" fill="none" stroke="currentColor" stroke-width="32" />
+  <path d="M 256 87.5 A 168.5 168.5 0 0 1 424.5 256 M 256 424.5 A 168.5 168.5 0 0 1 87.5 256" fill="none" stroke="currentColor" stroke-width="16" />
+  <path d="M 212 148 L 300 148 L 300 228 L 212 228 Z" fill="currentColor" />
+  <path d="M 156 248 L 356 248 L 356 364 L 156 364 Z M 196 268 L 196 288 L 316 288 L 316 268 Z" fill="currentColor" fill-rule="evenodd" />
+</svg>

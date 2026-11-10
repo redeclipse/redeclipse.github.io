@@ -386,6 +386,23 @@
     -webkit-mask: center / contain no-repeat;
     mask: center / contain no-repeat;
 }
+/* Master Modes in the colours the game's server browser gives them: Locked yellow, Private and Password red */
+.servers-accessicon {
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+    margin: -0.2em 0.3em -0.1em 0;
+    vertical-align: -0.2em;
+    background-color: rgb(240, 224, 224);
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
+.servers-accessicon.locked {
+    background-color: rgb(240, 220, 90);
+}
+.servers-accessicon.private, .servers-accessicon.password {
+    background-color: rgb(255, 100, 100);
+}
 .servers-priv {
     display: inline-block;
     width: 1em;
