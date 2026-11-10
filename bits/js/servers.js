@@ -176,10 +176,11 @@
         if(typeof v !== "number") return "?";
         return Math.floor(v / 100) + "." + (Math.floor(v / 10) % 10) + "." + (v % 10);
     }
-    // Game servers older than the Current Release are Outdated, and newer ones run a Development Build.
+    // Game servers on the Current Release are Current, older ones Outdated, and newer ones run a Development Build.
     function versiontag(v)
     {
-        if(typeof v !== "number" || !release || v === release) return null;
+        if(typeof v !== "number" || !release) return null;
+        if(v === release) return el("span", { class: "servers-tag current", title: "The current release, v" + version(release), text: "Current" });
         if(v < release) return el("span", { class: "servers-tag outdated", title: "Older than the current release, v" + version(release), text: "Outdated" });
         return el("span", { class: "servers-tag development", title: "A development build, newer than the current release, v" + version(release), text: "Development" });
     }

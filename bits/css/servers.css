@@ -376,6 +376,11 @@
     vertical-align: 0.1em;
     cursor: help;
 }
+.servers-tag.current {
+    color: rgb(170, 240, 180);
+    border-color: rgba(80, 220, 110, 0.7);
+    background-color: rgba(10, 80, 30, 0.5);
+}
 .servers-tag.outdated {
     color: rgb(255, 200, 120);
     border-color: rgba(255, 170, 60, 0.7);
