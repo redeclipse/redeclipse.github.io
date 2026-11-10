@@ -149,16 +149,13 @@
     {
         return el("img", { class: "servers-icon", src: ICONPATH + path + ".png", alt: named ? "" : name, title: name });
     }
-    // The mode and mutators as icons: all named in the panel, while a row names only the mode to stay one line high.
-    function modeview(st, full)
+    // A mode or mutator as its icon, named beside it or only on hover; one with no icon is always named.
+    function partview(p, named)
     {
-        return modeparts(st).map(function(p, i)
-        {
-            var named = full || !i;
-            if(!p.icon) return el("span", { class: "servers-modepart" }, named ? p.name : el("small", { text: p.name }));
-            return el("span", { class: "servers-modepart" }, [icon(p.icon, p.name, named), named ? p.name : null]);
-        });
+        if(!p.icon) return el("span", { class: "servers-modepart" }, named ? p.name : el("small", { text: p.name }));
+        return el("span", { class: "servers-modepart" }, [icon(p.icon, p.name, named), named ? p.name : null]);
     }
+    function mutatornames(st) { return modeparts(st).slice(1).map(function(p) { return p.name; }).join(", "); }
     // As in the game, a Privilege icon takes the player's colour, so the SVGs are masks over it.
     function privicon(privilege, local)
     {
@@ -240,7 +237,8 @@
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
         { id: "players", title: "Players", value: function(s) { var h = humans(s); return h ? h.length * 1000 + (s.status.spectators || 0) * 10 + (s.status.bots || 0) : -1; } },
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
-        { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modename(s.status) : ""; } },
+        { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modeparts(s.status)[0].name : ""; } },
+        { id: "mutators", title: "Mutators", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
         { id: "mastermode", title: "Access", cls: "servers-opt", value: function(s) { return s.status ? s.status.mastermode : -1; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
@@ -363,7 +361,8 @@
             el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", {}, st ? st.map : "–"),
-            el("td", { class: "servers-wide servers-mode", title: st ? modename(st) : null }, st ? modeview(st, false) : "–"),
+            el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
+            el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-opt" }, st ? access(st) : "–"),
             el("td", { class: "servers-num" }, time),
             el("td", { class: "servers-opt", title: s.branch || null }, [version(s.version), versiontag(s.version)]),
@@ -772,7 +771,7 @@
         if(st)
         {
             fact("Map", st.map);
-            fact("Mode", modeview(st, true));
+            fact("Mode", modeparts(st).map(function(p) { return partview(p, true); }));
             if(statename(st)) fact("State", statename(st));
             if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
             fact("Players", (humans(s) || []).length + "/" + st.maxplayers + (st.spectators ? ", " + st.spectators + " spectating" : "") + (st.bots ? ", " + st.bots + " bot" + (st.bots === 1 ? "" : "s") : ""));

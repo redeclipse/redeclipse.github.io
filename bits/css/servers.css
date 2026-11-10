@@ -351,10 +351,10 @@
 .servers-modepart + .servers-modepart {
     margin-left: 0.4em;
 }
-.servers-row .servers-modepart + .servers-modepart + .servers-modepart {
-    margin-left: 0.1em;
+.servers-mutators .servers-modepart + .servers-modepart {
+    margin-left: 0.15em;
 }
-.servers-row .servers-modepart + .servers-modepart .servers-icon {
+.servers-mutators .servers-icon {
     margin-right: 0;
 }
 .servers-priv {
