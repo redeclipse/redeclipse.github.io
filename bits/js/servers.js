@@ -246,12 +246,12 @@
 
     var COLUMNS = [
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
-        { id: "players", title: "Players", value: playercount },
+        { id: "players", title: "Players", icon: "servers-playersicon", value: playercount },
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
         { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modeparts(s.status)[0].name : ""; } },
-        { id: "mutators", title: "Mutators", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
+        { id: "mutators", title: "Mutators", short: "Muts", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
-        { id: "version", title: "Version", cls: "servers-opt", value: function(s) { return s.version || 0; } },
+        { id: "version", title: "Version", short: "Ver", cls: "servers-opt", value: function(s) { return s.version || 0; } },
         { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } }
     ];
 
@@ -339,7 +339,10 @@
         COLUMNS.forEach(function(c)
         {
             var active = prefs.sort === c.id;
-            var b = el("button", { type: "button", class: "servers-sort" + (active ? " active" : ""), text: c.title + (active ? (prefs.dir < 0 ? " ▾" : " ▴") : "") });
+            var label = c.icon ? el("span", { class: c.icon, "aria-hidden": "true" }) : c.short || c.title;
+            var arrow = active ? el("span", { class: "servers-sortdir", "aria-hidden": "true", text: prefs.dir < 0 ? "▾" : "▴" }) : null;
+            var abbr = c.icon || c.short;
+            var b = el("button", { type: "button", class: "servers-sort" + (active ? " active" : ""), title: abbr ? c.title : null, "aria-label": abbr ? c.title : null }, [label, arrow]);
             b.addEventListener("click", function()
             {
                 if(prefs.sort === c.id) prefs.dir = -prefs.dir;

@@ -2,6 +2,7 @@
 /* Server browser and match monitor, /servers */
 #servers {
     margin: 12px 0 16px 0;
+    font-size: 14px;
     color: rgb(240, 224, 224);
 }
 #servers [hidden] {
@@ -105,6 +106,7 @@
     white-space: nowrap;
 }
 .servers-sort {
+    position: relative;
     display: block;
     width: 100%;
     padding: 6px 10px;
@@ -117,6 +119,22 @@
 }
 .servers-sort.active {
     color: rgb(255, 200, 200);
+}
+/* The sort arrow sits in the button's right padding, so it never widens the column */
+.servers-sortdir {
+    position: absolute;
+    right: 0;
+    width: 10px;
+    text-align: center;
+}
+.servers-playersicon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.125em;
+    background-color: currentColor;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .servers-row {
     background-color: rgba(0, 0, 0, 0.25);
@@ -167,6 +185,7 @@
     background: none;
     border: 0;
     font-family: monospace;
+    font-size: 85%;
     text-align: left;
     cursor: copy !important;
 }
@@ -414,7 +433,9 @@
     mask: center / contain no-repeat;
 }
 .servers-version {
-    padding: 0 0.35em;
+    display: inline-block;
+    padding: 0.24em 0.35em 0.07em 0.35em;
+    line-height: 1;
     border-radius: 3px;
     border: 1px solid;
     cursor: help;
