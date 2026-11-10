@@ -259,8 +259,22 @@
     width: 4.5em;
     text-align: right;
 }
+/* The score is a badge outlined in the team's colour, so it doesn't read as part of the name */
 .servers-teamscore {
+    display: inline-block;
+    min-width: 2em;
+    margin-left: 0.6em;
+    padding: 0.36em 0.4em 0 0.4em;
+    line-height: 1;
+    vertical-align: 0.05em;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.1);
     color: rgb(255, 255, 255);
+    font-size: 115%;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: none;
 }
 .servers-specs {
     margin: 0 0 8px 0;

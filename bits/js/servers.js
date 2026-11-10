@@ -755,7 +755,7 @@
             });
             self.board.appendChild(el("table", { class: "servers-team" }, [
                 el("thead", {}, el("tr", {}, [
-                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", text: " " + scores[t] }) : null]),
+                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", title: "Team score", style: "border-color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral), text: scores[t] }) : null]),
                     el("th", { class: "servers-num", text: "Points" }),
                     el("th", { class: "servers-num", text: "Frags" }),
                     el("th", { class: "servers-num", text: "Deaths" })
