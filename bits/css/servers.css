@@ -346,3 +346,13 @@
 .servers-row .servers-modepart + .servers-modepart .servers-icon {
     margin-right: 0;
 }
+.servers-priv {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    vertical-align: -0.12em;
+    background-color: currentColor;
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}

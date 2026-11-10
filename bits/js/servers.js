@@ -65,6 +65,9 @@
         "deathmatch-gladiator", "deathmatch-oldschool", "capture-quick", "capture-defend", "capture-protect", "defend-quick", "defend-king",
         "bomber-hold", "bomber-basket", "bomber-assault", "speedrun-lapped", "speedrun-endurance", "speedrun-gauntlet"];
     var TEAMICONS = ["alpha", "omega", "neutral", "spectator"];
+    // Privileges above none, and those a server's operator can give locally, which have icons of their own.
+    var PRIVILEGES = ["player", "supporter", "moderator", "administrator", "developer", "creator"];
+    var LOCALPRIVILEGES = ["supporter", "moderator", "administrator"];
     var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
     var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
@@ -149,6 +152,15 @@
             if(!p.icon) return el("span", { class: "servers-modepart" }, named ? p.name : el("small", { text: p.name }));
             return el("span", { class: "servers-modepart" }, [icon(p.icon, p.name, named), named ? p.name : null]);
         });
+    }
+    // As in the game, a Privilege icon takes the player's colour, so the SVGs are masks over it.
+    function privicon(privilege, local)
+    {
+        if(PRIVILEGES.indexOf(privilege) < 0) return null;
+        local = local && LOCALPRIVILEGES.indexOf(privilege) >= 0;
+        var name = privilege.charAt(0).toUpperCase() + privilege.slice(1) + (local ? ", given by this server" : "");
+        var url = "url(" + ICONPATH + "privilege/" + (local ? "local" : "") + privilege + ".svg)";
+        return el("span", { class: "servers-priv", role: "img", "aria-label": name, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
     function access(st)
     {
@@ -613,10 +625,15 @@
         while(this.feedlist.childNodes.length > FEEDLINES) this.feedlist.removeChild(this.feedlist.lastChild);
     };
 
-    Panel.prototype.name = function(c)
+    // On the scoreboard a name carries its Privilege, which the list has with whether it's local.
+    Panel.prototype.name = function(c, privileged)
     {
         if(!c) return el("span", { text: "someone" });
-        return el("span", { class: "servers-player", style: "color:" + this.colour(c.cn, c.team), text: c.name + (c.bot ? " (bot)" : "") });
+        var who = privileged && !c.bot ? this.listplayer(c.cn) || c : null;
+        return el("span", { class: "servers-player", style: "color:" + this.colour(c.cn, c.team) }, [
+            who && typeof who.privilege === "string" ? privicon(who.privilege, who.local) : null,
+            c.name + (c.bot ? " (bot)" : "")
+        ]);
     };
 
     // The list carries each human player's chosen colour and spectator flag, kept current by the live list.
@@ -707,7 +724,7 @@
             groups.get(t).sort(byscore).forEach(function(p)
             {
                 append(tb, el("tr", {}, [
-                    el("td", {}, [self.name(p), p.handle && p.handle !== p.name ? el("small", { text: " " + p.handle }) : null]),
+                    el("td", {}, [self.name(p, true), p.handle && p.handle !== p.name ? el("small", { text: " " + p.handle }) : null]),
                     el("td", { class: "servers-num", text: p.points || 0 }),
                     el("td", { class: "servers-num", text: p.frags || 0 }),
                     el("td", { class: "servers-num", text: p.deaths || 0 })
@@ -726,7 +743,7 @@
         if(specs.length)
         {
             var sp = el("p", { class: "servers-specs" }, el("strong", {}, [icon("team/spectator", "Spectating", true), "Spectating: "]));
-            specs.forEach(function(p, i) { if(i) sp.appendChild(document.createTextNode(", ")); sp.appendChild(self.name(p)); });
+            specs.forEach(function(p, i) { if(i) sp.appendChild(document.createTextNode(", ")); sp.appendChild(self.name(p, true)); });
             this.board.appendChild(sp);
         }
     };
