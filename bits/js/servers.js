@@ -85,7 +85,7 @@
         return bycolour;
     })();
     var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
-    var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
+    var PINGREFRESH = 15000, POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
 
     var root = document.getElementById("servers");
@@ -753,6 +753,7 @@
             this.base = master + "/relay/" + encodeURIComponent(s.host) + "/" + s.port + "/api/v1";
             this.refresh(); // the scoreboard shouldn't wait on the feed, which may be slow or blocked
             this.connect();
+            this.pings();
         }
         else
         {
@@ -775,6 +776,21 @@
             if(!r.ok) { var e = new Error(r.status); e.status = r.status; throw e; }
             return r.json();
         });
+    };
+
+    // The feed carries no pings, so fetch the players now and then for theirs, slower than the game does to spare the relay.
+    Panel.prototype.pings = function()
+    {
+        var self = this;
+        this.later(function()
+        {
+            self.get("/players").then(function(ps)
+            {
+                if(self.closed) return;
+                (ps || []).forEach(function(p) { var q = self.players.get(p.cn); if(q) q.ping = p.ping; });
+                self.drawboard();
+            }).catch(function() {}).then(function() { self.pings(); });
+        }, PINGREFRESH);
     };
 
     // The feed sends no snapshot, so fetch the match whenever the feed (re)opens or a new match starts.
@@ -989,18 +1005,22 @@
             groups.get(t).sort(byscore).forEach(function(p)
             {
                 append(tb, el("tr", {}, [
-                    el("td", {}, [self.name(p), p.handle && p.handle !== p.name ? el("small", { text: " " + p.handle }) : null]),
+                    el("td", {}, self.name(p)),
+                    el("td", { class: "servers-opt servers-account", text: p.handle || "-" }),
                     el("td", { class: "servers-num", text: p.points || 0 }),
                     el("td", { class: "servers-num", text: p.frags || 0 }),
-                    el("td", { class: "servers-num", text: p.deaths || 0 })
+                    el("td", { class: "servers-num", text: p.deaths || 0 }),
+                    el("td", { class: "servers-num servers-opt", text: typeof p.ping === "number" ? p.ping : "-" })
                 ]));
             });
             self.board.appendChild(el("table", { class: "servers-team" }, [
                 el("thead", {}, el("tr", {}, [
                     el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", title: "Team score", style: "border-color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral), text: scores[t] }) : null]),
+                    el("th", { class: "servers-opt servers-account", text: "Account" }),
                     el("th", { class: "servers-num", text: "Points" }),
                     el("th", { class: "servers-num", text: "Frags" }),
-                    el("th", { class: "servers-num", text: "Deaths" })
+                    el("th", { class: "servers-num", text: "Deaths" }),
+                    el("th", { class: "servers-num servers-opt", text: "Ping" })
                 ])),
                 tb
             ]));

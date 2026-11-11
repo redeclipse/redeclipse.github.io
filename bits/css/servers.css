@@ -378,6 +378,7 @@
 .servers-team {
     width: 100%;
     margin-bottom: 10px;
+    table-layout: fixed; /* every column but the name as wide as it says, so they line up from team to team */
 }
 .servers-team th, .servers-team td {
     padding: 3px 8px;
@@ -386,6 +387,14 @@
 .servers-team .servers-num {
     width: 4.5em;
     text-align: right;
+}
+/* as wide in every team's table, so the columns line up down the scoreboard */
+.servers-team .servers-account {
+    width: 9em;
+    max-width: 9em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* The score is a badge outlined in the team's colour, so it doesn't read as part of the name */
 .servers-teamscore {
