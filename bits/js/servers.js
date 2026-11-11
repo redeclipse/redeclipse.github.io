@@ -274,7 +274,7 @@
     var COLUMNS = [
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
         { id: "players", title: "Players", icon: "servers-playersicon", value: playercount },
-        { id: "map", title: "Map", value: function(s) { return s.status ? s.status.map : ""; } },
+        { id: "map", title: "Map", value: function(s) { return s.status ? s.status.maptitle || s.status.map : ""; } },
         { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modeparts(s.status)[0].name : ""; } },
         { id: "mutators", title: "Mutators", short: "Muts", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
         { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
@@ -304,7 +304,7 @@
         if(prefs.filter)
         {
             var f = prefs.filter.toLowerCase(), st = s.status || {};
-            var hay = [plain(s.description), s.host, String(s.port), st.map || "", s.status ? modename(st) : "", s.handle || ""];
+            var hay = [plain(s.description), s.host, String(s.port), st.map || "", st.maptitle || "", s.status ? modename(st) : "", s.handle || ""];
             (st.players || []).forEach(function(p) { hay.push(plain(p.name)); });
             if(hay.join("\n").toLowerCase().indexOf(f) < 0) return false;
         }
@@ -395,7 +395,7 @@
         append(tr, [
             el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
-            el("td", {}, st ? st.map : "–"),
+            el("td", { title: st && st.maptitle ? st.map : null }, st ? st.maptitle || st.map : "–"),
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-num" }, time),
@@ -559,9 +559,13 @@
         this.timers = [];
 
         this.map = null;
+        this.mapshot = null;
+        var self = this;
+        // A new or custom map has no preview here, so ask the server for its own, then show none.
         this.mapimg = el("img", { class: "servers-mapimg", width: 128, height: 128, alt: "", hidden: true, onerror: function()
         {
-            if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN; // a new or custom map with no preview
+            if(self.mapshot) { var shot = self.mapshot; self.mapshot = null; this.src = shot; }
+            else if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN;
         } });
         this.info = el("div", { class: "servers-matchinfo" });
         this.message = el("p", { class: "servers-message", hidden: true });
@@ -802,26 +806,30 @@
         var s = servers.get(this.key);
         if(!s) return;
         var st = s.status, facts = [];
-        // Only what the row doesn't show; facts from columns that small screens hide are shown only there.
+        // The mode beside its mutators, then what the row doesn't show; facts from columns that small screens hide are shown only there.
         var fact = function(label, value, cls) { facts.push(el("div", { class: cls }, [el("dt", { text: label }), el("dd", {}, value)])); };
         if(st)
         {
             var parts = modeparts(st);
-            fact("Mode", partview(parts[0], true), "servers-widefact");
+            fact("Mode", partview(parts[0], true));
             if(parts.length > 1) fact("Mutators", parts.slice(1).map(function(p) { return partview(p, true); }));
             if(playing(st) && statename(st)) fact("State", statename(st)); // the Time column shows it otherwise
         }
         fact("Version", versionview(s.version), "servers-optfact");
+        if(st && st.mapauthor) fact("Author", st.mapauthor);
         if(s.branch) fact("Branch", s.branch);
         fact("Address", addressbutton(s), "servers-optfact");
-        if((st && st.map || null) !== this.map)
+        // the crc as well, as a map can be saved again under the same name
+        var mapkey = st && st.map ? st.map + "/" + (st.mapcrc || "") : null;
+        if(mapkey !== this.map)
         {
-            this.map = st && st.map || null;
-            this.mapimg.hidden = !this.map;
-            if(this.map)
+            this.map = mapkey;
+            this.mapimg.hidden = !mapkey;
+            if(mapkey)
             {
-                this.mapimg.src = MAPPATH + encodeURIComponent(this.map.replace(/^.*\//, "")) + ".jpg";
-                this.mapimg.alt = this.mapimg.title = "Preview of " + this.map;
+                this.mapshot = st.mapcrc && s.relay >= 1 ? master + "/relay/" + encodeURIComponent(s.host) + "/" + s.port + "/api/v1/mapshot?crc=" + st.mapcrc : null;
+                this.mapimg.src = MAPPATH + encodeURIComponent(st.map.replace(/^.*\//, "")) + ".jpg";
+                this.mapimg.alt = this.mapimg.title = "Preview of " + (st.maptitle || st.map);
             }
         }
         clear(this.info);

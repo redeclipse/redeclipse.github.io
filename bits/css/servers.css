@@ -227,7 +227,7 @@
     border: 1px solid rgba(255, 64, 64, 0.6);
     object-fit: cover;
 }
-.servers-optfact, .servers-widefact {
+.servers-optfact {
     display: none;
 }
 .servers-match dl {
@@ -373,9 +373,6 @@
 @media (max-width: 560px) {
     .servers-wide {
         display: none;
-    }
-    .servers-widefact {
-        display: block;
     }
 }
 /* Icons sit inside the line, so rows stay one line high; a percentage max-width would let the table squeeze them out */
