@@ -55,7 +55,9 @@
         return out;
     })();
     var MASTERMODES = ["Open", "Veto", "Locked", "Private", "Password"];
-    var TEAMCOLOURS = { alpha: "#7aa2ff", omega: "#ff6a6a", neutral: "#e8e8e8", enemy: "#ffd27a", environment: "#b0b0b0" };
+    // The game's default team colours, and the minimum luma of a colour drawn as text (the game's textcolourlevel).
+    var TEAMCOLOURS = { neutral: 0x808080, alpha: 0x3030F0, omega: 0xF03030, enemy: 0xF0F030, environment: 0x30F030 };
+    var TEXTCOLOURLEVEL = 0.55;
     // Icons drawn by dc, in bits/images/servers by the game's names; whatever has none is shown as text.
     var ICONPATH = "/bits/images/servers/";
     var MODEICONS = { "Demo": "demo", "Editing": "editing", "Deathmatch": "deathmatch", "Capture the Flag": "capture", "Defend the Flag": "defend",
@@ -250,7 +252,7 @@
     // A player from the Web API, as the game shows one: their privilege's icon in the colour they chose, then their name in their team's.
     function playerview(p)
     {
-        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[p.team] || TEAMCOLOURS.neutral) }, [
+        return el("span", { class: "servers-player", style: "color:" + teamtextcolour(p.team) }, [
             typeof p.privilege === "string" || p.bot ? privicon(p.privilege || "none", p.local, p.bot, playercolour(p.colour || 0, p.team)) : null,
             plain(p.name)
         ]);
@@ -261,7 +263,7 @@
     function resultview(m, gv)
     {
         var map = m.maptitle || m.map, teams = m.teams || [], players = m.players || [], out = [], score;
-        var teamview = function(t) { return el("span", { style: "color:" + (TEAMCOLOURS[t.team] || TEAMCOLOURS.neutral) }, [teamicon(t.team, teamname(t.team)), teamname(t.team)]); };
+        var teamview = function(t) { return el("span", { style: "color:" + teamtextcolour(t.team) }, [teamicon(t.team, teamname(t.team)), teamname(t.team)]); };
         if(teams.length >= 2)
         {
             score = m.timed ? laptime(teams[0].score) : teams[0].score + (teams[0].score < 0 || teams[1].score < 0 ? " to " : "-") + teams[1].score;
@@ -285,25 +287,38 @@
     function polledname(st, p)
     {
         var team = polledteam(st, p), priv = typeof p.privilege === "string" ? ICONPRIVILEGES[p.privilege] || p.privilege : null;
-        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[team] || TEAMCOLOURS.neutral), title: team ? teamname(team) : null }, [
+        return el("span", { class: "servers-player", style: "color:" + teamtextcolour(team), title: team ? teamname(team) : null }, [
             priv ? privicon(priv, p.local, false, playercolour(p.colour || 0, team)) : null,
             plain(p.name)
         ]);
     }
 
-    // Player colours are chosen in game against a dark background; lift very dark ones so they stay legible.
-    function playercolour(colour, team)
+    // A colour drawn as text, as the game draws it: lifted to a minimum luma by scaling it up, then mixing in white for what scaling can't reach.
+    function textcolour(colour)
     {
-        if(!colour) return TEAMCOLOURS[team] || TEAMCOLOURS.neutral;
-        var r = (colour >> 16) & 255, g = (colour >> 8) & 255, b = colour & 255;
-        var lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-        if(lum < 140)
+        var v = [((colour >> 16) & 255) / 255, ((colour >> 8) & 255) / 255, (colour & 255) / 255];
+        var luma = 0.2126 * v[0] + 0.7152 * v[1] + 0.0722 * v[2], peak = Math.max(v[0], v[1], v[2]);
+        if(luma >= TEXTCOLOURLEVEL) return colour;
+        if(peak > 0)
         {
-            var f = (140 - lum) / (255 - lum);
-            r = Math.round(r + (255 - r) * f); g = Math.round(g + (255 - g) * f); b = Math.round(b + (255 - b) * f);
+            var scale = Math.min(TEXTCOLOURLEVEL / luma, 1 / peak);
+            v = v.map(function(c) { return c * scale; });
+            luma *= scale;
         }
-        return "rgb(" + r + "," + g + "," + b + ")";
+        if(luma < TEXTCOLOURLEVEL)
+        {
+            var mix = (TEXTCOLOURLEVEL - luma) / (1 - luma);
+            v = v.map(function(c) { return c * (1 - mix) + mix; });
+        }
+        v = v.map(function(c) { return Math.round(Math.min(Math.max(c, 0), 1) * 255); });
+        return (v[0] << 16) | (v[1] << 8) | v[2];
     }
+    function csscolour(colour) { return "#" + ("00000" + colour.toString(16)).slice(-6); }
+    function teamcolour(team) { return csscolour(TEAMCOLOURS[team] || TEAMCOLOURS.neutral); }
+    function teamtextcolour(team) { return csscolour(textcolour(TEAMCOLOURS[team] || TEAMCOLOURS.neutral)); }
+
+    // Player colours are chosen in game against a dark background, so they're lifted as text is to stay legible.
+    function playercolour(colour, team) { return colour ? csscolour(textcolour(colour)) : teamtextcolour(team); }
 
     function backoff(n) { return Math.min(BACKOFFMAX, BACKOFFMIN * Math.pow(2, n)); }
 
@@ -871,7 +886,7 @@
     {
         if(!c) return el("span", { text: "someone" });
         var who = c.bot ? null : typeof c.privilege === "string" ? c : this.listplayer(c.cn) || c, colour = this.colour(c.cn, c.team, c.colour);
-        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[c.team] || TEAMCOLOURS.neutral) }, [
+        return el("span", { class: "servers-player", style: "color:" + teamtextcolour(c.team) }, [
             c.bot ? privicon(null, false, true, colour) : typeof who.privilege === "string" ? privicon(who.privilege, who.local, false, colour) : null,
             c.name
         ]);
@@ -958,7 +973,7 @@
     Panel.prototype.drawobjectives = function(o)
     {
         var self = this, items = [];
-        var team = function(t) { return el("span", { class: "servers-objteam", style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [teamicon(t, teamname(t)), teamname(t)]); };
+        var team = function(t) { return el("span", { class: "servers-objteam", style: "color:" + teamtextcolour(t) }, [teamicon(t, teamname(t)), teamname(t)]); };
         var where = function(a)
         {
             if(a.state === "taken" && a.carrier) return [" taken by ", self.name(a.carrier)];
@@ -977,7 +992,7 @@
                 {
                     var pct = Math.max(0, Math.min(100, p.progress || 0));
                     item.push(", ", team(p.enemy), " taking ", el("span", { class: "servers-objbar", title: pct + "%" },
-                        el("span", { style: "width:" + pct + "%;background-color:" + (TEAMCOLOURS[p.enemy] || TEAMCOLOURS.neutral) })), " " + pct + "%");
+                        el("span", { style: "width:" + pct + "%;background-color:" + teamcolour(p.enemy) })), " " + pct + "%");
                 }
                 items.push(item);
             });
@@ -1020,7 +1035,7 @@
             });
             self.board.appendChild(el("table", { class: "servers-team" }, [
                 el("thead", {}, el("tr", {}, [
-                    el("th", { style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", title: "Team score", style: "border-color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral), text: scores[t] }) : null]),
+                    el("th", { style: "color:" + teamtextcolour(t) }, [TEAMICONS.indexOf(t) >= 0 ? teamicon(t, title) : null, title, t in scores ? el("span", { class: "servers-teamscore", title: "Team score", style: "border-color:" + teamcolour(t), text: scores[t] }) : null]),
                     el("th", { class: "servers-opt servers-account", text: "Account" }),
                     el("th", { class: "servers-num", text: "Points" }),
                     el("th", { class: "servers-num", text: "Frags" }),
