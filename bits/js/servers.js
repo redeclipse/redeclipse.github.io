@@ -561,7 +561,7 @@
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-num" }, time),
-            el("td", { class: "servers-opt", title: s.branch || null }, versionview(s.version)),
+            el("td", { class: "servers-opt" }, versionview(s.version)),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
@@ -1059,7 +1059,6 @@
         if(st && typeof st.url === "string" && /^https?:\/\/[^\s"<>\\]+$/.test(st.url))
             fact("Website", el("a", { class: "servers-weblink", href: st.url, target: "_blank", rel: "nofollow noopener noreferrer", text: st.url.replace(/^https?:\/\//, "").replace(/\/$/, "") }));
         if(st && st.lastmatch && st.lastmatch.ended) fact("Last match", resultview(st.lastmatch, st.gameversion).concat([", " + ago(st.lastmatch.ended)]));
-        if(s.branch) fact("Branch", s.branch);
         fact("Address", addressbutton(s), "servers-optfact");
         // the crc as well, as a map can be saved again under the same name
         var mapkey = st && st.map ? st.map + "/" + (st.mapcrc || "") : null;
