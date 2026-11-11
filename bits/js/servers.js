@@ -244,7 +244,7 @@
         var teamview = function(t) { return el("span", { style: "color:" + (TEAMCOLOURS[t.team] || TEAMCOLOURS.neutral) }, [teamicon(t.team, teamname(t.team)), teamname(t.team)]); };
         if(teams.length >= 2)
         {
-            score = m.timed ? laptime(teams[0].score) : teams[0].score + "-" + teams[1].score;
+            score = m.timed ? laptime(teams[0].score) : teams[0].score + (teams[0].score < 0 || teams[1].score < 0 ? " to " : "-") + teams[1].score;
             if(m.draw) out.push(teamview(teams[0]), " and ", teamview(teams[1]), " drew " + score);
             else out.push(teamview(teams[0]), " won " + score);
         }
@@ -969,6 +969,9 @@
         }
         fact("Version", versionview(s.version), "servers-optfact");
         if(st && st.mapauthor) fact("Author", st.mapauthor);
+        // the operator's site, only as a web address, and opened away from this page
+        if(st && typeof st.url === "string" && /^https?:\/\/[^\s"<>\\]+$/.test(st.url))
+            fact("Website", el("a", { class: "servers-weblink", href: st.url, target: "_blank", rel: "nofollow noopener noreferrer", text: st.url.replace(/^https?:\/\//, "").replace(/\/$/, "") }));
         if(st && st.lastmatch && st.lastmatch.ended) fact("Last match", resultview(st.lastmatch, st.gameversion).concat([", " + ago(st.lastmatch.ended)]));
         if(s.branch) fact("Branch", s.branch);
         fact("Address", addressbutton(s), "servers-optfact");
@@ -987,6 +990,7 @@
         }
         clear(this.info);
         append(this.info, el("dl", {}, facts));
+        if(st && typeof st.motd === "string" && st.motd.trim()) append(this.info, el("p", { class: "servers-motd", text: st.motd }));
         // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard,
         // best score first, each after their Privilege in their colour and in their team's colour as in the game's server browser.
         if(st && st.polled && !this.base && st.players && st.players.length)

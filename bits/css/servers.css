@@ -404,6 +404,13 @@
     text-align: center;
     text-shadow: none;
 }
+.servers-motd {
+    margin: 0 0 8px;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+    color: rgb(230, 220, 220);
+    font-style: italic;
+}
 .servers-specs {
     margin: 0 0 8px 0;
 }
@@ -565,4 +572,12 @@
     color: rgb(180, 210, 255);
     border-color: rgba(110, 160, 255, 0.7);
     background-color: rgba(20, 50, 120, 0.5);
+}
+#servers a.servers-weblink {
+    color: rgb(0, 200, 224);
+    text-decoration: none;
+}
+#servers a.servers-weblink:hover, #servers a.servers-weblink:focus {
+    color: rgb(128, 255, 255);
+    text-decoration: underline;
 }
