@@ -245,6 +245,14 @@
         else { n = Math.floor(secs / 86400); unit = "day"; }
         return n + " " + unit + (n === 1 ? "" : "s") + " ago";
     }
+    // A player from the Web API, as the game shows one: their privilege's icon in the colour they chose, then their name in their team's.
+    function playerview(p)
+    {
+        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[p.team] || TEAMCOLOURS.neutral) }, [
+            typeof p.privilege === "string" || p.bot ? privicon(p.privilege || "none", p.local, p.bot, playercolour(p.colour || 0, p.team)) : null,
+            plain(p.name)
+        ]);
+    }
     // A timed speedrun's score, in milliseconds.
     function laptime(ms) { return ms > 0 ? clock(ms / 1000) + "." + String(ms % 1000).padStart(3, "0") : "no time"; }
     // Who won a match and on what, from a server's last match or a result on the Event feed, best first in its teams and players.
@@ -262,8 +270,8 @@
         {
             var p = players[0];
             score = m.timed ? (p.points > 0 ? "in " + laptime(p.points) : "without a time") : "with " + p.points + " point" + (p.points === 1 ? "" : "s");
-            if(m.draw && players.length >= 2) out.push(plain(p.name), " and ", plain(players[1].name), " drew " + score);
-            else out.push(plain(p.name), " won " + score);
+            if(m.draw && players.length >= 2) out.push(playerview(p), " and ", playerview(players[1]), " drew " + score);
+            else out.push(playerview(p), " won " + score);
         }
         else out.push("Nobody won");
         out.push(" in " + modename({ modeid: m.modeid, mutators: m.mutators, gameversion: gv }).replace(/:.*$/, "") + " on " + map);
@@ -841,7 +849,7 @@
     Panel.prototype.name = function(c)
     {
         if(!c) return el("span", { text: "someone" });
-        var who = c.bot ? null : this.listplayer(c.cn) || c, colour = this.colour(c.cn, c.team);
+        var who = c.bot ? null : typeof c.privilege === "string" ? c : this.listplayer(c.cn) || c, colour = this.colour(c.cn, c.team, c.colour);
         return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[c.team] || TEAMCOLOURS.neutral) }, [
             c.bot ? privicon(null, false, true, colour) : typeof who.privilege === "string" ? privicon(who.privilege, who.local, false, colour) : null,
             c.name
@@ -856,8 +864,10 @@
         for(var i = 0; i < ps.length; i++) if(ps[i].cn === cn) return ps[i];
         return null;
     };
-    Panel.prototype.colour = function(cn, team)
+    // the colour the player chose, from the Web API's own player when it gives one, else from the list
+    Panel.prototype.colour = function(cn, team, colour)
     {
+        if(typeof colour === "number") return playercolour(colour, team);
         var lp = this.listplayer(cn);
         return playercolour(lp ? lp.colour : 0, team);
     };
@@ -926,12 +936,11 @@
     // What every player's HUD shows of the objectives: each flag or ball and who carries it, and each point, who holds it and who is taking it.
     Panel.prototype.drawobjectives = function(o)
     {
-        var items = [];
+        var self = this, items = [];
         var team = function(t) { return el("span", { class: "servers-objteam", style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [teamicon(t, teamname(t)), teamname(t)]); };
         var where = function(a)
         {
-            if(a.state === "taken" && a.carrier)
-                return [" taken by ", el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[a.carrier.team] || TEAMCOLOURS.neutral) }, plain(a.carrier.name))];
+            if(a.state === "taken" && a.carrier) return [" taken by ", self.name(a.carrier)];
             return [a.state === "dropped" ? " dropped" : " at home"];
         };
         if(o)
