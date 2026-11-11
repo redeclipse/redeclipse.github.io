@@ -425,7 +425,7 @@
             return u;
         }); });
         var now = new Date(), nowday = (now.getDay() + 6) % 7, nowhour = now.getHours();
-        var summary = top >= 0.5 ? "Busiest on " + DAYS[bestday] + "s around " + hourname(besthour) + ", about " + Math.round(top) + " on" : "Usually quiet";
+        var summary = top >= 0.5 ? "Busiest on " + DAYS[bestday] + "s around " + hourname(besthour) + ", about " + Math.round(top) + " playing" : "Usually quiet";
         var shade = function(v) { return "rgba(224, 72, 72, " + (0.12 + 0.88 * Math.sqrt(top > 0 ? v / top : 0)).toFixed(3) + ")"; };
         var readout = el("small", { "aria-live": "polite", text: summary });
         var grid = el("div", { class: "servers-heat", role: "img", "aria-label": title + " over the last eight weeks. " + summary + ".",
@@ -435,7 +435,7 @@
             grid.appendChild(el("span", { class: "servers-heatday", "aria-hidden": "true", text: DAYS[d].slice(0, 3) }));
             row.forEach(function(v, hr)
             {
-                var tip = DAYS[d] + " " + hourname(hr) + ": " + (v === null ? "no record" : v < 0.05 ? "usually empty" : "about " + (Math.round(v * 10) / 10) + " on");
+                var tip = DAYS[d] + " " + hourname(hr) + ": " + (v === null ? "no record" : v < 0.05 ? "usually empty" : "about " + (Math.round(v * 10) / 10) + " playing");
                 var show = function() { readout.textContent = tip; };
                 grid.appendChild(el("span", { class: "servers-heatcell" + (v === null ? " unknown" : "") + (d === nowday && hr === nowhour ? " now" : ""),
                     style: v === null ? null : "background:" + shade(v), onmouseenter: show, onclick: show }));
