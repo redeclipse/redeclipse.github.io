@@ -128,9 +128,6 @@ a:hover, a:active, a:focus {
 .navitem {
     font-size: 24px;
 }
-.video {
-    padding: 8px 16px 16px 8px;
-}
 .footer {
     width: 100%;
     font-size: 15px;
@@ -165,140 +162,17 @@ button, input, button, select, textarea {
 input[type="text"], input[type="submit"] {
     padding: 2px 6px 2px 6px;
 }
-.radiobox {
-    display: inline-block;
-    position: relative;
-    padding-right: 4px;
-    padding-left: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.radiobox input {
-    opacity: 0;
-}
-.radiomark {
-    position: absolute;
-    top: 2px;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: rgb(128, 0, 0);
-    border-radius: 50%;
-}
-.radiobox:hover input ~ .radiomark {
-    background-color: rgb(192, 0, 0);
-}
-.radiobox input:checked ~ .radiomark {
-    background-color: rgb(128, 0, 0);
-}
-.radiobox:hover input:checked ~ .radiomark {
-    background-color: rgb(192, 0, 0);
-}
-.radiomark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-.radiobox input:checked ~ .radiomark:after {
-    display: block;
-}
-.radiobox .radiomark:after {
-    top: 3px;
-    left: 3px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgb(255, 255, 255);
-}
-.nowrap-text {
-    white-space: nowrap;
-    margin-right: 2px;
-}
-.nowrap-text:before {
-    content: "[";
-    color: rgb(255, 255, 255);
-}
-.nowrap-text:after {
-    content: "]";
-    color: rgb(255, 255, 255);
-}
-.img-text {
-    vertical-align: bottom;
-    width: 20px;
-    height: 20px;
-    margin-right: 2px;
-}
-.priv-player {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(255, 128, 96);
-}
-.priv-supporter {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(255, 255, 128);
-}
-.priv-moderator {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(192, 255, 128);
-}
-.priv-operator {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(128, 255, 192);
-}
-.priv-administrator {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(128, 255, 255);
-}
-.priv-developer {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(128, 192, 255);
-}
-.priv-founder {
-    white-space: nowrap;
-    margin-right: 2px;
-    vertical-align: top;
-    color: rgb(224, 128, 224);
-}
-@media screen and (max-width: 1024px) {
-    .hide-small {
-        display: none;
-    }
-}
 @media screen and (max-width: 800px) {
-    .hide-small {
-        display: none;
-    }
     .footer {
         font-size: 14px;
     }
 }
 @media screen and (max-width: 560px) {
-    .hide-small {
-        display: none;
-    }
     .footer {
         font-size: 13px;
     }
 }
 @media screen and (max-width: 432px) {
-    .hide-small {
-        display: none;
-    }
     .footer {
         font-size: 12px;
     }

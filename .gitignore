@@ -9,7 +9,6 @@ data/local.yml
 .DS_Store
 *.orig
 *.rej
-*.bak
 *.kate-swp
 
 
