@@ -225,6 +225,40 @@
         return layout(st).play.indexOf(st.state) >= 0;
     }
     function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
+    // How long ago a unix time was, roughly.
+    function ago(t)
+    {
+        var secs = Math.max(0, now() - t), n, unit;
+        if(secs < 60) return "just now";
+        if(secs < 3600) { n = Math.floor(secs / 60); unit = "minute"; }
+        else if(secs < 86400) { n = Math.floor(secs / 3600); unit = "hour"; }
+        else { n = Math.floor(secs / 86400); unit = "day"; }
+        return n + " " + unit + (n === 1 ? "" : "s") + " ago";
+    }
+    // A timed speedrun's score, in milliseconds.
+    function laptime(ms) { return ms > 0 ? clock(ms / 1000) + "." + String(ms % 1000).padStart(3, "0") : "no time"; }
+    // Who won a match and on what, from a server's last match or a result on the Event feed, best first in its teams and players.
+    function resultview(m, gv)
+    {
+        var map = m.maptitle || m.map, teams = m.teams || [], players = m.players || [], out = [], score;
+        var teamview = function(t) { return el("span", { style: "color:" + (TEAMCOLOURS[t.team] || TEAMCOLOURS.neutral) }, [teamicon(t.team, teamname(t.team)), teamname(t.team)]); };
+        if(teams.length >= 2)
+        {
+            score = m.timed ? laptime(teams[0].score) : teams[0].score + "-" + teams[1].score;
+            if(m.draw) out.push(teamview(teams[0]), " and ", teamview(teams[1]), " drew " + score);
+            else out.push(teamview(teams[0]), " won " + score);
+        }
+        else if(players.length)
+        {
+            var p = players[0];
+            score = m.timed ? (p.points > 0 ? "in " + laptime(p.points) : "without a time") : "with " + p.points + " point" + (p.points === 1 ? "" : "s");
+            if(m.draw && players.length >= 2) out.push(plain(p.name), " and ", plain(players[1].name), " drew " + score);
+            else out.push(plain(p.name), " won " + score);
+        }
+        else out.push("Nobody won");
+        out.push(" in " + modename({ modeid: m.modeid, mutators: m.mutators, gameversion: gv }).replace(/:.*$/, "") + " on " + map);
+        return out;
+    }
 
     // A team colour that's none of the defaults, as game mods rarely make it, names no team.
     function polledteam(st, p) { return typeof p.teamcolour === "number" ? POLLTEAMS[p.teamcolour] || null : null; }
@@ -841,6 +875,13 @@
                 this.line(["New match: " + m.map + ", " + modename({ modeid: m.modeid, mutators: m.mutators, gameversion: gv })], "map");
                 this.later(function() { self.refresh(); }, 2500); // past the relay's 2 second cache
                 break;
+            case "result":
+                if(m.match)
+                {
+                    var was = servers.get(this.key);
+                    this.line(["Match over: "].concat(resultview(m.match, was && was.status ? was.status.gameversion : undefined)), "map");
+                }
+                break;
             case "score":
                 if(m.teams) this.teams = m.teams;
                 (m.players || []).forEach(function(s)
@@ -928,6 +969,7 @@
         }
         fact("Version", versionview(s.version), "servers-optfact");
         if(st && st.mapauthor) fact("Author", st.mapauthor);
+        if(st && st.lastmatch && st.lastmatch.ended) fact("Last match", resultview(st.lastmatch, st.gameversion).concat([", " + ago(st.lastmatch.ended)]));
         if(s.branch) fact("Branch", s.branch);
         fact("Address", addressbutton(s), "servers-optfact");
         // the crc as well, as a map can be saved again under the same name
