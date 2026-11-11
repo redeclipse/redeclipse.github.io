@@ -127,7 +127,17 @@
     }
     function clear(e) { while(e.firstChild) e.removeChild(e.firstChild); return e; }
     function plain(s) { return String(s || "").replace(/\f(?:z..|\[[^\]]*\]|\([^)]*\)|\{[^}]*\}|.)/g, ""); }
-    function now() { return Date.now() / 1000; }
+    // The times in the list are by the master's clock, which ours needn't agree with, so count by its clock: how far ours is ahead of it
+    // comes from the time it stamps on what it sends. A list the browser revalidated comes back with its old stamp, which can only make
+    // ours look further ahead, so polls keep the least seen; the live list's messages are always fresh.
+    var skew = null;
+    function stamped(t, fresh)
+    {
+        if(typeof t !== "number") return;
+        var ahead = Date.now() / 1000 - t;
+        skew = fresh || skew === null ? ahead : Math.min(skew, ahead);
+    }
+    function now() { return Date.now() / 1000 - (skew || 0); }
     function key(host, port) { return host + "/" + port; }
     function skey(s) { return key(s.host, s.port); }
     function address(s) { return (s.host.indexOf(":") >= 0 ? "[" + s.host + "]" : s.host) + ":" + s.port; }
@@ -618,6 +628,7 @@
         {
             var m;
             try { m = JSON.parse(e.data); } catch(err) { return; }
+            stamped(m.time, true);
             switch(m.event)
             {
                 case "snapshot":
@@ -661,7 +672,7 @@
         }).then(function(data)
         {
             if(gen !== pollgen) return;
-            if(data) setlist(data.servers);
+            if(data) { stamped(data.time, false); setlist(data.servers); }
             setstate("polling");
         }).catch(function()
         {
