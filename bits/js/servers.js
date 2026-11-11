@@ -333,6 +333,72 @@
         return b;
     }
 
+    // ---- when people play: the master's peak players for each 15 minutes over eight weeks,
+    // averaged for each weekday and hour in the viewer's own time, Monday first
+
+    var HISTORYDAYS = 56, HISTORYREFRESH = 15 * 60 * 1000;
+    var DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    function fetchhistory(url, done)
+    {
+        fetch(url + "?days=" + HISTORYDAYS)
+            .then(function(res) { return res.ok ? res.json() : null; })
+            .then(function(h) { if(h && Array.isArray(h.peaks)) done(h); })
+            .catch(function() {});
+    }
+    function hourname(hr) { return (hr < 10 ? "0" : "") + hr + ":00"; }
+
+    // A grid of weekdays by hours, brighter the more were on, on a square root so the few on a quiet hour still show;
+    // hatched where nothing is known, the hour now outlined. Hovering or tapping a cell shows its day, hour and players
+    // in place of the summary. Null when there's no history at all.
+    function heatmap(h, title)
+    {
+        var sums = [], counts = [], known = 0;
+        for(var d = 0; d < 7; d++) { sums.push(new Array(24).fill(0)); counts.push(new Array(24).fill(0)); }
+        h.peaks.forEach(function(p, i)
+        {
+            if(typeof p !== "number") return;
+            var t = new Date((h.start + i * h.bucket) * 1000), day = (t.getDay() + 6) % 7;
+            sums[day][t.getHours()] += p;
+            counts[day][t.getHours()]++;
+            known++;
+        });
+        if(!known) return null;
+        var top = 0, bestday = 0, besthour = 0;
+        var usual = sums.map(function(row, d) { return row.map(function(v, hr)
+        {
+            if(!counts[d][hr]) return null;
+            var u = v / counts[d][hr];
+            if(u > top) { top = u; bestday = d; besthour = hr; }
+            return u;
+        }); });
+        var now = new Date(), nowday = (now.getDay() + 6) % 7, nowhour = now.getHours();
+        var summary = top >= 0.5 ? "Busiest on " + DAYS[bestday] + "s around " + hourname(besthour) + ", about " + Math.round(top) + " on" : "Usually quiet";
+        var shade = function(v) { return "rgba(224, 72, 72, " + (0.12 + 0.88 * Math.sqrt(top > 0 ? v / top : 0)).toFixed(3) + ")"; };
+        var readout = el("small", { "aria-live": "polite", text: summary });
+        var grid = el("div", { class: "servers-heat", role: "img", "aria-label": title + " over the last eight weeks. " + summary + ".",
+            onmouseleave: function() { readout.textContent = summary; } });
+        usual.forEach(function(row, d)
+        {
+            grid.appendChild(el("span", { class: "servers-heatday", "aria-hidden": "true", text: DAYS[d].slice(0, 3) }));
+            row.forEach(function(v, hr)
+            {
+                var tip = DAYS[d] + " " + hourname(hr) + ": " + (v === null ? "no record" : v < 0.05 ? "usually empty" : "about " + (Math.round(v * 10) / 10) + " on");
+                var show = function() { readout.textContent = tip; };
+                grid.appendChild(el("span", { class: "servers-heatcell" + (v === null ? " unknown" : "") + (d === nowday && hr === nowhour ? " now" : ""),
+                    style: v === null ? null : "background:" + shade(v), onmouseenter: show, onclick: show }));
+            });
+        });
+        grid.appendChild(el("span", { "aria-hidden": "true" }));
+        for(var hr = 0; hr < 24; hr++) grid.appendChild(el("span", { class: "servers-heathour", "aria-hidden": "true", text: hr % 6 ? "" : hourname(hr).slice(0, 2) }));
+        var map = el("div", { class: "servers-history" }, [
+            el("div", { class: "servers-historytitle" }, [el("span", { text: title }), readout]),
+            grid
+        ]);
+        map.usualnow = usual[nowday][nowhour];
+        return map;
+    }
+
     // ---- page skeleton
 
     var bar = el("div", { class: "servers-bar" });
@@ -340,14 +406,56 @@
     var hideempty = el("input", { type: "checkbox", id: "servers-hideempty" });
     hideempty.checked = prefs.hideempty;
     var indicator = el("span", { class: "servers-indicator", role: "status" });
-    var summary = el("span", { class: "servers-summary" });
-    append(bar, [filter, el("label", { for: "servers-hideempty", class: "servers-toggle" }, [hideempty, " Hide empty"]), summary, indicator]);
+    append(bar, [filter, el("label", { for: "servers-hideempty", class: "servers-toggle" }, [hideempty, " Hide empty"])]);
+
+    // beside when people play: how many are on now against how many usually are, the busiest server and the release
+    var stats = el("div", { class: "servers-stats", "aria-live": "polite" });
+    var globalnow = null; // usually on at this hour of this weekday, from the history
+    function stat(value, label) { return el("div", { class: "servers-stat" }, [el("strong", { text: value }), el("span", { text: label })]); }
+    function drawstats(people, active)
+    {
+        clear(stats);
+        if(!loaded) return;
+        append(stats, [
+            stat(people, people === 1 ? "player on now" : "players on now"),
+            stat(servers.size, (servers.size === 1 ? "server" : "servers") + ", " + active + " with players")
+        ]);
+        if(typeof globalnow === "number")
+        {
+            var usual = Math.round(globalnow);
+            stats.appendChild(el("p", { class: "servers-statline", text: (usual < 1 ? "Usually quiet at this time" : "Usually about " + usual + " on at this time") +
+                (people > usual + 1 ? ", busier than usual" : people + 1 < usual ? ", quieter than usual" : "") }));
+        }
+        var busiest = null;
+        servers.forEach(function(s) { if(playercount(s) > 0 && (!busiest || playercount(s) > playercount(busiest))) busiest = s; });
+        if(busiest) stats.appendChild(el("p", { class: "servers-statline" }, ["Busiest now: ",
+            el("button", { type: "button", class: "servers-link", text: plain(busiest.description) || busiest.host, onclick: function() { openpanel(skey(busiest)); } }),
+            " with " + playercount(busiest) + (playercount(busiest) === 1 ? " player" : " players")]));
+        if(release) stats.appendChild(el("p", { class: "servers-statline" }, ["Current release: ", el("a", { href: "/download", text: "v" + version(release) })]));
+    }
 
     var banner = el("div", { class: "servers-banner", role: "alert", hidden: true });
     var notice = el("div", { class: "servers-notice", role: "status", hidden: true });
     var thead = el("thead"), tbody = el("tbody");
     var table = el("table", { class: "servers-table" }, [thead, tbody]);
-    append(clear(root), [bar, banner, notice, el("div", { class: "servers-scroll" }, table)]);
+    // when people play across every server, above the list
+    var global = el("div", { class: "servers-global", hidden: true });
+    var top = el("div", { class: "servers-top" }, [global, el("div", { class: "servers-side" }, [bar, stats, indicator])]);
+    append(clear(root), [top, banner, notice, el("div", { class: "servers-scroll" }, table)]);
+    function loadglobal()
+    {
+        fetchhistory(master + "/api/v1/history", function(h)
+        {
+            var map = heatmap(h, "When people play, by day and hour");
+            clear(global);
+            if(map) global.appendChild(map);
+            global.hidden = !map;
+            globalnow = map ? map.usualnow : null;
+            queue();
+        });
+    }
+    loadglobal();
+    setInterval(loadglobal, HISTORYREFRESH);
 
     filter.addEventListener("input", function() { prefs.filter = filter.value; saveprefs(); render(); });
     hideempty.addEventListener("change", function() { prefs.hideempty = hideempty.checked; saveprefs(); render(); });
@@ -414,10 +522,11 @@
         renderqueued = false;
         renderhead();
         clear(tbody);
-        var list = sorted(), shown = 0, people = 0;
+        var list = sorted(), shown = 0, people = 0, active = 0;
         list.forEach(function(s)
         {
             people += Math.max(0, playercount(s));
+            if(playercount(s) > 0) active++;
             if(!visible(s)) return;
             shown++;
             tbody.appendChild(row(s));
@@ -425,7 +534,7 @@
         });
         if(!loaded) tbody.appendChild(el("tr", {}, el("td", { colspan: COLUMNS.length, class: "servers-empty", text: "Loading servers…" })));
         else if(!shown) tbody.appendChild(el("tr", {}, el("td", { colspan: COLUMNS.length, class: "servers-empty", text: servers.size ? "No servers match the filter." : "No servers are registered right now." })));
-        summary.textContent = loaded ? servers.size + " server" + (servers.size === 1 ? "" : "s") + ", " + people + " player" + (people === 1 ? "" : "s") : "";
+        drawstats(people, active);
         table.classList.toggle("stale", stale);
         if(open) open.update();
     }
@@ -568,6 +677,7 @@
             else if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN;
         } });
         this.info = el("div", { class: "servers-matchinfo" });
+        this.busy = el("div", { class: "servers-busy", hidden: true });
         this.message = el("p", { class: "servers-message", hidden: true });
         this.board = el("div", { class: "servers-board" });
         this.feedstate = el("p", { class: "servers-feedstate" });
@@ -578,11 +688,12 @@
         ]);
         var closebtn = el("button", { type: "button", class: "servers-close", "aria-label": "Close", text: "×", onclick: function() { closepanel(); } });
         // The map preview has a column of its own, with the match beside it.
-        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info, this.message, this.body]);
+        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info, this.busy, this.message, this.body]);
         this.cell = el("td", { colspan: COLUMNS.length }, [closebtn, this.header]);
         this.row = el("tr", { class: "servers-panel" }, this.cell);
 
         var s = servers.get(k);
+        if(s) this.loadbusy(s);
         if(s && s.relay >= 1)
         {
             this.base = master + "/relay/" + encodeURIComponent(s.host) + "/" + s.port + "/api/v1";
@@ -843,6 +954,20 @@
             append(this.info, on);
         }
         if(this.players.size) this.drawboard(); // spectator flags and colours may have changed
+    };
+
+    // When this server is usually busy, by weekday and hour.
+    Panel.prototype.loadbusy = function(s)
+    {
+        var self = this;
+        fetchhistory(master + "/api/v1/servers/" + encodeURIComponent(s.host) + "/" + s.port + "/history", function(h)
+        {
+            if(self.closed) return;
+            var map = heatmap(h, "Usually on here, by day and hour");
+            clear(self.busy);
+            if(map) self.busy.appendChild(map);
+            self.busy.hidden = !map;
+        });
     };
 
     Panel.prototype.close = function()

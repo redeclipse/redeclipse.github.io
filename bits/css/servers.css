@@ -12,12 +12,72 @@
     font: inherit;
     cursor: pointer;
 }
+/* When people play on the left, the search and how things stand on the right; one column on narrow screens or with no history */
+.servers-top {
+    display: grid;
+    grid-template-columns: minmax(0, 560px) minmax(220px, 1fr);
+    gap: 12px 28px;
+    align-items: start;
+    margin-bottom: 6px;
+}
+.servers-top:has(> .servers-global[hidden]) {
+    grid-template-columns: minmax(0, 1fr);
+}
+.servers-top:has(> .servers-global[hidden]) > .servers-side {
+    grid-column: 1;
+}
+.servers-side {
+    position: relative;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 0;
+}
 .servers-bar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 16px;
-    margin-bottom: 10px;
+}
+.servers-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 24px;
+    align-items: baseline;
+}
+.servers-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    color: rgb(220, 160, 160);
+    font-size: 90%;
+}
+.servers-stat strong {
+    color: rgb(255, 255, 255);
+    font-size: 220%;
+    line-height: 1;
+}
+/* bottom right of the side, on the release's line rather than one of its own */
+.servers-side > .servers-indicator {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.servers-statline {
+    flex: 1 0 100%;
+    margin: 0;
+    font-size: 90%;
+    color: rgb(200, 200, 200);
+}
+.servers-link {
+    padding: 0;
+    color: rgb(255, 140, 140);
+    background: none;
+    border: 0;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
 }
 .servers-filter {
     flex: 1 1 260px;
@@ -37,10 +97,6 @@
     font-weight: normal;
     white-space: nowrap;
     cursor: pointer;
-}
-.servers-summary {
-    color: rgb(255, 200, 200);
-    white-space: nowrap;
 }
 .servers-indicator {
     margin-left: auto;
@@ -220,7 +276,7 @@
 }
 .servers-match > .servers-mapimg {
     grid-column: 1;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
     width: 128px;
     height: 128px;
     border-radius: 4px;
@@ -244,6 +300,59 @@
 .servers-match dd {
     margin: 0;
     color: rgb(255, 255, 255);
+}
+/* When people play: weekdays by hours, the hour now outlined, unknown hours hatched */
+.servers-history {
+    max-width: 560px;
+    margin: 0 0 10px 0;
+}
+.servers-global .servers-history {
+    margin: 0;
+}
+.servers-busy .servers-history {
+    max-width: none;
+}
+.servers-historytitle {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2px 12px;
+    font-size: 80%;
+    color: rgb(220, 160, 160);
+    margin-bottom: 4px;
+}
+.servers-historytitle small {
+    color: rgb(200, 200, 200);
+}
+.servers-heat {
+    display: grid;
+    grid-template-columns: 2.6em repeat(24, minmax(0, 1fr));
+    gap: 2px;
+    align-items: center;
+}
+.servers-heatcell {
+    aspect-ratio: 1.4;
+    border-radius: 2px;
+    background: rgba(224, 72, 72, 0.12);
+}
+.servers-heatcell:hover {
+    outline: 1px solid rgb(255, 160, 160);
+}
+.servers-heatcell.unknown {
+    background: repeating-linear-gradient(45deg, transparent 0 3px, rgba(255, 255, 255, 0.08) 3px 4px);
+}
+.servers-heatcell.now {
+    outline: 1px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 1px;
+}
+.servers-heatday, .servers-heathour {
+    font-size: 70%;
+    color: rgb(170, 170, 170);
+    line-height: 1.2;
+}
+.servers-heathour {
+    white-space: nowrap;
+    overflow: visible;
 }
 .servers-message {
     margin: 8px 0;
@@ -366,8 +475,13 @@
         width: 80px;
         height: 80px;
     }
-    .servers-match > .servers-message, .servers-match > .servers-panelbody {
+    .servers-match > .servers-message, .servers-match > .servers-panelbody, .servers-match > .servers-busy {
         grid-column: 1 / -1;
+    }
+}
+@media (max-width: 800px) {
+    .servers-top {
+        grid-template-columns: minmax(0, 1fr);
     }
 }
 @media (max-width: 560px) {
