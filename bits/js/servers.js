@@ -1046,7 +1046,10 @@
             var parts = modeparts(st);
             fact("Mode", partview(parts[0], true));
             if(parts.length > 1) fact("Mutators", parts.slice(1).map(function(p) { return partview(p, true); }));
-            if(playing(st) && statename(st)) fact("State", statename(st)); // the Time column shows it otherwise
+            // the Time column shows the state when not in play, but not how long until the next
+            var next = typeof st.stateends === "number" && st.stateends > now();
+            if(statename(st) && (playing(st) || next))
+                fact("State", next ? [statename(st) + " ", el("span", { "data-ends": st.stateends, text: remaining(st.stateends) })] : statename(st));
         }
         fact("Version", versionview(s.version), "servers-optfact");
         if(st && st.mapauthor) fact("Author", st.mapauthor);
