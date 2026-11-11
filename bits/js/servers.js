@@ -391,8 +391,7 @@
         if(everyone)
             players = el("span", { title: everyone.length ? everyone.map(function(p) { return plain(p.name); }).join("\n") : "Nobody on" }, everyone.length + "/" + st.maxplayers);
         var time = "–";
-        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) })
-            : el("small", {}, [statename(st) || "?", st.stateends > now() ? " " : null, st.stateends > now() ? el("span", { "data-ends": st.stateends, text: remaining(st.stateends) }) : null]);
+        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
             el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
