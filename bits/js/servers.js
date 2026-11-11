@@ -234,6 +234,8 @@
         if(typeof st.state !== "number") return typeof st.ends === "number";
         return layout(st).play.indexOf(st.state) >= 0;
     }
+    // A weapon as the server names it to players, or by its id from servers too old to say.
+    function weapon(m) { return m.weaponname || m.weapon || ""; }
     function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
     // How long ago a unix time was, roughly.
     function ago(t)
@@ -906,10 +908,10 @@
                 if(m.client) this.line([this.name(m.client), " joined team " + teamname(m.client.team)], "team");
                 break;
             case "frag":
-                this.line([this.name(m.killer), " fragged ", this.name(m.victim), m.weapon ? " with the " + m.weapon : ""], "frag");
+                this.line([this.name(m.killer), " fragged ", this.name(m.victim), weapon(m) ? " with the " + weapon(m) : ""], "frag");
                 break;
             case "suicide":
-                this.line([this.name(m.victim), " died" + (m.weapon ? " by their own " + m.weapon : "")], "frag");
+                this.line([this.name(m.victim), " died" + (weapon(m) ? " by their own " + weapon(m) : "")], "frag");
                 break;
             case "map":
                 var cur = servers.get(this.key), gv = cur && cur.status ? cur.status.gameversion : undefined;
