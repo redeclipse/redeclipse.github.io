@@ -581,3 +581,27 @@
     color: rgb(128, 255, 255);
     text-decoration: underline;
 }
+.servers-objectives {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    list-style: none;
+    margin: 0 0 8px;
+    padding: 0;
+}
+.servers-objteam {
+    font-weight: bold;
+}
+.servers-objbar {
+    display: inline-block;
+    width: 48px;
+    height: 6px;
+    vertical-align: middle;
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+}
+.servers-objbar > span {
+    display: block;
+    height: 100%;
+}

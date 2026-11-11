@@ -714,10 +714,11 @@
         this.busy = el("div", { class: "servers-busy", hidden: true });
         this.message = el("p", { class: "servers-message", hidden: true });
         this.board = el("div", { class: "servers-board" });
+        this.objectives = el("ul", { class: "servers-objectives", hidden: true });
         this.feedstate = el("p", { class: "servers-feedstate" });
         this.feedlist = el("ol", { class: "servers-feed", "aria-live": "polite" });
         this.body = el("div", { class: "servers-panelbody" }, [
-            el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.board]),
+            el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.objectives, this.board]),
             el("div", { class: "servers-feedbox" }, [el("h3", { text: "Match feed" }), this.feedstate, this.feedlist])
         ]);
         var closebtn = el("button", { type: "button", class: "servers-close", "aria-label": "Close", text: "×", onclick: function() { closepanel(); } });
@@ -761,7 +762,9 @@
     Panel.prototype.refresh = function()
     {
         var self = this;
-        return Promise.all([this.get("/players"), this.get("/teams")]).then(function(res)
+        // older servers have no objectives to give, which is no reason to show no match
+        var objectives = this.get("/objectives").catch(function() { return null; });
+        return Promise.all([this.get("/players"), this.get("/teams"), objectives]).then(function(res)
         {
             if(self.closed) return;
             self.fetchfails = 0;
@@ -769,6 +772,7 @@
             (res[0] || []).forEach(function(p) { self.players.set(p.cn, p); });
             self.teams = res[1] || [];
             self.say("");
+            self.drawobjectives(res[2]);
             self.drawboard();
         }).catch(function(e)
         {
@@ -882,6 +886,9 @@
                     this.line(["Match over: "].concat(resultview(m.match, was && was.status ? was.status.gameversion : undefined)), "map");
                 }
                 break;
+            case "objectives":
+                this.drawobjectives(m);
+                break;
             case "score":
                 if(m.teams) this.teams = m.teams;
                 (m.players || []).forEach(function(s)
@@ -903,6 +910,40 @@
     {
         var lp = this.listplayer(p.cn);
         return lp ? !!lp.spectator : p.state === "Spectator";
+    };
+
+    // What every player's HUD shows of the objectives: each flag or ball and who carries it, and each point, who holds it and who is taking it.
+    Panel.prototype.drawobjectives = function(o)
+    {
+        var items = [];
+        var team = function(t) { return el("span", { class: "servers-objteam", style: "color:" + (TEAMCOLOURS[t] || TEAMCOLOURS.neutral) }, [teamicon(t, teamname(t)), teamname(t)]); };
+        var where = function(a)
+        {
+            if(a.state === "taken" && a.carrier)
+                return [" taken by ", el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[a.carrier.team] || TEAMCOLOURS.neutral) }, plain(a.carrier.name))];
+            return [a.state === "dropped" ? " dropped" : " at home"];
+        };
+        if(o)
+        {
+            (o.flags || []).forEach(function(f) { items.push([team(f.team), " flag"].concat(where(f))); });
+            (o.balls || []).forEach(function(b) { items.push(["Ball"].concat(where(b))); });
+            (o.points || []).forEach(function(p)
+            {
+                // by the letter the game's HUD shows, and the map's own name for it when it has one
+                var label = (p.id || "") + (p.name && p.name !== "Point" ? (p.id ? " " : "") + plain(p.name) : "");
+                var item = [el("strong", {}, label || "Point"), ": ", p.owner && p.owner !== "neutral" ? team(p.owner) : "nobody"];
+                if(p.enemy)
+                {
+                    var pct = Math.max(0, Math.min(100, p.progress || 0));
+                    item.push(", ", team(p.enemy), " taking ", el("span", { class: "servers-objbar", title: pct + "%" },
+                        el("span", { style: "width:" + pct + "%;background-color:" + (TEAMCOLOURS[p.enemy] || TEAMCOLOURS.neutral) })), " " + pct + "%");
+                }
+                items.push(item);
+            });
+        }
+        clear(this.objectives);
+        items.forEach(function(i) { this.objectives.appendChild(el("li", {}, i)); }, this);
+        this.objectives.hidden = !items.length;
     };
 
     Panel.prototype.drawboard = function()
