@@ -68,6 +68,22 @@
     // Privileges with icons, and those a server's operator can give locally, which have icons of their own.
     var PRIVILEGES = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
     var LOCALPRIVILEGES = ["supporter", "moderator", "administrator"];
+    // A polled status has the words on the game's Privilege icons, where creator is founder and v1.6's operator sits just above moderator.
+    var ICONPRIVILEGES = { founder: "creator", operator: "moderator" };
+    // A polled status has each player's team colour. The game's default team colours changed often, even within a game version,
+    // but no colour ever meant two teams, so one table names them all. Kappa and sigma were v1.6's extra teams with the Multi mutator.
+    var POLLTEAMS = (function()
+    {
+        var teams = {
+            neutral: [0x90A090, 0xA0A0A0, 0x909090, 0x707070, 0xAAAAAA, 0x606060, 0x808080],
+            alpha: [0x5F66FF, 0x6060FF, 0x2020FF, 0x1040F8, 0x0000DD, 0x1010DD, 0x3030F0],
+            omega: [0xFF4F44, 0xFF4040, 0xFF2020, 0xFF3210, 0xDD0000, 0xDD1010, 0xF03030],
+            kappa: [0xFFD022, 0xFFFF40, 0xA0A020],
+            sigma: [0x22FF22, 0x40FF40, 0x20A020]
+        }, bycolour = {};
+        Object.keys(teams).forEach(function(t) { teams[t].forEach(function(c) { bycolour[c] = t; }); });
+        return bycolour;
+    })();
     var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
     var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
@@ -209,6 +225,17 @@
         return layout(st).play.indexOf(st.state) >= 0;
     }
     function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
+
+    // A team colour that's none of the defaults, as game mods rarely make it, names no team.
+    function polledteam(st, p) { return typeof p.teamcolour === "number" ? POLLTEAMS[p.teamcolour] || null : null; }
+    function polledname(st, p)
+    {
+        var team = polledteam(st, p), priv = typeof p.privilege === "string" ? ICONPRIVILEGES[p.privilege] || p.privilege : null;
+        return el("span", { class: "servers-player", style: "color:" + (TEAMCOLOURS[team] || TEAMCOLOURS.neutral), title: team ? teamname(team) : null }, [
+            priv ? privicon(priv, p.local, false, playercolour(p.colour || 0, team)) : null,
+            plain(p.name)
+        ]);
+    }
 
     // Player colours are chosen in game against a dark background; lift very dark ones so they stay legible.
     function playercolour(colour, team)
@@ -364,7 +391,8 @@
         if(everyone)
             players = el("span", { title: everyone.length ? everyone.map(function(p) { return plain(p.name); }).join("\n") : "Nobody on" }, everyone.length + "/" + st.maxplayers);
         var time = "–";
-        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
+        if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) })
+            : el("small", {}, [statename(st) || "?", st.stateends > now() ? " " : null, st.stateends > now() ? el("span", { "data-ends": st.stateends, text: remaining(st.stateends) }) : null]);
         append(tr, [
             el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
@@ -799,9 +827,14 @@
         }
         clear(this.info);
         append(this.info, el("dl", {}, facts));
-        // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard.
+        // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard,
+        // best score first, each after their Privilege in their colour and in their team's colour as in the game's server browser.
         if(st && st.polled && !this.base && st.players && st.players.length)
-            append(this.info, el("p", { class: "servers-specs" }, ["On the server: ", st.players.map(function(p) { return plain(p.name); }).join(", ")]));
+        {
+            var on = el("p", { class: "servers-specs" }, "On the server: ");
+            st.players.forEach(function(p, i) { if(i) on.appendChild(document.createTextNode(", ")); on.appendChild(polledname(st, p)); });
+            append(this.info, on);
+        }
         if(this.players.size) this.drawboard(); // spectator flags and colours may have changed
     };
 
