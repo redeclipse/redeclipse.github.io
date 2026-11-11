@@ -858,8 +858,11 @@
         var t = new Date();
         var stamp = [t.getHours(), t.getMinutes(), t.getSeconds()].map(function(n) { return (n < 10 ? "0" : "") + n; }).join(":");
         var li = el("li", { class: cls }, [el("time", { text: stamp }), " "].concat(kids));
-        this.feedlist.insertBefore(li, this.feedlist.firstChild);
-        while(this.feedlist.childNodes.length > FEEDLINES) this.feedlist.removeChild(this.feedlist.lastChild);
+        // oldest first, so the newest is at the bottom, which stays in view unless the visitor has scrolled up to read
+        var list = this.feedlist, stick = list.scrollHeight - list.scrollTop - list.clientHeight < 8;
+        list.appendChild(li);
+        while(list.childNodes.length > FEEDLINES) list.removeChild(list.firstChild);
+        if(stick) list.scrollTop = list.scrollHeight;
     };
 
     // A name is in its team's colour, after its Privilege (or the bot icon) in the player's own colour,
