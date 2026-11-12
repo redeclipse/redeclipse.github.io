@@ -197,6 +197,20 @@
         var url = "url(" + ICONPATH + "privilege/" + (bot ? "bot" : (local ? "local" : "") + privilege) + ".svg)";
         return el("span", { class: "servers-priv", role: "img", "aria-label": name, title: name, style: "color:" + colour + ";-webkit-mask-image:" + url + ";mask-image:" + url });
     }
+    // A player's standing as the game's own lines name it, such as "global moderator", when it is more than a player's
+    function standing(c)
+    {
+        if(!c || c.bot || PRIVILEGES.indexOf(c.privilege) <= PRIVILEGES.indexOf("player")) return "";
+        if(c.local && LOCALPRIVILEGES.indexOf(c.privilege) >= 0) return "local " + c.privilege;
+        return { supporter: "global supporter", moderator: "global moderator", administrator: "global administrator",
+            developer: "project developer", creator: "project founder" }[c.privilege] || "";
+    }
+    // On joins and leaves a player's account handle and standing follow their name, so someone can't pass for a player who has one
+    function handle(c)
+    {
+        var parts = [c && c.handle ? plain(c.handle) : "", standing(c)].filter(Boolean);
+        return parts.length ? " (" + parts.join(", ") + ")" : null;
+    }
     // Team icons are masks too, so they take the colour of the team's name beside them.
     function teamicon(team, name)
     {
@@ -936,11 +950,17 @@
         {
             case "join":
                 if(m.client) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0 }, m.client));
-                this.line([this.name(m.client), " joined"], "join");
+                this.line([this.name(m.client), handle(m.client), " joined"], "join");
                 break;
             case "leave":
                 if(m.client) this.players.delete(m.client.cn);
-                this.line([this.name(m.client), " left" + (m.reason ? " (" + m.reason + ")" : "")], "leave");
+                this.line([this.name(m.client), handle(m.client), " left" + (m.reason ? " (" + m.reason + ")" : "")], "leave");
+                break;
+            case "identify":
+                if(!m.client || !m.client.handle) break;
+                if((p = this.players.get(m.client.cn))) Object.assign(p, { handle: m.client.handle, privilege: m.client.privilege, local: m.client.local });
+                // the standing only when it is more than a player's, as the game's line has it
+                this.line([this.name(m.client), " identified as " + plain(m.client.handle) + (standing(m.client) ? " (" + standing(m.client) + ")" : "")], "join");
                 break;
             case "team":
                 if(m.client && (p = this.players.get(m.client.cn))) p.team = m.client.team;
