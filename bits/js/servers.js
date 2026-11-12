@@ -901,16 +901,15 @@
         ]);
     };
 
-    // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead.
-    // As in the game, its sender's Privilege shows only when an account speaks for itself, local or not: someone it bridges
-    // from elsewhere, such as Discord, would otherwise wear the bridge account's.
+    // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead,
+    // and every sender has a Privilege icon, so the lines align: as in the game, an account speaking for itself shows its own,
+    // local or not, while someone it bridges from elsewhere, such as Discord, shows none, rather than wearing the bridge's.
     Panel.prototype.speaker = function(c, before, after)
     {
         if(!c || !c.web) return [icon("chat", "From the game"), before, this.name(c), after];
-        var own = (!c.via || c.via === "web") && c.handle && c.name === c.handle,
-            ranked = own && typeof c.privilege === "string" && c.privilege !== "none" && c.privilege !== "player";
+        var own = (!c.via || c.via === "web") && c.handle && c.name === c.handle;
         return [bridgeicon(c.via), before, el("span", { class: "servers-player", style: "color:" + teamtextcolour("neutral") }, [
-            ranked ? privicon(c.privilege, c.local, false, "#ffffff") : null,
+            privicon(own && typeof c.privilege === "string" ? c.privilege : "none", own && c.local, false, "#ffffff"),
             plain(c.name) || "someone"
         ]), after];
     };
