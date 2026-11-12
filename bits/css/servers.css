@@ -465,6 +465,9 @@
 .servers-feed li.join, .servers-feed li.leave, .servers-feed li.team {
     color: rgb(200, 180, 180);
 }
+.servers-feed li.chat {
+    color: rgb(255, 255, 255);
+}
 .servers-feed:empty::before {
     content: "Waiting for something to happen\2026";
     color: rgb(180, 140, 140);

@@ -67,6 +67,9 @@
         "deathmatch-gladiator", "deathmatch-oldschool", "capture-quick", "capture-defend", "capture-protect", "defend-quick", "defend-king",
         "bomber-hold", "bomber-basket", "bomber-assault", "speedrun-lapped", "speedrun-endurance", "speedrun-gauntlet"];
     var TEAMICONS = ["alpha", "omega", "neutral", "spectator"];
+    // Where bridged chat comes from, as the game's config/bridge.cfg names them; anywhere else is shown as the web, as in the game.
+    var BRIDGES = { web: ["web", "Web"], irc: ["irc", "IRC"], discord: ["discord", "Discord"], matrix: ["matrix", "Matrix"], xmpp: ["xmpp", "XMPP"],
+        twitch: ["twitch", "Twitch"], telegram: ["telegram", "Telegram"], stoat: ["stoat", "Stoat"], revolt: ["stoat", "Stoat"] };
     // Privileges with icons, and those a server's operator can give locally, which have icons of their own.
     var PRIVILEGES = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
     var LOCALPRIVILEGES = ["supporter", "moderator", "administrator"];
@@ -235,6 +238,12 @@
     {
         if(typeof st.state !== "number") return typeof st.ends === "number";
         return layout(st).play.indexOf(st.state) >= 0;
+    }
+    // Where a message sent over the Web API came from, as its icon, named on hover.
+    function bridgeicon(via)
+    {
+        var b = Object.prototype.hasOwnProperty.call(BRIDGES, via) ? BRIDGES[via] : BRIDGES.web;
+        return icon("bridge/" + b[0], "From " + b[1]);
     }
     // A weapon as the server names it to players, or by its id from servers too old to say.
     function weapon(m) { return m.weaponname || m.weapon || ""; }
@@ -892,6 +901,14 @@
         ]);
     };
 
+    // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead,
+    // and its sender, who isn't a player, has no Privilege, as that is the bridge account's.
+    Panel.prototype.speaker = function(c, before, after)
+    {
+        if(!c || !c.web) return [icon("chat", "From the game"), before, this.name(c), after];
+        return [bridgeicon(c.via), before, el("span", { class: "servers-player", style: "color:" + teamtextcolour("neutral"), text: plain(c.name) || "someone" }), after];
+    };
+
     // The list carries each human player's chosen colour and spectator flag, kept current by the live list.
     Panel.prototype.listplayer = function(cn)
     {
@@ -954,8 +971,14 @@
                     if(q) { q.points = s.points; q.frags = s.frags; q.deaths = s.deaths; }
                 });
                 break;
-            case "chat": case "action": case "control": case "auth": case "challenge":
-                break; // chat is deliberately not shown on the website
+            case "chat":
+                this.line(this.speaker(m.client, "", ": " + plain(m.text)), "chat");
+                break;
+            case "action":
+                this.line(this.speaker(m.client, "* ", " " + plain(m.text)), "chat");
+                break;
+            case "control": case "auth": case "challenge":
+                break;
             default:
                 if(typeof m.text === "string" && m.text) this.line([m.text], "broadcast");
                 return;
@@ -1075,6 +1098,8 @@
             if(statename(st)) fact("State", !playing(st) && next ? [statename(st) + " ", el("span", { "data-ends": st.stateends, text: remaining(st.stateends) })] : statename(st));
             if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
             if(MASTERMODES[st.mastermode]) fact("Access", [access(st, true), MASTERMODES[st.mastermode]]);
+            // whether chat from outside the game, such as Discord, is carried in; older servers don't say
+            if(typeof st.bridge === "number") fact("Bridged chat", st.bridge ? "On" : "Off");
         }
         fact("Version", versionview(s.version));
         // the operator's site, only as a web address, and opened away from this page
