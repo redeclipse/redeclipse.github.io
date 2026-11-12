@@ -901,12 +901,18 @@
         ]);
     };
 
-    // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead,
-    // and its sender, who isn't a player, has no Privilege, as that is the bridge account's.
+    // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead.
+    // As in the game, its sender's Privilege shows only when an account speaks for itself, local or not: someone it bridges
+    // from elsewhere, such as Discord, would otherwise wear the bridge account's.
     Panel.prototype.speaker = function(c, before, after)
     {
         if(!c || !c.web) return [icon("chat", "From the game"), before, this.name(c), after];
-        return [bridgeicon(c.via), before, el("span", { class: "servers-player", style: "color:" + teamtextcolour("neutral"), text: plain(c.name) || "someone" }), after];
+        var own = (!c.via || c.via === "web") && c.handle && c.name === c.handle,
+            ranked = own && typeof c.privilege === "string" && c.privilege !== "none" && c.privilege !== "player";
+        return [bridgeicon(c.via), before, el("span", { class: "servers-player", style: "color:" + teamtextcolour("neutral") }, [
+            ranked ? privicon(c.privilege, c.local, false, "#ffffff") : null,
+            plain(c.name) || "someone"
+        ]), after];
     };
 
     // The list carries each human player's chosen colour and spectator flag, kept current by the live list.
