@@ -183,14 +183,20 @@
     width: 10px;
     text-align: center;
 }
-.servers-playersicon {
+.servers-playersicon, .servers-timeicon {
     display: inline-block;
     width: 1em;
     height: 1em;
     vertical-align: -0.125em;
     background-color: currentColor;
+}
+.servers-playersicon {
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z'/%3E%3C/svg%3E") center / contain no-repeat;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M224 248a120 120 0 1 0 0-240 120 120 0 1 0 0 240zm-29.7 56C95.8 304 16 383.8 16 482.3 16 498.7 29.3 512 45.7 512l356.6 0c16.4 0 29.7-13.3 29.7-29.7 0-98.5-79.8-178.3-178.3-178.3l-59.4 0z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.servers-timeicon {
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0a256 256 0 1 1 0 512 256 256 0 1 1 0-512zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0a256 256 0 1 1 0 512 256 256 0 1 1 0-512zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 .servers-row {
     background-color: rgba(0, 0, 0, 0.25);
@@ -282,9 +288,6 @@
     border-radius: 4px;
     border: 1px solid rgba(255, 64, 64, 0.6);
     object-fit: cover;
-}
-.servers-optfact {
-    display: none;
 }
 .servers-match dl {
     display: flex;
@@ -473,9 +476,6 @@
     .servers-opt {
         display: none;
     }
-    .servers-optfact {
-        display: block;
-    }
     .servers-panel > td {
         padding: 10px 8px;
     }
@@ -581,6 +581,17 @@
     color: rgb(180, 210, 255);
     border-color: rgba(110, 160, 255, 0.7);
     background-color: rgba(20, 50, 120, 0.5);
+}
+.servers-tag {
+    display: inline-block;
+    margin-left: 0.4em;
+    padding: 0.24em 0.35em 0.07em 0.35em;
+    line-height: 1;
+    font-size: 85%;
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background-color: rgba(255, 255, 255, 0.08);
+    color: rgb(200, 200, 200);
 }
 #servers a.servers-weblink {
     color: rgb(0, 200, 224);

@@ -200,13 +200,13 @@
         var url = "url(" + ICONPATH + "team/" + team + ".png)";
         return el("span", { class: "servers-teamicon", "aria-hidden": "true", title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
-    // A Master Mode's icon, before the server's name, as a mask coloured as the game's server browser colours them.
-    function access(st)
+    // A Master Mode's icon, before the server's name, as a mask coloured as the game's server browser colours them; hidden from screen readers when named beside it.
+    function access(st, named)
     {
         var name = MASTERMODES[st.mastermode];
         if(!name) return null;
         var slug = name.toLowerCase(), url = "url(" + ICONPATH + "mastermode/" + slug + ".svg)";
-        return el("span", { class: "servers-accessicon " + slug, role: "img", "aria-label": name, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
+        return el("span", { class: "servers-accessicon " + slug, role: named ? null : "img", "aria-label": named ? null : name, "aria-hidden": named ? "true" : null, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
     function statename(st) { return typeof st.state === "number" ? layout(st).states[st.state] || "?" : ""; }
     function version(v)
@@ -346,7 +346,7 @@
         { id: "map", title: "Map", value: function(s) { return s.status ? s.status.maptitle || s.status.map : ""; } },
         { id: "mode", title: "Mode", cls: "servers-wide", value: function(s) { return s.status ? modeparts(s.status)[0].name : ""; } },
         { id: "mutators", title: "Mutators", short: "Muts", cls: "servers-opt", value: function(s) { return s.status ? mutatornames(s.status) : ""; } },
-        { id: "time", title: "Time", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
+        { id: "time", title: "Time", icon: "servers-timeicon", value: function(s) { return !s.status ? -2 : !playing(s.status) ? -1 : s.status.ends < 0 ? 1e12 : s.status.ends; } },
         { id: "version", title: "Version", short: "Ver", cls: "servers-opt", value: function(s) { return s.version || 0; } },
         { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } }
     ];
@@ -570,7 +570,7 @@
         var time = "–";
         if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
-            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("small", { text: " " + s.handle }) : null]),
+            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("span", { class: "servers-tag", text: s.handle }) : null]),
             el("td", { class: "servers-num" }, players),
             el("td", { title: st && st.maptitle ? st.map : null }, st ? st.maptitle || st.map : "–"),
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
@@ -1059,25 +1059,29 @@
         var s = servers.get(this.key);
         if(!s) return;
         var st = s.status, facts = [];
-        // The mode beside its mutators, then what the row doesn't show; facts from columns that small screens hide are shown only there.
-        var fact = function(label, value, cls) { facts.push(el("div", { class: cls }, [el("dt", { text: label }), el("dd", {}, value)])); };
+        // Everything known about the server, what its row shows included.
+        var fact = function(label, value) { facts.push(el("div", {}, [el("dt", { text: label }), el("dd", {}, value)])); };
+        fact("Server", [plain(s.description) || s.host, s.handle ? el("span", { class: "servers-tag", title: "Handle", text: s.handle }) : null]);
         if(st)
         {
             var parts = modeparts(st);
+            if(st.map) fact("Map", st.maptitle && st.maptitle !== st.map ? [st.maptitle, el("span", { class: "servers-tag", title: "File name", text: st.map })] : st.map);
+            if(st.mapauthor) fact("Author", st.mapauthor);
             fact("Mode", partview(parts[0], true));
             if(parts.length > 1) fact("Mutators", parts.slice(1).map(function(p) { return partview(p, true); }));
-            // the Time column shows the state when not in play, but not how long until the next
+            if(st.players) fact("Players", st.players.length + "/" + st.maxplayers);
+            // in play, how long the match has left; otherwise how long until the next state, when the server says
             var next = typeof st.stateends === "number" && st.stateends > now();
-            if(statename(st) && (playing(st) || next))
-                fact("State", next ? [statename(st) + " ", el("span", { "data-ends": st.stateends, text: remaining(st.stateends) })] : statename(st));
+            if(statename(st)) fact("State", !playing(st) && next ? [statename(st) + " ", el("span", { "data-ends": st.stateends, text: remaining(st.stateends) })] : statename(st));
+            if(playing(st)) fact("Time left", el("span", { "data-ends": st.ends, text: remaining(st.ends) }));
+            if(MASTERMODES[st.mastermode]) fact("Access", [access(st, true), MASTERMODES[st.mastermode]]);
         }
-        fact("Version", versionview(s.version), "servers-optfact");
-        if(st && st.mapauthor) fact("Author", st.mapauthor);
+        fact("Version", versionview(s.version));
         // the operator's site, only as a web address, and opened away from this page
         if(st && typeof st.url === "string" && /^https?:\/\/[^\s"<>\\]+$/.test(st.url))
             fact("Website", el("a", { class: "servers-weblink", href: st.url, target: "_blank", rel: "nofollow noopener noreferrer", text: st.url.replace(/^https?:\/\//, "").replace(/\/$/, "") }));
         if(st && st.lastmatch && st.lastmatch.ended) fact("Last match", resultview(st.lastmatch, st.gameversion).concat([", " + ago(st.lastmatch.ended)]));
-        fact("Address", addressbutton(s), "servers-optfact");
+        fact("Address", addressbutton(s));
         // the crc as well, as a map can be saved again under the same name
         var mapkey = st && st.map ? st.map + "/" + (st.mapcrc || "") : null;
         if(mapkey !== this.map)
