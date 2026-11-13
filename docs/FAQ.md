@@ -91,6 +91,18 @@ The link goes away when you log out. To have it made each time you log in, put t
 L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0
 ```
 
+## How do I find people to play with?
+
+Join the **Ready queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
+
+You can wait from three places, and they all share one queue:
+
+- **In the game:** the server browser has the queue above the list. Leave the game open in the background and it flashes and asks you to join when your match is ready. It never joins by itself.
+- **On the website:** the [server browser](/servers) has the same queue. Keep the page open: it chimes, shows a notification if you allow it, and gives you a Join button.
+- **On our [Discord](/discord):** the pinned Matchmaking post in the servers forum lists the servers and has the queue's buttons. You're mentioned in the server's own thread with a join link when your match is ready. Your place lasts 60 minutes, and you'll be asked shortly before it runs out if you want 30 more. Use `/matchmaking status` to see where you stand.
+
+If you join a server while you're waiting, you aren't counted twice, and you're taken out of the queue once that server has as many on as you wanted. Anyone in the @Matchmaking role on Discord hears when one more player would make a match.
+
 ## When I launch the game, there's a terminal. Is that normal?
 
 Yes. Red Eclipse will automatically check for updates, and you will see a terminal while the updater script is running.
