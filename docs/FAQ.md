@@ -79,6 +79,18 @@ On Steam and Discord, your friends see the mode and map you're playing, the serv
 
 Choose what friends see under Settings, Gameplay, Friends, or with `presence` in the console: `0` shows nothing, `1` shows what you're playing without a Join button, and `2` (the default) adds the Join button.
 
+On Linux, the game also finds Discord when it's installed as a Flatpak or Snap, or when you use Vesktop from Flathub, as long as Discord is running before you start the game. If your friends still can't see what you're playing, link Discord's socket to where the game looks yourself (this is for the Flatpak; change the folder to match your Discord):
+
+```
+ln -s "$XDG_RUNTIME_DIR/app/com.discordapp.Discord/discord-ipc-0" "$XDG_RUNTIME_DIR/discord-ipc-0"
+```
+
+The link goes away when you log out. To have it made each time you log in, put this line in `~/.config/user-tmpfiles.d/discord-rpc.conf`:
+
+```
+L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0
+```
+
 ## When I launch the game, there's a terminal. Is that normal?
 
 Yes. Red Eclipse will automatically check for updates, and you will see a terminal while the updater script is running.
