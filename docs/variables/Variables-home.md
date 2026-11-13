@@ -36,6 +36,7 @@ Variables can be used to change almost everything about how the game works. Curr
 
 ### misc commands
 "connectguidelines" "toggles acceptance of the multiplayer guidelines" "boolean"
+"joinlinks" "toggles whether this copy of the game registers redeclipse:// links and takes the ones clicked while it runs" "boolean"
 "setdesc" "sets the description for an alias (you are reading one right now)" "alias description arguments"
 "version" "game version for scripts" "version"
 "autosavebackups" "make backups;^n0 = off, 1 = single backup, 2 = named backup, 3/4 = same as 1/2 with move to ^"backups/^"" "value"

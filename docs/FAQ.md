@@ -65,6 +65,14 @@ See the .redeclipse user data in your home directory: `~/.redeclipse`
 
 Check the app data in your home directory: `/Users/<username>/Library/Application Support/Red Eclipse`
 
+## How do I join a server from a link?
+
+A server's address on the [server browser](/servers) is a join link, such as `redeclipse://203.0.113.5:28801`. Clicking it opens Red Eclipse and joins that server. If the game is already open, the link goes to it instead of starting another copy, and it asks first if that would take you out of a match or away from unsaved edits.
+
+Each server's chat thread on our [Discord](/discord) has a "join it" link, and each post saying someone joined has a "Join them" link. Discord can't open the game itself, so these go to a page on the master server that opens it for you.
+
+The game sets up join links whenever it starts, without needing administrator rights, and the copy you started most recently is the one they open. Join links never include a server's password. If clicking one does nothing, start the game once and try again. To stop a copy of the game from taking join links, set `joinlinks 0` in its console.
+
 ## When I launch the game, there's a terminal. Is that normal?
 
 Yes. Red Eclipse will automatically check for updates, and you will see a terminal while the updater script is running.
