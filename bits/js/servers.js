@@ -588,7 +588,7 @@
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-num" }, time),
-            el("td", { class: "servers-opt" }, [versionview(s.version), s.channel ? el("small", { class: "servers-channel", text: " " + s.channel, title: "Takes Ready queue matches for " + s.channel + " players" }) : null]),
+            el("td", { class: "servers-opt" }, versionview(s.version)),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
@@ -748,7 +748,7 @@
             case "unqueued":
                 // a place claimed by another tab, or one that ended while this page wasn't looking
                 queuecleared();
-                if(m.reason === "moved") shownotice("Your place in the Ready queue moved to another tab.");
+                if(m.reason === "moved") shownotice("Your place in the Matchmaking Queue moved to another tab.");
                 break;
             case "pop":
                 if(!m.ticket || m.ticket !== rq.ticket) break;
@@ -797,13 +797,13 @@
         }
         else if(rq.threshold)
         {
-            title = "You're in the Ready queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
+            title = "You're in the Matchmaking Queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
             help = "Carry on: you'll be asked to join once enough players are ready. Keep this page open.";
             if(mine) counts.push(queuecounts(mine));
         }
         else
         {
-            title = "Ready queue";
+            title = "Matchmaking Queue";
             help = "Pick a match size: everyone waiting is sent to a server together";
             // a row of sizes for each channel, as players can only join servers of their own version
             channels.forEach(function(c)

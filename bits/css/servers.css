@@ -162,9 +162,6 @@
     justify-content: flex-end;
     gap: 6px;
 }
-.servers-channel {
-    color: rgb(170, 170, 170);
-}
 .servers-queuelabel {
     color: rgb(170, 170, 170);
 }
