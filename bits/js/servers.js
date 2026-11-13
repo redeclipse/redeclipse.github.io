@@ -776,6 +776,11 @@
     }
     // each channel is one version's servers and players, as the master names them
     function queuechannels() { return rq.counts && Array.isArray(rq.counts.channels) ? rq.counts.channels : []; }
+    // one channel is the only version anyone can be matched on, so it says which and how to get it; with more, each row is named
+    function versionnote(c)
+    {
+        return "Matches are played on the " + c.name + " version (v" + c.version + "). On Steam, " + (c.name === "release" ? "the default branch has it." : "switch to the " + c.name + " branch to join them.");
+    }
     function channelname(c) { return c.name.charAt(0).toUpperCase() + c.name.slice(1) + " (v" + c.version + ")"; }
     function renderqueue()
     {
@@ -810,7 +815,7 @@
                         title: "Wait for a match of at least " + t + " " + channelname(c) + " players, counting anyone already on the server", onclick: function() { queuejoin(c.name, t); } }));
                 });
                 actions.push(el("div", { class: "servers-queuerow" }, row));
-                counts.push(channels.length > 1 ? channelname(c) + ": " + queuecounts(c) : queuecounts(c) + ", for " + channelname(c) + " players");
+                counts.push(channels.length > 1 ? channelname(c) + ": " + queuecounts(c) : queuecounts(c) + ". " + versionnote(c));
             });
         }
         if(rq.threshold || rq.pop) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Leave queue", onclick: queueleave }));
