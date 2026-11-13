@@ -5,7 +5,7 @@
     "use strict";
 
     // How a server's mode, mutators and state numbers read depends on its game protocol (status.gameversion),
-    // taken from src/game/gamemode.h in redeclipse/base, and Redflare for the versions before that history.
+    // taken from src/game/gamemode.h in redeclipse/base and redeclipse/oldsvnre.
     // Each entry applies from its protocol on and inherits whatever it leaves out; "gsp" is merged by mode id.
     // The game specific mutators always take the bits straight after the named ones.
     var OLDSTATES = ["Waiting", "Voting", "Intermission", "Playing", "Overtime"];
@@ -16,26 +16,33 @@
             { from: 0, // 1.2
                 modes: ["Demo", "Editing", "Campaign", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial"],
                 mutators: ["Multi", "Team", "Instagib", "Medieval", "Ballistic", "Duel", "Survivor", "Arena", "Onslaught", "Hover", "Jetpack", "Vampire", "Expert", "Resize"],
-                gsp: {}, states: OLDSTATES, play: [3, 4] },
+                gsp: { 4: ["Return", "Defend", "Protect"], 5: ["Quick", "Conquer"], 6: ["Basket", "Hold"] },
+                implied: { 2: ["Team"], 4: ["Team"], 5: ["Team"], 6: ["Team"] }, states: OLDSTATES, play: [3, 4] },
             { from: 217, // 1.3
                 modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial"],
-                mutators: ["Multi", "Team", "Coop", "Instagib", "Medieval", "Ballistic", "Duel", "Survivor", "Arena", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"] },
+                mutators: ["Multi", "Team", "Coop", "Instagib", "Medieval", "Ballistic", "Duel", "Survivor", "Arena", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"],
+                gsp: { 3: ["Return", "Defend", "Protect"], 4: ["Quick", "Conquer", "King"], 5: ["Hold"], 6: [] },
+                implied: { 3: ["Team"], 4: ["Team"], 5: ["Team"] } },
             { from: 220, // 1.4
                 modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend the Flag", "Bomber Ball", "Time Trial", "Gauntlet"],
-                mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"] },
+                mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Jetpack", "Vampire", "Expert", "Resize"],
+                gsp: { 3: ["Quick", "Defend", "Protect"], 4: ["Quick", "King"], 5: ["Hold", "Touchdown"], 7: ["Timed", "Hard"] },
+                implied: { 1: ["Free for All", "Classic"] } },
             { from: 226, // 1.5
                 modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend and Control", "Bomber Ball", "Race"],
                 mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Freestyle", "Vampire", "Resize", "Hard", "Basic"],
-                gsp: { 3: ["Quick", "Defend", "Protect"], 4: ["Quick", "King"], 5: ["Hold", "Basket", "Attack"], 6: ["Timed", "Endurance", "Gauntlet"] } },
+                gsp: { 3: ["Quick", "Defend", "Protect"], 4: ["Quick", "King"], 5: ["Hold", "Basket", "Attack"], 6: ["Timed", "Endurance", "Gauntlet"], 7: [] } },
             { from: 227, states: STATES, play: [5, 6] },
             { from: 228, gsp: { 2: ["Gladiator", "Old School"] } }, // 1.6 is 230
             { from: 236, gsp: { 5: ["Hold", "Basket", "Assault"] } },
+            { from: 238, implied: { 1: ["Free for All"] } },
             { from: 242, mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Freestyle", "Vampire", "Resize", "Hard", "Arena"] },
             { from: 244, mutators: ["Multi", "Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena"] },
             { from: 245, // 2.0
                 mutators: ["Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena"],
                 gsp: { 6: ["Lapped", "Endurance", "Gauntlet"] } },
             { from: 270, mutators: ["Free for All", "Coop", "Instagib", "Medieval", "Kaboom", "Duel", "Survivor", "Classic", "Onslaught", "Vampire", "Resize", "Hard", "Arena", "Dark"] },
+            { from: 274, implied: { 1: ["Free for All", "Arena"] } },
             { from: 278, modes: ["Demo", "Editing", "Deathmatch", "Capture the Flag", "Defend and Control", "Bomber Ball", "Speedrun"] }
         ];
         var out = [], cur = {};
@@ -156,15 +163,15 @@
         return LAYOUTS[0];
     }
     function slug(name) { name = name.toLowerCase().replace(/[^a-z]/g, ""); return name === "freeforall" ? "ffa" : name; }
-    // The mode, then its mutators, each with its icon where there is one.
+    // The mode, then its mutators (leaving out those the mode implies), each with its icon where there is one.
     function modeparts(st)
     {
-        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), gsp = l.gsp[st.modeid] || [], mode = MODEICONS[name];
+        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), gsp = l.gsp[st.modeid] || [], implied = l.implied[st.modeid] || [], mode = MODEICONS[name];
         var parts = [{ name: name, icon: mode ? "mode/" + mode : null }];
         for(var i = 0; i < 31; i++) if(st.mutators & (1 << i))
         {
             var specific = i >= l.mutators.length, m = specific ? gsp[i - l.mutators.length] : l.mutators[i];
-            if(!m) continue;
+            if(!m || implied.indexOf(m) >= 0) continue;
             var file = (specific ? mode + "-" : "") + slug(m);
             parts.push({ name: m, icon: MUTATORICONS.indexOf(file) >= 0 ? "mutator/" + file : null });
         }
