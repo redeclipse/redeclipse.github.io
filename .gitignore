@@ -11,10 +11,39 @@ data/local.yml
 *.rej
 *.kate-swp
 
-
-# Agent files
-CLAUDE.md
-AGENTS.md
-GLOSSARY.md
-.agents/
+# AI agents
+.github/copilot-instructions.md
+.github/instructions/
+.github/prompts/
+.github/chatmodes/
 .claude/
+.cursor/
+.cursorrules
+.cursorignore
+.gemini/
+.codex/
+.windsurf/
+.windsurfrules
+.clinerules
+.roo/
+.roomodes
+.continue/
+.junie/
+.kiro/
+.amazonq/
+.superpowers/
+.aider*
+.mcp.json
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+GEMINI.md
+GLOSSARY.md
+GLOSSARY-MAP.md
+CODING_STANDARDS.md
+MISSION.md
+RESOURCES.md
+.agents/
+.scratch/
+.out-of-scope/
+learning-records/
