@@ -123,6 +123,61 @@
 .servers-indicator.offline::before {
     background-color: rgb(255, 60, 60);
 }
+/* The Ready queue: what it does and how close a match is on the left, its buttons on the right */
+.servers-queue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 64, 64, 0.5);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.servers-queuetext {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+.servers-queuehelp {
+    color: rgb(204, 204, 204);
+    font-size: 0.9em;
+}
+.servers-queuecounts {
+    color: rgb(150, 150, 150);
+    font-size: 0.9em;
+}
+.servers-queueactions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+.servers-queuelabel {
+    color: rgb(170, 170, 170);
+}
+.servers-queuebutton {
+    padding: 4px 12px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 64, 64);
+    border-radius: 4px;
+    text-decoration: none;
+}
+.servers-queuebutton:hover, .servers-queuebutton:focus {
+    background-color: rgba(160, 0, 0, 0.6);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+.servers-queuebutton.primary {
+    background-color: rgb(190, 30, 30);
+}
+.servers-queuebutton[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
 .servers-banner, .servers-notice {
     margin-bottom: 10px;
     padding: 6px 12px;

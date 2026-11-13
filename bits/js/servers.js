@@ -521,7 +521,8 @@
     // when people play across every server, above the list
     var global = el("div", { class: "servers-global", hidden: true });
     var top = el("div", { class: "servers-top" }, [global, el("div", { class: "servers-side" }, [bar, stats, indicator])]);
-    append(clear(root), [top, banner, notice, el("div", { class: "servers-scroll" }, table)]);
+    var queuebox = el("div", { class: "servers-queue", hidden: true });
+    append(clear(root), [top, queuebox, banner, notice, el("div", { class: "servers-scroll" }, table)]);
     function loadglobal()
     {
         fetchhistory(master + "/api/v1/history", function(h)
@@ -650,6 +651,168 @@
         queue();
     }
 
+
+    // ---- the Ready queue: people say how small a match they'd play and are sent to a server together once there are enough.
+    // This page's place belongs to its live list socket; its Ticket is kept for the tab, so a reload claims the place back.
+
+    var QUEUEKEY = "redeclipse.queue", THRESHOLDS = [2, 4, 6, 8];
+    var rq = { counts: null, threshold: 0, ticket: "", want: 0, pop: null, error: "", flash: null };
+    (function()
+    {
+        try { var saved = JSON.parse(sessionStorage.getItem(QUEUEKEY) || "null"); if(saved && saved.ticket) { rq.ticket = saved.ticket; rq.want = saved.threshold | 0; } }
+        catch(e) {}
+    })();
+    function queuesave()
+    {
+        try
+        {
+            if(rq.ticket && rq.want) sessionStorage.setItem(QUEUEKEY, JSON.stringify({ ticket: rq.ticket, threshold: rq.want }));
+            else sessionStorage.removeItem(QUEUEKEY);
+        }
+        catch(e) {}
+    }
+    function queuesend(msg) { if(live && live.readyState === 1) { live.send(JSON.stringify(msg)); return true; } return false; }
+    function queuejoin(t)
+    {
+        rq.want = t;
+        rq.error = "";
+        if(window.Notification && Notification.permission === "default") try { Notification.requestPermission(); } catch(e) {}
+        queuesend({ queue: "join", source: "web", threshold: t, ticket: rq.ticket || undefined });
+        renderqueue();
+    }
+    function queueleave()
+    {
+        queuesend({ queue: "leave" });
+        queuecleared();
+    }
+    function queuecleared()
+    {
+        rq.threshold = rq.want = 0;
+        rq.ticket = "";
+        rq.pop = null;
+        stopflash();
+        queuesave();
+        renderqueue();
+    }
+    // a page left in the background hears its match with a chime, a notification and a flashing title, and joins only when asked
+    function chime()
+    {
+        try
+        {
+            var ac = new (window.AudioContext || window.webkitAudioContext)(), t = ac.currentTime;
+            [660, 880].forEach(function(f, i)
+            {
+                var o = ac.createOscillator(), g = ac.createGain();
+                o.frequency.value = f;
+                g.gain.setValueAtTime(0.0001, t + i * 0.18);
+                g.gain.exponentialRampToValueAtTime(0.2, t + i * 0.18 + 0.02);
+                g.gain.exponentialRampToValueAtTime(0.0001, t + i * 0.18 + 0.3);
+                o.connect(g).connect(ac.destination);
+                o.start(t + i * 0.18);
+                o.stop(t + i * 0.18 + 0.32);
+            });
+        }
+        catch(e) {}
+    }
+    function startflash()
+    {
+        stopflash();
+        var title = document.title, on = false;
+        rq.flash = { title: title, timer: setInterval(function() { on = !on; document.title = on ? "Your match is ready" : title; }, 1000) };
+    }
+    function stopflash()
+    {
+        if(!rq.flash) return;
+        clearInterval(rq.flash.timer);
+        document.title = rq.flash.title;
+        rq.flash = null;
+    }
+    window.addEventListener("focus", stopflash);
+    function popserver() { return rq.pop ? servers.get(key(rq.pop.host, rq.pop.port)) : null; }
+    function poplink() { return rq.pop ? "redeclipse://" + rq.pop.host + ":" + rq.pop.port + "?ticket=" + rq.ticket : ""; }
+    function queueevent(m)
+    {
+        switch(m.event)
+        {
+            case "queue":
+                rq.counts = m.queue || null;
+                break;
+            case "queued":
+                if(m.error) { rq.error = m.error; rq.want = rq.threshold = 0; rq.ticket = ""; queuesave(); break; }
+                rq.ticket = m.ticket;
+                rq.threshold = rq.want = m.threshold;
+                queuesave();
+                break;
+            case "unqueued":
+                // a place claimed by another tab, or one that ended while this page wasn't looking
+                queuecleared();
+                if(m.reason === "moved") shownotice("Your place in the Ready queue moved to another tab.");
+                break;
+            case "pop":
+                if(!m.ticket || m.ticket !== rq.ticket) break;
+                rq.pop = { host: m.host, port: m.port };
+                chime();
+                if(!document.hasFocus()) startflash();
+                if(window.Notification && Notification.permission === "granted") try
+                {
+                    var s = popserver(), n = new Notification("Your match is ready", { body: s ? plain(s.description) || s.host : m.host + ":" + m.port, tag: "redeclipse-queue" });
+                    n.onclick = function() { window.focus(); n.close(); };
+                }
+                catch(e) {}
+                break;
+            default:
+                return false;
+        }
+        renderqueue();
+        return true;
+    }
+    // the game's own wording, so the queue reads the same everywhere
+    function queuecounts(q)
+    {
+        if(q.next && q.next.needed) return q.ready + " waiting, " + q.next.needed + " more needed for a " + q.next.threshold + "+ match";
+        return q.ready ? q.ready + " waiting" : "Nobody is waiting yet";
+    }
+    function renderqueue()
+    {
+        var q = rq.counts;
+        queuebox.hidden = !q && !rq.threshold;
+        if(queuebox.hidden) return;
+        var title, help, actions = [];
+        if(rq.pop)
+        {
+            var s = popserver();
+            title = "Your match is ready on " + (s ? plain(s.description) || s.host : rq.pop.host + ":" + rq.pop.port);
+            help = "Join now, or leave the queue if you've changed your mind";
+            actions.push(el("a", { class: "servers-queuebutton primary", href: poplink(), text: "Join", onclick: stopflash }));
+        }
+        else if(rq.threshold)
+        {
+            title = "You're in the Ready queue for a " + rq.threshold + "+ match";
+            help = "Carry on: you'll be asked to join once enough players are ready. Keep this page open.";
+        }
+        else
+        {
+            title = "Ready queue";
+            help = "Pick a match size: everyone waiting is sent to a server together";
+            actions.push(el("span", { class: "servers-queuelabel", text: "Ready for" }));
+            THRESHOLDS.forEach(function(t)
+            {
+                actions.push(el("button", { type: "button", class: "servers-queuebutton", text: t + "+", disabled: !live || null,
+                    title: "Wait for a match of at least " + t + " players, counting anyone already on the server", onclick: function() { queuejoin(t); } }));
+            });
+        }
+        if(rq.threshold || rq.pop) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Leave queue", onclick: queueleave }));
+        clear(queuebox);
+        append(queuebox, [
+            el("div", { class: "servers-queuetext" }, [
+                el("strong", { text: title }),
+                el("span", { class: "servers-queuehelp", text: help }),
+                el("span", { class: "servers-queuecounts", text: rq.error ? "Couldn't join: " + rq.error : !live ? "Waiting for the live list to reconnect" : q ? queuecounts(q) : "" })
+            ]),
+            el("div", { class: "servers-queueactions" }, actions)
+        ]);
+    }
+
     // ---- staying up to date: the live list, with polling while it is down
 
     var live = null, livefails = 0, polltimer = null;
@@ -673,6 +836,8 @@
                     stoppolling();
                     setstate("live");
                     setlist(m.servers);
+                    // a place this tab had, claimed back by its Ticket
+                    if(rq.want && rq.ticket) queuesend({ queue: "join", source: "web", threshold: rq.want, ticket: rq.ticket });
                     break;
                 case "add": case "update":
                     if(m.server) { servers.set(skey(m.server), m.server); listchanged(); }
@@ -681,9 +846,12 @@
                     servers.delete(key(m.host, m.port));
                     listchanged();
                     break;
+                default:
+                    queueevent(m);
+                    break;
             }
         };
-        ws.onclose = function() { if(ws === live) { live = null; liveclosed(opened); } };
+        ws.onclose = function() { if(ws === live) { live = null; liveclosed(opened); renderqueue(); } };
     }
     function liveclosed(wasopen)
     {
