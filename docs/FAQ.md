@@ -73,6 +73,12 @@ Each server's chat thread on our [Discord](/discord) has a "join it" link, and e
 
 The game sets up join links whenever it starts, without needing administrator rights, and the copy you started most recently is the one they open. Join links never include a server's password. If clicking one does nothing, start the game once and try again. To stop a copy of the game from taking join links, set `joinlinks 0` in its console.
 
+## Can my friends see what I'm playing and join me?
+
+On Steam and Discord, your friends see the mode and map you're playing, the server's name and how many people are on it. While you're on a server from the [server browser](/servers) that is open, needs no password and has room, they also get a Join button that brings them to the same server, the same way a join link does. Your server's address is never shown as text.
+
+Choose what friends see under Settings, Gameplay, Friends, or with `presence` in the console: `0` shows nothing, `1` shows what you're playing without a Join button, and `2` (the default) adds the Join button.
+
 ## When I launch the game, there's a terminal. Is that normal?
 
 Yes. Red Eclipse will automatically check for updates, and you will see a terminal while the updater script is running.
