@@ -151,9 +151,19 @@
 }
 .servers-queueactions {
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+.servers-queuerow {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: 6px;
+}
+.servers-channel {
+    color: rgb(170, 170, 170);
 }
 .servers-queuelabel {
     color: rgb(170, 170, 170);

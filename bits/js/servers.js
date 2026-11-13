@@ -588,7 +588,7 @@
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
             el("td", { class: "servers-opt servers-mutators", title: st ? mutatornames(st) || null : null }, st ? modeparts(st).slice(1).map(function(p) { return partview(p, false); }) : null),
             el("td", { class: "servers-num" }, time),
-            el("td", { class: "servers-opt" }, versionview(s.version)),
+            el("td", { class: "servers-opt" }, [versionview(s.version), s.channel ? el("small", { class: "servers-channel", text: " " + s.channel, title: "Takes Ready queue matches for " + s.channel + " players" }) : null]),
             el("td", { class: "servers-opt servers-addr" }, addressbutton(s))
         ]);
         var toggle = function() { if(open && open.key === k) closepanel(); else openpanel(k); };
@@ -656,28 +656,29 @@
     // This page's place belongs to its live list socket; its Ticket is kept for the tab, so a reload claims the place back.
 
     var QUEUEKEY = "redeclipse.queue", THRESHOLDS = [2, 4, 6, 8];
-    var rq = { counts: null, threshold: 0, ticket: "", want: 0, pop: null, error: "", flash: null };
+    var rq = { counts: null, threshold: 0, ticket: "", want: 0, channel: "", pop: null, error: "", flash: null };
     (function()
     {
-        try { var saved = JSON.parse(sessionStorage.getItem(QUEUEKEY) || "null"); if(saved && saved.ticket) { rq.ticket = saved.ticket; rq.want = saved.threshold | 0; } }
+        try { var saved = JSON.parse(sessionStorage.getItem(QUEUEKEY) || "null"); if(saved && saved.ticket) { rq.ticket = saved.ticket; rq.want = saved.threshold | 0; rq.channel = saved.channel || ""; } }
         catch(e) {}
     })();
     function queuesave()
     {
         try
         {
-            if(rq.ticket && rq.want) sessionStorage.setItem(QUEUEKEY, JSON.stringify({ ticket: rq.ticket, threshold: rq.want }));
+            if(rq.ticket && rq.want) sessionStorage.setItem(QUEUEKEY, JSON.stringify({ ticket: rq.ticket, threshold: rq.want, channel: rq.channel }));
             else sessionStorage.removeItem(QUEUEKEY);
         }
         catch(e) {}
     }
     function queuesend(msg) { if(live && live.readyState === 1) { live.send(JSON.stringify(msg)); return true; } return false; }
-    function queuejoin(t)
+    function queuejoin(channel, t)
     {
         rq.want = t;
+        rq.channel = channel;
         rq.error = "";
         if(window.Notification && Notification.permission === "default") try { Notification.requestPermission(); } catch(e) {}
-        queuesend({ queue: "join", source: "web", threshold: t, ticket: rq.ticket || undefined });
+        queuesend({ queue: "join", source: "web", channel: channel, threshold: t, ticket: rq.ticket || undefined });
         renderqueue();
     }
     function queueleave()
@@ -741,6 +742,7 @@
                 if(m.error) { rq.error = m.error; rq.want = rq.threshold = 0; rq.ticket = ""; queuesave(); break; }
                 rq.ticket = m.ticket;
                 rq.threshold = rq.want = m.threshold;
+                rq.channel = m.channel || rq.channel;
                 queuesave();
                 break;
             case "unqueued":
@@ -772,12 +774,15 @@
         if(q.next && q.next.needed) return q.ready + " waiting, " + q.next.needed + " more needed for a " + q.next.threshold + "+ match";
         return q.ready ? q.ready + " waiting" : "Nobody is waiting yet";
     }
+    // each channel is one version's servers and players, as the master names them
+    function queuechannels() { return rq.counts && Array.isArray(rq.counts.channels) ? rq.counts.channels : []; }
+    function channelname(c) { return c.name.charAt(0).toUpperCase() + c.name.slice(1) + " (v" + c.version + ")"; }
     function renderqueue()
     {
-        var q = rq.counts;
-        queuebox.hidden = !q && !rq.threshold;
+        var channels = queuechannels(), mine = channels.filter(function(c) { return c.name === rq.channel; })[0];
+        queuebox.hidden = !channels.length && !rq.threshold;
         if(queuebox.hidden) return;
-        var title, help, actions = [];
+        var title, help, actions = [], counts = [];
         if(rq.pop)
         {
             var s = popserver();
@@ -787,18 +792,25 @@
         }
         else if(rq.threshold)
         {
-            title = "You're in the Ready queue for a " + rq.threshold + "+ match";
+            title = "You're in the Ready queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
             help = "Carry on: you'll be asked to join once enough players are ready. Keep this page open.";
+            if(mine) counts.push(queuecounts(mine));
         }
         else
         {
             title = "Ready queue";
             help = "Pick a match size: everyone waiting is sent to a server together";
-            actions.push(el("span", { class: "servers-queuelabel", text: "Ready for" }));
-            THRESHOLDS.forEach(function(t)
+            // a row of sizes for each channel, as players can only join servers of their own version
+            channels.forEach(function(c)
             {
-                actions.push(el("button", { type: "button", class: "servers-queuebutton", text: t + "+", disabled: !live || null,
-                    title: "Wait for a match of at least " + t + " players, counting anyone already on the server", onclick: function() { queuejoin(t); } }));
+                var row = [el("span", { class: "servers-queuelabel", text: channels.length > 1 ? channelname(c) : "Ready for" })];
+                THRESHOLDS.forEach(function(t)
+                {
+                    row.push(el("button", { type: "button", class: "servers-queuebutton", text: t + "+", disabled: !live || null,
+                        title: "Wait for a match of at least " + t + " " + channelname(c) + " players, counting anyone already on the server", onclick: function() { queuejoin(c.name, t); } }));
+                });
+                actions.push(el("div", { class: "servers-queuerow" }, row));
+                counts.push(channels.length > 1 ? channelname(c) + ": " + queuecounts(c) : queuecounts(c) + ", for " + channelname(c) + " players");
             });
         }
         if(rq.threshold || rq.pop) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Leave queue", onclick: queueleave }));
@@ -807,7 +819,7 @@
             el("div", { class: "servers-queuetext" }, [
                 el("strong", { text: title }),
                 el("span", { class: "servers-queuehelp", text: help }),
-                el("span", { class: "servers-queuecounts", text: rq.error ? "Couldn't join: " + rq.error : !live ? "Waiting for the live list to reconnect" : q ? queuecounts(q) : "" })
+                el("span", { class: "servers-queuecounts", text: rq.error ? "Couldn't join: " + rq.error : !live ? "Waiting for the live list to reconnect" : counts.join(" · ") })
             ]),
             el("div", { class: "servers-queueactions" }, actions)
         ]);
@@ -837,7 +849,7 @@
                     setstate("live");
                     setlist(m.servers);
                     // a place this tab had, claimed back by its Ticket
-                    if(rq.want && rq.ticket) queuesend({ queue: "join", source: "web", threshold: rq.want, ticket: rq.ticket });
+                    if(rq.want && rq.ticket && rq.channel) queuesend({ queue: "join", source: "web", channel: rq.channel, threshold: rq.want, ticket: rq.ticket });
                     break;
                 case "add": case "update":
                     if(m.server) { servers.set(skey(m.server), m.server); listchanged(); }
@@ -1281,7 +1293,7 @@
             // whether chat from outside the game, such as Discord, is carried in; older servers don't say
             if(typeof st.bridge === "number") fact("Bridged chat", st.bridge ? "On" : "Off");
         }
-        fact("Version", versionview(s.version));
+        fact("Version", [versionview(s.version), s.channel ? " " + s.channel : null]);
         // the operator's site, only as a web address, and opened away from this page
         if(st && typeof st.url === "string" && /^https?:\/\/[^\s"<>\\]+$/.test(st.url))
             fact("Website", el("a", { class: "servers-weblink", href: st.url, target: "_blank", rel: "nofollow noopener noreferrer", text: st.url.replace(/^https?:\/\//, "").replace(/\/$/, "") }));
