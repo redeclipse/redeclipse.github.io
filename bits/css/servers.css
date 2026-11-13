@@ -241,17 +241,13 @@
     color: rgb(255, 210, 210);
     background: none;
 }
-#servers .servers-copy {
-    padding: 0;
+#servers .servers-join {
     color: rgb(255, 210, 210);
-    background: none;
-    border: 0;
     font-family: monospace;
     font-size: 85%;
-    text-align: left;
-    cursor: copy !important;
+    text-decoration: none;
 }
-#servers .servers-copy:hover, #servers .servers-copy:focus {
+#servers .servers-join:hover, #servers .servers-join:focus {
     color: rgb(255, 255, 255);
     text-decoration: underline dotted;
     outline: none;

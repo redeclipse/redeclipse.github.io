@@ -404,26 +404,13 @@
         return true;
     }
 
-    function copyconnect(s, button)
-    {
-        var text = "/connect " + s.host + " " + s.port;
-        var done = function(ok)
-        {
-            var was = button.textContent;
-            button.textContent = ok ? "Copied" : text;
-            setTimeout(function() { button.textContent = was; }, ok ? 1500 : 6000);
-        };
-        if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function() { done(true); }, function() { done(false); });
-        else done(false);
-    }
-
-    // The address copies the command to join it when clicked.
+    // The address is the server's join link, which opens the game and joins it.
     function addressbutton(s)
     {
-        var b = el("button", { type: "button", class: "servers-copy", title: "Click to copy /connect " + s.host + " " + s.port });
-        b.textContent = address(s);
-        b.addEventListener("click", function(e) { e.stopPropagation(); copyconnect(s, b); });
-        return b;
+        var a = el("a", { class: "servers-join", href: "redeclipse://" + s.host + ":" + s.port, title: "Join this server in Red Eclipse" });
+        a.textContent = address(s);
+        a.addEventListener("click", function(e) { e.stopPropagation(); });
+        return a;
     }
 
     // ---- when people play: the master's peak players for each 15 minutes over eight weeks,
