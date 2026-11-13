@@ -36,6 +36,12 @@ modification must be approved and will be done on a case-by-case basis. It is
 advised you create a topic in the "General Discussion" section of the official
 Red Eclipse discussions located at https://www.redeclipse.net/discuss
 
+NOTE: By playing online you consent to the disclosure of certain information for
+legitimate administration and moderation purposes, as outlined in the Red
+Eclipse Privacy Policy at https://www.redeclipse.net/privacy. This includes,
+but is not limited to: Username, Steam ID and handle, Discord handle, IP
+address, Hardware configuration, and Operating system details.
+
 ### Guidelines for Servers
 
 (See RE Mark Policy for definitions of "substantially (un)modified")
@@ -140,7 +146,7 @@ Red Eclipse discussions located at https://www.redeclipse.net/discuss
     situation in a professional manner.
   - Extended verbal disputes with players in-game is not permitted and
     moderators are encouraged to ignore abuse from other players.
-  - The powers of a moderator should be not be used for personal disputes with
+  - The powers of a moderator should not be used for personal disputes with
     another player or moderator.
 
 * The use of mute, quarantine, kick, and/or ban should only be used when a user
@@ -188,6 +194,6 @@ Red Eclipse discussions located at https://www.redeclipse.net/discuss
 
 ### Attribution
 
-This text is Copyright (C) 2011-2018, the Red Eclipse Team
-and is available under a Creative Commons Attribution-ShareAlike 3.0 Unported
-License <http://creativecommons.org/licenses/by-sa/3.0/>
+This text is Copyright (C) 2011-2026, the Red Eclipse Team
+and is available under a Creative Commons Attribution-ShareAlike 4.0
+License <http://creativecommons.org/licenses/by-sa/4.0/>
