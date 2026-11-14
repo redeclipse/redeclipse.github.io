@@ -22,3 +22,6 @@
 - url: /issues
   title: "Issue Tracker"
   icon: list-check
+- url: /account
+  title: "Account"
+  icon: user

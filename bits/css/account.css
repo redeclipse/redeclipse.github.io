@@ -1,0 +1,149 @@
+@charset "utf-8";
+/* Signing in with a Red Eclipse account, /account, and the server browser's chat and moderation */
+#account {
+    margin: 12px 0 16px 0;
+    font-size: 14px;
+    color: rgb(240, 224, 224);
+}
+#account [hidden] {
+    display: none !important;
+}
+#account button, .servers-chat button, .servers-mod button {
+    font: inherit;
+    cursor: pointer;
+    padding: 4px 12px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 64, 64);
+    border-radius: 4px;
+}
+#account button:hover, #account button:focus, .servers-chat button:hover, .servers-chat button:focus, .servers-mod button:hover, .servers-mod button:focus {
+    background-color: rgba(160, 0, 0, 0.6);
+}
+#account button[disabled], .servers-chat button[disabled], .servers-mod button[disabled] {
+    opacity: 0.5;
+    cursor: default;
+}
+#account input[type=text], #account input[type=password], .servers-chat input, .servers-mod input, .servers-mod select {
+    font: inherit;
+    padding: 4px 8px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(120, 80, 80);
+    border-radius: 4px;
+    min-width: 0;
+}
+.account-form {
+    display: grid;
+    grid-template-columns: 8em minmax(0, 360px);
+    gap: 8px 12px;
+    align-items: center;
+    max-width: 640px;
+}
+.account-form > .account-help, .account-form > .account-check, .account-form > button {
+    grid-column: 1 / -1;
+}
+.account-form > button {
+    justify-self: start;
+}
+@media (max-width: 560px) {
+    .account-form {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.account-help {
+    margin: 0;
+    color: rgb(190, 170, 170);
+    font-size: 90%;
+}
+#account .account-link {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: rgb(255, 128, 128);
+    text-decoration: underline;
+}
+.account-notice {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid rgb(120, 80, 80);
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.account-notice.account-bad {
+    border-color: rgb(255, 64, 64);
+    background-color: rgba(120, 0, 0, 0.6);
+}
+.account-signins {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+}
+.account-signins th, .account-signins td {
+    padding: 4px 8px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-wrap: anywhere;
+}
+.account-signins th {
+    color: rgb(220, 160, 160);
+    font-weight: normal;
+}
+.account-current td {
+    background-color: rgba(255, 64, 64, 0.08);
+}
+.account-tag {
+    margin-left: 6px;
+    padding: 0 6px;
+    border-radius: 3px;
+    font-size: 85%;
+    background-color: rgba(255, 64, 64, 0.3);
+}
+/* Under the match feed: who you are there, the chat box, and moderation for those it allows */
+.servers-standing {
+    margin: 6px 0 0 0;
+    color: rgb(170, 170, 170);
+    font-size: 90%;
+}
+.servers-chat {
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+}
+.servers-chat input {
+    flex: 1;
+}
+.servers-feed li.refused {
+    color: rgb(255, 96, 96);
+}
+.servers-mod {
+    margin-top: 12px;
+}
+.servers-mod h3 {
+    margin-bottom: 4px;
+}
+.servers-mod table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 90%;
+}
+.servers-mod td, .servers-mod th {
+    padding: 3px 6px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-wrap: anywhere;
+}
+.servers-mod th {
+    color: rgb(220, 160, 160);
+    font-weight: normal;
+}
+.servers-mod form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    margin-top: 6px;
+}
+.servers-mod .servers-modnote {
+    color: rgb(255, 96, 96);
+    margin: 4px 0 0 0;
+}
