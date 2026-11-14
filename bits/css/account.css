@@ -76,13 +76,63 @@
 .account-signins {
     width: 100%;
     border-collapse: collapse;
+}
+/* Each value on one line, the table scrolling sideways on a narrow screen rather than breaking them */
+.account-scroll {
+    overflow-x: auto;
     margin-bottom: 12px;
 }
 .account-signins th, .account-signins td {
-    padding: 4px 8px;
+    padding: 6px 10px;
     text-align: left;
+    vertical-align: middle;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    overflow-wrap: anywhere;
+    white-space: nowrap;
+}
+.account-signins .account-device {
+    width: 100%;
+    white-space: normal;
+    min-width: 12em;
+}
+.account-signins .account-ip {
+    font-family: monospace;
+    font-size: 90%;
+}
+.account-signins .account-end {
+    text-align: right;
+}
+/* On a phone each sign-in is a card, its values under their names */
+@media (max-width: 640px) {
+    .account-signins thead {
+        display: none;
+    }
+    .account-signins, .account-signins tbody, .account-signins tr, .account-signins td {
+        display: block;
+        width: auto;
+    }
+    .account-signins tr {
+        padding: 6px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .account-signins td {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 2px 8px;
+        border: 0;
+    }
+    .account-signins td[data-label]::before {
+        content: attr(data-label);
+        color: rgb(220, 160, 160);
+    }
+    .account-signins .account-device {
+        min-width: 0;
+        font-weight: 600;
+    }
+    .account-signins .account-end {
+        justify-content: flex-end;
+        padding-top: 6px;
+    }
 }
 .account-signins th {
     color: rgb(220, 160, 160);
@@ -92,6 +142,8 @@
     background-color: rgba(255, 64, 64, 0.08);
 }
 .account-tag {
+    display: inline-block;
+    white-space: nowrap;
     margin-left: 6px;
     padding: 0 6px;
     border-radius: 3px;

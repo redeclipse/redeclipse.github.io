@@ -76,6 +76,18 @@
         return r.x.toString(16);
     }
 
+    // a name people know their device by, such as "Firefox on Linux", from a browser's User-Agent, which the master may have cut short
+    function device(ua)
+    {
+        ua = String(ua || "");
+        if(!/^Mozilla\//.test(ua)) return ua;
+        var browser = /Edg\//.test(ua) ? "Edge" : /OPR\/|Opera/.test(ua) ? "Opera" : /Firefox|Gecko\/\d/.test(ua) ? "Firefox" : /Chrome\/|CriOS/.test(ua) ? "Chrome"
+            : /Safari\//.test(ua) ? "Safari" : "A browser";
+        var system = /Android/.test(ua) ? "Android" : /iPhone|iPad|iPod/.test(ua) ? "iOS" : /Windows/.test(ua) ? "Windows" : /Mac OS X|Macintosh/.test(ua) ? "macOS"
+            : /CrOS/.test(ua) ? "ChromeOS" : /Linux|X11/.test(ua) ? "Linux" : /BSD/.test(ua) ? "BSD" : "";
+        return system ? browser + " on " + system : browser;
+    }
+
     // auth.cfg holds a line like: authkey "name" "private key"
     function readauthcfg(text)
     {
@@ -135,7 +147,7 @@
         {
             if(r.status !== 200) throw new Error(r.json.error || "The master server refused to sign you in.");
             var ans = answer(privkey, r.json.challenge);
-            return self.call("POST", "", { id: r.json.id, answer: ans, remember: !!remember });
+            return self.call("POST", "", { id: r.json.id, answer: ans, remember: !!remember, label: device(navigator.userAgent) });
         }).then(function(r)
         {
             if(r.status !== 200) throw new Error(r.json.error === "identity verification failed" ? "That key isn't this account's." : (r.json.error || "The master server refused to sign you in."));
@@ -174,7 +186,7 @@
     };
     Account.prototype.forget = function(host, port) { this.sessions.delete(host + "/" + port); };
 
-    window.REAccount = { Account: Account, answer: answer, readauthcfg: readauthcfg, MASTER: MASTER };
+    window.REAccount = { Account: Account, answer: answer, readauthcfg: readauthcfg, device: device, MASTER: MASTER };
 
     // ---- the Account page
 
@@ -267,21 +279,21 @@
         var rows = (me.signins || []).slice().sort(function(a, b) { return b.lastused - a.lastused; }).map(function(s)
         {
             return el("tr", { class: s.current ? "account-current" : null }, [
-                el("td", {}, [s.label || "Unnamed", s.current ? el("span", { class: "account-tag", text: "This browser" }) : null]),
-                el("td", { text: date(s.created) }),
-                el("td", { text: date(s.lastused) }),
-                el("td", { text: day(s.expires) + (s.remember ? "" : " (when the browser closes)") }),
-                el("td", { text: s.firstaddr === s.lastaddr ? s.lastaddr : s.firstaddr + ", then " + s.lastaddr }),
-                el("td", {}, el("button", { type: "button", text: s.current ? "Sign out" : "Sign out there", onclick: function()
+                el("td", { class: "account-device", title: s.label || "" }, [device(s.label) || "Unnamed", s.current ? el("span", { class: "account-tag", text: "This browser" }) : null]),
+                el("td", { class: "account-when", "data-label": "Signed in", text: date(s.created) }),
+                el("td", { class: "account-when", "data-label": "Last used", text: date(s.lastused) }),
+                el("td", { class: "account-when", "data-label": "Ends", text: s.remember ? day(s.expires) : "When the browser closes" }),
+                el("td", { class: "account-addr", "data-label": "Address" }, el("span", { class: "account-ip" }, s.firstaddr === s.lastaddr ? s.lastaddr : [s.firstaddr, el("br"), "then " + s.lastaddr])),
+                el("td", { class: "account-end" }, el("button", { type: "button", text: s.current ? "Sign out" : "Sign out there", onclick: function()
                 {
                     account.end(s.current ? null : s.id).then(function() { refresh(); });
                 } }))
             ]);
         });
-        return el("table", { class: "account-signins" }, [
+        return el("div", { class: "account-scroll" }, el("table", { class: "account-signins" }, [
             el("thead", {}, el("tr", {}, ["Device", "Signed in", "Last used", "Ends", "Address", ""].map(function(h) { return el("th", { text: h }); }))),
             el("tbody", {}, rows)
-        ]);
+        ]));
     }
 
     function draw(me)
