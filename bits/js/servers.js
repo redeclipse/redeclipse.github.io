@@ -97,7 +97,9 @@
         return bycolour;
     })();
     var MAPPATH = "/bits/images/maps/", MAPUNKNOWN = "/bits/images/servers/map-unknown.jpg";
-    var PINGREFRESH = 15000, POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
+    // everything on the feed, and the pings the scoreboard shows, which come only to those who ask
+    var FEEDEVENTS = "default,ping";
+    var POLLTIME = 5000, BACKOFFMIN = 1000, BACKOFFMAX = 30000, FEEDLINES = 100;
     var PREFKEY = "redeclipse.servers";
 
     var root = document.getElementById("servers");
@@ -1037,7 +1039,6 @@
             this.base = master + "/relay/" + encodeURIComponent(s.host) + "/" + s.port + "/api/v1";
             this.refresh(); // the scoreboard shouldn't wait on the feed, which may be slow or blocked
             this.connect();
-            this.pings();
         }
         else
         {
@@ -1060,21 +1061,6 @@
             if(!r.ok) { var e = new Error(r.status); e.status = r.status; throw e; }
             return r.json();
         });
-    };
-
-    // The feed carries no pings, so fetch the players now and then for theirs, slower than the game does to spare the relay.
-    Panel.prototype.pings = function()
-    {
-        var self = this;
-        this.later(function()
-        {
-            self.get("/players").then(function(ps)
-            {
-                if(self.closed) return;
-                (ps || []).forEach(function(p) { var q = self.players.get(p.cn); if(q) q.ping = p.ping; });
-                self.drawboard();
-            }).catch(function() {}).then(function() { self.pings(); });
-        }, PINGREFRESH);
     };
 
     // The feed sends no snapshot, so fetch the match whenever the feed (re)opens or a new match starts.
@@ -1106,7 +1092,7 @@
         var self = this, opened = false;
         if(!this.feedfails) this.feedstate.textContent = "Connecting to the match feed…";
         var ws;
-        try { ws = new WebSocket(this.base.replace(/^http/, "ws") + "/events"); }
+        try { ws = new WebSocket(this.base.replace(/^http/, "ws") + "/events?events=" + FEEDEVENTS); }
         catch(e) { this.feedclosed(false); return; }
         this.ws = ws;
         ws.onopen = function()
@@ -1339,7 +1325,7 @@
         switch(m.event)
         {
             case "join":
-                if(m.client) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0 }, m.client));
+                if(m.client) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0, ping: 0 }, m.client));
                 this.line([this.name(m.client), handle(m.client), " joined"], "join");
                 break;
             case "leave":
@@ -1376,6 +1362,9 @@
                 break;
             case "objectives":
                 this.drawobjectives(m);
+                break;
+            case "ping":
+                (m.players || []).forEach(function(s) { var q = self.players.get(s.cn); if(q) q.ping = s.ping; });
                 break;
             case "score":
                 if(m.teams) this.teams = m.teams;
