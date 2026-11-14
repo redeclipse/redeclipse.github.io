@@ -93,7 +93,7 @@ L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0
 
 ## How do I find people to play with?
 
-Join the **Ready queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
+Join the **Matchmaking Queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
 
 You can wait from three places, and they all share one queue:
 
