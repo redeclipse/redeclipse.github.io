@@ -13,7 +13,7 @@
             <div class="main pagecontainer">
                 <h1>{{ page.title | default: page.path }}</h1>
                 {{ content }}
-                <div id="account" data-master="{{ page.master }}">
+                <div id="account" data-master="{{ page.master }}" data-action="{{ page.action }}" data-turnstile="{{ site.turnstile }}">
                     <noscript><p>Signing in needs JavaScript.</p></noscript>
                 </div>
             </div>

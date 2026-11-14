@@ -24,7 +24,7 @@
     opacity: 0.5;
     cursor: default;
 }
-#account input[type=text], #account input[type=password], .servers-chat input, .servers-mod input, .servers-mod select {
+#account input[type=text], #account input[type=password], #account input[type=email], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
     font: inherit;
     padding: 4px 8px;
     color: rgb(255, 255, 255);
@@ -198,4 +198,55 @@
 .servers-mod .servers-modnote {
     color: rgb(255, 96, 96);
     margin: 4px 0 0 0;
+}
+/* registering, the key panel and the owner's account */
+.account-captcha {
+    grid-column: 1 / -1;
+    min-height: 65px;
+}
+.account-fields {
+    display: grid;
+    grid-template-columns: 8em minmax(0, 1fr);
+    gap: 8px 12px;
+    align-items: center;
+    max-width: 720px;
+}
+.account-fields dt {
+    color: rgb(190, 170, 170);
+}
+.account-fields dd {
+    margin: 0;
+}
+.account-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin: 8px 0;
+}
+.account-key code, .account-line code {
+    word-break: break-all;
+}
+.account-cfg {
+    width: 100%;
+    max-width: 720px;
+    font-family: monospace;
+    resize: vertical;
+}
+#account a.account-button {
+    display: inline-block;
+    padding: 4px 12px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgb(255, 64, 64);
+    border-radius: 4px;
+    text-decoration: none;
+}
+.account-admin h3, .account-owner h3 {
+    margin-top: 20px;
+}
+@media (max-width: 560px) {
+    .account-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
