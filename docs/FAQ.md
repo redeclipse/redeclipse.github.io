@@ -95,13 +95,15 @@ L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0
 
 Join the **Matchmaking Queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
 
+The queue needs a Red Eclipse account, which only takes an email: register one on the Account page of the game's Player menu, or on the [account page](/account). Your place is your account's, so you can join from one place and leave or renew from another, and everyone can see who's waiting.
+
 You can wait from three places, and they all share one queue:
 
-- **In the game:** the server browser has the queue above the list. Leave the game open in the background and it flashes and asks you to join when your match is ready. It never joins by itself.
-- **On the website:** the [server browser](/servers) has the same queue. Keep the page open: it chimes, shows a notification if you allow it, and gives you a Join button.
-- **On our [Discord](/discord):** the pinned Matchmaking post in the servers forum lists the servers and has the queue's buttons. You're mentioned in the server's own thread with a join link when your match is ready. Your place lasts 60 minutes, and you'll be asked shortly before it runs out if you want 30 more. Use `/matchmaking status` to see where you stand.
+- **In the game:** the server browser has the queue above the list, and the game queues with the account it signs in with. Leave the game open in the background and it flashes and asks you to join when your match is ready. It never joins by itself.
+- **On the website:** the [server browser](/servers) has the same queue once you've signed in on the [account page](/account). Keep the page open: it chimes, shows a notification if you allow it, and gives you a Join button.
+- **On our [Discord](/discord):** link your account with `/link` and the code from the game's Account page or the account page. The pinned Matchmaking post in the servers forum lists the servers and has the queue's buttons. You're mentioned in the server's own thread with a join link when your match is ready, wherever you queued from. Use `/matchmaking status` to see where you stand. Press Notify me under the queue to be mentioned in the Matchmaking post when one more player would make a match, and Stop when you've had enough.
 
-If you join a server while you're waiting, you aren't counted twice, and you're taken out of the queue once that server has as many on as you wanted. Anyone in the @Matchmaking role on Discord hears when one more player would make a match.
+Your place lasts 60 minutes, and you can add 30 more when it's nearly up: the game and the website show a Renew button, and Discord asks you shortly before it runs out. If you join a server while you're waiting, you aren't counted twice, and you're taken out of the queue once that server has as many on as you wanted. The game signs you in on servers with your account, which is how the queue sees you arrive. When you're sent to a server, it keeps a place for you for 5 minutes, so someone joining it by themselves can't take it first.
 
 ## When I launch the game, there's a terminal. Is that normal?
 
