@@ -51,7 +51,7 @@ Now attempt to reproduce the problem in game. Once Red Eclipse has crashed, GDB 
 ```
 bt full
 ```
-This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/RPDmG5Z).
+This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/redeclipse).
 
 ## Linux
 
@@ -75,4 +75,4 @@ Now attempt to reproduce the problem in game. Once Red Eclipse has crashed, GDB 
 ```
 bt full
 ```
-This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/RPDmG5Z).
+This will produce a backtrace, copy and paste this to an accessible place such as a crash report on the Red Eclipse [Github Issues page](https://github.com/redeclipse/base/issues) or paste to the Red Eclipse [Discord](https://discord.com/invite/redeclipse).
