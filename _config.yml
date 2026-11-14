@@ -10,7 +10,7 @@ locs:
   api: "https://api.github.com"
   ref: "https://github.com"
 # Cloudflare Turnstile's site key for the account page's captcha; the master server holds its secret
-turnstile: ""
+turnstile: "0x4AAAAAAGAa78BLvLji5ZxX"
 
 # Where things are
 source: "."
