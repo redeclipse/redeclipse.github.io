@@ -1,12 +1,12 @@
 ---
-title: Gameplay - Multiplayer Guidelines
+title: Multiplayer Guidelines
 layout: docs
-origfile: gameplay/Multiplayer-Guidelines.md
+origfile: Multiplayer-Guidelines.md
 origtitle: Multiplayer-Guidelines
-permalink: /docs/gameplay/Multiplayer-Guidelines
+permalink: /docs/Multiplayer-Guidelines
 redirect_from:
-  - /docs/gameplay/Multiplayer_Guidelines/
-  - /wiki/gameplay/Multiplayer_Guidelines/
+  - /docs/Multiplayer_Guidelines/
+  - /wiki/Multiplayer_Guidelines/
 ---
 * TOC
 {:toc}
