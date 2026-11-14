@@ -613,7 +613,10 @@
     {
         renderqueued = false;
         renderhead();
-        clear(tbody);
+        // the open match stays where it is while the rows around it are rebuilt, as taking it out would scroll its feed
+        // back to the top and take the focus from its chat
+        var panel = open ? open.row : null, placed = false;
+        Array.from(tbody.childNodes).forEach(function(c) { if(c !== panel) tbody.removeChild(c); });
         var list = sorted(), shown = 0, people = 0, active = 0;
         list.forEach(function(s)
         {
@@ -621,9 +624,16 @@
             if(playercount(s) > 0) active++;
             if(!visible(s)) return;
             shown++;
-            tbody.appendChild(row(s));
-            if(open && open.key === skey(s)) tbody.appendChild(open.row);
+            var r = row(s);
+            if(panel && !placed && panel.parentNode === tbody) tbody.insertBefore(r, panel);
+            else tbody.appendChild(r);
+            if(panel && open.key === skey(s))
+            {
+                if(panel.parentNode !== tbody) tbody.appendChild(panel);
+                placed = true;
+            }
         });
+        if(panel && !placed && panel.parentNode === tbody) tbody.removeChild(panel);
         if(!loaded) tbody.appendChild(el("tr", {}, el("td", { colspan: COLUMNS.length, class: "servers-empty", text: "Loading servers…" })));
         else if(!shown) tbody.appendChild(el("tr", {}, el("td", { colspan: COLUMNS.length, class: "servers-empty", text: servers.size ? "No servers match the filter." : "No servers are registered right now." })));
         drawstats(people, active);
