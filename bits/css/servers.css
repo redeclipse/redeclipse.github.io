@@ -44,11 +44,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 6px 24px;
-    align-items: baseline;
+    align-items: center;
 }
+/* the label sits on the middle of its big number, not its baseline */
 .servers-stat {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     gap: 6px;
     color: rgb(220, 160, 160);
     font-size: 90%;
