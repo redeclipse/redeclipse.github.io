@@ -841,7 +841,9 @@
         {
             var can = live && rq.signedin;
             title = "Matchmaking Queue";
-            help = rq.signedin === false ? null : "Pick a match size: everyone waiting is sent to a server together";
+            // signed in to an account the master wouldn't give a session for is a failure, not a missing account
+            help = rq.signedin !== false ? "Pick a match size: everyone waiting is sent to a server together" :
+                rq.handle ? "Couldn't sign in to the master as " + rq.handle + ", reload to try again" : null;
             // a row of sizes for each channel, as players can only join servers of their own version
             channels.forEach(function(c)
             {
@@ -882,6 +884,7 @@
     // the account this browser signed in to, if any, gets a session on the master first, so the socket queues as it
     function connectlive()
     {
+        rq.handle = "";
         var signedin = account ? account.me(true).then(function(me)
         {
             if(!me) return null;
