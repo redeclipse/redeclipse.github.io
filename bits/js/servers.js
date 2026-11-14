@@ -1326,11 +1326,12 @@
         {
             case "join":
                 if(m.client) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0, ping: 0 }, m.client));
-                this.line([this.name(m.client), handle(m.client), " joined"], "join");
+                // a bot's coming and going shows on the scoreboard, which is news enough
+                if(m.client && !m.client.bot) this.line([this.name(m.client), handle(m.client), " joined"], "join");
                 break;
             case "leave":
                 if(m.client) this.players.delete(m.client.cn);
-                this.line([this.name(m.client), handle(m.client), " left" + (m.reason ? " (" + m.reason + ")" : "")], "leave");
+                if(m.client && !m.client.bot) this.line([this.name(m.client), handle(m.client), " left" + (m.reason ? " (" + m.reason + ")" : "")], "leave");
                 break;
             case "identify":
                 if(!m.client || !m.client.handle) break;
