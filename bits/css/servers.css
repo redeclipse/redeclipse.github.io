@@ -124,7 +124,7 @@
 .servers-indicator.offline::before {
     background-color: rgb(255, 60, 60);
 }
-/* The Ready queue: what it does and how close a match is on the left, its buttons on the right */
+/* The Matchmaking Queue: what it does, how close a match is and who's waiting on the left, its buttons on the right */
 .servers-queue {
     display: flex;
     flex-wrap: wrap;
@@ -149,6 +149,23 @@
 .servers-queuecounts {
     color: rgb(150, 150, 150);
     font-size: 0.9em;
+}
+.servers-queuewaiting {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 14px;
+    max-height: 4.8em;
+    overflow-y: auto;
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.9em;
+}
+.servers-queuename {
+    color: rgb(255, 255, 255);
+}
+.servers-queuehandle {
+    color: rgb(150, 150, 150);
 }
 .servers-queueactions {
     display: flex;

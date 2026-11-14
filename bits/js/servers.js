@@ -673,33 +673,18 @@
     }
 
 
-    // ---- the Ready queue: people say how small a match they'd play and are sent to a server together once there are enough.
-    // This page's place belongs to its live list socket; its Ticket is kept for the tab, so a reload claims the place back.
+    // ---- the Matchmaking Queue: people say how small a match they'd play and are sent to a server together once there are enough.
+    // A place is the account's, wherever it queued from, so the live list opens with a session on the master for the account
+    // this browser signed in to; without one, the page shows the queue and how to get an account.
 
-    var QUEUEKEY = "redeclipse.queue", THRESHOLDS = [2, 4, 6, 8];
-    var rq = { counts: null, threshold: 0, ticket: "", want: 0, channel: "", pop: null, error: "", flash: null };
-    (function()
-    {
-        try { var saved = JSON.parse(sessionStorage.getItem(QUEUEKEY) || "null"); if(saved && saved.ticket) { rq.ticket = saved.ticket; rq.want = saved.threshold | 0; rq.channel = saved.channel || ""; } }
-        catch(e) {}
-    })();
-    function queuesave()
-    {
-        try
-        {
-            if(rq.ticket && rq.want) sessionStorage.setItem(QUEUEKEY, JSON.stringify({ ticket: rq.ticket, threshold: rq.want, channel: rq.channel }));
-            else sessionStorage.removeItem(QUEUEKEY);
-        }
-        catch(e) {}
-    }
+    var THRESHOLDS = [2, 4, 6, 8], RENEWABLE = 1800;
+    var rq = { counts: null, threshold: 0, expires: 0, channel: "", pop: null, error: "", flash: null, signedin: null, handle: "" };
     function queuesend(msg) { if(live && live.readyState === 1) { live.send(JSON.stringify(msg)); return true; } return false; }
     function queuejoin(channel, t)
     {
-        rq.want = t;
-        rq.channel = channel;
         rq.error = "";
         if(window.Notification && Notification.permission === "default") try { Notification.requestPermission(); } catch(e) {}
-        queuesend({ queue: "join", source: "web", channel: channel, threshold: t, ticket: rq.ticket || undefined });
+        queuesend({ queue: "join", source: "web", channel: channel, threshold: t });
         renderqueue();
     }
     function queueleave()
@@ -707,13 +692,12 @@
         queuesend({ queue: "leave" });
         queuecleared();
     }
+    function queuerenew() { queuesend({ queue: "renew" }); }
     function queuecleared()
     {
-        rq.threshold = rq.want = 0;
-        rq.ticket = "";
+        rq.threshold = rq.expires = 0;
         rq.pop = null;
         stopflash();
-        queuesave();
         renderqueue();
     }
     // a page left in the background hears its match with a chime, a notification and a flashing title, and joins only when asked
@@ -751,7 +735,19 @@
     }
     window.addEventListener("focus", stopflash);
     function popserver() { return rq.pop ? servers.get(key(rq.pop.host, rq.pop.port)) : null; }
-    function poplink() { return rq.pop ? "redeclipse://" + rq.pop.host + ":" + rq.pop.port + "?ticket=" + rq.ticket : ""; }
+    function poplink() { return rq.pop ? "redeclipse://" + rq.pop.host + ":" + rq.pop.port : ""; }
+    function popped(host, port)
+    {
+        rq.pop = { host: host, port: port };
+        chime();
+        if(!document.hasFocus()) startflash();
+        if(window.Notification && Notification.permission === "granted") try
+        {
+            var s = popserver(), n = new Notification("Your match is ready", { body: s ? plain(s.description) || s.host : host + ":" + port, tag: "redeclipse-queue" });
+            n.onclick = function() { window.focus(); n.close(); };
+        }
+        catch(e) {}
+    }
     function queueevent(m)
     {
         switch(m.event)
@@ -760,28 +756,22 @@
                 rq.counts = m.queue || null;
                 break;
             case "queued":
-                if(m.error) { rq.error = m.error; rq.want = rq.threshold = 0; rq.ticket = ""; queuesave(); break; }
-                rq.ticket = m.ticket;
-                rq.threshold = rq.want = m.threshold;
+                // the account's place, also on connecting when it has one from anywhere
+                if(m.error) { rq.error = m.error; break; }
+                rq.error = "";
+                rq.threshold = m.threshold;
+                rq.expires = m.expires || 0;
                 rq.channel = m.channel || rq.channel;
-                queuesave();
+                if(m.host && m.port && !rq.pop) rq.pop = { host: m.host, port: m.port };
                 break;
             case "unqueued":
-                // a place claimed by another tab, or one that ended while this page wasn't looking
                 queuecleared();
-                if(m.reason === "moved") shownotice("Your place in the Matchmaking Queue moved to another tab.");
+                if(m.reason === "expired") shownotice("Your place in the Matchmaking Queue ran out.");
+                else if(m.reason === "popped") shownotice("You didn't join your match in time, so you've left the Matchmaking Queue.");
                 break;
             case "pop":
-                if(!m.ticket || m.ticket !== rq.ticket) break;
-                rq.pop = { host: m.host, port: m.port };
-                chime();
-                if(!document.hasFocus()) startflash();
-                if(window.Notification && Notification.permission === "granted") try
-                {
-                    var s = popserver(), n = new Notification("Your match is ready", { body: s ? plain(s.description) || s.host : m.host + ":" + m.port, tag: "redeclipse-queue" });
-                    n.onclick = function() { window.focus(); n.close(); };
-                }
-                catch(e) {}
+                if(!m.mine) break;
+                popped(m.host, m.port);
                 break;
             default:
                 return false;
@@ -789,6 +779,8 @@
         renderqueue();
         return true;
     }
+    // while queued the minutes left count down
+    setInterval(function() { if(rq.threshold) renderqueue(); }, 30000);
     // the game's own wording, so the queue reads the same everywhere
     function queuecounts(q)
     {
@@ -803,6 +795,28 @@
         return "Matches are played on the " + c.name + " version (v" + c.version + "). On Steam, " + (c.name === "release" ? "the default branch has it." : "switch to the " + c.name + " branch to join them.");
     }
     function channelname(c) { return c.name.charAt(0).toUpperCase() + c.name.slice(1) + " (v" + c.version + ")"; }
+    function queueminutes()
+    {
+        var m = Math.max(1, Math.ceil((rq.expires - now()) / 60));
+        return m === 1 ? "1 minute" : m + " minutes";
+    }
+    // who's waiting, as the game shows a player: their privilege's icon, display name or handle, then the handle, match size and
+    // where they are
+    function waitingview()
+    {
+        var entries = rq.counts && Array.isArray(rq.counts.entries) ? rq.counts.entries : [], named = queuechannels().length > 1;
+        if(!entries.length) return null;
+        return el("ul", { class: "servers-queuewaiting" }, entries.map(function(e)
+        {
+            var name = plain(e.displayname || ""), where = e.state === "held" ? ", on a server" : e.state === "travelling" ? ", on the way" : "";
+            return el("li", {}, [
+                privicon(e.privilege || "none", false, false, "currentColor"),
+                el("span", { class: "servers-queuename", text: name || e.handle }),
+                name ? el("span", { class: "servers-queuehandle", text: " (" + e.handle + ")" }) : null,
+                " " + (named ? e.channel + " " : "") + e.threshold + "+" + where
+            ]);
+        }));
+    }
     function renderqueue()
     {
         var channels = queuechannels(), mine = channels.filter(function(c) { return c.name === rq.channel; })[0];
@@ -819,33 +833,43 @@
         else if(rq.threshold)
         {
             title = "You're in the Matchmaking Queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
-            help = "Carry on: you'll be asked to join once enough players are ready. Keep this page open.";
+            help = "Carry on: you'll be asked to join once enough players are ready, your place lasts " + queueminutes() + " more";
             if(mine) counts.push(queuecounts(mine));
+            if(rq.expires && rq.expires - now() <= RENEWABLE) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Renew", title: "Keep your place for another 30 minutes", onclick: queuerenew }));
         }
         else
         {
+            var can = live && rq.signedin;
             title = "Matchmaking Queue";
-            help = "Pick a match size: everyone waiting is sent to a server together";
+            help = rq.signedin === false ? null : "Pick a match size: everyone waiting is sent to a server together";
             // a row of sizes for each channel, as players can only join servers of their own version
             channels.forEach(function(c)
             {
                 var row = [el("span", { class: "servers-queuelabel", text: channels.length > 1 ? channelname(c) : "Ready for" })];
                 THRESHOLDS.forEach(function(t)
                 {
-                    row.push(el("button", { type: "button", class: "servers-queuebutton", text: t + "+", disabled: !live || null,
-                        title: "Wait for a match of at least " + t + " " + channelname(c) + " players, counting anyone already on the server", onclick: function() { queuejoin(c.name, t); } }));
+                    row.push(el("button", { type: "button", class: "servers-queuebutton", text: t + "+", disabled: !can || null,
+                        title: rq.signedin === false ? "You need an account to queue" : "Wait for a match of at least " + t + " " + channelname(c) + " players, counting anyone already on the server",
+                        onclick: function() { queuejoin(c.name, t); } }));
                 });
                 actions.push(el("div", { class: "servers-queuerow" }, row));
                 counts.push(channels.length > 1 ? channelname(c) + ": " + queuecounts(c) : queuecounts(c) + ". " + versionnote(c));
             });
         }
         if(rq.threshold || rq.pop) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Leave queue", onclick: queueleave }));
+        // without an account, how to get one: register it on the account page or in the game, or sign in with one
+        var helpview = help !== null ? el("span", { class: "servers-queuehelp", text: help }) : el("span", { class: "servers-queuehelp" }, [
+            "You need an account to queue, which only takes an email: ",
+            el("a", { href: "/account", text: "register one or sign in" }),
+            ", or register in the game from the Account page of the Player menu."
+        ]);
         clear(queuebox);
         append(queuebox, [
             el("div", { class: "servers-queuetext" }, [
                 el("strong", { text: title }),
-                el("span", { class: "servers-queuehelp", text: help }),
-                el("span", { class: "servers-queuecounts", text: rq.error ? "Couldn't join: " + rq.error : !live ? "Waiting for the live list to reconnect" : counts.join(" · ") })
+                helpview,
+                el("span", { class: "servers-queuecounts", text: rq.error ? "Couldn't join: " + rq.error : !live ? "Waiting for the live list to reconnect" : counts.join(" · ") }),
+                waitingview()
             ]),
             el("div", { class: "servers-queueactions" }, actions)
         ]);
@@ -855,9 +879,21 @@
 
     var live = null, livefails = 0, polltimer = null;
 
+    // the account this browser signed in to, if any, gets a session on the master first, so the socket queues as it
     function connectlive()
     {
-        var url = master.replace(/^http/, "ws") + "/api/v1/servers/live";
+        var signedin = account ? account.me(true).then(function(me)
+        {
+            if(!me) return null;
+            rq.handle = me.name || "";
+            return account.mastersession();
+        }) : Promise.resolve(null);
+        signedin.then(function(sess) { openlive(sess); }, function() { openlive(null); });
+    }
+    function openlive(sess)
+    {
+        rq.signedin = !!sess;
+        var url = master.replace(/^http/, "ws") + "/api/v1/servers/live" + (sess ? "?token=" + encodeURIComponent(sess.token) : "");
         try { live = new WebSocket(url); }
         catch(e) { liveclosed(); return; }
         var ws = live, opened = false;
@@ -874,8 +910,6 @@
                     stoppolling();
                     setstate("live");
                     setlist(m.servers);
-                    // a place this tab had, claimed back by its Ticket
-                    if(rq.want && rq.ticket && rq.channel) queuesend({ queue: "join", source: "web", channel: rq.channel, threshold: rq.want, ticket: rq.ticket });
                     break;
                 case "add": case "update":
                     if(m.server) { servers.set(skey(m.server), m.server); listchanged(); }

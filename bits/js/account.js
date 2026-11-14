@@ -193,6 +193,19 @@
     };
     Account.prototype.forget = function(host, port) { this.sessions.delete(host + "/" + port); };
 
+    // a session on the master itself, for its live list, where the Matchmaking Queue takes the account's place; a fresh one
+    // each time, as one kept would lapse while a socket that opened with it stays open
+    Account.prototype.mastersession = function()
+    {
+        var self = this;
+        return this.call("POST", "/session").then(function(r)
+        {
+            if(r.status === 200 && r.json.token) return r.json;
+            if(r.status === 401) { hint(false); self.mine = Promise.resolve(null); }
+            return null;
+        });
+    };
+
     window.REAccount = { Account: Account, answer: answer, readauthcfg: readauthcfg, device: device, MASTER: MASTER };
 
     // ---- the Account page
