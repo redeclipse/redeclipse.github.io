@@ -41,8 +41,6 @@ unpublished: false
 
 # Plugins
 plugins:
-  - jekyll-avatar
-  - jekyll-mentions
   - jekyll-redirect-from
   - jekyll-sitemap
   - jekyll-paginate
