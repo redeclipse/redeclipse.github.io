@@ -686,3 +686,7 @@
     display: block;
     height: 100%;
 }
+/* a bridged sender's own account, after their name, grey as the game draws it */
+.servers-account {
+    color: rgb(170, 170, 170);
+}

@@ -1268,13 +1268,15 @@
 
     // Chat from the game has the game's chat icon before the player. Chat from the Web API has where it came from instead,
     // and every sender has a Privilege icon, so the lines align: an account speaking for itself shows its own, local or not,
-    // and someone it bridges from elsewhere, such as Discord, the standing the server was given for them there, or none.
+    // and someone it bridges from elsewhere, such as Discord, the standing the server was given for them there, or none,
+    // with their own account after their name when they've linked one.
     Panel.prototype.speaker = function(c, before, after)
     {
         if(!c || !c.web) return [icon("chat", "From the game"), before, this.name(c), after];
         return [bridgeicon(c.via), before, el("span", { class: "servers-player", style: "color:" + teamtextcolour("neutral") }, [
             privicon(typeof c.privilege === "string" ? c.privilege : "none", c.local, false, "#ffffff"),
-            plain(c.name) || "someone"
+            plain(c.name) || "someone",
+            c.account ? el("span", { class: "servers-account", text: " (" + c.account + ")" }) : null
         ]), after];
     };
 
