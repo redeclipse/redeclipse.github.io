@@ -103,6 +103,10 @@
     var root = document.getElementById("servers");
     if(!root) return;
     var master = (root.getAttribute("data-master") || "https://play.redeclipse.net:28888").replace(/\/+$/, "");
+    // signing in through the master, from account.js, to chat and moderate on the servers that let you
+    var account = window.REAccount ? new window.REAccount.Account(master) : null;
+    var PRIVRANKS = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
+    var CONTROLTYPES = ["kick", "mute", "limit", "ban", "allow", "except"];
     // The Current Release from data/game.yml, numbered as server versions are (209 is 2.0.9), or 0 if unreadable.
     var release = (function(v)
     {
@@ -956,9 +960,22 @@
         this.objectives = el("ul", { class: "servers-objectives", hidden: true });
         this.feedstate = el("p", { class: "servers-feedstate" });
         this.feedlist = el("ol", { class: "servers-feed", "aria-live": "polite" });
+        this.token = null;
+        this.privilege = "none";
+        this.standing = el("p", { class: "servers-standing", hidden: !account });
+        this.chatinput = el("input", { type: "text", maxlength: 260, placeholder: "Chat on this server", "aria-label": "Chat on this server" });
+        this.chat = el("form", { class: "servers-chat", hidden: true, onsubmit: function(e)
+        {
+            e.preventDefault();
+            var text = self.chatinput.value.trim();
+            if(!text || !self.ws || self.ws.readyState !== 1) return;
+            self.ws.send(JSON.stringify({ say: text }));
+            self.chatinput.value = "";
+        } }, [this.chatinput, el("button", { type: "submit", text: "Send" })]);
+        this.mod = el("div", { class: "servers-mod", hidden: true });
         this.body = el("div", { class: "servers-panelbody" }, [
-            el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.objectives, this.board]),
-            el("div", { class: "servers-feedbox" }, [el("h3", { text: "Match feed" }), this.feedstate, this.feedlist])
+            el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.objectives, this.board, this.mod]),
+            el("div", { class: "servers-feedbox" }, [el("h3", { text: "Match feed" }), this.feedstate, this.feedlist, this.standing, this.chat])
         ]);
         var closebtn = el("button", { type: "button", class: "servers-close", "aria-label": "Close", text: "×", onclick: function() { closepanel(); } });
         // The map preview has a column of its own, with the match beside it.
@@ -1052,6 +1069,7 @@
             self.feedfails = 0;
             self.feedstate.textContent = "";
             if(!first) self.refresh(); // catch up on what was missed while the feed was down
+            self.signin();
         };
         ws.onmessage = function(e)
         {
@@ -1059,7 +1077,150 @@
             try { m = JSON.parse(e.data); } catch(err) { return; }
             self.event(m);
         };
-        ws.onclose = function() { if(self.ws === ws) { self.ws = null; self.feedclosed(opened); } };
+        ws.onclose = function() { if(self.ws === ws) { self.ws = null; self.signedout(); self.feedclosed(opened); } };
+    };
+
+    // ---- signing in on the feed with a session from the master, the same words the game uses
+
+    Panel.prototype.showstanding = function(text, signinlink)
+    {
+        clear(this.standing);
+        append(this.standing, [text, signinlink ? [" ", el("a", { href: "/account", text: "Sign in" })] : null]);
+    };
+
+    Panel.prototype.signin = function()
+    {
+        var self = this, s = servers.get(this.key);
+        if(!account || !this.ws) return;
+        account.me().then(function(me)
+        {
+            if(self.closed || !self.ws) return;
+            if(!me) { self.showstanding("Not signed in", true); return; }
+            if(!s || s.relay < 2) { self.showstanding("Not signed in: this server doesn't allow signing in through the relay"); return; }
+            self.showstanding("Signing in…");
+            account.session(s.host, s.port).then(function(sess)
+            {
+                if(self.closed || !self.ws || self.ws.readyState !== 1) return;
+                self.token = sess.token;
+                self.ws.send(JSON.stringify({ token: sess.token }));
+            }, function(err)
+            {
+                if(self.closed) return;
+                self.showstanding("Not signed in: " + err.message, err.status === 401);
+            });
+        });
+    };
+
+    Panel.prototype.signedout = function()
+    {
+        this.privilege = "none";
+        this.chat.hidden = true;
+        this.mod.hidden = true;
+    };
+
+    // the feed's answer to the session, which also comes again when the session ends
+    Panel.prototype.authed = function(m)
+    {
+        var s = servers.get(this.key);
+        if(m.error || m.privilege === "none")
+        {
+            var had = this.token;
+            this.signedout();
+            this.token = null;
+            // a session that ran out unused, so get another, once
+            if(had && s && !this.resigned) { this.resigned = true; account.forget(s.host, s.port); this.signin(); return; }
+            this.showstanding("Not signed in" + (m.error ? ": " + m.error : ""));
+            return;
+        }
+        this.resigned = false;
+        this.privilege = m.privilege;
+        this.showstanding("Signed in as " + plain(m.name) + " (" + (m.local ? "local " : "") + m.privilege + ")");
+        this.chat.hidden = false;
+        this.moderation();
+    };
+
+    Panel.prototype.said = function(m)
+    {
+        if(m.error) this.line(["Not sent: " + m.error], "refused");
+        else if(m.cut) this.line(["Cut short to " + m.cut + " characters"], "refused");
+    };
+
+    // ---- moderation, website only: the server's Controls and a map change, for those its locks allow
+
+    Panel.prototype.authget = function(method, path, body)
+    {
+        var init = { method: method, cache: "no-store", headers: { Authorization: "Bearer " + this.token } };
+        if(body) { init.headers["Content-Type"] = "application/json"; init.body = JSON.stringify(body); }
+        return fetch(this.base + path, init).then(function(r)
+        {
+            return r.json().catch(function() { return {}; }).then(function(j) { return { status: r.status, json: j }; });
+        });
+    };
+
+    Panel.prototype.moderation = function()
+    {
+        var self = this;
+        if(PRIVRANKS.indexOf(this.privilege) < PRIVRANKS.indexOf("moderator") || !this.token) { this.mod.hidden = true; return; }
+        this.authget("GET", "/controls").then(function(r)
+        {
+            if(self.closed || !self.token) return;
+            self.drawmod(r.status === 200 && Array.isArray(r.json) ? r.json : [], r.status === 200 ? "" : r.json.error || "Couldn't fetch the controls.");
+        }, function() { if(!self.closed) self.drawmod([], "Couldn't fetch the controls."); });
+    };
+
+    Panel.prototype.drawmod = function(controls, note)
+    {
+        var self = this, s = servers.get(this.key), st = s && s.status;
+        var msg = el("p", { class: "servers-modnote", text: note || "", hidden: !note });
+        var done = function(r, ok)
+        {
+            if(r.status === ok || r.status === 200) self.moderation();
+            else { msg.textContent = r.json.error || "That didn't work (" + r.status + ")."; msg.hidden = false; }
+        };
+        var rows = controls.map(function(c)
+        {
+            return el("tr", {}, [
+                el("td", { text: c.type }),
+                el("td", { text: [c.name, c.handle ? "(" + plain(c.handle) + ")" : null].filter(Boolean).join(" ") || (c.ip ? c.ip + (c.mask ? "/" + c.mask : "") : "") }),
+                el("td", { text: c.reason || "" }),
+                el("td", { text: c.by || c.source || "" }),
+                el("td", {}, c.scope === "global" ? "global" : el("button", { type: "button", text: "Remove", onclick: function()
+                {
+                    self.authget("DELETE", "/controls/" + c.id).then(function(r) { done(r, 200); });
+                } }))
+            ]);
+        });
+        var who = el("select", { "aria-label": "Player" }, Array.from(this.players.values()).filter(function(p) { return !p.bot; }).map(function(p)
+        {
+            return el("option", { value: p.cn, text: plain(p.name) + " (" + p.cn + ")" });
+        }));
+        var what = el("select", { "aria-label": "Control" }, CONTROLTYPES.map(function(t) { return el("option", { value: t, text: t.charAt(0).toUpperCase() + t.slice(1) }); }));
+        var why = el("input", { type: "text", placeholder: "Reason", "aria-label": "Reason", maxlength: 100 });
+        var add = el("form", { onsubmit: function(e)
+        {
+            e.preventDefault();
+            if(!who.value) return;
+            self.authget("POST", "/controls", { cn: Number(who.value), type: what.value, reason: why.value || undefined }).then(function(r) { done(r, 201); });
+        } }, [who, what, why, el("button", { type: "submit", text: "Apply" })]);
+        var modes = st ? layout(st).modes : [];
+        var mapname = el("input", { type: "text", placeholder: "Map, such as bloodlust", "aria-label": "Map" });
+        var mode = el("select", { "aria-label": "Mode" }, modes.map(function(m, i) { return i < 2 ? null : el("option", { value: i, text: m, selected: st && st.modeid === i }); }));
+        var change = el("form", { onsubmit: function(e)
+        {
+            e.preventDefault();
+            if(!mapname.value.trim()) return;
+            self.authget("POST", "/map", { map: mapname.value.trim(), mode: Number(mode.value) }).then(function(r) { done(r, 200); });
+        } }, [mapname, mode, el("button", { type: "submit", text: "Change map" })]);
+        clear(this.mod);
+        append(this.mod, [
+            el("h3", { text: "Moderation" }),
+            controls.length ? el("table", {}, [el("thead", {}, el("tr", {}, ["Control", "Who", "Reason", "By", ""].map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)])
+                : el("p", { class: "servers-feedstate", text: "No controls" }),
+            who.options.length ? add : null,
+            change,
+            msg
+        ]);
+        this.mod.hidden = false;
     };
 
     Panel.prototype.feedclosed = function(wasopen)
@@ -1181,7 +1342,16 @@
             case "action":
                 this.line(this.speaker(m.client, "* ", " " + plain(m.text)), "chat");
                 break;
-            case "control": case "auth": case "challenge":
+            case "auth":
+                this.authed(m);
+                return;
+            case "said":
+                this.said(m);
+                return;
+            case "control":
+                if(!this.mod.hidden) this.moderation();
+                break;
+            case "challenge":
                 break;
             default:
                 if(typeof m.text === "string" && m.text) this.line([m.text], "broadcast");
