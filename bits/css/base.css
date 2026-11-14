@@ -265,7 +265,7 @@ th {
     height: 100%;
     border: 0;
 }
-/* Navbar: the menu folds behind a button below 768px */
+/* Navbar: the menu folds behind a button below 992px */
 .navbar {
     position: relative;
     z-index: 1000;
@@ -349,7 +349,7 @@ th {
     padding-bottom: 10px;
     line-height: 20px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
     .navbar-header {
         float: left;
     }

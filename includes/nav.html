@@ -11,9 +11,20 @@
         </div>
         <div id="navbar" class="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                {% for navitem in site.data.navigation %}
+                {% for navitem in site.data.navigation %}{% unless navitem.more or navitem.iconly %}
                     <li class="navitem"><a href="{{ navitem.url }}" title="{{ navitem.title }}">{% include icon.html name=navitem.icon %}<div class="navtext">{{ navitem.title }}</div></a></li>
-                {% endfor %}
+                {% endunless %}{% endfor %}
+                <li class="navitem navmore">
+                    <button type="button" class="navmorebutton" aria-expanded="false" aria-controls="navmenu" title="More">{% include icon.html name="ellipsis" %}<div class="navtext">More</div></button>
+                    <ul id="navmenu" class="navmenu">
+                        {% for navitem in site.data.navigation %}{% if navitem.more %}
+                        <li><a href="{{ navitem.url }}">{% include icon.html name=navitem.icon %} {{ navitem.title }}</a></li>
+                        {% endif %}{% endfor %}
+                    </ul>
+                </li>
+                {% for navitem in site.data.navigation %}{% if navitem.iconly %}
+                    <li class="navitem navicon"><a href="{{ navitem.url }}" title="{{ navitem.title }}" aria-label="{{ navitem.title }}">{% include icon.html name=navitem.icon %}<div class="navtext">{{ navitem.title }}</div></a></li>
+                {% endif %}{% endfor %}
             </ul>
         </div>
     </div>

@@ -1,6 +1,4 @@
-- url: /steam
-  title: "Steam"
-  icon: steam
+# The navbar: the site's sections, then "More" with the rest (more: true), then Account as an icon alone (iconly: true).
 - url: /discord
   title: "Discord"
   icon: discord
@@ -13,15 +11,23 @@
 - url: /docs
   title: "Documentation"
   icon: book
+- url: /steam
+  title: "Steam"
+  icon: steam
+  more: true
 - url: /github
   title: "GitHub"
   icon: github
+  more: true
 - url: /discuss
   title: "Discussions"
   icon: comment
+  more: true
 - url: /issues
   title: "Issue Tracker"
   icon: list-check
+  more: true
 - url: /account
   title: "Account"
   icon: user
+  iconly: true

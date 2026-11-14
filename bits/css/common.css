@@ -104,6 +104,97 @@ a:hover, a:active, a:focus {
         font-size: 20px;
     }
 }
+/* "More" looks like the other entries and opens its menu below it; folded, its entries are listed like the rest */
+.navbar-inverse .navbar-nav > li > .navmorebutton {
+    display: block;
+    padding: 2px 4px 2px 4px;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    color: rgb(255, 178, 178);
+    text-shadow: -1px -1px 4px rgb(255, 0, 0);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: all 0.15s linear 0s;
+}
+.navbar-inverse .navbar-nav > li > .navmorebutton:hover, .navmore.open > .navmorebutton {
+    color: rgb(255, 255, 255);
+    text-shadow: -1px -1px 5px rgb(255, 0, 0);
+}
+.navmorebutton > div, .navmorebutton > svg {
+    display: inline;
+    padding: 0px 0px 0px 2px;
+}
+.navmenu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1001;
+    min-width: 200px;
+    margin: 0;
+    padding: 4px 0;
+    font-size: 16px;
+    list-style: none;
+    text-align: left;
+    background-color: rgba(16, 0, 0, 0.97);
+    border: 1px solid rgb(120, 0, 0);
+    border-radius: 4px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+.navmore:hover > .navmenu, .navmore:focus-within > .navmenu, .navmore.open > .navmenu {
+    display: block;
+}
+.navmenu a, .navmenu a:link, .navmenu a:visited {
+    display: block;
+    padding: 6px 14px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: rgb(255, 178, 178);
+    text-shadow: -1px -1px 4px rgb(255, 0, 0);
+}
+.navmenu a:hover, .navmenu a:focus {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    background-color: rgba(255, 0, 0, 0.15);
+}
+@media screen and (max-width: 1200px) {
+    .navbar-inverse .navbar-nav > li > .navmorebutton {
+        padding: 4px 4px 8px 4px;
+        font-size: 20px;
+    }
+}
+/* Account stands apart at the end, its icon alone, its name only for screen readers and folded */
+@media (min-width: 992px) {
+    .navicon {
+        margin-left: 12px;
+    }
+    .navicon .navtext {
+        display: none !important;
+    }
+}
+@media (max-width: 991px) {
+    .navmorebutton {
+        display: none !important;
+    }
+    .navmenu {
+        display: block;
+        position: static;
+        min-width: 0;
+        padding: 0;
+        text-align: right;
+        background: none;
+        border: 0;
+        box-shadow: none;
+    }
+    .navmenu a, .navmenu a:link, .navmenu a:visited {
+        padding: 4px 4px 8px 4px;
+        font-size: 20px;
+        line-height: 20px;
+    }
+}
 .navbar-toggle {
     margin-top: 23px;
 }
