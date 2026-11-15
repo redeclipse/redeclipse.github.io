@@ -333,7 +333,7 @@
     // ---- registering, lost keys and the mailed links
 
     var ACTION = root.getAttribute("data-action") || "", SITEKEY = root.getAttribute("data-turnstile") || "";
-    var FLAGPRIV = { u: 1, s: 2, m: 3, o: 3, a: 4, d: 5, c: 6 }, PRIVNAMES = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
+    var FLAGPRIV = { u: 1, s: 2, m: 3, o: 3, a: 4, d: 5, c: 6 }, PRIVNAMES = ["none", "player", "supporter", "moderator", "administrator", "developer", "founder"];
     var CONTROLTYPES = ["ban", "mute", "limit", "allow", "except", "trust"];
 
     function privof(flags)

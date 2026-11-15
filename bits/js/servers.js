@@ -81,10 +81,10 @@
     var BRIDGES = { web: ["web", "Web"], irc: ["irc", "IRC"], discord: ["discord", "Discord"], matrix: ["matrix", "Matrix"], xmpp: ["xmpp", "XMPP"],
         twitch: ["twitch", "Twitch"], telegram: ["telegram", "Telegram"], stoat: ["stoat", "Stoat"], revolt: ["stoat", "Stoat"] };
     // Privileges with icons, and those a server's operator can give locally, which have icons of their own.
-    var PRIVILEGES = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
+    var PRIVILEGES = ["none", "player", "supporter", "moderator", "administrator", "developer", "founder"];
     var LOCALPRIVILEGES = ["supporter", "moderator", "administrator"];
-    // A polled status has the words on the game's Privilege icons, where creator is founder and v1.6's operator sits just above moderator.
-    var ICONPRIVILEGES = { founder: "creator", operator: "moderator" };
+    // A polled status has the words on the game's Privilege icons, where founder is founder and v1.6's operator sits just above moderator.
+    var ICONPRIVILEGES = { founder: "founder", operator: "moderator" };
     // A polled status has each player's team colour. The game's default team colours changed often, even within a game version,
     // but no colour ever meant two teams, so one table names them all. Kappa and sigma were v1.6's extra teams with the Multi mutator.
     var POLLTEAMS = (function()
@@ -110,7 +110,7 @@
     var master = (root.getAttribute("data-master") || "https://play.redeclipse.net:28888").replace(/\/+$/, "");
     // signing in through the master, from account.js, to chat and moderate on the servers that let you
     var account = window.REAccount ? new window.REAccount.Account(master) : null;
-    var PRIVRANKS = ["none", "player", "supporter", "moderator", "administrator", "developer", "creator"];
+    var PRIVRANKS = ["none", "player", "supporter", "moderator", "administrator", "developer", "founder"];
     var CONTROLTYPES = ["kick", "mute", "limit", "ban", "allow", "except"];
     // The Current Release from data/game.yml, numbered as server versions are (209 is 2.0.9), or 0 if unreadable.
     var release = (function(v)
@@ -221,7 +221,7 @@
         if(!c || c.bot || PRIVILEGES.indexOf(c.privilege) <= PRIVILEGES.indexOf(minpriv)) return "";
         if(c.local && LOCALPRIVILEGES.indexOf(c.privilege) >= 0) return "local " + c.privilege;
         return { player: "player account", supporter: "global supporter", moderator: "global moderator", administrator: "global administrator",
-            developer: "project developer", creator: "project founder" }[c.privilege] || "";
+            developer: "project developer", founder: "project founder" }[c.privilege] || "";
     }
     // On joins and leaves a player's standing and account follow their name, as the game's own join line has them
     function handle(c)
