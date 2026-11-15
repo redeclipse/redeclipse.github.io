@@ -76,6 +76,17 @@
         return r.x.toString(16);
     }
 
+    // the master's own sign-in takes the answer hashed with what it's for, so one given to a game server can't be passed on to it
+    function signinanswer(privkey, challenge)
+    {
+        var raw = answer(privkey, challenge).toLowerCase().replace(/^0+(?=.)/, "");
+        if(!window.crypto || !crypto.subtle) return Promise.reject(new Error("This browser can't sign in here, as the page needs a secure connection."));
+        return crypto.subtle.digest("SHA-256", new TextEncoder().encode("Red Eclipse master sign-in " + raw)).then(function(h)
+        {
+            return Array.from(new Uint8Array(h)).map(function(b) { return (b < 16 ? "0" : "") + b.toString(16); }).join("");
+        });
+    }
+
     // a name people know their device by, such as "Firefox on Linux", from a browser's User-Agent, which the master may have cut short
     function device(ua)
     {
@@ -153,8 +164,11 @@
         return this.call("POST", "", { name: name }).then(function(r)
         {
             if(r.status !== 200) throw new Error(r.json.error || "The master server refused to sign you in.");
-            var ans = answer(privkey, r.json.challenge);
-            return self.call("POST", "", { id: r.json.id, answer: ans, remember: !!remember, label: device(navigator.userAgent) });
+            var id = r.json.id;
+            return signinanswer(privkey, r.json.challenge).then(function(ans)
+            {
+                return self.call("POST", "", { id: id, answer: ans, remember: !!remember, label: device(navigator.userAgent) });
+            });
         }).then(function(r)
         {
             if(r.status !== 200) throw new Error(r.json.error === "identity verification failed" ? "That key isn't this account's." : (r.json.error || "The master server refused to sign you in."));
