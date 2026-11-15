@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-The time since the release of v1.6 has seen some major developments within the project, starting at the New UI and culminating in a full port of the Tesseract engine to Red Eclipse that is now being dubbed "version 2.0", which we will hopefully be releasing in the near future. So, what does this mean?
+Version 2.0 introduced major changes over the Red Eclipse 1.x series, starting with a rebuilt UI and a full port of the Tesseract rendering engine. This page summarizes the key architectural and mapping differences compared to 1.x.
 
 ## A New Rendering Engine
 From the [Tesseract website](http://tesseract.gg/):
@@ -30,7 +30,7 @@ Since starting the v2.0 project, there have been some deviations from the standa
 In choosing your load-out, this was basically among the first of the ways we gave players to customise their character and combat styles. Rather than creating rigid classes, we wanted to offer everything so you could make as many different combinations as you want. In v2.0 this has been extended further to actually give your choices more depth, these include things like changing weight, speed, and health. More modifiers will probably be added as the situation evolves and we find more ways to give deeper mechanics to each weapon, after which we will have to take a look at the balance again before releasing.
 
 ### Impulse System
-Probably one of the most guarded and heralded aspects of the game, this has always been sensitive to changes. The biggest change here from previous versions is the removal of the "Impulse Meter", a source of conditionally regenerative energy that limited your ability to perform special moves like boosting, dashing, and parkour. This is another response to a popular mutator in v1.6, "Freestyle", which is generally the same idea. The only limit from here will be how many moves you can do before having to touch the ground again, with delay timers between each move, and the mutator will now just lift the move count restrictions.
+Probably one of the most guarded and heralded aspects of the game, this has always been sensitive to changes. Alongside limiting how many moves you can perform before touching the ground again (`impulsecount`, with delay timers between actions), Red Eclipse 2.x supports both the air-transit count and the regenerating energy meter (`impulsecostmeter`), while setting the limits to `0` enables unlimited freestyle movement.
 
 ### Jumping
 Not a thing you think would change much, but we've been running a few experiments here to make things a bit more interesting/nuanced, things may or may not change. Holding down jump now lets you jump a little higher, and holding down crouch helps you fall a little faster. Pressing jump in mid-air while holding crouch also allows you impulse directly down. These changes have been made in tandem with the speed/weight changes mentioned above to strike a balance between the new mechanics and the old "feel".
@@ -59,7 +59,7 @@ You can change how a light behaves by modifying attribute 7 in a bitwise fashion
 
 Having lights that work in realtime has finally allowed me to add both "palette" and "palindex" attributes to the LIGHT entity at attributes 8 and 9. This means maps can be completely responsive to to the available palettes which includes team colours in team games, even allowing for a neutral fallback if it is a free-for-all game. You can use these attributes in conjunction with "texpalette" to make textures the same colours. We would like to see more maps taking advantage of this feature as we can actually change the colours of the teams with variables. Anyway, I'll try to explain how this works.
 
-Palette "0" - rotating pulse colours:
+Palette "0" - rotating pulse colours (1 through 30; highlights shown below):
 - 0 = this special value means apply no palette (0, 0)
 - 1 = `PULSE_FIRE`, fire like colours
 - 2 = `PULSE_BURN`, like fire, but darker (used for the burn residual)
@@ -71,10 +71,12 @@ Palette "0" - rotating pulse colours:
 
 Palette "1" - team colours:
 - 0 = team neutral colour
-- 1 through 4 = team colour (or neutral in ffa)
-- 5 through 8 = team colour (persistent regardless of mode)
+- 1 through 2 = alpha and omega team colours (or neutral in FFA)
+- 3 through 5 = neutral, alpha, and omega colours (persistent regardless of mode)
 
-Palette "2" - weapon colours: a little long to list, but the gist is 0-11 (claw to rocket) but will be white if that particular weapon is disabled by some method, 12-23 is persistently the weapon colour.
+Palette "2" - weapon colours: `0`–`17` (Claw through Eclipse), reverting to white if that weapon is disabled by the current mode or mutators; `18`–`35` is persistently the weapon colour.
+
+Palette "3" - world colours (`worldcol` slots): references a slot index from `0` upwards into the map's active world/palette/material colour table.
 
 ### LightFX
 This has been our variation on Cube's SPOTLIGHT entity, but with several enhancements that include PULSE, FLICKER, and GLOW that have only really been used in the map "Test Chamber". Before, you could only use one LIGHTFX entity per light and get consistent results, but with the new lighting system we was able to revise this so you can link several LIGHTFX to LIGHTs and have it all work nicely in tandem. This means you could have a volumetric spotlight that flickers every so often, as if it were broken.
@@ -87,8 +89,8 @@ Something we've talked about in the past and wanted to do but couldn't because o
 
 This change involved duplicating a lot of variables and adding a new attribute to a ton of entities to support changing the entire map depending on the situation. And no, you don't have to use it to have a day and night version of your map (you can have two day versions for example), but it would be nice to see two variants of every map to keep things interesting for the players, even if that just means changing the lighting a little, placing items in different places, or changing the layout with mapmodels.
 
-The following entities now have a "variant" attribute:
-> light, playerstart, particles, sound, lightfx, decal, weapon, teleport, actor, trigger, pusher, affinity, checkpoint
+The following entities have a "variant" attribute:
+> light, mapmodel, playerstart, particles, sound, lightfx, decal, wind, mapui, physics, worldcol, weapon, teleport, actor, trigger, pusher, affinity, checkpoint, rail, camera
 
 The following variables now have a "alt" variant (eg. skybox -> skyboxalt) for variant 2:
 > ambient, ambientscale, skylight, skylightscale, fog, fogcolour, skybgcolour, skybox, skycolour, skyblend, skyoverbright, skyoverbrightmin, skyoverbrightthreshold, spinsky, yawsky, cloudbox, cloudcolour, cloudblend, spinclouds, yawclouds, cloudclip, cloudlayer, cloudlayercolour, cloudlayerblend, cloudoffsetx, cloudoffsety, cloudscrollx, cloudscrolly, cloudscale, spincloudlayer, yawcloudlayer, cloudheight, cloudfade, cloudsubdiv, envlayer, envlayercolour, envlayerblend, envoffsetx, envoffsety, envscrollx, envscrolly, envscale, spinenvlayer, yawenvlayer, envheight, envfade, envsubdiv, atmo, atmoplanetsize, atmoheight, atmobright, atmolight, atmolightscale, atmodisksize, atmodiskbright, atmohaze, atmohazefade, atmohazefadescale, atmoclarity, atmodensity, atmoblend, fogdomeheight, fogdomemin, fogdomemax, fogdomecap, fogdomeclip, fogdomecolour, fogdomeclouds, skytexture, skyshadow, sunlight, sunlightscale, sunlightyaw, sunlightpitch
@@ -107,11 +109,5 @@ This is a new entity which takes the place of the old SUNLIGHT spot. This allows
 ### Map Descriptions
 A new map variable, `mapdesc`, should be set alongside `maptitle` and `mapauthor`. It provides a short description of the map which is shown in menus, and should only be about 1 to 2 sentences long as it is used in tooltips.
 
-## What We Need
-Version 1.6 was released in December 2017 and we've been without a release for quite a while now because half the game is being rebuilt. What we need is:
-- Maps, either new or ported. We only have a handful of maps at the moment. Post maps up on the discussions for feedback, and assign them to @qreeves when they're ready to review for inclusion in the game.
-- Models, ones to replace any low quality assets, and new ones for ammo boxes.
-- Any UI work that hasn't covered stuff we previously had, due to the interface rewrite.
-
-## In Conclusion
-There's been a lot of work done since v1.5.8 was released, and there's a whole ton more still to do. This is actually an exciting time for the project and we hope you all enjoy the new rendering engine (@qreeves basically stayed up 40 hours at time for a whole week to get it done!). Also be sure to thank @lsalzman for all the hard work he's done on Tesseract and his tireless efforts helping us with everything technical in Red Eclipse, without him this game would not exist.
+## Conclusion
+Major architecture changes since the 1.x series include the new UI system, dynamic deferred lighting via the Tesseract engine, and updated entity/variant workflows. Special thanks to @lsalzman for all his work on Tesseract and technical assistance with Red Eclipse.

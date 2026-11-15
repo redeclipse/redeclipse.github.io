@@ -58,7 +58,7 @@ Some maps will have a layout that is not perfectly symmetrical where one team ma
 | <img src="../images/modes/capture.png" width="64px"/>   |[**Capture the Flag**](Capture-the-Flag)  |Take the enemy flag and return it to the base to score|
 | <img src="../images/modes/defend.png" width="64px"/>    |[**Defend and Control**](Defend-Control)|Defend control points to score                        |
 | <img src="../images/modes/bomber.png" width="64px"/>    |**Bomber Ball**       |Carry the bomb into the enemy goal to score           |
-| <img src="../images/modes/race.png" width="64px"/>      |**Race**              |Compete for the fastest time completing a lap         |
+| <img src="../images/modes/speedrun.png" width="64px"/>  |**Speedrun**          |Try to complete the obstacle course in the fastest time|
 
 ### Mutators
 Gameplay can be further customised by enabling mutators to create some unique game mode combinations.
@@ -78,6 +78,7 @@ Gameplay can be further customised by enabling mutators to create some unique ga
 |<img src="../images/modes/resize.png" width="64px"/>   |Resize   |Players change size depending on their health     |
 |<img src="../images/modes/hard.png" width="64px"/>     |Hard     |Radar and health regeneration is disabled         |
 |<img src="../images/modes/arena.png" width="64px"/>    |Arena    |Players are able to carry all weapons at once     |
+|<img src="../images/modes/dark.png" width="64px"/>     |Dark     |Murder in the dark                                |
 
 An example of how mutators work to change the gameplay:
 
@@ -107,6 +108,6 @@ Additional mutators which can only be enabled in specific game modes.
 |<img src="../images/modes/bomberhold.png" width="64px"/>    |Bomber Ball       |Hold      |Hold the bomb as long as possible to score                  |
 |<img src="../images/modes/bomberbasket.png" width="64px"/>  |Bomber Ball       |Basket    |Throw the bomb into the enemy goal to score                 |
 |<img src="../images/modes/bomberassault.png" width="64px"/> |Bomber Ball       |Assault   |Teams take turns attacking and defending                    |
-|<img src="../images/modes/racelapped.png" width="64px"/>    |Race              |Lapped    |Compete for the most number of laps                         |
-|<img src="../images/modes/raceendurance.png" width="64px"/> |Race              |Endurance |Laps must be completed without dying at all                 |
-|<img src="../images/modes/racegauntlet.png" width="64px"/>  |Race              |Gauntlet  |Teams take turns running the gauntlet                       |
+|<img src="../images/modes/speedrunlapped.png" width="64px"/>    |Speedrun          |Lapped    |Try to complete the obstacle course the most number of times|
+|<img src="../images/modes/speedrunendurance.png" width="64px"/> |Speedrun          |Endurance |Laps must be completed without dying at all                 |
+|<img src="../images/modes/speedrungauntlet.png" width="64px"/>  |Speedrun          |Gauntlet  |Teams take turns running the gauntlet                       |

@@ -24,20 +24,20 @@ You must download and install MSYS2 for easiest building on Windows.
 
 In the MSYS2 prompt, change directory to the location of Red Eclipse:
 ```
-cd /c/Users/qreev/Documents/redeclipse
+cd /c/Users/<user>/Documents/redeclipse
 ```
-*(note: that MSYS2 is using "/" as the root directory, so that `C:\Users\qreev\Documents\redeclipse` would be written as `/c/Users/qreev/Documents/redeclipse`)*
+*(note: MSYS2 uses "/" as the root directory, so `C:\Users\<user>\Documents\redeclipse` is written as `/c/Users/<user>/Documents/redeclipse`)*
 
 First you must compile with debug symbols:
 ```
-make -Csrc clean && CXXFLAGS=-ggdb3 make -Csrc install
+make -C src clean && CXXFLAGS=-ggdb3 make -C src install
 ```
 
 <a href="images/debug/win_dbg1.png" target="_blank"><img src="images/debug/win_dbg1.png" width="512px"/></a>
 
 Then run with GDB:
 ```
-gdb src/redeclipse_windows.exe
+gdb bin/amd64/redeclipse.exe
 ```
 
 <a href="images/debug/win_dbg2.png" target="_blank"><img src="images/debug/win_dbg2.png" width="512px"/></a>
@@ -60,12 +60,12 @@ On Linux-based systems, you can use GDB to get a backtrace:
 First you must compile with debug symbols:
 
 ```
-make -Csrc clean && CXXFLAGS=-ggdb3 make -Csrc install
+make -C src clean && CXXFLAGS=-ggdb3 make -C src install
 ```
 
 Then run with GDB:
 ```
-gdb src/redeclipse_linux
+gdb bin/amd64/redeclipse_linux
 ```
 Inside GDB, to start Red Eclipse, type:
 ```

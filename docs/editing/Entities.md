@@ -9,6 +9,15 @@ redirect_from:
 ---
 * TOC
 {:toc}
+## Placing and Editing Entities
+
+You can place, select, and configure entities either through the editor UI or via console commands while in edit mode (`F2`):
+
+- **Entities panel & quick placement:** Press `F6` to open the Entities panel, `Ctrl+E` for the quick Entity placer, `Ctrl+N` to add an entity at your grid selection, or `Ctrl+Shift+N` to add one at the camera position. Press `Ctrl+F` to search entities.
+- **Console command:** Open the console (`~` or `/`) and run `/newent <type> [attributes...]`, for example `/newent light 300 180 180 180`.
+- **Selecting & moving:** Left-click an entity to select it (`N` selects entities inside the current grid selection, `End` deselects, `Delete` removes selected entities). Drag along one of its axis arrows to move it; `Shift+C` cycles entity snapping (`/entselsnapmode` or `/entselsnap`).
+- **Editing attributes:** Use the `F6` Entities panel, press `.` (`/entset`) to enter attribute values directly, or hold `1`–`9` (and `0` for attribute 10) while scrolling the mouse wheel to adjust attributes 1–10.
+
 ## Actor
 
 `/newent actor`
@@ -21,20 +30,20 @@ An actor entity, can allow you to select specific weapons / personality of the a
 
 `/newent affinity`
 
-Affinities are entities that set the positional location of flags, capture points, bomberball spawns, etc.
-These are usually placed with *modebit* and *mutsbit* set to the corresponding bitwise value for specific game modes / mutators.
+Affinities are entities that set the positional location of flags, capture points, bomber-balls, etc.
+These are usually placed with `modes` and `muts` set to the corresponding bitwise value for specific game modes / mutators.
 
 ## Camera
 
 `/newent camera`
 
-These entities are used when spectating with spectv. These can be linked to [rails](#rail) to allow them to move around.
+These entities are used when spectating with SpecTV. They can be linked to [rails](#rail) to allow them to move around.
 
 ## Checkpoint
 
 `/newent checkpoint`
 
-The `checkpoint` entity is used to track progress in the [Race](../gameplay/Race) game mode. When a player dies during Race, they will respawn at the last checkpoint.
+The `checkpoint` entity is used to track progress in the [Speedrun](../gameplay/Speedrun) game mode. When a player dies during Speedrun, they respawn at the last checkpoint.
 
 ## Decal
 
@@ -62,29 +71,43 @@ The `light` entity is used to add point lights. They can be configured with the 
 | 4  | blue     | The blue channel (0-255)
 | 5  | flare    | Lens flare
 | 6  | fscale   | The scale of the lens flare
-| 7  | flags    | Additional bitwise flags for *no-shadow, static, no-specular, volumetric* effects.
-| 8  | palette  | The type of colour palette to use
+| 7  | flags    | Additional bitwise flags (`1` no-shadow, `2` no-dynamic-shadow, `4` volumetric, `8` no-specular, etc.)
+| 8  | palette  | The type of colour palette (`0` pulse, `1` team, `2` weapon, `3` worldcol)
 | 9  | palindex | The index of the chosen colour palette
-| 10 | variant  | Determines if the entity appears in both map variants or only one
-| 11 | fxlevel  | Determines if the entity will be rendered based on the users [map effects](Fxlevels) setting
+| 10 | modes    | Bitmask of game modes where the light appears
+| 11 | muts     | Bitmask of mutators where the light appears
+| 12 | variant  | Determines if the entity appears in both map variants (`0`), normal (`1`), or alternate (`2`)
+| 13 | fxlevel  | Determines if the entity is rendered based on the user's [map effects](Fxlevels) setting
 
 ## Lightfx
 
 `/newent lightfx`
 
-An entity that can linked to `light` entities, to apply additional effects such as a spotlight. When linked to a light entity, the light entity takes on the additional properties of the `lightfx`. See links for more information on how to link these together.
+An entity that can linked to `light` entities, to apply additional effects such as a spotlight. When linked to a light entity, the light entity takes on the additional properties of the `lightfx`. See [Linking Entities](#linking-entities) for more information.
 
 ## Mapmodel
 
 `/newent mapmodel`
 
-A map model, i.e. a polygon mesh rendered as md3/md5/obj/iqm which you collide against, cast shadows etc. Mapmodels are useful for interactive objects that may require an animation, or for placing detail within a map for things that cannot be made within the octree.
+A map model, i.e. a polygon mesh rendered as md3/md5/obj/iqm which you collide against, cast shadows etc. Mapmodels are useful for interactive objects that may require an animation, or for placing detail within a map for things that cannot be made within the octree. See [Information for v2](../Information-for-v2#variants) for palette details.
 
-## Particle
+## Map UI
 
-`/newent particle`
+`/newent mapui`
+
+Renders an in-world UI surface on the map (or proximity/visor display when triggered), with orientation, radius, scale, flags, blend, and mode/mutator/variant filters.
+
+## Particles
+
+`/newent particles`
 
 Particles allow you to add fire, rain, lasers, snow, etc.
+
+## Physics
+
+`/newent physics`
+
+Defines a 3D physics zone controlling movement speed (`0`), gravity (`1`), or coasting (`2`) within its box volume (`width`, `length`, `height`, `falloff`), with optional mode, mutator, and map-variant filtering.
 
 ## Playerstart
 
@@ -96,19 +119,24 @@ Players spawn from these entities.
 
 `/newent pusher`
 
-A pusher entity gives you a push in the direction specified. These can be used for creating jumppads, boosters, or even simulating wind that blows the player in a specific direction.
+A pusher entity gives you a push in the direction specified. These can be used for creating jumppads or boosters. The `type` attribute controls how velocity is applied:
+
+- `0` (conditional): applies force only if velocity along each active axis is below the force threshold.
+- `1` (additional): adds the force directly to current velocity.
+- `2` (redirectional): redirects current velocity into the pusher direction and applies the force.
+- `3` (absolute): replaces current velocity with the pusher direction and force.
 
 ## Rail
 
 `/newent rail`
 
-Rails are a new feature in the development branch. Entities can be linked to a rail, enabling them to move around the map. These are used to add spectv cameras to a map, or to make mapmodels/lights move around as true dynamic objects.
+Entities can be linked to a rail, enabling them to move around the map along connected nodes. These are used for moving SpecTV cameras, mapmodels, lights, particles, sounds, triggers, and other dynamic objects.
 
 ## Route
 
 `/newent route`
 
-The `route` entities are used to add possible paths that the player can follow to complete a lap in [Race](../gameplay/Race) mode.
+The `route` entities are used to add possible paths that the player can follow to complete a lap in [Speedrun](../gameplay/Speedrun) mode.
 
 These are easier to place by using `/droproute 1` similar as to how [waypoints](Waypoints) are placed.
 
@@ -134,6 +162,12 @@ A streamed sound is a map sound in every other way: it is placed, attenuated, oc
 
 Tick **Music yields** in a sound entity's flags and the map's music grows quieter the louder that sound is heard, down to silence at the sound's full volume (within its reference distance), and returns as the sound fades with distance, behind walls or in another sound environment. The music is back to full where the sound has faded to silence, or by the entity's distance clamp if it has one. This works on any sound entity, streamed or not, and is what lets a song playing from a place in the map take over from the map's music as the player walks up to it. Players can turn the effect down or off with `musicyield`.
 
+## Sound Env
+
+`/newent soundenv`
+
+Defines a box-shaped acoustic/reverb zone (`type` environment preset index from Environment Settings, `width`, `length`, `height`, and fade parameters) that applies OpenAL EAX reverb effects to sounds heard inside the zone.
+
 ## Teleport
 
 `/newent teleport`
@@ -156,4 +190,19 @@ The `weapon` entity is used to place [weapon](../gameplay/Weapons-Guide) spawns 
 
 `/newent wind`
 
-A wind entity allows a [mapmodel](#mapmodel) with the correct vertex painting applied, to sway around with a simulated wind effect.
+A wind entity allows a [mapmodel](#mapmodel) with wind vertex painting (and optional linked sound entities) to sway dynamically with simulated wind.
+
+## World Colour
+
+`/newent worldcol`
+
+Modifies or blends active world, palette, and material colour slots (`type` blend operation, `flags`, `value` strength, `select` bitmask, `modes`, `muts`, `variant`), useful for dynamic lighting/colour transitions or per-variant styling.
+
+## Linking Entities
+
+Some entities can be linked together to drive dynamic behaviour:
+
+- Press `L` (`ta_ent_chain_link`) to chain-link selected entities or `Shift+L` (`ta_ent_star_link`) to star-link them from the active entity. Use the `F6` Entities panel to unlink or inspect links.
+- Sounds, particles, and `lightfx` can link to triggers, pushers, teleports, affinities, playerstarts, checkpoints, and rails (sounds can also link to `wind`).
+- Triggers can control linked mapmodels (visibility, collision, door animations) or other triggers; `lightfx` link to `light` entities; `worldcol` can link to `light` entities; `rail` nodes link to each other and to moving entities (`camera`, `mapmodel`, `light`, `particles`, `sound`, etc.); `teleport` pairs link together for one-way or two-way travel.
+- Each combination supports link modes that determine direction and behaviour.

@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-# THE RED ECLIPSE MARK POLICY
+## THE RED ECLIPSE MARK POLICY
 
 ## General Guidelines
 
@@ -135,7 +135,7 @@ The Red Eclipse project reserves the sole right to:
 2. Modify this policy to preserve the rights of Red Eclipse, the public, the
    community, and the users.
    The latest version of the Red Eclipse Mark Policy should be available at
-   <https://www.redeclipse.net/wiki/Trademark_Policy>
+   <https://www.redeclipse.net/trademark>
 
 3. Grant exceptions to this policy, of any kind and for any reason whatsoever,
    other clauses notwithstanding.
@@ -160,7 +160,7 @@ as described above.
 
 ## Attribution
 
-This text is Copyright (C) 2011-2025, the Red Eclipse Team
+This text is Copyright (C) 2011-2026, the Red Eclipse Team
 and is available under a Creative Commons Attribution-ShareAlike 4.0
 License <http://creativecommons.org/licenses/by-sa/4.0/>
 

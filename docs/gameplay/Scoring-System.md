@@ -32,7 +32,7 @@ This bonus can only be awarded once in a match, providing a 1-point bonus to the
 ### Team kills
 <img src="../images/icons/warning.png" width="48px"/>
 
-In team games, you have teammates for a reason, so don't kill them! Doing so brings a harsh penalty: -6 points are lost for each team kill. There is only one exception: No points are lost for kills attributed to residual damage (bleeding, electric shock, or burn). Avoid team kills at all costs, as too many will get you automatically kicked and banned from the server!
+In team games, you have teammates for a reason, so don't kill them! Doing so brings a harsh penalty: -6 points are lost for each team kill. Exceptions: No points are lost for kills attributed to mines or residual damage (bleeding, electric shock, burn, or corrosion). Avoid team kills at all costs, as too many will get you automatically kicked and banned from the server!
 
 ### Suicide
 If you hit yourself with your own weapon and run out of health (this includes exploding yourself with grenades or hitting your own mines), this counts as a team kill and is subject to the above scoring. However, there are other ways to die both accidental and on purpose: jumping into an abyss or off the edge of the map, a lava pit or other map hazard (causing you to collide with invisible death material). Also, you can press K at any time to immediately commit suicide. None of these options are desirable, bringing a penalty of -3 (pressing K while holding a grenade brings a penalty of -6).
@@ -74,7 +74,7 @@ In objective based team games, frags and bonus elements of the Deathmatch Scorin
 ### Duel and survivor
 <img src="../images/modes/duel.png" width="48px"/> <img src="../images/modes/survivor.png" width="48px"/>
 
-If either one of these modes are selected, regardless of game type, players' scores are replaced by a different system that tracks the number of rounds they've scored in, and thus their contribution to the team score if it's a team game. In a survivor deathmatch, the winning team only receives 1 point per round regardless of how many players are still alive, but each surviving player at the end gets a point to their own credit. The one exception is that multi-survivor Capture the Flag offers the unique possibility of earning up to 3 points per round (by capturing all 3 other flags simultaneously).
+If either one of these modes are selected, regardless of game type, players' scores are replaced by a different system that tracks the number of rounds they've scored in, and thus their contribution to the team score if it's a team game. In a survivor deathmatch, the winning team only receives 1 point per round regardless of how many players are still alive, but each surviving player at the end gets a point to their own credit.
 
 ### Capture-the-flag
 <img src="../images/modes/capture.png" width="48px"/>
@@ -99,10 +99,10 @@ If either one of these modes are selected, regardless of game type, players' sco
 - Picking up the ball: 3 points.
 - Scoring a goal: 5 points.
 - Killing a team mate who holds the ball: -12 points (including the team kill penalty).
-- Scoring an own goal: -5 points, and -1 point to the team score. Note that simply carrying the ball over your base does not count as an own goal; you have to throw the ball and let it fly or bounce into your goal to earn this dubious achievement. It is impossible to score an own goal if Touchdown is selected.
+- Scoring an own goal: -5 points, and -1 point to the team score. Note that simply carrying the ball over your base does not count as an own goal; you have to throw the ball and let it fly or bounce into your goal to earn this dubious achievement.
 - In the Hold mutator, deathmatch scores are not used. Instead, each player's listed score will simply be their contribution to the team score, if it's a team game. Players score 1 point for each second they hold onto the ball, with a penalty of -10 points for holding onto the ball too long and having the timer run out. No other actions affect the points in the Hold mutator.
 
-### Race
-<img src="../images/modes/race.png" width="48px"/>
+### Speedrun
+<img src="../images/modes/speedrun.png" width="48px"/>
 
-The scoring system in race games is usually limited to the lap count of each player and team - or the fastest lap time when the Timed mutator is active. Even though deathmatch scoring awards can be earned in Gauntlet Trial, they have no effect on a players score. 
+The scoring system in speedrun games is limited to the fastest lap time — or the lap count of each player when the Lapped mutator is active. Even though deathmatch scoring awards can be earned in Gauntlet, they have no effect on a player's score.

@@ -24,25 +24,29 @@ Players get buffed when **defending**
 
 - a secured control point in defend games
 - their base in bomber games
-- the flag in their team base or
-- a team mate who carries their flag
-- Note: The flag carrier is not buffed and
-- dropped flags have no buffing power
+- their own team's flag in its base or dropped in capture games
+- or while carrying their own team's flag (and teammates nearby)
+- Note: Carrying the enemy flag does not grant a buff by default.
 
 ## Ailments
-Some weapons induce status ailments that inflict some damage over time and last for about five seconds. Useful to delay enemy health recovery. Multiple effects can be stacked.
+Some weapons induce status ailments that inflict damage over time for 5.5 seconds. Useful to delay enemy health recovery. Multiple effects can be stacked.
 
 ### Shock
 <img src="../images/icons/shock.png" width="48px"/>
 
-Slows down movement greatly. Deals 3 damage per second for 5.5 seconds. Caused by <img src="../images/weapons/zapper.png" width="32px"/>the zapper's secondary, <img src="../images/weapons/mine.png" width="32px"/>mines and specific hurt residuals.
+Slows down movement greatly. Deals 3 damage per second for 5.5 seconds. Caused by <img src="../images/weapons/zapper.png" width="32px"/> the zapper's secondary, <img src="../images/weapons/trident.png" width="32px"/> trident, <img src="../images/weapons/mine.png" width="32px"/> mines and specific hurt residuals.
 
 ### Burn
 <img src="../images/icons/burn.png" width="48px"/>
 
-Deals 3 damage per second for 5.5 seconds. Can be negated with the secondary fire of the <img src="../images/weapons/flamer.png" width="32px"/> flamer or by entering water (as long as the burnt body part is submerged). Caused by <img src="../images/weapons/grenade.png" width="32px"/>grenades, <img src="../images/weapons/rocket.png" width="32px"/>rockets, <img src="../images/weapons/flamer.png" width="32px"/>flamer and specific hurt residuals.
+Deals 3 damage per second for 5.5 seconds. Can be negated with the secondary fire of the <img src="../images/weapons/flamer.png" width="32px"/> flamer or by entering water (as long as the burnt body part is submerged). Caused by <img src="../images/weapons/grenade.png" width="32px"/> grenades, <img src="../images/weapons/rocket.png" width="32px"/> rockets, <img src="../images/weapons/flamer.png" width="32px"/> flamer primary, <img src="../images/weapons/eclipse.png" width="32px"/> eclipse secondary and specific hurt residuals.
 
 ### Bleed
 <img src="../images/icons/bleed.png" width="48px"/>
 
-Deals 3 damage per second for 5.5 seconds. Caused by the secondary fire of <img src="../images/weapons/shotgun.png" width="32px"/>the shotgun's secondary, <img src="../images/weapons/sword.png" width="32px"/>the sword's secondary, and specific hurt residuals. 
+Deals 3 damage per second for 5.5 seconds. Caused by the secondary fire of <img src="../images/weapons/shotgun.png" width="32px"/> the shotgun, <img src="../images/weapons/sword.png" width="32px"/> the sword, <img src="../images/weapons/jetsaw.png" width="32px"/> jetsaw, and specific hurt residuals.
+
+### Corrode
+<img src="../images/icons/corrode.png" width="48px"/>
+
+Deals 1.5 damage per second for 5.5 seconds. Caused by the <img src="../images/weapons/corroder.png" width="32px"/> corroder and specific hurt residuals.

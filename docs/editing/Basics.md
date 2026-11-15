@@ -63,21 +63,25 @@ Here's some of the basic methods you can use to manipulate cubes within the map;
 
 Materials can be used to add visual effects and help with the design / flow of your map. These are similar to cube geometry, but cannot be manipulated in the same ways.
 
-They appear as translucent cubes, their visibility whilst editing can be toggled from view by pressing `M`.
+They appear as translucent volumes; their visibility while editing can be toggled with `Ctrl+M` (`M` in legacy binds) or `/showmat [0|1]`.
 
-All available materials can be viewed by pressing `NUMPAD 0`.
+You can open the Materials panel by pressing `F7`, apply the active material with `M`, or apply materials directly using the default keypad binds or console commands:
 
 | Default Keybind | Command   | Material Name | Description                                          |
 | --------------- | --------- | :------------ | ---------------------------------------------------- |
 | NUMPAD 1        | `/air`    | Air (none)    | Clears any existing material                         |
-| NUMPAD 2        | `/alpha`  | Alpha         | Makes cubes transparent                              |
-| NUMPAD 3        | `/water`  | Water         | Makes empty cubes become water                       |
-| NUMPAD 4        | `/lava`   | Lava          | Makes empty cubes become lava which kills the player |
-| NUMPAD 5        | `/clip`   | Clip          | Stops the player from passing through                |
-| NUMPAD 6        | `/noclip` | Noclip        | Allows the player to pass through cubes              |
+| NUMPAD 2        | `/alpha`  | Alpha         | Makes geometry translucent (`/valpha [front] [back]`, `0.0` invisible to `1.0` opaque) |
+| NUMPAD 3        | `/water`  | Water         | Creates water (`water2`–`water4` for extra variants) |
+| NUMPAD 4        | `/lava`   | Lava          | Creates lava that burns players (`lava2`–`lava4` for extra variants) |
+| NUMPAD 5        | `/clip`   | Clip          | Stops players from passing through                   |
+| NUMPAD 6        | `/noclip` | Noclip        | Allows players and projectiles to pass through cubes |
 | NUMPAD 7        | `/aiclip` | AI Clip       | Stops bots from passing through                      |
-| NUMPAD 8        | `/death`  | Death         | Kills the player when they enter it                  |
-| NUMPAD 9        | `/ladder` | Ladder        | Allows the player to walk vertically upwards         |
+| NUMPAD 8        | `/death`  | Death         | Kills players immediately when their feet enter it   |
+| NUMPAD 9        | `/ladder` | Ladder        | Allows players to climb vertical geometry            |
+| —               | `/glass`  | Glass         | Renders refractive glass surfaces (`glass2`–`glass4` for extra variants) |
+| —               | `/volfog` | Volumetric Fog | Creates volumetric fog (`volfog2`–`volfog4` for extra variants) |
+| —               | `/hurt`   | Hurt          | Damages players whose feet enter it using `/hurtdamage` (HP is out of `1000`) and `/hurtresidual` |
+| —               | `/nogi`   | No GI         | Excludes cubes from global illumination calculations |
 
 ----
 
@@ -85,9 +89,9 @@ All available materials can be viewed by pressing `NUMPAD 0`.
 
 Red Eclipse supports realtime dynamic lighting. Meaning you can add a light entity to the map and instantly see your changes by moving the light entity around.
 
-To add a new light entity, you can press `E`,`F` to access the entity menu, and select *light*. Or alternatively, you can also type `/newent light` into the console. The entity will appear where your current grid selection is located.
+To add a new light entity, press `F6` to open the Entities panel (`Ctrl+E` for the quick Entity placer, or `Ctrl+N` to add at the cursor), and select `light`. Alternatively, type `/newent light` into the console. The entity appears at your current grid selection.
 
-Most importantly, you will want to set the colour and the radius of the light entity. You will see a list of values written above the entity itself. These parameters can be adjusted by their corresponding number, by holding down that key, and scrolling with the mouse, whilst the entity is selected (left click).
+Most importantly, you will want to set the colour and radius of the light entity. A list of attribute values appears above the entity itself. You can adjust parameters in the Entities panel (`F6`), directly with `.` (`/entset`), or by selecting the entity (left-click) and scrolling the mouse wheel while holding the corresponding number key:
 
 | Key/Mouse bind | Parameter |
 | -------------- | --------- |
@@ -96,9 +100,9 @@ Most importantly, you will want to set the colour and the radius of the light en
 | 3 + SCROLL     | Green     |
 | 4 + SCROLL     | Blue      |
 
-You can also add some global lighting, by setting the `sunlight` variable.
+You can also add global directional lighting by setting the `sunlight` variable.
 
-This can be adjusted from the *Environment Settings*, accessed by pressing `F3`.
+This can be adjusted from the *Environment Settings* panel by pressing `F5`.
 
 Alternatively, you can type `/sunlight 140 150 160` into the console, to instantly add light to the world. This command takes the values R G B (0-255).
 
@@ -114,35 +118,37 @@ You can do this by simply running `/calclight` in the console (this command also
 
 ### Mapmodels
 
-A mapmodel is a polygon mesh that can be placed anywhere without restrictions, they can even intersect cube geometry. These are useful for adding details to a map, where it may be hard or unconvincing to create a certain shape with cube geometry. Pressing `F6` will open up the mapmodel finder, allowing you to quickly find and place a mapmodel.
+A mapmodel is a polygon mesh that can be placed anywhere without restrictions; they can even intersect cube geometry. These are useful for adding details to a map where it may be hard or unconvincing to create a certain shape with cube geometry. Press `F6` to open the Entities panel (or `Ctrl+E` for the Entity placer), select `mapmodel`, and browse the model list to place one.
 
-You can also use the console to add mapmodels to your map, by typing `/newent mapmodel`.
+You can also use the console to add mapmodels to your map by typing `/newent mapmodel`.
 
-Similar to the light entity, you can hold `1 + SCROLL` to cycle through the mapmodel index.
+Similar to the light entity, you can hold `1 + SCROLL` to cycle through the mapmodel index, or choose models visually in the Entities panel.
 
 ----
 
-### Helper UI's
+### Editor Panels
 
-Red Eclipse features several helper menus for adjusting various map settings whilst inside the editing mode. Ensure you have pressed `F2` to enter the edit camera to access the following;
+Red Eclipse features several editor panels for adjusting map settings while in edit mode. Ensure you have pressed `F2` to enter edit mode to access the following:
 
-#### Texture Browser
+#### Texture Browser (`F4`)
 
-Pressing `F1` will open the texture browser, you can use this to apply a texture to your current grid selection. Simply scroll down the list and click on the texture you wish to apply. You can press `-` to toggle the `allfaces` setting, which will dictate whether the texture is applied to a selected cube face, or the entire cube.
+Pressing `F4` opens the texture browser, which lets you apply a texture to your current grid selection. Scroll through the list and click a texture to apply it. You can press `-` to toggle `allfaces`, which controls whether textures apply only to the selected face or to all faces of the selected cubes.
 
-#### Environment Settings
+#### Environment Settings (`F5`)
 
-These can be accessed by pressing `F3`. Here you can change several things relating to the world lighting, fog, skybox, and ambient lighting.
+Pressing `F5` opens Environment Settings, where you can configure world lighting, sunlight, fog, skybox layers, cloud layers, and map sound settings.
 
-The above are also accessible from the editing menu, which can be accessed by pressing `E`.
+#### Entities Panel & Placer (`F6` / `Ctrl+E`)
 
-#### Mapmodel Finder
+Pressing `F6` opens the Entities panel to create, browse, and edit [entities](Entities) — including lights, [mapmodels](#mapmodels), sounds, particles, triggers, and game objects. Pressing `Ctrl+E` opens the quick Entity placer.
 
-A menu for finding available mapmodels can be shown by pressing `F6`. Scroll down the list and click to place that model at your active grid selection.
+#### Materials Panel (`F7`)
 
-#### The REEE
+Pressing `F7` opens the Materials panel to choose and apply material volumes, and `Ctrl+M` toggles material volume overlays.
 
-The *Red Eclipse Editing Encyclopedia*, found within the editing menu (press `E`). This menu displays an alphabetically ordered list of available commands related to editing, along with a description of usage, and the parameters each command expects.
+#### Search Actions (`F3`) & Toolbar (`Tab`)
+
+Pressing `F3` in edit mode opens the action search dialog. Pressing `Tab` switches to cursor mode so you can click icons in the editor toolbar directly, and `/help <command>` prints command or variable usage in the console.
 
 ### More on map editing
 

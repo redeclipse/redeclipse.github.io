@@ -30,9 +30,7 @@ Primary fires a VERY boring projectile that you can't really write much about. Y
 
 ### Secondary
 
-*NOTE: The secondary is completely broken at the moment and rarely, if ever, hits anyone. Use at your own risk.*
-
-Alt fire is a pistol whip. It does not cost any ammunition, it's a short-ranged melee attack. It deals okay damage and you can thwack people over the head pretty past. Again, pretty boring, but the Pistol does its job of being a filler weapon very well.
+Alt fire is a pistol whip. It does not cost any ammunition, as it is a short-ranged melee attack. It deals higher damage per hit than primary fire in melee range, and you can strike opponents over the head quickly. Again, pretty simple, but the Pistol does its job of being a reliable filler weapon very well.
 
 ### Tips
 

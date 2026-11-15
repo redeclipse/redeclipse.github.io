@@ -10,11 +10,11 @@ redirect_from:
 ---
 * TOC
 {:toc}
-# Particle FX
+## Particle FX
 
 This document describes how to create particle effects.
 
-## Particle types
+### Particle types
 
 Following particle types are available:
 
@@ -28,7 +28,7 @@ Following particle types are available:
 | Explosion     | 5     | $FX_PARTTYPE_EXPLODE | 3D explosion fireball                        |
 | Text          | 6     | $FX_PARTTYPE_TEXT    | Text particle                                |
 
-## Available particles
+### Available particles
 
 Following pre-defined particles are available for use:
 
@@ -86,7 +86,7 @@ Following pre-defined particles are available for use:
 | $PART_LIGHTNING          | 59    | Flare                |
 | $PART_LIGHTZAP           | 60    | Flare                |
 
-# Particle properties
+## Particle properties
 
 Those properties are only available when the effect type is particle.
 
@@ -105,7 +105,6 @@ Those properties are only available when the effect type is particle.
 | maxpartsize    | Float        | FLT_MIN                 | 16                   | FLT_MAX             | Random, Lerp | Final particle size (explosion)                            |
 | vel            | Float        | 0                       | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                                |
 | gravity        | Float        | -FLT_MAX                | 0                    | FLT_MAX             | Random, Lerp | Particle gravity                                           |
-| vel            | Float        | 0                       | 50                   | FLT_MAX             | Random, Lerp | Splash/shape particle speed                                |
 | text           | String       | [n/a]                   |                      | [n/a]               |              | Text                                                       |
 | parttrack      | Integer      | 0                       | 1                    | 1                   |              | Follow entity position (when not using offsets)            |
 
@@ -114,11 +113,11 @@ Those properties are only available when the effect type is particle.
  * Making long-fade particles (single/explosion/flare/text) follow the entity's position.
  * Dealing with model tag positions, being always one frame behind (such as when creating muzzle effects for weapons).
 
-# Particle collision
+## Particle collision
 
 With the use of the `collide` property one can define how a particle should behave upon collision with map geometry.
 By default it passes right through (value: `$FX_PARTCOLLIDE_NONE`).
-By setting `collide` to a stain index value (for instance `$STAIN_SMOKE`) (see *"Available stains"* in *Fx-Other.md*)
+By setting `collide` to a stain index value (for instance `$STAIN_SMOKE`) (see [Available stains](Fx-Other#available-stains) in [Other FX](Fx-Other))
 the particle will collide with geometry and leave the set stain.
 Alternatively, one can set the value to `$FX_PARTCOLLIDE_NOSTAIN` in order to simply
 enable geometry collision without making the particle leave any stains.

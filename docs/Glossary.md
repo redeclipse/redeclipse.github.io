@@ -35,13 +35,13 @@ The following list explains some commonly used terms and acronyms.
 | muts   | game mutators, special game rules that can be added and combined for a more diverse game experience. |
 | nade   | grenade, a collectible explosive weapon. |
 | ogg    | container format for vorbis audio, used for music and sound files. |
-| op     | operator, a player with advanced [privileges](server-how-to/Privileges). Or just OverPowered. |
+| op     | operator (former name) or local op (`addlocalop`), a player with elevated [privileges](server-how-to/Privileges). Or just OverPowered. |
 | pzap   | a typical taunt or chat comment, echoism of a rifle shot. |
-| runner | players with a preference for parkour and agile game-play, like race games or hit-and-run tactics in capture-the-flag or bomber-ball games. |
+| runner | players with a preference for parkour and agile game-play, like speedrun games or hit-and-run tactics in capture-the-flag or bomber-ball games. |
 | sg     | shotgun, a short ranged loadout weapon. |
 | smg    | sub-machine-gun, a rapid fire loadout weapon. |
 | spec   | spectate or going into spectator mode, allows to watch the game action from any player's point of view. |
 | svn    | subversion, a software versioning and revision control system. SVN was used for Red Eclipse prior to the migration to github. |
 | tk     | team kill. Killing your team mates is penalized with point loss, and players can get kicked or banned automatically for a certain number of team kills. |
-| trial  | time-trial, the former mode name for race games in versions 1.0 to 1.4. |
+| trial  | time-trial, the former mode name for speedrun (and race) games in versions 1.0 to 1.4. |
 | wpt    | file format to store waypoints for a map, a navigation mesh that allows bots to move much more efficiently. |

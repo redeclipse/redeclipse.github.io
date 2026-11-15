@@ -7,6 +7,7 @@ permalink: /docs/Home
 redirect_from:
   - /docs/
   - /docs/Main_Page/
+  - /wiki/
   - /wiki/Main_Page/
   - /wiki/Home/
 ---
@@ -24,6 +25,7 @@ redirect_from:
 
 ## Server Administration
 - **[Server Setup](server-how-to/Server-Setup)** - How to configure and run a Red Eclipse server.
+- **[Server HTTPS](server-how-to/Server-HTTPS)** - Enabling HTTPS and TLS certificates for your server's Web API.
 - **[Administration Guide](server-how-to/Admin-Guide)** - How to manage and moderate a server.
 - **[Accounts](Accounts)** - Registering an account, saving its key, and linking Steam and Discord.
 - **[Privilege Levels](server-how-to/Privileges)** - What those icons next to player names are all about.

@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-The next release of Red Eclipse, 2.0, is based on the Tesseract engine, which is much more GPU heavy than the outgoing Cube 2 engine. To see if your current computer is up to the task of RE 2.0, check with the system requirements listed below.
+Red Eclipse 2.0 and later is based on the Tesseract engine (OpenGL 3.3 or greater and GLSL 3.30 or greater required), which is much more GPU-heavy than the old Cube 2 engine. To see if your current computer is up to the task of running Red Eclipse, check the system requirements listed below.
 
 ## GPU
 
@@ -70,9 +70,9 @@ Skylake, any (Celeron G3\*\*\*, Pentium G45\*\*, i3-6\*\*\*, i5-6\*\*\*, i7-6\*\
 
 Kaby Lake, any (i3-7\*\*\*, i5-7\*\*\*, i7-7\*\*\*)
 
-Kaby Lake, any (i5-8\*\*\*M, i7-8\*\*\*M)<font size="-5">*mfw intel don't do this refresh shit*</font>
+Kaby Lake Refresh, any (i5-8\*\*\*U, i7-8\*\*\*U)
 
-Covfefe Lake, any (i3-8\*\*\*, i5-8\*\*\*, i7-8\*\*\*)
+Coffee Lake, any (i3-8\*\*\*, i5-8\*\*\*, i7-8\*\*\*)
 
 **Bay Trail (Celeron J, Celeron N, Atom Z3\*\*\*, Pentium J, Pentium N) is not officially considered adequate**
 

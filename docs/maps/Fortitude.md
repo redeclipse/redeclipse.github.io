@@ -9,15 +9,16 @@ redirect_from:
 ---
 * TOC
 {:toc}
-<img style='border:5px solid #ffe0e0e0' src="../images/maps/fortitude/fortitude.png" width="256px" />
+<img style='border:5px solid #ffe0e0e0' src="../images/maps/fortitude.png" width="256px" />
 
 ## Information
 
 |                            |                                                      |
 |----------------------------|------------------------------------------------------|
-| **Name**                   | Fortitude                                            |
-| **Author**                 | James "Max Payne" Tonjes and Alex "molexted" Foster  |
+| **Name** | Fortitude |
+| **Author** | James 'Max Payne' Tonjes, Alex 'molexted' Foster and dc |
 | **Filename**               | fortitude                                            |
+| **Rotation** | Standard Rotation |
 | **Release Date**           | 2012-09-01 (2019-11-02)                              |
 | **Introduced in**          | 2.0.0 (-1.5.6)                                       |
 | **Size**                   | Small (4-6)                                          |
@@ -25,12 +26,12 @@ redirect_from:
 | **Theme**                  | Futuristic                                           |
 | **Environmental Features** | None                                                 |
 | **Day/Night**              | ✔/✔                                                  |
-| **Lights**                 | 85 (0/53/73)                                         |
-| **Entities**               | 222                                                  |
+| **Lights** | 98 |
+| **Entities** | 335 |
 | **Vertices**               | 70k                                                  |
 | **Triangles**              | 92k                                                  |
-| **Vslots**                 | 127                                                  |
-| **Recommend Modes**        | CTF                                                  |
+| **Vslots** | 145 |
+| **Recommended Modes** | Deathmatch, Capture the Flag, Defend and Control, Bomber Ball, Hold |
 
 ## Review
 
@@ -43,15 +44,15 @@ Back after a significant rework after being removed in 1.5.6, Fortitude boasts a
 
 ## Spawn Register
 
-| Weapon/Item                                                         | Count |
-|---------------------------------------------------------------------|:-----:|
-| <img src="../images/weapons/sword.png" width="32px"/> **Sword**     |   2   |
-| <img src="../images/weapons/shotgun.png" width="32px"/> **Shotgun** |   2   |
-| <img src="../images/weapons/smg.png" width="32px"/> **SMG**         |   2   |
-| <img src="../images/weapons/flamer.png" width="32px"/> **Flamer**   |   2   |
-| <img src="../images/weapons/plasma.png" width="32px"/> **Plasma**   |   2   |
-| <img src="../images/weapons/zapper.png" width="32px"/> **Zapper**   |   2   |
-| <img src="../images/weapons/rifle.png" width="32px"/> **Rifle**     |   2   |
-| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** |   7   |
-| <img src="../images/weapons/mine.png" width="32px"/> **Mine**       |   3   |
-| <img src="../images/weapons/rocket.png" width="32px"/> **Rocket**   |   0   |
+| Weapon/Item | Count |
+|---|:---:|
+| <img src="../images/weapons/sword.png" width="32px"/> **Sword** | 2 |
+| <img src="../images/weapons/shotgun.png" width="32px"/> **Shotgun** | 2 |
+| <img src="../images/weapons/smg.png" width="32px"/> **SMG** | 2 |
+| <img src="../images/weapons/flamer.png" width="32px"/> **Flamer** | 2 |
+| <img src="../images/weapons/plasma.png" width="32px"/> **Plasma** | 2 |
+| <img src="../images/weapons/zapper.png" width="32px"/> **Zapper** | 2 |
+| <img src="../images/weapons/rifle.png" width="32px"/> **Rifle** | 2 |
+| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** | 7 |
+| <img src="../images/weapons/mine.png" width="32px"/> **Mine** | 3 |
+| <img src="../images/weapons/rocket.png" width="32px"/> **Rocket** | 1 |

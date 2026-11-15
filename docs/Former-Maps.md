@@ -11,6 +11,21 @@ redirect_from:
 * TOC
 {:toc}
 
+## Removed Since 2.0.0
+[//]: # (HTML is easier to maintain as markdown when applying changes)
+<table>
+    <tr>
+        <td>
+            <div><a href="maps-old/Auster"><img src="images/maps-old/auster.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps-old/Auster">Auster</a></div>
+        </td>
+        <td>
+            <div><a href="maps-old/Ennui"><img src="images/maps-old/ennui.png" width="128px" height="128px" /></a></div>
+            <div><a href="maps-old/Ennui">Ennui</a></div>
+        </td>
+    </tr>
+</table>
+
 ## 1.6 maps
 
 ### Main Maps
@@ -26,24 +41,6 @@ redirect_from:
             <div>Battlefield</div>
         </td>
         <td>
-            <div><img src="images/maps-old/bloodlust.png" width="128px" height="128px" /></div>
-            <div>Bloodlust</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/cargo.png" width="128px" height="128px" /></div>
-            <div>Cargo</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/castle.png" width="128px" height="128px" /></div>
-            <div>Castle</div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div><img src="images/maps-old/center.png" width="128px" height="128px" /></div>
-            <div>Center</div>
-        </td>
-        <td>
             <div><img src="images/maps-old/conflict.png" width="128px" height="128px" /></div>
             <div>Conflict</div>
         </td>
@@ -52,40 +49,14 @@ redirect_from:
             <div>Darkness</div>
         </td>
         <td>
-            <div><img src="images/maps-old/deathtrap.png" width="128px" height="128px" /></div>
-            <div>Deathtrap</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/deli.png" width="128px" height="128px" /></div>
-            <div>Deli</div>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <div><img src="images/maps-old/depot.png" width="128px" height="128px" /></div>
-            <div>Depot</div>
-        </td>
-        <td>
             <div><img src="images/maps-old/dropzone.png" width="128px" height="128px" /></div>
             <div>Dropzone</div>
         </td>
-        <td>
-            <div><img src="images/maps-old/dutility.png" width="128px" height="128px" /></div>
-            <div>Dutility</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/echo.png" width="128px" height="128px" /></div>
-            <div>Echo</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/enyo.png" width="128px" height="128px" /></div>
-            <div>Enyo</div>
-        </td>
     </tr>
     <tr>
         <td>
-            <div><a href="maps-old/Fatal-Error"><img src="images/maps-old/error.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps-old/Fatal-Error">Error</a> </div>
+            <div><img src="images/maps-old/enyo.png" width="128px" height="128px" /></div>
+            <div>Enyo</div>
         </td>
         <td>
             <div><img src="images/maps-old/ghost.png" width="128px" height="128px" /></div>
@@ -126,29 +97,15 @@ redirect_from:
             <div>Tribal</div>
         </td>
     </tr>
-    <tr>
-        <td>
-            <div><img src="images/maps-old/ubik.png" width="128px" height="128px" /></div>
-            <div>Ubik</div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/wet.png" width="128px" height="128px" /></div>
-            <div>Wet</div>
-        </td>
-    </tr>
 </table>
 
-### Race maps
+### Speedrun / Race maps
 [//]: # (HTML is easier to maintain as markdown when applying changes)
 <table>
     <tr>
         <td>
             <div><a href="maps-old/Absorption"><img src="images/maps-old/absorption.png" width="128px" height="128px" /></a></div>
             <div><a href="maps-old/Absorption">Absorption</a></div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/cyanide.png" width="128px" height="128px" /></div>
-            <div>Cyanide</div>
         </td>
         <td>
             <div><img src="images/maps-old/decomposition.png" width="128px" height="128px" /></div>
@@ -162,16 +119,12 @@ redirect_from:
             <div><img src="images/maps-old/hinder.png" width="128px" height="128px" /></div>
             <div>Hinder</div>
         </td>
-    </tr>
-    <tr>
-        <td>
-            <div><img src="images/maps-old/neodrive.png" width="128px" height="128px" /></div>
-            <div>Neodrive</div>
-        </td>
         <td>
             <div><img src="images/maps-old/purge.png" width="128px" height="128px" /></div>
             <div>Purge</div>
         </td>
+    </tr>
+    <tr>
         <td>
             <div><img src="images/maps-old/relax.png" width="128px" height="128px" /></div>
             <div>Relax</div>
@@ -196,23 +149,13 @@ redirect_from:
             <div>Abuse</div>
         </td>
         <td>
-            <div><img src="images/maps-old/deathtrap.png" width="128px" height="128px" /></div>
-            <div>Deathtrap</div>
-        </td>
-        <td>
             <div><img src="images/maps-old/disco.png" width="128px" height="128px" /></div>
             <div><b>Disco</b></div>
-        </td>
-        <td>
-            <div><img src="images/maps-old/dutility.png" width="128px" height="128px" /></div>
-            <div>Dutility</div>
         </td>
         <td>
             <div><img src="images/maps-old/eternal.png" width="128px" height="128px" /></div>
             <div><b>Eternal</b></div>
         </td>
-    </tr>
-    <tr>
         <td>
             <div><img src="images/maps-old/purge.png" width="128px" height="128px" /></div>
             <div>Purge</div>
@@ -221,6 +164,8 @@ redirect_from:
             <div><img src="images/maps-old/singularity.png" width="128px" height="128px" /></div>
             <div><b>Singularity</b></div>
         </td>
+    </tr>
+    <tr>
         <td>
             <div><img src="images/maps-old/torus.png" width="128px" height="128px" /></div>
             <div><b>Torus</b></div>
@@ -243,10 +188,6 @@ redirect_from:
             <div><a href="maps-old/Colony">Colony</a></div>
         </td>
         <td>
-            <div><a href="maps-old/Rooftop"><img src="images/maps-old/rooftop.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps-old/Rooftop">Rooftop</a></div>
-        </td>
-        <td>
             <div><img src="images/maps-old/train.png" width="128px" height="128px" /></div>
             <div>Train</div>
         </td>
@@ -260,10 +201,6 @@ redirect_from:
         <td>
             <div><a href="maps-old/Linear"><img src="images/maps-old/linear.png" width="128px" height="128px" /></a></div>
             <div><a href="maps-old/Linear">Linear</a></div>
-        </td>
-        <td>
-            <div><a href="maps-old/Fortitude"><img src="images/maps-old/fortitude.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps-old/Fortitude">Fortitude</a></div>
         </td>
     </tr>
 </table>
@@ -351,8 +288,8 @@ redirect_from:
             <div><a href="maps-old/Lab">Lab</a></div>
         </td>
         <td>
-            <div><a href="maps-old/Tranquility"><img src="images/maps-old/tranquility.png" width="128px" height="128px" /></a></div>
-            <div><a href="maps-old/Tranquility">Tranquility</a></div>
+            <div><img src="images/maps-old/tranquility.png" width="128px" height="128px" /></div>
+            <div>Tranquility</div>
         </td>
     </tr>
 </table>

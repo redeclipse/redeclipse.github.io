@@ -9,7 +9,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-# Models
+## Models
 ## Importing Models
 ### Supported Formats
 Redeclipse supports several model formats;

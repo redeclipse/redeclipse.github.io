@@ -22,9 +22,7 @@ redirect_from:
 
 ### Description
 
-*NOTE: The Sword is easier to use in third person due to weird hitbox jankiness. This is being fixed by the developers.*
-
-A strong weapon, if not a seemingly odd choice in a cybernetic future full of powerful ranged weaponry. It's one of the lightest in the game, so it doesn't slow you down at all when held, giving it a nice parkour utility. But otherwise, it's as simple as it gets: you run up to people and cut them the fuck up. Since it doesn't require ammo, you can repeat this process until the heat death of the universe, or until you die. While easy to learn how to use, mastering it is a whole another thing, and it doesn't help that every other weapon in the game is a gun - therefore it has the "medium" difficulty rating, as you have to learn HOW to run up to people without getting killed.
+A strong weapon, if not a seemingly odd choice in a cybernetic future full of powerful ranged weaponry. It's one of the lightest in the game, so it doesn't slow you down at all when held, giving it a nice parkour utility. But otherwise, it's as simple as it gets: you run up to people and cut them up. Since it doesn't require ammo, you can repeat this process indefinitely. While easy to learn how to use, mastering it is a whole another thing, and it doesn't help that most other weapons in the game are guns - therefore it has the "medium" difficulty rating, as you have to learn HOW to run up to people without getting killed.
 
 ### Primary
 

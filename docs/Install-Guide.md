@@ -27,10 +27,10 @@ If you get a permission denied error during install, right click the installer a
 
 ### Standard Package
 - Install Red Eclipse's dependencies.
-    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-mixer-2.0-0 libsdl2-image-2.0-0 libsdl2-2.0-0`
-    - Fedora: `dnf install curl SDL2 SDL2_mixer SDL2_image`
+    - Debian/Ubuntu: `sudo apt-get install curl libsdl2-2.0-0 libsdl2-image-2.0-0 libopenal1 libsndfile1 zlib1g libx11-6`
+    - Fedora: `sudo dnf install curl SDL2 SDL2_image openal-soft libsndfile zlib libX11`
 - [Download the tarball](/download/linux), move it to your home directory, and extract it with your file manager, an archive utility, or the terminal command `tar -jxvf redeclipse_X.Y.Z_nix.tar.bz2`.
-- Enter the extracted folder (redeclipse-X.Y.Z) and run `redeclipse.sh` to launch Red Eclipse.
+- Enter the extracted folder (`redeclipse-X.Y.Z`) and run `./redeclipse.sh` to launch Red Eclipse.
 
 ## macOS
 There are no official macOS packages, but you can build the game yourself by following [Building from Source](#building-from-source). macOS support has only recently returned and has not been tested by the developers yet, so please report any problems on our [Discord](/discord) or [Discussions](/discuss).

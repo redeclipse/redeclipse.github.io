@@ -9,8 +9,6 @@ redirect_from:
 ---
 * TOC
 {:toc}
-# Accounts
-
 A Red Eclipse account is optional: you can always play without one. It gives you a **handle**, a name nobody else can take, which servers and other players see when it matters who you really are. Your standing, such as supporter or moderator, comes with it to every server. Accounts can also link your Steam and Discord accounts.
 
 Your account proves who you are with a **key** that only you hold. The game keeps it in `auth.cfg`, in your Red Eclipse home folder, and signs you in with it on servers that use accounts.

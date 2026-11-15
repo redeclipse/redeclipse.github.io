@@ -12,38 +12,37 @@ redirect_from:
 {:toc}
 ## Vote filtering
 If you wish to limit voting on your server to only certain modes or mutators you will need to
-- Take all the the *bit shifted* values for the modes/mutators you want to allow
-- Add them up
-- Use this sum value for the `sv_modelockfilter`/`sv_mutslockfilter` variable
+- Take all the *bit shifted* values for the modes/mutators you want to allow
+- Add them up (or combine them with bitwise OR `|`)
+- Use this value for the `sv_modelockfilter` / `sv_mutslockfilter` variable
 
-For example, to lock voting to only deathmatch and bomber-ball you need 4 + 32 = 36
+For example, to lock voting to only deathmatch and bomber-ball you need 4 + 32 = 36:
 ```cubescript
 sv_modelockfilter 36
 ```
 
 This will also lock the voting to only the allowed maps for those modes.
 
-As of Red Eclipse 1.3 (Galactic Edition), there are now `idx vars` that represent each bit-shifted value for each mode and mutator. These vars can be easily added when changing settings that involve these filters. For example:
+Red Eclipse exports `$G_*` (mode index) and `$G_M_*` (mutator index) constants, along with precomputed bitmask globals such as `$G_ALL`, `$G_LIMIT`, `$G_M_ALL`, `$G_M_FILTER`, and `$G_M_ROTATE`. Because `$G_*` and `$G_M_*` hold bit indices (`0..6` and `0..16`), bit-shift each one with `(<< 1 ...)` when combining them in CubeScript. For example:
 ```cubescript
-sv_modelockfilter (+ $modebitdeathmatch $modebitcapture)
+sv_modelockfilter (| (<< 1 $G_DEATHMATCH) (<< 1 $G_CAPTURE))
 ```
-Would limit the server to deathmatch and capture the flag
+would limit the server to Deathmatch and Capture the Flag.
 
-To allow the admin to override the filter, set
+To allow a moderator to override the filter, set:
 ```cubescript
 sv_modelock 3
 ```
 
-It is not possible to disable voting for mutators completely, but you can get close by using
+It is not possible to disable voting for mutators completely, but you can restrict voting to only the third mode-specific variation (`ctf-protect`, `bb-assault`, `speedrun-gauntlet`) by using:
 ```cubescript
-sv_mutslockfilter 65536
+sv_mutslockfilter (<< 1 $G_M_GSP3) // or 65536
 ```
-which will only keep the third mode variation mutator (ctf-protect) enabled.
 
 ## Server Rotation Filtering
-If you wish to filter the server rotation (without blocking rotation completely) use the `sv_rotatemodefilter`/`sv_rotatemutsfilter` variables
+If you wish to filter the server rotation (without blocking rotation completely) use the `sv_rotatemodefilter` / `sv_rotatemutsfilter` variables.
 
-For example
+For example:
 ```cubescript
 sv_rotatemodefilter 36
 ```
@@ -51,46 +50,47 @@ sv_rotatemodefilter 36
 ## Filter Values
 ### Modes
 
-| Number | Bit shifted | idxvar              | Mutator          |
-|:------:|------------:|---------------------|------------------|
-|    0   | 1           | `modebitdemo`       | Demo             |
-|    1   | 2           | `modebitediting`    | Editing          |
-|    2   | 4           | `modebitdeathmatch` | Deathmatch       |
-|    3   | 8           | `modebitcapture`    | Capture the Flag |
-|    4   | 16          | `modebitdefend`     | Defend the Flag  |
-|    5   | 32          | `modebitbomber`     | Bomber-ball      |
-|    6   | 64          | `modebitrace`       | Race             |
-|    7   | 127         | `modebitall`        | All              |
+| Number | Bit shifted | Index variable | Constant / Mask | Mode               |
+|:------:|------------:|----------------|-----------------|--------------------|
+| 0      | 1           | `G_DEMO`       | —               | Demo               |
+| 1      | 2           | `G_EDITING`    | —               | Editing            |
+| 2      | 4           | `G_DEATHMATCH` | —               | Deathmatch         |
+| 3      | 8           | `G_CAPTURE`    | —               | Capture the Flag   |
+| 4      | 16          | `G_DEFEND`     | —               | Defend and Control |
+| 5      | 32          | `G_BOMBER`     | —               | Bomber Ball        |
+| 6      | 64          | `G_SPEEDRUN`   | —               | Speedrun           |
+| —      | 60          | —              | `G_LIMIT`       | DM, CTF, Defend, Bomber |
+| —      | 127         | —              | `G_ALL`         | All                |
 
 ### Mutators
 
-| Number | Bit shifted | idxvar             | Mutator                                                                       |
-|:------:|------------:|--------------------|-------------------------------------------------------------------------------|
-|    0   | 1           | `mutsbitmulti`     | Multi                                                                         |
-|    1   | 2           | `mutsbitffa`       | Free-for-all                                                                  |
-|    2   | 4           | `mutsbitcoop`      | Co-op                                                                         |
-|    3   | 8           | `mutsbitinstagib`  | Instagib                                                                      |
-|    4   | 16          | `mutsbitmedieval`  | Medieval                                                                      |
-|    5   | 32          | `mutsbitkaboom`    | Kaboom                                                                        |
-|    6   | 64          | `mutsbitduel`      | Duel                                                                          |
-|    7   | 128         | `mutsbitsurvivor`  | Survivor                                                                      |
-|    8   | 256         | `mutsbitclassic`   | Classic                                                                       |
-|    9   | 512         | `mutsbitonslaught` | Onslaught                                                                     |
-|   10   | 1024        | `mutsbitfreestyle` | Freestyle                                                                     |
-|   11   | 2048        | `mutsbitvampire`   | Vampire                                                                       |
-|   12   | 4096        | `mutsbitresize`    | Resize                                                                        |
-|   13   | 8192        | `mutsbithard`      | Hard                                                                          |
-|   14   | 16384       | `mutsbitbasic`     | Basic                                                                         |
-|   15   | 32768       | `mutsbitgsp1`      | First mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard)  |
-|   16   | 65536       | `mutsbitgsp2`      | Second mode variation (ctf-defend, dtf-king, bomber-touchdown, gauntlet-hard) |
-|   17   | 131072      | `mutsbitgsp3`      | Third mode variation (ctf-protect)                                            |
-|   18   | 262143      | `mutsbitall`       | All                                                                           |
+| Number | Bit shifted | Index variable   | Constant / Mask | Mutator                                                                                         |
+|:------:|------------:|------------------|-----------------|-------------------------------------------------------------------------------------------------|
+| 0      | 1           | `G_M_FFA`        | —               | Free-for-All                                                                                    |
+| 1      | 2           | `G_M_COOP`       | —               | Co-op                                                                                           |
+| 2      | 4           | `G_M_INSTAGIB`   | —               | Instagib                                                                                        |
+| 3      | 8           | `G_M_MEDIEVAL`   | —               | Medieval                                                                                        |
+| 4      | 16          | `G_M_KABOOM`     | —               | Kaboom                                                                                          |
+| 5      | 32          | `G_M_DUEL`       | —               | Duel                                                                                            |
+| 6      | 64          | `G_M_SURVIVOR`   | —               | Survivor                                                                                        |
+| 7      | 128         | `G_M_CLASSIC`    | —               | Classic                                                                                         |
+| 8      | 256         | `G_M_ONSLAUGHT`  | —               | Onslaught                                                                                       |
+| 9      | 512         | `G_M_VAMPIRE`    | —               | Vampire                                                                                         |
+| 10     | 1024        | `G_M_RESIZE`     | —               | Resize                                                                                          |
+| 11     | 2048        | `G_M_HARD`       | —               | Hard                                                                                            |
+| 12     | 4096        | `G_M_ARENA`      | —               | Arena                                                                                           |
+| 13     | 8192        | `G_M_DARK`       | —               | Dark                                                                                            |
+| 14     | 16384       | `G_M_GSP1`       | —               | First mode variation (`dm-gladiator`, `ctf-quick`, `dac-quick`, `bb-hold`, `speedrun-lapped`)   |
+| 15     | 32768       | `G_M_GSP2`       | —               | Second mode variation (`dm-oldschool`, `ctf-defend`, `dac-king`, `bb-basket`, `speedrun-endurance`) |
+| 16     | 65536       | `G_M_GSP3`       | —               | Third mode variation (`ctf-protect`, `bb-assault`, `speedrun-gauntlet`)                         |
+| —      | 118785      | —                | `G_M_ROTATE`    | Default rotation filter (`FFA`, `Arena`, `GSP1`, `GSP2`, `GSP3`)                                |
+| —      | 131071      | —                | `G_M_ALL` / `G_M_FILTER` | All                                                                                    |
 
 ## How the Filter Values Work
 Filters are simply created using bitwise OR (numbers are bit shifted first):
 
-Example: 
-2 *(Deathmatch)* + 5 *(Bomber Ball)* = (1<<2) + (1<<5) = 4 + 32 = 36
+Example:
+2 *(Deathmatch)* + 5 *(Bomber Ball)* = `(1<<2) + (1<<5)` = 4 + 32 = 36
 ```
 00000100 +
 00100000 =

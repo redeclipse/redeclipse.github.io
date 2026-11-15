@@ -55,7 +55,7 @@ The location of user content varies on different operating systems.
 
 ### Windows
 
-Check the "My Games" folder in your documents: `%USERPROFILE%\My Documents\My Games\Red Eclipse`
+Check the "My Games" folder in your documents: `%USERPROFILE%\Documents\My Games\Red Eclipse`
 
 ### Linux
 
@@ -63,7 +63,7 @@ See the .redeclipse user data in your home directory: `~/.redeclipse`
 
 ### Mac/OSX
 
-Check the app data in your home directory: `/Users/<username>/Library/Application Support/Red Eclipse`
+Check the app data in your home directory: `/Users/<username>/Library/Application Support/Red Eclipse`
 
 ## How do I join a server from a link?
 
@@ -105,14 +105,6 @@ You can wait from three places, and they all share one queue:
 
 Your place lasts 60 minutes, and you can add 30 more when it's nearly up: the game and the website show a Renew button, and Discord asks you shortly before it runs out. If you join a server while you're waiting, you aren't counted twice, and you're taken out of the queue once that server has as many on as you wanted. The game signs you in on servers with your account, which is how the queue sees you arrive. When you're sent to a server, it keeps a place for you for 5 minutes, so someone joining it by themselves can't take it first.
 
-## When I launch the game, there's a terminal. Is that normal?
-
-Yes. Red Eclipse will automatically check for updates, and you will see a terminal while the updater script is running.
-
-## Why does the game not start?
-
-If the terminal window closes without launching the game, then there's a problem with the updater, usually missing permissions to replace some files. On windows for example, right-click the game launcher and select "Run as administrator". If the updater still hangs or fails, try a fresh install, but that really should not be necessary.
-
 ## What does 'devel' mean?
 
 This is the development version of the game, which can be [built from source](Install-Guide#building-from-source) from our Github repository to check out upcoming features and life on the bleeding edge.
@@ -125,9 +117,9 @@ All development happens on the master branch of our [base repository](https://gi
 
 Technical problems can be reported in the [discussion area](/discuss). Evident bugs can be reported on the [issue list](/issues), but first, please have a look at our [contribution guidelines](https://github.com/redeclipse/.github/blob/master/CONTRIBUTING).
 
-## Red Eclipse fails with 'OpenGL 2.0 or greater is required!', but I have 2.0 or greater.
+## Red Eclipse fails with 'OpenGL 3.3 or greater is required!' (or fails to create an OpenGL 3.3 context).
 
-On Windows, when Red Eclipse detects the renderer as 'GDI Generic' it will report a much lower GL version. This has been resolved by removing config.cfg and init.cfg to reset game settings.
+Your graphics card or driver does not support OpenGL 3.3 / GLSL 3.30, or the operating system is falling back to a software renderer (such as Microsoft's GDI Generic renderer on Windows). Try updating your GPU drivers from AMD, NVIDIA, or Intel. If you previously forced incompatible video settings, removing `config.cfg` and `init.cfg` from your Red Eclipse user data directory resets game settings to their defaults.
 
 ## Can I contribute to the game?
 

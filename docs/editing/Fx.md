@@ -9,20 +9,20 @@ redirect_from:
 ---
 * TOC
 {:toc}
-# Description of FX System
+## Description of FX System
 
 Red Eclipse comes with an extensible FX system, which allows for scripted audio/visual events, such as particles and sounds.
 Its creation has been motivated by removal of hardcoded parts in the game source code,
 allowing for further creative customization of various audio/visual aspects of the game.
 
-## Current support and usage
+### Current support and usage
 
 FX system is currently only used to script effects for weapons, projectiles and entities.
 It may be expanded for creation of map FX in the future.
 
-# The innerworkings
+## The innerworkings
 
-## FX definitions
+### FX definitions
 
 An FX definition consists of a unique name (identifier), type and a set of properties.
 This information describes exactly the behavior of an effect.
@@ -31,29 +31,29 @@ Definitions can be overwritten by simple re-definition.
 A single definition can only define a single kind of effect: one kind of a particle, one kind of a sound, etc.
 If multiple effects are desired to be emitted from the same source (by the same emitter), be it of the same or various other types, they can be chained together by parent-child relationship.
 
-## FX emitters
+### FX emitters
 
 An FX emitter is a singular entity responsible for emission of effects. It holds a list of FX instances to emit, as well as all unique states and parameters that modulate the behavior of those instances.
 There is a pool of pre-allocated emitters in the engine, which are reused as needed. This however means, that there is a limit to how many emitters can be used at once, at a given time (governed by the `maxfxemitters` variable).
 
-## FX instances
+### FX instances
 
 An FX instance is responsible for emission of a single effect. Instances are managed by and bound to emitters. An emitter can have a chain of different instances, each instance emitting a unique effect.
 There is a pool of pre-allocated instances in the engine, which are reused as needed. This however means, that there is a limit to how many instances can be used at once, at a given time (governed by the `maxfxinstances` variable).
 
-# Defining FX
+## Defining FX
 
 Effects are defined by using `registerfx` command.
 
     registerfx [name] [type] [body]
 
-### Parameters
+#### Parameters
 
 * name - `string` - unique identifier
 * type - `number` - effect type, consult the FX type table. It is recommended handles are used instead, for readability.
 * body - `code` - block of properties defining the behavior of the effect
 
-### Example
+#### Example
 
     registerfx FX_P_AIRBLAST_LIFE $FX_TYPE_PARTICLE [
         fxpropi parttype $FX_PARTTYPE_SINGLE
@@ -64,7 +64,7 @@ Effects are defined by using `registerfx` command.
         fxpropf blend 0.1
     ]
 
-## FX types
+### FX types
 
 The list of supported FX types is as follows:
 
@@ -76,7 +76,7 @@ The list of supported FX types is as follows:
 | Wind     | 3     | $FX_TYPE_WIND     | Wind source     |
 | Stain    | 4     | $FX_TYPE_STAIN    | Residual stain  |
 
-## FX property types
+### FX property types
 
 FX properties have different types, in order to change/set them one must use appropriate functions:
 
@@ -91,7 +91,7 @@ FX properties have different types, in order to change/set them one must use app
 
 **NOTE:** On top of the aforementioned arguments, each function accepts optional modifier type and modifier parameter blocks. Those will be explained later.
 
-## Scheduling and timing effects
+### Scheduling and timing effects
 
 Effects can be scheduled in various ways. To change how timing functions on an effect, one must make use of the appropriate properties. All properties listed here (except for `emitmove`) are `integer` type.
 
@@ -111,13 +111,13 @@ Effects can be scheduled in various ways. To change how timing functions on an e
 * `emitmove` - as opposed to rest being `integer` type, this one is `float`, when set above `0`, only allows emission when emitter moves at a given speed. Default: `0`.
 * `emitparam` - only allows emission when internal emitter parameter (see *"Internal parameters"*) of a given index (`integer`) becomes larger than 0. Default: `-1`.
 
-### Example 1: single-shot emission for 1 second
+#### Example 1: single-shot emission for 1 second
 
     registerfx FX_EXAMPLE1 $FX_TYPE_PARTICLE [
         fxpropi emitlen 1000
     ]
 
-### Example 2: periodic emission switching on and off every 1 second during a period of 10 seconds
+#### Example 2: periodic emission switching on and off every 1 second during a period of 10 seconds
 
     registerfx FX_EXAMPLE2 $FX_TYPE_PARTICLE [
         fxpropi activelen 10000
@@ -126,7 +126,7 @@ Effects can be scheduled in various ways. To change how timing functions on an e
         fxpropi emittimeliness 1
     ]
 
-### Example 3: periodic emission, emitting for 100ms every 1 second during a period of 10 seconds
+#### Example 3: periodic emission, emitting for 100ms every 1 second during a period of 10 seconds
 
     registerfx FX_EXAMPLE3 $FX_TYPE_PARTICLE [
         fxpropi activelen 10000
@@ -137,7 +137,7 @@ Effects can be scheduled in various ways. To change how timing functions on an e
 
 Various properties can also have modifiers applied such as interpolation or randomness. Using such modifiers one can alter the scheduling parameters randomly or even interpolate them over time.
 
-### Example 4: randomly occurring emission for 100ms during a period of 10 seconds
+#### Example 4: randomly occurring emission for 100ms during a period of 10 seconds
 
     registerfx FX_EXAMPLE4 $FX_TYPE_PARTICLE [
         fxpropi activelen 10000
@@ -150,7 +150,7 @@ Various properties can also have modifiers applied such as interpolation or rand
 **NOTE: In the supplied example a minimum interval of `2` is used, to ensure the emission is treated as periodic. Remember, value of `1` implies standard emission!**
 Emission will occur randomly from 2 to 1000 milliseconds (the random value is added to the base value).
 
-## Iteration
+### Iteration
 
 Effect emissions can also be repeated by iterating an effect. It allows you to create repeated patterns using a single effect instance.
 
@@ -159,7 +159,7 @@ Effect emissions can also be repeated by iterating an effect. It allows you to c
 
 You can also modulate various properties by interpolating the values by the iteration. (*see "Property modifiers"*)
 
-### Example: single particle repeated 5 times, increasing in size from 0.5 to 1.0, forming a cone
+#### Example: single particle repeated 5 times, increasing in size from 0.5 to 1.0, forming a cone
 
     registerfx FX_EXAMPLE_ITER $FX_TYPE_PARTICLE [
         fxpropi iter 5
@@ -170,7 +170,7 @@ You can also modulate various properties by interpolating the values by the iter
         ]
     ]
 
-## Positioning
+### Positioning
 
 By default effects will be emitted from the origin position the attached entity and in its direction.
 However, this can be overridden with the following properties:
@@ -190,12 +190,12 @@ The end position of an effect is referred to as *end* or *to*.
 * `posfroment` - sets the starting position to one of the positions of an entity (see *"Entity positions"*). Default: `-1`.
 * `endfroment` - sets the end position to one of the positions of an entity (see *"Entity positions"*). Default: `-1`.
 
-### Entity positions
+#### Entity positions
 
 Player entities have a number of predefined positions, which can be used to position effects.
 In addition, they also have a number of tags, which are attached to the entity's model bones, and follow the entity's animation.
 
-### Entity position points
+#### Entity position points
 
 | Type   | Value | CubeScript handle  | Description                                |
 |--------|-------|--------------------|--------------------------------------------|
@@ -206,7 +206,7 @@ In addition, they also have a number of tags, which are attached to the entity's
 | Dir    | 4     | $FX_ENT_POS_DIR    | Origin offset by the entity's direction.   |
 | Muzzle | 5     | $FX_ENT_POS_MUZZLE | Gun muzzle position of the entity.         |
 
-### Entity position tags
+#### Entity position tags
 
 | Type      | Value | CubeScript handle     |
 |-----------|-------|-----------------------|
@@ -225,7 +225,7 @@ In addition, they also have a number of tags, which are attached to the entity's
 | Toe left  | 15    | $FX_ENT_TAG_TOE_LEFT  |
 | Toe right | 16    | $FX_ENT_TAG_TOE_RIGHT |
 
-## Property modifiers
+### Property modifiers
 
 As previously mentioned, various properties can have modifiers applied. The availability of modifiers depends on the property.
 Modifiers can also have their own properties, further allowing for fine-tuning their behavior.
@@ -242,7 +242,7 @@ Currently, there are two different modifiers available, the list may be expanded
 1. Lerp
 2. Random
 
-### Interpolation properties
+#### Interpolation properties
 
 Interpolation (lerp) modifier has the following properties (all are `integer` type):
 
@@ -251,7 +251,7 @@ Interpolation (lerp) modifier has the following properties (all are `integer` ty
 * `lerpparam` - changes which internal parameter (see *"Internal parameters"*) is used as the interpolator when `lerpmode` in internal parameter mode. Default: `0`.
 * `lerpshape` - sets the interpolation shape (*see "Interpolation shapes"*). Default: `$FX_MOD_LERP_SHAPE_LINEAR` (`0`).
 
-### Interpolation modes
+#### Interpolation modes
 
 | Mode               | Value | CubeScript handle   | Description                                                                      |
 |--------------------|-------|---------------------|----------------------------------------------------------------------------------|
@@ -260,7 +260,7 @@ Interpolation (lerp) modifier has the following properties (all are `integer` ty
 | Internal parameter | 2     | $FX_MOD_LERP_PARAM  | Interpolation by using parameter set by `lerpparam` as the factor.               |
 | Iteration          | 3     | $FX_MOD_LERP_ITER   | Interpolation by using the iteration progress as the factor. (*see "Iteration"*) |
 
-### Interpolation shapes
+#### Interpolation shapes
 
 | Shape      | Value | CubeScript handle             | Formula            |
 |------------|-------|-------------------------------|--------------------|
@@ -269,7 +269,7 @@ Interpolation (lerp) modifier has the following properties (all are `integer` ty
 | Square out | 2     | $FX_MOD_LERP_SHAPE_SQUARE_OUT | y = 1 - (1 - x)^2  |
 | Smooth     | 3     | $FX_MOD_LERP_SHAPE_SMOOTH     | y = x^2 * (3 - 2x) |
 
-### Example: Interpolating a particle's size
+#### Example: Interpolating a particle's size
 
     registerfx FX_EXAMPLES_PARTICLE_SIZE_LERP $FX_TYPE_PARTICLE [
         fxpropf partsize 0.5
@@ -279,7 +279,7 @@ Interpolation (lerp) modifier has the following properties (all are `integer` ty
         ]
     ]
 
-## Internal parameters
+### Internal parameters
 
 Certain modifiers (such as interpolation) can use parameters, which are supplied from outside to modulate the behavior of an effect.
 The availability of parameters depends entirely on the context where an effect is used, therefore, parameters may share IDs if their usage context differs.
@@ -291,13 +291,13 @@ The availability of parameters depends entirely on the context where an effect i
 | Projectile bounce velocity | Projectile bounce FX | 0          | $P_FX_BOUNCE_VEL_PARAM | Bounce velocity of a projectile, `0-1`.                 |
 | Impulse boost              | Player impulse FX    | 0          | <n/a>                  | Set to `1` on player impulse boost, is otherwise `0`.   |
 
-## Chaining effects
+### Chaining effects
 
 There two ways to chain effects together: parenting and end-of-life emission.
 
 When an effect is parented to other, it will be instantiated along with its parent. In order to parent an effect one must use the `fxparent` function, passing the parent's ID as the parameter.
 
-### Example 5: one effect parented to another
+#### Example 5: one effect parented to another
 
     registerfx FX_EXAMPLE5_PARENT $FX_TYPE_PARTICLE [
     ]
@@ -310,7 +310,7 @@ As mentioned, besides parenting one could define an end-of-life emission, which 
 
 **NOTE: `fxend` is meant to be used on the caller, not the callee, which is the opposite of `fxparent`.**
 
-### Example 6: one effect occurring after the end of another
+#### Example 6: one effect occurring after the end of another
 
     registerfx FX_EXAMPLE6_FIRST $FX_TYPE_PARTICLE [
         fxend FX_EXAMPLE6_SECOND
@@ -319,7 +319,7 @@ As mentioned, besides parenting one could define an end-of-life emission, which 
     registerfx FX_EXAMPLE6_SECOND $FX_TYPE_PARTICLE [
     ]
 
-# Generic properties
+## Generic properties
 
 These properties are available regardless of the effect type.
 

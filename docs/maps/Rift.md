@@ -9,15 +9,16 @@ redirect_from:
 ---
 * TOC
 {:toc}
-<img style='border:5px solid #ffe0e0e0' src="../images/maps/rift/rift.png" width="256px" />
+<img style='border:5px solid #ffe0e0e0' src="../images/maps/rift.png" width="256px" />
 
 ## Information
 
 |                            |                                      |
 |----------------------------|--------------------------------------|
-| **Name**                   | Rift                                 |
-| **Author**                 | Alex "molexted" Foster               |
+| **Name** | Rift |
+| **Author** | Alex Foster and Quinton Reeves |
 | **Filename**               | rift                                 |
+| **Rotation** | Standard Rotation |
 | **Release Date**           | 2019-11-02                           |
 | **Introduced in**          | 2.0.0                                |
 | **Size**                   | Medium (6-10)                        |
@@ -25,12 +26,12 @@ redirect_from:
 | **Theme**                  | Forest                               |
 | **Environmental Features** | N/A                                  |
 | **Day/Night**              | ✔/✔                                  |
-| **Lights**                 | 131 (63/107/120)                     |
-| **Entities**               | 693                                  |
+| **Lights** | 131 |
+| **Entities** | 635 |
 | **Vertices**               | 87k                                  |
 | **Triangles**              | 120k                                 |
-| **Vslots**                 | 271                                  |
-| **Recommend Modes**        | CTF, TDM                             |
+| **Vslots** | 274 |
+| **Recommended Modes** | Deathmatch, Capture the Flag, Defend and Control, King of the Hill, Bomber Ball, Hold |
 
 ## Overview
 This is the map formerly known by its assigned layout name, ctf13.
@@ -45,15 +46,15 @@ Tripartiate map with alpha and omega bases at the far corners. The long chasms l
 
 ## Spawn Register
 
-| Weapon/Item                                                         | Count |
-|---------------------------------------------------------------------|:-----:|
-| <img src="../images/weapons/sword.png" width="32px"/> **Sword**     |   2   |
-| <img src="../images/weapons/shotgun.png" width="32px"/> **Shotgun** |   2   |
-| <img src="../images/weapons/smg.png" width="32px"/> **SMG**         |   2   |
-| <img src="../images/weapons/flamer.png" width="32px"/> **Flamer**   |   2   |
-| <img src="../images/weapons/plasma.png" width="32px"/> **Plasma**   |   2   |
-| <img src="../images/weapons/zapper.png" width="32px"/> **Zapper**   |   2   |
-| <img src="../images/weapons/rifle.png" width="32px"/> **Rifle**     |   2   |
-| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** |   4   |
-| <img src="../images/weapons/mine.png" width="32px"/> **Mine**       |   2   |
-| <img src="../images/weapons/rocket.png" width="32px"/> **Rocket**   |   0   |
+| Weapon/Item | Count |
+|---|:---:|
+| <img src="../images/weapons/sword.png" width="32px"/> **Sword** | 0 |
+| <img src="../images/weapons/shotgun.png" width="32px"/> **Shotgun** | 2 |
+| <img src="../images/weapons/smg.png" width="32px"/> **SMG** | 2 |
+| <img src="../images/weapons/flamer.png" width="32px"/> **Flamer** | 2 |
+| <img src="../images/weapons/plasma.png" width="32px"/> **Plasma** | 2 |
+| <img src="../images/weapons/zapper.png" width="32px"/> **Zapper** | 2 |
+| <img src="../images/weapons/rifle.png" width="32px"/> **Rifle** | 2 |
+| <img src="../images/weapons/grenade.png" width="32px"/> **Grenade** | 4 |
+| <img src="../images/weapons/mine.png" width="32px"/> **Mine** | 2 |
+| <img src="../images/weapons/rocket.png" width="32px"/> **Rocket** | 1 |
