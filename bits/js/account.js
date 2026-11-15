@@ -359,12 +359,22 @@
         return turnstile;
     }
 
-    // Cloudflare Turnstile in a box, whose answer goes with the form
-    function captcha(box)
+    // Cloudflare Turnstile in a box, whose answer goes with the form. Its script loads only once someone starts on the form,
+    // so the page where a private key is typed for signing in runs nobody else's code unless it's wanted
+    function captcha(box, fields)
     {
-        var id = null;
-        loadturnstile().then(function(t) { id = t.render(box, { sitekey: SITEKEY, theme: "dark" }); }, function(err) { box.textContent = err.message; });
+        var id = null, started = false;
+        box.textContent = "The captcha appears once you start filling this in.";
+        function start()
+        {
+            if(started) return;
+            started = true;
+            box.textContent = "";
+            loadturnstile().then(function(t) { id = t.render(box, { sitekey: SITEKEY, theme: "dark" }); }, function(err) { started = false; box.textContent = err.message; });
+        }
+        fields.forEach(function(f) { f.addEventListener("focus", start); });
         return {
+            start: start,
             token: function() { return id !== null && window.turnstile ? window.turnstile.getResponse(id) || "" : ""; },
             reset: function() { if(id !== null && window.turnstile) window.turnstile.reset(id); }
         };
@@ -376,12 +386,12 @@
         if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Register in the game instead: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
         var handle = el("input", { type: "text", id: "account-handle", autocomplete: "off", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
         var email = el("input", { type: "email", id: "account-email", autocomplete: "email", required: true, maxlength: 254 });
-        var box = el("div", { class: "account-captcha" }), check = captcha(box);
+        var box = el("div", { class: "account-captcha" }), check = captcha(box, [handle, email]);
         var button = el("button", { type: "submit", text: "Register" });
         return el("form", { class: "account-form", onsubmit: function(e)
         {
             e.preventDefault();
-            if(!check.token()) { say("Solve the captcha first.", true); return; }
+            if(!check.token()) { check.start(); say("Solve the captcha first.", true); return; }
             button.disabled = true;
             say("Registering…");
             account.accounts("POST", "", { handle: handle.value.trim(), email: email.value.trim(), captcha: check.token() }).then(function(r)
@@ -405,12 +415,12 @@
     {
         if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Ask for a new key in the game: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
         var who = el("input", { type: "text", id: "account-who", autocomplete: "off", spellcheck: "false", required: true });
-        var box = el("div", { class: "account-captcha" }), check = captcha(box);
+        var box = el("div", { class: "account-captcha" }), check = captcha(box, [who]);
         var button = el("button", { type: "submit", text: "Reset the key" });
         return el("form", { class: "account-form", onsubmit: function(e)
         {
             e.preventDefault();
-            if(!check.token()) { say("Solve the captcha first.", true); return; }
+            if(!check.token()) { check.start(); say("Solve the captcha first.", true); return; }
             var value = who.value.trim(), body = { captcha: check.token() };
             body[value.indexOf("@") >= 0 ? "email" : "handle"] = value;
             button.disabled = true;
