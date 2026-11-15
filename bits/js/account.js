@@ -538,7 +538,7 @@
         }
         else
         {
-            if(q.get("error") || !q.get("code")) { refresh(); say("Discord didn't link: " + (q.get("error_description") || q.get("error") || "no code came back") + ".", true); return true; }
+            if(q.get("error") || !q.get("code")) { refresh(); say("Discord didn't link: " + (q.get("error") === "access_denied" ? "it was cancelled" : q.get("error") ? "Discord refused it" : "no code came back") + ".", true); return true; }
             body = { code: q.get("code"), state: q.get("state") };
         }
         root.textContent = "Linking…";
