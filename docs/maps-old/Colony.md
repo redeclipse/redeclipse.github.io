@@ -1,5 +1,5 @@
 ---
-title: Maps old - Colony
+title: Maps Old - Colony
 layout: docs
 origfile: maps-old/Colony.md
 origtitle: Colony

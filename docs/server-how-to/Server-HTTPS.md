@@ -1,5 +1,5 @@
 ---
-title: Server how to - Server HTTPS
+title: Server How To - Server HTTPS
 layout: docs
 origfile: server-how-to/Server-HTTPS.md
 origtitle: Server-HTTPS

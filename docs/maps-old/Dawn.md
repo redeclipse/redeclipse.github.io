@@ -1,5 +1,5 @@
 ---
-title: Maps old - Dawn
+title: Maps Old - Dawn
 layout: docs
 origfile: maps-old/Dawn.md
 origtitle: Dawn

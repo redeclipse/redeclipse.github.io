@@ -1,5 +1,5 @@
 ---
-title: Server how to - Server GameFilters
+title: Server How To - Server GameFilters
 layout: docs
 origfile: server-how-to/Server-GameFilters.md
 origtitle: Server-GameFilters

@@ -1,5 +1,5 @@
 ---
-title: Maps old - Amplification
+title: Maps Old - Amplification
 layout: docs
 origfile: maps-old/Amplification.md
 origtitle: Amplification

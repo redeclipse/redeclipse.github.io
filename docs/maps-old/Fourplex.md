@@ -1,5 +1,5 @@
 ---
-title: Maps old - Fourplex
+title: Maps Old - Fourplex
 layout: docs
 origfile: maps-old/Fourplex.md
 origtitle: Fourplex

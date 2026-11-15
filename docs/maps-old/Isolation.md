@@ -1,5 +1,5 @@
 ---
-title: Maps old - Isolation
+title: Maps Old - Isolation
 layout: docs
 origfile: maps-old/Isolation.md
 origtitle: Isolation

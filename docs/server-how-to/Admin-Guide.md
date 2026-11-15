@@ -1,5 +1,5 @@
 ---
-title: Server how to - Admin Guide
+title: Server How To - Admin Guide
 layout: docs
 origfile: server-how-to/Admin-Guide.md
 origtitle: Admin-Guide
@@ -10,7 +10,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-Red Eclipse moderators and administrators have several powerful commands at their disposal to manage players and gameplay. This guide lists common admin commands, print it for a handy cheat sheet. For a complete list of admin commands and variables, see the [Variables Reference](../variables/Variables).
+Red Eclipse moderators and administrators have several powerful commands at their disposal to manage players and gameplay. This guide lists common admin commands, print it for a handy cheat sheet. For a complete list of admin commands and variables, see the [server variables](../variables/Server).
 
 ## Using Commands
 ### Entering Commands

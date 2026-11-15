@@ -1,5 +1,5 @@
 ---
-title: Server how to - Privileges
+title: Server How To - Privileges
 layout: docs
 origfile: server-how-to/Privileges.md
 origtitle: Privileges
@@ -26,7 +26,7 @@ Players can [register an account](../Accounts) that allows them to authenticate 
 Of course, bots are not related to player accounts, but they have their own icons to readily distinguish them from human ("real") players. Some privilege levels can be either local or global. Local privileges are given to registered players on specific servers, as described in a following section. In contrast, global privileges are valid on all public servers.
 
 ## Levels and lock variables
-The levels [above](#privilege-icons) sorted from low to high refer to the usage of certain server variables (`*lock`, such as `sv_varslock` or `sv_kicklock`) that define the minimum privilege required to perform a specific action (`0` = none, `1` = player, `2` = supporter, `3` = moderator, `4` = administrator, `5` = developer, `6` = founder, `7` = nobody). This allows server owners to give more liberal rights to lower player levels. The same levels can also be used to restrict map editing, joining a game, or connecting to the server. See all lock variables in the [Variables Reference](../variables/Variables).
+The levels [above](#privilege-icons) sorted from low to high refer to the usage of certain server variables (`*lock`, such as `sv_varslock` or `sv_kicklock`) that define the minimum privilege required to perform a specific action (`0` = none, `1` = player, `2` = supporter, `3` = moderator, `4` = administrator, `5` = developer, `6` = founder, `7` = nobody). This allows server owners to give more liberal rights to lower player levels. The same levels can also be used to restrict map editing, joining a game, or connecting to the server. See all lock variables in the [server variables](../variables/Server#locks).
 
 ## Local Privileges
 If you host a game server, you are free to specify local privileges for selected players. To add existing user accounts (including your own) to your local server user lists, in [servinit.cfg](Server-Setup#configuration-files) add:

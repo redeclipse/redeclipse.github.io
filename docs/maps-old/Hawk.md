@@ -1,5 +1,5 @@
 ---
-title: Maps old - Hawk
+title: Maps Old - Hawk
 layout: docs
 origfile: maps-old/Hawk.md
 origtitle: Hawk

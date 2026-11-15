@@ -1,5 +1,5 @@
 ---
-title: Maps old - Lab
+title: Maps Old - Lab
 layout: docs
 origfile: maps-old/Lab.md
 origtitle: Lab
