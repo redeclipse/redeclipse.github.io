@@ -75,6 +75,8 @@
         "bomber-hold", "bomber-basket", "bomber-assault", "speedrun-lapped", "speedrun-endurance", "speedrun-gauntlet"];
     var TEAMICONS = ["alpha", "omega", "neutral", "spectator"];
     var RESIGNWAIT = 60000; // a session that ran out unused is replaced at most this often
+    var FEEDSTEADY = 5000; // how long the match feed stays up before a drop counts as a fresh start
+    var MAXFEEDPLAYERS = 256;
     // Where bridged chat comes from, as the game's config/bridge.cfg names them; anywhere else is shown as the web, as in the game.
     var BRIDGES = { web: ["web", "Web"], irc: ["irc", "IRC"], discord: ["discord", "Discord"], matrix: ["matrix", "Matrix"], xmpp: ["xmpp", "XMPP"],
         twitch: ["twitch", "Twitch"], telegram: ["telegram", "Telegram"], stoat: ["stoat", "Stoat"], revolt: ["stoat", "Stoat"] };
@@ -996,6 +998,7 @@
         this.teams = [];
         this.feed = [];
         this.feedfails = 0;
+        this.feedsince = 0;
         this.resigned = 0;
         this.fetchfails = 0;
         this.ws = null;
@@ -1107,7 +1110,7 @@
         {
             var first = !self.feedopened;
             opened = self.feedopened = true;
-            self.feedfails = 0;
+            self.feedsince = Date.now();
             self.feedstate.textContent = "";
             if(!first) self.refresh(); // catch up on what was missed while the feed was down
             self.signin();
@@ -1226,7 +1229,7 @@
                 el("td", { text: c.by || c.source || "" }),
                 el("td", {}, c.scope === "global" ? "global" : el("button", { type: "button", text: "Remove", onclick: function()
                 {
-                    self.authget("DELETE", "/controls/" + c.id).then(function(r) { done(r, 200); });
+                    self.authget("DELETE", "/controls/" + encodeURIComponent(c.id)).then(function(r) { done(r, 200); });
                 } }))
             ]);
         });
@@ -1266,7 +1269,7 @@
     Panel.prototype.feedclosed = function(wasopen)
     {
         if(this.closed) return;
-        if(wasopen) this.feedfails = 0;
+        if(wasopen && Date.now() - this.feedsince > FEEDSTEADY) this.feedfails = 0; // a feed that drops straight away still backs off
         var self = this, wait = backoff(this.feedfails++);
         this.feedstate.textContent = this.feedopened ? "Lost the match feed, reconnecting…" : "Can't connect to the match feed, retrying…";
         this.later(function() { self.connect(); }, wait);
@@ -1332,7 +1335,7 @@
         switch(m.event)
         {
             case "join":
-                if(m.client) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0, ping: 0 }, m.client));
+                if(m.client && (this.players.size < MAXFEEDPLAYERS || this.players.has(m.client.cn))) this.players.set(m.client.cn, Object.assign({ points: 0, frags: 0, deaths: 0, ping: 0 }, m.client));
                 // a bot's coming and going shows on the scoreboard, which is news enough
                 if(m.client && !m.client.bot) this.line([this.name(m.client), handle(m.client), " joined"], "join");
                 break;
