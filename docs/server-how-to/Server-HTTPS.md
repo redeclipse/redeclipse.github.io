@@ -12,7 +12,7 @@ redirect_from:
 {:toc}
 Every dedicated server runs the **Web API**: a small web server alongside the game, serving the server's status, players, moderation routes and a live Event feed. It speaks plain HTTP out of the box. Give it a certificate and the same port also speaks HTTPS and `wss://`. This guide covers turning that on, getting a free certificate from Let's Encrypt with `acme.sh`, and keeping it renewed.
 
-For what the Web API offers, see [doc/web-api-guide.md](https://github.com/redeclipse/base/blob/master/doc/web-api-guide). For how it works inside, see [doc/web-api.md](https://github.com/redeclipse/base/blob/master/doc/web-api).
+For what the Web API offers, see the [Web API Guide](../Web-API-Guide). For how it works inside, see [src/doc/web-api.md](https://github.com/redeclipse/base/blob/master/src/doc/web-api) in the base repository.
 
 ## Do you need it?
 

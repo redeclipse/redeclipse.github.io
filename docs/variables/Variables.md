@@ -1,12 +1,12 @@
 ---
-title: Variables - Variables home
+title: Variables
 layout: docs
-origfile: variables/Variables-home.md
-origtitle: Variables-home
-permalink: /docs/variables/Variables-home
+origfile: variables/Variables.md
+origtitle: Variables
+permalink: /docs/variables/Variables
 redirect_from:
-  - /docs/variables/Variables_home/
-  - /wiki/variables/Variables_home/
+  - /docs/variables/Variables-home/
+  - /wiki/variables/Variables/
 ---
 * TOC
 {:toc}
