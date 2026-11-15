@@ -1,15 +1,17 @@
 ---
-title: Home
+title: Index
 layout: docs
-origfile: Home.md
-origtitle: Home
-permalink: /docs/Home
+origfile: Index.md
+origtitle: Index
+permalink: /docs/
 redirect_from:
-  - /docs/
+  - /docs/Index/
+  - /wiki/Index/
+  - /docs/Home/
+  - /wiki/Home/
   - /docs/Main_Page/
   - /wiki/
   - /wiki/Main_Page/
-  - /wiki/Home/
 ---
 * TOC
 {:toc}
@@ -18,13 +20,13 @@ redirect_from:
 ## New to Red Eclipse?
 - **[Frequently Asked Questions](FAQ)** - See if your question is one of the ones we're asked a lot.
 - **[Installation Help](Install-Guide)** - If you're stuck, these are our official instructions.
-- **[Gameplay Guide](gameplay/Gameplay-Guide)** - Want to learn how to play? This is a good start.
+- **[Gameplay Guide](gameplay/)** - Want to learn how to play? This is a good start.
 - **[Learn about the Weapons](gameplay/Weapons-Guide)** - Each weapon is unique, learn the pros and cons.
 - **[Tips and Tricks for using Parkour](gameplay/Parkour-Guide)** - Everyone loves running on walls, but there's more to learn.
-- **[Official Maps](Official-Maps)** - Descriptions and recommendations for the included levels.
+- **[Official Maps](maps/)** - Descriptions and recommendations for the included levels.
 
 ## Server Administration
-- **[Server Setup](server-how-to/Server-Setup)** - How to configure and run a Red Eclipse server.
+- **[Server Setup](server-how-to/)** - How to configure and run a Red Eclipse server.
 - **[Server HTTPS](server-how-to/Server-HTTPS)** - Enabling HTTPS and TLS certificates for your server's Web API.
 - **[Web API Guide](Web-API-Guide)** - What the master and game servers answer over HTTP and WebSockets, for web developers and bot authors.
 - **[Administration Guide](server-how-to/Admin-Guide)** - How to manage and moderate a server.

@@ -1,10 +1,13 @@
 ---
-title: Gameplay - Gameplay Guide
+title: Gameplay
 layout: docs
-origfile: gameplay/Gameplay-Guide.md
-origtitle: Gameplay-Guide
-permalink: /docs/gameplay/Gameplay-Guide
+origfile: gameplay/Index.md
+origtitle: Index
+permalink: /docs/gameplay/
 redirect_from:
+  - /docs/gameplay/Index/
+  - /wiki/gameplay/Index/
+  - /docs/gameplay/Gameplay-Guide/
   - /docs/gameplay/Gameplay_Guide/
   - /wiki/gameplay/Gameplay_Guide/
 ---
@@ -111,3 +114,39 @@ Additional mutators which can only be enabled in specific game modes.
 |<img src="../images/modes/speedrunlapped.png" width="64px"/>    |Speedrun          |Lapped    |Try to complete the obstacle course the most number of times|
 |<img src="../images/modes/speedrunendurance.png" width="64px"/> |Speedrun          |Endurance |Laps must be completed without dying at all                 |
 |<img src="../images/modes/speedrungauntlet.png" width="64px"/>  |Speedrun          |Gauntlet  |Teams take turns running the gauntlet                       |
+
+### Gameplay Pages
+
+#### Mode Pages
+- [Modes and Mutators](Modes-and-Mutators) - Every mode and mutator, and what each one changes.
+- [Deathmatch](Deathmatch) - Battle it out, highest score wins.
+- [Capture the Flag](Capture-the-Flag) - Take the enemy flag back to your base, whilst defending your own.
+- [Defend and Control](Defend-Control) - Capture and hold control points across the map.
+- [Bomber Ball](Bomber-Ball) - Carry the bomb into the enemy goal before its timer runs out.
+- [Speedrun](Speedrun) - Complete the obstacle course in the fastest time.
+- [Demo](Demo) - Play back recorded matches.
+
+#### Guides
+- [Weapons Guide](Weapons-Guide) - The weapons, their loadouts and how each one plays.
+- [Parkour Guide](Parkour-Guide) - The impulse system, and the moves you can chain together.
+- [Scoring System](Scoring-System) - How points are gained and lost, and the bonuses for streaks and sprees.
+- [Status Effects](Status-Effects) - Buffs, and the shock, burn, bleed and corrode ailments.
+
+#### Weapon Pages
+- [Claw Attack](Weapon-Claw)
+- [Sidearm Pistol](Weapon-Pistol)
+- [Energy Sword](Weapon-Sword)
+- [Super Shotgun](Weapon-Shotgun)
+- [Submachine Gun](Weapon-Smg)
+- [Flame Thrower](Weapon-Flamer)
+- [Plasma Inductor](Weapon-Plasma)
+- [Electro Zapper](Weapon-Zapper)
+- [Laser Rifle](Weapon-Rifle)
+- [Corrosion Cannon](Weapon-Corroder)
+- [Frag Grenade](Weapon-Grenade)
+- [Shock Mine](Weapon-Mine)
+- [Rocket Launcher](Weapon-Rocket)
+- [Heavy Minigun](Weapon-Minigun)
+- [Jet Chainsaw](Weapon-Jetsaw)
+- [Eclipse Rod](Weapon-Eclipse)
+- [Trident](Weapon-Trident)

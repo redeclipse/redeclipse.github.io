@@ -1,16 +1,26 @@
 ---
-title: Server How To - Server Setup
+title: Server How To
 layout: docs
-origfile: server-how-to/Server-Setup.md
-origtitle: Server-Setup
-permalink: /docs/server-how-to/Server-Setup
+origfile: server-how-to/Index.md
+origtitle: Index
+permalink: /docs/server-how-to/
 redirect_from:
+  - /docs/server-how-to/Index/
+  - /docs/server_how_to/Index/
+  - /wiki/server_how_to/Index/
+  - /docs/server-how-to/Server-Setup/
   - /docs/server_how_to/Server_Setup/
   - /wiki/server_how_to/Server_Setup/
 ---
 * TOC
 {:toc}
 **WARNING: Before setting up a public server you should read the [Multiplayer Guidelines](../Multiplayer-Guidelines), which governs how you may and may not use the master server. Be warned that modifications to the source code must be approved, and servers must honour the "auth" system. No if's, but's, or maybe's.**
+
+## More on Servers
+- [Server HTTPS](Server-HTTPS) - Enabling HTTPS and TLS certificates for your server's Web API.
+- [Administration Guide](Admin-Guide) - How to manage and moderate a server.
+- [Privilege Levels](Privileges) - The privileges players can have, and giving them on your own server.
+- [Game Filters](Server-GameFilters) - Limiting the modes and mutators players can vote for and the server rotates through.
 
 ## System Requirements
 Hosting one or more Red Eclipse servers on your system will require a decent bandwith (20-30 Kb/s down and ~10 Kb/s up per player/ bot), but use very few compute resources, such as RAM or CPU power. Therefore, no system requirements are specified, a server should run on any supported operating system. A Red Eclipse can even be run on a Raspberry Pi if so desired, though it is advisable to have a little more compute power to avoid lagspikes on player join.
@@ -136,7 +146,7 @@ You can change the "openness" of your server; i.e., allowing anyone to claim loc
 ### Server Customization
 - For information on how to limit modes and mutators please see [Game Filters](Server-GameFilters)
 - For an example `servinit.cfg` configuration see [doc/examples/servinit.cfg](https://github.com/redeclipse/base/blob/master/doc/examples/servinit.cfg)
-- For information on server and game variables, see the [server variables](../variables/Server) and the rest of the [variables](../variables/Variables)
+- For information on server and game variables, see the [server variables](../variables/Server) and the rest of the [variables](../variables/)
 
 ## Forwarding Ports
 Public servers need port forwarding (and firewall rules) configured for the game ports, plus the Web API port if direct HTTP/HTTPS connections are desired.

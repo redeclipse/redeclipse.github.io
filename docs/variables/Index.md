@@ -1,12 +1,17 @@
 ---
-title: Variables - Variables
+title: Variables
 layout: docs
-origfile: variables/Variables.md
-origtitle: Variables
-permalink: /docs/variables/Variables
+origfile: variables/Index.md
+origtitle: Index
+permalink: /docs/variables/
 redirect_from:
-  - /docs/variables/Variables-home/
+  - /docs/variables/Index/
+  - /wiki/variables/Index/
+  - /docs/variables/Variables/
   - /wiki/variables/Variables/
+  - /docs/variables/Variables-home/
+  - /docs/variables/Variables_home/
+  - /wiki/variables/Variables_home/
 ---
 * TOC
 {:toc}

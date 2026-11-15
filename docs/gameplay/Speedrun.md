@@ -5,11 +5,11 @@ origfile: gameplay/Speedrun.md
 origtitle: Speedrun
 permalink: /docs/gameplay/Speedrun
 redirect_from:
+  - /wiki/gameplay/Speedrun/
   - /docs/gameplay/Race/
   - /docs/gameplay/race/
   - /wiki/gameplay_Race/
   - /wiki/race/
-  - /wiki/gameplay/Speedrun/
 ---
 * TOC
 {:toc}
