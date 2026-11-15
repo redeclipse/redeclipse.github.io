@@ -74,6 +74,7 @@
         "deathmatch-gladiator", "deathmatch-oldschool", "capture-quick", "capture-defend", "capture-protect", "defend-quick", "defend-king",
         "bomber-hold", "bomber-basket", "bomber-assault", "speedrun-lapped", "speedrun-endurance", "speedrun-gauntlet"];
     var TEAMICONS = ["alpha", "omega", "neutral", "spectator"];
+    var RESIGNWAIT = 60000; // a session that ran out unused is replaced at most this often
     // Where bridged chat comes from, as the game's config/bridge.cfg names them; anywhere else is shown as the web, as in the game.
     var BRIDGES = { web: ["web", "Web"], irc: ["irc", "IRC"], discord: ["discord", "Discord"], matrix: ["matrix", "Matrix"], xmpp: ["xmpp", "XMPP"],
         twitch: ["twitch", "Twitch"], telegram: ["telegram", "Telegram"], stoat: ["stoat", "Stoat"], revolt: ["stoat", "Stoat"] };
@@ -995,6 +996,7 @@
         this.teams = [];
         this.feed = [];
         this.feedfails = 0;
+        this.resigned = 0;
         this.fetchfails = 0;
         this.ws = null;
         this.timers = [];
@@ -1167,11 +1169,10 @@
             this.signedout();
             this.token = null;
             // a session that ran out unused, so get another, once
-            if(had && s && !this.resigned) { this.resigned = true; account.forget(s.host, s.port); this.signin(); return; }
+            if(had && s && Date.now() - this.resigned > RESIGNWAIT) { this.resigned = Date.now(); account.forget(s.host, s.port); this.signin(); return; }
             this.showstanding("Not signed in" + (m.error ? ": " + m.error : ""));
             return;
         }
-        this.resigned = false;
         this.privilege = m.privilege;
         this.showstanding("Signed in as " + plain(m.name) + " (" + (m.local ? "local " : "") + m.privilege + ")");
         this.chat.hidden = false;
