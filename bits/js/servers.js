@@ -230,6 +230,7 @@
     // Team icons are masks too, so they take the colour of the team's name beside them.
     function teamicon(team, name)
     {
+        if(TEAMICONS.indexOf(team) < 0) team = "neutral";
         var url = "url(" + ICONPATH + "team/" + team + ".png)";
         return el("span", { class: "servers-teamicon", "aria-hidden": "true", title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
