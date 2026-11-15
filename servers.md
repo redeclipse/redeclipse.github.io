@@ -3,7 +3,7 @@ title: Servers
 layout: servers
 permalink: /servers
 master: https://play.redeclipse.net:28888
-apiguide: https://github.com/redeclipse/base/blob/master/doc/web-api-guide.md
+apiguide: https://www.redeclipse.net/docs/Web-API-Guide
 ---
 Every game server known to the master server, updated live. Select a server to watch its match.
 

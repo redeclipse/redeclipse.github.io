@@ -1,5 +1,5 @@
 // Signing in with a Red Eclipse account: the master's remembered sign-ins, and the Account page.
-// See "Remembered sign-ins" in doc/web-api-guide.md in redeclipse/base. The private key is only ever held while answering a challenge.
+// See "Remembered sign-ins" in the Web API Guide (https://www.redeclipse.net/docs/Web-API-Guide). The private key is only ever held while answering a challenge.
 (function()
 {
     "use strict";
