@@ -1596,7 +1596,8 @@
 
     function fromhash()
     {
-        var h = decodeURIComponent(location.hash.replace(/^#/, ""));
+        var h;
+        try { h = decodeURIComponent(location.hash.replace(/^#/, "")); } catch(e) { h = ""; }
         var at = h.lastIndexOf("/");
         if(at <= 0) { if(open) closepanel(); return; }
         var k = key(h.slice(0, at), h.slice(at + 1));
