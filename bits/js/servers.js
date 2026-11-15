@@ -170,9 +170,11 @@
     }
     function slug(name) { name = name.toLowerCase().replace(/[^a-z]/g, ""); return name === "freeforall" ? "ffa" : name; }
     // The mode, then its mutators (leaving out those the mode implies), each with its icon where there is one.
+    // A table's own entry, so a value from a server such as "constructor" finds nothing rather than something built in
+    function own(t, i) { return t && Object.prototype.hasOwnProperty.call(t, i) ? t[i] : undefined; }
     function modeparts(st)
     {
-        var l = layout(st), name = l.modes[st.modeid] || ("Mode " + st.modeid), gsp = l.gsp[st.modeid] || [], implied = l.implied[st.modeid] || [], mode = MODEICONS[name];
+        var l = layout(st), name = own(l.modes, st.modeid) || ("Mode " + st.modeid), gsp = own(l.gsp, st.modeid) || [], implied = own(l.implied, st.modeid) || [], mode = own(MODEICONS, name);
         var parts = [{ name: name, icon: mode ? "mode/" + mode : null }];
         for(var i = 0; i < 31; i++) if(st.mutators & (1 << i))
         {
@@ -234,8 +236,8 @@
     // A Master Mode's icon, before the server's name, as a mask coloured as the game's server browser colours them; hidden from screen readers when named beside it.
     function access(st, named)
     {
-        var name = MASTERMODES[st.mastermode];
-        if(!name) return null;
+        var name = own(MASTERMODES, st.mastermode);
+        if(typeof name !== "string") return null;
         var slug = name.toLowerCase(), url = "url(" + ICONPATH + "mastermode/" + slug + ".svg)";
         return el("span", { class: "servers-accessicon " + slug, role: named ? null : "img", "aria-label": named ? null : name, "aria-hidden": named ? "true" : null, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
@@ -275,7 +277,7 @@
     }
     // A weapon as the server names it to players, or by its id from servers too old to say.
     function weapon(m) { return m.weaponname || m.weapon || ""; }
-    function teamname(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
+    function teamname(t) { return typeof t === "string" && t ? t.charAt(0).toUpperCase() + t.slice(1) : ""; }
     // How long ago a unix time was, roughly.
     function ago(t)
     {
@@ -375,7 +377,7 @@
     var servers = new Map(), loaded = false, stale = false, transport = "connecting";
 
     // Everyone connected, spectators included; -1 when the server reports no status.
-    function playercount(s) { return s.status && s.status.players ? s.status.players.length : -1; }
+    function playercount(s) { return s.status && Array.isArray(s.status.players) ? s.status.players.length : -1; }
 
     var COLUMNS = [
         { id: "description", title: "Server", value: function(s) { return plain(s.description).toLowerCase(); } },
@@ -388,13 +390,15 @@
         { id: "address", title: "Address", cls: "servers-opt", value: function(s) { return skey(s); } }
     ];
 
+    // a server sending fields of the wrong type sorts as nothing rather than stopping the whole list
+    function sortvalue(col, s) { try { return col.value(s); } catch(e) { return ""; } }
     function sorted()
     {
         var col = COLUMNS.filter(function(c) { return c.id === prefs.sort; })[0] || COLUMNS[1];
         var list = Array.from(servers.values());
         list.sort(function(a, b)
         {
-            var x = col.value(a), y = col.value(b);
+            var x = sortvalue(col, a), y = sortvalue(col, b);
             if(x < y) return -prefs.dir;
             if(x > y) return prefs.dir;
             if((a.priority || 0) !== (b.priority || 0)) return (b.priority || 0) - (a.priority || 0);
@@ -586,7 +590,7 @@
 
     function row(s)
     {
-        var st = s.status, k = skey(s), everyone = st && st.players;
+        var st = s.status, k = skey(s), everyone = st && Array.isArray(st.players) ? st.players : null;
         var tr = el("tr", { class: "servers-row" + (open && open.key === k ? " open" : ""), tabindex: "0", "aria-expanded": open && open.key === k ? "true" : "false" });
         var players = "–";
         // Everyone connected, spectators included and bots left out, with their names on hover.
@@ -625,8 +629,9 @@
             people += Math.max(0, playercount(s));
             if(playercount(s) > 0) active++;
             if(!visible(s)) return;
+            var r;
+            try { r = row(s); } catch(e) { return; } // one server's bad status leaves the rest of the list standing
             shown++;
-            var r = row(s);
             if(panel && !placed && panel.parentNode === tbody) tbody.insertBefore(r, panel);
             else tbody.appendChild(r);
             if(panel && open.key === skey(s))
