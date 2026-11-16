@@ -5,4 +5,5 @@ permalink: /account/activate
 master: https://play.redeclipse.net:28888
 action: activate
 sitemap: false
+shape: card
 ---

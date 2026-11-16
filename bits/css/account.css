@@ -17,6 +17,7 @@
     margin: 12px 0 16px 0;
     font-size: 14px;
     color: var(--account-text);
+    color-scheme: dark;
 }
 #account [hidden] {
     display: none !important;
@@ -75,6 +76,23 @@
 }
 .account-card-wide {
     max-width: 760px;
+}
+#account .account-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+    border-bottom: 0;
+}
+#account .account-card h3 {
+    margin: 20px 0 8px 0;
+    font-size: 16px;
+    color: var(--account-text);
+    text-shadow: none;
+}
+.account-card > p:last-child, .account-card > .account-actions {
+    margin-bottom: 0;
+}
+.account-card > .account-actions, .account-card > .account-stack {
+    margin-top: 16px;
 }
 .account-shape-card #account > .account-notice {
     max-width: 440px;
@@ -356,20 +374,91 @@
 .account-key code, .account-line code {
     word-break: break-all;
 }
+/* The key page: the game's console and the file side by side, each with its copy buttons */
+.account-ways {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+@media (max-width: 680px) {
+    .account-ways {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.account-way {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 16px;
+    border: 1px solid var(--account-line);
+    border-radius: 4px;
+}
+#account .account-way h3 {
+    margin: 0;
+}
+.account-way p {
+    margin: 0;
+}
+.account-way .account-actions {
+    margin-top: auto;
+}
+/* one line of the key, scrolling sideways rather than breaking it */
+#account code.account-copyline, .account-cfg {
+    scrollbar-width: thin;
+    scrollbar-color: var(--account-input) transparent;
+}
+#account code.account-copyline {
+    display: block;
+    padding: 8px 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+    word-wrap: normal;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--account-input);
+    border-radius: 4px;
+}
 .account-cfg {
     width: 100%;
-    max-width: 720px;
     font-family: monospace;
-    resize: vertical;
+    font-size: 85%;
+    resize: none;
+}
+.account-folders {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 6px 16px;
+    margin: 0 0 8px 0;
+}
+.account-folders dt {
+    color: var(--account-muted);
+    font-weight: 600;
+    text-shadow: none;
+}
+.account-folders code {
+    overflow-wrap: anywhere;
 }
 #account a.account-button {
     display: inline-block;
     padding: 4px 12px;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgb(255, 64, 64);
+    border: 1px solid var(--account-accent);
     border-radius: 4px;
     text-decoration: none;
+}
+#account a.account-button:hover, #account a.account-button:focus {
+    background-color: rgba(160, 0, 0, 0.6);
+}
+#account a.account-button.account-primary {
+    padding: 8px 20px;
+    font-weight: 600;
+    text-align: center;
+    background-color: var(--account-fill);
+}
+#account a.account-button.account-primary:hover, #account a.account-button.account-primary:focus {
+    background-color: var(--account-fill-hover);
 }
 .account-admin h3, .account-owner h3 {
     margin-top: 20px;

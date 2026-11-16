@@ -5,4 +5,5 @@ permalink: /account/email
 master: https://play.redeclipse.net:28888
 action: email
 sitemap: false
+shape: card
 ---

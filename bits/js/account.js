@@ -474,30 +474,46 @@
         return b;
     }
 
-    // the key, shown once, and how to use it in the game
-    function keypanel(k)
+    // the key, shown once, and how to use it in the game, in a wide card of its own
+    function keypanel(k, title)
     {
         var line = "authkey " + k.handle + " " + k.privkey, cfg = "// the Red Eclipse account " + k.handle + "\n" + line + "\n";
-        var file = el("textarea", { class: "account-cfg", readonly: true, rows: 2, spellcheck: "false" });
+        var file = el("textarea", { class: "account-cfg", readonly: true, rows: 3, wrap: "off", spellcheck: "false", "aria-label": "auth.cfg" });
         file.value = cfg;
         var download = el("a", { href: URL.createObjectURL(new Blob([cfg], { type: "text/plain" })), download: "auth.cfg", class: "account-button", text: "Download auth.cfg" });
-        return el("div", { class: "account-key" }, [
+        return card([
+            el("h2", { text: title }),
             el("p", { class: "account-notice account-bad" }, [el("strong", { text: "This key is shown once." }), " Save it now: it can't be shown again, and without it you'd have to reset it."]),
-            el("h2", { text: "Use it in the game" }),
-            el("p", {}, ["Open the console with ", el("kbd", { text: "`" }), " (the key above Tab), paste this line and press Enter. The game saves it to ", el("code", { text: "auth.cfg" }), " for you."]),
-            el("p", { class: "account-line" }, [el("code", { text: line }), " ", copybutton(function() { return line; })]),
-            el("h2", { text: "Or save auth.cfg" }),
-            el("p", {}, ["Put this ", el("code", { text: "auth.cfg" }), " in your Red Eclipse home folder:"]),
-            file,
-            el("p", {}, [download, " ", copybutton(function() { return cfg; })]),
-            el("ul", { class: "account-help" }, [
-                el("li", {}, ["Windows: ", el("code", { text: "Documents\\My Games\\Red Eclipse" })]),
-                el("li", {}, ["Linux: ", el("code", { text: "~/.redeclipse" })]),
-                el("li", {}, ["macOS: ", el("code", { text: "~/Library/Application Support/Red Eclipse" })]),
-                el("li", { text: "The game's console shows the folder it uses as \"Home directory\" when it starts, which may have another folder inside, such as stable." })
+            el("div", { class: "account-ways" }, [
+                el("div", { class: "account-way" }, [
+                    el("h3", { text: "In the game" }),
+                    el("p", {}, ["Open the console with ", el("kbd", { text: "`" }), " (the key above Tab), paste this line and press Enter. The game saves it to ", el("code", { text: "auth.cfg" }), " for you."]),
+                    el("code", { class: "account-copyline", text: line }),
+                    actions(copybutton(function() { return line; }))
+                ]),
+                el("div", { class: "account-way" }, [
+                    el("h3", { text: "Or as a file" }),
+                    el("p", {}, ["Save this as ", el("code", { text: "auth.cfg" }), " in your Red Eclipse home folder."]),
+                    file,
+                    actions([download, copybutton(function() { return cfg; })])
+                ])
             ]),
-            el("p", {}, ["Then you're signed in on every server that uses accounts, and you can ", el("a", { href: "/account/login", text: "sign in here" }), " with it too."])
-        ]);
+            el("h3", { text: "Your home folder" }),
+            el("dl", { class: "account-folders" }, [
+                el("dt", { text: "Windows" }), el("dd", {}, el("code", { text: "Documents\\My Games\\Red Eclipse" })),
+                el("dt", { text: "Linux" }), el("dd", {}, el("code", { text: "~/.redeclipse" })),
+                el("dt", { text: "macOS" }), el("dd", {}, el("code", { text: "~/Library/Application Support/Red Eclipse" }))
+            ]),
+            el("p", { class: "account-help", text: "The game's console shows the folder it uses as \"Home directory\" when it starts, which may have another folder inside, such as stable." }),
+            el("p", {}, "Then you're signed in on every server that uses accounts, and you can sign in here with it too."),
+            actions(el("a", { href: PAGES.login, class: "account-button account-primary", text: "Sign in" }))
+        ], true);
+    }
+
+    // what a mailed link did, and where to go next
+    function result(title, text, next)
+    {
+        return card([el("h2", { text: title }), el("p", { text: text }), next ? actions(el("a", { href: next[1], class: "account-button account-primary", text: next[0] })) : null]);
     }
 
     // the link's token, taken out of the address bar so it isn't left there
@@ -514,20 +530,15 @@
         clear(root);
         root.appendChild(notice);
         if(!token) { say("That link is incomplete. Copy the whole of it from the email.", true); return true; }
-        var button = el("button", { type: "button", text: label, onclick: function()
+        var note = notifier(), front;
+        var button = el("button", { type: "button", class: "account-primary", text: label, onclick: function()
         {
             button.disabled = true;
-            say("Asking the master server…");
-            post().then(function(r)
-            {
-                say("");
-                clear(root);
-                root.appendChild(notice);
-                done(r);
-            }).catch(function(err) { button.disabled = false; say(err.message, true); });
+            note.say("Asking the master server…");
+            post().then(function(r) { root.replaceChild(done(r), front); }).catch(function(err) { button.disabled = false; note.say(err.message, true); });
         } });
-        root.appendChild(el("p", { text: intro }));
-        root.appendChild(el("p", {}, button));
+        front = card([el("p", { class: "account-intro", text: intro }), note.el, actions(button)]);
+        root.appendChild(front);
         return true;
     }
 
@@ -540,39 +551,32 @@
                 return linkpage(token, "Activate my account", "Activate your Red Eclipse account and get its key.", function()
                 {
                     return account.accounts("POST", "/activate", { token: token }).then(function(r) { if(r.status !== 200) throw failed(r, "The master server couldn't activate it."); return r.json; });
-                }, function(k)
-                {
-                    root.appendChild(el("p", { class: "account-who" }, ["Your account ", el("strong", { text: k.handle }), " is ready."]));
-                    root.appendChild(keypanel(k));
-                });
+                }, function(k) { return keypanel(k, "Your account " + k.handle + " is ready"); });
             case "reset":
                 if(!token) return false; // asking for the link, rather than following it
                 return linkpage(token, "Reset my key", "Get a new key for your Red Eclipse account. The old one stops working, and you're signed out everywhere it was remembered.", function()
                 {
                     return account.accounts("POST", "/reset/confirm", { token: token }).then(function(r) { if(r.status !== 200) throw failed(r, "The master server couldn't reset it."); return r.json; });
-                }, function(k)
-                {
-                    root.appendChild(el("p", { class: "account-who" }, ["Here's the new key for ", el("strong", { text: k.handle }), "."]));
-                    root.appendChild(keypanel(k));
-                });
+                }, function(k) { return keypanel(k, "Here's the new key for " + k.handle); });
             case "cancel":
                 return linkpage(token, "Remove the registration", "Someone registered a Red Eclipse account with your email address. If it wasn't you, remove it.", function()
                 {
                     return account.accounts("POST", "/cancel", { token: token }).then(function(r) { if(r.status !== 204) throw failed(r, "The master server couldn't remove it."); });
-                }, function() { say("Removed. Your email address is free again, and nothing more will come from this."); });
+                }, function() { return result("Registration removed", "Your email address is free again, and nothing more will come from this.", ["Back to Red Eclipse", "/"]); });
             case "email":
                 return linkpage(token, "Use this email address", "Use this email address for your Red Eclipse account from now on.", function()
                 {
                     return account.accounts("POST", "/email/confirm", { token: token }).then(function(r) { if(r.status !== 200) throw failed(r, "The master server couldn't change it."); return r.json; });
-                }, function(r) { say("Done: " + r.handle + "'s email address is now " + r.email + "."); });
+                }, function(r) { return result("Email address changed", r.handle + "'s email address is now " + r.email + ".", ["Your account", PAGES.profile]); });
             case "email-cancel":
                 return linkpage(token, "Stop the change", "Someone asked to move your Red Eclipse account to another email address. If it wasn't you, stop it.", function()
                 {
                     return account.accounts("POST", "/email/cancel", { token: token }).then(function(r) { if(r.status !== 204) throw failed(r, "The master server couldn't stop it."); });
                 }, function()
                 {
-                    say("Stopped. Someone was signed in to your account to ask for it, so reset its key to sign them out.");
-                    account.accounts("GET").then(function(r) { root.appendChild(el("h2", { text: "Reset the key" })); root.appendChild(resetform(r.json || {})); });
+                    var box = result("Change stopped", "Someone was signed in to your account to ask for it. Reset its key to sign them out everywhere.");
+                    account.accounts("GET").then(function(r) { box.appendChild(resetform(r.json || {})); });
+                    return box;
                 });
             case "steam": case "discord":
                 return linkreturn();
