@@ -178,6 +178,51 @@
     white-space: normal;
     overflow-wrap: anywhere;
 }
+/* A choice of one, such as an account's Privilege: the picked one lit, the ones that can't be picked faint */
+.account-picker {
+    display: inline-flex;
+    border: 1px solid var(--account-input);
+    border-radius: 4px;
+    overflow: hidden;
+}
+#account .account-picker button.account-pick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 7px;
+    color: var(--account-muted);
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 0;
+    border-radius: 0;
+}
+#account .account-picker button.account-pick + button.account-pick {
+    border-left: 1px solid var(--account-input);
+}
+#account .account-picker button.account-pick:hover:not([disabled]), #account .account-picker button.account-pick:focus-visible {
+    color: rgb(255, 255, 255);
+    background-color: rgba(160, 0, 0, 0.4);
+}
+#account .account-picker button.account-pick-on {
+    color: rgb(255, 255, 255);
+    background-color: var(--account-fill);
+    cursor: default;
+}
+#account .account-picker button.account-pick[disabled] {
+    opacity: 1;
+    color: rgba(190, 170, 170, 0.3);
+}
+#account .account-picker button.account-pick-on[disabled] {
+    color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(150, 0, 0, 0.45);
+}
+.account-privicon {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-color: currentColor;
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
 #account .account-clear {
     margin-left: 8px;
     font-size: 90%;

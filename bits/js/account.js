@@ -752,6 +752,24 @@
         return el("div", { class: "account-scroll" }, el("table", { class: "account-signins account-admintable" },
             [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)]));
     }
+    // an account's Privilege as the game's icons, one picked; those it can't be given are greyed, and picking one asks first
+    var PRIVLETTERS = ["u", "s", "m", "a", "d", "c"];
+    function aname(word) { return (/^[aeiou]/i.test(word) ? "an " : "a ") + word; }
+    function privpicker(a, mine, why, act)
+    {
+        var now = privof(a.flags);
+        return el("div", { class: "account-picker", role: "group", "aria-label": "Privilege" }, PRIVLETTERS.map(function(c, i)
+        {
+            var priv = i + 1, word = PRIVNAMES[priv], on = priv === now, cant = why || (!outranks(mine, priv) ? "Only below your own privilege" : null);
+            var url = "url(/bits/images/servers/privilege/" + word + ".svg)";
+            return el("button", { type: "button", class: "account-pick" + (on ? " account-pick-on" : ""), "aria-pressed": on ? "true" : "false", "aria-label": capital(word),
+                title: capital(word) + (on ? ", now" : cant ? ": " + cant.charAt(0).toLowerCase() + cant.slice(1) : ""), disabled: !!(cant && (!on || why)), onclick: function()
+                {
+                    if(on) return;
+                    if(window.confirm("Make " + a.handle + " " + aname(word) + "? This ends their sign-ins.")) act("PATCH", { flags: c }, a.handle + " is now " + aname(word) + ".");
+                } }, el("span", { class: "account-privicon", style: "-webkit-mask-image:" + url + ";mask-image:" + url }));
+        }));
+    }
     function removebutton(label, onclick, why) { return el("button", { type: "button", class: "account-danger-button", text: label, disabled: !!why, title: why || null, onclick: onclick }); }
 
     function adminaccounts(me)
@@ -764,11 +782,10 @@
             {
                 if(r.status !== 200) throw failed(r, "The search failed.");
                 clear(results).appendChild(el("p", { class: "account-help", text: r.json.total + " account" + (r.json.total === 1 ? "" : "s") + (r.json.total > r.json.accounts.length ? ", showing " + r.json.accounts.length : "") }));
-                results.appendChild(admintable(["Handle", "Flags", "Email", "Display name", "Steam", "Discord", ""], r.json.accounts.map(function(a)
+                results.appendChild(admintable(["Handle", "Privilege", "Email", "Display name", "Steam", "Discord", ""], r.json.accounts.map(function(a)
                 {
                     var self = a.handle === me.name, can = !self && outranks(mine, privof(a.flags));
                     var why = self ? "You can't change your own account here" : can ? null : "Their privilege is at or above yours";
-                    var flags = el("input", { type: "text", value: a.flags, size: 4, spellcheck: "false", disabled: !can, title: why, "aria-label": "Flags" });
                     function act(method, body, done)
                     {
                         return account.call(method, "/admin/accounts/" + encodeURIComponent(a.handle), body).then(function(r)
@@ -780,17 +797,14 @@
                     }
                     return el("tr", {}, [
                         el("td", {}, el("strong", { text: a.handle })),
-                        el("td", {}, el("span", { class: "account-inline" }, [flags, el("button", { type: "button", class: "account-quiet", text: "Set", disabled: !can, title: why, onclick: function()
-                        {
-                            if(cangive(mine, flags.value.trim(), list.say)) act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
-                        } })])),
+                        el("td", {}, privpicker(a, mine, why, act)),
                         el("td", { text: a.email }),
                         el("td", {}, [a.displayname || null, a.displayname ? el("button", { type: "button", class: "account-link account-clear", text: "Clear", disabled: !can, title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
                         el("td", { text: a.steamid }), el("td", { text: a.discord }),
                         el("td", {}, removebutton("Remove", function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); }, why))
                     ]);
                 })));
-                results.appendChild(givehelp(mine));
+                results.appendChild(el("p", { class: "account-help", text: "You can give up to " + aname(PRIVNAMES[Math.max.apply(null, PRIVLETTERS.map(function(c, i) { return outranks(mine, i + 1) ? i + 1 : 0; }))]) + ". Changing an account's privilege ends its sign-ins." }));
             }).catch(function(err) { list.say(err.message, true); });
         }
         list.querySelector(".account-panel-head").appendChild(el("form", { class: "account-inline account-search", role: "search", onsubmit: function(e) { e.preventDefault(); search(); } },
