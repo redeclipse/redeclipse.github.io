@@ -730,7 +730,6 @@
     // nobody changes or gives a standing at or above their own, except a founder
     function outranks(mine, other) { return mine >= FLAGPRIV.c || other < mine; }
     function givable(mine) { return Object.keys(FLAGPRIV).filter(function(c) { return outranks(mine, FLAGPRIV[c]); }); }
-    function givehelp(mine) { return el("p", { class: "account-help", text: "Flags are letters: u player, s supporter, m or o moderator, a administrator, d developer, c founder. You can give " + givable(mine).join(", ") + "." }); }
     function cangive(mine, flags, say)
     {
         if(outranks(mine, privof(flags))) return true;
@@ -769,6 +768,21 @@
                     if(window.confirm("Make " + a.handle + " " + aname(word) + "? This ends their sign-ins.")) act("PATCH", { flags: c }, a.handle + " is now " + aname(word) + ".");
                 } }, el("span", { class: "account-privicon", style: "-webkit-mask-image:" + url + ";mask-image:" + url }));
         }));
+    }
+    // a server account's level, which sets its place among servers with as many players: one letter, the highest it has
+    var SERVERLEVELS = [["b", "Basic"], ["u", "Featured"], ["m", "Official"]];
+    function levelof(flags) { return /m/i.test(flags || "") ? "Official" : /u/i.test(flags || "") ? "Featured" : "Basic"; }
+    function levelpicker(pick)
+    {
+        var buttons = SERVERLEVELS.map(function(l, i)
+        {
+            return el("button", { type: "button", class: "account-pick account-pickword" + (i ? "" : " account-pick-on"), "aria-pressed": i ? "false" : "true", text: l[1], onclick: function()
+            {
+                buttons.forEach(function(b, j) { b.className = "account-pick account-pickword" + (j === i ? " account-pick-on" : ""); b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
+                pick(l[0]);
+            } });
+        });
+        return el("div", { class: "account-picker", role: "group", "aria-label": "Level" }, buttons);
     }
     function removebutton(label, onclick, why) { return el("button", { type: "button", class: "account-danger-button", text: label, disabled: !!why, title: why || null, onclick: onclick }); }
 
@@ -860,10 +874,10 @@
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Email", ""], r.json.servers.map(function(a)
                 {
                     var can = outranks(mine, privof(a.flags));
-                    return el("tr", {}, [el("td", {}, el("strong", { text: a.handle })), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, removebutton("Remove", function()
+                    return el("tr", {}, [el("td", {}, el("strong", { text: a.handle })), el("td", { text: levelof(a.flags) }), el("td", { text: a.email }), el("td", {}, removebutton("Remove", function()
                     {
                         if(!window.confirm("Remove the server account " + a.handle + "?")) return;
                         account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(a.handle + " is removed."); load(); }).catch(function(err) { list.say(err.message, true); });
@@ -872,20 +886,21 @@
             }).catch(function(err) { list.say(err.message, true); });
         }
         list.appendChild(servers);
-        var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true }), sflags = el("input", { type: "text", id: "admin-sflags", size: 4, spellcheck: "false" });
+        var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true }), slevel = "b", spicker = levelpicker(function(l) { slevel = l; });
         var skey = el("input", { type: "text", id: "admin-skey", spellcheck: "false", required: true }), semail = el("input", { type: "email", id: "admin-semail" });
         add.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
-            if(!cangive(mine, sflags.value.trim(), add.say)) return;
-            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: sflags.value.trim(), pubkey: skey.value.trim(), email: semail.value.trim() }).then(function(r)
+            if(!cangive(mine, slevel, add.say)) return;
+            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: slevel, pubkey: skey.value.trim(), email: semail.value.trim() }).then(function(r)
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
                 add.say(shandle.value.trim() + " is added.");
-                shandle.value = sflags.value = skey.value = semail.value = "";
+                shandle.value = skey.value = semail.value = "";
                 load();
             }).catch(function(err) { add.say(err.message, true); });
-        } }, [formfield("Handle", shandle), formfield("Flags", sflags, givehelp(mine).textContent), formfield("Public key", skey, "From genkey, which the server's operator keeps the private half of."),
+        } }, [formfield("Handle", shandle), el("div", { class: "account-field" }, [el("div", { class: "account-field-head" }, el("span", { class: "account-label", text: "Level" })), spicker,
+            el("p", { class: "account-help", text: "Among servers with as many players, Official ones come first in the Server Browser, then Featured, then Basic." })]), formfield("Public key", skey, "From genkey, which the server's operator keeps the private half of."),
             formfield("Email", semail, "Who to contact about it."), actions(el("button", { type: "submit", text: "Add" }))]));
         load();
         return el("div", { class: "account-panels" }, [list, add]);

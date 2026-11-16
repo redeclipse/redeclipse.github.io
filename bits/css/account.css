@@ -215,6 +215,12 @@
     color: rgba(255, 255, 255, 0.75);
     background-color: rgba(150, 0, 0, 0.45);
 }
+#account .account-picker button.account-pickword {
+    padding: 6px 16px;
+}
+.account-field .account-picker {
+    align-self: flex-start;
+}
 .account-privicon {
     display: block;
     width: 18px;
@@ -350,7 +356,7 @@
     align-items: baseline;
     gap: 4px 12px;
 }
-.account-field label {
+.account-field label, .account-label {
     color: var(--account-muted);
     font-weight: 600;
 }
