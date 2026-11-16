@@ -113,7 +113,8 @@ Running a server: its settings, the privileges needed for each action, moderatio
 | `spawnlock` | determines who may spawn when the server is locked;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `iphostlock` | determines who may see player addresses and hosts;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `overflowlock` | players at or above this privilege level are not kicked for message overflow;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
-| `overflowsize` | kick players with this many or more queued messages | `value` |
+| `overflowsize` | kick players who send this many or more messages in one world update, beyond any allowance they saved up | `value` |
+| `overflowburst` | how much unused message allowance a quiet player can save up, so one large update after a stall is not kicked, 0 = none | `milliseconds` |
 | `eventfuture` | drop timed events scheduled more than this far ahead, 0 = off | `milliseconds` |
 | `eventlimit` | drop events when a client has this many queued, counting each hit and shot they carry, 0 = unlimited | `value` |
 | `teamkilllock` | players at or above this privilege level are exempt from team kill warnings and punishments;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
