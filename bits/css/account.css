@@ -246,6 +246,14 @@
 .account-card > .account-way {
     margin: 16px 0;
 }
+.account-owner .account-inline {
+    margin: 0;
+    flex-wrap: nowrap;
+}
+.account-owner input {
+    width: 10em;
+    min-width: 0;
+}
 #account .account-clear {
     margin-left: 8px;
     font-size: 90%;

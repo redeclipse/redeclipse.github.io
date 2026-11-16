@@ -912,10 +912,33 @@
                 load();
             }).catch(function(err) { list.say(err.message, true); });
         }
-        function owner(a)
+        // the owner, with Change turning it into a field for another's handle
+        function owner(a, why)
         {
-            if(a.owner) return [a.owner, a.ownergone ? el("div", { class: "account-help", text: "Account deleted" }) : null];
-            return [a.email || "", el("div", { class: "account-help", text: "No owner, from before owners" })];
+            var box = el("div", { class: "account-owner" });
+            function show()
+            {
+                clear(box).appendChild(el("div", { class: "account-inline account-ownernow" }, [el("span", { text: a.owner || a.email || "" }),
+                    why ? null : el("button", { type: "button", class: "account-link account-clear", text: "Change", onclick: edit })]));
+                if(a.ownergone) box.appendChild(el("div", { class: "account-help", text: "Account deleted" }));
+                else if(!a.owner) box.appendChild(el("div", { class: "account-help", text: "No owner, from before owners" }));
+            }
+            function edit()
+            {
+                var input = el("input", { type: "text", value: a.owner || "", spellcheck: "false", required: true, "aria-label": "The new owner's handle" });
+                clear(box).appendChild(el("form", { class: "account-inline", onsubmit: function(e)
+                {
+                    e.preventDefault();
+                    var to = input.value.trim();
+                    if(!to || to === a.owner) { show(); return; }
+                    var ask = a.pending ? "Send " + a.handle + "'s link to " + to + " instead? The one already sent stops working."
+                        : "Make " + to + " the owner of " + a.handle + "?" + (a.newkey ? " The new key's link already sent stops working." : "");
+                    if(window.confirm(ask)) call("PATCH", a, "", { owner: to }, a.handle + " now belongs to " + to + "." + (a.pending ? " Its link went to them." : ""));
+                } }, [input, el("button", { type: "submit", class: "account-quiet", text: "Save" }), el("button", { type: "button", class: "account-link", text: "Cancel", onclick: show })]));
+                input.focus();
+            }
+            show();
+            return box;
         }
         function state(a)
         {
@@ -939,7 +962,7 @@
                     return el("tr", {}, [
                         el("td", {}, [el("strong", { text: a.handle }), state(a)]),
                         el("td", {}, picker),
-                        el("td", {}, owner(a)),
+                        el("td", {}, owner(a, why)),
                         el("td", {}, el("div", { class: "account-rowactions" }, [
                             el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!why, title: why, onclick: function()
                             {
