@@ -1,4 +1,4 @@
-// Signing in with a Red Eclipse account: the master's remembered sign-ins, and the Account page.
+// Signing in with a Red Eclipse account: the master's remembered sign-ins, and the account pages under /account.
 // See "Remembered sign-ins" in the Web API Guide (https://www.redeclipse.net/docs/Web-API-Guide). The private key is only ever held while answering a challenge.
 (function()
 {
@@ -222,7 +222,7 @@
 
     window.REAccount = { Account: Account, answer: answer, readauthcfg: readauthcfg, device: device, MASTER: MASTER };
 
-    // ---- the Account page
+    // ---- the account pages
 
     var root = document.getElementById("account");
     if(!root) return;
@@ -259,7 +259,7 @@
         notice.className = "account-notice" + (bad ? " account-bad" : "");
     }
 
-    function signinform()
+    function signinform(done)
     {
         var name = el("input", { type: "text", id: "account-name", autocomplete: "username", spellcheck: "false", required: true });
         var key = el("input", { type: "password", id: "account-key", autocomplete: "off", spellcheck: "false", required: true });
@@ -288,7 +288,7 @@
             {
                 key.value = "";
                 say("");
-                draw(me);
+                done(me);
             }, function(err)
             {
                 button.disabled = false;
@@ -465,7 +465,7 @@
                 el("li", {}, ["macOS: ", el("code", { text: "~/Library/Application Support/Red Eclipse" })]),
                 el("li", { text: "The game's console shows the folder it uses as \"Home directory\" when it starts, which may have another folder inside, such as stable." })
             ]),
-            el("p", {}, ["Then you're signed in on every server that uses accounts, and you can ", el("a", { href: "/account", text: "sign in here" }), " with it too."])
+            el("p", {}, ["Then you're signed in on every server that uses accounts, and you can ", el("a", { href: "/account/login", text: "sign in here" }), " with it too."])
         ]);
     }
 
@@ -515,6 +515,7 @@
                     root.appendChild(keypanel(k));
                 });
             case "reset":
+                if(!token) return false; // asking for the link, rather than following it
                 return linkpage(token, "Reset my key", "Get a new key for your Red Eclipse account. The old one stops working, and you're signed out everywhere it was remembered.", function()
                 {
                     return account.accounts("POST", "/reset/confirm", { token: token }).then(function(r) { if(r.status !== 200) throw failed(r, "The master server couldn't reset it."); return r.json; });
@@ -552,23 +553,25 @@
     function linkreturn()
     {
         var q = new URLSearchParams(window.location.search), body;
-        if(window.history.replaceState) window.history.replaceState(null, "", "/account");
+        if(window.history.replaceState) window.history.replaceState(null, "", PAGES.profile);
         if(ACTION === "steam")
         {
             var openid = {};
             q.forEach(function(v, k) { if(k.indexOf("openid.") === 0) openid[k] = v; });
+            ACTION = "profile";
             if(!openid["openid.return_to"]) { refresh(); return true; }
             body = { openid: openid };
         }
         else
         {
+            ACTION = "profile";
             if(q.get("error") || !q.get("code")) { refresh(); say("Discord didn't link: " + (q.get("error") === "access_denied" ? "it was cancelled" : q.get("error") ? "Discord refused it" : "no code came back") + ".", true); return true; }
             body = { code: q.get("code"), state: q.get("state") };
         }
         root.textContent = "Linking…";
         account.me(true).then(function(me)
         {
-            if(!me) { draw(null); say("Sign in first, then link it again.", true); return; }
+            if(!me) { tologin(); return; }
             return account.call("POST", "/account/" + ACTION, body).then(function(r)
             {
                 refresh();
@@ -656,7 +659,11 @@
             account.call("DELETE", "/account", { confirm: confirm.value.trim() }).then(function(r)
             {
                 if(r.status !== 204) throw failed(r, "It couldn't be deleted.");
-                account.end().then(function() { draw(null); say("Your account is deleted. Its key no longer works, and its handle is free for anyone."); });
+                account.end().then(function()
+                {
+                    page(null);
+                    say("Your account is deleted. Its key no longer works, and its handle is free for anyone.");
+                });
             }).catch(function(err) { say(err.message, true); });
         } }, [
             el("p", { class: "account-help", text: "This can't be undone. Type your handle to delete it." }),
@@ -669,9 +676,9 @@
 
     function admintable(head, rows) { return el("div", { class: "account-scroll" }, el("table", { class: "account-signins" }, [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)])); }
 
-    function adminpanel(me)
+    function adminaccounts(me)
     {
-        var box = el("div", { class: "account-admin" }), results = el("div"), controls = el("div"), servers = el("div");
+        var box = el("div", { class: "account-admin" }), results = el("div");
         var q = el("input", { type: "text", id: "admin-q", placeholder: "Handle or email", spellcheck: "false" });
         function search()
         {
@@ -691,14 +698,25 @@
                             search();
                         }).catch(function(err) { say(err.message, true); });
                     }
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", {}, [flags, el("button", { type: "button", text: "Set", onclick: function() { act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + "."); } })]),
+                    return el("tr", {}, [el("td", { text: a.handle }), el("td", {}, [flags, el("button", { type: "button", text: "Set", onclick: function()
+                        {
+                            act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
+                        } })]),
                         el("td", { text: a.email }), el("td", {}, [a.displayname || "", a.displayname ? el("button", { type: "button", text: "Clear", onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
                         el("td", { text: a.steamid }), el("td", { text: a.discord }),
                         el("td", {}, el("button", { type: "button", text: "Remove", onclick: function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); } }))]);
                 })));
             }).catch(function(err) { say(err.message, true); });
         }
-        function loadcontrols()
+        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e) { e.preventDefault(); search(); } }, [q, el("button", { type: "submit", text: "Search" })]));
+        box.appendChild(results);
+        return box;
+    }
+
+    function admincontrols()
+    {
+        var box = el("div", { class: "account-admin" }), controls = el("div");
+        function load()
         {
             account.call("GET", "/admin/controls").then(function(r)
             {
@@ -707,35 +725,13 @@
                 {
                     return el("tr", {}, [el("td", { text: c.type }), el("td", { text: c.address }), el("td", { text: c.reason }), el("td", {}, el("button", { type: "button", text: "Remove", onclick: function()
                     {
-                        account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); loadcontrols(); }).catch(function(err) { say(err.message, true); });
-                    } }))]);
-                })));
-            }).catch(function(err) { say(err.message, true); });
-        }
-        function loadservers()
-        {
-            account.call("GET", "/admin/servers").then(function(r)
-            {
-                if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
-                {
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, el("button", { type: "button", text: "Remove", onclick: function()
-                    {
-                        if(!window.confirm("Remove the server account " + a.handle + "?")) return;
-                        account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); loadservers(); }).catch(function(err) { say(err.message, true); });
+                        account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); load(); }).catch(function(err) { say(err.message, true); });
                     } }))]);
                 })));
             }).catch(function(err) { say(err.message, true); });
         }
         var ctype = el("select", {}, CONTROLTYPES.map(function(t) { return el("option", { value: t, text: t }); }));
         var caddr = el("input", { type: "text", placeholder: "1.2.3.4, or 1.2 for a range", spellcheck: "false" }), creason = el("input", { type: "text", placeholder: "Reason, with the date" });
-        var shandle = el("input", { type: "text", placeholder: "Handle", spellcheck: "false" }), sflags = el("input", { type: "text", placeholder: "Flags", size: 4, spellcheck: "false" });
-        var skey = el("input", { type: "text", placeholder: "Public key", spellcheck: "false" }), semail = el("input", { type: "email", placeholder: "Email" });
-        var mailto = el("input", { type: "email", placeholder: "Address" });
-        box.appendChild(el("h3", { text: "Accounts" }));
-        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e) { e.preventDefault(); search(); } }, [q, el("button", { type: "submit", text: "Search" })]));
-        box.appendChild(results);
-        box.appendChild(el("h3", { text: "Global lists" }));
         box.appendChild(el("p", { class: "account-help", text: "Every linked server gets these. Global bans are a last resort: see the Multiplayer Guidelines." }));
         box.appendChild(controls);
         box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
@@ -745,10 +741,33 @@
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
                 caddr.value = creason.value = "";
-                loadcontrols();
+                load();
             }).catch(function(err) { say(err.message, true); });
         } }, [ctype, caddr, creason, el("button", { type: "submit", text: "Add" })]));
-        box.appendChild(el("h3", { text: "Server accounts" }));
+        load();
+        return box;
+    }
+
+    function adminservers()
+    {
+        var box = el("div", { class: "account-admin" }), servers = el("div");
+        function load()
+        {
+            account.call("GET", "/admin/servers").then(function(r)
+            {
+                if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
+                clear(servers).appendChild(admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
+                {
+                    return el("tr", {}, [el("td", { text: a.handle }), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, el("button", { type: "button", text: "Remove", onclick: function()
+                    {
+                        if(!window.confirm("Remove the server account " + a.handle + "?")) return;
+                        account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); load(); }).catch(function(err) { say(err.message, true); });
+                    } }))]);
+                })));
+            }).catch(function(err) { say(err.message, true); });
+        }
+        var shandle = el("input", { type: "text", placeholder: "Handle", spellcheck: "false" }), sflags = el("input", { type: "text", placeholder: "Flags", size: 4, spellcheck: "false" });
+        var skey = el("input", { type: "text", placeholder: "Public key", spellcheck: "false" }), semail = el("input", { type: "email", placeholder: "Email" });
         box.appendChild(servers);
         box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
         {
@@ -757,11 +776,17 @@
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
                 shandle.value = sflags.value = skey.value = semail.value = "";
-                loadservers();
+                load();
             }).catch(function(err) { say(err.message, true); });
         } }, [shandle, sflags, skey, semail, el("button", { type: "submit", text: "Add" })]));
-        box.appendChild(el("h3", { text: "Mail" }));
-        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
+        load();
+        return box;
+    }
+
+    function adminmail()
+    {
+        var mailto = el("input", { type: "email", placeholder: "Address" });
+        return el("form", { class: "account-inline", onsubmit: function(e)
         {
             e.preventDefault();
             account.call("POST", "/admin/mail", { to: mailto.value.trim() }).then(function(r)
@@ -769,35 +794,73 @@
                 if(r.status !== 202) throw failed(r, "It couldn't be sent.");
                 say("A test email is on its way to " + mailto.value.trim() + "; the master's log says if it couldn't be delivered.");
             }).catch(function(err) { say(err.message, true); });
-        } }, [mailto, el("button", { type: "submit", text: "Send a test email" })]));
-        loadcontrols();
-        loadservers();
-        return box;
+        } }, [mailto, el("button", { type: "submit", text: "Send a test email" })]);
     }
 
-    function draw(me)
+    // ---- the pages, each at its own address
+
+    var PAGES = { login: "/account/login", register: "/account/register", reset: "/account/reset", profile: "/account/profile", admin: "/account/admin" };
+    var ADMINPAGES = [["admin", "Overview", PAGES.admin], ["admin-accounts", "Accounts", PAGES.admin + "/accounts"], ["admin-controls", "Global lists", PAGES.admin + "/controls"],
+        ["admin-servers", "Server accounts", PAGES.admin + "/servers"]];
+
+    function go(path) { window.location.replace(path); }
+    // where to go once signed in: only ever the server browser or one of these pages, so a link can't send anyone elsewhere
+    function nextpath()
+    {
+        var n = new URLSearchParams(window.location.search).get("next") || "";
+        return n === "/servers" || (/^\/account\/[a-z\/-]+$/.test(n) && n !== PAGES.login && n !== PAGES.register) ? n : PAGES.profile;
+    }
+    function tologin() { go(PAGES.login + "?next=" + encodeURIComponent(window.location.pathname)); }
+    function isadmin(me) { return privof(me.flags) >= FLAGPRIV.a; }
+
+    // links between pages, the one we're on (or, unless exact, under) marked
+    function tabs(list, exact)
+    {
+        var here = window.location.pathname.replace(/\/+$/, "");
+        return el("nav", { class: "account-tabs" }, list.map(function(t)
+        {
+            var on = here === t[1] || (!exact && here.indexOf(t[1] + "/") === 0);
+            return el("a", { href: t[1], class: on ? "account-tab-on" : null, "aria-current": on ? "page" : null, text: t[0] });
+        }));
+    }
+
+    // a fresh page, with the links between the account pages and the notice
+    function page(me)
     {
         clear(root);
+        root.appendChild(tabs(me ? [["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])
+            : [["Sign in", PAGES.login], ["Register", PAGES.register], ["Lost your key?", PAGES.reset]]));
+        if(me) root.appendChild(el("p", { class: "account-who" }, ["Signed in as ", el("strong", { text: me.name }), "."]));
         root.appendChild(notice);
-        if(!me)
-        {
-            root.appendChild(el("p", { text: "Sign in with your Red Eclipse account to chat on servers from the server browser, and to moderate them if your account can." }));
-            root.appendChild(signinform());
-            var more = el("div");
-            root.appendChild(more);
-            account.accounts("GET").then(function(r)
-            {
-                var info = r.status === 200 ? r.json : { register: false };
-                more.appendChild(el("h2", { text: "Register" }));
-                more.appendChild(registerform(info));
-                more.appendChild(el("h2", { text: "Lost your key?" }));
-                more.appendChild(resetform(info));
-            });
-            return;
-        }
-        root.appendChild(el("p", { class: "account-who" }, ["Signed in as ", el("strong", { text: me.name }), "."]));
+    }
+
+    function loginpage(me)
+    {
+        if(me) { go(nextpath()); return; }
+        page(null);
+        root.appendChild(el("p", { text: "Sign in with your Red Eclipse account to chat on servers from the server browser, and to moderate them if your account can." }));
+        root.appendChild(signinform(function() { go(nextpath()); }));
+    }
+
+    function registerpage(me)
+    {
+        if(me) { go(PAGES.profile); return; }
+        page(null);
+        account.accounts("GET").then(function(r) { root.appendChild(registerform(r.status === 200 ? r.json : { register: false })); });
+    }
+
+    function resetpage(me)
+    {
+        page(me);
+        root.appendChild(el("p", { text: "Ask for a new key for your account. A link to get it goes to the account's email address, and the old key stops working once you follow it." }));
+        account.accounts("GET").then(function(r) { root.appendChild(resetform(r.status === 200 ? r.json : {})); });
+    }
+
+    function profilepage(me)
+    {
+        if(!me) { tologin(); return; }
+        page(me);
         var owner = el("div");
-        root.appendChild(el("h2", { text: "Your account" }));
         root.appendChild(owner);
         account.call("GET", "/account").then(function(r)
         {
@@ -808,16 +871,43 @@
         root.appendChild(signinlist(me));
         root.appendChild(el("p", {}, [el("button", { type: "button", text: "Sign out everywhere", onclick: function()
         {
-            account.end("all").then(function() { refresh(); });
+            account.end("all").then(function() { go(PAGES.login); });
         } })]));
-        if(privof(me.flags) >= FLAGPRIV.a)
+    }
+
+    function adminpage(me)
+    {
+        if(!me) { tologin(); return; }
+        page(me);
+        if(!isadmin(me)) { say("Your account can't manage the master server.", true); return; }
+        root.appendChild(tabs(ADMINPAGES.map(function(p) { return [p[1], p[2]]; }), true));
+        switch(ACTION)
         {
-            root.appendChild(el("h2", { text: "Administration" }));
-            root.appendChild(adminpanel(me));
+            case "admin-accounts": root.appendChild(adminaccounts(me)); break;
+            case "admin-controls": root.appendChild(admincontrols()); break;
+            case "admin-servers": root.appendChild(adminservers()); break;
+            default:
+                root.appendChild(el("p", { text: "The master server has no console, so its administrators manage it here." }));
+                root.appendChild(el("ul", {}, ADMINPAGES.slice(1).map(function(p) { return el("li", {}, el("a", { href: p[2], text: p[1] })); })));
+                root.appendChild(el("h2", { text: "Mail" }));
+                root.appendChild(adminmail());
         }
     }
 
-    function refresh() { account.me(true).then(draw); }
+    function route(me)
+    {
+        switch(ACTION)
+        {
+            case "login": return loginpage(me);
+            case "register": return registerpage(me);
+            case "reset": return resetpage(me);
+            case "profile": return profilepage(me);
+            case "admin": case "admin-accounts": case "admin-controls": case "admin-servers": return adminpage(me);
+        }
+        go(me ? PAGES.profile : PAGES.login);
+    }
+
+    function refresh() { account.me(true).then(route); }
     root.textContent = "Loading…";
     if(!actionpage()) refresh();
 })();

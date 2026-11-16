@@ -870,10 +870,10 @@
             });
         }
         if(rq.threshold || rq.pop) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Leave queue", onclick: queueleave }));
-        // without an account, how to get one: register it on the account page or in the game, or sign in with one
+        // without an account, how to get one: register it on the website or in the game, or sign in with one
         var helpview = help !== null ? el("span", { class: "servers-queuehelp", text: help }) : el("span", { class: "servers-queuehelp" }, [
             "You need an account to queue, which only takes an email: ",
-            el("a", { href: "/account", text: "register one or sign in" }),
+            el("a", { href: "/account/register", text: "register one" }), " or ", el("a", { href: "/account/login?next=/servers", text: "sign in" }),
             ", or register in the game from the Account page of the Player menu."
         ]);
         clear(queuebox);
@@ -1129,7 +1129,7 @@
     Panel.prototype.showstanding = function(text, signinlink)
     {
         clear(this.standing);
-        append(this.standing, [text, signinlink ? [" ", el("a", { href: "/account", text: "Sign in" })] : null]);
+        append(this.standing, [text, signinlink ? [" ", el("a", { href: "/account/login?next=/servers", text: "Sign in" })] : null]);
     };
 
     Panel.prototype.signin = function()

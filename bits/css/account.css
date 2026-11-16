@@ -1,5 +1,5 @@
 @charset "utf-8";
-/* Signing in with a Red Eclipse account, /account, and the server browser's chat and moderation */
+/* Signing in with a Red Eclipse account, the /account pages, and the server browser's chat and moderation */
 #account {
     margin: 12px 0 16px 0;
     font-size: 14px;
@@ -244,6 +244,26 @@
 }
 .account-admin h3, .account-owner h3 {
     margin-top: 20px;
+}
+.account-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin: 0 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgb(120, 80, 80);
+}
+#account .account-tabs a {
+    color: rgb(240, 200, 200);
+    text-decoration: none;
+    padding: 2px 0;
+}
+#account .account-tabs a:hover, #account .account-tabs a:focus {
+    color: rgb(255, 255, 255);
+}
+#account .account-tabs a.account-tab-on {
+    color: rgb(255, 255, 255);
+    border-bottom: 2px solid rgb(255, 64, 64);
 }
 @media (max-width: 560px) {
     .account-fields {
