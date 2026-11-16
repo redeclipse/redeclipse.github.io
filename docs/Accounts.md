@@ -19,7 +19,7 @@ You need a handle and an email address. Your handle is 3 to 24 letters, numbers,
 
 **In the game:** open **Player setup**, then **Account**, enter your handle and email address and press **Register**.
 
-**On the website:** go to https://www.redeclipse.net/account and fill in **Register**.
+**On the website:** fill in the form at https://www.redeclipse.net/account/register.
 
 Either way, you get an email with a link to activate your account within 7 days. Until you do, the account can't be used, but nobody else can take its handle or email address. If it doesn't arrive, register again with the same handle and email for a new one. If someone used your address without asking, the email has a link to remove it straight away; otherwise it's removed after 7 days.
 
@@ -43,11 +43,11 @@ Keep `auth.cfg` to yourself: anyone with your key can sign in as you. With the s
 
 ## Lost your key?
 
-Ask for a new one with your handle or email address: in the game under **Player setup**, **Account**, **Lost your key?**, or on the website's account page. If the account has an email address, it gets a link that lasts a day. Following it gives you a new key, the same way as activating, and the old one stops working everywhere.
+Ask for a new one with your handle or email address: in the game under **Player setup**, **Account**, **Lost your key?**, or at https://www.redeclipse.net/account/reset. If the account has an email address, it gets a link that lasts a day. Following it gives you a new key, the same way as activating, and the old one stops working everywhere.
 
 ## On the website
 
-Sign in at https://www.redeclipse.net/account with your handle and key (the page can read them from your `auth.cfg`). There you can:
+Sign in at https://www.redeclipse.net/account/login with your handle and key (the page can read them from your `auth.cfg`). Your account's page, https://www.redeclipse.net/account/profile, is where you can:
 
 - **Set a display name**, which the website shows with your handle, such as `Someone Cool (someone)`. It can be up to 32 characters and change once an hour. Until you choose one, it's taken from the first name you're seen playing under, or your Discord name. In the game you go by your in-game name as always, and on Discord by your Discord name.
 - **Link Steam**, by signing in to Steam.

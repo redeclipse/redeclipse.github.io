@@ -516,7 +516,7 @@ The Control entries your Privilege may see:
 | Field | Meaning |
 |---|---|
 | `type` | `allow`, `ban`, `mute`, `limit` or `except` |
-| `scope` | `temporary`, `internal`, `local` or `global`. Global entries come from the master and can't be removed here |
+| `scope` | `temporary`, `internal`, `local` or `global`. Global entries come from the master and can't be removed here, and only a global `except` lifts a global ban, mute or limit |
 | `source` | `server`, `player`, `automatic` or `master` |
 | `name`, `handle`, `by`, `reason` | Present when known |
 | `ip`, `mask` | At the server's `iphostlock` and above (moderator by default). `mask` is the prefix length, and is present only for ranges |
@@ -529,7 +529,7 @@ The Control entries your Privilege may see:
 
 - `type` is `kick`, `allow`, `ban`, `mute`, `limit` or `except`. `reason` is optional.
 - Success is `201` with `{"ok": true}`.
-- You can't act on a player whose Privilege is higher than yours. A player protected by an `except` entry can only be acted on by an Administrator.
+- You can't act on a player whose Privilege is higher than yours. A player protected by an `except` entry can only be acted on by an Administrator, and a player protected by a global `except` can't be banned, muted or limited here at all.
 
 ### DELETE /controls/\<id\>
 
@@ -1025,7 +1025,7 @@ An account can link one Steam account and one Discord account, each proven throu
 
 ### Administration
 
-The master has no console, so its administrators manage it here, signed in with a remembered sign-in at the master's `masteradminlock` (administrator by default). Nobody can change an account at or above their own standing, or give one, except a founder.
+The master has no console, so its administrators manage it here, signed in with a remembered sign-in at the master's `masteradminlock` (administrator by default). Nobody can change or remove an account or server account at or above their own standing, or give either a standing at or above their own, except a founder.
 
 | Route | Does |
 |---|---|
