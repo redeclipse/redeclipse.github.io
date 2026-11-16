@@ -672,13 +672,24 @@
         return box;
     }
 
-    // ---- administration, for administrators
+    // ---- administration, for administrators, which mirrors what the master allows; the master decides
+
+    // nobody changes or gives a standing at or above their own, except a founder
+    function outranks(mine, other) { return mine >= FLAGPRIV.c || other < mine; }
+    function givable(mine) { return Object.keys(FLAGPRIV).filter(function(c) { return outranks(mine, FLAGPRIV[c]); }); }
+    function givehelp(mine) { return el("p", { class: "account-help", text: "Flags are letters: u player, s supporter, m or o moderator, a administrator, d developer, c founder. You can give " + givable(mine).join(", ") + "." }); }
+    function cangive(mine, flags)
+    {
+        if(outranks(mine, privof(flags))) return true;
+        say("You can only give a standing below your own: " + givable(mine).join(", ") + ".", true);
+        return false;
+    }
 
     function admintable(head, rows) { return el("div", { class: "account-scroll" }, el("table", { class: "account-signins" }, [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)])); }
 
     function adminaccounts(me)
     {
-        var box = el("div", { class: "account-admin" }), results = el("div");
+        var box = el("div", { class: "account-admin" }), results = el("div"), mine = privof(me.flags);
         var q = el("input", { type: "text", id: "admin-q", placeholder: "Handle or email", spellcheck: "false" });
         function search()
         {
@@ -688,7 +699,9 @@
                 clear(results).appendChild(el("p", { class: "account-help", text: r.json.total + " account(s)" + (r.json.total > r.json.accounts.length ? ", showing " + r.json.accounts.length : "") }));
                 results.appendChild(admintable(["Handle", "Flags", "Email", "Display name", "Steam", "Discord", ""], r.json.accounts.map(function(a)
                 {
-                    var flags = el("input", { type: "text", value: a.flags, size: 4, spellcheck: "false" });
+                    var self = a.handle === me.name, can = !self && outranks(mine, privof(a.flags));
+                    var why = self ? "You can't change your own account here" : can ? null : "Their standing is at or above yours";
+                    var flags = el("input", { type: "text", value: a.flags, size: 4, spellcheck: "false", disabled: !can, title: why });
                     function act(method, body, done)
                     {
                         return account.call(method, "/admin/accounts/" + encodeURIComponent(a.handle), body).then(function(r)
@@ -698,17 +711,18 @@
                             search();
                         }).catch(function(err) { say(err.message, true); });
                     }
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", {}, [flags, el("button", { type: "button", text: "Set", onclick: function()
+                    return el("tr", {}, [el("td", { text: a.handle }), el("td", {}, [flags, el("button", { type: "button", text: "Set", disabled: !can, title: why, onclick: function()
                         {
-                            act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
+                            if(cangive(mine, flags.value.trim())) act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
                         } })]),
-                        el("td", { text: a.email }), el("td", {}, [a.displayname || "", a.displayname ? el("button", { type: "button", text: "Clear", onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
+                        el("td", { text: a.email }), el("td", {}, [a.displayname || "", a.displayname ? el("button", { type: "button", text: "Clear", disabled: !can, title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
                         el("td", { text: a.steamid }), el("td", { text: a.discord }),
-                        el("td", {}, el("button", { type: "button", text: "Remove", onclick: function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); } }))]);
+                        el("td", {}, el("button", { type: "button", text: "Remove", disabled: !can, title: why, onclick: function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); } }))]);
                 })));
             }).catch(function(err) { say(err.message, true); });
         }
         box.appendChild(el("form", { class: "account-inline", onsubmit: function(e) { e.preventDefault(); search(); } }, [q, el("button", { type: "submit", text: "Search" })]));
+        box.appendChild(givehelp(mine));
         box.appendChild(results);
         return box;
     }
@@ -748,9 +762,9 @@
         return box;
     }
 
-    function adminservers()
+    function adminservers(me)
     {
-        var box = el("div", { class: "account-admin" }), servers = el("div");
+        var box = el("div", { class: "account-admin" }), servers = el("div"), mine = privof(me.flags);
         function load()
         {
             account.call("GET", "/admin/servers").then(function(r)
@@ -758,7 +772,9 @@
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
                 clear(servers).appendChild(admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
                 {
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, el("button", { type: "button", text: "Remove", onclick: function()
+                    var can = outranks(mine, privof(a.flags));
+                    return el("tr", {}, [el("td", { text: a.handle }), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, el("button", { type: "button", text: "Remove", disabled: !can,
+                        title: can ? null : "Its standing is at or above yours", onclick: function()
                     {
                         if(!window.confirm("Remove the server account " + a.handle + "?")) return;
                         account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); load(); }).catch(function(err) { say(err.message, true); });
@@ -772,6 +788,7 @@
         box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
         {
             e.preventDefault();
+            if(!cangive(mine, sflags.value.trim())) return;
             account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: sflags.value.trim(), pubkey: skey.value.trim(), email: semail.value.trim() }).then(function(r)
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
@@ -779,6 +796,7 @@
                 load();
             }).catch(function(err) { say(err.message, true); });
         } }, [shandle, sflags, skey, semail, el("button", { type: "submit", text: "Add" })]));
+        box.appendChild(givehelp(mine));
         load();
         return box;
     }
@@ -885,7 +903,7 @@
         {
             case "admin-accounts": root.appendChild(adminaccounts(me)); break;
             case "admin-controls": root.appendChild(admincontrols()); break;
-            case "admin-servers": root.appendChild(adminservers()); break;
+            case "admin-servers": root.appendChild(adminservers(me)); break;
             default:
                 root.appendChild(el("p", { text: "The master server has no console, so its administrators manage it here." }));
                 root.appendChild(el("ul", {}, ADMINPAGES.slice(1).map(function(p) { return el("li", {}, el("a", { href: p[2], text: p[1] })); })));
