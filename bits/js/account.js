@@ -912,33 +912,51 @@
                 load();
             }).catch(function(err) { list.say(err.message, true); });
         }
-        // the owner, with Change turning it into a field for another's handle
-        function owner(a, why)
+        // inline editor for a cell's text field, turning it into a form with Save and Cancel when Change is clicked
+        function inlinefield(cls, value, label, why, required, help, save)
         {
-            var box = el("div", { class: "account-owner" });
+            var box = el("div", { class: cls });
             function show()
             {
-                clear(box).appendChild(el("div", { class: "account-inline account-ownernow" }, [el("span", { text: a.owner || a.email || "" }),
+                clear(box).appendChild(el("div", { class: "account-inline account-ownernow" }, [el("span", { text: value }),
                     why ? null : el("button", { type: "button", class: "account-link account-clear", text: "Change", onclick: edit })]));
-                if(a.ownergone) box.appendChild(el("div", { class: "account-help", text: "Account deleted" }));
-                else if(!a.owner) box.appendChild(el("div", { class: "account-help", text: "No owner, from before owners" }));
+                if(help) box.appendChild(el("div", { class: "account-help", text: help }));
             }
             function edit()
             {
-                var input = el("input", { type: "text", value: a.owner || "", spellcheck: "false", required: true, "aria-label": "The new owner's handle" });
+                var input = el("input", { type: "text", value: value, spellcheck: "false", required: !!required, "aria-label": label });
                 clear(box).appendChild(el("form", { class: "account-inline", onsubmit: function(e)
                 {
                     e.preventDefault();
-                    var to = input.value.trim();
-                    if(!to || to === a.owner) { show(); return; }
-                    var ask = a.pending ? "Send " + a.handle + "'s link to " + to + " instead? The one already sent stops working."
-                        : "Make " + to + " the owner of " + a.handle + "?" + (a.newkey ? " The new key's link already sent stops working." : "");
-                    if(window.confirm(ask)) call("PATCH", a, "", { owner: to }, a.handle + " now belongs to " + to + "." + (a.pending ? " Its link went to them." : ""));
+                    if(!save(input.value.trim())) show();
                 } }, [input, el("button", { type: "submit", class: "account-quiet", text: "Save" }), el("button", { type: "button", class: "account-link", text: "Cancel", onclick: show })]));
                 input.focus();
             }
             show();
             return box;
+        }
+        // the owner, with Change turning it into a field for another's handle
+        function owner(a, why)
+        {
+            var help = a.ownergone ? "Account deleted" : !a.owner ? "No owner, from before owners" : null;
+            return inlinefield("account-owner", a.owner || "", "The new owner's handle", why, true, help, function(to)
+            {
+                if(!to || (to === a.owner && !a.ownergone)) return false;
+                var ask = a.pending ? "Send " + a.handle + "'s link to " + to + " instead? The one already sent stops working."
+                    : "Make " + to + " the owner of " + a.handle + "?" + (a.newkey ? " The new key's link already sent stops working." : "");
+                if(window.confirm(ask)) call("PATCH", a, "", { owner: to }, a.handle + " now belongs to " + to + "." + (a.pending ? " Its link went to them." : ""));
+                return true;
+            });
+        }
+        // the description, with Change turning it into an inline field
+        function desc(a, why)
+        {
+            return inlinefield("account-desc", a.desc || "", "Description", why, false, null, function(to)
+            {
+                if(to === (a.desc || "")) return false;
+                call("PATCH", a, "", { desc: to }, a.handle + "'s description was updated.");
+                return true;
+            });
         }
         function state(a)
         {
@@ -951,9 +969,10 @@
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", "Description", ""], r.json.servers.map(function(a)
                 {
                     var why = outranks(mine, privof(a.flags)) ? null : "Its level is at or above your privilege";
+                    var keywhy = why || (!a.owner ? "Give it an owner first" : a.ownergone ? "Give it a new owner first" : null);
                     var picker = levelpicker(a.flags, function(l) { return why || levelcant(l); }, function(l, done)
                     {
                         var word = levelof(l);
@@ -963,11 +982,12 @@
                         el("td", {}, [el("strong", { text: a.handle }), state(a)]),
                         el("td", {}, picker),
                         el("td", {}, owner(a, why)),
+                        el("td", {}, desc(a, why)),
                         el("td", {}, el("div", { class: "account-rowactions" }, [
-                            el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!why, title: why, onclick: function()
+                            el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!keywhy, title: keywhy, onclick: function()
                             {
-                                if(a.pending || window.confirm("Mail " + (a.owner || a.email) + " a link to a new key for " + a.handle + "? Its old key works until they follow it."))
-                                    call("POST", a, "/key", null, "A new link went to " + (a.owner || a.email) + ".");
+                                if(a.pending || window.confirm("Mail " + a.owner + " a link to a new key for " + a.handle + "? Its old key works until they follow it."))
+                                    call("POST", a, "/key", null, "A new link went to " + a.owner + ".");
                             } }),
                             removebutton(a.pending ? "Withdraw" : "Remove", function()
                             {
@@ -981,21 +1001,24 @@
         list.appendChild(servers);
         var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
         var sowner = el("input", { type: "text", id: "admin-sowner", spellcheck: "false", required: true });
+        var sdesc = el("input", { type: "text", id: "admin-sdesc", spellcheck: "false" });
         var slevel = "b", spicker = levelpicker("b", levelcant, function(l, done) { slevel = l; done(); });
         add.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
-            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: slevel, owner: sowner.value.trim() }).then(function(r)
+            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: slevel, owner: sowner.value.trim(), desc: sdesc.value.trim() }).then(function(r)
             {
                 if(r.status !== 202) throw failed(r, "It couldn't be added.");
                 add.say("A link to get " + r.json.handle + "'s key went to " + r.json.owner + "'s email address. It lasts until " + day(r.json.expires) + ".");
-                shandle.value = sowner.value = "";
+                shandle.value = sowner.value = sdesc.value = "";
                 load();
             }).catch(function(err) { add.say(err.message, true); });
         } }, [formfield("Handle", shandle, "The server's own name on the master: 3 to 24 letters, numbers, - or _."),
             el("div", { class: "account-field" }, [el("div", { class: "account-field-head" }, el("span", { class: "account-label", text: "Level" })), spicker,
                 el("p", { class: "account-help", text: "Among servers with as many players, Official ones come first in the Server Browser, then Featured, then Basic." })]),
-            formfield("Owner", sowner, "The handle of the player account that runs it."), actions(el("button", { type: "submit", text: "Send to the owner" }))]));
+            formfield("Owner", sowner, "The handle of the player account that runs it."),
+            formfield("Description", sdesc, "Optional note on what the server is, such as where it runs or who it's for."),
+            actions(el("button", { type: "submit", text: "Send to the owner" }))]));
         load();
         return el("div", { class: "account-panels" }, [list, add]);
     }
