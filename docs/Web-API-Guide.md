@@ -1008,20 +1008,15 @@ An account can link one Steam account and one Discord account, each proven throu
 
 `DELETE /api/v1/signin/account/steam` unlinks it.
 
-**Discord**, two ways:
-
-- Through Discord's sign-in: `GET /api/v1/signin/account/discord` gives `{"url", "state"}`. Discord sends the person back to `/account/discord?code=<code>&state=<state>`; post both to `POST /api/v1/signin/account/discord`. 503 when the master has no Discord application set up.
-- With a code: `POST /api/v1/signin/account/discord/code` gives `{"code": "H6SEHTCQ", "expires": <Unix time>}`, good once for 10 minutes. The person types `/link <code>` to the Discord bot.
+**Discord**, through Discord's sign-in: `GET /api/v1/signin/account/discord` gives `{"url", "state"}`. Discord sends the person back to `/account/discord?code=<code>&state=<state>`; post both to `POST /api/v1/signin/account/discord`. 503 when the master has no Discord application set up.
 
 `DELETE /api/v1/signin/account/discord` unlinks it.
 
-**The bot's routes** need a session at the master's `masterdiscordlock` (developer by default), as the bot's account has:
+**The bot's route** needs a session at the master's `masterdiscordlock` (developer by default), as the bot's account has. Only the account's owner links or unlinks Discord.
 
 | Route | Does |
 |---|---|
-| `POST /api/v1/accounts/discord/link` | `{"code", "discord": "<member's ID>", "name": "<their Discord name>"}` links the member to the code's account, answering `{"handle", "displayname"}` |
 | `GET /api/v1/accounts/discord/<id>` | Which account the member is: `{"handle", "displayname", "privilege"}`, `privilege` being the account's own standing, or 404 |
-| `DELETE /api/v1/accounts/discord/<id>` | Unlinks the member (204) |
 
 ### Administration
 

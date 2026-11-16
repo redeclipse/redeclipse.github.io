@@ -51,7 +51,7 @@ Sign in at https://www.redeclipse.net/account/login with your handle and key (th
 
 - **Set a display name**, which the website shows with your handle, such as `Someone Cool (someone)`. It can be up to 32 characters and change once an hour. Until you choose one, it's taken from the first name you're seen playing under, or your Discord name. In the game you go by your in-game name as always, and on Discord by your Discord name.
 - **Link Steam**, by signing in to Steam.
-- **Link Discord**, by signing in to Discord, or with a code: press **Get a /link code**, then type `/link <code>` to the Red Eclipse bot on our Discord within ten minutes. The game can make these codes too. `/unlink` on Discord removes it. Once linked, what you say in a server's thread on our Discord shows in the game as `Your Discord Name (handle)`, with your account's standing.
+- **Link Discord**, by signing in to Discord, and unlink it the same way. Once linked, what you say in a server's thread on our Discord shows in the game as `Your Discord Name (handle)`, with your account's standing.
 - **Change your email address.** The new address gets a link to confirm it, and the old one is told, with a link to stop the change.
 - **Delete your account.** Its key stops working and its handle is free for anyone to register.
 
