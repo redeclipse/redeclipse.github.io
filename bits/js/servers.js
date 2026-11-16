@@ -205,10 +205,13 @@
         return el("span", { class: "servers-modepart" }, [icon(p.icon, p.name, named), named ? p.name : null]);
     }
     function mutatornames(st) { return modeparts(st).slice(1).map(function(p) { return p.name; }).join(", "); }
+    // Servers and masters from before the top Privilege's rename say creator for founder
+    function privword(p) { return p === "creator" ? "founder" : p; }
     // As in the game, a Privilege icon takes the player's colour, so the icons are masks over it. Bots have one of their own,
     // and a Privilege the page doesn't know shows as none, as the game clamps it.
     function privicon(privilege, local, bot, colour)
     {
+        privilege = privword(privilege);
         if(PRIVILEGES.indexOf(privilege) < 0) privilege = "none";
         local = local && LOCALPRIVILEGES.indexOf(privilege) >= 0;
         var name = bot ? "Bot" : privilege === "none" ? "No privilege" : privilege.charAt(0).toUpperCase() + privilege.slice(1) + (local ? ", given by this server" : "");
@@ -218,10 +221,11 @@
     // A player's standing as the game's own lines name it, such as "global moderator", when it is above minpriv
     function standing(c, minpriv)
     {
-        if(!c || c.bot || PRIVILEGES.indexOf(c.privilege) <= PRIVILEGES.indexOf(minpriv)) return "";
-        if(c.local && LOCALPRIVILEGES.indexOf(c.privilege) >= 0) return "local " + c.privilege;
+        var priv = c ? privword(c.privilege) : "";
+        if(!c || c.bot || PRIVILEGES.indexOf(priv) <= PRIVILEGES.indexOf(minpriv)) return "";
+        if(c.local && LOCALPRIVILEGES.indexOf(priv) >= 0) return "local " + priv;
         return { player: "player account", supporter: "global supporter", moderator: "global moderator", administrator: "global administrator",
-            developer: "project developer", founder: "project founder" }[c.privilege] || "";
+            developer: "project developer", founder: "project founder" }[priv] || "";
     }
     // On joins and leaves a player's standing and account follow their name, as the game's own join line has them
     function handle(c)
@@ -1176,7 +1180,7 @@
             this.showstanding("Not signed in" + (m.error ? ": " + m.error : ""));
             return;
         }
-        this.privilege = m.privilege;
+        this.privilege = privword(m.privilege);
         this.showstanding("Signed in as " + plain(m.name) + " (" + (m.local ? "local " : "") + m.privilege + ")");
         this.chat.hidden = false;
         this.moderation();
