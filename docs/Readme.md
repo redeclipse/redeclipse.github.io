@@ -68,6 +68,7 @@ with some conditions:
 
 - The tag should only be used if you need to do some sort of styling (like resizing, etc)
 - You should **not** link to an outside source. Any images needed should be copied to the `images` directory in the docs repository.
+- Do not add screenshots of the game's menus, editor or other interface. They go out of date whenever the game changes, so describe the interface in words instead. Icons, and pictures of maps, are fine.
 
 ### Paths
 All paths need to be relative to each other. The docs repository is converted to GitHub Pages and sits in the `docs` directory, not at the root.

@@ -28,8 +28,6 @@ The texture under the selection is the one on the first solid cube in it, on the
 
 `F4` (legacy `F1`) opens it on the right, as does the toolbar's **Textures** button.
 
-![The Textures Tool panel beside a selection textured with slot 40](../images/editing/textures-panel.png "The Textures Tool panel, with the picked texture outlined in red")
-
 ### Picked texture
 
 The top of the Tool panel shows the picked texture: its number and file, and a preview. When it is a variant, a smaller preview beside it shows the slot it comes from; click that to pick the slot instead.
@@ -71,8 +69,6 @@ The menu isn't available online, and removing and culling can't be undone. Savin
 ## Texture variants
 
 A variant is a texture slot drawn differently, and a face can use one in place of the slot itself. **Toggle texture variant edit** shows the variant settings of the selection's texture, which follow the selection as it moves. A change makes a variant with it, or reuses one that matches, and gives it to the selected faces (to every face of the selected cubes with **All cube faces** on). The settings are greyed out with nothing selected, and closing the Tool panel drops changes not yet applied.
-
-![The variant settings, with the Transform and Other sections open](../images/editing/textures-variant.png "The Textures Tool panel showing variant settings")
 
 - **Apply changes** (the button at the top): apply the changed settings to the selection. It is greyed out while **Auto apply** applies them as they change.
 - Right click a setting to copy, paste or reset it; reset takes it back to the slot's own value.
@@ -165,8 +161,6 @@ The `vgrass` commands under [Texture slots](../variables/Editing#texture-slots) 
 ## Edit texture slot
 
 The slot itself: the image files the texture is made of, and the settings every variant of it starts from. Open it with **Edit texture**, with **Edit slot** in the texture list's right click menu, or from the right click menu of any texture field.
-
-![The Edit texture slot Tool panel](../images/editing/textures-slot.png "Edit texture slot for a metal plate texture")
 
 - **Diffuse**, **Normal**, **Glow**, **Specularity**, **Height**, **Alpha**, **Displacement**: the slot's image for each, chosen from the game's files. A field is greyed out when no shader takes it alongside the others.
 - **Specular from diffuse alpha**: shown when the diffuse image has an alpha channel, to use it as the specular map.

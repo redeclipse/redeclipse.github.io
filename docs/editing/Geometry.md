@@ -13,8 +13,6 @@ A map's geometry is cubes on a grid: select some, then extrude, carve, push, rot
 
 Keys here are the default bind preset's. Where the legacy preset differs, it is noted as "legacy"; see [Bind presets](Interface#bind-presets). Most edits act on the selection and work only while it is in view; otherwise the console says "Selection not in view".
 
-![A raised block with the selection over it](../images/editing/geometry-extrude.png "A block extruded from the floor, with the selection over it")
-
 ## Selecting
 
 Edit mode starts in cursor mode, so the editor works on whatever the mouse cursor points at; in mouse look (`Tab`) it works on the centre of the screen. With nothing selected, the cube under the cursor is outlined: that cube, at the current grid size, is what the keys below act on.
@@ -78,8 +76,6 @@ A copy fills the paste buffer, which keeps it across maps until the next copy.
 - `Ctrl+C`: copy the selected cubes, with the selected entities ([`copy`](../variables/Editing)). Legacy `C`.
 - `Ctrl+V`: paste. Hold it to see where the paste will go, and let go to paste ([`paste`](../variables/Editing)). Legacy `V`.
 - The toolbar's **Copy** and **Paste** buttons do the same, the Paste button pasting at once at the selection.
-
-![The paste preview beside the block it was copied from](../images/editing/geometry-paste-preview.png "Holding Ctrl shows the paste preview at the cursor")
 
 Holding `Ctrl`, or the paste key, shows the paste preview: the copy drawn see-through at the spot it would land, with a box around it.
 

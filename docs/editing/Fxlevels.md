@@ -45,12 +45,4 @@ Shadows tend to be the heaviest thing to render, so limiting most lights to only
 
 The same as above, mapmodels will cast shadows which can be problematic for performance if there are many on lower end hardware. Duplicating the mapmodel entity (in the same location), but setting one of them to use the *no-shadow* flag can be useful.
 
-Below shows a comparison of how fxlevel / mapeffects can be used to remove shadows from map models and lights, depending on the users `mapeffects` setting.
-
-* `mapeffects 3`
-
-![mapeffects 3](../images/editing/mapeffects0.jpg)
-
-* `mapeffects 1`
-
-![mapeffects 1](../images/editing/mapeffects1.jpg)
+For example, give the shadow-casting light or mapmodel fxlevel `-4` (appears in `mapeffects 3` only) and its *no-shadow* duplicate fxlevel `-3` (appears in `mapeffects 1` and `mapeffects 2` only). Players on `mapeffects 3` see the shadows, and players on lower settings see the same light or model without them.

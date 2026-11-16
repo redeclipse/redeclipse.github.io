@@ -25,6 +25,8 @@ Players can [register an account](../Accounts) that allows them to authenticate 
 
 Of course, bots are not related to player accounts, but they have their own icons to readily distinguish them from human ("real") players. Some privilege levels can be either local or global. Local privileges are given to registered players on specific servers, as described in a following section. In contrast, global privileges are valid on all public servers.
 
+Supporters are players recognised for taking part in or contributing to the project, or donating to it. By default, moderators and above can kick, ban and mute players, change server variables, pick maps and modes outside the rotation, move players between teams and to spectating, record demos, and edit maps; each of these is set by its own lock variable, so a server can move it to another level. Administrators hold every lock that moderators hold and can change the locks themselves. Developers and the founder hold all the powers of the levels below them.
+
 ## Levels and lock variables
 The levels [above](#privilege-icons) sorted from low to high refer to the usage of certain server variables (`*lock`, such as `sv_varslock` or `sv_kicklock`) that define the minimum privilege required to perform a specific action (`0` = none, `1` = player, `2` = supporter, `3` = moderator, `4` = administrator, `5` = developer, `6` = founder, `7` = nobody). This allows server owners to give more liberal rights to lower player levels. The same levels can also be used to restrict map editing, joining a game, or connecting to the server. See all lock variables in the [server variables](../variables/Server#locks).
 

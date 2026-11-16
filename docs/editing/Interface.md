@@ -13,8 +13,6 @@ The map editor's screen: the toolbar, the selection box and view toggles, action
 
 Keys here are the default bind preset's. Where the legacy preset differs, it is noted as "legacy"; see [Bind presets](#bind-presets).
 
-![The editor with the Wireframe settings popup open](../images/editing/interface-toolbar.png "The toolbar, the selection box and the Wireframe settings popup")
-
 ## Cursor mode and keyboard
 
 Edit mode starts in cursor mode: the mouse moves a cursor for the toolbar and Tool panels, and edits go where it points.
@@ -69,8 +67,6 @@ The five buttons under the selection box switch view modes; each is lit while it
   - **Enable overlay**: show material volumes ([`showmat`](../variables/Editing#materials)).
   - **Substances**, **Clips**, **Other**: which kinds of material the overlay shows.
 
-![The Material volume overlay popup](../images/editing/interface-material-overlay.png "The Material volume overlay popup")
-
 ## Selection and status
 
 - **Selection** box, bottom left: the grid size (`G` + wheel, with its size in metres), the selected **Side**, the selection's **Size** in grid cubes and its **Pos**ition. When the selection holds materials they are listed; hover one and click **X** to remove it.
@@ -87,8 +83,6 @@ The five buttons under the selection box switch view modes; each is lit while it
 - An action result shows its key in orange and its category: AI, Editor, Entities, Environment, Map, Materials, Physics or Textures. A wheel icon and a `+` mean hold the key and turn the mouse wheel.
 - A **Go to** result opens the Tool panel holding that setting and flashes it.
 - `Return` leaves the text field, then Up and Down pick a result, `Return` runs it and `Esc` closes the search. Clicking a result runs it too.
-
-![Action search for grab](../images/editing/interface-search.png "Searching for grab")
 
 ## Tool panels
 
@@ -113,8 +107,6 @@ The Image editor opens from an image field's right click menu (**Edit image**).
 
 Open it with the toolbar's Editor settings button.
 
-![The Editor settings Tool panel, with the Textures Tool panel on the right](../images/editing/interface-editor-settings.png "Editor settings, left, and Textures, right")
-
 - **Undo size (MB)**: memory kept for undo ([`undomegs`](../variables/Editing)).
 - **Float speed**, **Fast float speed**: flying speed in edit mode, normally and with `Shift` held.
 - **Float coast**: how gradually flying speeds up and slows down; higher drifts longer.
@@ -136,8 +128,6 @@ Open it with the toolbar's Editor settings button.
 ## Editor bindings
 
 Every editor action, grouped by category, with its key. Open it from the bottom of Editor settings, or search for "Editor bindings".
-
-![The Editor bindings Tool panel with the preset popup](../images/editing/interface-editor-bindings.png "Editor bindings, with the Preset popup open")
 
 - **Preset**: shows the bind preset last applied; click to choose another.
 - **Search**: show only the actions whose names contain the text, as you type.
