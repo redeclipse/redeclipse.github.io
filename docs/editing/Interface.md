@@ -9,7 +9,7 @@ redirect_from:
 ---
 * TOC
 {:toc}
-The map editor's screen: the toolbar, the selection box and view toggles, action search, Tool panels, editor settings and key bindings. Press `F2` to enter or leave edit mode.
+The map editor's screen: the menu bar and toolbar, the docks of Tool panels, the selection box and view toggles, action search, help, editor settings and key bindings. Press `F2` to enter or leave edit mode.
 
 Keys here are the default bind preset's. Where the legacy preset differs, it is noted as "legacy"; see [Bind presets](#bind-presets).
 
@@ -20,13 +20,27 @@ Edit mode starts in cursor mode: the mouse moves a cursor for the toolbar and To
 - `Tab`: switch between cursor mode and mouse look, where the mouse turns the view and edits go to the centre of the screen.
 - Right click in cursor mode: a short click opens the context menu of what is under the cursor; holding it looks around. A mouse icon next to the cursor shows when there is a context menu.
 - Up, Down, Left, Right and `Return`: move through and pick items in the Tool panel whose title bar is highlighted. With no such Tool panel, `Return` opens chat.
-- `Esc`: back out of a Tool panel's keyboard navigation, else cancel the selection. The main menu is on the toolbar.
+- `Esc`: back out of a Tool panel's keyboard navigation, else cancel the selection. The main menu is on the toolbar and in the **File** menu.
+- `F1`: open the documentation of the Tool panel under the cursor, or these editing pages; see [Help](#help).
 - `Shift` + wheel over a value: step the value. With **Free value scrolling** on (see [Editor settings](#editor-settings)), the wheel alone steps it.
 - Right click on a value: **Copy value**, **Paste value** and **Reset value**.
 
+## Menu bar
+
+The menu bar across the top of the screen holds every editor action by name, with its key beside it. It is hidden until it is needed: move the cursor to the top edge of the screen in cursor mode, or press and release `Alt` on its own. It stays while a menu is open, and hides again when the cursor leaves it, or on another lone `Alt`. While it shows, the toolbar and docks move down under it.
+
+- **File**: start a new map, save, save as, download the map, reload it, Map settings, enlarge and shrink the map, and the main menu.
+- **Edit**: undo, redo, copy, paste, flip; apply, get and replace textures; set a material volume; add, delete, link, unlink and unify entities, and the entity snap mode.
+- **Select**: focus an axis; select the entities in the selection or the linked ones, deselect, search and cycle entities.
+- **View**: cursor mode, the outline and grid views, fullbright, no textures, the material overlay and physics layers, and collapsing either dock.
+- **Tools**: every Tool panel, the waypoint actions, recalculating the map, culling textures, new texture slots and decals, Editor settings, Editor bindings and action search.
+- **Help**: help for the Tool panel under the cursor (`F1`), each editing page, and action search.
+
+Click a menu's name to open it; with one open, move along the bar to open the others.
+
 ## Toolbar
 
-Hover a button for its name, what it does and its key. A button lights up while its Tool panel is open.
+The toolbar runs across the top of the screen. Hover a button for its name, what it does and its key. A button lights up while its Tool panel is open.
 
 Left side:
 
@@ -40,11 +54,11 @@ Left side:
 - **Paste**: paste, `Ctrl+V` (legacy `V`).
 - **Search action**: open [action search](#action-search), `F3`.
 
-Centre, the map button: the map's name, its revision (`r` and a number, [`maprevision`](../variables/Editing#map-values), which goes up with each save) and the **Variant** being edited, Default or Alternate ([`forcemapvariant`](../variables/General#maps)). Click it to open the Map settings Tool panel (`Shift+F5`).
+Centre, the map button: the map's name, its revision (`r` and a number, [`maprevision`](../variables/Editing#map-values), which goes up with each save) and the variant being edited, Default or Alternate ([`forcemapvariant`](../variables/General#maps)). Click it to open the Map settings Tool panel (`Shift+F5`).
 
 Right side, each opening its Tool panel:
 
-- **Textures**: `F4` (legacy `F1`).
+- **Textures**: `F4` (legacy `Shift+F1`).
 - **Blendmap paint**: painting with blend brushes; see [Blendmap](Blendmap).
 - **Environment**: `F5`.
 - **Entities**: `F6`.
@@ -54,85 +68,98 @@ Right side, each opening its Tool panel:
 
 ## View toggles
 
-The five buttons under the selection box switch view modes; each is lit while its mode is on.
+The five buttons under the selection box switch view modes; each is lit while its mode is on. Hover one for its key.
 
-- **WF**: click for the Wireframe settings popup. `F9` cycles the mode without it.
+- **Outline**: click for the Outline mode popup. `F9` cycles the mode without it.
   - Mode: **None**, **Wireframe** (draw geometry as edges, [`wireframe`](../variables/Editing#edit-view)) or **Outline** (draw the edges over the textures, [`outline`](../variables/Editing#edit-view)).
   - **Outline depth test**: outline only the surfaces in view ([`dtoutline`](../variables/Editing#edit-view)).
   - **Colour**: the outline's colour ([`outlinecolour`](../variables/Editing#edit-view)).
-- **FB**: fullbright, every surface lit evenly ([`fullbright`](../variables/Editing#edit-view)), `B`.
-- **BG**: blank geometry, textures drawn plain white ([`blankgeom`](../variables/Editing#edit-view)).
-- **PL**: show physics layers ([`showphyslayers`](../variables/Editing#materials)), `Ctrl+P`.
-- **MV**: click for the Material volume overlay popup. `Ctrl+M` (legacy `M`) turns the overlay on and off without it.
+- **Fullbright**: every surface lit evenly ([`fullbright`](../variables/Editing#edit-view)), `B`.
+- **No textures**: blank geometry, textures drawn plain white ([`blankgeom`](../variables/Editing#edit-view)).
+- **Physics layers**: show physics layers ([`showphyslayers`](../variables/Editing#materials)), `Ctrl+P`.
+- **Materials**: click for the Material volume overlay popup. `Ctrl+M` (legacy `M`) turns the overlay on and off without it.
   - **Enable overlay**: show material volumes ([`showmat`](../variables/Editing#materials)).
   - **Substances**, **Clips**, **Other**: which kinds of material the overlay shows.
 
 ## Selection and status
 
-- **Selection** box, bottom left: the grid size (`G` + wheel, with its size in metres), the selected **Side**, the selection's **Size** in grid cubes and its **Pos**ition. When the selection holds materials they are listed; hover one and click **X** to remove it.
-- Under it, the axis view: the X (red), Y (green) and Z (blue) axes as the camera sees them.
+- **Selection** box, bottom left, beside the left dock when one is open: the **Grid** size (`G` + wheel, with its size in metres), the selected **Side** as the axis it faces (such as `+Z (top)`), the selection's **Size** in grid cubes and its **Position**. When the selection holds material volumes they are listed; hover one and click its cross to remove it.
+- Left of it, the axis view: the X (red), Y (green) and Z (blue) axes as the camera sees them. When there is little room between the docks, it moves above the selection box and the view toggles wrap into rows.
 - Next to the cursor: while pushing cubes or faces, the count of cubes changed.
 - Info bar, bottom right: what an action just did, such as "Undo map edit". How long it stays and whether it chimes are in [Editor settings](#editor-settings).
-- Status bar, along the bottom: camera position, yaw and pitch; entity count (selected in brackets) and waypoint count; map triangles and vertices; particles; frame rate and the slowest frame. **Show extended render status** adds renderer counts.
+- Status line, along the bottom, each value named: **Camera** position, **Yaw** and **Pitch**; **Entities** (and how many are selected) and **Waypoints**; map **Triangles** and **Vertices**, each with how much is drawn; **Extra vertices**; **Particles**; and on the right **FPS** and the **Slowest frame**. **Show extended render status** adds octree nodes, vertex arrays, draw calls and occlusion queries.
 
 ## Action search
 
-`F3` opens **Search action** in the centre. Every editor action has a name, and many Tool panel settings are listed too.
+`F3` opens **Search** in the centre. Every editor action has a name, and many Tool panel settings are listed too.
 
 - Type part of a name and the results show as you type. Up to 20 results are shown.
-- An action result shows its key in orange and its category: AI, Editor, Entities, Environment, Map, Materials, Physics or Textures. A wheel icon and a `+` mean hold the key and turn the mouse wheel.
+- An action result shows its key in blue and its category: AI, Editor, Entities, Environment, Map, Materials, Physics or Textures. A wheel icon and a `+` mean hold the key and turn the mouse wheel.
 - A **Go to** result opens the Tool panel holding that setting and flashes it.
 - `Return` leaves the text field, then Up and Down pick a result, `Return` runs it and `Esc` closes the search. Clicking a result runs it too.
 
 ## Tool panels
 
-Each editor window is a Tool panel, opened on the left, in the centre or on the right of the screen, so up to three are open at once beside the map.
+Each editor window is a Tool panel. Most open in a dock, a column down the left or right edge of the screen from the toolbar to the status line; action search, Map settings and the Image editor open in the centre.
 
-- Left: Editor settings and Editor bindings.
-- Centre: action search, Map settings and the Image editor.
-- Right: Textures, Blendmap paint, Environment, Entities, Material volumes, AI and Map physics. Opening one of these replaces the one open on the right.
-- A Tool panel opened from inside another, such as Editor bindings from Editor settings, stacks on top of it. The arrow button on its title bar goes back to the one under it; the X closes it.
+- Every Tool panel opens in the right dock until you move it. Each dock holds its Tool panels as tabs along the top, showing one at a time: Textures, Paint (Blendmap paint), Materials, Entities, Environment, Physics, AI, Settings and Bindings. Click a tab to show it; hover it for its key.
+- To move a Tool panel to the other dock, click the arrow on its title bar, or right click its tab. Each remembers its dock between games.
+- The down arrow on the title bar collapses the dock to a thin strip of icons, one for each tab; click the up arrow, or a tab's icon, to open it again. Opening a Tool panel in a collapsed dock opens the dock.
+- Both docks take the width of the wider one, as far as room allows, so they don't change width as you switch tabs.
+- A Tool panel opened from inside another, such as Replace texture from Textures, stacks on top of it in the same dock. The back arrow on its title bar goes back to the one under it; the cross closes it.
+- A Tool panel's **?** opens its page of this documentation; small **?** links on section headings open that section.
 - Loading a map closes every Tool panel.
 
 Keys that open Tool panels:
 
-- `F4`: Textures (legacy `F1`).
+- `F4`: Textures (legacy `Shift+F1`).
 - `F5`: Environment. `Shift+F5`: Map settings.
 - `F6`: Entities. `Shift+F6`: AI. `Ctrl+E`: Entities in templates mode.
 - `F7`: Material volumes. `Shift+F7`: Map physics.
 
 The Image editor opens from an image field's right click menu (**Edit image**).
 
+## Help
+
+- `F1`, or **Help** in the Help menu: open the documentation page of the Tool panel under the cursor, at its heading. With no Tool panel under the cursor, or one whose page isn't written yet, it opens these editing pages.
+- The **?** on a Tool panel's title bar, and on a section heading, open its page the same way. They only show when the page exists.
+- The Help menu lists each editing page, and the main menu's Map Editor has a **Documentation** button.
+
 ## Editor settings
 
-Open it with the toolbar's Editor settings button.
+Open it with the toolbar's Editor settings button, or the **Settings** tab.
 
-- **Undo size (MB)**: memory kept for undo ([`undomegs`](../variables/Editing)).
+Camera:
+
 - **Float speed**, **Fast float speed**: flying speed in edit mode, normally and with `Shift` held.
 - **Float coast**: how gradually flying speeds up and slows down; higher drifts longer.
 - **Edit FOV**: field of view in edit mode ([`editfov`](../variables/Interface#field-of-view)).
+
+Editing:
+
+- **Undo size (MB)**: memory kept for undo ([`undomegs`](../variables/Editing)).
 - **Lock non-multiplayer functionality**: when editing online, turn off the edits other players can't receive.
-- **Entity sel. box size**: the size of the box you click to select an entity ([`entselradius`](../variables/Editing)).
-- **Add entities to selection on grab**: when entities are already selected, grabbing adds the one under the cursor to them.
-- **Entity edit only with panel open**: entities can be edited only while the Entities Tool panel is open.
-- **Cancel entity selection in passthrough**: holding `Ctrl` (select through cubes) deselects entities.
 - **Offset selection grid**: draw the selection grid slightly off the surfaces.
 - **Default auto-apply during texture edit**: turn on auto-apply while editing a texture variant.
-- **Edit UI scale**: the size of the toolbar and Tool panels, 100% to 150%.
-- **Edit info notification sound**: chime when the info bar shows.
-- **Show extended render status**: more renderer counts in the status bar.
-- **Edit info length**: how long the info bar stays.
 - **Free value scrolling**: the wheel steps values without `Shift`. It can get in the way of scrolling a Tool panel.
-- **Editor bindings**: open the [Editor bindings](#editor-bindings) Tool panel.
+
+Interface:
+
+- **Edit UI scale**: the size of the menu bar, toolbar and Tool panels, 100% to 150%.
+- **Edit info length**: how long the info bar stays.
+- **Edit info notification sound**: chime when the info bar shows.
+- **Show extended render status**: more renderer counts in the status line.
+
+**Editor bindings** at the bottom opens the [Editor bindings](#editor-bindings) Tool panel. The entity selection and editing options are under **More options** in the Entities Tool panel.
 
 ## Editor bindings
 
-Every editor action, grouped by category, with its key. Open it from the bottom of Editor settings, or search for "Editor bindings".
+Every editor action, grouped by category, with its key. Open it with the **Bindings** tab, from the bottom of Editor settings, or the Tools menu.
 
 - **Preset**: shows the bind preset last applied; click to choose another.
 - **Search**: show only the actions whose names contain the text, as you type.
 - Each action's key field: click it and press a key, with `Ctrl`, `Alt` or `Shift` if you like, to bind it. An action has one key, and taking a key from another action leaves that action unbound.
-- **X**: clear the action's key.
+- The cross: clear the action's key.
 - A wheel icon marks an action you hold while turning the mouse wheel.
 
 The mouse buttons, the wheel, the arrow keys, `Return` and the digits can't be bound here.
@@ -145,7 +172,7 @@ Legacy differs in these keys:
 
 - Undo `Z`, redo `O`, copy `C`, paste `V`, flip `X`.
 - Grab `Shift+C`, snap mode `Ctrl+Shift+C`; focus axis `Shift+X`, `Shift+Y`, `Shift+Z`.
-- Apply texture `Y`, get texture `J`, Textures `F1`, recalculate lighting `F4`.
+- Apply texture `Y`, get texture `J`, Textures `Shift+F1`, recalculate lighting `F4`.
 - Save `F8`, save as `Shift+F8`.
 - Material overlay `M`, set material `Ctrl+M`.
 - The default keys for applying and getting textures, save, save as and redo (`T`, `Shift+T`, `Ctrl+S`, `Ctrl+Shift+S`, `Ctrl+Shift+Z`) still work under legacy.

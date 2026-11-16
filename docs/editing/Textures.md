@@ -26,7 +26,7 @@ The texture under the selection is the one on the first solid cube in it, on the
 
 ## The Textures Tool panel
 
-`F4` (legacy `F1`) opens it on the right, as does the toolbar's **Textures** button.
+`F4` (legacy `Shift+F1`) opens it in its dock, as do the toolbar's **Textures** button and the dock's **Textures** tab (see [Tool panels](Interface#tool-panels)).
 
 ### Picked texture
 
@@ -34,11 +34,11 @@ The top of the Tool panel shows the picked texture: its number and file, and a p
 
 The buttons beside the preview:
 
-- **Apply texture**: apply the picked texture to the selection, as `T` does.
-- **Get texture**: pick the selection's texture, as `Shift+T` does.
-- **Toggle texture variant edit**: show the [variant settings](#texture-variants) of the selection's texture in place of the texture list, and press again to go back.
-- **Edit texture**: open [Edit texture slot](#edit-texture-slot) for the selection's texture, or for the picked texture with nothing selected.
-- **More texture actions** (`...`): **Replace textures**, which opens [Replace texture](#replace-texture), and **Cull textures**, which removes every slot the map doesn't use and tidies the faces hidden inside cubes. It can't be undone.
+- **Apply**: apply the picked texture to the selection, as `T` does.
+- **Get**: pick the selection's texture, as `Shift+T` does.
+- **Variant**: show the [variant settings](#texture-variants) of the selection's texture in place of the texture list, and press again to go back. It stays lit while they show.
+- **Edit slot**: open [Edit texture slot](#edit-texture-slot) for the selection's texture, or for the picked texture with nothing selected.
+- **More**: **Replace textures**, which opens [Replace texture](#replace-texture), and **Cull textures**, which removes every slot the map doesn't use and tidies the faces hidden inside cubes. It can't be undone.
 
 Under them:
 
@@ -68,7 +68,7 @@ The menu isn't available online, and removing and culling can't be undone. Savin
 
 ## Texture variants
 
-A variant is a texture slot drawn differently, and a face can use one in place of the slot itself. **Toggle texture variant edit** shows the variant settings of the selection's texture, which follow the selection as it moves. A change makes a variant with it, or reuses one that matches, and gives it to the selected faces (to every face of the selected cubes with **All cube faces** on). The settings are greyed out with nothing selected, and closing the Tool panel drops changes not yet applied.
+A variant is a texture slot drawn differently, and a face can use one in place of the slot itself. **Variant** shows the variant settings of the selection's texture, which follow the selection as it moves. A change makes a variant with it, or reuses one that matches, and gives it to the selected faces (to every face of the selected cubes with **All cube faces** on). The settings are greyed out with nothing selected, and closing the Tool panel drops changes not yet applied.
 
 - **Apply changes** (the button at the top): apply the changed settings to the selection. It is greyed out while **Auto apply** applies them as they change.
 - Right click a setting to copy, paste or reset it; reset takes it back to the slot's own value.
@@ -119,7 +119,7 @@ Only the settings the texture's shader uses are shown ([`vshaderparam`](../varia
 
 ### Grass
 
-The variant's grass. The slot's own grass, which its variants start from, is set in [Edit texture slot](#edit-texture-slot). Settings that show Usual, Map or Shape's use the usual value, the map's or the head shape's.
+The variant's grass. The slot's own grass, which its variants start from, is set in [Edit texture slot](#edit-texture-slot). Settings that show Default, Map or Shape's use the default value, the map's or the head shape's.
 
 - **Colours**:
   - **Grass**: grow grass, from its root up in this colour ([`vgrasscolourroot`](../variables/Editing#texture-slots)).
@@ -160,7 +160,7 @@ The `vgrass` commands under [Texture slots](../variables/Editing#texture-slots) 
 
 ## Edit texture slot
 
-The slot itself: the image files the texture is made of, and the settings every variant of it starts from. Open it with **Edit texture**, with **Edit slot** in the texture list's right click menu, or from the right click menu of any texture field.
+The slot itself: the image files the texture is made of, and the settings every variant of it starts from. Open it with **Edit slot** beside the preview, with **Edit slot** in the texture list's right click menu, or from the right click menu of any texture field.
 
 - **Diffuse**, **Normal**, **Glow**, **Specularity**, **Height**, **Alpha**, **Displacement**: the slot's image for each, chosen from the game's files. A field is greyed out when no shader takes it alongside the others.
 - **Specular from diffuse alpha**: shown when the diffuse image has an alpha channel, to use it as the specular map.
@@ -177,24 +177,25 @@ The slot itself: the image files the texture is made of, and the settings every 
 
 ## Replace texture
 
-**Replace textures**, in the Textures Tool panel's **...** menu, swaps one texture for another on every face that has it. Not available online.
+**Replace textures**, in the Textures Tool panel's **More** menu, swaps one texture for another on every face that has it. Not available online.
 
 - **Limit to selection**: replace only within the selection.
 - **Old texture**: the texture to replace. Click it to choose from the list, or use the arrow button to take the selection's.
 - **Swap**: swap the old and new textures.
 - **New texture**: the texture to put in its place, chosen the same way.
 - **Replace**: replace it. This can't be undone.
-- **Close**: close the Tool panel.
+
+The back arrow on its title bar returns to Textures.
 
 ## Blend painting
 
-The toolbar's **Blendmap paint** button opens the Blendmap paint Tool panel, and `P` cycles the paint mode. Painting brings out each texture's blend layer, set in [Blending](#blending). See [Blendmap](Blendmap).
+The toolbar's **Blendmap paint** button, or the dock's **Paint** tab, opens the Blendmap paint Tool panel, and `P` cycles the paint mode. Painting brings out each texture's blend layer, set in [Blending](#blending). See [Blendmap](Blendmap).
 
 ## Keys
 
 | Key | Action |
 | :--- | :--- |
-| `F4` | Textures Tool panel (legacy `F1`) |
+| `F4` | Textures Tool panel (legacy `Shift+F1`) |
 | `T` | Apply the picked texture (legacy `Y`; `T` still works) |
 | `Ctrl+T` | Apply the picked texture to every face of the selected cubes |
 | `Shift+T` | Get the selection's texture (legacy `J`; `Shift+T` still works) |

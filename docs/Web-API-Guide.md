@@ -702,7 +702,8 @@ The master also answers the game server routes above for itself, and its `/api/v
 | `script` | Present when the master has a script for game clients; you can ignore it |
 | `host`, `port` | The server's address and game port, which are also its relay address |
 | `description` | May contain [markup](#text-markup) |
-| `handle`, `flags` | The account that registered the server and its standing, when there is one |
+| `handle`, `flags` | The server account the server signed in with, and its level: `b` Basic, `u` Featured or `m` Official, when it has one |
+| `priority` | From that level: 0 without a server account, then 2 Basic, 3 Featured and 4 Official. Server browsers order servers with as many players by it, highest first |
 | `version` | The server's version, such as 209 for 2.0.9 |
 | `webport` | Present when the server's API is on |
 | `relay` | 0 when the server isn't linked to the master |
@@ -1027,15 +1028,27 @@ The master has no console, so its administrators manage it here, signed in with 
 | `GET /api/v1/signin/admin/accounts?q=<text>&limit=<n>` | Accounts whose handle or email holds `q`: `{"total", "accounts": [{"handle", "flags", "email", "steamid", "discord", "displayname", "pubkey"}]}` |
 | `PATCH /api/v1/signin/admin/accounts/<handle>` | `{"flags": "<letters>"}` changes its standing, which ends its sign-ins. `{"displayname": "<name>"}` replaces or clears its display name, which takes `masterdisplaylock` (moderator by default) |
 | `DELETE /api/v1/signin/admin/accounts/<handle>` | Removes it |
-| `GET /api/v1/signin/admin/servers` | Server accounts, the same way |
-| `POST /api/v1/signin/admin/servers` | `{"handle", "flags", "pubkey", "email"}` adds one |
-| `DELETE /api/v1/signin/admin/servers/<handle>` | Removes one |
+| `GET /api/v1/signin/admin/servers?q=<text>&limit=<n>` | Server accounts whose handle or owner holds `q`: `{"total", "servers": [...]}`, each `{"handle", "flags", "owner", "pubkey"}`, with `ownergone` when the owner's account was deleted, `email` in place of `owner` for one made before server accounts had owners, and `newkey`, a Unix time, while a new key's link is out. One still waiting for its owner is `{"handle", "flags", "owner", "pending": true, "expires"}` |
+| `POST /api/v1/signin/admin/servers` | `{"handle", "flags", "owner"}` makes one for the owner's account, which is mailed a link to get its key (202, as it's then waiting). `flags` is its level |
+| `PATCH /api/v1/signin/admin/servers/<handle>` | `{"flags": "<level>"}` changes its level, which servers signed in with it get straight away. `{"owner": "<handle>"}` gives it to another account: one still waiting has its link sent to the new owner instead, the old one no longer working, and a new key's link already sent to the old owner stops working |
+| `POST /api/v1/signin/admin/servers/<handle>/key` | Mails the owner a fresh link: a new key for one that's there, whose old key works until it's followed, or the link again for one still waiting (202) |
+| `DELETE /api/v1/signin/admin/servers/<handle>` | Removes one, or withdraws one still waiting |
 | `GET /api/v1/signin/admin/controls` | The master's own control entries, which it sends to every linked server: `{"controls": [{"id", "type", "address", "reason"}]}` |
 | `POST /api/v1/signin/admin/controls` | `{"type": "ban", "address": "1.2.3", "reason": "..."}` adds one. `type` is `allow`, `ban`, `mute`, `limit`, `except` or `trust`; `address` is up to four numbers, fewer for a range |
 | `DELETE /api/v1/signin/admin/controls/<id>` | Removes one |
 | `POST /api/v1/signin/admin/mail` | `{"to": "<address>"}` sends a test email, to check the master's mail settings (202) |
 
-Flags are letters: `u` player, `s` supporter, `m` or `o` moderator, `a` administrator, `d` developer, `c` founder.
+An account's flags are one letter, its standing: `u` player, `s` supporter, `m` moderator, `a` administrator, `d` developer, `c` founder. The master keeps only the highest of any it's given, reading `o` as `m`. A server account's are one letter for its level: `b` Basic, `u` Featured or `m` Official, anything else being read as `b`; giving one takes a standing above the level's, `m` counting as moderator.
+
+#### Server accounts
+
+A server signs in to the master with a server account, whose level sets its `priority` in the master's list ([GET /api/v1/servers](#get-apiv1servers)). An administrator makes one for an owner, a player's account, and the master mails the owner's address a link to the website's **`/account/server#<token>`**, which lasts `masterregisterdays`. The page posts the token to `POST /api/v1/accounts/server` with `{"token": "<token>"}`, which makes the key pair and answers once with:
+
+```json
+{"handle": "myserver", "privkey": "1f3a...", "pubkey": "+8c2d...", "serverauthkey": "serverauthkey myserver 1f3a...", "newkey": false}
+```
+
+The owner puts the `serverauthkey` line in `secrets.cfg` in the server's home folder, which a server runs before `servinit.cfg` on every start and rehash. `newkey` is `true` when it replaced the key of one that was there, whose old key then stops working. An unknown or used token gets 404.
 
 ## Limits
 

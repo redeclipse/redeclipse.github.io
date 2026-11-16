@@ -148,7 +148,7 @@ Pressing `F7` opens the Materials panel to choose and apply material volumes, an
 
 #### Search Actions (`F3`) & Toolbar (`Tab`)
 
-Pressing `F3` in edit mode opens the action search dialog. Pressing `Tab` switches to cursor mode so you can click icons in the editor toolbar directly, and `/help <command>` prints command or variable usage in the console.
+Pressing `F3` in edit mode opens the action search dialog. Pressing `Tab` switches to cursor mode so you can click icons in the editor toolbar directly, and `/help <command>` prints command or variable usage in the console. Moving the cursor to the top edge of the screen, or pressing `Alt` on its own, shows the menu bar, which lists every editor action by name with its key, and `F1` opens the documentation of the Tool panel under the cursor. See [Interface](Interface).
 
 ### More on map editing
 
