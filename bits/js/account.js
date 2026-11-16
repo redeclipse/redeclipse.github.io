@@ -240,27 +240,56 @@
             else if(k.slice(0, 2) === "on") e.addEventListener(k.slice(2), v);
             else e.setAttribute(k, v === true ? "" : v);
         }
-        (Array.isArray(kids) ? kids : kids ? [kids] : []).forEach(function(c)
+        (function add(list)
         {
-            if(c === undefined || c === null || c === false) return;
-            e.appendChild(typeof c === "object" ? c : document.createTextNode(String(c)));
-        });
+            (Array.isArray(list) ? list : list ? [list] : []).forEach(function(c)
+            {
+                if(c === undefined || c === null || c === false) return;
+                if(Array.isArray(c)) add(c);
+                else e.appendChild(typeof c === "object" ? c : document.createTextNode(String(c)));
+            });
+        })(kids);
         return e;
     }
     function clear(e) { while(e.firstChild) e.removeChild(e.firstChild); return e; }
     function date(t) { return new Date(t * 1000).toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" }); }
     function day(t) { return new Date(t * 1000).toLocaleDateString(undefined, { dateStyle: "medium" }); }
 
-    var notice = el("p", { class: "account-notice", hidden: true });
-    function say(text, bad)
+    // a message box for one form or panel, so what an action says shows next to it; the page has one of its own for the rest
+    function notifier()
     {
-        notice.textContent = text || "";
-        notice.hidden = !text;
-        notice.className = "account-notice" + (bad ? " account-bad" : "");
+        var box = el("p", { class: "account-notice", role: "status", hidden: true });
+        return { el: box, say: function(text, bad)
+        {
+            box.textContent = text || "";
+            box.hidden = !text;
+            box.className = "account-notice" + (bad ? " account-bad" : "");
+        } };
+    }
+    var pagenote = notifier(), notice = pagenote.el, say = pagenote.say;
+
+    // a labelled field over its input, help under it and, beside the label, anything that fills it in
+    function formfield(label, input, help, side)
+    {
+        return el("div", { class: "account-field" }, [
+            el("div", { class: "account-field-head" }, [el("label", { for: input.id, text: label }), side]),
+            input,
+            help ? el("p", { class: "account-help" }, help) : null
+        ]);
+    }
+    function actions(kids) { return el("div", { class: "account-actions" }, kids); }
+    // a page with one thing to do has it in a card, and the pages next to it linked under that
+    function card(kids, wide) { return el("div", { class: "account-card" + (wide ? " account-card-wide" : "") }, kids); }
+    function cardlinks(list)
+    {
+        var kids = [];
+        list.forEach(function(l, i) { if(i) kids.push(" · "); kids.push(el("a", { href: l[1], text: l[0] })); });
+        return el("p", { class: "account-cardlinks" }, kids);
     }
 
     function signinform(done)
     {
+        var note = notifier(), say = note.say;
         var name = el("input", { type: "text", id: "account-name", autocomplete: "username", spellcheck: "false", required: true });
         var key = el("input", { type: "password", id: "account-key", autocomplete: "off", spellcheck: "false", required: true });
         var remember = el("input", { type: "checkbox", id: "account-remember", checked: true });
@@ -278,8 +307,8 @@
             });
             file.value = "";
         } });
-        var button = el("button", { type: "submit", text: "Sign in" });
-        var form = el("form", { class: "account-form", onsubmit: function(e)
+        var button = el("button", { type: "submit", class: "account-primary", text: "Sign in" });
+        var form = el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             button.disabled = true;
@@ -295,15 +324,16 @@
                 say(err.message, true);
             });
         } }, [
-            el("label", { for: "account-name", text: "Account name" }), name,
-            el("label", { for: "account-key", text: "Private key" }), key,
-            el("p", { class: "account-help" }, ["Your private key is in ", el("code", { text: "auth.cfg" }), " in your Red Eclipse home folder, after ",
-                el("code", { text: "authkey" }), " and your name. ",
-                el("button", { type: "button", class: "account-link", text: "Read it from the file", onclick: function() { file.click(); } }), file,
-                " It's used here once to answer the master server's challenge, then forgotten: it's never sent anywhere or kept."]),
-            el("label", { class: "account-check" }, [remember, " Keep me signed in on this browser"]),
-            el("p", { class: "account-help", text: "For 26 weeks, or 4 for moderators and above, unless it goes unused for half that. Safari keeps it 7 days unless you come back." }),
-            button
+            formfield("Handle", name),
+            formfield("Private key", key, ["In ", el("code", { text: "auth.cfg" }), " in your Red Eclipse home folder, after ", el("code", { text: "authkey" }),
+                " and your handle. It only answers the master server's challenge here, and is never sent anywhere or kept."],
+                [el("button", { type: "button", class: "account-link", text: "Read it from auth.cfg", onclick: function() { file.click(); } }), file]),
+            el("div", { class: "account-check" }, [
+                el("label", {}, [remember, "Keep me signed in on this browser"]),
+                el("p", { class: "account-help", text: "For 26 weeks, or 4 for moderators and above, unless it goes unused for half that. Safari keeps it 7 days unless you come back." })
+            ]),
+            note.el,
+            actions(button)
         ]);
         return form;
     }
@@ -370,6 +400,7 @@
             if(started) return;
             started = true;
             box.textContent = "";
+            box.classList.add("account-captcha-on");
             loadturnstile().then(function(t) { id = t.render(box, { sitekey: SITEKEY, theme: "dark" }); }, function(err) { started = false; box.textContent = err.message; });
         }
         fields.forEach(function(f) { f.addEventListener("focus", start); });
@@ -384,11 +415,12 @@
     {
         if(!info.register) return el("p", { class: "account-help", text: "Registration is closed for now." });
         if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Register in the game instead: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
+        var note = notifier(), say = note.say;
         var handle = el("input", { type: "text", id: "account-handle", autocomplete: "off", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
         var email = el("input", { type: "email", id: "account-email", autocomplete: "email", required: true, maxlength: 254 });
         var box = el("div", { class: "account-captcha" }), check = captcha(box, [handle, email]);
-        var button = el("button", { type: "submit", text: "Register" });
-        return el("form", { class: "account-form", onsubmit: function(e)
+        var button = el("button", { type: "submit", class: "account-primary", text: "Register" });
+        return el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             if(!check.token()) { check.start(); say("Solve the captcha first.", true); return; }
@@ -403,21 +435,20 @@
                 handle.value = email.value = "";
             }).catch(function(err) { button.disabled = false; say(err.message, true); });
         } }, [
-            el("label", { for: "account-handle", text: "Handle" }), handle,
-            el("label", { for: "account-email", text: "Email address" }), email,
-            el("p", { class: "account-help", text: "Your handle is the name everyone knows your account by, 3 to 24 letters, numbers, - or _, and it can't be changed. "
-                + "Your email address is only used for the link that activates it, resetting its key and changing the address, and is never shown." }),
-            box, button
+            formfield("Handle", handle, "The name everyone knows your account by: 3 to 24 letters, numbers, - or _. It can't be changed."),
+            formfield("Email address", email, "Only for the link that activates it, resetting its key and changing the address. It's never shown."),
+            box, note.el, actions(button)
         ]);
     }
 
     function resetform(info)
     {
         if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Ask for a new key in the game: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
+        var note = notifier(), say = note.say;
         var who = el("input", { type: "text", id: "account-who", autocomplete: "off", spellcheck: "false", required: true });
         var box = el("div", { class: "account-captcha" }), check = captcha(box, [who]);
-        var button = el("button", { type: "submit", text: "Reset the key" });
-        return el("form", { class: "account-form", onsubmit: function(e)
+        var button = el("button", { type: "submit", class: "account-primary", text: "Send a reset link" });
+        return el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             if(!check.token()) { check.start(); say("Solve the captcha first.", true); return; }
@@ -431,7 +462,7 @@
                 if(r.status !== 202) throw failed(r, "The master server couldn't do that.");
                 say("If that's an account with an email address, a link to reset its key was sent there. It lasts a day.");
             }).catch(function(err) { button.disabled = false; say(err.message, true); });
-        } }, [el("label", { for: "account-who", text: "Handle or email" }), who, box, button]);
+        } }, [formfield("Handle or email address", who), box, note.el, actions(button)]);
     }
 
     function copybutton(get)
@@ -833,13 +864,15 @@
         }));
     }
 
-    // a fresh page, with the links between the account pages and the notice
+    // a fresh page, with the links between the account pages and the notice; signed out, just the notice, as each page has its card
     function page(me)
     {
         clear(root);
-        root.appendChild(tabs(me ? [["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])
-            : [["Sign in", PAGES.login], ["Register", PAGES.register], ["Lost your key?", PAGES.reset]]));
-        if(me) root.appendChild(el("p", { class: "account-who" }, ["Signed in as ", el("strong", { text: me.name }), "."]));
+        if(me)
+        {
+            root.appendChild(tabs([["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])));
+            root.appendChild(el("p", { class: "account-who" }, ["Signed in as ", el("strong", { text: me.name }), "."]));
+        }
         root.appendChild(notice);
     }
 
@@ -847,22 +880,30 @@
     {
         if(me) { go(nextpath()); return; }
         page(null);
-        root.appendChild(el("p", { text: "Sign in with your Red Eclipse account to chat on servers from the server browser, and to moderate them if your account can." }));
-        root.appendChild(signinform(function() { go(nextpath()); }));
+        root.appendChild(card([
+            el("p", { class: "account-intro", text: "Sign in with your Red Eclipse account to chat on servers from the Server Browser, and to moderate them if your account can." }),
+            signinform(function() { go(nextpath()); })
+        ]));
+        root.appendChild(cardlinks([["Register an account", PAGES.register], ["Lost your key?", PAGES.reset]]));
     }
 
     function registerpage(me)
     {
         if(me) { go(PAGES.profile); return; }
         page(null);
-        account.accounts("GET").then(function(r) { root.appendChild(registerform(r.status === 200 ? r.json : { register: false })); });
+        var box = card(el("p", { class: "account-intro", text: "A Red Eclipse account proves who you are on every server, and signs you in here. A link to activate it goes to your email address." }));
+        root.appendChild(box);
+        root.appendChild(cardlinks([["Sign in", PAGES.login], ["Lost your key?", PAGES.reset]]));
+        account.accounts("GET").then(function(r) { box.appendChild(registerform(r.status === 200 ? r.json : { register: false })); });
     }
 
     function resetpage(me)
     {
         page(me);
-        root.appendChild(el("p", { text: "Ask for a new key for your account. A link to get it goes to the account's email address, and the old key stops working once you follow it." }));
-        account.accounts("GET").then(function(r) { root.appendChild(resetform(r.status === 200 ? r.json : {})); });
+        var box = card(el("p", { class: "account-intro", text: "A link to get a new key goes to the account's email address. The old key stops working once you follow it." }));
+        root.appendChild(box);
+        if(!me) root.appendChild(cardlinks([["Sign in", PAGES.login], ["Register an account", PAGES.register]]));
+        account.accounts("GET").then(function(r) { box.appendChild(resetform(r.status === 200 ? r.json : {})); });
     }
 
     function profilepage(me)

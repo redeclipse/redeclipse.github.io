@@ -1,9 +1,22 @@
 @charset "utf-8";
 /* Signing in with a Red Eclipse account, the /account pages, and the server browser's chat and moderation */
+/* One set of colours for all of it: red is kept for the active tab, primary buttons and danger, labels are muted */
+:root {
+    --account-text: rgb(240, 224, 224);
+    --account-muted: rgb(190, 170, 170);
+    --account-surface: rgba(0, 0, 0, 0.35);
+    --account-line: rgba(255, 160, 160, 0.18);
+    --account-input: rgb(120, 80, 80);
+    --account-accent: rgb(255, 64, 64);
+    --account-link: rgb(255, 128, 128);
+    --account-fill: rgb(150, 0, 0);
+    --account-fill-hover: rgb(190, 0, 0);
+    --account-bad: rgba(120, 0, 0, 0.6);
+}
 #account {
     margin: 12px 0 16px 0;
     font-size: 14px;
-    color: rgb(240, 224, 224);
+    color: var(--account-text);
 }
 #account [hidden] {
     display: none !important;
@@ -14,7 +27,7 @@
     padding: 4px 12px;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgb(255, 64, 64);
+    border: 1px solid var(--account-accent);
     border-radius: 4px;
 }
 #account button:hover, #account button:focus, .servers-chat button:hover, .servers-chat button:focus, .servers-mod button:hover, .servers-mod button:focus {
@@ -29,9 +42,107 @@
     padding: 4px 8px;
     color: rgb(255, 255, 255);
     background-color: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgb(120, 80, 80);
+    border: 1px solid var(--account-input);
     border-radius: 4px;
     min-width: 0;
+}
+#account input:focus, #account select:focus, #account textarea:focus {
+    outline: none;
+    border-color: var(--account-accent);
+    box-shadow: 0 0 0 2px rgba(255, 64, 64, 0.25);
+}
+#account button.account-primary {
+    padding: 8px 20px;
+    font-weight: 600;
+    background-color: var(--account-fill);
+    border-color: var(--account-accent);
+}
+#account button.account-primary:hover, #account button.account-primary:focus {
+    background-color: var(--account-fill-hover);
+}
+/* Pages with one thing to do: the title and a card in the middle, the pages next to them linked under it */
+.account-shape-card > h1 {
+    text-align: center;
+    border-bottom: 0;
+}
+.account-card {
+    max-width: 440px;
+    margin: 16px auto 8px auto;
+    padding: 20px 24px;
+    background-color: var(--account-surface);
+    border: 1px solid var(--account-line);
+    border-radius: 6px;
+}
+.account-card-wide {
+    max-width: 760px;
+}
+.account-shape-card #account > .account-notice {
+    max-width: 440px;
+    margin: 0 auto;
+}
+.account-intro {
+    margin: 0 0 16px 0;
+}
+.account-cardlinks {
+    text-align: center;
+    color: var(--account-muted);
+}
+#account .account-cardlinks a {
+    color: var(--account-link);
+}
+@media (max-width: 480px) {
+    .account-card {
+        padding: 16px;
+    }
+}
+/* Forms: each label over its field, help under it, and the buttons last */
+.account-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.account-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.account-field-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4px 12px;
+}
+.account-field label {
+    color: var(--account-muted);
+    font-weight: 600;
+}
+#account .account-stack input[type=text], #account .account-stack input[type=password], #account .account-stack input[type=email] {
+    width: 100%;
+    padding: 8px 10px;
+}
+.account-field .account-help, .account-stack > .account-notice {
+    margin: 0;
+}
+#account input[type=checkbox] {
+    accent-color: var(--account-fill);
+}
+.account-check label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.account-check .account-help {
+    margin: 4px 0 0 21px;
+}
+.account-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+.account-card .account-actions .account-primary {
+    flex: 1 1 auto;
 }
 .account-form {
     display: grid;
@@ -53,15 +164,19 @@
 }
 .account-help {
     margin: 0;
-    color: rgb(190, 170, 170);
+    color: var(--account-muted);
     font-size: 90%;
 }
 #account .account-link {
     padding: 0;
     border: 0;
     background: none;
-    color: rgb(255, 128, 128);
+    color: var(--account-link);
     text-decoration: underline;
+}
+#account .account-link:hover, #account .account-link:focus {
+    background: none;
+    color: rgb(255, 255, 255);
 }
 .account-notice {
     padding: 6px 12px;
@@ -70,8 +185,8 @@
     background-color: rgba(0, 0, 0, 0.6);
 }
 .account-notice.account-bad {
-    border-color: rgb(255, 64, 64);
-    background-color: rgba(120, 0, 0, 0.6);
+    border-color: var(--account-accent);
+    background-color: var(--account-bad);
 }
 .account-signins {
     width: 100%;
@@ -200,9 +315,23 @@
     margin: 4px 0 0 0;
 }
 /* registering, the key panel and the owner's account */
+/* Turnstile's box, as big as the widget before it loads so the card doesn't jump */
 .account-captcha {
     grid-column: 1 / -1;
     min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    text-align: center;
+    color: var(--account-muted);
+    font-size: 90%;
+    border: 1px dashed var(--account-line);
+    border-radius: 4px;
+}
+.account-captcha.account-captcha-on {
+    padding: 0;
+    border-color: transparent;
 }
 .account-fields {
     display: grid;
