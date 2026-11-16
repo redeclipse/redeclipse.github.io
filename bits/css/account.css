@@ -229,6 +229,23 @@
     -webkit-mask: center / contain no-repeat;
     mask: center / contain no-repeat;
 }
+.account-rowactions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 8px;
+}
+.account-admintable .account-tag {
+    display: table;
+    margin: 4px 0 0 0;
+}
+.account-tag.account-tag-wait {
+    color: var(--account-muted);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+.account-card > .account-way {
+    margin: 16px 0;
+}
 #account .account-clear {
     margin-left: 8px;
     font-size: 90%;

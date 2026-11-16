@@ -534,6 +534,27 @@
         ], true);
     }
 
+    // a server account's key, shown once, and where it goes
+    function serverkeypanel(k)
+    {
+        var cfg = "// the Red Eclipse server account " + k.handle + "\n" + k.serverauthkey + "\n";
+        var download = el("a", { href: URL.createObjectURL(new Blob([cfg], { type: "text/plain" })), download: "secrets.cfg", class: "account-button", text: "Download secrets.cfg" });
+        return card([
+            el("h2", { text: k.newkey ? "Here's the new key for " + k.handle : "The server account " + k.handle + " is ready" }),
+            el("p", { class: "account-notice account-bad" }, [el("strong", { text: "This key is shown once." }), " Save it now: it can't be shown again, and without it an administrator would have to send you a new one."]),
+            el("div", { class: "account-way" }, [
+                el("h3", { text: "Put it in secrets.cfg" }),
+                el("p", {}, ["Add this line to ", el("code", { text: "secrets.cfg" }), " in your server's home folder, next to ", el("code", { text: "servinit.cfg" }),
+                    k.newkey ? ", in place of its old serverauthkey line." : ". Download it only if your server has no secrets.cfg yet."]),
+                el("code", { class: "account-copyline", text: k.serverauthkey }),
+                actions([copybutton(function() { return k.serverauthkey; }), download])
+            ]),
+            el("p", {}, ["The server reads ", el("code", { text: "secrets.cfg" }), " before ", el("code", { text: "servinit.cfg" }), " when it starts and on ", el("code", { text: "rehash" }),
+                ", then signs in to the master server with it: its log says ", el("code", { text: "Server auth succeeded" }), "."]),
+            k.newkey ? el("p", { class: "account-help", text: "The old key no longer works." }) : null
+        ], true);
+    }
+
     // what a mailed link did, and where to go next
     function result(title, text, next)
     {
@@ -602,6 +623,11 @@
                     account.accounts("GET").then(function(r) { box.appendChild(resetform(r.json || {})); });
                     return box;
                 });
+            case "server":
+                return linkpage(token, "Get the server's key", "Get the key your server signs in to the Red Eclipse master server with.", function()
+                {
+                    return account.accounts("POST", "/server", { token: token }).then(function(r) { if(r.status !== 200) throw failed(r, "The master server couldn't make it."); return r.json; });
+                }, function(k) { return serverkeypanel(k); });
             case "steam": case "discord":
                 return linkreturn();
         }
@@ -772,15 +798,22 @@
     // a server account's level, which sets its place among servers with as many players: one letter, the highest it has
     var SERVERLEVELS = [["b", "Basic"], ["u", "Featured"], ["m", "Official"]];
     function levelof(flags) { return /m/i.test(flags || "") ? "Official" : /u/i.test(flags || "") ? "Featured" : "Basic"; }
-    function levelpicker(pick)
+    // now: the letter picked; cant(letter): why it can't be, or nothing; pick(letter, done): done() lights it once it's taken
+    function levelpicker(now, cant, pick)
     {
-        var buttons = SERVERLEVELS.map(function(l, i)
+        var buttons = SERVERLEVELS.map(function(l)
         {
-            return el("button", { type: "button", class: "account-pick account-pickword" + (i ? "" : " account-pick-on"), "aria-pressed": i ? "false" : "true", text: l[1], onclick: function()
-            {
-                buttons.forEach(function(b, j) { b.className = "account-pick account-pickword" + (j === i ? " account-pick-on" : ""); b.setAttribute("aria-pressed", j === i ? "true" : "false"); });
-                pick(l[0]);
-            } });
+            var on = l[0] === now, why = cant(l[0]);
+            return el("button", { type: "button", class: "account-pick account-pickword" + (on ? " account-pick-on" : ""), "aria-pressed": on ? "true" : "false", text: l[1],
+                title: why || null, disabled: !!(why && !on), onclick: function()
+                {
+                    if(l[0] === now) return;
+                    pick(l[0], function()
+                    {
+                        now = l[0];
+                        buttons.forEach(function(b, j) { var lit = SERVERLEVELS[j][0] === now; b.className = "account-pick account-pickword" + (lit ? " account-pick-on" : ""); b.setAttribute("aria-pressed", lit ? "true" : "false"); });
+                    });
+                } });
         });
         return el("div", { class: "account-picker", role: "group", "aria-label": "Level" }, buttons);
     }
@@ -867,41 +900,79 @@
 
     function adminservers(me)
     {
-        var mine = privof(me.flags), list = panel("Server accounts", { full: true, intro: "The accounts game servers sign in to the master with." });
-        var add = panel("Add a server account"), servers = el("div");
+        var mine = privof(me.flags), list = panel("Server accounts", { full: true, intro: "The accounts game servers sign in to the master with. Each has an owner, whose account gets the key." });
+        var add = panel("Add a server account", { intro: "Its owner is mailed a link to get the key, which their server reads from secrets.cfg." }), servers = el("div");
+        function levelcant(letter) { return outranks(mine, privof(letter)) ? null : "Only below your own privilege"; }
+        function call(method, a, path, body, done)
+        {
+            return account.call(method, "/admin/servers/" + encodeURIComponent(a.handle) + (path || ""), body).then(function(r)
+            {
+                if(r.status < 200 || r.status > 204) throw failed(r, "That didn't work.");
+                list.say(done);
+                load();
+            }).catch(function(err) { list.say(err.message, true); });
+        }
+        function owner(a)
+        {
+            if(a.owner) return [a.owner, a.ownergone ? el("div", { class: "account-help", text: "Account deleted" }) : null];
+            return [a.email || "", el("div", { class: "account-help", text: "No owner, from before owners" })];
+        }
+        function state(a)
+        {
+            if(a.pending) return el("span", { class: "account-tag account-tag-wait", text: "Waiting for its owner until " + day(a.expires) });
+            if(a.newkey) return el("span", { class: "account-tag account-tag-wait", text: "New key sent, until " + day(a.newkey) });
+            return null;
+        }
         function load()
         {
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Email", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", ""], r.json.servers.map(function(a)
                 {
-                    var can = outranks(mine, privof(a.flags));
-                    return el("tr", {}, [el("td", {}, el("strong", { text: a.handle })), el("td", { text: levelof(a.flags) }), el("td", { text: a.email }), el("td", {}, removebutton("Remove", function()
+                    var why = outranks(mine, privof(a.flags)) ? null : "Its level is at or above your privilege";
+                    var picker = levelpicker(a.flags, function(l) { return why || levelcant(l); }, function(l, done)
                     {
-                        if(!window.confirm("Remove the server account " + a.handle + "?")) return;
-                        account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(a.handle + " is removed."); load(); }).catch(function(err) { list.say(err.message, true); });
-                    }, can ? null : "Its privilege is at or above yours"))]);
+                        var word = levelof(l);
+                        if(window.confirm("Make " + a.handle + " " + word + "?")) call("PATCH", a, "", { flags: l }, a.handle + " is now " + word + ".");
+                    });
+                    return el("tr", {}, [
+                        el("td", {}, [el("strong", { text: a.handle }), state(a)]),
+                        el("td", {}, picker),
+                        el("td", {}, owner(a)),
+                        el("td", {}, el("div", { class: "account-rowactions" }, [
+                            el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!why, title: why, onclick: function()
+                            {
+                                if(a.pending || window.confirm("Mail " + (a.owner || a.email) + " a link to a new key for " + a.handle + "? Its old key works until they follow it."))
+                                    call("POST", a, "/key", null, "A new link went to " + (a.owner || a.email) + ".");
+                            } }),
+                            removebutton(a.pending ? "Withdraw" : "Remove", function()
+                            {
+                                if(window.confirm((a.pending ? "Withdraw " : "Remove ") + "the server account " + a.handle + "?")) call("DELETE", a, "", null, a.handle + (a.pending ? " is withdrawn." : " is removed."));
+                            }, why)
+                        ]))
+                    ]);
                 })) : el("p", { class: "account-help", text: "There are no server accounts." }));
             }).catch(function(err) { list.say(err.message, true); });
         }
         list.appendChild(servers);
-        var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true }), slevel = "b", spicker = levelpicker(function(l) { slevel = l; });
-        var skey = el("input", { type: "text", id: "admin-skey", spellcheck: "false", required: true }), semail = el("input", { type: "email", id: "admin-semail" });
+        var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
+        var sowner = el("input", { type: "text", id: "admin-sowner", spellcheck: "false", required: true });
+        var slevel = "b", spicker = levelpicker("b", levelcant, function(l, done) { slevel = l; done(); });
         add.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
-            if(!cangive(mine, slevel, add.say)) return;
-            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: slevel, pubkey: skey.value.trim(), email: semail.value.trim() }).then(function(r)
+            account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: slevel, owner: sowner.value.trim() }).then(function(r)
             {
-                if(r.status !== 201) throw failed(r, "It couldn't be added.");
-                add.say(shandle.value.trim() + " is added.");
-                shandle.value = skey.value = semail.value = "";
+                if(r.status !== 202) throw failed(r, "It couldn't be added.");
+                add.say("A link to get " + r.json.handle + "'s key went to " + r.json.owner + "'s email address. It lasts until " + day(r.json.expires) + ".");
+                shandle.value = sowner.value = "";
                 load();
             }).catch(function(err) { add.say(err.message, true); });
-        } }, [formfield("Handle", shandle), el("div", { class: "account-field" }, [el("div", { class: "account-field-head" }, el("span", { class: "account-label", text: "Level" })), spicker,
-            el("p", { class: "account-help", text: "Among servers with as many players, Official ones come first in the Server Browser, then Featured, then Basic." })]), formfield("Public key", skey, "From genkey, which the server's operator keeps the private half of."),
-            formfield("Email", semail, "Who to contact about it."), actions(el("button", { type: "submit", text: "Add" }))]));
+        } }, [formfield("Handle", shandle, "The server's own name on the master: 3 to 24 letters, numbers, - or _."),
+            el("div", { class: "account-field" }, [el("div", { class: "account-field-head" }, el("span", { class: "account-label", text: "Level" })), spicker,
+                el("p", { class: "account-help", text: "Among servers with as many players, Official ones come first in the Server Browser, then Featured, then Basic." })]),
+            formfield("Owner", sowner, "The handle of the player account that runs it."), actions(el("button", { type: "submit", text: "Send to the owner" }))]));
         load();
         return el("div", { class: "account-panels" }, [list, add]);
     }
