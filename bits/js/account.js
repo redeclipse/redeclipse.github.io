@@ -619,15 +619,6 @@
                 account.call("DELETE", "/account/" + kind).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be unlinked."); refresh(); }).catch(function(err) { say(err.message, true); });
             } });
         }
-        var code = el("span", { class: "account-code" });
-        var codebutton = el("button", { type: "button", text: "Get a /link code", onclick: function()
-        {
-            account.call("POST", "/account/discord/code").then(function(r)
-            {
-                if(r.status !== 200) throw failed(r, "No code came back.");
-                clear(code).appendChild(el("span", {}, ["Type ", el("code", { text: "/link " + r.json.code }), " to the Red Eclipse bot on Discord within ten minutes."]));
-            }).catch(function(err) { say(err.message, true); });
-        } });
         var newemail = el("input", { type: "email", id: "account-newemail", autocomplete: "email", maxlength: 254 });
         var confirm = el("input", { type: "text", id: "account-confirm", autocomplete: "off", spellcheck: "false" });
         box.appendChild(el("dl", { class: "account-fields" }, [].concat(
@@ -638,7 +629,7 @@
             field("Steam", mine.steamid ? [el("a", { href: "https://steamcommunity.com/profiles/" + mine.steamid, rel: "noopener", text: mine.steamid }), " ", unlinkbutton("steam")]
                 : linkbutton("steam", "Link with Steam")),
             field("Discord", mine.discord ? [el("span", { text: mine.discord }), " ", unlinkbutton("discord")]
-                : el("span", { class: "account-inline" }, [linkbutton("discord", "Link with Discord"), codebutton, code]))
+                : linkbutton("discord", "Link with Discord"))
         )));
         box.appendChild(el("p", { class: "account-help", text: "Your display name is shown with your handle here on the website, up to 32 characters. In game you go by your in-game name, and on Discord by your Discord name." }));
         box.appendChild(el("h3", { text: "Change your email address" }));
