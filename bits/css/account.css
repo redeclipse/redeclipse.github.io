@@ -61,6 +61,130 @@
 #account button.account-primary:hover, #account button.account-primary:focus {
     background-color: var(--account-fill-hover);
 }
+#account button.account-quiet {
+    border-color: var(--account-input);
+}
+#account button.account-quiet:hover, #account button.account-quiet:focus {
+    border-color: var(--account-accent);
+}
+#account button.account-danger-button {
+    color: rgb(255, 150, 150);
+    border-color: var(--account-accent);
+}
+#account button.account-danger-button:hover, #account button.account-danger-button:focus {
+    color: rgb(255, 255, 255);
+    background-color: var(--account-fill);
+}
+/* Labels and table headings are muted, without the site's red glow */
+#account dt, #account th {
+    color: var(--account-muted);
+    font-weight: 600;
+    text-shadow: none;
+}
+/* Signed in: the links between the pages, and who's signed in, in one bar */
+.account-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 8px 16px;
+    margin: 0 0 16px 0;
+    border-bottom: 1px solid var(--account-input);
+}
+#account .account-bar .account-tabs {
+    margin: 0 0 -1px 0;
+    padding: 0;
+    border-bottom: 0;
+}
+#account .account-bar .account-tabs a {
+    display: inline-block;
+    padding: 4px 0 8px 0;
+}
+.account-whoami {
+    padding-bottom: 8px;
+    color: var(--account-muted);
+}
+.account-whoami strong {
+    color: var(--account-text);
+}
+/* The panels of a signed in page, two across where there's room */
+.account-panels {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+@media (max-width: 900px) {
+    .account-panels {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.account-panel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+    background-color: var(--account-surface);
+    border: 1px solid var(--account-line);
+    border-radius: 6px;
+}
+.account-panel-full {
+    grid-column: 1 / -1;
+}
+.account-panel.account-danger {
+    border-color: rgba(255, 64, 64, 0.5);
+}
+.account-panel-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px 12px;
+}
+#account .account-panel-head h2 {
+    margin: 0;
+    font-size: 18px;
+    border-bottom: 0;
+}
+#account .account-danger .account-panel-head h2 {
+    color: rgb(255, 150, 150);
+}
+.account-panel > p, .account-panel > dl, .account-panel .account-notice {
+    margin: 0;
+}
+.account-panel .account-stack {
+    max-width: 440px;
+}
+@media (max-width: 480px) {
+    .account-panel {
+        padding: 12px;
+    }
+}
+/* A linked account: its icon, what it is, and the button */
+.account-linkrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.account-linkrow + .account-linkrow {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--account-line);
+}
+.account-linkrow > .icon {
+    width: 24px;
+    height: 24px;
+    flex: 0 0 auto;
+    fill: var(--account-text);
+}
+.account-linkwhat {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
 /* Pages with one thing to do: the title and a card in the middle, the pages next to them linked under it */
 .account-shape-card > h1 {
     text-align: center;
@@ -354,15 +478,17 @@
 .account-fields {
     display: grid;
     grid-template-columns: 8em minmax(0, 1fr);
-    gap: 8px 12px;
-    align-items: center;
-    max-width: 720px;
-}
-.account-fields dt {
-    color: rgb(190, 170, 170);
+    gap: 10px 12px;
+    align-items: baseline;
 }
 .account-fields dd {
     margin: 0;
+}
+.account-fields .account-inline {
+    margin: 0 0 4px 0;
+}
+.account-fields .account-inline input {
+    flex: 1 1 12em;
 }
 .account-inline {
     display: flex;
@@ -485,6 +611,6 @@
 }
 @media (max-width: 560px) {
     .account-fields {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: 7em minmax(0, 1fr);
     }
 }

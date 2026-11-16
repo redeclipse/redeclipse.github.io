@@ -286,6 +286,30 @@
         list.forEach(function(l, i) { if(i) kids.push(" · "); kids.push(el("a", { href: l[1], text: l[0] })); });
         return el("p", { class: "account-cardlinks" }, kids);
     }
+    // a part of a signed in page with its own heading, anything acting on all of it beside that, and its own messages
+    function panel(title, o)
+    {
+        o = o || {};
+        var note = notifier();
+        var box = el("div", { class: "account-panel" + (o.full ? " account-panel-full" : "") + (o.danger ? " account-danger" : "") }, [
+            el("div", { class: "account-panel-head" }, [el("h2", { text: title }), o.tools ? el("div", { class: "account-panel-tools" }, o.tools) : null]),
+            o.intro ? el("p", { class: "account-help account-panel-intro" }, o.intro) : null,
+            note.el
+        ]);
+        box.say = note.say;
+        return box;
+    }
+    // one of the site's icons, as includes/icon.html draws them
+    function icon(name, width)
+    {
+        var svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"), use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+        svg.setAttribute("class", "icon");
+        svg.setAttribute("viewBox", "0 0 " + width + " 512");
+        svg.setAttribute("aria-hidden", "true");
+        use.setAttribute("href", "/bits/images/icons.svg#" + name);
+        svg.appendChild(use);
+        return svg;
+    }
 
     function signinform(done)
     {
@@ -338,7 +362,7 @@
         return form;
     }
 
-    function signinlist(me)
+    function signinlist(me, say)
     {
         var rows = (me.signins || []).slice().sort(function(a, b) { return b.lastused - a.lastused; }).map(function(s)
         {
@@ -348,9 +372,9 @@
                 el("td", { class: "account-when", "data-label": "Last used", text: date(s.lastused) }),
                 el("td", { class: "account-when", "data-label": "Ends", text: s.remember ? day(s.expires) : "When the browser closes" }),
                 el("td", { class: "account-addr", "data-label": "Address" }, el("span", { class: "account-ip" }, s.firstaddr === s.lastaddr ? s.lastaddr : [s.firstaddr, el("br"), "then " + s.lastaddr])),
-                el("td", { class: "account-end" }, el("button", { type: "button", text: s.current ? "Sign out" : "Sign out there", onclick: function()
+                el("td", { class: "account-end" }, el("button", { type: "button", class: "account-quiet", text: s.current ? "Sign out" : "Sign out there", onclick: function()
                 {
-                    account.end(s.current ? null : s.id).then(function() { refresh(); });
+                    account.end(s.current ? null : s.id).then(function() { refresh(); }, function(err) { say(err.message, true); });
                 } }))
             ]);
         });
@@ -620,11 +644,14 @@
     // ---- the signed in owner's account
 
     function field(label, value) { return [el("dt", { text: label }), el("dd", {}, value)]; }
+    function capital(t) { return t.charAt(0).toUpperCase() + t.slice(1); }
 
-    function ownerpanel(mine)
+    // the signed in owner's account, as panels: who they are, what's linked, and changing or deleting it
+    function ownerpanels(mine, into)
     {
-        var box = el("div", { class: "account-owner" });
-        var display = el("input", { type: "text", id: "account-display", maxlength: 64, value: mine.displayname || "", placeholder: "Taken from your in-game or Discord name" });
+        var who = panel("Account"), linked = panel("Linked accounts"), mail = panel("Change your email address"), gone = panel("Delete your account", { danger: true,
+            intro: "This can't be undone: its key stops working everywhere, and its handle is free for anyone to register." });
+        var display = el("input", { type: "text", id: "account-display", maxlength: 64, value: mine.displayname || "", placeholder: "From your in-game or Discord name" });
         var save = el("button", { type: "button", text: "Save", onclick: function()
         {
             save.disabled = true;
@@ -633,55 +660,55 @@
                 save.disabled = false;
                 if(r.status !== 200) throw failed(r, "It couldn't be changed.");
                 display.value = r.json.displayname || "";
-                say(r.json.displayname ? "You show as " + r.json.displayname + " (" + r.json.handle + ") on the website." : "Your display name is cleared, and it's filled in again from your in-game or Discord name.");
-            }).catch(function(err) { save.disabled = false; say(err.message, true); });
+                who.say(r.json.displayname ? "You show as " + r.json.displayname + " (" + r.json.handle + ") on the website." : "Your display name is cleared, and it's filled in again from your in-game or Discord name.");
+            }).catch(function(err) { save.disabled = false; who.say(err.message, true); });
         } });
-        function linkbutton(kind, label)
+        who.appendChild(el("dl", { class: "account-fields" }, [].concat(
+            field("Handle", el("strong", { text: mine.handle })),
+            field("Privilege", capital(PRIVNAMES[privof(mine.flags)] || "player")),
+            field("Email", [mine.email || "none", mine.newemail ? el("div", { class: "account-help", text: "Changing to " + mine.newemail + " once it's confirmed" }) : null]),
+            field("Display name", [el("div", { class: "account-inline" }, [display, save]),
+                el("div", { class: "account-help", text: "Shown with your handle on the website, up to 32 characters. In game you go by your in-game name, and on Discord by your Discord name." })])
+        )));
+
+        function linkrow(kind, label, width, value)
         {
-            return el("button", { type: "button", text: label, onclick: function()
+            var button = value ? el("button", { type: "button", class: "account-quiet", text: "Unlink", onclick: function()
+            {
+                account.call("DELETE", "/account/" + kind).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be unlinked."); refresh(); }).catch(function(err) { linked.say(err.message, true); });
+            } }) : el("button", { type: "button", text: "Link with " + label, onclick: function()
             {
                 account.call("GET", "/account/" + kind).then(function(r)
                 {
                     if(r.status !== 200 || !r.json.url) throw failed(r, "It can't be linked right now.");
                     window.location.href = r.json.url;
-                }).catch(function(err) { say(err.message, true); });
+                }).catch(function(err) { linked.say(err.message, true); });
             } });
+            return el("div", { class: "account-linkrow" }, [icon(kind, width), el("div", { class: "account-linkwhat" }, [el("strong", { text: label }),
+                el("span", { class: "account-help" }, value || "Not linked")]), button]);
         }
-        function unlinkbutton(kind)
-        {
-            return el("button", { type: "button", text: "Unlink", onclick: function()
-            {
-                account.call("DELETE", "/account/" + kind).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be unlinked."); refresh(); }).catch(function(err) { say(err.message, true); });
-            } });
-        }
-        var newemail = el("input", { type: "email", id: "account-newemail", autocomplete: "email", maxlength: 254 });
-        var confirm = el("input", { type: "text", id: "account-confirm", autocomplete: "off", spellcheck: "false" });
-        box.appendChild(el("dl", { class: "account-fields" }, [].concat(
-            field("Handle", el("strong", { text: mine.handle })),
-            field("Standing", PRIVNAMES[privof(mine.flags)] || "player"),
-            field("Email", [mine.email || "none", mine.newemail ? el("span", { class: "account-help", text: " (changing to " + mine.newemail + " once it's confirmed)" }) : null]),
-            field("Display name", el("span", { class: "account-inline" }, [display, save])),
-            field("Steam", mine.steamid ? [el("a", { href: "https://steamcommunity.com/profiles/" + mine.steamid, rel: "noopener", text: mine.steamid }), " ", unlinkbutton("steam")]
-                : linkbutton("steam", "Link with Steam")),
-            field("Discord", mine.discord ? [el("span", { text: mine.discord }), " ", unlinkbutton("discord")]
-                : linkbutton("discord", "Link with Discord"))
-        )));
-        box.appendChild(el("p", { class: "account-help", text: "Your display name is shown with your handle here on the website, up to 32 characters. In game you go by your in-game name, and on Discord by your Discord name." }));
-        box.appendChild(el("h3", { text: "Change your email address" }));
-        box.appendChild(el("form", { class: "account-form", onsubmit: function(e)
+        linked.appendChild(el("div", {}, [
+            linkrow("steam", "Steam", 512, mine.steamid ? el("a", { href: "https://steamcommunity.com/profiles/" + mine.steamid, rel: "noopener", text: mine.steamid }) : null),
+            linkrow("discord", "Discord", 576, mine.discord || null)
+        ]));
+
+        var newemail = el("input", { type: "email", id: "account-newemail", autocomplete: "email", maxlength: 254, required: true });
+        mail.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             account.call("POST", "/account/email", { email: newemail.value.trim() }).then(function(r)
             {
                 if(r.status !== 202) throw failed(r, "It couldn't be changed.");
-                say("Check " + newemail.value.trim() + " for a link to confirm it. Until then your account keeps its old address, which is told about the change.");
+                mail.say("Check " + newemail.value.trim() + " for a link to confirm it. Until then your account keeps its old address, which is told about the change.");
                 newemail.value = "";
-            }).catch(function(err) { say(err.message, true); });
-        } }, [el("label", { for: "account-newemail", text: "New address" }), newemail, el("button", { type: "submit", text: "Change" })]));
-        box.appendChild(el("h3", { text: "Delete your account" }));
-        box.appendChild(el("form", { class: "account-form", onsubmit: function(e)
+            }).catch(function(err) { mail.say(err.message, true); });
+        } }, [formfield("New address", newemail, "A link to confirm it goes there first."), actions(el("button", { type: "submit", text: "Change address" }))]));
+
+        var confirm = el("input", { type: "text", id: "account-confirm", autocomplete: "off", spellcheck: "false", required: true });
+        gone.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
+            if(confirm.value.trim() !== mine.handle) { gone.say("That isn't your handle.", true); return; }
             account.call("DELETE", "/account", { confirm: confirm.value.trim() }).then(function(r)
             {
                 if(r.status !== 204) throw failed(r, "It couldn't be deleted.");
@@ -690,12 +717,12 @@
                     page(null);
                     say("Your account is deleted. Its key no longer works, and its handle is free for anyone.");
                 });
-            }).catch(function(err) { say(err.message, true); });
-        } }, [
-            el("p", { class: "account-help", text: "This can't be undone. Type your handle to delete it." }),
-            el("label", { for: "account-confirm", text: "Your handle" }), confirm, el("button", { type: "submit", text: "Delete my account" })
-        ]));
-        return box;
+            }).catch(function(err) { gone.say(err.message, true); });
+        } }, [formfield("Type your handle to confirm", confirm), actions(el("button", { type: "submit", class: "account-danger-button", text: "Delete my account" }))]));
+
+        into.appendChild(who);
+        into.appendChild(linked);
+        return [mail, gone];
     }
 
     // ---- administration, for administrators, which mirrors what the master allows; the master decides
@@ -868,14 +895,17 @@
         }));
     }
 
-    // a fresh page, with the links between the account pages and the notice; signed out, just the notice, as each page has its card
+    // a fresh page: signed in, a bar with the links between the account pages and who's signed in; then the page's notice
     function page(me)
     {
         clear(root);
         if(me)
         {
-            root.appendChild(tabs([["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])));
-            root.appendChild(el("p", { class: "account-who" }, ["Signed in as ", el("strong", { text: me.name }), "."]));
+            var out = el("button", { type: "button", class: "account-link", text: "Sign out", onclick: function() { account.end().then(function() { go(PAGES.login); }); } });
+            root.appendChild(el("div", { class: "account-bar" }, [
+                tabs([["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])),
+                el("div", { class: "account-whoami" }, ["Signed in as ", el("strong", { text: me.name }), " · ", out])
+            ]));
         }
         root.appendChild(notice);
     }
@@ -914,19 +944,20 @@
     {
         if(!me) { tologin(); return; }
         page(me);
-        var owner = el("div");
-        root.appendChild(owner);
-        account.call("GET", "/account").then(function(r)
-        {
-            if(r.status === 200) owner.appendChild(ownerpanel(r.json));
-            else owner.appendChild(el("p", { class: "account-help", text: failed(r, "Your account's details couldn't be read.").message }));
-        });
-        root.appendChild(el("h2", { text: "Where you're signed in" }));
-        root.appendChild(signinlist(me));
-        root.appendChild(el("p", {}, [el("button", { type: "button", text: "Sign out everywhere", onclick: function()
+        var grid = el("div", { class: "account-panels" });
+        root.appendChild(grid);
+        var signins = panel("Where you're signed in", { full: true, tools: el("button", { type: "button", class: "account-quiet", text: "Sign out everywhere", onclick: function()
         {
             account.end("all").then(function() { go(PAGES.login); });
-        } })]));
+        } }) });
+        signins.appendChild(signinlist(me, signins.say));
+        account.call("GET", "/account").then(function(r)
+        {
+            if(r.status !== 200) { say(failed(r, "Your account's details couldn't be read.").message, true); grid.appendChild(signins); return; }
+            var rest = ownerpanels(r.json, grid);
+            grid.appendChild(signins);
+            rest.forEach(function(p) { grid.appendChild(p); });
+        });
     }
 
     function adminpage(me)
