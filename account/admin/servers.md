@@ -1,5 +1,5 @@
 ---
-title: Server accounts
+title: Administration - Server accounts
 layout: account
 permalink: /account/admin/servers
 master: https://play.redeclipse.net:28888

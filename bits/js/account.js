@@ -731,141 +731,183 @@
     function outranks(mine, other) { return mine >= FLAGPRIV.c || other < mine; }
     function givable(mine) { return Object.keys(FLAGPRIV).filter(function(c) { return outranks(mine, FLAGPRIV[c]); }); }
     function givehelp(mine) { return el("p", { class: "account-help", text: "Flags are letters: u player, s supporter, m or o moderator, a administrator, d developer, c founder. You can give " + givable(mine).join(", ") + "." }); }
-    function cangive(mine, flags)
+    function cangive(mine, flags, say)
     {
         if(outranks(mine, privof(flags))) return true;
-        say("You can only give a standing below your own: " + givable(mine).join(", ") + ".", true);
+        say("You can only give a privilege below your own: " + givable(mine).join(", ") + ".", true);
         return false;
     }
 
-    function admintable(head, rows) { return el("div", { class: "account-scroll" }, el("table", { class: "account-signins" }, [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)])); }
+    // a table whose cells carry their column's name, so on a phone each row is a card of labelled values
+    function admintable(head, rows)
+    {
+        rows.forEach(function(tr)
+        {
+            Array.from(tr.children).forEach(function(td, i)
+            {
+                if(head[i]) td.setAttribute("data-label", head[i]);
+                if(i === tr.children.length - 1 && !head[i]) td.className = (td.className ? td.className + " " : "") + "account-end";
+            });
+        });
+        return el("div", { class: "account-scroll" }, el("table", { class: "account-signins account-admintable" },
+            [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)]));
+    }
+    function removebutton(label, onclick, why) { return el("button", { type: "button", class: "account-danger-button", text: label, disabled: !!why, title: why || null, onclick: onclick }); }
 
     function adminaccounts(me)
     {
-        var box = el("div", { class: "account-admin" }), results = el("div"), mine = privof(me.flags);
-        var q = el("input", { type: "text", id: "admin-q", placeholder: "Handle or email", spellcheck: "false" });
+        var mine = privof(me.flags), list = panel("Accounts", { full: true }), results = el("div");
+        var q = el("input", { type: "search", id: "admin-q", placeholder: "Handle or email", spellcheck: "false", "aria-label": "Handle or email" });
         function search()
         {
             account.call("GET", "/admin/accounts?limit=100&q=" + encodeURIComponent(q.value.trim())).then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The search failed.");
-                clear(results).appendChild(el("p", { class: "account-help", text: r.json.total + " account(s)" + (r.json.total > r.json.accounts.length ? ", showing " + r.json.accounts.length : "") }));
+                clear(results).appendChild(el("p", { class: "account-help", text: r.json.total + " account" + (r.json.total === 1 ? "" : "s") + (r.json.total > r.json.accounts.length ? ", showing " + r.json.accounts.length : "") }));
                 results.appendChild(admintable(["Handle", "Flags", "Email", "Display name", "Steam", "Discord", ""], r.json.accounts.map(function(a)
                 {
                     var self = a.handle === me.name, can = !self && outranks(mine, privof(a.flags));
-                    var why = self ? "You can't change your own account here" : can ? null : "Their standing is at or above yours";
-                    var flags = el("input", { type: "text", value: a.flags, size: 4, spellcheck: "false", disabled: !can, title: why });
+                    var why = self ? "You can't change your own account here" : can ? null : "Their privilege is at or above yours";
+                    var flags = el("input", { type: "text", value: a.flags, size: 4, spellcheck: "false", disabled: !can, title: why, "aria-label": "Flags" });
                     function act(method, body, done)
                     {
                         return account.call(method, "/admin/accounts/" + encodeURIComponent(a.handle), body).then(function(r)
                         {
                             if(r.status !== 200 && r.status !== 204) throw failed(r, "That didn't work.");
-                            say(done);
+                            list.say(done);
                             search();
-                        }).catch(function(err) { say(err.message, true); });
+                        }).catch(function(err) { list.say(err.message, true); });
                     }
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", {}, [flags, el("button", { type: "button", text: "Set", disabled: !can, title: why, onclick: function()
+                    return el("tr", {}, [
+                        el("td", {}, el("strong", { text: a.handle })),
+                        el("td", {}, el("span", { class: "account-inline" }, [flags, el("button", { type: "button", class: "account-quiet", text: "Set", disabled: !can, title: why, onclick: function()
                         {
-                            if(cangive(mine, flags.value.trim())) act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
-                        } })]),
-                        el("td", { text: a.email }), el("td", {}, [a.displayname || "", a.displayname ? el("button", { type: "button", text: "Clear", disabled: !can, title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
+                            if(cangive(mine, flags.value.trim(), list.say)) act("PATCH", { flags: flags.value.trim() }, a.handle + "'s flags are " + flags.value.trim() + ".");
+                        } })])),
+                        el("td", { text: a.email }),
+                        el("td", {}, [a.displayname || null, a.displayname ? el("button", { type: "button", class: "account-link account-clear", text: "Clear", disabled: !can, title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
                         el("td", { text: a.steamid }), el("td", { text: a.discord }),
-                        el("td", {}, el("button", { type: "button", text: "Remove", disabled: !can, title: why, onclick: function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); } }))]);
+                        el("td", {}, removebutton("Remove", function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); }, why))
+                    ]);
                 })));
-            }).catch(function(err) { say(err.message, true); });
+                results.appendChild(givehelp(mine));
+            }).catch(function(err) { list.say(err.message, true); });
         }
-        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e) { e.preventDefault(); search(); } }, [q, el("button", { type: "submit", text: "Search" })]));
-        box.appendChild(givehelp(mine));
-        box.appendChild(results);
-        return box;
+        list.querySelector(".account-panel-head").appendChild(el("form", { class: "account-inline account-search", role: "search", onsubmit: function(e) { e.preventDefault(); search(); } },
+            [q, el("button", { type: "submit", text: "Search" })]));
+        list.appendChild(results);
+        var grid = el("div", { class: "account-panels" }, list);
+        return grid;
     }
 
     function admincontrols()
     {
-        var box = el("div", { class: "account-admin" }), controls = el("div");
+        var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines." });
+        var add = panel("Add to the global lists"), controls = el("div");
         function load()
         {
             account.call("GET", "/admin/controls").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The global lists couldn't be read.");
-                clear(controls).appendChild(admintable(["Type", "Address", "Reason", ""], r.json.controls.map(function(c)
+                clear(controls).appendChild(r.json.controls.length ? admintable(["Type", "Address", "Reason", ""], r.json.controls.map(function(c)
                 {
-                    return el("tr", {}, [el("td", { text: c.type }), el("td", { text: c.address }), el("td", { text: c.reason }), el("td", {}, el("button", { type: "button", text: "Remove", onclick: function()
+                    return el("tr", {}, [el("td", { text: capital(c.type) }), el("td", {}, el("span", { class: "account-ip", text: c.address })), el("td", { text: c.reason }), el("td", {}, removebutton("Remove", function()
                     {
-                        account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); load(); }).catch(function(err) { say(err.message, true); });
-                    } }))]);
-                })));
-            }).catch(function(err) { say(err.message, true); });
+                        account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(c.address + " is off the " + c.type + " list."); load(); }).catch(function(err) { list.say(err.message, true); });
+                    }))]);
+                })) : el("p", { class: "account-help", text: "The global lists are empty." }));
+            }).catch(function(err) { list.say(err.message, true); });
         }
-        var ctype = el("select", {}, CONTROLTYPES.map(function(t) { return el("option", { value: t, text: t }); }));
-        var caddr = el("input", { type: "text", placeholder: "1.2.3.4, or 1.2 for a range", spellcheck: "false" }), creason = el("input", { type: "text", placeholder: "Reason, with the date" });
-        box.appendChild(el("p", { class: "account-help", text: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines." }));
-        box.appendChild(controls);
-        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
+        list.appendChild(controls);
+        var ctype = el("select", { id: "admin-ctype" }, CONTROLTYPES.map(function(t) { return el("option", { value: t, text: capital(t) }); }));
+        var caddr = el("input", { type: "text", id: "admin-caddr", spellcheck: "false", required: true }), creason = el("input", { type: "text", id: "admin-creason" });
+        add.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             account.call("POST", "/admin/controls", { type: ctype.value, address: caddr.value.trim(), reason: creason.value.trim() }).then(function(r)
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
+                add.say(caddr.value.trim() + " is on the " + ctype.value + " list.");
                 caddr.value = creason.value = "";
                 load();
-            }).catch(function(err) { say(err.message, true); });
-        } }, [ctype, caddr, creason, el("button", { type: "submit", text: "Add" })]));
+            }).catch(function(err) { add.say(err.message, true); });
+        } }, [formfield("Type", ctype), formfield("Address", caddr, "An address such as 1.2.3.4, or 1.2 for a range."), formfield("Reason", creason, "Why, with the date."),
+            actions(el("button", { type: "submit", text: "Add" }))]));
         load();
-        return box;
+        return el("div", { class: "account-panels" }, [list, add]);
     }
 
     function adminservers(me)
     {
-        var box = el("div", { class: "account-admin" }), servers = el("div"), mine = privof(me.flags);
+        var mine = privof(me.flags), list = panel("Server accounts", { full: true, intro: "The accounts game servers sign in to the master with." });
+        var add = panel("Add a server account"), servers = el("div");
         function load()
         {
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Flags", "Email", ""], r.json.servers.map(function(a)
                 {
                     var can = outranks(mine, privof(a.flags));
-                    return el("tr", {}, [el("td", { text: a.handle }), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, el("button", { type: "button", text: "Remove", disabled: !can,
-                        title: can ? null : "Its standing is at or above yours", onclick: function()
+                    return el("tr", {}, [el("td", {}, el("strong", { text: a.handle })), el("td", { text: a.flags }), el("td", { text: a.email }), el("td", {}, removebutton("Remove", function()
                     {
                         if(!window.confirm("Remove the server account " + a.handle + "?")) return;
-                        account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); load(); }).catch(function(err) { say(err.message, true); });
-                    } }))]);
-                })));
-            }).catch(function(err) { say(err.message, true); });
+                        account.call("DELETE", "/admin/servers/" + encodeURIComponent(a.handle)).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(a.handle + " is removed."); load(); }).catch(function(err) { list.say(err.message, true); });
+                    }, can ? null : "Its privilege is at or above yours"))]);
+                })) : el("p", { class: "account-help", text: "There are no server accounts." }));
+            }).catch(function(err) { list.say(err.message, true); });
         }
-        var shandle = el("input", { type: "text", placeholder: "Handle", spellcheck: "false" }), sflags = el("input", { type: "text", placeholder: "Flags", size: 4, spellcheck: "false" });
-        var skey = el("input", { type: "text", placeholder: "Public key", spellcheck: "false" }), semail = el("input", { type: "email", placeholder: "Email" });
-        box.appendChild(servers);
-        box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
+        list.appendChild(servers);
+        var shandle = el("input", { type: "text", id: "admin-shandle", spellcheck: "false", required: true }), sflags = el("input", { type: "text", id: "admin-sflags", size: 4, spellcheck: "false" });
+        var skey = el("input", { type: "text", id: "admin-skey", spellcheck: "false", required: true }), semail = el("input", { type: "email", id: "admin-semail" });
+        add.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
-            if(!cangive(mine, sflags.value.trim())) return;
+            if(!cangive(mine, sflags.value.trim(), add.say)) return;
             account.call("POST", "/admin/servers", { handle: shandle.value.trim(), flags: sflags.value.trim(), pubkey: skey.value.trim(), email: semail.value.trim() }).then(function(r)
             {
                 if(r.status !== 201) throw failed(r, "It couldn't be added.");
+                add.say(shandle.value.trim() + " is added.");
                 shandle.value = sflags.value = skey.value = semail.value = "";
                 load();
-            }).catch(function(err) { say(err.message, true); });
-        } }, [shandle, sflags, skey, semail, el("button", { type: "submit", text: "Add" })]));
-        box.appendChild(givehelp(mine));
+            }).catch(function(err) { add.say(err.message, true); });
+        } }, [formfield("Handle", shandle), formfield("Flags", sflags, givehelp(mine).textContent), formfield("Public key", skey, "From genkey, which the server's operator keeps the private half of."),
+            formfield("Email", semail, "Who to contact about it."), actions(el("button", { type: "submit", text: "Add" }))]));
         load();
-        return box;
+        return el("div", { class: "account-panels" }, [list, add]);
     }
 
     function adminmail()
     {
-        var mailto = el("input", { type: "email", placeholder: "Address" });
-        return el("form", { class: "account-inline", onsubmit: function(e)
+        var mail = panel("Mail", { full: true, intro: "Send a test email to check the master's mail works; its log says if it couldn't be delivered." });
+        var mailto = el("input", { type: "email", id: "admin-mailto", required: true });
+        mail.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
             account.call("POST", "/admin/mail", { to: mailto.value.trim() }).then(function(r)
             {
                 if(r.status !== 202) throw failed(r, "It couldn't be sent.");
-                say("A test email is on its way to " + mailto.value.trim() + "; the master's log says if it couldn't be delivered.");
-            }).catch(function(err) { say(err.message, true); });
-        } }, [mailto, el("button", { type: "submit", text: "Send a test email" })]);
+                mail.say("A test email is on its way to " + mailto.value.trim() + ".");
+            }).catch(function(err) { mail.say(err.message, true); });
+        } }, [formfield("Address", mailto), actions(el("button", { type: "submit", text: "Send a test email" }))]));
+        return mail;
+    }
+
+    // the overview: what each page is for, and the mail test
+    function adminoverview()
+    {
+        var about = { "admin-accounts": "Find player accounts, set their privilege, clear display names and remove accounts.",
+            "admin-controls": "The bans, mutes, limits, allows, excepts and trusts every linked server gets.",
+            "admin-servers": "The accounts game servers sign in with, which set their place in the Server Browser." };
+        var cards = ADMINPAGES.slice(1).map(function(p)
+        {
+            var box = panel(p[1]);
+            box.appendChild(el("p", { text: about[p[0]] }));
+            box.appendChild(actions(el("a", { href: p[2], class: "account-button", text: "Open " + p[1].toLowerCase() })));
+            return box;
+        });
+        return el("div", {}, [el("p", { class: "account-help account-lead", text: "The master server has no console, so its administrators manage it here." }),
+            el("div", { class: "account-panels account-panels-three" }, cards), el("div", { class: "account-panels account-gap" }, adminmail())]);
     }
 
     // ---- the pages, each at its own address
@@ -896,15 +938,18 @@
     }
 
     // a fresh page: signed in, a bar with the links between the account pages and who's signed in; then the page's notice
-    function page(me)
+    function page(me, sub)
     {
         clear(root);
         if(me)
         {
             var out = el("button", { type: "button", class: "account-link", text: "Sign out", onclick: function() { account.end().then(function() { go(PAGES.login); }); } });
             root.appendChild(el("div", { class: "account-bar" }, [
-                tabs([["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])),
-                el("div", { class: "account-whoami" }, ["Signed in as ", el("strong", { text: me.name }), " · ", out])
+                el("div", { class: "account-barrow" }, [
+                    tabs([["Your account", PAGES.profile]].concat(isadmin(me) ? [["Administration", PAGES.admin]] : [])),
+                    el("div", { class: "account-whoami" }, ["Signed in as ", el("strong", { text: me.name }), " · ", out])
+                ]),
+                sub ? el("div", { class: "account-subbar" }, sub) : null
             ]));
         }
         root.appendChild(notice);
@@ -963,19 +1008,14 @@
     function adminpage(me)
     {
         if(!me) { tologin(); return; }
-        page(me);
-        if(!isadmin(me)) { say("Your account can't manage the master server.", true); return; }
-        root.appendChild(tabs(ADMINPAGES.map(function(p) { return [p[1], p[2]]; }), true));
+        if(!isadmin(me)) { page(me); say("Your account can't manage the master server.", true); return; }
+        page(me, tabs(ADMINPAGES.map(function(p) { return [p[1], p[2]]; }), true));
         switch(ACTION)
         {
             case "admin-accounts": root.appendChild(adminaccounts(me)); break;
             case "admin-controls": root.appendChild(admincontrols()); break;
             case "admin-servers": root.appendChild(adminservers(me)); break;
-            default:
-                root.appendChild(el("p", { text: "The master server has no console, so its administrators manage it here." }));
-                root.appendChild(el("ul", {}, ADMINPAGES.slice(1).map(function(p) { return el("li", {}, el("a", { href: p[2], text: p[1] })); })));
-                root.appendChild(el("h2", { text: "Mail" }));
-                root.appendChild(adminmail());
+            default: root.appendChild(adminoverview());
         }
     }
 

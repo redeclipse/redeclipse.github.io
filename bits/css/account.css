@@ -38,7 +38,7 @@
     opacity: 0.5;
     cursor: default;
 }
-#account input[type=text], #account input[type=password], #account input[type=email], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
+#account input[type=text], #account input[type=search], #account input[type=password], #account input[type=email], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
     font: inherit;
     padding: 4px 8px;
     color: rgb(255, 255, 255);
@@ -81,14 +81,16 @@
     font-weight: 600;
     text-shadow: none;
 }
-/* Signed in: the links between the pages, and who's signed in, in one bar */
+/* Signed in: the links between the pages, and who's signed in, in one bar, with a smaller row for a section's own pages */
 .account-bar {
+    margin: 0 0 16px 0;
+}
+.account-barrow {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-end;
     gap: 8px 16px;
-    margin: 0 0 16px 0;
     border-bottom: 1px solid var(--account-input);
 }
 #account .account-bar .account-tabs {
@@ -96,7 +98,7 @@
     padding: 0;
     border-bottom: 0;
 }
-#account .account-bar .account-tabs a {
+#account .account-barrow .account-tabs a {
     display: inline-block;
     padding: 4px 0 8px 0;
 }
@@ -106,6 +108,18 @@
 }
 .account-whoami strong {
     color: var(--account-text);
+}
+.account-subbar {
+    border-bottom: 1px solid var(--account-line);
+    font-size: 13px;
+}
+#account .account-subbar .account-tabs a {
+    display: inline-block;
+    padding: 8px 0 6px 0;
+    color: var(--account-muted);
+}
+#account .account-subbar .account-tabs a:hover, #account .account-subbar .account-tabs a:focus, #account .account-subbar .account-tabs a.account-tab-on {
+    color: rgb(255, 255, 255);
 }
 /* The panels of a signed in page, two across where there's room */
 .account-panels {
@@ -131,6 +145,42 @@
 }
 .account-panel-full {
     grid-column: 1 / -1;
+}
+.account-panels-three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+@media (max-width: 900px) {
+    .account-panels-three {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+.account-gap {
+    margin-top: 16px;
+}
+#account .account-lead {
+    margin: 0 0 16px 0;
+}
+.account-panel > .account-actions {
+    margin-top: auto;
+}
+.account-panels-three .account-panel {
+    align-self: stretch;
+}
+.account-search {
+    margin: 0;
+}
+.account-search input {
+    width: 16em;
+    max-width: 100%;
+}
+/* Admin tables: values wrap rather than run off, actions sit on the right */
+.account-admintable td {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+#account .account-clear {
+    margin-left: 8px;
+    font-size: 90%;
 }
 .account-panel.account-danger {
     border-color: rgba(255, 64, 64, 0.5);
@@ -377,6 +427,9 @@
         gap: 12px;
         padding: 2px 8px;
         border: 0;
+    }
+    .account-signins td[data-label]:empty {
+        display: none;
     }
     .account-signins td[data-label]::before {
         content: attr(data-label);
