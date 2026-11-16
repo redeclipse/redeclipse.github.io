@@ -746,7 +746,7 @@
         }
         var ctype = el("select", {}, CONTROLTYPES.map(function(t) { return el("option", { value: t, text: t }); }));
         var caddr = el("input", { type: "text", placeholder: "1.2.3.4, or 1.2 for a range", spellcheck: "false" }), creason = el("input", { type: "text", placeholder: "Reason, with the date" });
-        box.appendChild(el("p", { class: "account-help", text: "Every linked server gets these. Global bans are a last resort: see the Multiplayer Guidelines." }));
+        box.appendChild(el("p", { class: "account-help", text: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines." }));
         box.appendChild(controls);
         box.appendChild(el("form", { class: "account-inline", onsubmit: function(e)
         {
