@@ -74,3 +74,5 @@ Mapmodels can be loaded into a map during an editing session by running `mmodel 
 
 ### Player Vanities
 Vanities are defined in `vanities/package.cfg`, and need to be exported as IQM as per requiring a bone for positioning.
+
+To line a vanity up on the player, or a weapon in the first person hands, use the [Model Editor](Model-Editor): it shows the change as you make it and saves the `mdl*` lines to paste into the config.

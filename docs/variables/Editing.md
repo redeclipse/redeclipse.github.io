@@ -56,6 +56,12 @@ Editing maps: entities, the map's settings, its lighting and sky, textures and m
 | `lodmodelscale` | sets how large models count as on screen when choosing their detail, higher keeps detail further away | `value` |
 | `mdllod` | sets a simpler version of the model to use beyond this distance at 1080p, and nearer or further at other views | `name distance` |
 | `mdllodpixels` | sets a simpler version of the model to use when it is narrower on screen than this many pixels | `name pixels` |
+| `modeleditor` | opens the Model Editor, on the given host model when given one | `[model]` |
+| `modeledithost` | sets the Model Editor's host model, kept for next time | `model` |
+| `modeleditattached` | sets the models the Model Editor attaches to its host, as pairs of model and tag, kept for next time | `list` |
+| `modeleditanim` | sets the animation the Model Editor shows its host model in, every frame when empty | `name` |
+| `modeleditfile` | sets the file in your home folder the Model Editor saves to | `file` |
+| `modeleditsave` | saves the placement and tags of each model listed, as the lines of their configs, to a file in your home folder (modeleditfile when none is given) | `file models` |
 | `grassheadlodpixels` | sets how wide on screen grass heads are when they start to use fewer points, using a quarter of them at a third of this | `pixels` |
 | `grassheadpixels` | sets how wide on screen grass heads are when they stop being drawn | `pixels` |
 | `grassleafpixels` | sets how long on screen the leaves on the stalks of grass heads are when they stop being drawn | `pixels` |

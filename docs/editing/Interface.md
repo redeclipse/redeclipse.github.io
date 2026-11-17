@@ -127,7 +127,7 @@ The Image editor opens from an image field's right click menu (**Edit image**).
 
 - `F1`, the toolbar's **Help** button, or **Help** in the Help menu: open the documentation page of the Tool panel under the cursor, at its heading. With no Tool panel under the cursor, or one whose page isn't written yet, it opens these editing pages.
 - The **?** on a Tool panel's title bar, and on a section heading, open its page the same way. They only show when the page exists.
-- The Help menu lists each editing page, and the main menu's Map Editor has a **Documentation** button.
+- The Help menu lists each editing page, and the Map Editor, under Dev Tools in the main menu, has a **Documentation** button.
 
 ## Editor settings
 
