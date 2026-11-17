@@ -142,12 +142,12 @@ Every error has a JSON body of the form `{"error": "what went wrong"}`, with a m
 | 400 | The request is malformed or a field is missing or invalid |
 | 401 | The route needs more than Player and you sent no token (`WWW-Authenticate: Bearer`), or your token is unknown or its session expired (`unknown or expired token`), so sign in again |
 | 403 | Your Privilege is too low, the route needs an encrypted connection, the origin isn't allowed, or your address is banned |
-| 404 | No such route, player or entry |
-| 405 | The path exists but not for that method (`Allow` lists the ones it takes) |
+| 404 | No such route, player or entry; for a route, the error names the method and path it couldn't match |
+| 405 | The path exists but not for that method; the error names the request and the methods it takes, which `Allow` lists too |
 | 408 | The request took too long to arrive |
 | 409 | The action can't apply, such as banning a player with no address |
 | 413 | The body is over 1 MB |
-| 426 | `/events` was asked for without a WebSocket upgrade |
+| 426 | `/events` was asked for without a WebSocket upgrade, which the error names |
 | 429 | Too many failed sign-ins from your address, or too many messages to `POST /say`; retry after `Retry-After` |
 | 431 | Too many headers, or a header line that is too long |
 | 503 | The server isn't connected to the master, so it can't check a sign-in |
