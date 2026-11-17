@@ -291,7 +291,7 @@
         padding: 12px;
     }
 }
-/* A linked account: its icon, what it is, and the button */
+/* A linked identity: its icon, what it is, and the button */
 .account-linkrow {
     display: flex;
     align-items: center;
