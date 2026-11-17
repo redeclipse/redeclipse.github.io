@@ -637,9 +637,9 @@
     // Steam or Discord sending the person back after proving who they are
     function linkreturn()
     {
-        var q = new URLSearchParams(window.location.search), body;
+        var q = new URLSearchParams(window.location.search), body, kind = ACTION;
         if(window.history.replaceState) window.history.replaceState(null, "", PAGES.profile);
-        if(ACTION === "steam")
+        if(kind === "steam")
         {
             var openid = {};
             q.forEach(function(v, k) { if(k.indexOf("openid.") === 0) openid[k] = v; });
@@ -657,11 +657,11 @@
         account.me(true).then(function(me)
         {
             if(!me) { tologin(); return; }
-            return account.call("POST", "/account/" + ACTION, body).then(function(r)
+            return account.call("POST", "/account/" + kind, body).then(function(r)
             {
                 refresh();
                 if(r.status !== 200) say(failed(r, "It didn't link.").message, true);
-                else say(ACTION === "steam" ? "Your Steam account is linked." : "Your Discord account is linked.");
+                else say(kind === "steam" ? "Your Steam account is linked." : "Your Discord account is linked.");
             });
         });
         return true;
