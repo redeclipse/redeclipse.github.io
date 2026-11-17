@@ -110,6 +110,48 @@ Heightmap mode shapes terrain with a brush, pushing the corners of the cubes und
 - `K` + wheel: choose the brush; its name is shown in the console.
 - Middle click a surface: add its texture to the textures the brush changes, or take it away again. With none chosen, or with a selection, the brush changes any surface.
 
+## Shapes
+
+A shape is geometry worked out from a formula, such as a sphere, a cone or terrain from a heightmap image, and built over the selection in one go. Open the Shapes Tool panel with `Shift+F4`, its toolbar button or **Tools** in the menu bar, choose a shape and its size, and press **Build**.
+
+- The shape starts at the selection's corner, the one nearest the world's origin, and sizes are in cubes of the current grid size. The selection grows to the box the shape is built in, which the panel shows under **Detail**.
+- **Add** joins the shape to the geometry already there, which is kept, and **Carve** cuts the shape out of it, like a carving wheel turn in that shape: build a box, then carve a cylinder through it for a doorway.
+- **Detail** halves the cubes the surface passes through that many times, so the surface is smoother without filling the inside with small cubes. Big shapes are cheapest built at a large grid size with some detail.
+- **Offset** moves the shape inside its box, so it can sit part way into the selection, and a sphere's **Stretch** makes it longer along an axis, an ellipsoid.
+- New faces take the texture last applied, as extruding does.
+- One undo takes the whole shape back. A shape whose box is too big for **Undo size** in [Editor settings](Interface#editor-settings) isn't built: raise it, or use a larger grid size.
+- A box holds at most 2048 cubes on a side and 1048576 in all. Its **Build** button is grey while a shape can't be built, and its tip says why.
+
+The shapes, and their commands, which take the same sizes followed by the detail, the offset and `1` to carve:
+
+- Sphere ([`buildsphere`](../variables/Editing#shapes), or [`buildellipsoid`](../variables/Editing#shapes)): radius and stretch.
+- Cylinder ([`buildcylinder`](../variables/Editing#shapes)): radius and height, standing upright.
+- Tunnel ([`buildtunnel`](../variables/Editing#shapes)): a block with an arched passage through it along Y, by radius and length.
+- Pipe bend ([`buildpipebend`](../variables/Editing#shapes)) and torus ([`buildtorus`](../variables/Editing#shapes)): the radius of the bend or ring, and of the pipe.
+- Paraboloid ([`buildparaboloid`](../variables/Editing#shapes)): a dome as wide as its box at the bottom.
+- Octahedron ([`buildoctahedron`](../variables/Editing#shapes)): an eight-sided diamond.
+- Helix ([`buildhelix`](../variables/Editing#shapes)): a coil around Z, by the radius of its tube and of its coil.
+- Box ([`buildbox`](../variables/Editing#shapes)): three sizes and a rounding of its edges and corners.
+- Cone ([`buildcone`](../variables/Editing#shapes)): radius and height, standing on its base.
+
+### Terrain from a heightmap
+
+**Build terrain** raises ground from a greyscale image ([`buildterrain`](../variables/Editing#shapes)): each pixel is the height of a corner of a column of cubes, brighter being higher, up to **Height** cubes for white. The terrain is one cube smaller than the image on each side, so an image of 65 by 65 pixels makes terrain 64 cubes across. Typed in the console, the image is named with its extension, such as `buildterrain mymap/height.png 16`.
+
+### Importing cubes
+
+**Import** reads an SMC file, a list of cubes made by a marching cubes tool outside the game ([`importsmc`](../variables/Editing#shapes)). Each line is a cube, `x y z size` from the selection's corner followed by the densities of its eight corners, negative inside. **Solid cubes** makes each listed cube solid instead. Lines that aren't cubes inside the world are skipped and counted in the console.
+
+### Editing online
+
+Shapes, terrain, imports and heightmap strokes reach the other players in the session. A very large one is sent a part at a time, so they may see it arrive over a few moments, and one too big to send at all is taken back, saying so in the console.
+
+The server limits how fast each player's edits may arrive ([`editcost`](../variables/Server)), so the game sends large edits and many quick ones a little at a time to stay within it. An edit over a selection holding more cubes than that allows at once (1048576 at the server's defaults, counted at the selection's grid size) is refused online, saying so in the console: select a larger grid size, or edit it in parts. A copy too big to send, such as a large prefab, can't be pasted online either.
+
+Commands that change the whole map, such as shrinking it or culling texture slots, reach everyone in the order the server gets them. An edit another player made just before, still on its way, lands where the map was, so run them while nobody else is in the middle of an edit.
+
+Two players placing new entities at the same moment can each take the same slot, and each ends up with the other's entity in place of their own. Check entities placed together with someone else, and place again any that went missing.
+
 ## Keys
 
 | Key | Action |
@@ -140,6 +182,7 @@ Heightmap mode shapes terrain with a brush, pushing the corners of the cubes und
 | `Backspace` | Delete the selected entities, else empty the selected cubes |
 | `H` | Heightmap mode |
 | `K` + wheel | Heightmap brush |
+| `Shift+F4` | Shapes Tool panel |
 | `-` | Texture every face of the selected cubes, or only the selected side ([`allfaces`](../variables/Editing)) |
 | `B` | Fullbright |
 | `F9` | Cycle the outline mode |

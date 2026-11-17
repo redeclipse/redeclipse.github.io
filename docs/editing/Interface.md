@@ -45,7 +45,6 @@ The toolbar runs across the top of the screen. Hover a button for its name, what
 Left side:
 
 - **Main menu**: open the main menu.
-- **Editor settings**: open the [Editor settings](#editor-settings) Tool panel.
 - **Save**: save the map, `Ctrl+S` (legacy `F8`).
 - **Save as**: save the map under a new name, `Ctrl+Shift+S` (legacy `Shift+F8`).
 - **Undo**: `Ctrl+Z` (legacy `Z`).
@@ -53,18 +52,22 @@ Left side:
 - **Copy**: copy the selection, `Ctrl+C` (legacy `C`).
 - **Paste**: paste, `Ctrl+V` (legacy `V`).
 - **Search action**: open [action search](#action-search), `F3`.
+- **Help**: open these editing pages; see [Help](#help).
 
 Centre, the map button: the map's name, its revision (`r` and a number, [`maprevision`](../variables/Editing#map-values), which goes up with each save) and the variant being edited, Default or Alternate ([`forcemapvariant`](../variables/General#maps)). Click it to open the Map settings Tool panel (`Shift+F5`).
 
-Right side, each opening its Tool panel:
+Right side, the panel buttons, each showing its Tool panel in its [dock](#tool-panels); click a lit one to close it, or right click one to move its Tool panel to the other dock:
 
 - **Textures**: `F4` (legacy `Shift+F1`).
 - **Blendmap paint**: painting with blend brushes; see [Blendmap](Blendmap).
-- **Environment**: `F5`.
-- **Entities**: `F6`.
 - **Material volumes**: `F7`.
-- **AI**: waypoints, `Shift+F6`; see [Waypoints](Waypoints). Not available online.
+- **Shapes**: spheres, boxes, terrain and other shapes built over the selection, `Shift+F4`; see [Shapes](Geometry#shapes).
+- **Entities**: `F6`.
+- **Environment**: `F5`.
 - **Map physics**: `Shift+F7`.
+- **AI**: waypoints, `Shift+F6`; see [Waypoints](Waypoints). Not available online.
+- **Editor settings**: see [Editor settings](#editor-settings).
+- **Editor bindings**: see [Editor bindings](#editor-bindings).
 
 ## View toggles
 
@@ -94,7 +97,7 @@ The five buttons under the selection box switch view modes; each is lit while it
 `F3` opens **Search** in the centre. Every editor action has a name, and many Tool panel settings are listed too.
 
 - Type part of a name and the results show as you type. Up to 20 results are shown.
-- An action result shows its key in blue and its category: AI, Editor, Entities, Environment, Map, Materials, Physics or Textures. A wheel icon and a `+` mean hold the key and turn the mouse wheel.
+- An action result shows its key in blue and its category: AI, Editor, Entities, Environment, Map, Materials, Physics, Shapes or Textures. A wheel icon and a `+` mean hold the key and turn the mouse wheel.
 - A **Go to** result opens the Tool panel holding that setting and flashes it.
 - `Return` leaves the text field, then Up and Down pick a result, `Return` runs it and `Esc` closes the search. Clicking a result runs it too.
 
@@ -102,10 +105,10 @@ The five buttons under the selection box switch view modes; each is lit while it
 
 Each editor window is a Tool panel. Most open in a dock, a column down the left or right edge of the screen from the toolbar to the status line; action search, Map settings and the Image editor open in the centre.
 
-- Every Tool panel opens in the right dock until you move it. Each dock holds its Tool panels as tabs along the top, showing one at a time: Textures, Paint (Blendmap paint), Materials, Entities, Environment, Physics, AI, Settings and Bindings. Click a tab to show it; hover it for its key.
-- To move a Tool panel to the other dock, click the arrow on its title bar, or right click its tab. Each remembers its dock between games.
-- The down arrow on the title bar collapses the dock to a thin strip of icons, one for each tab; click the up arrow, or a tab's icon, to open it again. Opening a Tool panel in a collapsed dock opens the dock.
-- Both docks take the width of the wider one, as far as room allows, so they don't change width as you switch tabs.
+- Every Tool panel opens in the right dock until you move it. A dock shows one Tool panel at a time; the toolbar's panel buttons switch between them.
+- To move a Tool panel to the other dock, click the arrow on its title bar, or right click its panel button. Each remembers its dock between games.
+- The down arrow on the title bar collapses the dock to a thin strip with the icon of the Tool panel it holds; click the up arrow or the icon to open it again. Opening a Tool panel in a collapsed dock opens the dock.
+- Both docks take the width of the wider one, as far as room allows, so they don't change width as you switch Tool panels.
 - A Tool panel opened from inside another, such as Replace texture from Textures, stacks on top of it in the same dock. The back arrow on its title bar goes back to the one under it; the cross closes it.
 - A Tool panel's **?** opens its page of this documentation; small **?** links on section headings open that section.
 - Loading a map closes every Tool panel.
@@ -116,18 +119,19 @@ Keys that open Tool panels:
 - `F5`: Environment. `Shift+F5`: Map settings.
 - `F6`: Entities. `Shift+F6`: AI. `Ctrl+E`: Entities in templates mode.
 - `F7`: Material volumes. `Shift+F7`: Map physics.
+- `Shift+F4`: Shapes.
 
 The Image editor opens from an image field's right click menu (**Edit image**).
 
 ## Help
 
-- `F1`, or **Help** in the Help menu: open the documentation page of the Tool panel under the cursor, at its heading. With no Tool panel under the cursor, or one whose page isn't written yet, it opens these editing pages.
+- `F1`, the toolbar's **Help** button, or **Help** in the Help menu: open the documentation page of the Tool panel under the cursor, at its heading. With no Tool panel under the cursor, or one whose page isn't written yet, it opens these editing pages.
 - The **?** on a Tool panel's title bar, and on a section heading, open its page the same way. They only show when the page exists.
 - The Help menu lists each editing page, and the main menu's Map Editor has a **Documentation** button.
 
 ## Editor settings
 
-Open it with the toolbar's Editor settings button, or the **Settings** tab.
+Open it with the toolbar's Editor settings button, or the Tools menu.
 
 Camera:
 
@@ -138,7 +142,7 @@ Camera:
 Editing:
 
 - **Undo size (MB)**: memory kept for undo ([`undomegs`](../variables/Editing)).
-- **Lock non-multiplayer functionality**: when editing online, turn off the edits other players can't receive.
+- **Lock non-multiplayer functionality**: when editing online, turn off the edits other players can't receive, such as adding texture slots, map sounds and waypoints, and refuse an undo too big to send to them rather than undoing it only on your map.
 - **Offset selection grid**: draw the selection grid slightly off the surfaces.
 - **Default auto-apply during texture edit**: turn on auto-apply while editing a texture variant.
 - **Free value scrolling**: the wheel steps values without `Shift`. It can get in the way of scrolling a Tool panel.
@@ -154,7 +158,7 @@ Interface:
 
 ## Editor bindings
 
-Every editor action, grouped by category, with its key. Open it with the **Bindings** tab, from the bottom of Editor settings, or the Tools menu.
+Every editor action, grouped by category, with its key. Open it with the toolbar's Editor bindings button, from the bottom of Editor settings, or the Tools menu.
 
 - **Preset**: shows the bind preset last applied; click to choose another.
 - **Search**: show only the actions whose names contain the text, as you type.

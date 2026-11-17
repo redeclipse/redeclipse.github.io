@@ -96,6 +96,25 @@ Editing maps: entities, the map's settings, its lighting and sky, textures and m
 | `mapsoundstream` | sets whether the map sound slot at index is streamed, read as it plays rather than held whole in memory, or returns it if no value is given | `index value` |
 | `mapsoundinfo` | returns number of mapsound slots used in the current map when supplied index = -1, otherwise returns path to the sound on the slot provided by the index | `index` |
 
+## Shapes
+
+| Variable / Command | Description | Arguments / Fields |
+| :--- | :--- | :--- |
+| `buildsphere` | builds a sphere over the selection from its corner, sizes in cubes of the grid size; detail halves the cubes its surface crosses that many times, the offset moves it in its box, the scales stretch it along each axis, and carve 1 cuts it out of the geometry instead of adding it | `radius` `detail` `offx` `offy` `offz` `scalex` `scaley` `scalez` `carve` |
+| `buildellipsoid` | the same as buildsphere, for a sphere stretched by its scales | `radius` `detail` `offx` `offy` `offz` `scalex` `scaley` `scalez` `carve` |
+| `buildcylinder` | builds an upright cylinder over the selection, as buildsphere does | `radius` `height` `detail` `offx` `offy` `offz` `carve` |
+| `buildtunnel` | builds a block with an arched passage through it along Y over the selection, as buildsphere does | `radius` `length` `detail` `offx` `offy` `offz` `carve` |
+| `buildpipebend` | builds a quarter bend of pipe with straight ends over the selection, as buildsphere does | `radius` `piperadius` `detail` `offx` `offy` `offz` `carve` |
+| `buildtorus` | builds a flat ring over the selection, as buildsphere does | `radius` `tuberadius` `detail` `offx` `offy` `offz` `carve` |
+| `buildparaboloid` | builds a dome as wide as its box at the bottom over the selection, as buildsphere does | `radius` `detail` `offx` `offy` `offz` `carve` |
+| `buildoctahedron` | builds an eight-sided diamond over the selection, as buildsphere does | `radius` `detail` `offx` `offy` `offz` `carve` |
+| `buildhelix` | builds a coil around Z over the selection, as buildsphere does | `tuberadius` `coilradius` `detail` `carve` |
+| `buildbox` | builds a box with its edges and corners rounded over the selection, as buildsphere does | `sizex` `sizey` `sizez` `rounding` `detail` `offx` `offy` `offz` `carve` |
+| `buildcone` | builds a cone standing on its base over the selection, as buildsphere does | `radius` `height` `detail` `offx` `offy` `offz` `carve` |
+| `buildterrain` | builds terrain from a greyscale heightmap image over the selection, one cube smaller than the image on each side, brighter being higher up to height cubes; name the image with its extension | `image` `height` `carve` |
+| `importsmc` | imports an SMC file of cubes from the selection's corner, a line per cube of x y z size and its eight corner densities, negative inside; voxel 1 makes each listed cube solid instead | `file` `voxel` |
+| `shapeproblem` | returns why a shape whose box is x y z cubes can't be built at the selection now, or nothing when it can | `x` `y` `z` |
+
 ## Map settings
 
 | Variable / Command | Description | Arguments / Fields |
@@ -108,7 +127,7 @@ Editing maps: entities, the map's settings, its lighting and sky, textures and m
 | `mapfile` | path to map .mpz file | `path` |
 | `mapname` | path to map file | `path` |
 | `savemap` | saves the current map as "mapname.mpz" in the homedir | `map` |
-| `shrinkmap` | shrinks the map size to smallest cubed area,<br>only empty space outside of the map will be removed | - |
+| `shrinkmap` | shrinks the map size to smallest cubed area,<br>only empty space outside of the map will be removed;<br>it clears the undo history | - |
 | `sendmap` | manually sends map to the server; not in edit mode, where other players send it when needed | - |
 | `getmap` | manually retrieves map from the server, or in edit mode from another player | - |
 | `newmap` | create new map with the specified gridpower and name | `size, name` |
@@ -294,6 +313,7 @@ Add `alt` to the end of these for the alternate map variant (`mapvariant 2`).
 
 | Variable / Command | Description | Arguments / Fields |
 | :--- | :--- | :--- |
+| `editproblem` | returns why an edit over the selection is too big to send to the other players online, or nothing when it can be made | |
 | `editmat` | modifies the material properties for selected cubes;<br>type is the material to be applied {water, clip, ladder..},<br>filter limits the command to only affect cubes whose material<br>match this, if given as empty string "" it matches all;<br>style limits the command to only affect cubes whose<br>geometry match this:<br>0 = normal<br>1 = non-empty<br>2 = empty<br>3 = not entirely solid<br>4 = entirely solid<br>example: editmat air water 2 would set all empty cubes<br>with water within the current selection to instead be air | `type filtermat filterstyle` |
 | `showmat` | toggles the visibility of material volumes | `value` |
 | `showphyslayers` | toggles the visibility of physical layers | `value` |

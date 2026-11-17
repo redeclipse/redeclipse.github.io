@@ -26,7 +26,7 @@ The texture under the selection is the one on the first solid cube in it, on the
 
 ## The Textures Tool panel
 
-`F4` (legacy `Shift+F1`) opens it in its dock, as do the toolbar's **Textures** button and the dock's **Textures** tab (see [Tool panels](Interface#tool-panels)).
+`F4` (legacy `Shift+F1`) opens it in its dock, as does the toolbar's **Textures** button (see [Tool panels](Interface#tool-panels)).
 
 ### Picked texture
 
@@ -64,7 +64,7 @@ Right click a texture, other than the sky (#0) and the default (#1), for its men
 - **Cull from here**: remove the slots the map doesn't use, from this one to the end of the list.
 - **Cull group**: remove the slots the map doesn't use from this one's group.
 
-The menu isn't available online, and removing and culling can't be undone. Saving the map writes its slots to the map's `.cfg` file.
+The menu isn't available online, and removing and culling can't be undone; culling also clears the undo history, as it renumbers the slots. Saving the map writes its slots to the map's `.cfg` file.
 
 ## Texture variants
 
@@ -177,7 +177,7 @@ The slot itself: the image files the texture is made of, and the settings every 
 
 ## Replace texture
 
-**Replace textures**, in the Textures Tool panel's **More** menu, swaps one texture for another on every face that has it. Not available online.
+**Replace textures**, in the Textures Tool panel's **More** menu, swaps one texture for another on every face that has it.
 
 - **Limit to selection**: replace only within the selection.
 - **Old texture**: the texture to replace. Click it to choose from the list, or use the arrow button to take the selection's.
@@ -189,7 +189,7 @@ The back arrow on its title bar returns to Textures.
 
 ## Blend painting
 
-The toolbar's **Blendmap paint** button, or the dock's **Paint** tab, opens the Blendmap paint Tool panel, and `P` cycles the paint mode. Painting brings out each texture's blend layer, set in [Blending](#blending). See [Blendmap](Blendmap).
+The toolbar's **Blendmap paint** button opens the Blendmap paint Tool panel, and `P` cycles the paint mode. Painting brings out each texture's blend layer, set in [Blending](#blending). See [Blendmap](Blendmap).
 
 ## Keys
 
