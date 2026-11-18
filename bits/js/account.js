@@ -1080,6 +1080,7 @@
         // whether it bans, and its limits
         function setmode(js)
         {
+            var MODES = ["Only saying what it would ban.", "Banning what its modulators match."], line = el("span", { class: "account-help", text: MODES[js.settings.shielddryrun ? 0 : 1] });
             clear(modeslot).appendChild(el("div", { class: "account-inline" }, [wordpicker("Mode", ["Dry run", "Banning"], js.settings.shielddryrun ? 0 : 1, function(i, done)
             {
                 if(i === 1 && !window.confirm("Turn the dry run off? Master Shield will then ban servers its modulators match.")) return;
@@ -1087,9 +1088,10 @@
                 {
                     if(r.status !== 200) throw failed(r, "It couldn't be changed.");
                     done();
+                    line.textContent = MODES[i];
                     status.say(i ? "Master Shield bans the servers its modulators match." : "Master Shield only says what it would ban.");
                 }).catch(function(err) { status.say(err.message, true); });
-            }), el("span", { class: "account-help", text: js.settings.shielddryrun ? "Only saying what it would ban." : "Banning what its modulators match." })]));
+            }), line]));
             SHIELDLIMITS.forEach(function(f) { nums[f[0]].value = js.settings[f[0]]; });
         }
         var limits = el("div", { class: "account-shieldlimits" }, SHIELDLIMITS.map(function(f)
