@@ -777,6 +777,45 @@
         return el("div", { class: "account-scroll" }, el("table", { class: "account-signins account-admintable" },
             [el("thead", {}, el("tr", {}, head.map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)]));
     }
+    // a list whose rows are one line each, with the rest of an item in a details row that clicking it opens, as Server details in the
+    // server browser; items: [{ key, cells, details }], opened: the keys left open, kept by the page so a reload after an action keeps them
+    function detailtable(head, items, opened)
+    {
+        var cols = head.length + 1, rows = [];
+        items.forEach(function(it)
+        {
+            var isopen = !!opened[it.key], details = el("tr", { class: "account-detailrow", hidden: !isopen }, el("td", { colspan: cols }, it.details));
+            var chevron = el("button", { type: "button", class: "account-chevron", "aria-label": "Details", title: "Details" });
+            var tr = el("tr", { class: "account-row" + (isopen ? " account-row-open" : ""), tabindex: "0", "aria-expanded": isopen ? "true" : "false" },
+                it.cells.concat(el("td", { class: "account-end" }, chevron)));
+            it.cells.forEach(function(td, i) { if(head[i]) td.setAttribute("data-label", head[i]); });
+            function toggle()
+            {
+                isopen = !isopen;
+                if(isopen) opened[it.key] = true; else delete opened[it.key];
+                details.hidden = !isopen;
+                tr.className = "account-row" + (isopen ? " account-row-open" : "");
+                tr.setAttribute("aria-expanded", isopen ? "true" : "false");
+            }
+            tr.addEventListener("click", function(e) { if(e.target === chevron || !e.target.closest("button, a, input, select, textarea, form")) toggle(); });
+            tr.addEventListener("keydown", function(e) { if((e.key === "Enter" || e.key === " ") && e.target === tr) { e.preventDefault(); toggle(); } });
+            rows.push(tr, details);
+        });
+        return el("div", { class: "account-scroll" }, el("table", { class: "account-signins account-detailtable" },
+            [el("thead", {}, el("tr", {}, head.concat("").map(function(h) { return el("th", { text: h }); }))), el("tbody", {}, rows)]));
+    }
+    // a summary cell: one line, cut short with the whole of it in its title; grow takes the room the other columns leave
+    function cell(value, grow, title)
+    {
+        return el("td", { class: grow ? "account-grow" : null, title: title || (typeof value === "string" ? value : null) }, Array.isArray(value) ? el("span", {}, value) : value);
+    }
+    // the inside of a details row: labelled values, then the actions
+    function details(pairs, buttons)
+    {
+        return el("div", { class: "account-details" }, [el("dl", {}, pairs.filter(function(p) { return p; }).map(function(p) { return [el("dt", { text: p[0] }), el("dd", {}, p[1])]; })),
+            buttons && buttons.length ? el("div", { class: "account-rowactions" }, buttons) : null]);
+    }
+    function faint(text) { return el("span", { class: "account-help", text: text }); }
     // an account's Privilege as the game's icons, one picked; those it can't be given are greyed, and picking one asks first
     var PRIVLETTERS = ["u", "s", "m", "a", "d", "c"];
     function aname(word) { return (/^[aeiou]/i.test(word) ? "an " : "a ") + word; }
@@ -794,6 +833,12 @@
                     if(window.confirm("Make " + a.handle + " " + aname(word) + "? This ends their sign-ins.")) act("PATCH", { flags: c }, a.handle + " is now " + aname(word) + ".");
                 } }, el("span", { class: "account-privicon", style: "-webkit-mask-image:" + url + ";mask-image:" + url }));
         }));
+    }
+    // a Privilege as its icon and word, for a summary row
+    function privbadge(word)
+    {
+        var url = "url(/bits/images/servers/privilege/" + word + ".svg)";
+        return el("span", { class: "account-privbadge" }, [word !== "none" ? el("span", { class: "account-privicon", style: "-webkit-mask-image:" + url + ";mask-image:" + url }) : null, capital(word)]);
     }
     // a server account's level, which sets its place among servers with as many players: one letter, the highest it has
     var SERVERLEVELS = [["b", "Basic"], ["u", "Featured"], ["m", "Official"]];
@@ -821,7 +866,7 @@
 
     function adminaccounts(me)
     {
-        var mine = privof(me.flags), list = panel("Accounts", { full: true }), results = el("div");
+        var mine = privof(me.flags), list = panel("Accounts", { full: true }), results = el("div"), opened = {};
         var q = el("input", { type: "search", id: "admin-q", placeholder: "Handle or email", spellcheck: "false", "aria-label": "Handle or email" });
         function search()
         {
@@ -829,7 +874,7 @@
             {
                 if(r.status !== 200) throw failed(r, "The search failed.");
                 clear(results).appendChild(el("p", { class: "account-help", text: r.json.total + " account" + (r.json.total === 1 ? "" : "s") + (r.json.total > r.json.accounts.length ? ", showing " + r.json.accounts.length : "") }));
-                results.appendChild(admintable(["Handle", "Privilege", "Email", "Display name", "Steam", "Discord", ""], r.json.accounts.map(function(a)
+                results.appendChild(detailtable(["Handle", "Privilege", "Display name", "Steam", "Discord"], r.json.accounts.map(function(a)
                 {
                     var self = a.handle === me.name, can = !self && outranks(mine, privof(a.flags));
                     var why = self ? "You can't change your own account here" : can ? null : "Their privilege is at or above yours";
@@ -842,15 +887,22 @@
                             search();
                         }).catch(function(err) { list.say(err.message, true); });
                     }
-                    return el("tr", {}, [
-                        el("td", {}, el("strong", { text: a.handle })),
-                        el("td", {}, privpicker(a, mine, why, act)),
-                        el("td", { text: a.email }),
-                        el("td", {}, [a.displayname || null, a.displayname ? el("button", { type: "button", class: "account-link account-clear", text: "Clear", disabled: !can, title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } }) : null]),
-                        el("td", { text: a.steamid }), el("td", { text: a.discord }),
-                        el("td", {}, removebutton("Remove", function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); }, why))
-                    ]);
-                })));
+                    var word = PRIVNAMES[privof(a.flags)] || "none";
+                    return { key: a.handle, cells: [
+                        cell(el("strong", { text: a.handle }), false, a.handle),
+                        cell(privbadge(word), false, capital(word)),
+                        cell(a.displayname || faint("None"), true, a.displayname || null),
+                        cell(a.steamid ? "Linked" : faint("No"), false, a.steamid || null),
+                        cell(a.discord ? "Linked" : faint("No"), false, a.discord || null)
+                    ], details: details([
+                        ["Email", el("span", { class: "account-wrap", text: a.email })],
+                        ["Privilege", privpicker(a, mine, why, act)],
+                        ["Display name", a.displayname ? el("span", { class: "account-wrap" }, [a.displayname, el("button", { type: "button", class: "account-link account-clear", text: "Clear", disabled: !can,
+                            title: why, onclick: function() { act("PATCH", { displayname: "" }, a.handle + "'s display name is cleared."); } })]) : faint("None")],
+                        ["Steam", a.steamid ? el("a", { href: "https://steamcommunity.com/profiles/" + a.steamid, rel: "noopener", text: a.steamid }) : faint("Not linked")],
+                        ["Discord", a.discord ? el("span", { class: "account-wrap", text: a.discord }) : faint("Not linked")]
+                    ], [removebutton("Remove", function() { if(window.confirm("Remove the account " + a.handle + "?")) act("DELETE", null, a.handle + " is removed."); }, why)]) };
+                }), opened));
                 results.appendChild(el("p", { class: "account-help", text: "You can give up to " + aname(PRIVNAMES[Math.max.apply(null, PRIVLETTERS.map(function(c, i) { return outranks(mine, i + 1) ? i + 1 : 0; }))]) + ". Changing an account's privilege ends its sign-ins." }));
             }).catch(function(err) { list.say(err.message, true); });
         }
@@ -864,21 +916,22 @@
     function admincontrols()
     {
         var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines. Bans from Master shield, the master's own defence against hostile servers, have the Automatic source and lapse on their own." });
-        var add = panel("Add to the global lists"), controls = el("div");
+        var add = panel("Add to the global lists"), controls = el("div"), opened = {};
         function load()
         {
             account.call("GET", "/admin/controls").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The global lists couldn't be read.");
-                clear(controls).appendChild(r.json.controls.length ? admintable(["Type", "Address", "Reason", "Source", "Added", ""], r.json.controls.map(function(c)
+                clear(controls).appendChild(r.json.controls.length ? detailtable(["Type", "Address", "Reason", "Source", "Added"], r.json.controls.map(function(c)
                 {
                     var source = c.source ? capital(c.source) + (c.by ? " (" + c.by + ")" : "") : "";
-                    return el("tr", {}, [el("td", { text: capital(c.type) }), el("td", {}, el("span", { class: "account-ip", text: c.address })), el("td", { text: c.reason }),
-                        el("td", { text: source }), el("td", { text: c.added ? day(c.added) : "" }), el("td", {}, removebutton("Remove", function()
+                    return { key: String(c.id), cells: [cell(capital(c.type)), cell(el("span", { class: "account-ip", text: c.address }), false, c.address),
+                        cell(c.reason || faint("None"), true, c.reason || null), cell(source), cell(c.added ? day(c.added) : "")],
+                        details: details([["Reason", c.reason ? el("span", { class: "account-wrap", text: c.reason }) : faint("None")], ["Source", source || faint("Unknown")]], [removebutton("Remove", function()
                     {
                         account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(c.address + " is off the " + c.type + " list."); load(); }).catch(function(err) { list.say(err.message, true); });
-                    }))]);
-                })) : el("p", { class: "account-help", text: "The global lists are empty." }));
+                    })]) };
+                }), opened) : el("p", { class: "account-help", text: "The global lists are empty." }));
             }).catch(function(err) { list.say(err.message, true); });
         }
         list.appendChild(controls);
@@ -903,7 +956,7 @@
     function adminservers(me)
     {
         var mine = privof(me.flags), list = panel("Server accounts", { full: true, intro: "The accounts game servers sign in to the master with. Each has an owner, whose account gets the key." });
-        var add = panel("Add a server account", { intro: "Its owner is mailed a link to get the key, which their server reads from secrets.cfg." }), servers = el("div");
+        var add = panel("Add a server account", { intro: "Its owner is mailed a link to get the key, which their server reads from secrets.cfg." }), servers = el("div"), opened = {};
         function levelcant(letter) { return outranks(mine, privof(letter)) ? null : "Only below your own privilege"; }
         function call(method, a, path, body, done)
         {
@@ -920,9 +973,9 @@
             var box = el("div", { class: cls });
             function show()
             {
-                clear(box).appendChild(el("div", { class: "account-inline account-ownernow" }, [el("span", { text: value }),
+                clear(box).appendChild(el("div", { class: "account-inline account-ownernow" }, [value ? el("span", { class: "account-wrap", text: value }) : faint(help || "None"),
                     why ? null : el("button", { type: "button", class: "account-link account-clear", text: "Change", onclick: edit })]));
-                if(help) box.appendChild(el("div", { class: "account-help", text: help }));
+                if(help && value) box.appendChild(el("div", { class: "account-help", text: help }));
             }
             function edit()
             {
@@ -967,21 +1020,28 @@
             if(!a.addresses || !a.addresses.length) return el("span", { class: "account-help", text: "None yet" });
             return el("div", { class: "account-addresses" }, a.addresses.map(function(k)
             {
-                return el("div", {}, [el("code", { text: k.host }), " " + (k.seen ? day(k.seen) : "")]);
+                return el("div", {}, [el("code", { text: k.host }), el("span", { class: "account-help", text: k.seen ? day(k.seen) : "" })]);
             }));
         }
-        function state(a)
+        // short in the summary row, in full in the details
+        function state(a, full)
         {
-            if(a.pending) return el("span", { class: "account-tag account-tag-wait", text: "Waiting for its owner until " + day(a.expires) });
-            if(a.newkey) return el("span", { class: "account-tag account-tag-wait", text: "New key sent, until " + day(a.newkey) });
-            return null;
+            var long = a.pending ? "Waiting for its owner until " + day(a.expires) : a.newkey ? "New key sent, until " + day(a.newkey) : null;
+            if(!long) return null;
+            return full ? el("span", { text: long }) : el("span", { class: "account-tag account-tag-wait", title: long, text: a.pending ? "Waiting" : "New key sent" });
+        }
+        function latest(a)
+        {
+            if(a.pending) return faint("Not yet");
+            var k = a.addresses && a.addresses[0];
+            return k ? el("span", {}, [el("span", { class: "account-ip", text: k.host }), k.seen ? el("span", { class: "account-help", text: " " + day(k.seen) }) : null]) : faint("None yet");
         }
         function load()
         {
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", "Description", "Signed in from", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? detailtable(["Handle", "Level", "Owner", "Signed in from"], r.json.servers.map(function(a)
                 {
                     var why = outranks(mine, privof(a.flags)) ? null : "Its level is at or above your privilege";
                     var keywhy = why || (!a.owner ? "Give it an owner first" : a.ownergone ? "Give it a new owner first" : null);
@@ -990,25 +1050,29 @@
                         var word = levelof(l);
                         if(window.confirm("Make " + a.handle + " " + word + "?")) call("PATCH", a, "", { flags: l }, a.handle + " is now " + word + ".");
                     });
-                    return el("tr", {}, [
-                        el("td", {}, [el("strong", { text: a.handle }), state(a)]),
-                        el("td", {}, picker),
-                        el("td", {}, owner(a, why)),
-                        el("td", {}, desc(a, why)),
-                        el("td", {}, known(a)),
-                        el("td", {}, el("div", { class: "account-rowactions" }, [
-                            el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!keywhy, title: keywhy, onclick: function()
-                            {
-                                if(a.pending || window.confirm("Mail " + a.owner + " a link to a new key for " + a.handle + "? Its old key works until they follow it."))
-                                    call("POST", a, "/key", null, "A new link went to " + a.owner + ".");
-                            } }),
-                            removebutton(a.pending ? "Withdraw" : "Remove", function()
-                            {
-                                if(window.confirm((a.pending ? "Withdraw " : "Remove ") + "the server account " + a.handle + "?")) call("DELETE", a, "", null, a.handle + (a.pending ? " is withdrawn." : " is removed."));
-                            }, why)
-                        ]))
-                    ]);
-                })) : el("p", { class: "account-help", text: "There are no server accounts." }));
+                    return { key: a.handle, cells: [
+                        cell([el("strong", { text: a.handle }), state(a)], false, a.handle),
+                        cell(levelof(a.flags)),
+                        cell(a.ownergone ? faint("Account deleted") : a.owner || faint("None"), false, a.owner || null),
+                        cell(latest(a), true, a.addresses && a.addresses[0] ? a.addresses[0].host : null)
+                    ], details: details([
+                        state(a, true) ? ["State", state(a, true)] : null,
+                        ["Level", picker],
+                        ["Owner", owner(a, why)],
+                        ["Description", desc(a, why)],
+                        a.pending ? null : ["Signed in from", known(a)]
+                    ], [
+                        el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!keywhy, title: keywhy, onclick: function()
+                        {
+                            if(a.pending || window.confirm("Mail " + a.owner + " a link to a new key for " + a.handle + "? Its old key works until they follow it."))
+                                call("POST", a, "/key", null, "A new link went to " + a.owner + ".");
+                        } }),
+                        removebutton(a.pending ? "Withdraw" : "Remove", function()
+                        {
+                            if(window.confirm((a.pending ? "Withdraw " : "Remove ") + "the server account " + a.handle + "?")) call("DELETE", a, "", null, a.handle + (a.pending ? " is withdrawn." : " is removed."));
+                        }, why)
+                    ]) };
+                }), opened) : el("p", { class: "account-help", text: "There are no server accounts." }));
             }).catch(function(err) { list.say(err.message, true); });
         }
         list.appendChild(servers);
@@ -1085,7 +1149,7 @@
         var status = panel("Master shield", { full: true, intro: "Tests every listed server against the Shield modulators below. A modulator only works while hostile servers " +
             "don't know what it looks for, so keep them to administrators." });
         var mods = panel("Shield modulators", { full: true, tools: el("button", { type: "button", text: "Add a modulator", onclick: function() { edit(null); } }) });
-        var editor = panel("", { full: true }), list = el("div"), modeslot = el("div"), nums = {};
+        var editor = panel("", { full: true }), list = el("div"), modeslot = el("div"), nums = {}, opened = {};
         editor.hidden = true;
 
         // whether it bans, and its limits
@@ -1127,21 +1191,23 @@
         // the modulators
         function row(m)
         {
-            var label = shieldlinklabel(m.link);
-            return el("tr", {}, [
-                el("td", {}, el("strong", { text: m.name })),
-                el("td", {}, label ? el("a", { href: m.link, target: "_blank", rel: "noopener", text: label }) : el("span", { class: "account-help", text: "None" })),
-                el("td", {}, wordpicker("State", ["On", "Off"], m.enabled ? 0 : 1, function(i, done)
-                {
-                    account.call("PATCH", "/admin/shield/modulators/" + m.id, { enabled: !i }).then(function(r)
+            var label = shieldlinklabel(m.link), now = el("span", { text: m.enabled ? "On" : "Off" });
+            function answers() { return label ? el("a", { href: m.link, target: "_blank", rel: "noopener", text: label }) : faint("None"); }
+            return { key: String(m.id), cells: [cell(el("strong", { text: m.name }), true, m.name), cell(answers(), false, m.link || null), cell(now)],
+                details: details([
+                    ["Name", el("span", { class: "account-wrap", text: m.name })],
+                    ["State", wordpicker("State", ["On", "Off"], m.enabled ? 0 : 1, function(i, done)
                     {
-                        if(r.status !== 200) throw failed(r, "It couldn't be changed.");
-                        m.enabled = r.json.enabled;
-                        done();
-                        mods.say(m.name + (m.enabled ? " is on." : " is off."));
-                    }).catch(function(err) { mods.say(err.message, true); });
-                })),
-                el("td", {}, el("div", { class: "account-rowactions" }, [el("button", { type: "button", text: "Edit", onclick: function() { edit(m); } }),
+                        account.call("PATCH", "/admin/shield/modulators/" + m.id, { enabled: !i }).then(function(r)
+                        {
+                            if(r.status !== 200) throw failed(r, "It couldn't be changed.");
+                            m.enabled = r.json.enabled;
+                            done();
+                            now.textContent = m.enabled ? "On" : "Off";
+                            mods.say(m.name + (m.enabled ? " is on." : " is off."));
+                        }).catch(function(err) { mods.say(err.message, true); });
+                    })]
+                ], [el("button", { type: "button", text: "Edit", onclick: function() { edit(m); } }),
                     removebutton("Remove", function()
                     {
                         if(!window.confirm("Remove the modulator " + m.name + "?")) return;
@@ -1152,7 +1218,7 @@
                             if(editing && editing.id === m.id) close();
                             load();
                         }).catch(function(err) { mods.say(err.message, true); });
-                    })]))]);
+                    })]) };
         }
         function load()
         {
@@ -1160,7 +1226,7 @@
             {
                 if(r.status !== 200) throw failed(r, "Master shield couldn't be read.");
                 setmode(r.json);
-                clear(list).appendChild(r.json.modulators.length ? admintable(["Name", "Answers", "State", ""], r.json.modulators.map(row)) :
+                clear(list).appendChild(r.json.modulators.length ? detailtable(["Name", "Answers", "State"], r.json.modulators.map(row), opened) :
                     el("p", { class: "account-help", text: "There are no modulators yet." }));
             }).catch(function(err) { status.say(err.message, true); });
         }
@@ -1195,7 +1261,7 @@
                 clear(results);
                 if(res.length) results.appendChild(admintable(["Server", "Map", "Would", "Saying"], res.map(function(x)
                 {
-                    return el("tr", {}, [el("td", {}, [el("span", { class: "account-ip", text: x.host + ":" + x.port }), el("div", { class: "account-help", text: x.desc })]),
+                    return el("tr", {}, [el("td", {}, el("div", {}, [el("span", { class: "account-ip", text: x.host + ":" + x.port }), el("div", { class: "account-help", text: x.desc })])),
                         el("td", { text: x.map }), el("td", { text: x.action === "bad" ? "Neither" : capital(x.action) }), el("td", { text: x.text })]);
                 })));
                 editor.say(res.length ? "It would act on " + res.length + " of the " + r.json.tested + " listed servers." : "It would leave all " + r.json.tested + " listed servers alone.");

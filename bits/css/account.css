@@ -173,10 +173,129 @@
     width: 16em;
     max-width: 100%;
 }
-/* Admin tables: values wrap rather than run off, actions sit on the right */
-.account-admintable td {
+/* Admin tables: text wraps rather than running off, while pickers and buttons stay whole */
+.account-signins.account-admintable td {
     white-space: normal;
     overflow-wrap: anywhere;
+}
+#account .account-picker, #account .account-rowactions button, #account .account-clear {
+    white-space: nowrap;
+    overflow-wrap: normal;
+}
+/* Admin lists: one line a row, cut short where it runs long, with the rest in a details row under it */
+.account-detailtable .account-row {
+    cursor: pointer;
+}
+.account-detailtable .account-row:hover, .account-detailtable .account-row:focus-visible {
+    background-color: rgba(255, 64, 64, 0.06);
+    outline: none;
+}
+.account-detailtable .account-row-open, .account-detailtable .account-row-open:hover {
+    background-color: rgba(255, 64, 64, 0.12);
+}
+.account-detailtable .account-row > td {
+    max-width: 14em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.account-detailtable .account-row > td.account-grow {
+    width: 100%;
+    max-width: 0;
+    min-width: 8em;
+}
+.account-detailtable .account-row > td.account-end {
+    width: 1%;
+    max-width: none;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.account-detailtable .account-row-open > td {
+    border-bottom-color: transparent;
+}
+.account-signins.account-detailtable .account-detailrow > td {
+    padding: 4px 16px 16px 16px;
+    white-space: normal;
+    background-color: rgba(255, 64, 64, 0.05);
+}
+#account button.account-chevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    color: var(--account-muted);
+    background: none;
+    border: 0;
+}
+#account button.account-chevron::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    margin-top: -4px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
+}
+#account .account-row-open button.account-chevron::before {
+    margin-top: 4px;
+    transform: rotate(-135deg);
+}
+#account button.account-chevron:hover, #account button.account-chevron:focus-visible, #account .account-row:hover button.account-chevron {
+    color: rgb(255, 255, 255);
+    background: none;
+}
+.account-details dl {
+    display: grid;
+    grid-template-columns: minmax(8em, max-content) minmax(0, 1fr);
+    align-items: center;
+    gap: 10px 20px;
+    margin: 0;
+}
+.account-details dd {
+    margin: 0;
+    min-width: 0;
+}
+.account-details .account-rowactions {
+    justify-content: flex-start;
+    margin-top: 14px;
+}
+.account-wrap {
+    overflow-wrap: anywhere;
+}
+.account-privbadge {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    gap: 6px;
+}
+.account-privbadge .account-privicon {
+    width: 16px;
+    height: 16px;
+}
+.account-addresses {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    gap: 2px 12px;
+}
+.account-addresses > div {
+    display: contents;
+}
+.account-addresses code {
+    justify-self: start;
+    overflow-wrap: anywhere;
+}
+@media (max-width: 640px) {
+    .account-details dl {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2px;
+    }
+    .account-details dd + dt {
+        margin-top: 8px;
+    }
+    .account-addresses {
+        grid-template-columns: minmax(0, 1fr) max-content;
+    }
 }
 /* A choice of one, such as an account's Privilege: the picked one lit, the ones that can't be picked faint */
 .account-picker {
@@ -519,6 +638,8 @@
     }
     .account-signins td[data-label]::before {
         content: attr(data-label);
+        flex: 0 0 auto;
+        white-space: nowrap;
         color: rgb(220, 160, 160);
     }
     .account-signins .account-device {
@@ -528,6 +649,47 @@
     .account-signins .account-end {
         justify-content: flex-end;
         padding-top: 6px;
+    }
+    .account-signins td > * {
+        min-width: 0;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+    .account-signins.account-admintable td {
+        display: grid;
+        grid-template-columns: 5em minmax(0, 1fr);
+    }
+    .account-signins.account-admintable td > * {
+        text-align: left;
+    }
+    /* an admin list's row is a card of labelled values, wrapping rather than cut, its chevron at the top right */
+    .account-detailtable .account-row {
+        position: relative;
+        padding-right: 36px;
+    }
+    .account-detailtable .account-row > td, .account-detailtable .account-row > td.account-grow {
+        max-width: none;
+        white-space: normal;
+        overflow: visible;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+    .account-detailtable .account-row > td.account-end {
+        position: absolute;
+        top: 6px;
+        right: 0;
+        width: auto;
+        padding: 0;
+    }
+    .account-detailtable .account-row-open {
+        border-bottom: 0;
+    }
+    .account-signins.account-detailtable .account-detailrow > td {
+        display: block;
+        padding: 8px 8px 12px 8px;
+    }
+    .account-detailrow > td > .account-details {
+        text-align: left;
     }
 }
 .account-signins th {
@@ -670,7 +832,7 @@
     margin-top: auto;
 }
 /* one line of the key, scrolling sideways rather than breaking it */
-#account code.account-copyline, .account-cfg {
+#account code.account-copyline, .account-cfg, .account-scroll {
     scrollbar-width: thin;
     scrollbar-color: var(--account-input) transparent;
 }
