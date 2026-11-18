@@ -1041,12 +1041,127 @@
         return mail;
     }
 
+    // Master Shield: its settings, its Shield Modulators, and Test, which says what a body would do to each listed server
+    var SHIELDSETTINGS = [["shieldbanlimit", "Bans an hour", "Bans in any hour by all modulators together, 0 for no limit."],
+        ["shieldmodulatorlimit", "Bans an hour by one modulator", "0 for no limit."],
+        ["shieldbanshare", "Most of the list at once", "The percentage of listed servers one pass may ban, though one is always allowed; 0 for no limit."],
+        ["shieldbanlapse", "Days a ban lasts", "Master Shield's bans lapse after this many days, 0 to keep them."]];
+    function shieldtest(body, out, box)
+    {
+        account.call("POST", "/admin/shield/test", { body: body }).then(function(r)
+        {
+            if(r.status !== 200) throw failed(r, "It couldn't be tested.");
+            var res = r.json.results || [];
+            clear(out);
+            if(res.length) out.appendChild(admintable(["Server", "Map", "Would", "Saying"], res.map(function(x)
+            {
+                return el("tr", {}, [el("td", {}, [el("span", { class: "account-ip", text: x.host + ":" + x.port }), " ", x.desc]), el("td", { text: x.map }),
+                    el("td", { text: x.action === "bad" ? "Neither ban nor flag" : capital(x.action) }), el("td", { text: x.text })]);
+            })));
+            box.say(res.length ? "It would act on " + res.length + " of " + r.json.tested + " listed servers." : "It would leave all " + r.json.tested + " listed servers alone.");
+        }).catch(function(err) { box.say(err.message, true); });
+    }
+    function adminshield()
+    {
+        var settings = panel("Settings", { intro: "While the dry run is on, Master Shield only says what it would ban." });
+        var mods = panel("Shield Modulators", { full: true, intro: "Each modulator's body is CubeScript run in the Sandbox for each listed server, with its details in $srvhost, $srvport, $srvdesc, " +
+            "$srvmap, $srvbranch, $srvversion, $srvhandle, $srvmode, $srvmutators and $srvplayers, a list of names. Its result is what to do: nothing, ban followed by the reason, " +
+            "which every linked server sees, or flag followed by a note for the admin notices. Keep them to administrators: a modulator only works while hostile servers don't know what it looks for." });
+        var add = panel("Add a modulator", { full: true }), list = el("div");
+        var dry = el("input", { type: "checkbox", id: "shield-dryrun" }), nums = {};
+        var fields = [formfield("Dry run", dry, "Say what would be banned without banning.")];
+        SHIELDSETTINGS.forEach(function(f)
+        {
+            nums[f[0]] = el("input", { type: "number", id: "shield-" + f[0], min: "0", step: "1", required: true });
+            fields.push(formfield(f[1], nums[f[0]], f[2]));
+        });
+        settings.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
+        {
+            e.preventDefault();
+            var body = { shielddryrun: dry.checked ? 1 : 0 };
+            SHIELDSETTINGS.forEach(function(f) { body[f[0]] = parseInt(nums[f[0]].value, 10) || 0; });
+            account.call("PATCH", "/admin/shield", body).then(function(r)
+            {
+                if(r.status !== 200) throw failed(r, "The settings couldn't be saved.");
+                show(r.json);
+                settings.say("Saved.");
+            }).catch(function(err) { settings.say(err.message, true); });
+        } }, fields.concat([actions(el("button", { type: "submit", text: "Save" }))])));
+        function editor(id, value) { return el("textarea", { id: id, class: "account-code", spellcheck: "false", rows: "14", text: value || "" }); }
+        function modulator(m)
+        {
+            var box = panel(m.name, { full: true }), on = el("input", { type: "checkbox", id: "shield-on-" + m.name, checked: !!m.enabled });
+            var body = editor("shield-body-" + m.name, m.body), out = el("div");
+            function save(enabled)
+            {
+                account.call("PUT", "/admin/shield/modulators/" + encodeURIComponent(m.name), { body: body.value, enabled: enabled }).then(function(r)
+                {
+                    if(r.status !== 200 && r.status !== 201) throw failed(r, "It couldn't be saved.");
+                    m.body = r.json.body;
+                    m.enabled = r.json.enabled;
+                    box.say(m.enabled ? "Saved, and it's on." : "Saved, and it's off.");
+                }).catch(function(err) { on.checked = !!m.enabled; box.say(err.message, true); });
+            }
+            on.onchange = function() { save(on.checked); };
+            box.appendChild(el("div", { class: "account-stack account-stack-wide" }, [formfield("On", on, "Off keeps the modulator without running it."), formfield("Body", body), actions([
+                el("button", { type: "button", text: "Save", onclick: function() { save(on.checked); } }),
+                el("button", { type: "button", text: "Test", onclick: function() { shieldtest(body.value, out, box); } }),
+                removebutton("Remove", function()
+                {
+                    if(!window.confirm("Remove the modulator " + m.name + "?")) return;
+                    account.call("DELETE", "/admin/shield/modulators/" + encodeURIComponent(m.name)).then(function(r)
+                    {
+                        if(r.status !== 204) throw failed(r, "It couldn't be removed.");
+                        mods.say(m.name + " was removed.");
+                        load();
+                    }).catch(function(err) { box.say(err.message, true); });
+                })]), out]));
+            return box;
+        }
+        function show(js)
+        {
+            dry.checked = !!js.settings.shielddryrun;
+            SHIELDSETTINGS.forEach(function(f) { nums[f[0]].value = js.settings[f[0]]; });
+        }
+        function load()
+        {
+            account.call("GET", "/admin/shield").then(function(r)
+            {
+                if(r.status !== 200) throw failed(r, "Master Shield couldn't be read.");
+                show(r.json);
+                clear(list);
+                if(!r.json.modulators.length) list.appendChild(el("p", { class: "account-help", text: "There are no modulators." }));
+                r.json.modulators.forEach(function(m) { list.appendChild(modulator(m)); });
+            }).catch(function(err) { mods.say(err.message, true); });
+        }
+        mods.appendChild(list);
+        var name = el("input", { type: "text", id: "shield-name", spellcheck: "false", required: true, maxlength: "32", pattern: "[A-Za-z0-9_\\-]+" });
+        var body = editor("shield-body"), out = el("div");
+        add.appendChild(el("form", { class: "account-stack account-stack-wide", onsubmit: function(e)
+        {
+            e.preventDefault();
+            var n = name.value.trim();
+            account.call("PUT", "/admin/shield/modulators/" + encodeURIComponent(n), { body: body.value, enabled: true }).then(function(r)
+            {
+                if(r.status !== 201 && r.status !== 200) throw failed(r, "It couldn't be added.");
+                add.say(n + " was added, and it's on.");
+                name.value = body.value = "";
+                clear(out);
+                load();
+            }).catch(function(err) { add.say(err.message, true); });
+        } }, [formfield("Name", name, "Up to 32 letters, digits, - and _, shown in the master's log and the admin notices."), formfield("Body", body), actions([
+            el("button", { type: "submit", text: "Add" }), el("button", { type: "button", text: "Test", onclick: function() { shieldtest(body.value, out, add); } })]), out]));
+        load();
+        return el("div", { class: "account-panels" }, [settings, mods, add]);
+    }
+
     // the overview: what each page is for, and the mail test
     function adminoverview()
     {
         var about = { "admin-accounts": "Find player accounts, set their privilege, clear display names and remove accounts.",
             "admin-controls": "The bans, mutes, limits, allows, excepts and trusts every linked server gets.",
-            "admin-servers": "The accounts game servers sign in with, which set their place in the Server Browser." };
+            "admin-servers": "The accounts game servers sign in with, which set their place in the Server Browser.",
+            "admin-shield": "Master Shield's settings and Shield Modulators, which test every listed server and ban or flag hostile ones." };
         var cards = ADMINPAGES.slice(1).map(function(p)
         {
             var box = panel(p[1]);
@@ -1062,7 +1177,7 @@
 
     var PAGES = { login: "/account/login", register: "/account/register", reset: "/account/reset", profile: "/account/profile", admin: "/account/admin" };
     var ADMINPAGES = [["admin", "Overview", PAGES.admin], ["admin-accounts", "Accounts", PAGES.admin + "/accounts"], ["admin-controls", "Global lists", PAGES.admin + "/controls"],
-        ["admin-servers", "Server accounts", PAGES.admin + "/servers"]];
+        ["admin-servers", "Server accounts", PAGES.admin + "/servers"], ["admin-shield", "Master Shield", PAGES.admin + "/shield"]];
 
     function go(path) { window.location.replace(path); }
     // where to go once signed in: only ever the server browser or one of these pages, so a link can't send anyone elsewhere
@@ -1163,6 +1278,7 @@
             case "admin-accounts": root.appendChild(adminaccounts(me)); break;
             case "admin-controls": root.appendChild(admincontrols()); break;
             case "admin-servers": root.appendChild(adminservers(me)); break;
+            case "admin-shield": root.appendChild(adminshield()); break;
             default: root.appendChild(adminoverview());
         }
     }
@@ -1175,7 +1291,7 @@
             case "register": return registerpage(me);
             case "reset": return resetpage(me);
             case "profile": return profilepage(me);
-            case "admin": case "admin-accounts": case "admin-controls": case "admin-servers": return adminpage(me);
+            case "admin": case "admin-accounts": case "admin-controls": case "admin-servers": case "admin-shield": return adminpage(me);
         }
         go(me ? PAGES.profile : PAGES.login);
     }

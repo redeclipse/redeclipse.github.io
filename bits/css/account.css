@@ -38,7 +38,7 @@
     opacity: 0.5;
     cursor: default;
 }
-#account input[type=text], #account input[type=search], #account input[type=password], #account input[type=email], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
+#account input[type=text], #account input[type=search], #account input[type=password], #account input[type=email], #account input[type=number], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
     font: inherit;
     padding: 4px 8px;
     color: rgb(255, 255, 255);
@@ -285,6 +285,12 @@
 }
 .account-panel .account-stack {
     max-width: 440px;
+}
+.account-panel .account-stack-wide {
+    max-width: none;
+}
+.account-stack-wide .account-field > input[type=checkbox] {
+    align-self: flex-start;
 }
 @media (max-width: 480px) {
     .account-panel {
@@ -746,4 +752,13 @@
     .account-fields {
         grid-template-columns: 7em minmax(0, 1fr);
     }
+}
+#account textarea.account-code {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9em;
+    line-height: 1.4;
+    resize: vertical;
+    tab-size: 4;
 }
