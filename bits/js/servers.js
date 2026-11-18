@@ -911,7 +911,7 @@
     function openlive(sess)
     {
         rq.signedin = !!sess;
-        var url = master.replace(/^http/, "ws") + "/api/v1/servers/live" + (sess ? "?token=" + encodeURIComponent(sess.token) : "");
+        var url = master.replace(/^http/, "ws") + "/api/v1/live" + (sess ? "?token=" + encodeURIComponent(sess.token) : "");
         try { live = new WebSocket(url); }
         catch(e) { liveclosed(); return; }
         var ws = live, opened = false;
