@@ -960,6 +960,16 @@
                 return true;
             });
         }
+        // its known addresses, the latest first, each with the day it last signed in from there
+        function known(a)
+        {
+            if(a.pending) return null;
+            if(!a.addresses || !a.addresses.length) return el("span", { class: "account-help", text: "None yet" });
+            return el("div", { class: "account-addresses" }, a.addresses.map(function(k)
+            {
+                return el("div", {}, [el("code", { text: k.host }), " " + (k.seen ? day(k.seen) : "")]);
+            }));
+        }
         function state(a)
         {
             if(a.pending) return el("span", { class: "account-tag account-tag-wait", text: "Waiting for its owner until " + day(a.expires) });
@@ -971,7 +981,7 @@
             account.call("GET", "/admin/servers").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The server accounts couldn't be read.");
-                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", "Description", ""], r.json.servers.map(function(a)
+                clear(servers).appendChild(r.json.servers.length ? admintable(["Handle", "Level", "Owner", "Description", "Signed in from", ""], r.json.servers.map(function(a)
                 {
                     var why = outranks(mine, privof(a.flags)) ? null : "Its level is at or above your privilege";
                     var keywhy = why || (!a.owner ? "Give it an owner first" : a.ownergone ? "Give it a new owner first" : null);
@@ -985,6 +995,7 @@
                         el("td", {}, picker),
                         el("td", {}, owner(a, why)),
                         el("td", {}, desc(a, why)),
+                        el("td", {}, known(a)),
                         el("td", {}, el("div", { class: "account-rowactions" }, [
                             el("button", { type: "button", class: "account-quiet", text: a.pending ? "Send again" : "Send a new key", disabled: !!keywhy, title: keywhy, onclick: function()
                             {
