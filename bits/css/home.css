@@ -271,7 +271,8 @@ h4 {
     margin-top: 0;
     margin-bottom: 0.45em;
     text-shadow: 0 0 10px rgba(255, 0, 0, 0.9), 0 0 20px rgba(255, 0, 0, 0.7), 0 0 30px rgba(255, 0, 0, 0.5);
-    font-size: clamp(10px, 2vw, 16px);
+    font-size: clamp(13px, 2vw, 16px);
+    line-height: 1.25;
     width: 100%;
     text-align: center;
 }
@@ -483,6 +484,13 @@ h4 {
 @media screen and (max-width: 540px) {
     .donate-text {
         letter-spacing: 0.1em;
+    }
+    /* every icon on one line */
+    .social-links {
+        font-size: 2.6em;
+    }
+    .social-links a, .social-links a:link, .social-links a:visited {
+        margin: 0 6px;
     }
     h3, h4 {
         font-size: 14px;
