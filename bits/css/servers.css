@@ -124,7 +124,7 @@
 .servers-indicator.offline::before {
     background-color: rgb(255, 60, 60);
 }
-/* The Matchmaking Queue: what it does, how close a match is and who's waiting on the left, its buttons on the right */
+/* The Matchmaking queue: what it does, how close a match is and who's waiting on the left, its buttons on the right */
 .servers-queue {
     display: flex;
     flex-wrap: wrap;

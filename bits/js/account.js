@@ -207,7 +207,7 @@
     };
     Account.prototype.forget = function(host, port) { this.sessions.delete(host + "/" + port); };
 
-    // a session on the master itself, for its live list, where the Matchmaking Queue takes the account's place; a fresh one
+    // a session on the master itself, for its live list, where the Matchmaking queue takes the account's place; a fresh one
     // each time, as one kept would lapse while a socket that opened with it stays open
     Account.prototype.mastersession = function()
     {
@@ -863,7 +863,7 @@
 
     function admincontrols()
     {
-        var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines. Bans from Master Shield, the master's own defence against hostile servers, have the Automatic source and lapse on their own." });
+        var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines. Bans from Master shield, the master's own defence against hostile servers, have the Automatic source and lapse on their own." });
         var add = panel("Add to the global lists"), controls = el("div");
         function load()
         {
@@ -1052,11 +1052,11 @@
         return mail;
     }
 
-    // Master Shield: whether it bans, its limits, its Shield Modulators, and an editor for one at a time with Test
+    // Master shield: whether it bans, its limits, its Shield modulators, and an editor for one at a time with Test
     var SHIELDLIMITS = [["shieldbanlimit", "Bans an hour", "Bans in any hour by all modulators together"],
         ["shieldmodulatorlimit", "Bans an hour each", "Bans in any hour by any one modulator"],
         ["shieldbanshare", "Most of the list, %", "The share of listed servers one pass may ban, though one ban is always allowed"],
-        ["shieldbanlapse", "Days a ban lasts", "Master Shield's bans lapse after this many days"]];
+        ["shieldbanlapse", "Days a ban lasts", "Master shield's bans lapse after this many days"]];
     // two or more words to pick one of, as the level picker: now is the index lit; pick(i, done) calls done() once it's taken
     function wordpicker(label, words, now, pick)
     {
@@ -1082,9 +1082,9 @@
     }
     function adminshield()
     {
-        var status = panel("Master Shield", { full: true, intro: "Tests every listed server against the Shield Modulators below. A modulator only works while hostile servers " +
+        var status = panel("Master shield", { full: true, intro: "Tests every listed server against the Shield modulators below. A modulator only works while hostile servers " +
             "don't know what it looks for, so keep them to administrators." });
-        var mods = panel("Shield Modulators", { full: true, tools: el("button", { type: "button", text: "Add a modulator", onclick: function() { edit(null); } }) });
+        var mods = panel("Shield modulators", { full: true, tools: el("button", { type: "button", text: "Add a modulator", onclick: function() { edit(null); } }) });
         var editor = panel("", { full: true }), list = el("div"), modeslot = el("div"), nums = {};
         editor.hidden = true;
 
@@ -1094,13 +1094,13 @@
             var MODES = ["Only saying what it would ban.", "Banning what its modulators match."], line = el("span", { class: "account-help", text: MODES[js.settings.shielddryrun ? 0 : 1] });
             clear(modeslot).appendChild(el("div", { class: "account-inline" }, [wordpicker("Mode", ["Dry run", "Banning"], js.settings.shielddryrun ? 0 : 1, function(i, done)
             {
-                if(i === 1 && !window.confirm("Turn the dry run off? Master Shield will then ban servers its modulators match.")) return;
+                if(i === 1 && !window.confirm("Turn the dry run off? Master shield will then ban servers its modulators match.")) return;
                 account.call("PATCH", "/admin/shield", { shielddryrun: i ? 0 : 1 }).then(function(r)
                 {
                     if(r.status !== 200) throw failed(r, "It couldn't be changed.");
                     done();
                     line.textContent = MODES[i];
-                    status.say(i ? "Master Shield bans the servers its modulators match." : "Master Shield only says what it would ban.");
+                    status.say(i ? "Master shield bans the servers its modulators match." : "Master shield only says what it would ban.");
                 }).catch(function(err) { status.say(err.message, true); });
             }), line]));
             SHIELDLIMITS.forEach(function(f) { nums[f[0]].value = js.settings[f[0]]; });
@@ -1158,7 +1158,7 @@
         {
             account.call("GET", "/admin/shield").then(function(r)
             {
-                if(r.status !== 200) throw failed(r, "Master Shield couldn't be read.");
+                if(r.status !== 200) throw failed(r, "Master shield couldn't be read.");
                 setmode(r.json);
                 clear(list).appendChild(r.json.modulators.length ? admintable(["Name", "Answers", "State", ""], r.json.modulators.map(row)) :
                     el("p", { class: "account-help", text: "There are no modulators yet." }));
@@ -1234,7 +1234,7 @@
         var about = { "admin-accounts": "Find player accounts, set their privilege, clear display names and remove accounts.",
             "admin-controls": "The bans, mutes, limits, allows, excepts and trusts every linked server gets.",
             "admin-servers": "The accounts game servers sign in with, which set their place in the Server Browser.",
-            "admin-shield": "Master Shield's settings and Shield Modulators, which test every listed server and ban or flag hostile ones." };
+            "admin-shield": "Master shield's settings and Shield modulators, which test every listed server and ban or flag hostile ones." };
         var cards = ADMINPAGES.slice(1).map(function(p)
         {
             var box = panel(p[1]);
@@ -1250,7 +1250,7 @@
 
     var PAGES = { login: "/account/login", register: "/account/register", reset: "/account/reset", profile: "/account/profile", admin: "/account/admin" };
     var ADMINPAGES = [["admin", "Overview", PAGES.admin], ["admin-accounts", "Accounts", PAGES.admin + "/accounts"], ["admin-controls", "Global lists", PAGES.admin + "/controls"],
-        ["admin-servers", "Server accounts", PAGES.admin + "/servers"], ["admin-shield", "Master Shield", PAGES.admin + "/shield"]];
+        ["admin-servers", "Server accounts", PAGES.admin + "/servers"], ["admin-shield", "Master shield", PAGES.admin + "/shield"]];
 
     function go(path) { window.location.replace(path); }
     // where to go once signed in: only ever the server browser or one of these pages, so a link can't send anyone elsewhere

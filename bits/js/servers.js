@@ -688,7 +688,7 @@
     }
 
 
-    // ---- the Matchmaking Queue: people say how small a match they'd play and are sent to a server together once there are enough.
+    // ---- the Matchmaking queue: people say how small a match they'd play and are sent to a server together once there are enough.
     // A place is the account's, wherever it queued from, so the live list opens with a session on the master for the account
     // this browser signed in to; without one, the page shows the queue and how to get an account.
 
@@ -781,8 +781,8 @@
                 break;
             case "unqueued":
                 queuecleared();
-                if(m.reason === "expired") shownotice("Your place in the Matchmaking Queue ran out.");
-                else if(m.reason === "popped") shownotice("You didn't join your match in time, so you've left the Matchmaking Queue.");
+                if(m.reason === "expired") shownotice("Your place in the Matchmaking queue ran out.");
+                else if(m.reason === "popped") shownotice("You didn't join your match in time, so you've left the Matchmaking queue.");
                 break;
             case "pop":
                 if(!m.mine) break;
@@ -847,7 +847,7 @@
         }
         else if(rq.threshold)
         {
-            title = "You're in the Matchmaking Queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
+            title = "You're in the Matchmaking queue for a " + rq.threshold + "+ match" + (mine ? " with " + channelname(mine) + " players" : "");
             help = "Carry on: you'll be asked to join once enough players are ready, your place lasts " + queueminutes() + " more";
             if(mine) counts.push(queuecounts(mine));
             if(rq.expires && rq.expires - now() <= RENEWABLE) actions.push(el("button", { type: "button", class: "servers-queuebutton", text: "Renew", title: "Keep your place for another 30 minutes", onclick: queuerenew }));
@@ -855,7 +855,7 @@
         else
         {
             var can = live && rq.signedin;
-            title = "Matchmaking Queue";
+            title = "Matchmaking queue";
             // signed in to an account the master wouldn't give a session for is a failure, not a missing account
             help = rq.signedin !== false ? "Pick a match size: everyone waiting is sent to a server together" :
                 rq.handle ? "Couldn't sign in to the master as " + rq.handle + ", reload to try again" : null;
