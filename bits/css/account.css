@@ -38,7 +38,7 @@
     opacity: 0.5;
     cursor: default;
 }
-#account input[type=text], #account input[type=search], #account input[type=password], #account input[type=email], #account input[type=number], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
+#account input[type=text], #account input[type=search], #account input[type=password], #account input[type=email], #account input[type=number], #account input[type=url], #account select, #account textarea, .servers-chat input, .servers-mod input, .servers-mod select {
     font: inherit;
     padding: 4px 8px;
     color: rgb(255, 255, 255);
@@ -761,4 +761,28 @@
     line-height: 1.4;
     resize: vertical;
     tab-size: 4;
+}
+.account-panel[hidden] {
+    display: none;
+}
+.account-shieldlimits, .account-shieldnames {
+    display: grid;
+    gap: 12px 16px;
+    margin: 12px 0 4px 0;
+}
+.account-shieldlimits {
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+    max-width: 760px;
+}
+.account-shieldnames {
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    margin: 0;
+}
+#account .account-shieldlimits input, #account .account-shieldnames input {
+    width: 100%;
+    box-sizing: border-box;
+}
+.account-help code {
+    font-size: 95%;
+    white-space: nowrap;
 }

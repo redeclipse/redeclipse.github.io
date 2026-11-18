@@ -1041,118 +1041,178 @@
         return mail;
     }
 
-    // Master Shield: its settings, its Shield Modulators, and Test, which says what a body would do to each listed server
-    var SHIELDSETTINGS = [["shieldbanlimit", "Bans an hour", "Bans in any hour by all modulators together, 0 for no limit."],
-        ["shieldmodulatorlimit", "Bans an hour by one modulator", "0 for no limit."],
-        ["shieldbanshare", "Most of the list at once", "The percentage of listed servers one pass may ban, though one is always allowed; 0 for no limit."],
-        ["shieldbanlapse", "Days a ban lasts", "Master Shield's bans lapse after this many days, 0 to keep them."]];
-    function shieldtest(body, out, box)
+    // Master Shield: whether it bans, its limits, its Shield Modulators, and an editor for one at a time with Test
+    var SHIELDLIMITS = [["shieldbanlimit", "Bans an hour", "Bans in any hour by all modulators together"],
+        ["shieldmodulatorlimit", "Bans an hour each", "Bans in any hour by any one modulator"],
+        ["shieldbanshare", "Most of the list, %", "The share of listed servers one pass may ban, though one ban is always allowed"],
+        ["shieldbanlapse", "Days a ban lasts", "Master Shield's bans lapse after this many days"]];
+    // two or more words to pick one of, as the level picker: now is the index lit; pick(i, done) calls done() once it's taken
+    function wordpicker(label, words, now, pick)
     {
-        account.call("POST", "/admin/shield/test", { body: body }).then(function(r)
+        var buttons = words.map(function(w, i)
         {
-            if(r.status !== 200) throw failed(r, "It couldn't be tested.");
-            var res = r.json.results || [];
-            clear(out);
-            if(res.length) out.appendChild(admintable(["Server", "Map", "Would", "Saying"], res.map(function(x)
+            return el("button", { type: "button", class: "account-pick account-pickword" + (i === now ? " account-pick-on" : ""), "aria-pressed": i === now ? "true" : "false", text: w, onclick: function()
             {
-                return el("tr", {}, [el("td", {}, [el("span", { class: "account-ip", text: x.host + ":" + x.port }), " ", x.desc]), el("td", { text: x.map }),
-                    el("td", { text: x.action === "bad" ? "Neither ban nor flag" : capital(x.action) }), el("td", { text: x.text })]);
-            })));
-            box.say(res.length ? "It would act on " + res.length + " of " + r.json.tested + " listed servers." : "It would leave all " + r.json.tested + " listed servers alone.");
-        }).catch(function(err) { box.say(err.message, true); });
+                if(i === now) return;
+                pick(i, function()
+                {
+                    now = i;
+                    buttons.forEach(function(x, j) { x.className = "account-pick account-pickword" + (j === now ? " account-pick-on" : ""); x.setAttribute("aria-pressed", j === now ? "true" : "false"); });
+                });
+            } });
+        });
+        return el("div", { class: "account-picker", role: "group", "aria-label": label }, buttons);
+    }
+    // what a modulator's link is to, for its label
+    function shieldlinklabel(url)
+    {
+        var m = /github\.com\/([^\/]+)\/([^\/]+)\/(issues\/(\d+)|security\/advisories\/(GHSA-[a-z0-9-]+))$/.exec(url || "");
+        return !m ? "" : m[4] ? m[2] + "#" + m[4] : m[5];
     }
     function adminshield()
     {
-        var settings = panel("Settings", { intro: "While the dry run is on, Master Shield only says what it would ban." });
-        var mods = panel("Shield Modulators", { full: true, intro: "Each modulator's body is CubeScript run in the Sandbox for each listed server, with its details in $srvhost, $srvport, $srvdesc, " +
-            "$srvmap, $srvbranch, $srvversion, $srvhandle, $srvmode, $srvmutators and $srvplayers, a list of names. Its result is what to do: nothing, ban followed by the reason, " +
-            "which every linked server sees, or flag followed by a note for the admin notices. Keep them to administrators: a modulator only works while hostile servers don't know what it looks for." });
-        var add = panel("Add a modulator", { full: true }), list = el("div");
-        var dry = el("input", { type: "checkbox", id: "shield-dryrun" }), nums = {};
-        var fields = [formfield("Dry run", dry, "Say what would be banned without banning.")];
-        SHIELDSETTINGS.forEach(function(f)
+        var status = panel("Master Shield", { full: true, intro: "Tests every listed server against the Shield Modulators below. A modulator only works while hostile servers " +
+            "don't know what it looks for, so keep them to administrators." });
+        var mods = panel("Shield Modulators", { full: true, tools: el("button", { type: "button", text: "Add a modulator", onclick: function() { edit(null); } }) });
+        var editor = panel("", { full: true }), list = el("div"), modeslot = el("div"), nums = {};
+        editor.hidden = true;
+
+        // whether it bans, and its limits
+        function setmode(js)
         {
-            nums[f[0]] = el("input", { type: "number", id: "shield-" + f[0], min: "0", step: "1", required: true });
-            fields.push(formfield(f[1], nums[f[0]], f[2]));
-        });
-        settings.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
+            clear(modeslot).appendChild(el("div", { class: "account-inline" }, [wordpicker("Mode", ["Dry run", "Banning"], js.settings.shielddryrun ? 0 : 1, function(i, done)
+            {
+                if(i === 1 && !window.confirm("Turn the dry run off? Master Shield will then ban servers its modulators match.")) return;
+                account.call("PATCH", "/admin/shield", { shielddryrun: i ? 0 : 1 }).then(function(r)
+                {
+                    if(r.status !== 200) throw failed(r, "It couldn't be changed.");
+                    done();
+                    status.say(i ? "Master Shield bans the servers its modulators match." : "Master Shield only says what it would ban.");
+                }).catch(function(err) { status.say(err.message, true); });
+            }), el("span", { class: "account-help", text: js.settings.shielddryrun ? "Only saying what it would ban." : "Banning what its modulators match." })]));
+            SHIELDLIMITS.forEach(function(f) { nums[f[0]].value = js.settings[f[0]]; });
+        }
+        var limits = el("div", { class: "account-shieldlimits" }, SHIELDLIMITS.map(function(f)
+        {
+            nums[f[0]] = el("input", { type: "number", id: "shield-" + f[0], min: "0", step: "1", required: true, title: f[2] + ", 0 for no limit" });
+            return formfield(f[1], nums[f[0]]);
+        }));
+        status.appendChild(modeslot);
+        status.appendChild(el("form", { class: "account-shieldlimitform", onsubmit: function(e)
         {
             e.preventDefault();
-            var body = { shielddryrun: dry.checked ? 1 : 0 };
-            SHIELDSETTINGS.forEach(function(f) { body[f[0]] = parseInt(nums[f[0]].value, 10) || 0; });
+            var body = {};
+            SHIELDLIMITS.forEach(function(f) { body[f[0]] = parseInt(nums[f[0]].value, 10) || 0; });
             account.call("PATCH", "/admin/shield", body).then(function(r)
             {
-                if(r.status !== 200) throw failed(r, "The settings couldn't be saved.");
-                show(r.json);
-                settings.say("Saved.");
-            }).catch(function(err) { settings.say(err.message, true); });
-        } }, fields.concat([actions(el("button", { type: "submit", text: "Save" }))])));
-        function editor(id, value) { return el("textarea", { id: id, class: "account-code", spellcheck: "false", rows: "14", text: value || "" }); }
-        function modulator(m)
+                if(r.status !== 200) throw failed(r, "The limits couldn't be saved.");
+                setmode(r.json);
+                status.say("The limits are saved.");
+            }).catch(function(err) { status.say(err.message, true); });
+        } }, [limits, el("p", { class: "account-help", text: "0 is no limit. Past a limit, a match is only reported." }), actions(el("button", { type: "submit", text: "Save limits" }))]));
+
+        // the modulators
+        function row(m)
         {
-            var box = panel(m.name, { full: true }), on = el("input", { type: "checkbox", id: "shield-on-" + m.name, checked: !!m.enabled });
-            var body = editor("shield-body-" + m.name, m.body), out = el("div");
-            function save(enabled)
-            {
-                account.call("PUT", "/admin/shield/modulators/" + encodeURIComponent(m.name), { body: body.value, enabled: enabled }).then(function(r)
+            var label = shieldlinklabel(m.link);
+            return el("tr", {}, [
+                el("td", {}, el("strong", { text: m.name })),
+                el("td", {}, label ? el("a", { href: m.link, target: "_blank", rel: "noopener", text: label }) : el("span", { class: "account-help", text: "None" })),
+                el("td", {}, wordpicker("State", ["On", "Off"], m.enabled ? 0 : 1, function(i, done)
                 {
-                    if(r.status !== 200 && r.status !== 201) throw failed(r, "It couldn't be saved.");
-                    m.body = r.json.body;
-                    m.enabled = r.json.enabled;
-                    box.say(m.enabled ? "Saved, and it's on." : "Saved, and it's off.");
-                }).catch(function(err) { on.checked = !!m.enabled; box.say(err.message, true); });
-            }
-            on.onchange = function() { save(on.checked); };
-            box.appendChild(el("div", { class: "account-stack account-stack-wide" }, [formfield("On", on, "Off keeps the modulator without running it."), formfield("Body", body), actions([
-                el("button", { type: "button", text: "Save", onclick: function() { save(on.checked); } }),
-                el("button", { type: "button", text: "Test", onclick: function() { shieldtest(body.value, out, box); } }),
-                removebutton("Remove", function()
-                {
-                    if(!window.confirm("Remove the modulator " + m.name + "?")) return;
-                    account.call("DELETE", "/admin/shield/modulators/" + encodeURIComponent(m.name)).then(function(r)
+                    account.call("PATCH", "/admin/shield/modulators/" + m.id, { enabled: !i }).then(function(r)
                     {
-                        if(r.status !== 204) throw failed(r, "It couldn't be removed.");
-                        mods.say(m.name + " was removed.");
-                        load();
-                    }).catch(function(err) { box.say(err.message, true); });
-                })]), out]));
-            return box;
-        }
-        function show(js)
-        {
-            dry.checked = !!js.settings.shielddryrun;
-            SHIELDSETTINGS.forEach(function(f) { nums[f[0]].value = js.settings[f[0]]; });
+                        if(r.status !== 200) throw failed(r, "It couldn't be changed.");
+                        m.enabled = r.json.enabled;
+                        done();
+                        mods.say(m.name + (m.enabled ? " is on." : " is off."));
+                    }).catch(function(err) { mods.say(err.message, true); });
+                })),
+                el("td", {}, el("div", { class: "account-rowactions" }, [el("button", { type: "button", text: "Edit", onclick: function() { edit(m); } }),
+                    removebutton("Remove", function()
+                    {
+                        if(!window.confirm("Remove the modulator " + m.name + "?")) return;
+                        account.call("DELETE", "/admin/shield/modulators/" + m.id).then(function(r)
+                        {
+                            if(r.status !== 204) throw failed(r, "It couldn't be removed.");
+                            mods.say(m.name + " was removed.");
+                            if(editing && editing.id === m.id) close();
+                            load();
+                        }).catch(function(err) { mods.say(err.message, true); });
+                    })]))]);
         }
         function load()
         {
             account.call("GET", "/admin/shield").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "Master Shield couldn't be read.");
-                show(r.json);
-                clear(list);
-                if(!r.json.modulators.length) list.appendChild(el("p", { class: "account-help", text: "There are no modulators." }));
-                r.json.modulators.forEach(function(m) { list.appendChild(modulator(m)); });
-            }).catch(function(err) { mods.say(err.message, true); });
+                setmode(r.json);
+                clear(list).appendChild(r.json.modulators.length ? admintable(["Name", "Answers", "State", ""], r.json.modulators.map(row)) :
+                    el("p", { class: "account-help", text: "There are no modulators yet." }));
+            }).catch(function(err) { status.say(err.message, true); });
         }
         mods.appendChild(list);
-        var name = el("input", { type: "text", id: "shield-name", spellcheck: "false", required: true, maxlength: "32", pattern: "[A-Za-z0-9_\\-]+" });
-        var body = editor("shield-body"), out = el("div");
-        add.appendChild(el("form", { class: "account-stack account-stack-wide", onsubmit: function(e)
+
+        // one modulator at a time: its name, link and body, and Test
+        var editing = null, results = el("div");
+        var ename = el("input", { type: "text", id: "shield-name", maxlength: "64", required: true });
+        var elink = el("input", { type: "url", id: "shield-link", spellcheck: "false", placeholder: "https://github.com/redeclipse/base/security/advisories/GHSA-..." });
+        var ebody = el("textarea", { id: "shield-body", class: "account-code", spellcheck: "false", rows: "18", required: true });
+        var heading = editor.querySelector("h2");
+        function close() { editing = null; editor.hidden = true; clear(results); editor.say(""); }
+        function edit(m)
+        {
+            editing = m;
+            heading.textContent = m ? "Edit " + m.name : "Add a modulator";
+            ename.value = m ? m.name : "";
+            elink.value = m ? m.link : "";
+            ebody.value = m ? m.body : "";
+            clear(results);
+            editor.say("");
+            editor.hidden = false;
+            editor.scrollIntoView({ behavior: "smooth", block: "start" });
+            ename.focus();
+        }
+        function test()
+        {
+            account.call("POST", "/admin/shield/test", { body: ebody.value }).then(function(r)
+            {
+                if(r.status !== 200) throw failed(r, "It couldn't be tested.");
+                var res = r.json.results || [];
+                clear(results);
+                if(res.length) results.appendChild(admintable(["Server", "Map", "Would", "Saying"], res.map(function(x)
+                {
+                    return el("tr", {}, [el("td", {}, [el("span", { class: "account-ip", text: x.host + ":" + x.port }), el("div", { class: "account-help", text: x.desc })]),
+                        el("td", { text: x.map }), el("td", { text: x.action === "bad" ? "Neither" : capital(x.action) }), el("td", { text: x.text })]);
+                })));
+                editor.say(res.length ? "It would act on " + res.length + " of the " + r.json.tested + " listed servers." : "It would leave all " + r.json.tested + " listed servers alone.");
+            }).catch(function(err) { editor.say(err.message, true); });
+        }
+        editor.appendChild(el("form", { class: "account-stack account-stack-wide", onsubmit: function(e)
         {
             e.preventDefault();
-            var n = name.value.trim();
-            account.call("PUT", "/admin/shield/modulators/" + encodeURIComponent(n), { body: body.value, enabled: true }).then(function(r)
+            var fields = { name: ename.value.trim(), link: elink.value.trim(), body: ebody.value };
+            var call = editing ? account.call("PATCH", "/admin/shield/modulators/" + editing.id, fields) : account.call("POST", "/admin/shield/modulators", Object.assign({ enabled: true }, fields));
+            call.then(function(r)
             {
-                if(r.status !== 201 && r.status !== 200) throw failed(r, "It couldn't be added.");
-                add.say(n + " was added, and it's on.");
-                name.value = body.value = "";
-                clear(out);
+                if(r.status !== 200 && r.status !== 201) throw failed(r, "It couldn't be saved.");
+                mods.say(r.json.name + (r.status === 201 ? " was added, and it's on." : " was saved."));
+                close();
                 load();
-            }).catch(function(err) { add.say(err.message, true); });
-        } }, [formfield("Name", name, "Up to 32 letters, digits, - and _, shown in the master's log and the admin notices."), formfield("Body", body), actions([
-            el("button", { type: "submit", text: "Add" }), el("button", { type: "button", text: "Test", onclick: function() { shieldtest(body.value, out, add); } })]), out]));
+            }).catch(function(err) { editor.say(err.message, true); });
+        } }, [
+            el("div", { class: "account-shieldnames" }, [formfield("Name", ename, "Shown in the master's log and the admin notices, such as Map Escape Exploit."),
+                formfield("Answers", elink, "The GitHub issue or security advisory it answers, if any.")]),
+            formfield("Body", ebody, ["CubeScript run in the Sandbox for each listed server, with ", el("code", { text: "$srvhost" }), ", ", el("code", { text: "$srvport" }), ", ",
+                el("code", { text: "$srvdesc" }), ", ", el("code", { text: "$srvmap" }), ", ", el("code", { text: "$srvbranch" }), ", ", el("code", { text: "$srvversion" }), ", ",
+                el("code", { text: "$srvhandle" }), ", ", el("code", { text: "$srvmode" }), ", ", el("code", { text: "$srvmutators" }), " and ", el("code", { text: "$srvplayers" }),
+                " (a list of names). Its result is what to do: nothing, ", el("code", { text: "ban <reason>" }), ", whose reason every linked server sees, or ",
+                el("code", { text: "flag <note>" }), " for the admin notices."]),
+            actions([el("button", { type: "submit", class: "account-primary", text: "Save" }), el("button", { type: "button", text: "Test on the list", onclick: test }),
+                el("button", { type: "button", text: "Cancel", onclick: close })]),
+            results]));
         load();
-        return el("div", { class: "account-panels" }, [settings, mods, add]);
+        return el("div", { class: "account-panels" }, [status, mods, editor]);
     }
 
     // the overview: what each page is for, and the mail test
