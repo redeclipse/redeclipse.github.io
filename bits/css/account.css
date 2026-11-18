@@ -117,6 +117,12 @@
     display: inline-block;
     padding: 8px 0 6px 0;
     color: var(--account-muted);
+    white-space: nowrap;
+}
+/* a section's own pages stay on one line, scrolling sideways on a phone */
+#account .account-subbar .account-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
 #account .account-subbar .account-tabs a:hover, #account .account-subbar .account-tabs a:focus, #account .account-subbar .account-tabs a.account-tab-on {
     color: rgb(255, 255, 255);
@@ -832,7 +838,7 @@
     margin-top: auto;
 }
 /* one line of the key, scrolling sideways rather than breaking it */
-#account code.account-copyline, .account-cfg, .account-scroll {
+#account code.account-copyline, .account-cfg, .account-scroll, .account-subbar .account-tabs {
     scrollbar-width: thin;
     scrollbar-color: var(--account-input) transparent;
 }
