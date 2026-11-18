@@ -677,7 +677,7 @@
     {
         var who = panel("Account"), linked = panel("Linked identities"), mail = panel("Change your email address"), gone = panel("Delete your account", { danger: true,
             intro: "This can't be undone: its key stops working everywhere, and its handle is free for anyone to register." });
-        var display = el("input", { type: "text", id: "account-display", maxlength: 64, value: mine.displayname || "", placeholder: "From your in-game or Discord name" });
+        var display = el("input", { type: "text", id: "account-display", maxlength: 64, value: mine.displayname || "", placeholder: "Your in-game or Discord name" });
         var save = el("button", { type: "button", text: "Save", onclick: function()
         {
             save.disabled = true;
