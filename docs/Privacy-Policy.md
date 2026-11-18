@@ -62,9 +62,14 @@ Red Eclipse integrates with Discord in two ways:
     the sender's Discord display name and role badge.
   - The master server's administrators get its admin notices in a private
     channel of the Red Eclipse Discord server: changes to accounts, server
-    accounts and the global lists, and the master's automatic bans of hostile
-    game servers. These can include account handles and the IP addresses on
-    the global lists.
+    accounts and the global lists, account registrations, failed sign-ins,
+    game servers that couldn't be listed or signed in from a new address,
+    Matchmaking queue pops, and the master's automatic bans of hostile game
+    servers. These can include account handles, linked Steam and Discord
+    account IDs, and the IP addresses of the players and servers involved,
+    such as the address an account was registered or signed in from. They
+    never include email addresses. The notices stay in that channel until an
+    administrator removes them.
 
 ### Steam Integration
 
@@ -103,8 +108,8 @@ Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
     bodies, query strings, authentication tokens, or challenge answers, and
     writes no relayed payloads to disk.
 
-* Matchmaking Queue:
-  - The Matchmaking Queue lets you wait for enough players for a match from the game,
+* Matchmaking queue:
+  - The Matchmaking queue lets you wait for enough players for a match from the game,
     the website or Discord, and needs an account (see below). Each entry holds
     your account's handle, how many players you want, when it was made and when
     it ends, and where you queued from (the game, the website or Discord).
@@ -173,7 +178,7 @@ Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
 
 * Server and relay logs are rotated and pruned automatically on a regular
   schedule.
-* Matchmaking Queue entries are kept only while they last, and removed from the saved
+* Matchmaking queue entries are kept only while they last, and removed from the saved
   queue as soon as they end.
 * Registrations that aren't activated are removed after seven days, and key
   reset and email change links stop working after 24 hours.

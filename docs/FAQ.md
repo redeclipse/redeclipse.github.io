@@ -93,7 +93,7 @@ L %t/discord-ipc-0 - - - - app/com.discordapp.Discord/discord-ipc-0
 
 ## How do I find people to play with?
 
-Join the **Matchmaking Queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
+Join the **Matchmaking queue**. Say how small a match you'd play, 2+, 4+, 6+ or 8+, then carry on with whatever you're doing. Once enough people are waiting, everyone is sent to the same server together, and anyone already on that server counts towards the match, so a server with a couple of players on it fills first.
 
 The queue needs a Red Eclipse account, which only takes an email: register one on the Account page of the game's Player menu, or on the [website](/account/register). Your place is your account's, so you can join from one place and leave or renew from another, and everyone can see who's waiting.
 

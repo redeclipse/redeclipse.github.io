@@ -21,7 +21,7 @@ This guide covers what you can call and what comes back. How it is built inside 
 - **Every route is below `/api/v1`.** The rest of each server's address space is left for web pages, such as the master's [bounce links](#join-links-and-bounce-links).
 - **Most sites only need the master.** A browser page on https can't reach a game server that has no CA-signed certificate, and most don't have one. The master's relay reaches every server holding a link to it, over https, with one code path.
 - **Reading is open to everyone.** Anything above that, such as moderation, needs a token and an encrypted connection.
-- **The master holds the Matchmaking Queue,** where people with an account wait for enough others to play with, and sends them to a server together. See [The Matchmaking Queue](#the-matchmaking-queue).
+- **The master holds the Matchmaking queue,** where people with an account wait for enough others to play with, and sends them to a server together. See [The Matchmaking queue](#the-matchmaking-queue).
 - **People can stay signed in for weeks** through a remembered sign-in on the master, which gets them a session on any server that takes one, without your site keeping their private key. See [Remembered sign-ins](#remembered-sign-ins).
 - **The master registers accounts,** from the game or a website, and lets their owners reset a lost key, change their email, link Steam and Discord and pick a display name. See [Accounts](#accounts).
 
@@ -297,7 +297,7 @@ Errors:
 | 429 | Too many failed attempts, or more than 8 sessions waiting on servers for one sign-in |
 | 501 | `this server doesn't support sessions from the master`: an older server, which can't be signed in on |
 
-`POST /api/v1/signin/session`, with no server named, gives a session on the master's own Web API, in the same form without `local`. Open the [live list](#websocket-apiv1live) with it to queue as the account in the [Matchmaking Queue](#the-matchmaking-queue). It ends with the remembered sign-in that made it, and lapses unused like any other session.
+`POST /api/v1/signin/session`, with no server named, gives a session on the master's own Web API, in the same form without `local`. Open the [live list](#websocket-apiv1live) with it to queue as the account in the [Matchmaking queue](#the-matchmaking-queue). It ends with the remembered sign-in that made it, and lapses unused like any other session.
 | 502, 504 | The server's link closed, or it didn't answer within 10 seconds |
 
 ### Failed attempts
@@ -390,7 +390,7 @@ Operators can add routes of their own outside `/api`, and those appear in the in
 | `players`, `spectators`, `bots` | Human players in the match, spectators, and bots |
 | `maxplayers` | The player slots and the spectator slots the server sets aside, together; one with no spectator slots set aside still lets a few more connect to watch |
 | `playerslots` | How many may play at once; spectators don't take a player slot. Older servers don't send it |
-| `reserved` | Player slots the server is keeping for people the [Matchmaking Queue](#the-matchmaking-queue) sent there, which nobody else can play in. Older servers don't send it |
+| `reserved` | Player slots the server is keeping for people the [Matchmaking queue](#the-matchmaking-queue) sent there, which nobody else can play in. Older servers don't send it |
 | `connections` | How many more people can connect right now, to play or watch. Older servers don't send it |
 | `modeid`, `mutators` | The mode's number, and its mutators as bit flags (see [Modes and mutators](#modes-and-mutators)) |
 | `mastermode` | One of `open`, `veto`, `locked`, `private`, `password` |
@@ -709,7 +709,7 @@ The master also answers the game server routes above for itself, and its `/api/v
 | `relay` | 0 when the server isn't linked to the master |
 | `bridge` | As in [GET /status](#get-status), present only for linked servers new enough to say; treat it missing as 0 |
 | `fingerprint` | Present when the server serves HTTPS |
-| `channel` | Present when the server takes [Matchmaking Queue](#the-matchmaking-queue) pops: `devel` or `release` |
+| `channel` | Present when the server takes [Matchmaking queue](#the-matchmaking-queue) pops: `devel` or `release` |
 | `status` | What the server is playing, when the master knows; see below |
 
 For servers linked to the master, `status` is what the server reports about its match:
@@ -816,23 +816,38 @@ const usual = sums.map((row, d) => row.map((s, hr) => counts[d][hr] ? s / counts
 
 The live list sends these messages:
 
-- **On connect:** a `snapshot` with the same fields as `GET /servers`, its `time` included, then a `queue` event (see [The Matchmaking Queue](#the-matchmaking-queue)).
+- **On connect:** a `snapshot` with the same fields as `GET /servers`, its `time` included, then a `queue` event (see [The Matchmaking queue](#the-matchmaking-queue)).
 - **When a server appears or changes:** `{"event": "add" | "update", "time": ..., "server": {...}}`, with one entry as in the list.
 - **When a server goes:** `{"event": "remove", "host": "...", "port": ...}`.
 
-Changes are checked once a second. All you can say to it is about the Matchmaking Queue, below; anything else is ignored. A token, as `?token=` on the URL, is read as the socket opens and sets, for as long as it stays open, which account the socket queues as and what it sees of the queue. A session on the master, [from a remembered sign-in](#sessions-from-a-remembered-sign-in), is one.
+Changes are checked once a second. All you can say to it is about the Matchmaking queue, below; anything else is ignored. A token, as `?token=` on the URL, is read as the socket opens and sets, for as long as it stays open, which account the socket queues as and what it sees of the queue. A session on the master, [from a remembered sign-in](#sessions-from-a-remembered-sign-in), is one.
 
 `/api/v1/servers/live`, its old path, is the same socket and stays for older games and pages. Use `/api/v1/live` in anything new.
 
 #### Admin notices
 
-A socket whose token is at the master's `masternoticelock` (administrator by default) also gets the master's admin notices: what its administrators should see, such as Master Shield's bans, control entries added or removed, and accounts and server accounts changed or removed.
+A socket whose token is at the master's `masternoticelock` (administrator by default) also gets the master's admin notices: what its administrators should see, and act on, with the addresses of the players and servers involved.
 
 ```json
-{"event": "notice", "id": 1794974050, "time": 1794974050, "kind": "shield", "text": "..."}
+{"event": "notice", "id": 1794974050, "time": 1794974050, "kind": "shield", "level": "warning", "text": "..."}
 ```
 
-`kind` is `shield`, `control`, `account` or `serveraccount`, and `text` is the line the master puts in its own log. Ids only go up, across restarts too. The master keeps its last 100, and `?since=<id>` with the token sends every kept one after that id as the socket opens, so a bot that was away can catch up on what it missed.
+`kind` is one of:
+
+- `shield`: Master shield's bans, flags, held back bans and lapsed bans, each with the server's description, version, branch, server account and player count, and changes to its modulators and settings.
+- `control`: control entries added, with their reason, or removed, with who added them, when and why.
+- `account`: registrations, activations and purges, key resets, email changes, display names, Steam and Discord links and unlinks, flag changes and removals, each with the address it came from and the account's linked Steam and Discord accounts where it matters.
+- `serveraccount`: server accounts made, given, changed, sent a new link or removed, and a server account signing in for the first time or from a host it hasn't used before (its known addresses, below).
+- `signin`: failed sign-ins, of players on a server with both their address and the server's, of server accounts, and of remembered sign-ins on the website.
+- `listing`: servers that weren't listed, as they gave another address, were too old or didn't answer pings, and peers sending a command the master doesn't know.
+- `master`: the master's own files that couldn't be loaded or saved, and mail that couldn't be sent.
+- `queue`: a Matchmaking queue pop, with the server and each account sent, where it queued from and its address.
+
+`level` is `info`, `warning` for something to look into, or `error` for something wrong with the master itself. A master older than the field sends none, which is `info`. `text` is the line the master puts in its own log, never with an email address and at most 1500 characters, cut short with `...`.
+
+What can happen over and over, such as failed sign-ins and servers that keep failing to be listed, is folded: the first for each account or server is sent at once, and the rest within `masternoticefold` seconds (an hour by default) come as one notice when that time is up, saying how many there were and the last of them. Every one still goes in the master's log.
+
+Ids only go up, across restarts too. The master keeps its last 100, and `?since=<id>` with the token sends every kept one after that id as the socket opens, so a bot that was away can catch up on what it missed.
 
 If your visitors' networks block port 28888, fall back to polling `GET /servers` with `If-None-Match`, no more often than every 5 seconds.
 
@@ -848,9 +863,9 @@ https://play.redeclipse.net:28888/join/<host>/<port>
 
 It's a web page, not part of `/api/v1`. For a server on the list it shows the server's description, sends the browser on to the join link, and offers a download link for anyone without the game. For anything else it answers `404` with a page that says so, so the master's address can't be used to send people to an unlisted server.
 
-### The Matchmaking Queue
+### The Matchmaking queue
 
-The Matchmaking Queue is for people who'd play if enough others turned up. It has a **channel** for each version the master's operator names, `devel` with `masterverdevel` and `release` with `masterverrelease`, and a channel set to `""` doesn't exist. A channel's servers are the linked ones on its version that run the newest protocol any of them does, which is what an up to date game of that version plays, and each lists that `channel`. Everything below happens within one channel. Each entry has a **Threshold**: the fewest people it will play with, 2, 4, 6 or 8, counting everyone already on the server it would be sent to, spectators included. Once some group's Thresholds are all met, the master **pops** them: it sends them all to one server and takes them out of the queue.
+The Matchmaking queue is for people who'd play if enough others turned up. It has a **channel** for each version the master's operator names, `devel` with `masterverdevel` and `release` with `masterverrelease`, and a channel set to `""` doesn't exist. A channel's servers are the linked ones on its version that run the newest protocol any of them does, which is what an up to date game of that version plays, and each lists that `channel`. Everything below happens within one channel. Each entry has a **Threshold**: the fewest people it will play with, 2, 4, 6 or 8, counting everyone already on the server it would be sent to, spectators included. Once some group's Thresholds are all met, the master **pops** them: it sends them all to one server and takes them out of the queue.
 
 - **Who goes:** the largest group, lowest Thresholds first, whose Thresholds are all met by the group and those already on the server.
 - **Where:** a listed server linked to the master, on the current game version, open, and with a player slot for each of them. Spectators don't take a player slot, but slots kept for an earlier pop do, and spectators still take one of the server's `connections`; a server too old to report its `playerslots` counts everyone on it against `maxplayers` instead. Of those, the one taking the largest group, then the one with the most people on, then the highest `priority`.
@@ -1040,17 +1055,17 @@ The master has no console, so its administrators manage it here, signed in with 
 | `GET /api/v1/signin/admin/accounts?q=<text>&limit=<n>` | Accounts whose handle or email holds `q`: `{"total", "accounts": [{"handle", "flags", "email", "steamid", "discord", "displayname", "pubkey"}]}` |
 | `PATCH /api/v1/signin/admin/accounts/<handle>` | `{"flags": "<letters>"}` changes its standing, which ends its sign-ins. `{"displayname": "<name>"}` replaces or clears its display name, which takes `masterdisplaylock` (moderator by default) |
 | `DELETE /api/v1/signin/admin/accounts/<handle>` | Removes it |
-| `GET /api/v1/signin/admin/servers?q=<text>&limit=<n>` | Server accounts whose handle, description or owner holds `q`: `{"total", "servers": [...]}`, each `{"handle", "flags", "desc", "owner", "pubkey"}`, with `ownergone` when a set `owner`'s account was deleted, empty `owner` for one made before server accounts had owners, and `newkey`, a Unix time, while a new key's link is out. One still waiting for its owner is `{"handle", "flags", "desc", "owner", "pending": true, "expires"}` |
+| `GET /api/v1/signin/admin/servers?q=<text>&limit=<n>` | Server accounts whose handle, description or owner holds `q`: `{"total", "servers": [...]}`, each `{"handle", "flags", "desc", "owner", "pubkey"}`, with `ownergone` when a set `owner`'s account was deleted, empty `owner` for one made before server accounts had owners, `newkey`, a Unix time, while a new key's link is out, and `addresses`, its known addresses: the hosts it signed in from, `[{"host", "seen"}]` with the latest first and `seen` the Unix time it last signed in from there (saved at most once a day, so a restart can set it back by up to a day), missing for one that hasn't signed in since the master started keeping them. A new key starts the list again. One still waiting for its owner is `{"handle", "flags", "desc", "owner", "pending": true, "expires"}` |
 | `POST /api/v1/signin/admin/servers` | `{"handle", "flags", "owner", "desc"}` makes one for the owner's account, which is mailed a link to get its key (202, as it's then waiting). `flags` is its level, and `desc` is optional |
 | `PATCH /api/v1/signin/admin/servers/<handle>` | `{"flags": "<level>"}` changes its level, which servers signed in with it get straight away. `{"owner": "<handle>"}` gives it to another account without sending a new key when one is already active; one still waiting has its link sent to the new owner instead, the old one no longer working, and a new key's link already sent to the old owner stops working. `{"desc": "<text>"}` changes or clears its description |
 | `POST /api/v1/signin/admin/servers/<handle>/key` | Mails the owner a fresh link: a new key for one that's there, whose old key works until it's followed, or the link again for one still waiting (202) |
 | `DELETE /api/v1/signin/admin/servers/<handle>` | Removes one, or withdraws one still waiting |
-| `GET /api/v1/signin/admin/controls` | The master's own control entries, which it sends to every linked server: `{"controls": [{"id", "type", "address", "reason"}]}`, with `source` (`player` for an administrator's, `automatic` for Master Shield's), `by` (the administrator's handle) and `added` (a Unix time) when the master knows them. Master Shield's bans lapse after the master's `shieldbanlapse` days |
+| `GET /api/v1/signin/admin/controls` | The master's own control entries, which it sends to every linked server: `{"controls": [{"id", "type", "address", "reason"}]}`, with `source` (`player` for an administrator's, `automatic` for Master shield's), `by` (the administrator's handle) and `added` (a Unix time) when the master knows them. Master shield's bans lapse after the master's `shieldbanlapse` days |
 | `POST /api/v1/signin/admin/controls` | `{"type": "ban", "address": "1.2.3", "reason": "..."}` adds one. `type` is `allow`, `ban`, `mute`, `limit`, `except` or `trust`; `address` is up to four numbers, fewer for a range |
 | `DELETE /api/v1/signin/admin/controls/<id>` | Removes one |
-| `GET /api/v1/signin/admin/shield` | Master Shield, at the master's `mastershieldlock` (administrator by default): `{"settings": {"shielddryrun", "shieldbanlimit", "shieldmodulatorlimit", "shieldbanshare", "shieldbanlapse"}, "modulators": [{"id", "name", "link", "enabled", "body"}]}`. An `id` lasts until the master restarts or rehashes |
+| `GET /api/v1/signin/admin/shield` | Master shield, at the master's `mastershieldlock` (administrator by default): `{"settings": {"shielddryrun", "shieldbanlimit", "shieldmodulatorlimit", "shieldbanshare", "shieldbanlapse"}, "modulators": [{"id", "name", "link", "enabled", "body"}]}`. An `id` lasts until the master restarts or rehashes |
 | `PATCH /api/v1/signin/admin/shield` | Any of the settings, such as `{"shielddryrun": 0}`; answers as `GET` |
-| `POST /api/v1/signin/admin/shield/modulators` | `{"name": "Map Escape Exploit", "link": "...", "body": "...", "enabled": true}` adds a Shield Modulator (201). Its name is up to 64 characters of plain text, no two alike; its optional link is the GitHub issue or security advisory it answers; its body is CubeScript run in the Sandbox with the server's details in `srvhost`, `srvport`, `srvdesc`, `srvmap`, `srvbranch`, `srvversion`, `srvhandle`, `srvmode`, `srvmutators` and `srvplayers`, and its result is nothing, `ban <reason>` or `flag <note>` |
+| `POST /api/v1/signin/admin/shield/modulators` | `{"name": "Map Escape Exploit", "link": "...", "body": "...", "enabled": true}` adds a Shield modulator (201). Its name is up to 64 characters of plain text, no two alike; its optional link is the GitHub issue or security advisory it answers; its body is CubeScript run in the Sandbox with the server's details in `srvhost`, `srvport`, `srvdesc`, `srvmap`, `srvbranch`, `srvversion`, `srvhandle`, `srvmode`, `srvmutators` and `srvplayers`, and its result is nothing, `ban <reason>` or `flag <note>` |
 | `PATCH /api/v1/signin/admin/shield/modulators/<id>` | Any of `name`, `link`, `body` and `enabled` |
 | `DELETE /api/v1/signin/admin/shield/modulators/<id>` | Removes one |
 | `POST /api/v1/signin/admin/shield/test` | `{"body": "..."}` runs a body on every listed server without acting on what it says: `{"tested", "results": [{"host", "port", "desc", "map", "action", "text"}]}`, `action` being `ban`, `flag` or `bad` for a result that's neither |
