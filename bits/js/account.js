@@ -863,16 +863,18 @@
 
     function admincontrols()
     {
-        var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines." });
+        var list = panel("Global lists", { full: true, intro: "Every linked server gets these, and a server's own excepts don't lift them: only an except here does. Global bans are a last resort: see the Multiplayer Guidelines. Bans from Master Shield, the master's own defence against hostile servers, have the Automatic source and lapse on their own." });
         var add = panel("Add to the global lists"), controls = el("div");
         function load()
         {
             account.call("GET", "/admin/controls").then(function(r)
             {
                 if(r.status !== 200) throw failed(r, "The global lists couldn't be read.");
-                clear(controls).appendChild(r.json.controls.length ? admintable(["Type", "Address", "Reason", ""], r.json.controls.map(function(c)
+                clear(controls).appendChild(r.json.controls.length ? admintable(["Type", "Address", "Reason", "Source", "Added", ""], r.json.controls.map(function(c)
                 {
-                    return el("tr", {}, [el("td", { text: capital(c.type) }), el("td", {}, el("span", { class: "account-ip", text: c.address })), el("td", { text: c.reason }), el("td", {}, removebutton("Remove", function()
+                    var source = c.source ? capital(c.source) + (c.by ? " (" + c.by + ")" : "") : "";
+                    return el("tr", {}, [el("td", { text: capital(c.type) }), el("td", {}, el("span", { class: "account-ip", text: c.address })), el("td", { text: c.reason }),
+                        el("td", { text: source }), el("td", { text: c.added ? day(c.added) : "" }), el("td", {}, removebutton("Remove", function()
                     {
                         account.call("DELETE", "/admin/controls/" + c.id).then(function(r) { if(r.status !== 204) throw failed(r, "It couldn't be removed."); list.say(c.address + " is off the " + c.type + " list."); load(); }).catch(function(err) { list.say(err.message, true); });
                     }))]);
