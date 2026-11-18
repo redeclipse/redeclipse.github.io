@@ -64,7 +64,7 @@ ws.onmessage = (e) =>
 ### Keep a server list up to date
 
 ```js
-const live = new WebSocket("wss://play.redeclipse.net:28888/api/v1/servers/live");
+const live = new WebSocket("wss://play.redeclipse.net:28888/api/v1/live");
 live.onmessage = (e) =>
 {
     const ev = JSON.parse(e.data);
@@ -297,7 +297,7 @@ Errors:
 | 429 | Too many failed attempts, or more than 8 sessions waiting on servers for one sign-in |
 | 501 | `this server doesn't support sessions from the master`: an older server, which can't be signed in on |
 
-`POST /api/v1/signin/session`, with no server named, gives a session on the master's own Web API, in the same form without `local`. Open the [live list](#websocket-apiv1serverslive) with it to queue as the account in the [Matchmaking Queue](#the-matchmaking-queue). It ends with the remembered sign-in that made it, and lapses unused like any other session.
+`POST /api/v1/signin/session`, with no server named, gives a session on the master's own Web API, in the same form without `local`. Open the [live list](#websocket-apiv1live) with it to queue as the account in the [Matchmaking Queue](#the-matchmaking-queue). It ends with the remembered sign-in that made it, and lapses unused like any other session.
 | 502, 504 | The server's link closed, or it didn't answer within 10 seconds |
 
 ### Failed attempts
@@ -812,7 +812,7 @@ h.peaks.forEach((p, i) => {
 const usual = sums.map((row, d) => row.map((s, hr) => counts[d][hr] ? s / counts[d][hr] : null));
 ```
 
-### WebSocket /api/v1/servers/live
+### WebSocket /api/v1/live
 
 The live list sends these messages:
 
@@ -821,6 +821,18 @@ The live list sends these messages:
 - **When a server goes:** `{"event": "remove", "host": "...", "port": ...}`.
 
 Changes are checked once a second. All you can say to it is about the Matchmaking Queue, below; anything else is ignored. A token, as `?token=` on the URL, is read as the socket opens and sets, for as long as it stays open, which account the socket queues as and what it sees of the queue. A session on the master, [from a remembered sign-in](#sessions-from-a-remembered-sign-in), is one.
+
+`/api/v1/servers/live`, its old path, is the same socket and stays for older games and pages. Use `/api/v1/live` in anything new.
+
+#### Admin notices
+
+A socket whose token is at the master's `masternoticelock` (administrator by default) also gets the master's admin notices: what its administrators should see, such as Master Shield's bans, control entries added or removed, and accounts and server accounts changed or removed.
+
+```json
+{"event": "notice", "id": 1794974050, "time": 1794974050, "kind": "shield", "text": "..."}
+```
+
+`kind` is `shield`, `control`, `account` or `serveraccount`, and `text` is the line the master puts in its own log. Ids only go up, across restarts too. The master keeps its last 100, and `?since=<id>` with the token sends every kept one after that id as the socket opens, so a bot that was away can catch up on what it missed.
 
 If your visitors' networks block port 28888, fall back to polling `GET /servers` with `If-None-Match`, no more often than every 5 seconds.
 
@@ -1033,9 +1045,15 @@ The master has no console, so its administrators manage it here, signed in with 
 | `PATCH /api/v1/signin/admin/servers/<handle>` | `{"flags": "<level>"}` changes its level, which servers signed in with it get straight away. `{"owner": "<handle>"}` gives it to another account without sending a new key when one is already active; one still waiting has its link sent to the new owner instead, the old one no longer working, and a new key's link already sent to the old owner stops working. `{"desc": "<text>"}` changes or clears its description |
 | `POST /api/v1/signin/admin/servers/<handle>/key` | Mails the owner a fresh link: a new key for one that's there, whose old key works until it's followed, or the link again for one still waiting (202) |
 | `DELETE /api/v1/signin/admin/servers/<handle>` | Removes one, or withdraws one still waiting |
-| `GET /api/v1/signin/admin/controls` | The master's own control entries, which it sends to every linked server: `{"controls": [{"id", "type", "address", "reason"}]}` |
+| `GET /api/v1/signin/admin/controls` | The master's own control entries, which it sends to every linked server: `{"controls": [{"id", "type", "address", "reason"}]}`, with `source` (`player` for an administrator's, `automatic` for Master Shield's), `by` (the administrator's handle) and `added` (a Unix time) when the master knows them. Master Shield's bans lapse after the master's `shieldbanlapse` days |
 | `POST /api/v1/signin/admin/controls` | `{"type": "ban", "address": "1.2.3", "reason": "..."}` adds one. `type` is `allow`, `ban`, `mute`, `limit`, `except` or `trust`; `address` is up to four numbers, fewer for a range |
 | `DELETE /api/v1/signin/admin/controls/<id>` | Removes one |
+| `GET /api/v1/signin/admin/shield` | Master Shield, at the master's `mastershieldlock` (administrator by default): `{"settings": {"shielddryrun", "shieldbanlimit", "shieldmodulatorlimit", "shieldbanshare", "shieldbanlapse"}, "modulators": [{"id", "name", "link", "enabled", "body"}]}`. An `id` lasts until the master restarts or rehashes |
+| `PATCH /api/v1/signin/admin/shield` | Any of the settings, such as `{"shielddryrun": 0}`; answers as `GET` |
+| `POST /api/v1/signin/admin/shield/modulators` | `{"name": "Map Escape Exploit", "link": "...", "body": "...", "enabled": true}` adds a Shield Modulator (201). Its name is up to 64 characters of plain text, no two alike; its optional link is the GitHub issue or security advisory it answers; its body is CubeScript run in the Sandbox with the server's details in `srvhost`, `srvport`, `srvdesc`, `srvmap`, `srvbranch`, `srvversion`, `srvhandle`, `srvmode`, `srvmutators` and `srvplayers`, and its result is nothing, `ban <reason>` or `flag <note>` |
+| `PATCH /api/v1/signin/admin/shield/modulators/<id>` | Any of `name`, `link`, `body` and `enabled` |
+| `DELETE /api/v1/signin/admin/shield/modulators/<id>` | Removes one |
+| `POST /api/v1/signin/admin/shield/test` | `{"body": "..."}` runs a body on every listed server without acting on what it says: `{"tested", "results": [{"host", "port", "desc", "map", "action", "text"}]}`, `action` being `ban`, `flag` or `bad` for a result that's neither |
 | `POST /api/v1/signin/admin/mail` | `{"to": "<address>"}` sends a test email, to check the master's mail settings (202) |
 
 An account's flags are one letter, its standing: `u` player, `s` supporter, `m` moderator, `a` administrator, `d` developer, `c` founder. The master keeps only the highest of any it's given, reading `o` as `m`. A server account's are one letter for its level: `b` Basic, `u` Featured or `m` Official, anything else being read as `b`; giving one takes a standing above the level's, `m` counting as moderator.

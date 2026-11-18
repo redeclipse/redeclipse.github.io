@@ -60,6 +60,11 @@ Red Eclipse integrates with Discord in two ways:
     the Red Eclipse Discord server under the player's in-game display name, and
     messages sent in that Discord thread are relayed into the game server with
     the sender's Discord display name and role badge.
+  - The master server's administrators get its admin notices in a private
+    channel of the Red Eclipse Discord server: changes to accounts, server
+    accounts and the global lists, and the master's automatic bans of hostile
+    game servers. These can include account handles and the IP addresses on
+    the global lists.
 
 ### Steam Integration
 

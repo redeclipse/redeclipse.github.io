@@ -183,4 +183,4 @@ Running a server: its settings, the privileges needed for each action, moderatio
 | `spectator` | put a player to spectator mode;<br>0 = join/unquarantine, 1 = spectate, 2 = spectate and quarantine | `name/cn mode` |
 | `addpriv` | adds local priv to cn;<br>priv: 2 = supporter, 3 = moderator, 4 = administrator | `name/cn priv` |
 | `resetpriv` | removes privileges added by addpriv from cn | `name/cn` |
-| `adminpass` | sets server admin password, if no password given, it will return the current password | `value` |
+| `adminpass` | sets the server's administrator password, which can't be read back | `value` |
