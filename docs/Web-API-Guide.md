@@ -400,6 +400,15 @@ Operators can add routes of their own outside `/api`, and those appear in the in
 | `bridge` | 1 when the server takes chat bridged from outside the game (see [Bridging chat](#bridging-chat)), 0 when its operator turned that off; older servers don't send it |
 | `you` | Your Privilege, present only when signed in, with `local` when it is local |
 
+Pass `?include=` with a comma-separated list of extra groups (or `all`) to ask for additional fields:
+
+| Group | Fields added | Access |
+|---|---|---|
+| `map` | `mapfilecrc` (present whenever the server has a map CRC, even without a preview) and `mapsize` (MPZ size in bytes) | Public |
+| `vars` | `mods`: object mapping each modified game variable (`IDF_GAMEMOD`) to its current value | Public |
+| `config` | `config`: `{"uptime", "password", "open", "connectlock", "editlock", "varslock"}` | Public |
+| `ips` | `playerips`: array of `{"cn", "name", "handle", "ip"}` for connected human players | Administrator+ |
+
 ### GET /players
 
 An array with one entry for each player, bot and spectator. The map's own enemies and hazards are left out here and on the Event feed:
@@ -748,6 +757,9 @@ Differences from `/status` on the server itself:
 | `local` | Present and `true` when that standing was given by the server's operator rather than the master |
 | `spectator` | Present and `true` when the player is spectating |
 | `colour` | The colour the player chose, as `0xRRGGBB` in a number, or 0 for none (the game then uses the team's) |
+| `ip` | Present only when `?include=ips` (or `all`) is requested by an Administrator or above |
+
+Pass `?include=` with a comma-separated list of extra groups (`map`, `vars`, `config`, `ips`, or `all`) to include extra fields in each linked server's `status`: `map` adds `mapfilecrc` and `mapsize`, `vars` adds `mods` (modified game variables), `config` adds `config` (`uptime`, `password`, `open`, `connectlock`, `editlock`, `varslock`), and `ips` (Administrator+ only, answered with `Cache-Control: private, no-store`) adds `ip` to each player object. Linked game servers treat the master as Founder and always send all groups over the link; by default `/api/v1/servers` and the live WebSocket list emit only the public fields.
 
 #### Polled status
 
@@ -1065,7 +1077,7 @@ The master has no console, so its administrators manage it here, signed in with 
 | `DELETE /api/v1/signin/admin/controls/<id>` | Removes one |
 | `GET /api/v1/signin/admin/shield` | Master shield, at the master's `mastershieldlock` (administrator by default): `{"settings": {"shielddryrun", "shieldbanlimit", "shieldmodulatorlimit", "shieldbanshare", "shieldbanlapse"}, "modulators": [{"id", "name", "link", "enabled", "body"}]}`. An `id` lasts until the master restarts or rehashes |
 | `PATCH /api/v1/signin/admin/shield` | Any of the settings, such as `{"shielddryrun": 0}`; answers as `GET` |
-| `POST /api/v1/signin/admin/shield/modulators` | `{"name": "Map Escape Exploit", "link": "...", "body": "...", "enabled": true}` adds a Shield modulator (201). Its name is up to 64 characters of plain text, no two alike; its optional link is the GitHub issue or security advisory it answers; its body is CubeScript run in the Sandbox with the server's details in `srvhost`, `srvport`, `srvdesc`, `srvmap`, `srvbranch`, `srvversion`, `srvhandle`, `srvmode`, `srvmutators` and `srvplayers`, and its result is nothing, `ban <reason>` or `flag <note>` |
+| `POST /api/v1/signin/admin/shield/modulators` | `{"name": "Map Escape Exploit", "link": "...", "body": "...", "enabled": true}` adds a Shield modulator (201). Its name is up to 64 characters of plain text, no two alike; its optional link is the GitHub issue or security advisory it answers; its body is CubeScript run in the Sandbox using `shieldinfo <field>`, `shieldplayer [index] [field]`, `shieldvar [name]` and `shieldcontrol <type> [ip]` (alongside Sandbox helpers `ipmatch`, `strregex`/`strcaseregex`, `strprefix`/`strsuffix`/`strcaseprefix`/`strcasesuffix`, `strstr`, `strmatch`, etc.), and its result is nothing, `ban <reason>` or `flag <note>` |
 | `PATCH /api/v1/signin/admin/shield/modulators/<id>` | Any of `name`, `link`, `body` and `enabled` |
 | `DELETE /api/v1/signin/admin/shield/modulators/<id>` | Removes one |
 | `POST /api/v1/signin/admin/shield/test` | `{"body": "..."}` runs a body on every listed server without acting on what it says: `{"tested", "results": [{"host", "port", "desc", "map", "action", "text"}]}`, `action` being `ban`, `flag` or `bad` for a result that's neither |
