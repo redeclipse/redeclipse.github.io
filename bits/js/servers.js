@@ -147,7 +147,104 @@
         return e;
     }
     function clear(e) { while(e.firstChild) e.removeChild(e.firstChild); return e; }
-    function plain(s) { return String(s || "").replace(/\f(?:z..|\[[^\]]*\]|\([^)]*\)|\{[^}]*\}|.)/g, ""); }
+    function plain(s) { return String(s || "").replace(/\f(?:z..|\[[^\]]*\]|\([^)]*\)|\{[^}]*\}|<[^>]*>|.)/g, ""); }
+    // Inline markdown matching the game's rendertext.cpp and Discord: **bold**, *italic*, _italic_, __underline__, ~~strike~~, `mono`.
+    function rich(s)
+    {
+        var str = plain(s), frag = document.createDocumentFragment();
+        if(!/[*_`~\\]/.test(str)) { if(str) frag.appendChild(document.createTextNode(str)); return frag; }
+        var alnum = function(c) { return !!c && /[A-Za-z0-9]/.test(c); };
+        var space = function(c) { return !c || /\s/.test(c); };
+        var hascloser = function(start, delim, count, boundary)
+        {
+            var incode = false;
+            for(var j = start; j < str.length && str[j] !== "\n"; j++)
+            {
+                var ch = str[j];
+                if(delim === "`") { if(ch === "`") return j > start; continue; }
+                if(incode) { if(ch === "`") incode = false; continue; }
+                if(ch === "\\" && (str[j + 1] === "*" || str[j + 1] === "_" || str[j + 1] === "`" || str[j + 1] === "~")) { j++; continue; }
+                if(ch === "`")
+                {
+                    var end = str.indexOf("`", j + 1), nl = str.indexOf("\n", j + 1);
+                    if(end > j + 1 && (nl < 0 || end < nl)) { incode = true; continue; }
+                    continue;
+                }
+                if(ch === delim)
+                {
+                    var run = 1;
+                    while(str[j + run] === delim) run++;
+                    var match = delim === "~" ? run === 2 : ((count === 1 && (run === 1 || run === 3)) || (count > 1 && run >= count));
+                    if(match && j > start && !space(str[j - 1]) && (!boundary || !alnum(str[j + count]))) return true;
+                    j += run - 1;
+                }
+            }
+            return false;
+        };
+        var state = 0, buf = "";
+        var flush = function()
+        {
+            if(!buf) return;
+            var node = document.createTextNode(buf);
+            if(state & 1) node = el("code", {}, node);
+            if(state & 2) node = el("strong", {}, node);
+            if(state & 20) node = el("em", {}, node);
+            if(state & 8) node = el("u", {}, node);
+            if(state & 32) node = el("del", {}, node);
+            frag.appendChild(node);
+            buf = "";
+        };
+        for(var i = 0; i < str.length; i++)
+        {
+            var ch = str[i];
+            if(ch === "\n") { if(state) { flush(); state = 0; } buf += ch; continue; }
+            if(state & 1)
+            {
+                if(ch === "`") { flush(); state &= ~1; continue; }
+                buf += ch; continue;
+            }
+            if(ch === "\\" && (str[i + 1] === "*" || str[i + 1] === "_" || str[i + 1] === "`" || str[i + 1] === "~"))
+            {
+                buf += str[++i]; continue;
+            }
+            if(ch === "`" && hascloser(i + 1, "`", 1, false))
+            {
+                flush(); state |= 1; continue;
+            }
+            if(ch === "~")
+            {
+                var trun = 1;
+                while(str[i + trun] === "~") trun++;
+                if((i === 0 || str[i - 1] !== "~") && trun === 2)
+                {
+                    if((state & 32) && i > 0 && !space(str[i - 1])) { flush(); state &= ~32; i++; continue; }
+                    if(!(state & 32) && !space(str[i + 2]) && hascloser(i + 2, "~", 2, false)) { flush(); state |= 32; i++; continue; }
+                }
+                buf += ch; continue;
+            }
+            if(ch === "*" || ch === "_")
+            {
+                var under = ch === "_", bbit = under ? 8 : 2, ibit = under ? 16 : 4, run = 1;
+                while(str[i + run] === ch) run++;
+                var prevsame = i > 0 && str[i - 1] === ch;
+                if(!prevsame && i > 0 && !space(str[i - 1]) && run <= 3)
+                {
+                    if(run === 3 && (state & bbit) && (state & ibit) && (!under || !alnum(str[i + 3]))) { flush(); state &= ~(bbit | ibit); i += 2; continue; }
+                    if(run >= 2 && (state & bbit) && (!under || !alnum(str[i + 2]))) { flush(); state &= ~bbit; i++; continue; }
+                    if((state & ibit) && (!under || !alnum(str[i + 1]))) { flush(); state &= ~ibit; continue; }
+                }
+                if(!prevsame && run <= 3 && (!under || !alnum(str[i - 1])))
+                {
+                    if(run === 3 && !(state & (bbit | ibit)) && !space(str[i + 3]) && hascloser(i + 3, ch, 3, under)) { flush(); state |= bbit | ibit; i += 2; continue; }
+                    if(run >= 2 && !(state & bbit) && !space(str[i + 2]) && hascloser(i + 2, ch, 2, under)) { flush(); state |= bbit; i++; continue; }
+                    if(!(state & ibit) && !space(str[i + 1]) && hascloser(i + 1, ch, 1, under)) { flush(); state |= ibit; continue; }
+                }
+            }
+            buf += ch;
+        }
+        flush();
+        return frag;
+    }
     // The times in the list are by the master's clock, which ours needn't agree with, so count by its clock: how far ours is ahead of it
     // comes from the time it stamps on what it sends. A list the browser revalidated comes back with its old stamp, which can only make
     // ours look further ahead, so polls keep the least seen; the live list's messages are always fresh.
@@ -1390,10 +1487,10 @@
                 });
                 break;
             case "chat":
-                this.line(this.speaker(m.client, "", ": " + plain(m.text)), "chat");
+                this.line(this.speaker(m.client, "", ": ").concat(rich(m.text)), "chat");
                 break;
             case "action":
-                this.line(this.speaker(m.client, "* ", " " + plain(m.text)), "chat");
+                this.line(this.speaker(m.client, "* ", " ").concat(rich(m.text)), "chat");
                 break;
             case "auth":
                 this.authed(m);
@@ -1407,7 +1504,7 @@
             case "challenge":
                 break;
             default:
-                if(typeof m.text === "string" && m.text) this.line([m.text], "broadcast");
+                if(typeof m.text === "string" && m.text) this.line([rich(m.text)], "broadcast");
                 return;
         }
         this.drawboard();
@@ -1549,7 +1646,7 @@
         }
         clear(this.info);
         append(this.info, el("dl", {}, facts));
-        if(st && typeof st.motd === "string" && st.motd.trim()) append(this.info, el("p", { class: "servers-motd", text: st.motd }));
+        if(st && typeof st.motd === "string" && st.motd.trim()) append(this.info, el("p", { class: "servers-motd" }, rich(st.motd)));
         // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard,
         // best score first, each after their Privilege in their colour and in their team's colour as in the game's server browser.
         if(st && st.polled && !this.base && st.players && st.players.length)
