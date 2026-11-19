@@ -128,7 +128,7 @@ Errors that come from the relay itself rather than from the server:
 Strings are plain text, with one exception: a server's `description` in the master's list is stored as the server sent it, and may carry Red Eclipse's colour codes. Each code starts with a form feed (`\f`, U+000C). This strips them:
 
 ```js
-const plain = (s) => s.replace(/\f(?:z..|\[[^\]]*\]|\([^)]*\)|\{[^}]*\}|.)/g, "");
+const plain = (s) => s.replace(/\f(?:z..|\[[^\]]*\]|\([^)]*\)|\{[^}]*\}|<[^>]*>|.)/g, "");
 ```
 
 Player names and chat are plain everywhere: in the master's list, in `/status` and `/players`, and on the Event feed. Where the game shows a player with colours and icons, the list gives you the parts as fields of their own (see [GET /api/v1/servers](#get-apiv1servers)).
