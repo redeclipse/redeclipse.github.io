@@ -50,8 +50,8 @@ The Red Eclipse project delcares that:
 
 3. The official contact methods are, but not limited to:
    - Email: contact@redeclipse.net
-   - Discussions: https://www.redeclipse.net/discuss
-   - Bugs and Issues: https://www.redeclipse.net/issues
+   - Discussions: https://redeclipse.net/discuss
+   - Bugs and Issues: https://redeclipse.net/issues
 
 4. Personal information and contact details for Mr Quinton Reeves is available
    to eligible organisations on request. Please email: contact@redeclipse.net
@@ -135,7 +135,7 @@ The Red Eclipse project reserves the sole right to:
 2. Modify this policy to preserve the rights of Red Eclipse, the public, the
    community, and the users.
    The latest version of the Red Eclipse Mark Policy should be available at
-   <https://www.redeclipse.net/trademark>
+   <https://redeclipse.net/trademark>
 
 3. Grant exceptions to this policy, of any kind and for any reason whatsoever,
    other clauses notwithstanding.

@@ -20,7 +20,7 @@ The pages here are Source Pages: plain Markdown that reads correctly on GitHub. 
 
 - Do not add front matter (a block starting with `---`) to a page; the build will refuse it.
 - Link to other pages by file name, including `.md`, relative to the page, such as `[Privileges](server-how-to/Privileges)`.
-- Link to the website with its full address, such as `https://www.redeclipse.net/download`.
+- Link to the website with its full address, such as `https://redeclipse.net/download`.
 
 ## The Style
 I didn't set a style guide to begin with because I was unsure of what to expect and unaware of any cross-compatibility issues. As I mentioned, the documentation will be automatically deployed to the Beta Website, and this involves going through a few steps using 

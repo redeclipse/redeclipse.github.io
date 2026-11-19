@@ -257,7 +257,7 @@ Each account holds at most 10; signing in an 11th time ends the one used longest
 
 **Where the token goes:**
 
-- **Browsers on the master's own list of origins** (on `play.redeclipse.net`, `https://www.redeclipse.net`) get it as an `HttpOnly` cookie, which page scripts can never read, so a script injected into the page can't take it away. Send every request below `/api/v1/signin` with `credentials: "include"`. The answer has no `token`, unless you send `"cookie": false`.
+- **Browsers on the master's own list of origins** (on `play.redeclipse.net`, `https://redeclipse.net`) get it as an `HttpOnly` cookie, which page scripts can never read, so a script injected into the page can't take it away. Send every request below `/api/v1/signin` with `credentials: "include"`. The answer has no `token`, unless you send `"cookie": false`.
 - **Everyone else, such as tools and bots,** gets `token` in the answer, and sends it as `Authorization: Bearer <token>` to the routes below. Keep it secret: it is the account, until it ends.
 - The cookie only counts from those origins. Sent from anywhere else, it's ignored.
 - Safari keeps a cookie at most 7 days when the server that set it has a different address from the page's, which is the case for the website and the master. So in Safari, people who don't come back within 7 days sign in again.

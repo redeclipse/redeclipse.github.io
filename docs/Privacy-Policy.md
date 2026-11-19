@@ -16,7 +16,7 @@ This Privacy Policy explains how the Red Eclipse project ("Red Eclipse", "Red
 Eclipse Team", "we", "us") collects, uses, and protects information when you use
 the Red Eclipse game client, connect to the play.redeclipse.net master server or
 connected game servers, interact with our Discord integration or bot, or visit
-https://www.redeclipse.net.
+https://redeclipse.net.
 
 Red Eclipse is an open-source, non-profit hobby project operated by Quinton
 Reeves and the Red Eclipse Team. We do not sell, rent, or trade personal data,
@@ -86,7 +86,7 @@ Red Eclipse integrates with Discord in two ways:
 When you connect to the `play.redeclipse.net` master server or any game server
 connected to it, certain information is processed for server operation,
 authentication, public server listings, and moderation in accordance with our
-Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
+Multiplayer Guidelines (https://redeclipse.net/guidelines):
 
 * Connection and Moderation Data:
   - In-game username, authentication handle (if you use a master server
@@ -102,7 +102,7 @@ Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
     match time, and active players' display names, scores, pings, teams, and
     privilege badges) to the master server (`play.redeclipse.net:28888`), where
     it is viewable in the in-game server browser and on the web server browser
-    at https://www.redeclipse.net/servers.
+    at https://redeclipse.net/servers.
   - The master server Web API relay logs only the target server, request path,
     HTTP status, response size, and viewer IP address; it never logs headers,
     bodies, query strings, authentication tokens, or challenge answers, and
@@ -126,7 +126,7 @@ Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
 
 * Accounts:
   - You can register an account in the game or at
-    https://www.redeclipse.net/account. An account holds its handle, your email
+    https://redeclipse.net/account. An account holds its handle, your email
     address, its public key, its standing, and, if you add them, a display
     name and the Steam ID and Discord user ID you link to it. The master server
     keeps these in its account file, and never keeps your private key: it's
@@ -155,10 +155,10 @@ Multiplayer Guidelines (https://www.redeclipse.net/guidelines):
 
 ### Website
 
-* Our website at https://www.redeclipse.net is hosted via GitHub Pages. Standard
+* Our website at https://redeclipse.net is hosted via GitHub Pages. Standard
   web server access logs (such as IP address and browser user-agent) are handled
   by GitHub in accordance with the GitHub Privacy Statement.
-* When you open the Server Browser page (`https://www.redeclipse.net/servers`),
+* When you open the Server Browser page (`https://redeclipse.net/servers`),
   your browser connects directly to `play.redeclipse.net:28888` to retrieve live
   server and match status.
 
@@ -195,8 +195,8 @@ If you have questions about this Privacy Policy or wish to make a data request,
 please contact the Red Eclipse Team:
 
 * Email: contact@redeclipse.net
-* Discussions: https://www.redeclipse.net/discuss
-* Issues: https://www.redeclipse.net/issues
+* Discussions: https://redeclipse.net/discuss
+* Issues: https://redeclipse.net/issues
 
 ### Attribution
 

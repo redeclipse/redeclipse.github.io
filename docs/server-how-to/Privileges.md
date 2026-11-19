@@ -51,6 +51,6 @@ Anyone with a privilege can give another player a local one on that server, from
 Bans, mutes and limits from the master server are global, and only the master's own excepts lift them. An except you add on your server protects a player from your server's entries alone.
 
 ## How to get an account
-Anyone can register an account, in the game under **Player setup**, **Account**, or at https://www.redeclipse.net/account/register. See [Accounts](../Accounts).
+Anyone can register an account, in the game under **Player setup**, **Account**, or at https://redeclipse.net/account/register. See [Accounts](../Accounts).
 
 Once the key is saved in your `auth.cfg`, you're identified when connecting to game servers that use accounts.
