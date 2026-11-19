@@ -1,5 +1,5 @@
 // Server browser and match monitor for /servers, built on the Red Eclipse Web API.
-// See the Web API Guide (https://www.redeclipse.net/docs/Web-API-Guide) for the routes and fields used here.
+// See the Web API Guide (https://redeclipse.net/docs/Web-API-Guide) for the routes and fields used here.
 (function()
 {
     "use strict";
