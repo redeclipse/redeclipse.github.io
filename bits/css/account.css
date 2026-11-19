@@ -954,3 +954,12 @@
     font-size: 95%;
     white-space: nowrap;
 }
+.account-shieldref summary {
+    cursor: pointer;
+}
+.account-shieldref > div {
+    margin-top: 6px;
+}
+.account-shieldref code {
+    white-space: normal;
+}
