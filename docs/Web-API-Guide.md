@@ -407,7 +407,7 @@ Pass `?include=` with a comma-separated list of extra groups (or `all`) to ask f
 | `map` | `mapfilecrc` (present whenever the server has a map CRC, even without a preview) and `mapsize` (MPZ size in bytes) | Public |
 | `vars` | `mods`: object mapping each modified game variable (`IDF_GAMEMOD`) to its current value | Public |
 | `config` | `config`: `{"uptime", "password", "open", "connectlock", "editlock", "varslock"}` | Public |
-| `ips` | `playerips`: array of `{"cn", "name", "handle", "ip"}` for connected human players | Administrator+ |
+| `ips` | `playerips`: array of `{"cn", "name", "handle", "ip"}` for connected human players | The server's `iphostlock` and above (moderator by default) |
 
 ### GET /players
 
@@ -857,7 +857,7 @@ A socket whose token is at the master's `masternoticelock` (administrator by def
 
 `level` is `info`, `warning` for something to look into, or `error` for something wrong with the master itself. A master older than the field sends none, which is `info`. `text` is the line the master puts in its own log, never with an email address and at most 1500 characters, cut short with `...`.
 
-What can happen over and over, such as failed sign-ins and servers that keep failing to be listed, is folded: the first for each account or server is sent at once, and the rest within `masternoticefold` seconds (an hour by default) come as one notice when that time is up, saying how many there were and the last of them. Every one still goes in the master's log.
+What can happen over and over, such as failed sign-ins and servers that keep failing to be listed, is folded: the first for each account or server is sent at once, and the rest within `masternoticefold` seconds (an hour by default) come as one notice when that time is up, saying how many there were and the last of them. The master's log folds them the same way, apart from mail failures, which it logs every time.
 
 Ids only go up, across restarts too. The master keeps its last 100, and `?since=<id>` with the token sends every kept one after that id as the socket opens, so a bot that was away can catch up on what it missed.
 
@@ -880,7 +880,7 @@ It's a web page, not part of `/api/v1`. For a server on the list it shows the se
 The Matchmaking queue is for people who'd play if enough others turned up. It has a **channel** for each version the master's operator names, `devel` with `masterverdevel` and `release` with `masterverrelease`, and a channel set to `""` doesn't exist. A channel's servers are the linked ones on its version that run the newest protocol any of them does, which is what an up to date game of that version plays, and each lists that `channel`. Everything below happens within one channel. Each entry has a **Threshold**: the fewest people it will play with, 2, 4, 6 or 8, counting everyone already on the server it would be sent to, spectators included. Once some group's Thresholds are all met, the master **pops** them: it sends them all to one server and takes them out of the queue.
 
 - **Who goes:** the largest group, lowest Thresholds first, whose Thresholds are all met by the group and those already on the server.
-- **Where:** a listed server linked to the master, on the current game version, open, and with a player slot for each of them. Spectators don't take a player slot, but slots kept for an earlier pop do, and spectators still take one of the server's `connections`; a server too old to report its `playerslots` counts everyone on it against `maxplayers` instead. Of those, the one taking the largest group, then the one with the most people on, then the highest `priority`.
+- **Where:** a listed server linked to the master, on the current game version, open, and with a player slot for each of them. Spectators don't take a player slot, but slots kept for an earlier pop do, and spectators still take one of the server's `connections`; a server too old to report its `playerslots` counts everyone on it against `maxplayers` instead. It must also be signed in with a server account, as what a server says about its room can't be checked. Of those, the one taking the largest group, then the one with the most people on, then the highest `priority`.
 - **When:** whenever the queue changes, and once a second as the list does.
 - **On their way:** popped entries count as on their server for 5 minutes (the master's `masterqueuetravel`), or until they arrive, so the next pop doesn't fill the same slots. The server is told who's coming and keeps a player slot for each of them for that long (at most its own `serverqueuereserve`, 10 minutes by default), or until they're playing there, so someone joining by themselves can watch but not take it; the slots it keeps are its `reserved`.
 
@@ -1002,12 +1002,12 @@ Errors:
 | 404 | The link is unknown, ran out or was removed |
 | 409 | The handle or email is taken |
 | 410 | The account is already activated |
-| 429 | Too many registrations from your address today (3 by default) |
-| 503 | Registration is closed, or the website can't register (no captcha set up) |
+| 429 | Too many registrations from your address today (3 by default), two captcha checks from your address are still waiting, or your address has had too many captcha checks today (20 by default) |
+| 503 | Registration is closed, the website can't register (no captcha set up), or too many captcha checks are waiting (try again after `Retry-After`) |
 
 ### Lost keys
 
-`POST /api/v1/accounts/reset` with `{"handle": "<handle>"}` or `{"email": "<address>"}`, and a `captcha` or `"game": true` as above, asks for a new key. It always answers 202 the same way, so it never says whether an account exists. If one does and has an email address, that address gets a link to `/account/reset#<token>`, lasting 24 hours. Only the newest link works.
+`POST /api/v1/accounts/reset` with `{"handle": "<handle>"}` or `{"email": "<address>"}`, and a `captcha` or `"game": true` as above, asks for a new key. It always answers 202 the same way, so it never says whether an account exists. A request with a captcha can get the same 429 and 503 answers for captcha checks as registration. If one does and has an email address, that address gets a link to `/account/reset#<token>`, lasting 24 hours. Only the newest link works.
 
 The page posts the token to `POST /api/v1/accounts/reset/confirm`, which answers like activation, with the new key. The old key stops working, and the account's remembered sign-ins end.
 
