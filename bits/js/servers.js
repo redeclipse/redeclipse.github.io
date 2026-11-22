@@ -550,6 +550,27 @@
     }
     function hourname(hr) { return (hr < 10 ? "0" : "") + hr + ":00"; }
 
+    // Cells and gaps in whole screen pixels, so every gap paints as wide as the next: the cells as wide as fit, each row a
+    // cell high (its shape from --heat-shape), and the day names' column takes what's left over. Stays on the stretchy
+    // layout without ResizeObserver.
+    function fitheat(grid)
+    {
+        if(!window.ResizeObserver) return;
+        new ResizeObserver(function()
+        {
+            var d = window.devicePixelRatio || 1, w = Math.floor(grid.getBoundingClientRect().width * d);
+            if(w <= 0) return;
+            var style = getComputedStyle(grid), shape = parseFloat(style.getPropertyValue("--heat-shape")) || 1.4;
+            var label = Math.ceil(parseFloat(style.fontSize) * 2.6 * d), gap = Math.max(1, Math.round(2 * d));
+            var cell = Math.max(1, Math.floor((w - label - 24 * gap) / 24)), high = Math.max(1, Math.round(cell / shape));
+            grid.style.setProperty("--heat-label", (w - 24 * (cell + gap)) / d + "px");
+            grid.style.setProperty("--heat-cell", cell / d + "px");
+            grid.style.setProperty("--heat-high", high / d + "px");
+            grid.style.setProperty("--heat-gap", gap / d + "px");
+            grid.classList.add("fitted");
+        }).observe(grid);
+    }
+
     // A grid of weekdays by hours, brighter the more were on, on a square root so the few on a quiet hour still show;
     // hatched where nothing is known, the hour now outlined. Hovering or tapping a cell shows its day, hour and players
     // in place of the summary. Null when there's no history at all.
@@ -593,6 +614,7 @@
         });
         grid.appendChild(el("span", { "aria-hidden": "true" }));
         for(var hr = 0; hr < 24; hr++) grid.appendChild(el("span", { class: "servers-heathour", "aria-hidden": "true", text: hr % 6 ? "" : hourname(hr).slice(0, 2) }));
+        fitheat(grid);
         var map = el("div", { class: "servers-history" }, [
             el("div", { class: "servers-historytitle" }, [el("span", { text: title }), readout]),
             grid
@@ -1115,7 +1137,7 @@
             else if(this.src.indexOf(MAPUNKNOWN) < 0) this.src = MAPUNKNOWN;
         } });
         this.info = el("div", { class: "servers-matchinfo" });
-        this.busy = el("div", { class: "servers-busy", hidden: true });
+        this.busy = el("div", { class: "servers-busy" }, el("p", { class: "servers-nohistory", text: "No history yet" }));
         this.message = el("p", { class: "servers-message", hidden: true });
         this.board = el("div", { class: "servers-board" });
         this.objectives = el("ul", { class: "servers-objectives", hidden: true });
@@ -1134,14 +1156,16 @@
             self.chatinput.value = "";
         } }, [this.chatinput, el("button", { type: "submit", text: "Send" })]);
         this.mod = el("div", { class: "servers-mod", hidden: true });
-        this.body = el("div", { class: "servers-panelbody" }, [
-            el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.objectives, this.board, this.mod]),
-            el("div", { class: "servers-feedbox" }, [el("h3", { text: "Match feed" }), this.feedstate, this.feedlist, this.standing, this.chat])
-        ]);
+        this.scoreboard = el("div", { class: "servers-scoreboard" }, [el("h3", { text: "Scoreboard" }), this.objectives, this.board, this.mod]);
         var closebtn = el("button", { type: "button", class: "servers-close", "aria-label": "Close", text: "×", onclick: function() { closepanel(); } });
-        // The map preview has a column of its own, with the match beside it.
-        this.header = el("div", { class: "servers-match" }, [this.mapimg, this.info, this.busy, this.message, this.body]);
-        this.cell = el("td", { colspan: COLUMNS.length }, [closebtn, this.header]);
+        // As the game lays it out: the map preview beside the match, then when it's usually busy beside what's happening
+        // there now, then the scoreboard, or why there isn't one in its place.
+        this.cell = el("td", { colspan: COLUMNS.length }, [closebtn,
+            el("div", { class: "servers-match" }, [this.mapimg, this.info]),
+            el("div", { class: "servers-activity" }, [this.busy,
+                el("div", { class: "servers-feedbox" }, [el("div", { class: "servers-historytitle", text: "Match feed" }), this.feedstate, this.feedlist, this.standing, this.chat])]),
+            el("div", { class: "servers-panelbody" }, [this.message, this.scoreboard])
+        ]);
         this.row = el("tr", { class: "servers-panel" }, this.cell);
 
         var s = servers.get(k);
@@ -1154,7 +1178,8 @@
         }
         else
         {
-            this.body.hidden = true;
+            this.scoreboard.hidden = this.feedlist.hidden = this.standing.hidden = true;
+            this.feedstate.textContent = "No match feed";
             this.say(s && s.status && s.status.polled
                 ? "This server isn't linked to the master server, which asks it how it's doing every 30 seconds instead, so there's no live match to show."
                 : "This server isn't linked to the master server, so there's no live match to show.");
@@ -1666,9 +1691,7 @@
         {
             if(self.closed) return;
             var map = heatmap(h, "Usually on here, by day and hour");
-            clear(self.busy);
-            if(map) self.busy.appendChild(map);
-            self.busy.hidden = !map;
+            if(map) clear(self.busy).appendChild(map);
         });
     };
 

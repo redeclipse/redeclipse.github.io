@@ -358,7 +358,7 @@
 }
 .servers-match > .servers-mapimg {
     grid-column: 1;
-    grid-row: 1 / span 4;
+    grid-row: 1;
     width: 128px;
     height: 128px;
     border-radius: 4px;
@@ -389,7 +389,29 @@
     margin: 0;
 }
 .servers-busy .servers-history {
-    max-width: none;
+    margin: 0;
+}
+/* nearly square cells as the game draws them, so a day's name fits its row at this size */
+.servers-busy .servers-heat {
+    --heat-shape: 1.06;
+}
+.servers-busy .servers-heatcell {
+    aspect-ratio: 1.06;
+}
+/* when it's usually busy beside what's happening now, the feed as tall as the heatmap, between rules as the game boxes them */
+.servers-activity {
+    display: grid;
+    grid-template-columns: 420px minmax(0, 1fr);
+    gap: 12px 24px;
+    margin-top: 12px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(255, 64, 64, 0.4);
+    border-bottom: 1px solid rgba(255, 64, 64, 0.4);
+}
+.servers-nohistory {
+    margin: 0;
+    font-size: 90%;
+    color: rgb(170, 170, 170);
 }
 .servers-historytitle {
     display: flex;
@@ -408,6 +430,19 @@
     grid-template-columns: 2.6em repeat(24, minmax(0, 1fr));
     gap: 2px;
     align-items: center;
+}
+/* in whole screen pixels once servers.js has measured it, each row a cell high with the labels spilling over */
+.servers-heat.fitted {
+    grid-template-columns: var(--heat-label) repeat(24, var(--heat-cell));
+    grid-template-rows: repeat(7, var(--heat-high)) auto;
+    gap: var(--heat-gap);
+}
+.servers-heat.fitted .servers-heatcell {
+    aspect-ratio: auto;
+    align-self: stretch;
+}
+.servers-heatday {
+    white-space: nowrap;
 }
 .servers-heatcell {
     aspect-ratio: 1.4;
@@ -438,16 +473,11 @@
     color: rgb(255, 200, 120);
 }
 .servers-panelbody {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px 24px;
-}
-.servers-scoreboard {
-    flex: 3 1 360px;
-    min-width: 0;
+    padding-top: 8px;
 }
 .servers-feedbox {
-    flex: 2 1 260px;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
 }
 .servers-panelbody h3 {
@@ -515,8 +545,12 @@
     display: none;
 }
 .servers-feed {
-    max-height: 360px;
+    flex: 1 1 0;
+    height: 0; /* the heatmap sets the row's height, not the feed */
+    min-height: 6em;
     overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 64, 64, 0.5) transparent;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -570,8 +604,11 @@
         width: 80px;
         height: 80px;
     }
-    .servers-match > .servers-message, .servers-match > .servers-panelbody, .servers-match > .servers-busy {
-        grid-column: 1 / -1;
+    .servers-activity {
+        grid-template-columns: minmax(0, 420px);
+    }
+    .servers-feed {
+        min-height: 12em;
     }
 }
 @media (max-width: 800px) {
