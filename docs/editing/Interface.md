@@ -183,6 +183,20 @@ Legacy differs in these keys:
 - Material overlay `M`, set material `Ctrl+M`.
 - The default keys for applying and getting textures, save, save as and redo (`T`, `Shift+T`, `Ctrl+S`, `Ctrl+Shift+S`, `Ctrl+Shift+Z`) still work under legacy.
 
+## Text fields
+
+Text fields, such as the map's title and description in Map settings or a search box, work the same everywhere in the game.
+
+- Click a field to type in it. It keeps the keyboard wherever the mouse goes, so editor keys don't fire while you type.
+- `Return` confirms the text; so do clicking anywhere else and closing the Tool panel. `Esc` puts the text back as it was.
+- `Tab` confirms and moves to the next field in the Tool panel, `Shift+Tab` to the one before.
+- Text longer than its field scrolls inside it to follow the cursor; a field several lines tall wraps its text and scrolls with the mouse wheel.
+- `Shift` with the arrows, `Home` or `End`, or with a click, selects text. Double click selects a word, triple click the whole line.
+- `Ctrl+A` selects all, `Ctrl+C` copies, `Ctrl+X` cuts and `Ctrl+V` pastes, through the system clipboard.
+- `Ctrl+Z` undoes and `Ctrl+Y` or `Ctrl+Shift+Z` redoes, in the field you're typing in, not the map.
+- `Ctrl` with the left and right arrows moves a word at a time; with `Backspace` or `Delete` it deletes a word.
+- On macOS, use `Cmd` where these say `Ctrl`, and `Alt` to move or delete a word.
+
 ## Console
 
 The console (`` ` `` or `/`) runs any editor command or variable. Type a name and a box under the input line shows its type, range, current and default value, usage and description. Every variable is listed in [Variables](../variables/).
