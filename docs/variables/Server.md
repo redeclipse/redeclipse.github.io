@@ -17,6 +17,7 @@ Running a server: its settings, the privileges needed for each action, moderatio
 | :--- | :--- | :--- |
 | `mastermode` | set a specific mode to the server;<br>0 = open (everybody can join), 1 = veto (vetolock determines who can force a vote), 2 = locked (only moderator or higher can spawn), 3 = private (only global privs and players with the password can join the server) | `value` |
 | `masterlock` | determines who can set mastermode;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
+| `serveropenlock` | determines who can set a mastermode that serveropen doesn't allow;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `spawneditlock` | determines who may spawn in editing mode when the server is locked;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `editlock` | determines who may toggle editing when the server is locked;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `speclock` | determines who may force players to spectate;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
@@ -110,6 +111,7 @@ Running a server: its settings, the privileges needed for each action, moderatio
 | `demokeep` | determines if demos that don't run to the end of the match are kept | `bool` |
 | `teamlock` | determines who may change the team of other players;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `exceptlock` | determines who may except players from bans, mutes and limits;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
+| `protectlock` | determines who may kick, ban, mute or limit a player an except protects;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `spawnlock` | determines who may spawn when the server is locked;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `iphostlock` | determines who may see player addresses and hosts;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |
 | `overflowlock` | players at or above this privilege level are not kicked for message overflow;<br>0 = off, 1 = player, 2 = supporter, 3 = moderator, 4 = administrator, 5 = developer, 6 = founder, 7 = nobody | `value` |

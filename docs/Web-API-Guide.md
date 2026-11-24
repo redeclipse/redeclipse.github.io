@@ -538,7 +538,7 @@ The Control entries your Privilege may see:
 
 - `type` is `kick`, `allow`, `ban`, `mute`, `limit` or `except`. `reason` is optional.
 - Success is `201` with `{"ok": true}`.
-- You can't act on a player whose Privilege is higher than yours. A player protected by an `except` entry can only be acted on by an Administrator, and a player protected by a global `except` can't be banned, muted or limited here at all.
+- You can't act on a player whose Privilege is higher than yours. A player protected by an `except` entry can only be acted on at the server's `protectlock` (administrator by default), and a player protected by a global `except` can't be banned, muted or limited here at all.
 
 ### DELETE /controls/\<id\>
 
@@ -757,9 +757,9 @@ Differences from `/status` on the server itself:
 | `local` | Present and `true` when that standing was given by the server's operator rather than the master |
 | `spectator` | Present and `true` when the player is spectating |
 | `colour` | The colour the player chose, as `0xRRGGBB` in a number, or 0 for none (the game then uses the team's) |
-| `ip` | Present only when `?include=ips` (or `all`) is requested by an Administrator or above |
+| `ip` | Present only when `?include=ips` (or `all`) is requested at the master's `masteriplock` or above (administrator by default) |
 
-Pass `?include=` with a comma-separated list of extra groups (`map`, `vars`, `config`, `ips`, or `all`) to include extra fields in each linked server's `status`: `map` adds `mapfilecrc` and `mapsize`, `vars` adds `mods` (modified game variables), `config` adds `config` (`uptime`, `password`, `open`, `connectlock`, `editlock`, `varslock`), and `ips` (Administrator+ only, answered with `Cache-Control: private, no-store`) adds `ip` to each player object. Linked game servers treat the master as Founder and always send all groups over the link; by default `/api/v1/servers` and the live WebSocket list emit only the public fields.
+Pass `?include=` with a comma-separated list of extra groups (`map`, `vars`, `config`, `ips`, or `all`) to include extra fields in each linked server's `status`: `map` adds `mapfilecrc` and `mapsize`, `vars` adds `mods` (modified game variables), `config` adds `config` (`uptime`, `password`, `open`, `connectlock`, `editlock`, `varslock`), and `ips` (at the master's `masteriplock`, administrator by default, answered with `Cache-Control: private, no-store`) adds `ip` to each player object. Linked game servers treat the master as Founder and always send all groups over the link; by default `/api/v1/servers` and the live WebSocket list emit only the public fields.
 
 #### Polled status
 
