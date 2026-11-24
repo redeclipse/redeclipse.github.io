@@ -668,6 +668,41 @@
 .servers-accessicon.private, .servers-accessicon.password {
     background-color: rgb(255, 100, 100);
 }
+.servers-reapedicon {
+    display: inline-block;
+    width: 1.3em;
+    height: 1.3em;
+    margin: -0.2em 0.3em -0.1em 0;
+    vertical-align: -0.2em;
+    background-color: rgb(255, 100, 100);
+    -webkit-mask: center / contain no-repeat;
+    mask: center / contain no-repeat;
+}
+.servers-tag.servers-reaped {
+    color: rgb(255, 140, 140);
+    border-color: rgba(255, 90, 90, 0.8);
+    background-color: rgba(120, 20, 20, 0.6);
+}
+.servers-reapbanner .servers-reapedicon {
+    width: 1.1em;
+    height: 1.1em;
+    margin: 0 0.3em 0 0;
+    background-color: currentColor;
+}
+.servers-reapbanner {
+    margin: 0 0 8px;
+    padding: 6px 10px;
+    border: 1px solid rgba(255, 90, 90, 0.8);
+    border-radius: 3px;
+    background-color: rgba(120, 20, 20, 0.6);
+    color: rgb(255, 200, 200);
+    overflow-wrap: anywhere;
+}
+.servers-reapby {
+    display: block;
+    font-size: 85%;
+    color: rgb(230, 170, 170);
+}
 .servers-priv {
     display: inline-block;
     width: 1em;

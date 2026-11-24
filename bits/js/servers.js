@@ -346,6 +346,15 @@
         var slug = name.toLowerCase(), url = "url(" + ICONPATH + "mastermode/" + slug + ".svg)";
         return el("span", { class: "servers-accessicon " + slug, role: named ? null : "img", "aria-label": named ? null : name, "aria-hidden": named ? "true" : null, title: name, style: "-webkit-mask-image:" + url + ";mask-image:" + url });
     }
+    function reapedicon()
+    {
+        var url = "url(" + ICONPATH + "reaped.svg)";
+        return el("span", { class: "servers-reapedicon", "aria-hidden": "true", style: "-webkit-mask-image:" + url + ";mask-image:" + url });
+    }
+    function reapedtag(s)
+    {
+        return s.reaped ? el("span", { class: "servers-tag servers-reaped", title: s.reaped.reason || "Reaped", text: "Reaped" }) : null;
+    }
     function statename(st) { return typeof st.state === "number" ? layout(st).states[st.state] || "?" : ""; }
     function version(v)
     {
@@ -726,7 +735,7 @@
         var time = "–";
         if(st) time = playing(st) ? el("span", { "data-ends": st.ends, text: remaining(st.ends) }) : el("small", { text: statename(st) || "?" });
         append(tr, [
-            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("span", { class: "servers-tag", text: s.handle }) : null]),
+            el("td", { class: "servers-desc", title: (plain(s.description) || s.host) + (s.handle ? " (" + s.handle + ")" : "") }, [s.reaped ? reapedicon() : st ? access(st) : null, plain(s.description) || s.host, s.handle ? el("span", { class: "servers-tag", text: s.handle }) : null, reapedtag(s)]),
             el("td", { class: "servers-num" }, players),
             el("td", { title: st && st.maptitle ? st.map : null }, st ? st.maptitle || st.map : "–"),
             el("td", { class: "servers-wide servers-mode", title: st ? modeparts(st)[0].name : null }, st ? partview(modeparts(st)[0], true) : "–"),
@@ -1670,6 +1679,12 @@
             }
         }
         clear(this.info);
+        if(s.reaped)
+        {
+            var r = s.reaped, by = r.source ? r.source.charAt(0).toUpperCase() + r.source.slice(1) + (r.by ? " (" + r.by + ")" : "") : "";
+            append(this.info, el("p", { class: "servers-reapbanner" }, [reapedicon(), el("strong", { text: "Reaped" }), r.reason ? ": " + r.reason : "",
+                by ? el("span", { class: "servers-reapby", text: by + (r.added ? ", " + new Date(r.added * 1000).toLocaleDateString() + " (" + ago(r.added) + ")" : "") }) : null]));
+        }
         append(this.info, el("dl", {}, facts));
         if(st && typeof st.motd === "string" && st.motd.trim()) append(this.info, el("p", { class: "servers-motd" }, rich(st.motd)));
         // A polled server only gives names, spectators among them, so list who's on in place of a scoreboard,

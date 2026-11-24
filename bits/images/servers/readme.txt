@@ -28,6 +28,11 @@ mastermode/*.svg
     Copyright (C) 2026 Red Eclipse Team
     Creative Commons Attribution ShareAlike 4.0 License (CC-BY-SA)
 
+reaped.svg
+    Created by the Red Eclipse Team, in the frame of mastermode/*.svg
+    Copyright (C) 2026 Red Eclipse Team
+    Creative Commons Attribution ShareAlike 4.0 License (CC-BY-SA)
+
 chat.png
     Created by Iceflower, from icons/chat.png in redeclipse/textures, scaled to 64px
     Copyright (C) 2019 Red Eclipse Team
