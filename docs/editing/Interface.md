@@ -185,7 +185,7 @@ Legacy differs in these keys:
 
 ## Text fields
 
-Text fields, such as the map's title and description in Map settings or a search box, work the same everywhere in the game.
+Text fields, such as the map's title and description in Map settings, a search box or the console's line, work the same everywhere in the game.
 
 - Click a field to type in it. It keeps the keyboard wherever the mouse goes, so editor keys don't fire while you type.
 - `Return` confirms the text; so do clicking anywhere else and closing the Tool panel. `Esc` puts the text back as it was.
@@ -199,4 +199,11 @@ Text fields, such as the map's title and description in Map settings or a search
 
 ## Console
 
-The console (`` ` `` or `/`) runs any editor command or variable. Type a name and a box under the input line shows its type, range, current and default value, usage and description. Every variable is listed in [Variables](../variables/).
+The console (`` ` `` or `/`) runs any editor command or variable. Type a name and a box under the input line shows its type, range, current and default value, usage and description, for the command the cursor is in. Finished brackets, parentheses and quotes count as one argument of the command around them, so `echo (fov) 90` shows `echo`, and nothing shows inside quotes or after `//`. Every variable is listed in [Variables](../variables/).
+
+Its line is a text field, so selecting, copying, pasting and undo work as above, with a few keys of its own:
+
+- `Return` runs the line, and `Esc` closes the console. It keeps the keyboard while it's open, whatever you click.
+- `Up` and `Down` step through what you've run before. `Down` past the newest brings back the line you were typing.
+- `Tab` completes the name ending at the cursor, finding it the same way as the box, and pressing it again cycles through the matches; `Shift+Tab` goes back. `Ctrl+Z` undoes the whole run of completions.
+- A long line wraps and grows to `conlinemax` rows, 6 by default, then scrolls.

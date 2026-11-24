@@ -37,7 +37,7 @@ Binding keys, aliases, and the CubeScript commands that scripts are made of.
 | `local` | declares a set of aliases as local to the alias (function) it was declared in | - |
 | `alias` | defines a new alias (variable or command block);<br>example: alias pi 3.14159265359<br>is equivalent to: pi = 3.14159265359 | `name contents` |
 | `getalias` | looks up the contents of an alias;<br>example: echo (getalias dm)<br>is equivalent to: echo $dm | `name` |
-| `inputconsole` | prepares input to the command line;<br>[init] is the input string<br>[prompt] is an optional prompt to use next to the input<br>[action] is an optional command to execute after inputconsole | `[init] [prompt] [action]` |
+| `inputconsole` | opens the console;<br>[init] is the text to start its line with | `[init]` |
 | `setcomplete` | Enables (or disables) tab-completion of a command;<br>name is the name of a command or alias,<br>[bool] (1) enables completion of name (the dafault is 0, disabled). | `name [bool]` |
 | `listcomplete` | Enables tab-completion of a command's first argument;<br>name is a command or alias,<br>list is a list of valid arguments to be completed | `name list` |
 | `playercomplete` | Enables tab-completion for players as argument of a command;<br>name is a command or alias,<br>remove can be omitted to add a completion or set to >0 to remove the completion | `name remove` |

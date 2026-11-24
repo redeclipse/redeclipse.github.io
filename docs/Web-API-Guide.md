@@ -237,7 +237,7 @@ Computing the answer:
 
 - **The private key** is in the player's `auth.cfg`, as the second word after `authkey <name>`. It is a secret, so it must never leave the player's machine.
 - **The key's answer:** the challenge is a point on NIST P-192 in compressed form: a sign (`+` or `-`, for the parity of y), then x in hex. Multiply that point by the private key and take its x coordinate in lowercase hex, without leading zeros. See `answerchallenge` in `src/shared/crypto.cpp`. From tools, `genkey answer <private key> <challenge>` prints it.
-- **What the master takes** is the SHA-256 of `Red Eclipse master sign-in ` (with its trailing space) followed by that hex, as 64 lowercase hex digits. This is what makes the answer count only on the master: the game answers a server's challenge with the key's answer alone, so a server can't turn one into a sign-in. See `signinanswer` in `src/engine/http.cpp`.
+- **What the master takes** is the SHA-256 of `Master Sign-in ` (with its trailing space) followed by that hex, as 64 lowercase hex digits. This is what makes the answer count only on the master: the game answers a server's challenge with the key's answer alone, so a server can't turn one into a sign-in. See `signinanswer` in `src/engine/http.cpp`.
 - **A browser** does the maths itself, with `crypto.subtle.digest("SHA-256", ...)` for the hash, which needs a secure page.
 
 Options on the last step:
@@ -315,7 +315,7 @@ The paths below leave out `/api/v1`. All `GET` routes also answer `HEAD`.
 
 | Method and path | Privilege | What it does |
 |---|---|---|
-| `GET /` (no `/api/v1`) | none | Says where the API is: `{"name": "Red Eclipse", "api": "/api/v1"}` |
+| `GET /` (no `/api/v1`) | none | Says where the API is: `{"name": "Red Eclipse", "api": "/api/v1"}`, where `name` is the game's name (`versionname`) |
 | `GET /api/v1` | none | What the server is and the routes you may use |
 | `GET /status` | none | The match: map, mode, counts, time left |
 | `GET /players` | none | Everyone connected, with scores |
@@ -349,6 +349,7 @@ Operators can add routes of their own outside `/api`, and those appear in the in
 }
 ```
 
+- `name` is the game's name (`versionname`), which a renamed build changes.
 - `type` is `server` or `master`.
 - Each route maps its methods to the Privilege they need. `WS` is a WebSocket.
 - Only the routes your Privilege reaches are listed.
