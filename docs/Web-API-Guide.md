@@ -852,7 +852,7 @@ A socket whose token is at the master's `masternoticelock` (administrator by def
 - `account`: registrations, activations and purges, key resets, email changes, display names, Steam and Discord links and unlinks, flag changes and removals, each with the address it came from and the account's linked Steam and Discord accounts where it matters.
 - `serveraccount`: server accounts made, given, changed, sent a new link or removed, and a server account signing in for the first time or from a host it hasn't used before (its known addresses, below).
 - `signin`: failed sign-ins, of players on a server with both their address and the server's, of server accounts, and of remembered sign-ins on the website.
-- `listing`: servers that weren't listed, as they gave another address, were too old or didn't answer pings, and peers sending a command the master doesn't know.
+- `listing`: servers that weren't listed, as they gave another address, were too old or didn't answer pings, peers sending a command the master doesn't know, and a server listed from an address that no server has listed from before, by the master's server history (none while `masterhistorydays` is 0).
 - `master`: the master's own files that couldn't be loaded or saved, and mail that couldn't be sent.
 - `queue`: a Matchmaking queue pop, with the server and each account sent, where it queued from and its address.
 
