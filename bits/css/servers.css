@@ -413,17 +413,20 @@
     font-size: 90%;
     color: rgb(170, 170, 170);
 }
+/* the readout on its own line, so a short hover readout doesn't pull it up beside the title and shift the page */
 .servers-historytitle {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 2px 12px;
+    flex-direction: column;
+    gap: 2px;
     font-size: 80%;
     color: rgb(220, 160, 160);
     margin-bottom: 4px;
 }
 .servers-historytitle small {
     color: rgb(200, 200, 200);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .servers-heat {
     display: grid;
