@@ -81,7 +81,7 @@
     {
         var raw = answer(privkey, challenge).toLowerCase().replace(/^0+(?=.)/, "");
         if(!window.crypto || !crypto.subtle) return Promise.reject(new Error("This browser can't sign in here, as the page needs a secure connection."));
-        return crypto.subtle.digest("SHA-256", new TextEncoder().encode("Red Eclipse master sign-in " + raw)).then(function(h)
+        return crypto.subtle.digest("SHA-256", new TextEncoder().encode("Master Sign-in " + raw)).then(function(h)
         {
             return Array.from(new Uint8Array(h)).map(function(b) { return (b < 16 ? "0" : "") + b.toString(16); }).join("");
         });
