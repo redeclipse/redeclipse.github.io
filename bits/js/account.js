@@ -7,11 +7,14 @@
     var MASTER = "https://play.redeclipse.net:28888";
     var HINTKEY = "redeclipse.signedin"; // only whether to ask the master, so anonymous visitors cost it nothing
 
-    // ---- NIST P-192, as src/shared/crypto.cpp uses it: a challenge is a point, a sign for the parity of y then x in hex,
-    // and the answer is x of that point multiplied by the private key
+    // ---- NIST P-192, as src/shared/crypto.cpp uses it: signing the master's challenge nonce with a Schnorr proof (e || s)
 
     var P = BigInt("0xfffffffffffffffffffffffffffffffeffffffffffffffff");
-    var B = BigInt("0x64210519e59c80e70fa7e9ab72243049feb8deecc146b9b1");
+    var ORDER = BigInt("0xffffffffffffffffffffffff99def836146bc9b1b4d22831");
+    var BASE = {
+        x: BigInt("0x188da80eb03090f67cbf20eb43a18800f4ff0afd82ff1012"),
+        y: BigInt("0x07192b95ffc8da78631011ed6b24cdd573f977a11e794811")
+    };
 
     function mod(a) { a %= P; return a < 0n ? a + P : a; }
     function modpow(b, e)
@@ -27,17 +30,6 @@
         return r;
     }
     function inverse(a) { return modpow(a, P - 2n); }
-
-    function decompress(challenge)
-    {
-        var m = /^([+-])([0-9a-fA-F]+)$/.exec(String(challenge || "").trim());
-        if(!m) return null;
-        var x = BigInt("0x" + m[2]);
-        var y2 = mod(x * x * x - 3n * x + B), y = modpow(y2, (P + 1n) / 4n);
-        if(y * y % P !== y2) return null;
-        if((y & 1n) !== (m[1] === "-" ? 1n : 0n)) y = P - y;
-        return { x: x, y: y };
-    }
 
     function add(a, b)
     {
@@ -65,25 +57,52 @@
         return r;
     }
 
-    function answer(privkey, challenge)
+    function hexbytes(buf)
     {
-        var key = String(privkey || "").trim();
-        if(!/^[0-9a-fA-F]+$/.test(key)) throw new Error("That isn't a private key: it should be the long run of letters and numbers after your name in auth.cfg.");
-        var pt = decompress(challenge);
-        if(!pt) throw new Error("The master server sent a challenge this page can't read.");
-        var r = multiply(BigInt("0x" + key), pt);
-        if(!r) throw new Error("That private key gives no answer.");
-        return r.x.toString(16);
+        return Array.from(new Uint8Array(buf)).map(function(b) { return (b < 16 ? "0" : "") + b.toString(16); }).join("");
     }
 
-    // the master's own sign-in takes the answer hashed with what it's for, so one given to a game server can't be passed on to it
-    function signinanswer(privkey, challenge)
+    function validhandle(s)
     {
-        var raw = answer(privkey, challenge).toLowerCase().replace(/^0+(?=.)/, "");
-        if(!window.crypto || !crypto.subtle) return Promise.reject(new Error("This browser can't sign in here, as the page needs a secure connection."));
-        return crypto.subtle.digest("SHA-256", new TextEncoder().encode("Master Sign-in " + raw)).then(function(h)
+        if(!s) return false;
+        for(var i = 0; i < s.length; i++)
         {
-            return Array.from(new Uint8Array(h)).map(function(b) { return (b < 16 ? "0" : "") + b.toString(16); }).join("");
+            var c = s.charCodeAt(i);
+            if(c <= 0x20 || c === 0x7f) return false;
+        }
+        return true;
+    }
+
+    // the master's own sign-in takes a Schnorr signature over its label, handle and nonce, so an in-game answer can never be turned into one
+    function signinanswer(privkey, name, challenge)
+    {
+        if(!window.crypto || !crypto.subtle || !crypto.getRandomValues) return Promise.reject(new Error("This browser can't sign in here, as the page needs a secure connection."));
+        var handle = String(name || "").trim();
+        if(!validhandle(handle)) return Promise.reject(new Error("Enter your account name."));
+        var key = String(privkey || "").trim();
+        if(!/^[0-9a-fA-F]{1,48}$/.test(key)) return Promise.reject(new Error("That isn't a private key: it should be the long run of letters and numbers after your name in auth.cfg."));
+        var d = BigInt("0x" + key) % ORDER;
+        if(d === 0n) return Promise.reject(new Error("That private key gives no answer."));
+        var chal = String(challenge || "").trim().toLowerCase();
+        if(!/^[0-9a-f]{1,128}$/.test(chal)) return Promise.reject(new Error("The master server sent a challenge this page can't read."));
+        var rand = new Uint8Array(32);
+        crypto.getRandomValues(rand);
+        var enc = new TextEncoder();
+        var nmsg = "Master Sign-in Nonce " + d.toString(16).padStart(48, "0") + " " + handle + " " + chal + " " + hexbytes(rand) + "00";
+        return crypto.subtle.digest("SHA-256", enc.encode(nmsg)).then(function(kh)
+        {
+            var k = BigInt("0x" + hexbytes(kh)) % ORDER;
+            if(k === 0n) k = 1n;
+            var r = multiply(k, BASE);
+            if(!r) throw new Error("That private key gives no answer.");
+            var rstr = (r.y & 1n ? "-" : "+") + r.x.toString(16).padStart(48, "0");
+            return crypto.subtle.digest("SHA-256", enc.encode("Master Sign-in " + handle + " " + chal + " " + rstr)).then(function(eh)
+            {
+                var ehex = hexbytes(eh);
+                var ed = (BigInt("0x" + ehex) % ORDER) * d % ORDER;
+                var s = k >= ed ? k - ed : k + ORDER - ed;
+                return ehex + s.toString(16).padStart(48, "0");
+            });
         });
     }
 
@@ -165,7 +184,7 @@
         {
             if(r.status !== 200) throw new Error(r.json.error || "The master server refused to sign you in.");
             var id = r.json.id;
-            return signinanswer(privkey, r.json.challenge).then(function(ans)
+            return signinanswer(privkey, name, r.json.challenge).then(function(ans)
             {
                 return self.call("POST", "", { id: id, answer: ans, remember: !!remember, label: device(navigator.userAgent) });
             });
@@ -220,7 +239,7 @@
         });
     };
 
-    window.REAccount = { Account: Account, answer: answer, readauthcfg: readauthcfg, device: device, MASTER: MASTER };
+    window.REAccount = { Account: Account, signinanswer: signinanswer, readauthcfg: readauthcfg, device: device, MASTER: MASTER };
 
     // ---- the account pages
 
