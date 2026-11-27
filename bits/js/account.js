@@ -122,7 +122,7 @@
     function readauthcfg(text)
     {
         var m = /authkey\s+"?([^"\s]+)"?\s+"?([0-9a-fA-F]+)"?/.exec(text || "");
-        return m ? { name: m[1], key: m[2] } : null;
+        return m ? { name: m[1].toLowerCase(), key: m[2].toLowerCase() } : null;
     }
 
     // ---- the master's sign-in routes, the cookie going with each request
@@ -178,7 +178,7 @@
     Account.prototype.signin = function(name, privkey, remember)
     {
         var self = this;
-        name = String(name || "").trim();
+        name = String(name || "").trim().toLowerCase();
         if(!name) return Promise.reject(new Error("Enter your account name."));
         return this.call("POST", "", { name: name }).then(function(r)
         {
@@ -333,7 +333,7 @@
     function signinform(done)
     {
         var note = notifier(), say = note.say;
-        var name = el("input", { type: "text", id: "account-name", autocomplete: "username", spellcheck: "false", required: true });
+        var name = el("input", { type: "text", id: "account-name", autocomplete: "username", autocapitalize: "none", spellcheck: "false", required: true });
         var key = el("input", { type: "password", id: "account-key", autocomplete: "off", spellcheck: "false", required: true });
         var remember = el("input", { type: "checkbox", id: "account-remember", checked: true });
         var file = el("input", { type: "file", accept: ".cfg,text/plain", hidden: true, onchange: function()
@@ -456,10 +456,9 @@
 
     function registerform(info)
     {
-        if(!info.register) return el("p", { class: "account-help", text: "Registration is closed for now." });
-        if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Register in the game instead: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
+        if(!info.register || !SITEKEY) return el("p", { class: "account-help", text: "Registration is closed for now." });
         var note = notifier(), say = note.say;
-        var handle = el("input", { type: "text", id: "account-handle", autocomplete: "off", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
+        var handle = el("input", { type: "text", id: "account-handle", autocomplete: "off", autocapitalize: "none", spellcheck: "false", required: true, minlength: 3, maxlength: 24, pattern: "[A-Za-z0-9_-]{3,24}" });
         var email = el("input", { type: "email", id: "account-email", autocomplete: "email", required: true, maxlength: 254 });
         var box = el("div", { class: "account-captcha" }), check = captcha(box, [handle, email]);
         var button = el("button", { type: "submit", class: "account-primary", text: "Register" });
@@ -474,7 +473,7 @@
                 button.disabled = false;
                 check.reset();
                 if(r.status !== 202) throw failed(r, "The master server couldn't register it.");
-                say("Check " + email.value.trim() + " for a link to activate " + r.json.handle + ", within " + info.days + " days. If it doesn't come, register again the same way for a new one.");
+                say("Check " + email.value.trim() + " for a link to activate " + r.json.handle + ", within " + info.days + " days. If the link doesn't come, ask for a new one on the key reset page.");
                 handle.value = email.value = "";
             }).catch(function(err) { button.disabled = false; say(err.message, true); });
         } }, [
@@ -486,9 +485,10 @@
 
     function resetform(info)
     {
-        if(!info.website || !SITEKEY) return el("p", { class: "account-help" }, ["Ask for a new key in the game: open ", el("strong", { text: "Player setup" }), ", then ", el("strong", { text: "Account" }), "."]);
+        var open = info.reset !== undefined ? info.reset : info.website;
+        if(!open || !SITEKEY) return el("p", { class: "account-help", text: "Key resets aren't available right now." });
         var note = notifier(), say = note.say;
-        var who = el("input", { type: "text", id: "account-who", autocomplete: "off", spellcheck: "false", required: true });
+        var who = el("input", { type: "text", id: "account-who", autocomplete: "off", autocapitalize: "none", spellcheck: "false", required: true });
         var box = el("div", { class: "account-captcha" }), check = captcha(box, [who]);
         var button = el("button", { type: "submit", class: "account-primary", text: "Send a reset link" });
         return el("form", { class: "account-stack", onsubmit: function(e)
@@ -503,7 +503,7 @@
                 button.disabled = false;
                 check.reset();
                 if(r.status !== 202) throw failed(r, "The master server couldn't do that.");
-                say("If that's an account with an email address, a link to reset its key was sent there. It lasts a day.");
+                say("If that's an account with an email address, or a registration still waiting, a link was sent there.");
             }).catch(function(err) { button.disabled = false; say(err.message, true); });
         } }, [formfield("Handle or email address", who), box, note.el, actions(button)]);
     }
@@ -530,7 +530,8 @@
             el("div", { class: "account-ways" }, [
                 el("div", { class: "account-way" }, [
                     el("h3", { text: "In the game" }),
-                    el("p", {}, ["Open the console with ", el("kbd", { text: "`" }), " (the key above Tab), paste this line and press Enter. The game saves it to ", el("code", { text: "auth.cfg" }), " for you."]),
+                    el("p", {}, ["Copy this line, then in the game open ", el("strong", { text: "Player setup" }), ", ", el("strong", { text: "Account" }), " and press ", el("strong", { text: "Paste key" }),
+                        " (or paste it in the console with ", el("kbd", { text: "`" }), " and press Enter). The game saves it to ", el("code", { text: "auth.cfg" }), " for you."]),
                     el("code", { class: "account-copyline", text: line }),
                     actions(copybutton(function() { return line; }))
                 ]),
@@ -749,12 +750,13 @@
             }).catch(function(err) { mail.say(err.message, true); });
         } }, [formfield("New address", newemail, "A link to confirm it goes there first."), actions(el("button", { type: "submit", text: "Change address" }))]));
 
-        var confirm = el("input", { type: "text", id: "account-confirm", autocomplete: "off", spellcheck: "false", required: true });
+        var confirm = el("input", { type: "text", id: "account-confirm", autocomplete: "off", autocapitalize: "none", spellcheck: "false", required: true });
         gone.appendChild(el("form", { class: "account-stack", onsubmit: function(e)
         {
             e.preventDefault();
-            if(confirm.value.trim() !== mine.handle) { gone.say("That isn't your handle.", true); return; }
-            account.call("DELETE", "/account", { confirm: confirm.value.trim() }).then(function(r)
+            var typed = confirm.value.trim().toLowerCase();
+            if(typed !== mine.handle) { gone.say("That isn't your handle.", true); return; }
+            account.call("DELETE", "/account", { confirm: typed }).then(function(r)
             {
                 if(r.status !== 204) throw failed(r, "It couldn't be deleted.");
                 account.end().then(function()
@@ -1423,7 +1425,7 @@
     function resetpage(me)
     {
         page(me);
-        var box = card(el("p", { class: "account-intro", text: "A link to get a new key goes to the account's email address. The old key stops working once you follow it." }));
+        var box = card(el("p", { class: "account-intro", text: "A link to get a new key, or a fresh link for a registration still waiting, goes to the account's email address. An active account's old key stops working once you follow it." }));
         root.appendChild(box);
         if(!me) root.appendChild(cardlinks([["Sign in", PAGES.login], ["Register an account", PAGES.register]]));
         account.accounts("GET").then(function(r) { box.appendChild(resetform(r.status === 200 ? r.json : {})); });
