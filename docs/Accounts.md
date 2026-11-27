@@ -17,18 +17,16 @@ Your account proves who you are with a **key** that only you hold. The game keep
 
 You need a handle and an email address. Your handle is 3 to 24 letters, numbers, `-` or `_`, and can't be changed later. Your email address is only used for the links described here, and is never shown to anyone.
 
-**In the game:** open **Player setup**, then **Account**, enter your handle and email address and press **Register**.
+Fill in the form at https://redeclipse.net/account/register (in the game, **Player setup**, **Account**, **Register** opens it for you).
 
-**On the website:** fill in the form at https://redeclipse.net/account/register.
-
-Either way, you get an email with a link to activate your account within 7 days. Until you do, the account can't be used, but nobody else can take its handle or email address. If it doesn't arrive, register again with the same handle and email for a new one. If someone used your address without asking, the email has a link to remove it straight away; otherwise it's removed after 7 days.
+You get an email with a link to activate your account within 7 days. Until you do, the account can't be used, but nobody else can take its handle or email address. If the email doesn't arrive, ask for a fresh link at https://redeclipse.net/account/reset. If someone used your address without asking, the email has a link to remove it straight away; otherwise it's removed after 7 days.
 
 ## Your key
 
 When you follow the link and press **Activate my account**, the page shows your key **once**. Save it then:
 
-- If you registered in the game and it's still running, it collects the key itself and saves it to `auth.cfg`. You're done.
-- Otherwise, open the game's console with `` ` `` (the key above Tab), paste the `authkey` line the page shows and press Enter. The game saves it to `auth.cfg` for you.
+- Copy the `authkey` line the page shows, then in the game open **Player setup**, **Account** and press **Paste key**. The game saves it to `auth.cfg` for you.
+- Or open the game's console with `` ` `` (the key above Tab), paste the `authkey` line and press Enter.
 - Or download the page's `auth.cfg` and put it in your Red Eclipse home folder:
 
 | System | Home folder |
@@ -43,7 +41,7 @@ Keep `auth.cfg` to yourself: anyone with your key can sign in as you. With the s
 
 ## Lost your key?
 
-Ask for a new one with your handle or email address: in the game under **Player setup**, **Account**, **Lost your key?**, or at https://redeclipse.net/account/reset. If the account has an email address, it gets a link that lasts a day. Following it gives you a new key, the same way as activating, and the old one stops working everywhere.
+Ask for a new one with your handle or email address at https://redeclipse.net/account/reset (in the game, **Player setup**, **Account**, **Reset key** opens it for you). If the account has an email address, it gets a link that lasts a day. Following it gives you a new key, the same way as activating, and the old one stops working everywhere.
 
 ## On the website
 

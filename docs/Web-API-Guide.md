@@ -23,7 +23,7 @@ This guide covers what you can call and what comes back. How it is built inside 
 - **Reading is open to everyone.** Anything above that, such as moderation, needs a token and an encrypted connection.
 - **The master holds the Matchmaking queue,** where people with an account wait for enough others to play with, and sends them to a server together. See [The Matchmaking queue](#the-matchmaking-queue).
 - **People can stay signed in for weeks** through a remembered sign-in on the master, which gets them a session on any server that takes one, without your site keeping their private key. See [Remembered sign-ins](#remembered-sign-ins).
-- **The master registers accounts,** from the game or a website, and lets their owners reset a lost key, change their email, link Steam and Discord and pick a display name. See [Accounts](#accounts).
+- **The master registers accounts** through a website with a captcha, and lets their owners reset a lost key, change their email, link Steam and Discord and pick a display name. See [Accounts](#accounts).
 
 ## Quick start
 
@@ -962,17 +962,17 @@ The queue is saved to `masterqueuefile` (`masterqueue.dat`) as it changes, so it
 
 ## Accounts
 
-The master holds every account. Anyone can register one, from the game or the website, with a **handle** and an email address. The master mails a link to activate it, and only an activated account works. All of these routes are on the master and need https (or localhost), like signing in.
+The master holds every account. Anyone can register one on the website with a **handle**, an email address and a solved captcha. The master mails a link to activate it, and only an activated account works. All of these routes are on the master and need https (or localhost), like signing in.
 
 ### Registering
 
-`GET /api/v1/accounts` says whether registration is open:
+`GET /api/v1/accounts` says whether registration and key resets are open:
 
 ```json
-{"register": true, "website": true, "days": 7}
+{"register": true, "reset": true, "website": true, "days": 7}
 ```
 
-`website` is false when the master has no captcha set up, so only the game can register. `days` is how long a registration has to be activated.
+`register` (and `website`) is false when registration is closed or the master has no captcha set up; `reset` says whether key resets are set up. `days` is how long a registration has to be activated.
 
 `POST /api/v1/accounts` registers one:
 
@@ -980,12 +980,11 @@ The master holds every account. Anyone can register one, from the game or the we
 |---|---|
 | `handle` | 3 to 24 letters, numbers, `-` or `_`. It's stored in lowercase, and no two accounts share one, whatever their case |
 | `email` | Where the link goes. No two accounts, or registrations waiting, share one |
-| `captcha` | From a website: the token Cloudflare Turnstile gave the page. The master checks it with Cloudflare |
-| `game` | From the game: `true` in place of a captcha |
+| `captcha` | The token Cloudflare Turnstile gave the page. The master checks it with Cloudflare |
 
-It answers 202 with `{"handle": "<handle>", "expires": <Unix time>}`, and from the game, also `pickup`, a secret the game keeps (see [The game collects its key](#the-game-collects-its-key)).
+It answers 202 with `{"handle": "<handle>", "expires": <Unix time>}` whether or not `email` already has an account, so email addresses cannot be enumerated. When `email` already belongs to an account or waiting registration, `handle` is still held until expiry or cancellation and `email` is mailed privately instead of activating `handle`.
 
-The registration is now **pending**. It holds its handle and email so nobody else can take them, but it can't sign in. The email has two links to the website's account page:
+Otherwise the registration is **pending**. It holds its handle and email so nobody else can take them, but it can't sign in. The email has two links to the website's account page:
 
 - **`/account/activate#<token>`** activates it. The page posts the token to `POST /api/v1/accounts/activate` with `{"token": "<token>"}`, which makes the account's key pair and answers once with:
 
@@ -993,10 +992,10 @@ The registration is now **pending**. It holds its handle and email so nobody els
   {"handle": "someone", "privkey": "1f3a...", "pubkey": "+8c2d...", "authkey": "authkey someone 1f3a..."}
   ```
 
-  The master keeps only the public key. The private key is in this answer and nowhere else, so show it to the person straight away with how to save it: the `authkey` line typed in the game's console, or saved as `auth.cfg` in their Red Eclipse home folder. The same token again gets 410.
+  The master keeps only the public key. The private key is in this answer and nowhere else, so show it to the person straight away with how to save it: pasted with **Paste key** under **Player setup**, **Account** in the game, typed as the `authkey` line in the game's console, or saved as `auth.cfg` in their Red Eclipse home folder. Using the same token again gets 404.
 - **`/account/cancel#<token>`**, "this wasn't me", posts to `POST /api/v1/accounts/cancel` and removes the registration at once (204).
 
-A registration not activated within `days` is removed. Registering again with the same handle and email replaces it with a fresh one and a new email, in case the first never arrived; its earlier links stop working. The tokens are after `#` so they never reach a server's logs, and a mail scanner fetching the links does nothing, as only the page's script posts them.
+A registration not activated within `days` is removed. If the email didn't arrive, asking on `POST /api/v1/accounts/reset` sends a fresh activation link. The tokens are after `#` so they never reach a server's logs, and a mail scanner fetching the links does nothing, as only the page's script posts them.
 
 Errors:
 
@@ -1004,27 +1003,16 @@ Errors:
 |---|---|
 | 400 | A bad handle or email, or no captcha |
 | 403 | The captcha wasn't solved |
-| 404 | The link is unknown, ran out or was removed |
-| 409 | The handle or email is taken |
-| 410 | The account is already activated |
+| 404 | The link is unknown, ran out, was already used or was removed |
+| 409 | The handle is taken |
 | 429 | Too many registrations from your address today (3 by default), two captcha checks from your address are still waiting, or your address has had too many captcha checks today (20 by default) |
-| 503 | Registration is closed, the website can't register (no captcha set up), or too many captcha checks are waiting (try again after `Retry-After`) |
+| 503 | Registration is closed, no captcha is set up, or too many captcha checks are waiting (try again after `Retry-After`) |
 
 ### Lost keys
 
-`POST /api/v1/accounts/reset` with `{"handle": "<handle>"}` or `{"email": "<address>"}`, and a `captcha` or `"game": true` as above, asks for a new key. It always answers 202 the same way, so it never says whether an account exists. A request with a captcha can get the same 429 and 503 answers for captcha checks as registration. If one does and has an email address, that address gets a link to `/account/reset#<token>`, lasting 24 hours. Only the newest link works.
+`POST /api/v1/accounts/reset` with `{"handle": "<handle>"}` or `{"email": "<address>"}` and a `captcha` as above asks for a new key. It always answers 202 with `{"expires": <Unix time>}` the same way, so it never says whether an account exists. A request can get the same 429 and 503 answers for captcha checks as registration. For an active account with an email address, that address gets a link to `/account/reset#<token>`, lasting 24 hours; only the newest link works. For a registration still waiting to be activated, its address gets a fresh activation link instead.
 
-The page posts the token to `POST /api/v1/accounts/reset/confirm`, which answers like activation, with the new key. The old key stops working, and the account's remembered sign-ins end.
-
-### The game collects its key
-
-A registration or reset from the game gets a `pickup` secret. The game posts it to `POST /api/v1/accounts/pickup` as `{"pickup": "<secret>"}` every few seconds:
-
-- `{"ready": false, "expires": <Unix time>}` while the link hasn't been followed. A registration's answer also has its `handle`.
-- `{"ready": true, "handle", "privkey", "pubkey", "authkey"}` once it has, which the game saves to `auth.cfg`. This works once.
-- 404 once it ran out or was collected.
-
-The page that followed the link still shows the key too, in case the game was closed.
+The page posts the token to `POST /api/v1/accounts/reset/confirm`, which answers like activation, with the new key. The link is bound to the account's current key: once followed, the old key stops working, the account's remembered sign-ins end, and any pending email changes or in-progress links are dropped.
 
 ### The owner's own account
 
@@ -1034,8 +1022,8 @@ These are below `/api/v1/signin`, so they take a [remembered sign-in](#remembere
 |---|---|
 | `GET /api/v1/signin/account` | `{"handle", "flags", "email", "steamid", "discord", "displayname"}`, and `newemail` while a change waits |
 | `PATCH /api/v1/signin/account` | `{"displayname": "<name>"}` sets the display name, once an hour (429 sooner). `""` clears it |
-| `POST /api/v1/signin/account/email` | `{"email": "<address>"}` mails that address a link to `/account/email#<token>`, and tells the old address, with a link to `/account/email-cancel#<token>` that stops it. Answers 202 |
-| `DELETE /api/v1/signin/account` | `{"confirm": "<handle>"}` deletes the account (204). Its handle is then free to register again. Accounts at moderator and above are removed by an administrator instead (403) |
+| `POST /api/v1/signin/account/email` | `{"email": "<address>"}` answers 202 whether or not `<address>` already has an account: when free, it mails `<address>` a link to `/account/email#<token>`; when already taken, it notifies `<address>` privately instead; either way, the old address is told with a link to `/account/email-cancel#<token>` that stops it |
+| `DELETE /api/v1/signin/account` | `{"confirm": "<handle>"}` deletes the account and drops its pending links and server-account invitations (204). Its handle is then free to register again. Accounts at moderator and above are removed by an administrator instead (403) |
 
 The email links post their token to `POST /api/v1/accounts/email/confirm`, which answers `{"handle", "email"}`, or `POST /api/v1/accounts/email/cancel` (204).
 
@@ -1071,7 +1059,7 @@ The master has no console, so its administrators manage it here, signed in with 
 |---|---|
 | `GET /api/v1/signin/admin/accounts?q=<text>&limit=<n>` | Accounts whose handle or email holds `q`: `{"total", "accounts": [{"handle", "flags", "email", "steamid", "discord", "displayname", "pubkey"}]}` |
 | `PATCH /api/v1/signin/admin/accounts/<handle>` | `{"flags": "<letters>"}` changes its standing, which ends its sign-ins. `{"displayname": "<name>"}` replaces or clears its display name, which takes `masterdisplaylock` (moderator by default) |
-| `DELETE /api/v1/signin/admin/accounts/<handle>` | Removes it |
+| `DELETE /api/v1/signin/admin/accounts/<handle>` | Removes it and drops its pending links and server-account invitations |
 | `GET /api/v1/signin/admin/servers?q=<text>&limit=<n>` | Server accounts whose handle, description or owner holds `q`: `{"total", "servers": [...]}`, each `{"handle", "flags", "desc", "owner", "pubkey"}`, with `ownergone` when a set `owner`'s account was deleted, empty `owner` for one made before server accounts had owners, `newkey`, a Unix time, while a new key's link is out, and `addresses`, its known addresses: the hosts it signed in from, `[{"host", "seen"}]` with the latest first and `seen` the Unix time it last signed in from there (saved at most once a day, so a restart can set it back by up to a day), missing for one that hasn't signed in since the master started keeping them. A new key starts the list again. One still waiting for its owner is `{"handle", "flags", "desc", "owner", "pending": true, "expires"}` |
 | `POST /api/v1/signin/admin/servers` | `{"handle", "flags", "owner", "desc"}` makes one for the owner's account, which is mailed a link to get its key (202, as it's then waiting). `flags` is its level, and `desc` is optional |
 | `PATCH /api/v1/signin/admin/servers/<handle>` | `{"flags": "<level>"}` changes its level, which servers signed in with it get straight away. `{"owner": "<handle>"}` gives it to another account without sending a new key when one is already active; one still waiting has its link sent to the new owner instead, the old one no longer working, and a new key's link already sent to the old owner stops working. `{"desc": "<text>"}` changes or clears its description |
