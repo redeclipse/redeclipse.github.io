@@ -99,7 +99,8 @@ A game server's entry in the master's list has a `webport` when its API is on, a
 
 What the relay passes on:
 
-- **Request headers:** only `Content-Type`, `Accept`, `Origin` and `If-None-Match`. `Authorization` is passed on only when the server's relay level is 2 and you reached the master over https. A token sent to the master over plain http is dropped, and the server sees an anonymous request.
+- **Request headers:** only `Content-Type`, `Accept`, `Origin` and `If-None-Match`. `Authorization` is passed on only when the server's relay level is 2, you reached the master over https and the server's link to the master is encrypted. Otherwise it's dropped, and the server sees an anonymous request. The same goes for `?token=` on a relayed Event feed.
+- **The master's own tokens** are never passed on. A session on the master or a remembered sign-in is for the master, so a request carrying one reaches the server as anonymous. Use a session [from the master for that server](#sessions-from-an-account) instead.
 - **Request bodies:** text only, such as JSON or a form.
 - **Response headers:** only `Content-Type`, `ETag`, `Cache-Control`, `Allow`, `WWW-Authenticate` and `Retry-After`. The master adds `X-Content-Type-Options: nosniff` and `Content-Security-Policy: sandbox allow-scripts allow-forms allow-popups`, so anything a server returns is sandboxed away from the master's origin.
 - **Caching:** anonymous `GET`s that succeed are cached for 2 seconds per server, path and query string. Polling more often than that gets the same answer back.
@@ -623,7 +624,7 @@ The answer is one of:
 How long it lasts:
 
 - A feed drops back to `none` when its token is removed or its session expires. You get another `auth` event when that happens.
-- Signing in needs `wss://` (see [Encryption is required](#encryption-is-required)). Through the relay it also needs the server's relay level to be 2.
+- Signing in needs `wss://` (see [Encryption is required](#encryption-is-required)). Through the relay it also needs the server's relay level to be 2 and its link to the master to be encrypted.
 
 ### Chatting on the feed
 

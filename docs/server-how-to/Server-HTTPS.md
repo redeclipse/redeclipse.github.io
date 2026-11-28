@@ -219,7 +219,7 @@ If you already run nginx, Caddy or similar with certificates of their own, they 
 httptrustproxy "127.0.0.1"
 ```
 
-Requests through a trusted proxy count as secure when the proxy sends `X-Forwarded-Proto: https`, so tokens and signing in work through it. In nginx that's `proxy_set_header X-Forwarded-Proto $scheme;` and `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`. Proxy the Event feed's WebSocket upgrade too (in nginx, `proxy_http_version 1.1` with the `Upgrade` and `Connection` headers passed on). The master's list will show no fingerprint for your server, so the game client talks to it over plain HTTP, which is fine for the public routes it uses.
+Requests through a trusted proxy count as secure when the proxy sends `X-Forwarded-Proto: https`, so tokens and signing in work through it. In nginx that's `proxy_set_header X-Forwarded-Proto $scheme;` and `proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;`. Proxy the Event feed's WebSocket upgrade too (in nginx, `proxy_http_version 1.1` with the `Upgrade` and `Connection` headers passed on). The master's list will show no fingerprint for your server, so the game client talks to it over plain HTTP, which is fine for the public routes it uses. A player signing in from the game goes through the master's encrypted relay instead, which needs `httprelay 2`.
 
 ## Keep the key private
 
